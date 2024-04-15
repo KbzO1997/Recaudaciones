@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<audit_trail flowId="13963394" cid="bpel:65973496">
+	<event date="2021-09-08T14:18:06.340-05:00" cat="2" type="2" n="0" sid="0">
+		<message>New instance of BPEL process "1.0" initiated (# "pagarComprobante").</message>
+	</event>
+	<event date="2021-09-08T14:18:06.340-05:00" cat="1" psid="0" label="process" type="2" n="1" sid="BpPrc0.1">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.340-05:00" cat="1" psid="BpPrc0.1" label="tryBlock of process (47)" type="2" n="2" sid="BpTry0.2">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.340-05:00" cat="1" psid="BpTry0.2" label="main (154)" type="2" n="3" sid="BpSeq0.3">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.341-05:00" wikey="65973496-BpRcv0-BpSeq0.3-1" cat="2" label="receiveInput" state="5" type="2" n="4" sid="BpSeq0.3">
+		<message>Received "process" call from partner "pagarcomprobante_client"</message>
+		<details>
+			<in>
+				<part name="payload" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+					<ns5:MensajeEntradaPagar xmlns:ns2="http://www.bolivariano.com/Recaudo" xmlns:ns3="http://www.bolivariano.com/CoreBB" xmlns:ns4="http://www.bolivariano.com/MensajeBolivariano" xmlns:ns5="http://www.bolivariano.com/MensajeIESS" xmlns:ns6="http://www.bolivariano.com/Cliente" xmlns:ns7="http://www.bolivariano.com/Cuenta" xmlns:ns8="http://www.bolivariano.com/Producto" xmlns:ns9="http://www.bolivariano.com/IESS">
+						<canal>SAT</canal>
+						<fecha>2021-09-08T00:00:00.000-05:00</fecha>
+						<oficina>0</oficina>
+						<terminal>TERMX</terminal>
+						<usuario>SROLESE</usuario>
+						<informacionIESS>
+							<autorizacion>N</autorizacion>
+							<cantidadCheque>0</cantidadCheque>
+							<chequeComision>0.0</chequeComision>
+							<debito>6383.24</debito>
+							<debitoComision>0.3</debitoComision>
+							<efectivo>0.0</efectivo>
+							<efectivoComision>0.0</efectivoComision>
+							<empresa>2494</empresa>
+							<identificacion>0992791799001</identificacion>
+							<nombre>UNIDAD EDUCATIVA LEMAS S.A. UNILEMAS</nombre>
+							<tipoMoneda>1</tipoMoneda>
+							<tipoOperacion>P</tipoOperacion>
+							<ubicacion>0</ubicacion>
+							<totalComision>0.3</totalComision>
+							<valorCheque>0.0</valorCheque>
+							<cuenta>
+								<debitar>true</debitar>
+								<numeroCuenta>0005307137</numeroCuenta>
+								<tipoCuenta>CTE</tipoCuenta>
+							</cuenta>
+							<idAfiliado>RUC</idAfiliado>
+							<numeroComprobante>0000000012070153</numeroComprobante>
+							<rubro>DIVPREHI</rubro>
+							<sucursal>0001</sucursal>
+							<valor>6383.24</valor>
+							<nemonico>62140</nemonico>
+							<numeroOperacion>1202654303</numeroOperacion>
+						</informacionIESS>
+						<informacionCore>
+							<codigoTRX>62140</codigoTRX>
+							<fechaProcesoKernel>2021-09-08-05:00</fechaProcesoKernel>
+							<modoCorreccion>N</modoCorreccion>
+							<operacion>P</operacion>
+							<rolBPM>1</rolBPM>
+							<sec>1202654303</sec>
+							<secuencial>1202654303</secuencial>
+							<secuencialBPM>1202654303</secuencialBPM>
+							<servidor>BOLIVSRV</servidor>
+							<servidorLocal>BOLIVSRV</servidorLocal>
+						</informacionCore>
+					</ns5:MensajeEntradaPagar>
+				</part>
+			</in>
+		</details>
+	</event>
+	<event date="2021-09-08T14:18:06.341-05:00" wikey="65973496-BxExe0-BpSeq0.3-2" cat="2" label="SetName" state="5" type="2" n="5" sid="BpSeq0.3">
+		<message>bpelx:exec executed</message>
+	</event>
+	<event date="2021-09-08T14:18:06.341-05:00" cat="1" psid="BpSeq0.3" label="Scope2 (177)" type="2" n="6" sid="BpScp0.4">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.341-05:00" cat="1" psid="BpScp0.4" label="tryBlock of scope Scope2 (177)" type="2" n="7" sid="BpTry1.5">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.341-05:00" cat="1" psid="BpTry1.5" label="Sequence35 (183)" type="2" n="8" sid="BpSeq1.6">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.341-05:00" wikey="65973496-BpAss0-BpSeq1.6-1" cat="2" to="inLogIess" label="AsignaLogIess" state="1" type="1" n="9" sid="BpSeq1.6">
+		<message>Updated variable "inLogIess"</message>
+	</event>
+	<event date="2021-09-08T14:18:06.341-05:00" wikey="65973496-BpAss0-BpSeq1.6-1" cat="2" label="AsignaLogIess" state="5" type="1" n="10" sid="BpSeq1.6">
+		<message>Completed assign</message>
+	</event>
+	<event date="2021-09-08T14:18:06.341-05:00" wikey="65973496-BpInv0-BpSeq1.6-2" cat="2" label="LogIess" state="1" type="2" n="11" sid="BpSeq1.6">
+		<message>Started invocation of operation "pa_pg_iauxiess" on partner "pa_pg_iauxiess".</message>
+	</event>
+	<event date="2021-09-08T14:18:06.353-05:00" wikey="65973496-BpInv0-BpSeq1.6-2" partnerWSDL="" cat="2" label="LogIess" state="5" type="2" n="12" sid="BpSeq1.6">
+		<message>Invoked 2-way operation "pa_pg_iauxiess" on partner "pa_pg_iauxiess".</message>
+		<details>
+			<messages>
+				<inLogIess>
+					<part name="InputParameters" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+						<InputParameters xmlns:oracle-xsl-mapper="http://www.oracle.com/xsl/mapper/schemas" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/pa_pg_iauxiess" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/sp/pa_pg_iauxiess">
+							<db:s_user>SROLESE</db:s_user>
+							<db:s_date>2021-09-08-05:00</db:s_date>
+							<db:t_trn>62140</db:t_trn>
+							<db:e_ced_ruc>0992791799001</db:e_ced_ruc>
+							<db:e_sucursal>0001</db:e_sucursal>
+							<db:e_rubro>DIVPREHI</db:e_rubro>
+							<db:e_num_comp>0000000012070153</db:e_num_comp>
+							<db:e_valor>6383.24</db:e_valor>
+							<db:e_nombre>UNIDAD EDUCATIVA LEMAS S.A. UNILEMAS</db:e_nombre>
+							<db:e_canal>SAT</db:e_canal>
+							<db:e_oficina>0</db:e_oficina>
+							<db:e_forma_pago>NDB</db:e_forma_pago>
+							<db:e_tipo_cta>CTE</db:e_tipo_cta>
+							<db:e_cuenta>0005307137</db:e_cuenta>
+							<db:e_servidor>BBTSSRV</db:e_servidor>
+						</InputParameters>
+					</part>
+				</inLogIess>
+				<outLogIess>
+					<part name="OutputParameters" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+						<OutputParameters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/sp/pa_pg_iauxiess">
+							<RETURN_VALUE>0</RETURN_VALUE>
+						</OutputParameters>
+					</part>
+				</outLogIess>
+			</messages>
+		</details>
+	</event>
+	<event date="2021-09-08T14:18:06.353-05:00" cat="1" type="2" n="13" sid="BpSeq1.6">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.353-05:00" cat="1" type="2" n="14" sid="BpTry1.5">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.353-05:00" cat="1" type="2" n="15" sid="BpScp0.4">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.353-05:00" cat="1" psid="BpSeq0.3" label="FlujoPago (200)" type="2" n="16" sid="BpScp1.7">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.353-05:00" cat="1" psid="BpScp1.7" label="tryBlock of scope FlujoPago (200)" type="2" n="17" sid="BpTry2.8">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.353-05:00" cat="1" psid="BpTry2.8" label="FlujoPago (270)" type="2" n="18" sid="BpSeq5.9">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.353-05:00" cat="1" psid="BpSeq5.9" label="ValidarIn (272)" type="2" n="19" sid="BpScp3.10">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.353-05:00" cat="1" psid="BpScp3.10" label="tryBlock of scope ValidarIn (272)" type="2" n="20" sid="BpTry3.11">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.353-05:00" cat="1" psid="BpTry3.11" label="sequence (323)" type="2" n="21" sid="BpSeq8.12">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.354-05:00" wikey="65973496-BpVal0-BpSeq8.12-1" cat="2" label="ValidateIn" state="5" type="2" n="22" sid="BpSeq8.12">
+		<message>BPEL "validate" activity is executed.</message>
+	</event>
+	<event date="2021-09-08T14:18:06.354-05:00" cat="1" type="2" n="23" sid="BpSeq8.12">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.354-05:00" cat="1" type="2" n="24" sid="BpTry3.11">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.354-05:00" cat="1" type="2" n="25" sid="BpScp3.10">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.354-05:00" cat="1" psid="BpSeq5.9" label="ScopePago (327)" type="2" n="26" sid="BpScp4.13">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.354-05:00" cat="1" psid="BpScp4.13" label="tryBlock of scope ScopePago (327)" type="2" n="27" sid="BpTry4.14">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.354-05:00" cat="1" psid="BpTry4.14" label="Sequence29 (578)" type="2" n="28" sid="BpSeq15.15">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.354-05:00" cat="1" psid="BpSeq15.15" label="FlujoPago (579)" type="2" n="29" sid="BpSeq16.16">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.354-05:00" cat="1" psid="BpSeq16.16" label="cobis (581)" type="2" n="30" sid="BpSeq17.17">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.354-05:00" wikey="65973496-BpAss15-BpSeq17.17-1" cat="2" to="inConsultarCobis" label="AsignarCanal" state="1" type="1" n="31" sid="BpSeq17.17">
+		<message>Updated variable "inConsultarCobis"</message>
+	</event>
+	<event date="2021-09-08T14:18:06.354-05:00" wikey="65973496-BpAss15-BpSeq17.17-1" cat="2" label="AsignarCanal" state="5" type="1" n="32" sid="BpSeq17.17">
+		<message>Completed assign</message>
+	</event>
+	<event date="2021-09-08T14:18:06.354-05:00" wikey="65973496-BpInv3-BpSeq17.17-2" cat="2" label="ConsultarCobis" state="1" type="2" n="33" sid="BpSeq17.17">
+		<message>Started invocation of operation "pa_CanalesNoCobis_interfase" on partner "pa_CanalesNoCobis_interfase".</message>
+	</event>
+	<event date="2021-09-08T14:18:06.375-05:00" wikey="65973496-BpInv3-BpSeq17.17-2" partnerWSDL="" cat="2" label="ConsultarCobis" state="4" type="4" n="34" sid="BpSeq17.17">
+		<message>Faulted while invoking operation "pa_CanalesNoCobis_interfase" on provider "pa_CanalesNoCobis_interfase". </message>
+		<details>
+			<messages>
+				<input>
+					<inConsultarCobis>
+						<part name="InputParameters" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+							<InputParameters xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/sp/pa_CanalesNoCobis_interfase">
+								<i_canal>SAT</i_canal>
+							</InputParameters>
+						</part>
+					</inConsultarCobis>
+				</input>
+				<fault>
+					<bpelFault>
+						<faultType>0</faultType>
+						<remoteFault xmlns="http://schemas.oracle.com/bpel/extension">
+							<part name="summary">
+								<summary>Exception occurred when binding was invoked.
+Exception occurred during invocation of JCA binding: "JCA Binding execute of Reference operation 'pa_CanalesNoCobis_interfase' failed due to: Register out parameter error.
+Error registering parameter RETURN_VALUE as an out parameter.
+An error occurred when registering parameter RETURN_VALUE as an out parameter of the cobis.dbo.pa_CanalesNoCobis_interfase API. 
+Cause: java.sql.SQLException: JZ0SV: Combination of setting parameters by name and by index is not allowed in the same CallableStatement.
+Check to ensure that the parameter is a valid IN/OUT or OUT parameter of the API.  This exception is considered retriable, likely due to a communication failure.  To classify it as non-retriable instead add property nonRetriableErrorCodes with value "0" to your deployment descriptor (i.e. weblogic-ra.xml).  To auto retry a retriable fault set these composite.xml properties for this invoke: jca.retry.interval, jca.retry.count, and jca.retry.backoff.  All properties are integers.
+". 
+The invoked JCA adapter raised a resource exception.
+Please examine the above error message carefully to determine a resolution.
+</summary>
+							</part>
+							<part name="code">
+								<code>0</code>
+							</part>
+							<part name="detail">
+								<detail>JZ0SV: Combination of setting parameters by name and by index is not allowed in the same CallableStatement.</detail>
+							</part>
+						</remoteFault>
+					</bpelFault>
+				</fault>
+				<faultType>
+					<message>0</message>
+				</faultType>
+			</messages>
+		</details>
+	</event>
+	<event date="2021-09-08T14:18:06.376-05:00" cat="1" type="2" n="35" sid="BpSeq17.17">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.376-05:00" cat="1" type="2" n="36" sid="BpSeq16.16">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.376-05:00" cat="1" type="2" n="37" sid="BpSeq15.15">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.376-05:00" cat="1" type="2" n="38" sid="BpTry4.14">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.376-05:00" cat="1" psid="BpScp4.13" label="catch (451)" type="2" n="39" sid="BpCFt3.18">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.376-05:00" cat="1" psid="BpCFt3.18" label="remoteFault (452)" type="2" n="40" sid="BpSeq11.19">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.376-05:00" cat="1" psid="BpSeq11.19" label="isTimeOut (453)" type="2" n="41" sid="BpIf0.20">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.376-05:00" wikey="65973496-BpIf0_Nd-BpIf0.20-1" cat="2" label="isTimeOut" state="5" type="2" n="42" sid="BpIf0.20">
+		<message>Else is selected.</message>
+	</event>
+	<event date="2021-09-08T14:18:06.376-05:00" cat="1" psid="BpIf0.20" label="else (491)" type="2" n="43" sid="BpEls0.21">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.376-05:00" wikey="65973496-BpAss12-BpEls0.21-1" cat="2" to="faultVar" label="ErrorDefault" state="1" type="1" n="44" sid="BpEls0.21">
+		<message>Updated variable "faultVar"</message>
+	</event>
+	<event date="2021-09-08T14:18:06.377-05:00" wikey="65973496-BpAss12-BpEls0.21-1" cat="2" to="faultVar" label="ErrorDefault" state="1" type="1" n="45" sid="BpEls0.21">
+		<message>Updated variable "faultVar"</message>
+	</event>
+	<event date="2021-09-08T14:18:06.377-05:00" wikey="65973496-BpAss12-BpEls0.21-1" cat="2" to="faultVar" label="ErrorDefault" state="1" type="1" n="46" sid="BpEls0.21">
+		<message>Updated variable "faultVar"</message>
+	</event>
+	<event date="2021-09-08T14:18:06.377-05:00" wikey="65973496-BpAss12-BpEls0.21-1" cat="2" to="out" label="ErrorDefault" state="1" type="1" n="47" sid="BpEls0.21">
+		<message>Updated variable "out"</message>
+	</event>
+	<event date="2021-09-08T14:18:06.377-05:00" wikey="65973496-BpAss12-BpEls0.21-1" cat="2" to="inHomologarMensaje" label="ErrorDefault" state="1" type="1" n="48" sid="BpEls0.21">
+		<message>Updated variable "inHomologarMensaje"</message>
+	</event>
+	<event date="2021-09-08T14:18:06.377-05:00" wikey="65973496-BpAss12-BpEls0.21-1" cat="2" to="inHomologarMensaje" label="ErrorDefault" state="1" type="1" n="49" sid="BpEls0.21">
+		<message>Updated variable "inHomologarMensaje"</message>
+	</event>
+	<event date="2021-09-08T14:18:06.377-05:00" wikey="65973496-BpAss12-BpEls0.21-1" cat="2" label="ErrorDefault" state="5" type="1" n="50" sid="BpEls0.21">
+		<message>Completed assign</message>
+	</event>
+	<event date="2021-09-08T14:18:06.377-05:00" cat="1" type="2" n="51" sid="BpEls0.21">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.377-05:00" cat="1" type="2" n="52" sid="BpIf0.20">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.377-05:00" wikey="65973496-BpThw2-BpSeq11.19-1" cat="2" label="PagarComprobanteIESSFault" state="5" type="4" n="53" sid="BpSeq11.19">
+		<message>"{http://xmlns.oracle.com/SCA_IESS/IESS/pagarComprobante}PagarComprobanteIESSFault" has been thrown.</message>
+		<details>
+			<bpelFault>
+				<faultType>0</faultType>
+				<PagarComprobanteIESSFault xmlns="http://xmlns.oracle.com/SCA_IESS/IESS/pagarComprobante">
+					<part>
+						<IESSFault xmlns="http://www.bolivariano.com/MensajeIESS">
+							<codigo xmlns="">70010</codigo>
+							<nombre xmlns="">Exception occurred when binding was invoked.
+Exception occurred during invocation of JCA binding: "JCA Binding execute of Reference operation 'pa_CanalesNoCobis_interfase' failed due to: Register out parameter error.
+Error registering parameter RETURN_VALUE as an out parameter.
+An error occurred when registering parameter RETURN_VALUE as an out parameter of the cobis.dbo.pa_CanalesNoCobis_interfase API. Cause: java.sql.SQLException: JZ0SV: Combination of setting parameters by name and by index is not allowed in the same CallableStatement.
+Check to ensure that the parameter is a valid IN/OUT or OUT parameter of the API.  This exception is considered retriable, likely due to a communication failure.  To classify it as non-retriable instead add property nonRetriableErrorCodes with value "0" to your deployment descriptor (i.e. weblogic-ra.xml).  To auto retry a retriable fault set these composite.xml properties for this invoke: jca.retry.interval, jca.retry.count, and jca.retry.backoff.  All properties are integers.
+". 
+The invoked JCA adapter raised a resource exception.
+Please examine the above error message carefully to determine a resolution.
+</nombre>
+							<descripcion xmlns="">JZ0SV: Combination of setting parameters by name and by index is not allowed in the same CallableStatement.</descripcion>
+						</IESSFault>
+					</part>
+				</PagarComprobanteIESSFault>
+			</bpelFault>
+		</details>
+	</event>
+	<event date="2021-09-08T14:18:06.379-05:00" cat="1" type="2" n="54" sid="BpSeq11.19">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.379-05:00" cat="1" type="2" n="55" sid="BpCFt3.18">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.379-05:00" cat="1" type="2" n="56" sid="BpScp4.13">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.379-05:00" cat="1" type="2" n="57" sid="BpSeq5.9">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.379-05:00" cat="1" type="2" n="58" sid="BpTry2.8">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.379-05:00" cat="1" psid="BpScp1.7" label="catchAll (209)" type="2" n="59" sid="BpCAl1.22">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.379-05:00" cat="1" psid="BpCAl1.22" label="Sequence33 (210)" type="2" n="60" sid="BpSeq2.23">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.379-05:00" cat="1" psid="BpSeq2.23" label="Scope1 (211)" type="2" n="61" sid="BpScp2.24">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.379-05:00" cat="1" psid="BpScp2.24" label="tryBlock of scope Scope1 (211)" type="2" n="62" sid="BpTry7.25">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.379-05:00" cat="1" psid="BpTry7.25" label="HomologarError (228)" type="2" n="63" sid="BpSeq4.26">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.379-05:00" wikey="65973496-BpInv1-BpSeq4.26-1" cat="2" label="HomologarMensaje" state="1" type="2" n="64" sid="BpSeq4.26">
+		<message>Started invocation of operation "homologarMensaje" on partner "HomologarMensaje".</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" wikey="65973496-BpInv1-BpSeq4.26-1" partnerWSDL="" cat="2" label="HomologarMensaje" state="5" type="2" n="65" sid="BpSeq4.26">
+		<message>Invoked 2-way operation "homologarMensaje" on partner "HomologarMensaje".</message>
+		<details>
+			<messages>
+				<inHomologarMensaje>
+					<part name="parametros" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+						<MensajeEntradaHomologarMensaje xmlns="http://www.bolivariano.com/HomologarMensaje">
+							<codigo>70010</codigo>
+							<sistema>sv_errores_ts</sistema>
+							<mensaje/>
+						</MensajeEntradaHomologarMensaje>
+					</part>
+				</inHomologarMensaje>
+				<outHomologarMensaje>
+					<part name="parametros" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+						<hom:MensajeSalidaHomologarMensaje xmlns:hom="http://www.bolivariano.com/HomologarMensaje" xmlns:wsa="http://www.w3.org/2005/08/addressing">
+							<hom:codigo>70010</hom:codigo>
+							<hom:mensaje>SU TRANSACCION NO PUDO SER PROCESADA</hom:mensaje>
+						</hom:MensajeSalidaHomologarMensaje>
+					</part>
+				</outHomologarMensaje>
+			</messages>
+		</details>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" wikey="65973496-BpAss2-BpSeq4.26-2" cat="2" to="outHomologarMensaje" label="AsignaDescripcionFault" state="1" type="1" n="66" sid="BpSeq4.26">
+		<message>Updated variable "outHomologarMensaje"</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" wikey="65973496-BpAss2-BpSeq4.26-2" cat="2" label="AsignaDescripcionFault" state="5" type="1" n="67" sid="BpSeq4.26">
+		<message>Completed assign</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" wikey="65973496-BpAss3-BpSeq4.26-3" cat="2" to="out" label="AsignarSalidaError" state="1" type="1" n="68" sid="BpSeq4.26">
+		<message>Updated variable "out"</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" wikey="65973496-BpAss3-BpSeq4.26-3" cat="2" to="out" label="AsignarSalidaError" state="1" type="1" n="69" sid="BpSeq4.26">
+		<message>Updated variable "out"</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" wikey="65973496-BpAss3-BpSeq4.26-3" cat="2" to="out" label="AsignarSalidaError" state="1" type="1" n="70" sid="BpSeq4.26">
+		<message>Updated variable "out"</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" wikey="65973496-BpAss3-BpSeq4.26-3" cat="2" to="out" label="AsignarSalidaError" state="1" type="1" n="71" sid="BpSeq4.26">
+		<message>Updated variable "out"</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" wikey="65973496-BpAss3-BpSeq4.26-3" cat="2" label="AsignarSalidaError" state="5" type="1" n="72" sid="BpSeq4.26">
+		<message>Completed assign</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" cat="1" type="2" n="73" sid="BpSeq4.26">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" cat="1" type="2" n="74" sid="BpTry7.25">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" cat="1" type="2" n="75" sid="BpScp2.24">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" cat="1" type="2" n="76" sid="BpSeq2.23">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" cat="1" type="2" n="77" sid="BpCAl1.22">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" cat="1" type="2" n="78" sid="BpScp1.7">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" wikey="65973496-BpRpl0-BpSeq0.3-3" cat="2" label="replyOutput" state="5" type="2" n="79" sid="BpSeq0.3">
+		<message>Reply to partner "pagarcomprobante_client".</message>
+		<details>
+			<out>
+				<part name="payload" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+					<MensajeSalidaPagar xmlns="http://www.bolivariano.com/MensajeIESS">
+						<codigoError xmlns="">70010</codigoError>
+						<codigoErrorRemoto xmlns=""/>
+						<mensajeSistema xmlns="">Exception occurred when binding was invoked.
+Exception occurred during invocation of JCA binding: "JCA Binding execute of Reference operation 'pa_CanalesNoCobis_interfase' failed due to: Register out parameter error.
+Error registering parameter RETURN_VALUE as an out parameter.
+An error occurred when registering parameter RETURN_VALUE as an out parameter of the cobis.dbo.pa_CanalesNoCobis_interfase API. Cause: java.sql.SQLException: JZ0SV: Combination of setting parameters by name and by index is not allowed in the same CallableStatement.
+Check to ensure that the parameter is a valid IN/OUT or OUT parameter of the API.  This exception is considered retriable, likely due to a communication failure.  To classify it as non-retriable instead add property nonRetriableErrorCodes with value "0" to your deployment descriptor (i.e. weblogic-ra.xml).  To auto retry a retriable fault set these composite.xml properties for this invoke: jca.retry.interval, jca.retry.count, and jca.retry.backoff.  All properties are integers.
+". 
+The invoked JCA adapter raised a resource exception.
+Please examine the above error message carefully to determine a resolution.
+</mensajeSistema>
+						<mensajeUsuario xmlns="">JZ0SV: Combination of setting parameters by name and by index is not allowed in the same CallableStatement.</mensajeUsuario>
+					</MensajeSalidaPagar>
+				</part>
+			</out>
+		</details>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" cat="1" psid="BpSeq0.3" label="Scope3 (1309)" type="2" n="80" sid="BpScp7.27">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" cat="1" psid="BpScp7.27" label="tryBlock of scope Scope3 (1309)" type="2" n="81" sid="BpTry8.28">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" cat="1" psid="BpTry8.28" label="NotificacionLatinia (1315)" type="2" n="82" sid="BpIf9.29">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" wikey="65973496-BpIf9_Nd-BpIf9.29-1" cat="2" label="NotificacionLatinia" state="5" type="2" n="83" sid="BpIf9.29">
+		<message>Else is selected.</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" cat="1" psid="BpIf9.29" label="else (1334)" type="2" n="84" sid="BpEls9.30">
+		<message>_cr_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" wikey="65973496-BpEmp4-BpEls9.30-1" cat="2" label="Continuar" state="5" type="2" n="85" sid="BpEls9.30">
+		<message>BPEL "empty" activity is executed.</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" cat="1" type="2" n="86" sid="BpEls9.30">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" cat="1" type="2" n="87" sid="BpIf9.29">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" cat="1" type="2" n="88" sid="BpTry8.28">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" cat="1" type="2" n="89" sid="BpScp7.27">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" cat="1" type="2" n="90" sid="BpSeq0.3">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" cat="1" type="2" n="91" sid="BpTry0.2">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" cat="1" type="2" n="92" sid="BpPrc0.1">
+		<message>_cl_</message>
+	</event>
+	<event date="2021-09-08T14:18:06.387-05:00" cat="2" type="2" n="93" sid="BpPrc0.1">
+		<message>BPEL process instance "65973496" completed</message>
+	</event>
+</audit_trail>
