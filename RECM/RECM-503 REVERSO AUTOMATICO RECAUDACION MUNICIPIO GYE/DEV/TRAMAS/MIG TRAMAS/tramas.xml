@@ -1,0 +1,40 @@
+<MensajeEntradaPagarConsumo xmlns:oraxsl="http://www.oracle.com/XSL/Transform/java" xmlns:oracle-xsl-mapper="http://www.oracle.com/xsl/mapper/schemas" xmlns:mc="http://www.bolivariano.com/MensajeCredimatic" xmlns="http://www.bolivariano.com/MensajeCredimatic" xmlns:wsa="http://www.w3.org/2005/08/addressing">
+<informacionTarjeta xmlns="">
+<mesPago>5</mesPago>
+<numeroTarjeta>40274804165854731041</numeroTarjeta>
+<Recaudo>
+<codigoComercio>888802</codigoComercio>
+<tipoOperacion>9311</tipoOperacion>
+<cuenta>
+<valorDebito>180.00</valorDebito>
+</cuenta>
+</Recaudo>
+<CoreBB>
+<secuencial>43598383</secuencial>
+<transaccionesterminal>87654321</transaccionesterminal>
+</CoreBB>
+</informacionTarjeta>
+</MensajeEntradaPagarConsumo>
+
+
+
+<inPagoProveedor>
+<part xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="MensajeISOSocketEntrada">
+<MensajeISOSocketEntrada xmlns="http://www.bolivariano.com/MensajeISOSocket">
+<mensajeISO>
+0200F03C450000C1000000000000000143001640274830473710410030000000000180005983831325230323240893110012000138373635343332313030303030303030303838383830320010393530364543554354410012303035303036303130353030000630303031383100243030303030303030303030303030303030303031383030300014313130303030303030303030303020202020202020202020202020202020202020202020
+</mensajeISO>
+<header>0000160102</header>
+</MensajeISOSocketEntrada>
+</part>
+</inPagoProveedor>
+<outPagoProveedor>
+<part xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="MensajeISOSocketSalida">
+<MensajeISOSocketSalida xmlns="http://www.bolivariano.com/MensajeISOSocket">
+<codigoError>java.net.SocketTimeoutException</codigoError>
+<estado>ERROR</estado>
+<mensajeError>---------- ERROR EN TRAMA TAMA�O CERO - java.net.SocketTimeoutException: ERROR EN TRAMA TAMA�O CERO</mensajeError>
+<mensajeISO/>
+</MensajeISOSocketSalida>
+</part>
+</outPagoProveedor>
