@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<CTSMessage>
+    <CTSHeader>
+        <Field name="kernelHeader" type="S">E7AEC50792032D00680003FF00002602</Field>
+        <Field name="backEndId" type="S">1</Field>
+        <Field name="fromServer" type="S">SRVDESA2</Field>
+        <Field name="srv" type="S">SRVDESA2</Field>
+        <Field name="sesn" type="N">45</Field>
+    </CTSHeader>
+    <Data>
+        <ProcedureRequest>
+            <SpName>cob_pagos..sp_tr_pago_agua_rc</SpName>
+            <Param name="@i_canal" type="39" io="0" len="3">DBA</Param>
+            <Param name="@t_trn" type="39" io="0" len="4">3201</Param>
+            <Param name="@i_aplcobis" type="39" io="0" len="1">S</Param>
+            <Param name="@i_autoriza" type="39" io="0" len="1">N</Param>
+            <Param name="@i_empresa" type="39" io="0" len="3">361</Param>
+            <Param name="@i_opcion" type="39" io="0" len="1">T</Param>
+            <Param name="@i_mon" type="48" io="0" len="1">1</Param>
+            <Param name="@i_ubi" type="56" io="0" len="4">0</Param>
+            <Param name="@i_tiporef" type="39" io="0" len="8">CONTRATO</Param>
+            <Param name="@i_codigo" type="39" io="0" len="6">528568</Param>
+            <Param name="@i_rubroperson" type="39" io="0" len="4">INAG</Param>
+            <Param name="@i_serviperson" type="39" io="0" len="4">CSBA</Param>
+            <Param name="@s_sesn" type="39" io="0" len="1">0</Param>
+            <Param name="@s_sev" type="39" io="0" len="1">0</Param>
+            <Param name="@s_ssn_branch" type="56" io="0" len="4">71068387</Param>
+            <Param name="@t_rol" type="52" io="0" len="2">165</Param>
+            <Param name="@s_loginid" type="52" io="0" len="2">20272</Param>
+            <Param name="@s_user" type="39" io="0" len="7">msilvag</Param>
+            <Param name="@s_srv" type="39" io="0" len="8">SRVDESA2</Param>
+            <Param name="@s_rol" type="56" io="0" len="4">165</Param>
+            <Param name="@s_ofi" type="56" io="0" len="4">0</Param>
+            <Param name="@s_term" type="39" io="0" len="8">COMPUTO1</Param>
+            <Param name="@s_ssn" type="56" io="0" len="4">130395879</Param>
+        </ProcedureRequest>
+    </Data>
+</CTSMessage><!--Salida-->
+<CTSMessage xmlns="http://www.bolivariano.com/respuestaMQ" xmlns:xsd1="http://www.bolivariano.com/MensajeInteragua">
+    <CTSHeader>
+        <Field name="kernelHeader" type="S">E7AEC50792032D00680003FF00002602</Field>
+        <Field name="fromServer" type="S">SRVDESA2</Field>
+        <Field name="srv" type="S">SRVDESA2</Field>
+        <Field name="sesn" type="N">45</Field>
+        <Field name="transaccion" type="N">3201</Field>
+        <Field name="usuario" type="N">msilvag</Field>
+        <Field name="secuencial" type="N">130395879</Field>
+        <Field name="terminal" type="N">COMPUTO1</Field>
+    </CTSHeader>
+    <Data>
+        <ProcedureResponse>
+            <ResultSet>
+                <Header>
+                    <col name="name" type="39" len="19" />
+                    <col name="value" type="39" len="19" />
+                </Header>
+                <rw>
+                    <cd>@o_autempresa</cd>
+                    <cd>8502203301</cd>
+                </rw>
+                <rw>
+                    <cd>@o_nombre</cd>
+                    <cd>INTERMEDIARIA DE VENTAS SUPER BAHIA SUBAHI SOCIEDAD ANONIMA</cd>
+                </rw>
+                <rw>
+                    <cd>@o_fecha_tope</cd>
+                    <cd>2022-04-25T00:00:00</cd>
+                </rw>
+                <rw>
+                    <cd>@o_saldo</cd>
+                    <cd>15.19</cd>
+                </rw>
+                <rw>
+                    <cd>@o_costo</cd>
+                    <cd>0E-19</cd>
+                </rw>
+            </ResultSet>
+            <OutputParams>
+                <param name="@o_autempresa" type="39" len="20">8502203301</param>
+                <param name="@o_nombre" type="39" len="20">INTERMEDIARIA DE VENTAS SUPER BAHIA SUBAHI SOCIEDAD ANONIMA</param>
+                <param name="@o_fecha_tope" type="39" len="20">2022-04-25T00:00:00</param>
+                <param name="@o_saldo" type="39" len="20">15.19</param>
+                <param name="@o_costo" type="39" len="20">0E-19</param>
+            </OutputParams>
+            <return>0</return>
+        </ProcedureResponse>
+    </Data>
+</CTSMessage>
+
+<!--PAGO-->
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<CTSMessage>
+    <CTSHeader>
+        <Field name="kernelHeader" type="S">E8AEC50794032D00680003FF0000F805</Field>
+        <Field name="backEndId" type="S">1</Field>
+        <Field name="fromServer" type="S">SRVDESA2</Field>
+        <Field name="srv" type="S">SRVDESA2</Field>
+        <Field name="sesn" type="N">45</Field>
+    </CTSHeader>
+    <Data>
+        <ProcedureRequest>
+            <SpName>cob_pagos..sp_tr_pago_agua_rc</SpName>
+            <Param name="@i_canal" type="39" io="0" len="3">DBA</Param>
+            <Param name="@s_ofi" type="39" io="0" len="1">0</Param>
+            <Param name="@s_term" type="39" io="0" len="5">TERMX</Param>
+            <Param name="@t_trn" type="56" io="0" len="4">3137</Param>
+            <Param name="@s_user" type="39" io="0" len="7">msilvag</Param>
+            <Param name="@i_aplcobis" type="39" io="0" len="1">S</Param>
+            <Param name="@i_autoriza" type="39" io="0" len="1">N</Param>
+            <Param name="@i_cant_chq" type="56" io="0" len="4">0</Param>
+            <Param name="@i_chq_com" type="110" io="0" len="8">0.00</Param>
+            <Param name="@i_debito" type="110" io="0" len="8">15.19</Param>
+            <Param name="@i_deb_com" type="110" io="0" len="8">0.00</Param>
+            <Param name="@i_efe" type="110" io="0" len="8">0.00</Param>
+            <Param name="@i_efe_com" type="110" io="0" len="8">0.00</Param>
+            <Param name="@i_empresa" type="39" io="0" len="3">361</Param>
+            <Param name="@i_opcion" type="39" io="0" len="1">T</Param>
+            <Param name="@i_mon" type="48" io="0" len="1">1</Param>
+            <Param name="@i_tiporef" type="39" io="0" len="8">contrato</Param>
+            <Param name="@i_valch" type="110" io="0" len="8">0.00</Param>
+            <Param name="@i_cuenta" type="39" io="0" len="10">0001809717</Param>
+            <Param name="@i_tipocta" type="39" io="0" len="3">AHO</Param>
+            <Param name="@i_codigo" type="39" io="0" len="6">528568</Param>
+            <Param name="@i_rubroperson" type="39" io="0" len="4">INAG</Param>
+            <Param name="@i_serviperson" type="39" io="0" len="4">CSBA</Param>
+            <Param name="@i_proceso" type="39" io="0" len="1">T</Param>
+            <Param name="@i_reten" type="110" io="0" len="8">0.00</Param>
+            <Param name="@i_comision" type="110" io="0" len="8">0.00</Param>
+            <Param name="@t_corr" type="39" io="0" len="1">N</Param>
+            <Param name="@i_servname" type="39" io="0" len="12">AGUA POTABLE</Param>
+            <Param name="@i_empname" type="39" io="0" len="9">INTERAGUA</Param>
+            <Param name="@i_val" type="110" io="0" len="8">15.19</Param>
+            <Param name="@i_subtotal" type="110" io="0" len="8">15.19</Param>
+            <Param name="@i_totapag" type="110" io="0" len="8">15.19</Param>
+            <Param name="@i_nombre_cta" type="39" io="0" len="0"></Param>
+            <Param name="@i_servicio" type="39" io="0" len="1">2</Param>
+            <Param name="@i_nombre" type="39" io="0" len="59">INTERMEDIARIA DE VENTAS SUPER BAHIA SUBAHI SOCIEDAD ANONIMA</Param>
+            <Param name="@s_org" type="39" io="0" len="1">D</Param>
+            <Param name="@s_srv" type="39" io="0" len="8">BOLIVSRV</Param>
+            <Param name="@s_lsrv" type="39" io="0" len="8">BOLIVSRV</Param>
+            <Param name="@s_sesn" type="39" io="0" len="1">0</Param>
+            <Param name="@s_sev" type="39" io="0" len="1">0</Param>
+            <Param name="@i_ubi" type="52" io="0" len="2">0</Param>
+            <Param name="@i_rol_cajero" type="56" io="0" len="4">165</Param>
+            <Param name="@t_nemonico" type="52" io="0" len="2">51</Param>
+            <Param name="@s_ssn_branch" type="56" io="0" len="4">71068439</Param>
+            <Param name="@t_rol" type="52" io="0" len="2">165</Param>
+            <Param name="@s_loginid" type="52" io="0" len="2">20272</Param>
+            <Param name="@s_user" type="39" io="0" len="7">msilvag</Param>
+            <Param name="@s_srv" type="39" io="0" len="8">SRVDESA2</Param>
+            <Param name="@s_rol" type="56" io="0" len="4">165</Param>
+            <Param name="@s_ofi" type="56" io="0" len="4">0</Param>
+            <Param name="@s_term" type="39" io="0" len="8">COMPUTO1</Param>
+            <Param name="@s_ssn" type="56" io="0" len="4">130395880</Param>
+        </ProcedureRequest>
+    </Data>
+</CTSMessage>

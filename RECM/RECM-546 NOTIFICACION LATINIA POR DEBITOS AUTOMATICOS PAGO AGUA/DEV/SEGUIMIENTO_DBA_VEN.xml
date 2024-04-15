@@ -1,0 +1,89 @@
+<!-- 
+    En la comparacion no se esta enviando el i_codigo en la trama DBA generada desde credimoney
+-->
+<!--TRAMA DBA-->
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<CTSMessage>
+    <CTSHeader>
+        <Field name="kernelHeader" type="S">0895C107EA054200680003FF00002002</Field>
+        <Field name="backEndId" type="S">1</Field>
+        <Field name="fromServer" type="S">SRVDESA2</Field>
+        <Field name="srv" type="S">SRVDESA2</Field>
+        <Field name="sesn" type="N">66</Field>
+    </CTSHeader>
+    <Data>
+        <ProcedureRequest>
+            <SpName>cob_pagos..sp_tr_pago_agua_rc</SpName>
+            <Param name="@i_canal" type="39" io="0" len="3">DBA</Param>
+            <Param name="@t_trn" type="39" io="0" len="4">3201</Param>
+            <Param name="@i_aplcobis" type="39" io="0" len="1">S</Param>
+            <Param name="@i_autoriza" type="39" io="0" len="1">N</Param>
+            <Param name="@i_empresa" type="39" io="0" len="3">361</Param>
+            <Param name="@i_opcion" type="39" io="0" len="1">T</Param>
+            <Param name="@i_mon" type="48" io="0" len="1">1</Param>
+            <Param name="@i_ubi" type="56" io="0" len="4">0</Param>
+            <Param name="@i_tiporef" type="39" io="0" len="8">CONTRATO</Param>
+            <Param name="@i_codigo" type="39" io="0" len="0"></Param>
+            <Param name="@i_rubroperson" type="39" io="0" len="4">INAG</Param>
+            <Param name="@i_serviperson" type="39" io="0" len="4">CSBA</Param>
+            <Param name="@s_sesn" type="39" io="0" len="1">0</Param>
+            <Param name="@s_sev" type="39" io="0" len="1">0</Param>
+            <Param name="@s_ssn_branch" type="56" io="0" len="4">64185641</Param>
+            <Param name="@t_rol" type="52" io="0" len="2">165</Param>
+            <Param name="@s_loginid" type="52" io="0" len="2">6429</Param>
+            <Param name="@s_user" type="39" io="0" len="7">msilvag</Param>
+            <Param name="@s_srv" type="39" io="0" len="8">SRVDESA2</Param>
+            <Param name="@s_rol" type="56" io="0" len="4">165</Param>
+            <Param name="@s_ofi" type="56" io="0" len="4">0</Param>
+            <Param name="@s_term" type="39" io="0" len="8">COMPUTO1</Param>
+            <Param name="@s_ssn" type="56" io="0" len="4">130127112</Param>
+        </ProcedureRequest>
+    </Data>
+</CTSMessage>
+
+<!--TRAMA DE VEN-->
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<CTSMessage>
+    <CTSHeader>
+        <Field name="kernelHeader" type="S">5AC9C107EC0F3800680003FF0000FD02</Field>
+        <Field name="backEndId" type="S">1</Field>
+        <Field name="fromServer" type="S">SRVDESA2</Field>
+        <Field name="srv" type="S">SRVDESA2</Field>
+        <Field name="sesn" type="N">56</Field>
+    </CTSHeader>
+    <Data>
+        <ProcedureRequest>
+            <SpName>cob_pagos..sp_tr_pago_agua_rc</SpName>
+            <Param name="@i_canal" type="39" io="0" len="3">VEN</Param>
+            <Param name="@s_ofi" type="39" io="0" len="1">0</Param>
+            <Param name="@s_term" type="39" io="0" len="15">VIRTUAL_BBADMIN</Param>
+            <Param name="@t_trn" type="56" io="0" len="4">3201</Param>
+            <Param name="@s_user" type="39" io="0" len="7">msilvag</Param>
+            <Param name="@i_aplcobis" type="39" io="0" len="1">S</Param>
+            <Param name="@i_autoriza" type="39" io="0" len="1">N</Param>
+            <Param name="@i_empresa" type="39" io="0" len="3">361</Param>
+            <Param name="@i_opcion" type="39" io="0" len="1">T</Param>
+            <Param name="@i_mon" type="39" io="0" len="1">1</Param>
+            <Param name="@i_tiporef" type="39" io="0" len="8">CONTRATO</Param>
+            <Param name="@i_codigo" type="39" io="0" len="6">528568</Param>
+            <Param name="@i_rubroperson" type="39" io="0" len="4">INAG</Param>
+            <Param name="@i_serviperson" type="39" io="0" len="4">CSBA</Param>
+            <Param name="@s_org" type="39" io="0" len="1">D</Param>
+            <Param name="@s_srv" type="39" io="0" len="8">BOLIVSRV</Param>
+            <Param name="@s_lsrv" type="39" io="0" len="8">BOLIVSRV</Param>
+            <Param name="@s_sesn" type="39" io="0" len="1">0</Param>
+            <Param name="@s_sev" type="39" io="0" len="1">0</Param>
+            <Param name="@i_ubi" type="56" io="0" len="4">0</Param>
+            <Param name="@i_rol_cajero" type="56" io="0" len="4">252</Param>
+            <Param name="@s_ssn_branch" type="56" io="0" len="4">65195647</Param>
+            <Param name="@t_rol" type="52" io="0" len="2">252</Param>
+            <Param name="@s_loginid" type="52" io="0" len="2">5565</Param>
+            <Param fname="@s_user" type="39" io="0" len="7">msilvag</Param>
+            <Param name="@s_srv" type="39" io="0" len="8">SRVDESA2</Param>
+            <Param name="@s_rol" type="56" io="0" len="4">252</Param>
+            <Param name="@s_ofi" type="56" io="0" len="4">0</Param>
+            <Param name="@s_term" type="39" io="0" len="10">VIRTUAL_BB</Param>
+            <Param name="@s_ssn" type="56" io="0" len="4">130140506</Param>
+        </ProcedureRequest>
+    </Data>
+</CTSMessage>
