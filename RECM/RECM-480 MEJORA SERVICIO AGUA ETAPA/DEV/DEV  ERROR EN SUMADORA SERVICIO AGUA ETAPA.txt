@@ -1,0 +1,21 @@
+--MI CAMBIO EN ATX 
+'kbastida
+ If (FMCCurATX(Pago_Val.Text) > FMCCurATX(Me.valor.Text)) Then
+
+--CAMBIO 
+En el archivo FCC51 en la condicion
+If FMTransmitirRPCATX(VGSqlConn, vl_servidor_BUS, "cob_procesador", "fp_pago_Etapa", True, "Transaccion Ok", "S", "N", "S", "51", "S", "S") = True Then
+en el primer if se cambio VTIndicadorSum = 1 por VTIndicadorSum = 0   
+
+en la condicion 
+Else
+        VLCambio% = True
+        VLFechaCorte = ""
+se cambio VTIndicadorSum = 1 por VTIndicadorSum = 0 
+
+
+PryTlb.Class1
+Set ClaseUC = New Class1 'Instanciar la dll
+VL_Resultado = ClaseUC.Send_requerimientoPinpad
+
+AtxRECA_PB.exe
