@@ -1,0 +1,22 @@
+<assign name="AsignarErrorPrueba">
+<copy>
+<from>'BEA-380002: connect timed out'</from>
+<to>$remoteFault.summary</to>
+</copy>
+<copy>
+<from>70008</from>
+<to>$remoteFault.code</to>
+</copy>
+<copy>
+<from>'&amp;amp;lt;con:fault xmlns:con="http://www.bea.com/wli/sb/context"&gt; &amp;amp;lt;con:errorCode&amp;gt;BEA-380002&amp;amp;lt;/con:errorCode&amp;gt; &amp;amp;lt;con:reason&amp;gt;connect timed out&amp;amp;lt;/con:reason&amp;gt; &amp;amp;lt;con:location&amp;gt; &amp;amp;lt;con:node&amp;gt;RouteNode1&amp;amp;lt;/con:node&amp;gt; &amp;amp;lt;con:path&amp;gt;request-pipeline&amp;amp;lt;/con:path&amp;gt; &amp;amp;lt;/con:location&amp;gt;&amp;amp;lt;/con:fault&amp;gt;'</from>
+<to>$remoteFault.detail</to>
+</copy>
+</assign>
+<throw name="lanzarErrorPrueba" faultName="bpelx:remoteFault" faultVariable="remoteFault"/>
+
+
+<variable name="remoteFault" messageType="bpelx:RuntimeFaultMessage"/>
+
+
+==========SINO FUNCIONA CAMBIAR EL COONECT POR READ===================
+
