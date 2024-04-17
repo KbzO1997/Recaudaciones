@@ -1,0 +1,1936 @@
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (104.47.70.102)
+ by mailweb.bolivariano.com (172.17.3.231) with Microsoft SMTP Server (TLS) id
+ 14.3.498.0; Wed, 8 Mar 2023 08:18:42 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=jePPXX8hpW53uZQOIwAkWhiQv84cemNliikNwBq/y0brP3muGAY5HnuhGJ6HwJWe5KPss9Tz0go6nVpcHTPaE76vJ9SVZeVwtG1gwZTbmXv4tGK0glq+SE30WiYM4xYbpP6M+bCY1RGoguTeqQ5Erv1Fo53qYe9y0cPOpv1Rf/OaPH9XBTT9IO/tg5Hp0ERlO4EeUHrlsy/b1TaHc82ME2QlkXiSZvkZ4ts5KS+ivzmrqB0wLvO9mBosq6IGWV44tTBoaFhWu0rOP1PPrYzT+y215wcTT2AUl2EIODRsxHDtE0S31SGvovQJ7ItlZiI/yMJhIgbnLsb1/z8oHt7r6A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=jhzGz27O4t36osl6sVweJ198Iv0xZuIqYixsCEfOtKs=;
+ b=eyldUOYfwhSmhed4eScB/lNFfOctY+QU3CgSMsYqkQKahsJCicjejvqnRCbXARFsYv+/mNMnPvAfMLeanDQWuHXRZHyLt3v49IO++scPM9TFCyLzuRd7udMXvkYXSvIZMhEQj+o6kLazrJ3rq4pZ9Esxru8W07NwETg2Z9rfJGn1V8YnbmPt5fW39dKMhRw509+hAJ6y7epdZ25OTn+qFPFNh1fMwnJjoEGTmjx2kWDybn+KsyAmVFhnZL+H5AW1wIH8bcgAWjrRRFRE1cJ23Non/1vWv4m/lhmzZWF8387Ryx4XT/1TrTg4G6Sv5Mi3cnJC1JnkAPC+h3JknxsFUg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=bolivariano.com; dmarc=pass action=none
+ header.from=bolivariano.com; dkim=pass header.d=bolivariano.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bolivariano.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=jhzGz27O4t36osl6sVweJ198Iv0xZuIqYixsCEfOtKs=;
+ b=b8XtviR1GnSdFIEl40dA1k6eBTMXXBsTL4Fa2pBmBcOb1AgEsIUGukatvCu4JD6Vg1WM+8trzip0ZJ87kv2XbleP8TAxCnPMtizbK/kN2A5NCY8z6ThL5sJDLh0rOEhfS5t0u5rLW+EQvOQf+4ExKC23HAUoDq2g87y+fu/gIDm2SWkEXyardEWoLqX0DPdaQHk9tivYtE+GkPhYgkbDYjhCk3Em4gEuDr0al9wjBTVT04wwRAvOCHG0unGKes8F7++h6zifNvP/E3oxIGqGmwB6whVSAc3Vd8NDadx4PrrCTQXegYqnotr47pHcBaO/sWh6D/7mDvbXbkePuUgKxQ==
+Received: from MN2PR10MB3407.namprd10.prod.outlook.com (2603:10b6:208:123::28)
+ by SJ0PR10MB4751.namprd10.prod.outlook.com (2603:10b6:a03:2db::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.17; Wed, 8 Mar
+ 2023 13:18:39 +0000
+Received: from MN2PR10MB3407.namprd10.prod.outlook.com
+ ([fe80::93c2:679c:7428:4088]) by MN2PR10MB3407.namprd10.prod.outlook.com
+ ([fe80::93c2:679c:7428:4088%6]) with mapi id 15.20.6178.017; Wed, 8 Mar 2023
+ 13:18:39 +0000
+From: Dario Espinosa Aldean <despinoa@bolivariano.com>
+To: "Kevin Bastidas Zavala (Externo)" <kbastidz@bolivariano.com>,
+	=?iso-8859-1?Q?Wendy_Cede=F1o_Ley?= <wcedeno@bolivariano.com>
+CC: Recaudos <Recaudos@bolivariano365.onmicrosoft.com>
+Subject: =?iso-8859-1?Q?RV:_PROD_PASE_[RECM-701]_[OPTIMIZACI=D3N_EN_EL_TIEMPO_DE_C?=
+ =?iso-8859-1?Q?ONECCION_PARA_LA_EMPRESA_MEGADATOS]?=
+Thread-Topic: =?iso-8859-1?Q?PROD_PASE_[RECM-701]_[OPTIMIZACI=D3N_EN_EL_TIEMPO_DE_CONEC?=
+ =?iso-8859-1?Q?CION_PARA_LA_EMPRESA_MEGADATOS]?=
+Thread-Index: AQHZUGkSHkvvFT3up02TC1zGAAJyPK7vVDsAgAAiWoCAAA3pAIAAXG8AgABlHoCAAJoPoA==
+Date: Wed, 8 Mar 2023 13:18:39 +0000
+Message-ID: <MN2PR10MB3407D2DF0902B49F056874B4DAB49@MN2PR10MB3407.namprd10.prod.outlook.com>
+References: <MN2PR10MB34079A524BD366E316A66B3BDAB79@MN2PR10MB3407.namprd10.prod.outlook.com>
+ <64075BDD.9010609@bolivariano.com>
+ <MN2PR10MB3181A72D07AC32164A95B2CBA4B79@MN2PR10MB3181.namprd10.prod.outlook.com>
+ <BN7PR10MB2755718481A0F07B8C8EB737C7B79@BN7PR10MB2755.namprd10.prod.outlook.com>
+ <DS7PR10MB53767CFAE6B695497CE1C650C7B49@DS7PR10MB5376.namprd10.prod.outlook.com>
+In-Reply-To: <DS7PR10MB53767CFAE6B695497CE1C650C7B49@DS7PR10MB5376.namprd10.prod.outlook.com>
+Accept-Language: es-ES, en-US
+Content-Language: es-ES
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=bolivariano.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: MN2PR10MB3407:EE_|SJ0PR10MB4751:EE_
+x-ms-office365-filtering-correlation-id: 5fa1b8d8-79c1-49d9-e16c-08db1fd7a196
+x-ld-processed: 381bee0c-a9ea-4342-81c0-318a50b0845f,ExtAddr
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: Qyf7tbuvFrMzq/C2E0rqNK907SjHiRS7TVZhfrQyTrRVM9wT0XKMkvurjJaS6ulr1ur/bmOrQcPHrcJpO33BA/6I31QExBXCTPhUsoCiy+PFQeP+Rt0H5fY1hvBrI1cbh1AlC7RbPYD/w24Zuvi44VvcqgGyogzr8CmOSuTpJ0/vk1cA7JibpMV7Ru+TtHk3/wjc/sDvj0BX4w+SrP1WLop3FY6qEEC8Lxz1lIpWqsrPyvRqg/AejGSItxHmyn1P14BngR5vWxZTmKVgXqPX05KLZBIP2Fg1T4oUHR9ePWGcqQ+JZSvEKimkv/YZ0CvOLCAKMFM1G2C6AYc6OiQDnbykrHfnuBhyxYzSGbCdsmCarda3HS6Y+55Jr1rG4CiPvCXu1YhPbUa19H+UphuUJB5p0ixkF3WsD6FRqILe5FSe23qcpXv0P+RFI5hNhk/bagvAIzL6Dx58xbFHc6QvcNm85Z8S+EqwKYMlpShORhZ+pwwipqcOrP862HaXh6SNDjxaUK24TPTsnfdJIE3tXWTqJRVA5e0hvxbc8SeJeKHR9PTL7hv2e6aM6hUJuLRdQjamfVNI/lP3Gtla2Br0X8b+P6AWEGDWVI0k2jbWGWl3ScgP6f3dXybcuxNtzK8bGzfxJzJ17QR3JRBy6HKzVA==
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:es;SCL:-1;SRV:;IPV:NLI;SFV:SKI;H:MN2PR10MB3407.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:;DIR:INB;
+Content-Type: multipart/related;
+	boundary="_005_MN2PR10MB3407D2DF0902B49F056874B4DAB49MN2PR10MB3407namp_";
+	type="multipart/alternative"
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: MN2PR10MB3407.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5fa1b8d8-79c1-49d9-e16c-08db1fd7a196
+X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Mar 2023 13:18:39.2350
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 381bee0c-a9ea-4342-81c0-318a50b0845f
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: aK61NBjpcKjcyBuHbyB+5bQueOIidDPwPRyKpxaEvttzcXIkGknXqAF0G7/8aeHv0xIZkR9ptglu2GOocws/P3sb16ofR55hpGCjQ6NznyQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB4751
+X-OrganizationHeadersPreserved: SJ0PR10MB4751.namprd10.prod.outlook.com
+Return-Path: despinoa@bolivariano.com
+X-OriginatorOrg: bolivariano.com
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-MS-Exchange-Organization-AuthSource: MN2PR10MB3407.namprd10.prod.outlook.com
+X-MS-Exchange-Organization-SCL: -1
+X-CrossPremisesHeadersPromoted: EX2K10SRV.bolivariano.fin.ec
+X-CrossPremisesHeadersFiltered: EX2K10SRV.bolivariano.fin.ec
+MIME-Version: 1.0
+
+--_005_MN2PR10MB3407D2DF0902B49F056874B4DAB49MN2PR10MB3407namp_
+Content-Type: multipart/alternative;
+	boundary="_000_MN2PR10MB3407D2DF0902B49F056874B4DAB49MN2PR10MB3407namp_"
+
+--_000_MN2PR10MB3407D2DF0902B49F056874B4DAB49MN2PR10MB3407namp_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+PSC
+
+Saludos cordiales,
+
+Dario Espinosa
+Desarrollo | Tecnolog=EDa
+Banco Bolivariano C.A Jun=EDn 200 y Panam=E1. Guayaquil=AD - Ecuador  | 4 2=
+30 5000 - Ext. 4907
+
+De: Marcos Del Rosario Camposano <mrosario@bolivariano.com>
+Enviado el: Tuesday, March 7, 2023 11:07 PM
+Para: Iv=E1n V=E1squez Galarza <ivasquez@bolivariano.com>; IDS-ADMINSRV <ID=
+S-ADMINSRV@bolivariano.com>
+CC: Administraci=F3n y Control <admcontrol@bolivariano.com>; Dario Barco Le=
+=F3n <dbarcol@bolivariano.com>; Desarrollo-Recaudaciones <Desarrollo-Recaud=
+aciones@bolivariano.com>; Middleware <Middleware@bolivariano.com>; Arquitec=
+turaQA <ArquitecturaQA@bolivariano.com>; Operadores Producci=F3n <operpro@b=
+olivariano.com>
+Asunto: RE: PROD PASE [RECM-701] [OPTIMIZACI=D3N EN EL TIEMPO DE CONECCION =
+PARA LA EMPRESA MEGADATOS]
+
+Pase realizado.
+
+
+
+
+Marcos Del Rosario C.
+
+Ingenier=EDa de Sistemas | Middleware |Tecnolog=EDa
+
+Jun=EDn 200 y Panam=E1. .|* (593) 4 230 5000 - Ext. 2261
+
+ [cid:image002.png@01D95196.93ACA610]
+
+________________________________
+De: Iv=E1n V=E1squez Galarza <ivasquez@bolivariano.com<mailto:ivasquez@boli=
+variano.com>>
+Enviado: martes, 7 de marzo de 2023 17:05
+Para: IDS-ADMINSRV <IDS-ADMINSRV@bolivariano.com<mailto:IDS-ADMINSRV@boliva=
+riano.com>>
+Cc: Administraci=F3n y Control <admcontrol@bolivariano.com<mailto:admcontro=
+l@bolivariano.com>>; Dario Barco Le=F3n <dbarcol@bolivariano.com<mailto:dba=
+rcol@bolivariano.com>>; Desarrollo-Recaudaciones <Desarrollo-Recaudaciones@=
+bolivariano.com<mailto:Desarrollo-Recaudaciones@bolivariano.com>>; Middlewa=
+re <Middleware@bolivariano.com<mailto:Middleware@bolivariano.com>>; Arquite=
+cturaQA <ArquitecturaQA@bolivariano.com<mailto:ArquitecturaQA@bolivariano.c=
+om>>; Operadores Producci=F3n <operpro@bolivariano.com<mailto:operpro@boliv=
+ariano.com>>
+Asunto: RV: PROD PASE [RECM-701] [OPTIMIZACI=D3N EN EL TIEMPO DE CONECCION =
+PARA LA EMPRESA MEGADATOS]
+
+
+Ok, pase aprobado.
+
+\\arcserver1srv\pases\RECM\701<file://arcserver1srv/pases/RECM/701>
+
+
+
+
+
+
+
+Iv=E1n VG
+
+
+
+De: Dario Barco Le=F3n <dbarcol@bolivariano.com<mailto:dbarcol@bolivariano.=
+com>>
+Enviado el: martes, 7 de marzo de 2023 11:34
+Para: Administraci=F3n y Control <admcontrol@bolivariano.com<mailto:admcont=
+rol@bolivariano.com>>
+CC: Kevin Bastidas Zavala (Externo) <kbastidz@bolivariano.com<mailto:kbasti=
+dz@bolivariano.com>>; Recaudos <Recaudos@bolivariano365.onmicrosoft.com<mai=
+lto:Recaudos@bolivariano365.onmicrosoft.com>>
+Asunto: RV: PROD PASE [RECM-701] [OPTIMIZACI=D3N EN EL TIEMPO DE CONECCION =
+PARA LA EMPRESA MEGADATOS]
+
+
+
+Favor proceder.
+
+
+
+Saludos,
+
+
+
+Dar=EDo Barco Le=F3n
+
+Desarrollo | Tecnolog=EDa
+
+Jun=EDn 208 y Pedro Carbo. Guayaquil-Ecuador | (593) 42305000 - Ext. 4908
+
+[cid:image001.png@01D950E8.BAFFC7A0]
+
+
+
+De: Kevin Bastidas Zavala (Externo) <kbastidz@bolivariano.com<mailto:kbasti=
+dz@bolivariano.com>>
+Enviado el: martes, marzo 07, 2023 10:44
+Para: Dario Barco Le=F3n <dbarcol@bolivariano.com<mailto:dbarcol@bolivarian=
+o.com>>
+CC: Dario Espinosa Aldean <despinoa@bolivariano.com<mailto:despinoa@bolivar=
+iano.com>>
+Asunto: PROD PASE [RECM-701] [OPTIMIZACI=D3N EN EL TIEMPO DE CONECCION PARA=
+ LA EMPRESA MEGADATOS]
+
+
+
+
+
+Buenos dias,
+
+
+
+Por favor su ayuda con la aprobaci=F3n del pase a producci=F3n
+
+
+
+
+
+ESTE PASE NO CONTIENE NADA RELACIONADO A TARJETAS DE CR=C9DITO
+
+
+
+
+
+Requerimiento (ClearQuest)
+
+
+
+C=F3digo(s):
+
+RECM-701
+
+Solicitud del Usuario:
+
+En Jira
+
+Conjunto de Cambio (Changeset):
+
+30159
+
+Descripci=F3n del cambio o de la soluci=F3n:
+
+OPTIMIZACI=D3N EN EL TIEMPO DE CONECCION PARA LA EMPRESA MEGADATOS
+
+Fecha Ejecuci=F3n:
+
+7/Marzo/2023
+
+Hora Ejecuci=F3n:
+
+23:30 PM
+
+Cantidad Archivos Back-End:
+
+0
+
+Cantidad Archivos Front-End:
+
+0
+
+Cantidad Archivos Middleware:
+
+1
+
+Observaci=F3n:
+
+
+
+Formularios
+
+
+
+Frond-End
+
+N/A
+
+Back-End
+
+
+
+Middleware
+
+
+
+Orden Procesos a implementar
+
+
+
+
+
+1.      Pasar sca_Megadatos.jar
+
+Con Orden de Proceso: ORDEN DE PROCESO SOA.doc
+
+
+
+
+
+
+
+Orden Procesos Batch
+
+N/A
+
+Tareas MTRA
+
+N/A
+
+
+
+Aprobaciones
+
+
+
+Aprobaci=F3n de CONTRALORIA Y PRODUCTOS:
+
+*         Actualizaci=F3n de datos de producci=F3n.
+
+*         Controles de auditoria.
+
+N/A
+
+Aprobaci=F3n de JEFATURA DE PRODUCCI=D3N:
+
+*         Revisi=F3n Orden Procesos Batch (Nuevos/Modificados)
+
+*         Ordenes de Procesos a implementar
+
+N/A
+
+Aprobaci=F3n de QA-DBA:
+
+*         Creaci=F3n, actualizaci=F3n, eliminaci=F3n de nuevos tablas, =EDn=
+dices, vistas, etc.
+
+*         Carga masiva de informaci=F3n (bcp)
+
+*         Creaci=F3n de base de datos
+
+*         Incremento de tama=F1o de base de datos
+
+*         Store Procedure (SP) nuevos
+
+*         SQR nuevos o modificados
+
+N/A
+
+Aprobaci=F3n de IDS/ARQUITECTURA:
+
+*         Nuevos productos en servidores NT
+
+*         Cambios en configuraciones de Servidores
+
+N/A
+
+Aprobaci=F3n de SEGURIDAD INFORMATICA:
+
+*         Creaci=F3n/Asignaci=F3n de:
+
+*         Transacciones
+
+*         Procedimientos
+
+*         Roles
+
+*         Creaci=F3n de usuarios y/o permisos en Producci=F3n
+
+*         Creaci=F3n y/o actualizaci=F3n de Flujos sobre canales para aplic=
+aciones nuevas o existentes
+
+N/A
+
+Aprobaci=F3n de MONITOREO DE SEGURIDAD INFORMATICA:
+
+*         Informe y aval de an=E1lisis de vulnerabilidad de aplicaciones We=
+b.
+
+N/A
+
+Aprobaci=F3n de CALIDAD:
+
+*         Documentaci=F3n de tablas y Store Procedures nuevos y/o modificad=
+os
+
+*         Documentaci=F3n por servicio: (10 d=EDas previos al pase)
+
+*         Hardware
+
+*         Software
+
+*         Monitoreo
+
+*         An=E1lisis de la B.D. (Previa aprobaci=F3n de DBA.)
+
+*         Respaldos (Previa aprobaci=F3n de jefe de producci=F3n)
+
+*         Documentaci=F3n complementaria
+
+*         Contingencia (Previa aprobaci=F3n de Proyectos)
+
+*         Soluci=F3n a problemas
+
+N/A
+
+Aprobaci=F3n de CONTROL DE CAMBIOS:
+
+*         Variaci=F3n planificada de configuraciones y software de servidor=
+es.
+
+*         Cambios en varias aplicaciones relacionados a un mismo tema.
+
+N/A
+
+Aprobaci=F3n de GERENCIA DE DESARROLLO/INFRAESTRUCTURA/ TECNOLOG=CDA:
+
+*         Cambios t=E9cnicos que modifiquen el proceso esencial  de las apl=
+icaciones cr=EDticas como son: SAT, 24online, Cajeros, C=E1mara, CSP, MTRA,=
+ Petro-Comercial, Portal Web, Postilion, Swift.
+
+*         Requerimientos Express (Fuera del Release)
+
+*         Requerimientos en Quincenas, Fines de Mes y Diciembre.
+
+N/A
+
+
+
+Notificaciones
+
+
+
+Mail de notificaci=F3n por parte del L=EDder Aplicativo del pase de optimiz=
+aci=F3n (CC T=E9cnico) al propietario de la informaci=F3n.
+
+N/A
+
+Mail de notificaci=F3n al usuario por parte de Productos para los pases de =
+requerimientos Funcionales o proyectos.
+
+kbastidz@bolivariano.com<mailto:jguerrej@bolivariano.com>
+
+
+
+Certificaciones
+
+
+
+Certificaci=F3n de pruebas T=E9cnicas y Funcionales (AMBIENTE DESARROLLO)
+
+N/A
+
+Certificaci=F3n de pruebas T=E9cnicas y Funcionales (AMBIENTE PREPRODUCCI=
+=D3N)
+
+N/A
+
+
+
+
+
+Saludos,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--_000_MN2PR10MB3407D2DF0902B49F056874B4DAB49MN2PR10MB3407namp_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40"><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<!--[if !mso]><style>v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style><![endif]--><style><!--
+/* Font Definitions */
+@font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+@font-face
+	{font-family:"Calibri \,serif\;color\:\#1F497D";
+	panose-1:0 0 0 0 0 0 0 0 0 0;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+p
+	{mso-style-priority:99;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif;}
+p.msonormal0, li.msonormal0, div.msonormal0
+	{mso-style-name:msonormal;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif;}
+p.xmsonormal, li.xmsonormal, div.xmsonormal
+	{mso-style-name:x_msonormal;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;
+	color:black;}
+p.xmsochpdefault, li.xmsochpdefault, div.xmsochpdefault
+	{mso-style-name:x_msochpdefault;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Times New Roman",serif;}
+span.xmsohyperlink
+	{mso-style-name:x_msohyperlink;
+	color:blue;
+	text-decoration:underline;}
+span.xestilocorreo19
+	{mso-style-name:x_estilocorreo19;
+	font-family:"Calibri",sans-serif;
+	color:windowtext;}
+span.EstiloCorreo23
+	{mso-style-type:personal-reply;
+	font-family:"Calibri",sans-serif;
+	color:#1F497D;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:70.85pt 3.0cm 70.85pt 3.0cm;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"ES-EC" link=3D"blue" vlink=3D"purple">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US">PSC<o:p></=
+o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US"><o:p>&nbsp=
+;</o:p></span></p>
+<div>
+<p class=3D"MsoNormal"><span lang=3D"ES" style=3D"font-size:11.0pt;font-fam=
+ily:&quot;Calibri&quot;,sans-serif;color:#1F497D">Saludos cordiales,<o:p></=
+o:p></span></p>
+<p class=3D"MsoNormal"><b><span lang=3D"ES" style=3D"font-size:11.0pt;font-=
+family:&quot;Calibri&quot;,sans-serif;color:#009999"><o:p>&nbsp;</o:p></spa=
+n></b></p>
+<p class=3D"MsoNormal"><b><span lang=3D"ES" style=3D"font-size:11.0pt;font-=
+family:&quot;Calibri&quot;,sans-serif;color:#009999">Dario Espinosa<o:p></o=
+:p></span></b></p>
+<p class=3D"MsoNormal"><b><span lang=3D"ES" style=3D"font-size:11.0pt;font-=
+family:&quot;Calibri&quot;,sans-serif;color:black">Desarrollo | Tecnolog=ED=
+a<o:p></o:p></span></b></p>
+<p class=3D"MsoNormal"><span lang=3D"ES" style=3D"font-size:11.0pt;font-fam=
+ily:&quot;Calibri&quot;,sans-serif;color:#A5A5A5">Banco Bolivariano C.A Jun=
+=EDn 200 y Panam=E1. Guayaquil=AD &#8211; Ecuador &nbsp;| 4 230 5000 - Ext.=
+ 4907<o:p></o:p></span></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US"><o:p>&nbsp=
+;</o:p></span></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0cm =
+0cm 0cm">
+<p class=3D"MsoNormal"><b><span lang=3D"ES" style=3D"font-size:11.0pt;font-=
+family:&quot;Calibri&quot;,sans-serif">De:</span></b><span lang=3D"ES" styl=
+e=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif"> Marcos D=
+el Rosario Camposano &lt;mrosario@bolivariano.com&gt;
+<br>
+<b>Enviado el:</b> Tuesday, March 7, 2023 11:07 PM<br>
+<b>Para:</b> Iv=E1n V=E1squez Galarza &lt;ivasquez@bolivariano.com&gt;; IDS=
+-ADMINSRV &lt;IDS-ADMINSRV@bolivariano.com&gt;<br>
+<b>CC:</b> Administraci=F3n y Control &lt;admcontrol@bolivariano.com&gt;; D=
+ario Barco Le=F3n &lt;dbarcol@bolivariano.com&gt;; Desarrollo-Recaudaciones=
+ &lt;Desarrollo-Recaudaciones@bolivariano.com&gt;; Middleware &lt;Middlewar=
+e@bolivariano.com&gt;; ArquitecturaQA &lt;ArquitecturaQA@bolivariano.com&gt=
+;;
+ Operadores Producci=F3n &lt;operpro@bolivariano.com&gt;<br>
+<b>Asunto:</b> RE: PROD PASE [RECM-701] [OPTIMIZACI=D3N EN EL TIEMPO DE CON=
+ECCION PARA LA EMPRESA MEGADATOS]<o:p></o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div>
+<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
+11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:black">Pase realiza=
+do.<o:p></o:p></span></p>
+</div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div id=3D"Signature">
+<div>
+<div>
+<p><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-ser=
+if;color:black">&nbsp;<o:p></o:p></span></p>
+<p><b><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-=
+serif;color:#009999">Marcos Del Rosario C.&nbsp;</span></b><span style=3D"f=
+ont-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:black"><o:=
+p></o:p></span></p>
+<p><b><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-=
+serif;color:#1F497D">Ingenier=EDa de Sistemas | Middleware |Tecnolog=EDa&nb=
+sp;</span></b><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quo=
+t;,sans-serif;color:black"><o:p></o:p></span></p>
+<p><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-ser=
+if;color:#A6A6A6">Jun=EDn 200 y Panam=E1.<b> .</b>|</span><span style=3D"fo=
+nt-size:11.0pt;font-family:Wingdings;color:#A6A6A6">(</span><span style=3D"=
+font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:#A6A6A6">
+ (593) 4 230 5000 - Ext. 2261</span><span style=3D"font-size:11.0pt;font-fa=
+mily:&quot;Calibri&quot;,sans-serif;color:#1F497D">&nbsp;&nbsp;</span><span=
+ style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color=
+:black"><o:p></o:p></span></p>
+<p><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-ser=
+if;color:black">&nbsp;<img width=3D"412" height=3D"67" style=3D"width:4.291=
+6in;height:.6979in" id=3D"_x0000_i1025" src=3D"cid:image002.png@01D95196.93=
+ACA610"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Calibri&quot;,sans-=
+serif;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+</div>
+</div>
+</div>
+<div class=3D"MsoNormal" align=3D"center" style=3D"text-align:center">
+<hr size=3D"2" width=3D"98%" align=3D"center">
+</div>
+<div id=3D"divRplyFwdMsg">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:11.0pt;font-family:&quot=
+;Calibri&quot;,sans-serif;color:black">De:</span></b><span style=3D"font-si=
+ze:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:black"> Iv=E1n V=
+=E1squez Galarza &lt;<a href=3D"mailto:ivasquez@bolivariano.com">ivasquez@b=
+olivariano.com</a>&gt;<br>
+<b>Enviado:</b> martes, 7 de marzo de 2023 17:05<br>
+<b>Para:</b> IDS-ADMINSRV &lt;<a href=3D"mailto:IDS-ADMINSRV@bolivariano.co=
+m">IDS-ADMINSRV@bolivariano.com</a>&gt;<br>
+<b>Cc:</b> Administraci=F3n y Control &lt;<a href=3D"mailto:admcontrol@boli=
+variano.com">admcontrol@bolivariano.com</a>&gt;; Dario Barco Le=F3n &lt;<a =
+href=3D"mailto:dbarcol@bolivariano.com">dbarcol@bolivariano.com</a>&gt;; De=
+sarrollo-Recaudaciones &lt;<a href=3D"mailto:Desarrollo-Recaudaciones@boliv=
+ariano.com">Desarrollo-Recaudaciones@bolivariano.com</a>&gt;;
+ Middleware &lt;<a href=3D"mailto:Middleware@bolivariano.com">Middleware@bo=
+livariano.com</a>&gt;; ArquitecturaQA &lt;<a href=3D"mailto:ArquitecturaQA@=
+bolivariano.com">ArquitecturaQA@bolivariano.com</a>&gt;; Operadores Producc=
+i=F3n &lt;<a href=3D"mailto:operpro@bolivariano.com">operpro@bolivariano.co=
+m</a>&gt;<br>
+<b>Asunto:</b> RV: PROD PASE [RECM-701] [OPTIMIZACI=D3N EN EL TIEMPO DE CON=
+ECCION PARA LA EMPRESA MEGADATOS]</span>
+<o:p></o:p></p>
+<div>
+<p class=3D"MsoNormal">&nbsp;<o:p></o:p></p>
+</div>
+</div>
+<div>
+<div>
+<p class=3D"xmsonormal" style=3D"background:white"><span lang=3D"ES" style=
+=3D"color:windowtext">Ok, pase aprobado.</span><span lang=3D"ES"><o:p></o:p=
+></span></p>
+<p class=3D"xmsonormal" style=3D"background:white"><span lang=3D"ES" style=
+=3D"color:windowtext"><a href=3D"file://arcserver1srv/pases/RECM/701">\\arc=
+server1srv\pases\RECM\701</a></span><span lang=3D"ES"><o:p></o:p></span></p=
+>
+<p class=3D"xmsonormal" style=3D"background:white"><span lang=3D"ES" style=
+=3D"color:windowtext">&nbsp;</span><span lang=3D"ES"><o:p></o:p></span></p>
+<div>
+<p class=3D"xmsonormal" style=3D"background:white"><span lang=3D"ES" style=
+=3D"color:windowtext">&nbsp;</span><span lang=3D"ES"><o:p></o:p></span></p>
+<p class=3D"xmsonormal" style=3D"background:white"><span lang=3D"ES" style=
+=3D"color:windowtext">&nbsp;</span><span lang=3D"ES"><o:p></o:p></span></p>
+<p class=3D"xmsonormal" style=3D"background:white"><b><span lang=3D"ES-MX" =
+style=3D"font-size:12.0pt;color:#0099A8">Iv=E1n VG</span></b><span lang=3D"=
+ES"><o:p></o:p></span></p>
+</div>
+<p class=3D"xmsonormal" style=3D"background:white"><span lang=3D"ES" style=
+=3D"color:windowtext">&nbsp;</span><span lang=3D"ES"><o:p></o:p></span></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0cm =
+0cm 0cm">
+<p class=3D"xmsonormal" style=3D"background:white"><b><span lang=3D"ES" sty=
+le=3D"color:windowtext">De:</span></b><span lang=3D"ES" style=3D"color:wind=
+owtext"> Dario Barco Le=F3n &lt;<a href=3D"mailto:dbarcol@bolivariano.com">=
+dbarcol@bolivariano.com</a>&gt;
+<br>
+<b>Enviado el:</b> martes, 7 de marzo de 2023 11:34<br>
+<b>Para:</b> Administraci=F3n y Control &lt;<a href=3D"mailto:admcontrol@bo=
+livariano.com">admcontrol@bolivariano.com</a>&gt;<br>
+<b>CC:</b> Kevin Bastidas Zavala (Externo) &lt;<a href=3D"mailto:kbastidz@b=
+olivariano.com">kbastidz@bolivariano.com</a>&gt;; Recaudos &lt;<a href=3D"m=
+ailto:Recaudos@bolivariano365.onmicrosoft.com">Recaudos@bolivariano365.onmi=
+crosoft.com</a>&gt;<br>
+<b>Asunto:</b> RV: PROD PASE [RECM-701] [OPTIMIZACI=D3N EN EL TIEMPO DE CON=
+ECCION PARA LA EMPRESA MEGADATOS]</span><span lang=3D"ES"><o:p></o:p></span=
+></p>
+</div>
+</div>
+<p class=3D"xmsonormal" style=3D"background:white"><span lang=3D"ES">&nbsp;=
+<o:p></o:p></span></p>
+<p class=3D"xmsonormal" style=3D"background:white"><span style=3D"color:win=
+dowtext">Favor proceder.</span><span lang=3D"ES"><o:p></o:p></span></p>
+<p class=3D"xmsonormal" style=3D"background:white"><span style=3D"color:win=
+dowtext">&nbsp;</span><span lang=3D"ES"><o:p></o:p></span></p>
+<p class=3D"xmsonormal" style=3D"background:white"><span style=3D"color:win=
+dowtext">Saludos,</span><span lang=3D"ES"><o:p></o:p></span></p>
+<p class=3D"xmsonormal" style=3D"background:white"><span style=3D"color:win=
+dowtext">&nbsp;</span><span lang=3D"ES"><o:p></o:p></span></p>
+<div>
+<p class=3D"xmsonormal" style=3D"background:white"><b><span lang=3D"ES-MX" =
+style=3D"color:#0099A8">Dar=EDo Barco Le=F3n</span></b><span lang=3D"ES"><o=
+:p></o:p></span></p>
+<p class=3D"xmsonormal" style=3D"background:white"><b><span lang=3D"ES-MX" =
+style=3D"font-size:10.0pt;color:#0099A8">Desarrollo | Tecnolog=EDa</span></=
+b><span lang=3D"ES"><o:p></o:p></span></p>
+<p class=3D"xmsonormal" style=3D"background:white"><span lang=3D"ES-MX" sty=
+le=3D"font-size:10.0pt;color:gray">Jun=EDn 208 y Pedro Carbo. Guayaquil-Ecu=
+ador | (593) 42305000 - Ext. 4908</span><span lang=3D"ES"><o:p></o:p></span=
+></p>
+<p class=3D"xmsonormal" style=3D"background:white"><span style=3D"color:gra=
+y"><img border=3D"0" width=3D"368" height=3D"58" style=3D"width:3.8333in;he=
+ight:.6041in" id=3D"x_Imagen_x0020_2" src=3D"cid:image001.png@01D950E8.BAFF=
+C7A0"></span><span lang=3D"ES"><o:p></o:p></span></p>
+</div>
+<p class=3D"xmsonormal" style=3D"background:white"><span style=3D"color:win=
+dowtext">&nbsp;</span><span lang=3D"ES"><o:p></o:p></span></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0cm =
+0cm 0cm">
+<p class=3D"xmsonormal" style=3D"background:white"><b><span lang=3D"ES" sty=
+le=3D"color:windowtext">De:</span></b><span lang=3D"ES" style=3D"color:wind=
+owtext"> Kevin Bastidas Zavala (Externo) &lt;</span><span lang=3D"ES"><a hr=
+ef=3D"mailto:kbastidz@bolivariano.com">kbastidz@bolivariano.com</a></span><=
+span lang=3D"ES" style=3D"color:windowtext">&gt;
+<br>
+<b>Enviado el:</b> martes, marzo 07, 2023 10:44<br>
+<b>Para:</b> Dario Barco Le=F3n &lt;</span><span lang=3D"ES"><a href=3D"mai=
+lto:dbarcol@bolivariano.com">dbarcol@bolivariano.com</a></span><span lang=
+=3D"ES" style=3D"color:windowtext">&gt;<br>
+<b>CC:</b> Dario Espinosa Aldean &lt;</span><span lang=3D"ES"><a href=3D"ma=
+ilto:despinoa@bolivariano.com">despinoa@bolivariano.com</a></span><span lan=
+g=3D"ES" style=3D"color:windowtext">&gt;<br>
+<b>Asunto:</b> PROD PASE [RECM-701] [OPTIMIZACI=D3N EN EL TIEMPO DE CONECCI=
+ON PARA LA EMPRESA MEGADATOS]</span><span lang=3D"ES"><o:p></o:p></span></p=
+>
+</div>
+</div>
+<p class=3D"xmsonormal" style=3D"background:white">&nbsp;<span lang=3D"ES">=
+<o:p></o:p></span></p>
+<p class=3D"xmsonormal" style=3D"background:white">&nbsp;<span lang=3D"ES">=
+<o:p></o:p></span></p>
+<div>
+<div>
+<div>
+<div>
+<p class=3D"xmsonormal" style=3D"background:white"><span style=3D"color:#1F=
+497D">Buenos dias,</span><span lang=3D"ES"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"xmsonormal" style=3D"background:white"><span style=3D"color:#1F=
+497D">&nbsp;</span><span lang=3D"ES"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"xmsonormal" style=3D"background:white"><span style=3D"color:#1F=
+497D">Por favor su ayuda con la aprobaci=F3n del pase a producci=F3n</span>=
+<span lang=3D"ES"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"xmsonormal" style=3D"background:white"><span style=3D"color:#1F=
+497D">&nbsp;</span><span lang=3D"ES"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"xmsonormal" style=3D"background:white"><span style=3D"color:#1F=
+497D">&nbsp;</span><span lang=3D"ES"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"xmsonormal" style=3D"background:white"><b><span style=3D"color:=
+#1F497D;background:yellow">ESTE PASE NO CONTIENE NADA RELACIONADO A TARJETA=
+S DE CR=C9DITO</span></b><span lang=3D"ES"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"xmsonormal" style=3D"background:white"><span style=3D"color:#1F=
+497D">&nbsp;</span><span lang=3D"ES"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"xmsonormal" style=3D"background:white"><span style=3D"color:#1F=
+497D">&nbsp;</span><span lang=3D"ES"><o:p></o:p></span></p>
+</div>
+<table class=3D"MsoNormalTable" border=3D"0" cellpadding=3D"0" width=3D"0" =
+style=3D"width:553.1pt;margin-left:5.8pt">
+<tbody>
+<tr style=3D"height:13.7pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.7pt">
+<p class=3D"xmsonormal" align=3D"center" style=3D"text-align:center"><b><sp=
+an style=3D"font-size:10.0pt;font-family:&quot;Tahoma&quot;,sans-serif">Req=
+uerimiento (ClearQuest)</span></b><o:p></o:p></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"xmsonormal" style=3D"background:white">&nbsp;<span lang=3D"ES">=
+<o:p></o:p></span></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellpadding=3D"0" width=3D"0" =
+style=3D"width:553.1pt;margin-left:5.8pt">
+<tbody>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif">C=F3digo(s):
+</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><b><u><span style=3D"color:red;background:yellow">R=
+ECM-</span>701</u></b><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif">Solicitud del Usuario:
+</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:14.0pt;font-family:&quot;T=
+ahoma&quot;,sans-serif;color:#1F497D">En Jira</span><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif;color:red">Conjunto de Cambio (Changeset):</span><o:p=
+></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:14.0pt">30159 </span><o:p>=
+</o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif">Descripci=F3n del cambio o de la soluci=F3n:</span><=
+o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal">OPTIMIZACI=D3N EN EL TIEMPO DE CONECCION PARA LA EM=
+PRESA MEGADATOS<o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif">Fecha Ejecuci=F3n:
+</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><b><span style=3D"font-family:&quot;Tahoma&quot;,sa=
+ns-serif;background:yellow">7</span></b><b><span style=3D"font-family:&quot=
+;Tahoma&quot;,sans-serif;color:red;background:yellow">/</span></b><b><span =
+style=3D"font-family:&quot;Tahoma&quot;,sans-serif;background:yellow">Marzo=
+</span></b><b><span style=3D"font-family:&quot;Tahoma&quot;,sans-serif;colo=
+r:red;background:yellow">/202</span></b><b><span style=3D"font-family:&quot=
+;Tahoma&quot;,sans-serif;color:#1F497D">3</span></b><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:15.85pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:15.85pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif">Hora Ejecuci=F3n:
+</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:15.85pt">
+<p class=3D"xmsonormal"><b><span style=3D"font-family:&quot;Tahoma&quot;,sa=
+ns-serif;background:yellow">2</span></b><b><span style=3D"font-family:&quot=
+;Tahoma&quot;,sans-serif;color:red;background:yellow">3:30 PM</span></b><o:=
+p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif;color:red">Cantidad Archivos Back-End:</span><o:p></o=
+:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal" style=3D"margin-bottom:12.0pt"><span style=3D"font-=
+size:8.0pt;font-family:&quot;Tahoma&quot;,sans-serif">0</span><o:p></o:p></=
+p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif;color:red">Cantidad Archivos Front-End:</span><o:p></=
+o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif">0</span><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif;color:red">Cantidad Archivos Middleware:</span><o:p><=
+/o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal" style=3D"margin-bottom:12.0pt"><span style=3D"font-=
+size:7.5pt;font-family:&quot;Tahoma&quot;,sans-serif;color:#1F497D">1</span=
+><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif">Observaci=F3n:</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+</tr>
+<tr style=3D"height:13.7pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.7pt"></td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.7pt"></td>
+</tr>
+</tbody>
+</table>
+<p class=3D"xmsonormal" style=3D"background:white">&nbsp;<span lang=3D"ES">=
+<o:p></o:p></span></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellpadding=3D"0" width=3D"0" =
+style=3D"width:553.1pt;margin-left:5.8pt">
+<tbody>
+<tr style=3D"height:13.7pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.7pt">
+<p class=3D"xmsonormal"><b><span style=3D"font-size:10.0pt;font-family:&quo=
+t;Tahoma&quot;,sans-serif">Formularios</span></b><o:p></o:p></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"xmsonormal" style=3D"background:white">&nbsp;<span lang=3D"ES">=
+<o:p></o:p></span></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellpadding=3D"0" width=3D"0" =
+style=3D"width:553.1pt;margin-left:5.8pt">
+<tbody>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif">Frond</span><span style=3D"font-size:8.0pt;font-fami=
+ly:&quot;Tahoma&quot;,sans-serif;color:#1F497D">-</span><span style=3D"font=
+-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-serif">End
+</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal">N/A<o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif">Back</span><span style=3D"font-size:8.0pt;font-famil=
+y:&quot;Tahoma&quot;,sans-serif;color:#1F497D">-</span><span style=3D"font-=
+size:8.0pt;font-family:&quot;Tahoma&quot;,sans-serif">End</span><o:p></o:p>=
+</p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><span style=3D"color:#1F497D">&nbsp; </span><o:p></=
+o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif">Middleware</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><span style=3D"color:#1F497D">&nbsp; </span><o:p></=
+o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif">Orden Procesos a implementar</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt 36.0pt;height:13.5pt">
+<p class=3D"xmsonormal"><span style=3D"color:#1F497D">&nbsp; </span><o:p></=
+o:p></p>
+<div>
+<p class=3D"xmsonormal"><span style=3D"color:#1F497D">&nbsp;</span><o:p></o=
+:p></p>
+</div>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt">1.<span style=3D"font=
+-size:7.0pt;font-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;
+</span>Pasar <b><span style=3D"background:yellow">sca_Megadatos.jar</span><=
+/b><o:p></o:p></p>
+<div>
+<p class=3D"xmsonormal"><span style=3D"font-family:&quot;Calibri ,serif;col=
+or:#1F497D&quot;,serif">Con Orden de Proceso:
+<b>ORDEN DE PROCESO SOA.doc</b></span><o:p></o:p></p>
+</div>
+<div>
+<p class=3D"xmsonormal"><span style=3D"color:#1F497D">&nbsp;</span><o:p></o=
+:p></p>
+</div>
+<div>
+<p class=3D"xmsonormal"><span style=3D"color:#1F497D">&nbsp;</span><o:p></o=
+:p></p>
+</div>
+<div>
+<p class=3D"xmsonormal"><span style=3D"color:#1F497D">&nbsp;</span><o:p></o=
+:p></p>
+</div>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif">Orden Procesos Batch</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal">N/A<o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.7pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.7pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif">Tareas MTRA</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.7pt">
+<p class=3D"xmsonormal">N/A<o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.7pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.7pt"></td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.7pt"></td>
+</tr>
+</tbody>
+</table>
+<p class=3D"xmsonormal" style=3D"background:white">&nbsp;<span lang=3D"ES">=
+<o:p></o:p></span></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellpadding=3D"0" width=3D"0" =
+style=3D"width:553.1pt;margin-left:5.8pt">
+<tbody>
+<tr style=3D"height:13.7pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.7pt">
+<p class=3D"xmsonormal"><b><span style=3D"font-size:10.0pt;font-family:&quo=
+t;Tahoma&quot;,sans-serif">Aprobaciones</span></b><o:p></o:p></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"xmsonormal" style=3D"background:white">&nbsp;<span lang=3D"ES">=
+<o:p></o:p></span></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellpadding=3D"0" width=3D"0" =
+style=3D"width:553.1pt;margin-left:5.8pt">
+<tbody>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><b><span style=3D"font-size:8.0pt;font-family:&quot=
+;Tahoma&quot;,sans-serif">Aprobaci=F3n de CONTRALORIA Y PRODUCTOS:
+</span></b><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Actualizaci=F3n de datos de producci=F3n.</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Controles de auditoria.</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal">N/A<o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><b><span style=3D"font-size:8.0pt;font-family:&quot=
+;Tahoma&quot;,sans-serif">Aprobaci=F3n de JEFATURA DE PRODUCCI=D3N:
+</span></b><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Revisi=F3n Orden Procesos Batch (Nuevos/Modificados)</span><o:p></o:p=
+></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Ordenes de Procesos a implementar</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal">N/A<o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><b><span style=3D"font-size:8.0pt;font-family:&quot=
+;Tahoma&quot;,sans-serif">Aprobaci=F3n de QA-DBA:
+</span></b><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Creaci=F3n, actualizaci=F3n, eliminaci=F3n de nuevos tablas, =EDndice=
+s, vistas, etc.</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Carga masiva de informaci=F3n (bcp)</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Creaci=F3n de base de datos</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Incremento de tama=F1o de base de datos</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Store Procedure (SP) nuevos</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">SQR nuevos o modificados</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal">N/A<o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><b><span style=3D"font-size:8.0pt;font-family:&quot=
+;Tahoma&quot;,sans-serif">Aprobaci=F3n de IDS/ARQUITECTURA:</span></b><span=
+ style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-serif">
+</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Nuevos productos en servidores NT</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Cambios en configuraciones de Servidores</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal">N/A<o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><b><span style=3D"font-size:8.0pt;font-family:&quot=
+;Tahoma&quot;,sans-serif">Aprobaci=F3n de SEGURIDAD INFORMATICA:</span></b>=
+<span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-serif">
+</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Creaci=F3n/Asignaci=F3n de:</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Transacciones</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Procedimientos</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Roles</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Creaci=F3n de usuarios y/o permisos en Producci=F3n</span><o:p></o:p>=
+</p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Creaci=F3n y/o actualizaci=F3n de Flujos sobre canales para aplicacio=
+nes nuevas o existentes
+</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal">N/A<o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><b><span style=3D"font-size:8.0pt;font-family:&quot=
+;Tahoma&quot;,sans-serif">Aprobaci=F3n de MONITOREO DE SEGURIDAD INFORMATIC=
+A:</span></b><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,=
+sans-serif">
+</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Informe y aval de an=E1lisis de vulnerabilidad de aplicaciones Web.</=
+span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal">N/A<o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><b><span style=3D"font-size:8.0pt;font-family:&quot=
+;Tahoma&quot;,sans-serif">Aprobaci=F3n de CALIDAD:</span></b><span style=3D=
+"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-serif">
+</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Documentaci=F3n de tablas y Store Procedures nuevos y/o modificados</=
+span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Documentaci=F3n por servicio: (10 d=EDas previos al pase)</span><o:p>=
+</o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Hardware</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Software</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Monitoreo</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">An=E1lisis de la B.D. (Previa aprobaci=F3n de DBA.)</span><o:p></o:p>=
+</p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Respaldos (Previa aprobaci=F3n de jefe de producci=F3n)</span><o:p></=
+o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Documentaci=F3n complementaria</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Contingencia (Previa aprobaci=F3n de Proyectos)</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Soluci=F3n a problemas</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal">N/A<o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><b><span style=3D"font-size:8.0pt;font-family:&quot=
+;Tahoma&quot;,sans-serif">Aprobaci=F3n de CONTROL DE CAMBIOS:</span></b><sp=
+an style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-serif">
+</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Variaci=F3n planificada de configuraciones y software de servidores.<=
+/span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Cambios en varias aplicaciones relacionados a un mismo tema.</span><o=
+:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal">N/A<o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><b><span style=3D"font-size:8.0pt;font-family:&quot=
+;Tahoma&quot;,sans-serif">Aprobaci=F3n de GERENCIA DE DESARROLLO</span></b>=
+<b><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-serif=
+;color:#1F497D">/</span></b><b><span style=3D"font-size:8.0pt;font-family:&=
+quot;Tahoma&quot;,sans-serif">INFRAESTRUCTURA</span></b><b><span style=3D"f=
+ont-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-serif;color:#1F497D">/</=
+span></b><b><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,s=
+ans-serif">
+ TECNOLOG=CDA:</span></b><span style=3D"font-size:8.0pt;font-family:&quot;T=
+ahoma&quot;,sans-serif">
+</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Cambios t=E9cnicos que modifiquen el proceso esencial&nbsp; de las ap=
+licaciones cr=EDticas como son: SAT, 24online, Cajeros, C=E1mara, CSP, MTRA=
+, Petro-Comercial, Portal Web, Postilion, Swift.</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Requerimientos Express (Fuera del Release)</span><o:p></o:p></p>
+<p class=3D"xmsonormal" style=3D"text-indent:-18.0pt"><span style=3D"font-s=
+ize:10.0pt;font-family:Symbol">=B7</span><span style=3D"font-size:7.0pt;fon=
+t-family:&quot;Times New Roman&quot;,serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-size:8.0pt;font-family:&quot;Tahoma&quot;,sans-s=
+erif">Requerimientos en Quincenas, Fines de Mes y Diciembre.</span><o:p></o=
+:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal">N/A<o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+</tr>
+</tbody>
+</table>
+<p class=3D"xmsonormal" style=3D"background:white">&nbsp;<span lang=3D"ES">=
+<o:p></o:p></span></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellpadding=3D"0" width=3D"0" =
+style=3D"width:553.1pt;margin-left:5.8pt">
+<tbody>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><b><span style=3D"font-size:10.0pt;font-family:&quo=
+t;Tahoma&quot;,sans-serif">Notificaciones</span></b><o:p></o:p></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"xmsonormal" style=3D"background:white">&nbsp;<span lang=3D"ES">=
+<o:p></o:p></span></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellpadding=3D"0" width=3D"0" =
+style=3D"width:553.1pt;margin-left:5.8pt">
+<tbody>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif">Mail de notificaci=F3n por parte del L=EDder Aplicat=
+ivo del pase de optimizaci=F3n (CC T=E9cnico) al propietario de la informac=
+i=F3n.</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal">N/A<o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif">Mail de notificaci=F3n al usuario por parte de Produ=
+ctos para los pases de requerimientos Funcionales o proyectos.</span>
+<o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"xmsonormal"><a href=3D"mailto:jguerrej@bolivariano.com"><span s=
+tyle=3D"color:#0563C1">kbastidz@bolivariano.com</span></a><span style=3D"co=
+lor:#1F497D">
+</span><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+</tr>
+</tbody>
+</table>
+<p class=3D"xmsonormal" style=3D"background:white">&nbsp;<span lang=3D"ES">=
+<o:p></o:p></span></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellpadding=3D"0" width=3D"0" =
+style=3D"width:553.1pt;margin-left:5.8pt">
+<tbody>
+<tr style=3D"height:13.7pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.7pt">
+<p class=3D"xmsonormal"><b><span style=3D"font-size:10.0pt;font-family:&quo=
+t;Tahoma&quot;,sans-serif">Certificaciones</span></b><o:p></o:p></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"xmsonormal" style=3D"background:white">&nbsp;<span lang=3D"ES">=
+<o:p></o:p></span></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellpadding=3D"0" width=3D"0" =
+style=3D"width:553.1pt;margin-left:5.8pt">
+<tbody>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+</tr>
+<tr style=3D"height:11.35pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:11.35pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif">Certificaci=F3n de pruebas T=E9cnicas y Funcionales =
+(AMBIENTE DESARROLLO)</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:11.35pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif">N/A</span><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:10.25pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:10.25pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif">Certificaci=F3n de pruebas T=E9cnicas y Funcionales =
+(AMBIENTE PREPRODUCCI=D3N)</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:10.25pt">
+<p class=3D"xmsonormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ta=
+homa&quot;,sans-serif">N/A</span><o:p></o:p></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p class=3D"xmsonormal" style=3D"background:white"><span style=3D"color:#1F=
+497D">&nbsp;</span><span lang=3D"ES"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"xmsonormal" style=3D"background:white"><span style=3D"color:#1F=
+497D">&nbsp;</span><span lang=3D"ES"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"xmsonormal" style=3D"background:white"><span style=3D"color:#1F=
+497D">Saludos,</span><span lang=3D"ES"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"xmsonormal" style=3D"background:white"><span style=3D"color:#00=
+9999">&nbsp;</span><span lang=3D"ES"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"xmsonormal" style=3D"background:white"><span style=3D"color:#1F=
+497D">&nbsp;</span><span lang=3D"ES"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"xmsonormal" style=3D"background:white"><span style=3D"color:#1F=
+497D">&nbsp;</span><span lang=3D"ES"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"xmsonormal" style=3D"background:white"><span style=3D"color:#1F=
+497D">&nbsp;</span><span lang=3D"ES"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"xmsonormal" style=3D"background:white">&nbsp;<span lang=3D"ES">=
+<o:p></o:p></span></p>
+</div>
+<p class=3D"xmsonormal" style=3D"background:white">&nbsp;<span lang=3D"ES">=
+<o:p></o:p></span></p>
+</div>
+<p class=3D"xmsonormal" style=3D"background:white">&nbsp;<span lang=3D"ES">=
+<o:p></o:p></span></p>
+</div>
+<p class=3D"xmsonormal" style=3D"background:white">&nbsp;<span lang=3D"ES">=
+<o:p></o:p></span></p>
+</div>
+<p class=3D"xmsonormal" style=3D"background:white">&nbsp;<span lang=3D"ES">=
+<o:p></o:p></span></p>
+</div>
+</div>
+</div>
+</body>
+</html>
+
+--_000_MN2PR10MB3407D2DF0902B49F056874B4DAB49MN2PR10MB3407namp_--
+
+--_005_MN2PR10MB3407D2DF0902B49F056874B4DAB49MN2PR10MB3407namp_
+Content-Type: image/png; name="image001.png"
+Content-Description: image001.png
+Content-Disposition: inline; filename="image001.png"; size=10957;
+	creation-date="Tue, 07 Mar 2023 16:34:13 GMT";
+	modification-date="Wed, 08 Mar 2023 13:18:36 GMT"
+Content-ID: <image001.png@01D950E8.BAFFC7A0>
+Content-Transfer-Encoding: base64
+
+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
+UgAAAABJRU5ErkJggg==
+
+--_005_MN2PR10MB3407D2DF0902B49F056874B4DAB49MN2PR10MB3407namp_
+Content-Type: image/png; name="image002.png"
+Content-Description: image002.png
+Content-Disposition: inline; filename="image002.png"; size=7897;
+	creation-date="Wed, 08 Mar 2023 13:18:36 GMT";
+	modification-date="Wed, 08 Mar 2023 13:18:37 GMT"
+Content-ID: <image002.png@01D95196.93ACA610>
+Content-Transfer-Encoding: base64
+
+iVBORw0KGgoAAAANSUhEUgAAAZwAAABDCAYAAACoXrN3AAAAAXNSR0IArs4c6QAAAAlwSFlzAAAO
+xAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUATWljcm9zb2Z0IE9mZmljZX/tNXEAAB5ZSURBVHhe
+7V0JeFTluf7OmX2yTULIgoACDRDFDTV1K1Kt1bZq6+PW1tbqtcu1m1br2l6Ph2uvrd2eLm69ta1r
+Ua+21db2UblViqBYQQEJoBCFQAIJyWSZZCaznPt+/8yZzISEmUmGeJ/y/e3I5Cz//5/3nPnf833f
++3+/0zRNkiIICAKCgCAgCBxoBJwHugGpXxAQBAQBQUAQYASEcOQ5EAQEAUFAEJgUBIRwJgVmaUQQ
+EAQEAUFACEeeAUFAEBAEBIFJQUAIZ1JglkYEAUFAECgeAkbg0y6q3NJIOs2hWHQGUaKcElqANN2N
+VgLJlhLq/ziGKG5ppFlR0hxBSsTjZGlBbO0jl95OcdpGsdgms725v3g9HL0mIZwDjbDULwgIAoJA
+kRAwZi2cRy7HFRTf/ElKWPju0cgNjtG05MdinsF/8FUV/jv5n2RJHxPHZmxXnwiRg7Yb0xc8Ty73
+b82WNS8Xqbv7VCOEc6CQlXoFAUFAECgSAkYg4Kaps2+DBXM1+Xx+ioAkhvCJhDOII0Us6h8mIJt0
+MgiHCcYu6jsO0vFxuWeCuK6kyNCVxsyjH6He3pvMYEtrkbqfrkYIp9iISn2CgCAgCBQRAaOucSqV
++x+n0tLF1D8AR1hvkmS4ZBKIsl5S1g3vTvFJ0qpJHT/ad7aIEvC9MYHp8L+Vll8KHjrFcDZ82ux8
++9UiXorIoosJptQlCAgCgkAxEQDZBEA2fwbZNFFPMFW17T5jcrFJZuS/7CpLudjY0skkmrE6qIFs
+mHh6u4n8ZYeR3/+sMb3xNLO1eUOxrkksnGIhKfUIAoKAIFBsBErc91J5eRMFQQJ20VJkonxmeZBO
++rwRpMTbmYgyLSUmHQukE4J+oLS8igZijxiNjSeazc2Dxbg0IZxioCh1CAKCgCBQZASMhmPOo5Ky
+S6i3J1lzljss7S9LudFyWDp2PGck+Yz2N5MOy9tCcN2VVx5F3cFrseF7xbg8IZxioCh1CAKCgCBQ
+RARgVegU1b6rgvoqLjPi37TCLGXl2FaKrUqzz0maL5BFM2HZHRwlnjOy77alEw6xrPoaIzDrbogI
+Msys8V2sEM74cJOzBAFBQBA4cAjEyk4kr+MECkMkYLu9bFIBczigLHPhk1RAawjGa+RzOjDVxqK+
+aFRxVGQoSphfQ06Pmyp9buzTqBd/W/hfZCgGkcAQ1GmupEotk9QyrR4+pqS0GqTzMQrSoxO9YCGc
+iSIo5wsCgoAgUGwE9PjHyVsKRRoGfDtWw20w+YAEvrpgLn197izM57SwSaOl7+6kJ7dup68e8QH6
+2LRaiiD4v2tgkB7duoMefuc9qnM56fL5c+hTM+spCpbaE47Qk1A9/2LjVjUPlByOUUgnJa1OWlcf
+RetCOMW+z1KfICAICALvOwK69kGy2A+mzJok6SjvWXKy5iF+H80tByGlyhRYMRt2d9F1/esocvyR
+dE3jbJqH/R+um0qn1U+lzy9bRTeuWkv9sHBuPXo+zasopQ/VTqEzp9fShS+spHAcMRvbkspStKFR
+JiSLjmQ3H8QDnLtg3EUsnHFDJycKAoKAIFB8BDDJ0wVyma4G+iwV2bDFMcTy5YwSY2WZy0GDsF6+
+tXItzQehnD2tRh3xudkzaG1XD/3ktfVkrHqDGivK6KLDDlH7PjG9jm459nC6FdsJpDXqfB0mI9Lq
+qbuyBF/6JnLFQjgTQU/OFQQEAUGg2AjUH+4jLVaVnsRpR/vtzAB2GpuR7bJc2gmFGayYuza3pAmH
+D/tSw6F018Z3KAI328/w74UgHFtDcAX2/XDdFnjv4L7jiZ8jJ4kymWlaKfnCHiGcYt9sqU8QEAQE
+gfcTgTBVkJ9K1HwYZeHYEmj+mpGaZtQ+Yj/iMc09/YjVJCAsYIkz0WGlJTTF56FdiN28h2wFoWiM
+ShHX4VLv89K0Ej9txj6V6HPUzASWiwapDHs7JwKNWDgTQU/OFQQEAUGg2Ag4Y5WQlHnT1Y4knVHb
+y5xokyA/3Gt6hrptEO65CEvaUNwOPU1E/DcLDAbYfcdqNbvsk5lAd5Izyi61CRUhnAnBJycLAoKA
+IFBkBJxUDivFkbZwRkqWM2XSmU3b2+FS+0h9NTkyjnu1s4v2hpAsAKSzCEICD0jHLms7g7SzF5kF
+2BoaK++arjkpGhtWKYzzkoVwxgmcnCYICAKCwAFBwKmXkhPzYziZJsdl7MmfbIGMpRGzjZNIlGZM
+CdD1jR9Id40FBre9uZkn5lB1ZTl996h5Wd2+bW0zJWKwcDxok8tI64YJLymb9k30eoVwJoqgnC8I
+CAKCQDERSFCpmpAJgkjmShtBOqOIBpIJBiz62GHT6RdNR6u4DJfNsFy+9sqb9GprOy2CUOCuk46l
+OWVJzxjHcq559U16YcfOJNlkhIqyMhvwwToIh2L+iV5mFuEYjSfXkI9qIXWwBeATrV/OFwQEAUFA
+EBgNAafmwGqde8w1K3dn7XZh1U4e4JVeICN1TWayzjEQnVbio2kQB9ilF1kHtvUjPQ3IpB77ZuBj
+lz4IB7awK83WIdhJQW1rKTOdDm9LZK7kNr5bOsLCidVSX+IY0hOw5aQIAoKAICAIHDgEEl6owtah
+/mzC0TGwZ1oxyvKwrRx7Lk52rzi9Dbu97m/eSmsw5+a500+iasyrOWFKJa38+Gn0kedfpseQVeCN
+7h5aduYpauLoArjXVp97Op313Ap6GRYQudmllspEPTLZJ9dfBH9YVhVm8+r1aJE/UgQBQUAQEATe
+HwQUf6SLvSw0k44SAuzDBsPHej20tr2DvrXmLXoI7jMuddj225MX0qnPvkSbkY3gKgzzTy9uUvtK
+kH/tv09ZSMf9aRkNchxH5VVL8o5qJlOgkN2rcSFTBM4aV7tykiAgCAgCgsCoCMDDxJkEWDXG/6bn
+3qTca0pgNoJ00n/iCyybR99tpe8c0UDzU+lvToCQYPEhNfRcy0565r1d9PreIB2HbVw488B5iO88
+tqkFVg4owXatZZEOWz6EjJ8TK0I4E8NPzhYEBAFBoMgI6H2cLWAfC8PONDBWKMWerwOiSkCttqqz
+O0043MFTa6bQcyAiyJvpxT1704Rj73ts07aMZRBSrjXFbSAx7k9CxwI5EytCOBPDT84WBAQBQaC4
+CESdyFfGedTYlMnIp8atpNPOjJJxwI77qHk7SAnAqWoyShXHaNQxyBY9mB2mV1kHUlkJhhVqGaRj
+cdoDmnBsf0zCMepOLqNYWy05vdUw66pBb85UhwaQr2c39Yc7sCDProkgjfW6F0KgcBzqLyenczv1
+00oz2AyNXnEKFg06lEr9R0NkXgKFBWY99fzNbG8PF6f24VqMvQEPHT3jeGxxUkfHGjPSrhLcqSR8
+V18dM00zVz4KVZmxapWTPvvlD9Lg0CxgMmwz6/xdTwCjLXTlxa/lXd+GDQ46/dwPke6ux/XnVh7q
+BNVMrJ2mul8aT1ZYo+7II4jCDcknV99G4bYNZjA4YTO82PdL6hME/p8jsBe//yH83t1YOyAVT8kK
+6qD7I11qqb8zYi7TfdnTZnZz6poUGc0ozd7XzWvnZKbNSSvU0n61KLmcxbdwjLo5F5HD80WK760i
+p7sSvYipVX0IEj5L9agEQ5dOXnfUOOTwPRSLrwIT/4fZ3tyT7000ahpOJ4/3hxSPHoOBcC/qjlLM
+KqNSh8vwH/447d11vRkJ7sm3vtGOM6bNuxQrD90Ftq4gH+TjvT1Qfvg4RWpbIfUa0xpPp73dm0Ai
+o5KrUd14Ak13/Br3/yhVb6Bim+Eo+09c13R83gNmD9OSJTmbNAINp9DFR95PloNnZaGvSoCfPC+h
+ZgDruB6i3zy51ugLXmEGW9/MWeni808lr/fvahKZG+fG8FDxW89YM5WVzxgPeE/kTNT9Qs76UwcY
+NXhmXN5rKRFtIpePOwuzHQ+3f9o6wz/15+aut+/Pty45ThA46BEoi3VS2NGPcbVK/ZZUTIU5Zl9S
+ycLKTk2DuI/f76VTp2L4zijLdiMNGurQYemciWwDmeX5to7hTAO8IzO7gTK0EvziOKFM0Vxt9jyc
+W2/V6N7f30NafAXFEpdTWWwXDQ4OUmQmGtuCq51rkResa7VhBPfW4G34Zqqb9g3qaHs63wEKhPbv
+5C+7B+c+RQntyzSzfD319cWoLVxJbvfZkObdSbWHrjEGKk83O1u2jOfhMzyNPorHvo/8DRUUYYNG
+3bBO3LvC13KIx++gmmqH0UfnmMF2aAeHC9qpIkfif8hbMpP6U/fC7Z6NN5PfUngwARxvp4ceCuCM
+7v1dB0hrHpIfLUMqi02o5yxg3wyiiFE4nCCev6V5ccvDLgqHGsjluZ8qql4wqOyYnNagUy9XxsYA
+dPih0N8BwhyQz0xgM3p3+IH2oMGhxJR8cTdqG+7EuuvXq+BmBGTFs6O5cF0u11Hk8v/aqJ23iA6t
+uNJcvVqsnXyBleMOXgRmzuyjd3Z1kNNRRTEe7XnYyiCdsV4Y7d8drJVvQjAwA9Jnu/x51x5a2Q7C
+we/0iw2HqbVy7LKio4ueY1l0KplnFvC2m04D2Xi98BJNrGS71H7wRCUFkMcnmnjM7Hz7reG8oPY4
+u5pb40ED655Sp1HX8CSI43O4iLwGKLjQFlGJ/x7kyL7RbG2+U3V9eAiHpUOPGJ66p2lq9Qvk9v7F
+aGpagEGqcL8hqAv3qFwNrJbVQ5HBy+ER3EhDAbQBJUYhxeKaKppgyb1i+CtuMHdtfjx9+pTEyWmy
+sc1RHnDZSnDA/LTi23GTclt+jrgJy6afNncuMv3tY5qtRt28+dQX+TiVedeQJ/Zt9ONbOS4lrghk
+MPyMuXvzecqFSfRPtUTgiPU00vUk1TF5EQMs1RuoLHA9hTB5jK85szAeYTyfEeBREbiM3u3m6/pG
+IdDLsYLAwYiAuXRp1Dh+UQu53PPw0pmc/KmMm7FJR/nsed0a/N4uxEqgS7AiqF3WBXvpCyvXqH2L
+Z82gnyxckN63FZNCL1/xOk7FuU7QQWqBt6z0Ng5sj0bh4enGD31iJZtwyohNOIuclnJnYcB30/a+
+UrjLuuxmjOlI0hOjPdiGAUTvSb3R5iQcrBbnoL3xezE4PWO2b74Tg9V1wO80mlV5IUglHd3i+IfR
+T+eQr3IXbd97Ddr9QcGX2NamU11NjBycHiLSau5++48F12GfoGtP0cDAiXhbPxQ3/TGjdv515LCe
+oCF9FWJDjUq9MbLwIN/X95DZAVdSlk00Zi8W48FaapMNYj+V5K//HjTxn8TDFgNxPkrd+hK01UtX
+f6aZ7n70aZDC2agtF+Hwg8LWxhxYUafgXeHDpMO15uCFlvCAcd89+JufVibKnKnPh/sP8pqDR8VU
+a67bZMM+Y37obSuHD+eHOATrz+36ulHd8BBeZNRbixRBQBDYDwI6rYSFc3ZSOMDS6NSxagIokS8j
++Sb/XQU581FTKujqw+fSv82aro7pgRrtiR1t9IMNW6gObrRbFzXR1SAjLiHMuXlqxy66GfN1dvaB
+R1w8Jtht8Fyc1Jwf/pfT7IQH3xpPXHfkFWYTjhOWgSpO+GBQtnUfiZSjPOB/JH1iNH4fOvNL/P0H
+mHtDqmMJDjLkKN2xYzETtpGi2gUGu+7uW3oT1dRU0/YOrvvZzLPhuuowXGW/RHqHL4GofoQLzR3w
+TlVg1Mw7i3ze7wOgcjUYEs1GrOk1DLxB0p2XZJJnri4nSTK2DW7FVnLoyRX4vN4mXEcTWTzQakNJ
+l90oxaEXECuyHAiR2UIDD8jmL3B9nYS67wKpu6m07Cay+hpBnJ8icwkZ2txO4J66VzmuguM2ZDXg
+JeJn6C8WNI8iOmS9hY2cF+lQGhh8GRE5zqNxcjJfUp4lEfssLD8v9aUMMn5gBwf/gXqQHsmXfDPz
+goAGQ2/h9zKbAgEf2r4CtQvh5AmxHHZQI/AMXtSWJBdUSzNB8kURrq8HQSRrgjxkJK2eTlgv05A5
+4PWeXnrxtXXEIoA34FRoReqaQ5DOZn5VBdLYhOgLr7wBIorSOuxrQdaBlOs7WY+KF40gm2HxwF+L
+cTeyCSeGVnmLMy2B4L9mMEGYS5Ykr9rC8KRDsZZZdD0fFdZJSI290+zc1GwkDcRO6ukNYEBFGtNR
+B+y/YmC8irrDUMiNSP2wvyvXMYjW1B5DO95LrsXtdPqouvZ4atvJrrlsnWAuBC++OEH3PPolDKD1
+Kg7Chd1EXJQQC2QwmmtKbUtA1J53QbyHB30U79QLIHI4iXqCiGFtRdwFlma8YRnECEsNreEMs/3t
+ZepYS8svHuXBoB+OrKShPWeSs/Zc3L0nKRL9BIgT9zBWDxJbodqoafgCSO43SpyQT9HoRIUvP6h+
++IMHB141d29ZZNTVBWD9/S+VB46lvu7b0dd3gN+vlKVF1GQYhpavyi6fbsgxgsC/IgLm6uVvGMd9
+aBmVl59BPSAWHjHteTjIDrAeZLEe82yS22wlmXr5T1kqLGzFTxnr4uwcDNPO7Ri/2PtgH8oCA7Zc
+FGGlhu90LrUM0uEXyf7+3YjrZhkF48V8hIUTDpHljFA4ltzudG6C2+grabJRA631TVxV8u1dJ49i
+xETmyj1jdiWAK1OjNtcH8cAdcLM8QJEQxxW27nNWDJOMHHEnxZyFLfoTc79G7bt+BRAvg5nohTKr
+izo7HkW/t8K6KcgHyQOjoes/oejQmermJAfNZBkrBsL+zkGI3OP06jhvytHU19Nnk42qY6rzCeru
+ewTfjsVnWcH1alYC8uSoUTM1uaQfPH7AYiuUfMdAhXcHdIJLzD3ND0AAcDN5A/MQ88ndhKaVqweV
+r3doCMyTuJzl4Sa1B42A72y8lJxMMwLP0vaejajMnXI9VtPjj+tUgMWauyNyhCDwL4qAg93o0TOw
+WhreDTPeL5kfQDpqyQAudtzF/m7nQ7OJhN1vTD5Om1wUew0TmA2fcqPx9gxLh93kkeiPzPb1uWPR
+edyGbMIJQ4ng4c5hiVOUlNT5xcx68IY9nGtNx/wZlttSIndnEokdcBtNxRuwl+fCmO1bHzTq538Q
+iqvHDd15HQaoDvKWfgVs+mtzz9u/I2esDhcexkAFGs+/mJ3r1+It+ipYJhcgPsGE02bu3DDuYDXi
+Tc9B9nsVuX3fww2uTr7V76ewGynU+xxiFe/m3+vMI/VN5PeVGdWzFkKlh0gfSkfsDKoodyD+xYP3
+OEpa1mL7zBJqjlDc+h3cmqWUaF+JWNMz8Be/h2vMXixjrNYsCEe4WrfHov6QAas4QAtnrjNi05ZT
+qPTrZuvqPxrRhh9TWcUc5XbjuJZFQbrookQ+MvFxXKScIgj8SyFgrn5pOaycu2lK1VepC2H0tHiA
+LzMjtmP/vNNxF+zOXNLAzkBgO65sS8m2mvZxo7GlhDrKQAO9wdeo1vtzTPAoSskmnBXeXjojzgPJ
+CQgKL6dK6h8rUARBgZO2dy9QPkVdZ4XZ/ktCXw5HUAXpZR+FNI1l1GS2bfoaSKcLltSPEacgxARY
+vstavt9hcLoM+LyJyaUFEY7qxM8erFBKrCTDOzC4evCGX7jazb4iJ65P16eoa91f4RgIzz+J0/dz
+wZG1P9nXVOU6BAlDN0D99g+4uf4LT46HvJ5bgMsKCu9+Xp1n8SROKz/X12gdCXsht66swEPloAFW
+mCWS+knLyjDhcl7Baty3j8Iai+HZPw4/BgOE5ULcZi5Fg6cYtXPZwvu8UrBxUet7hNdkWcs5m5AD
+BIGDHAFH5FoKBg+nqqrF1IWhkOeApwwURTrsWVduMiVjyxb+5CSd1HkjVxTlesowHodDUKZZn8kU
+dU30bmQRjrmgOW7Q3Hcx8N9Kvd1foy6tBwNHEI1E1FTEZOF4QwlcJeWkOWepASWWcrHtpzd4498G
+l81LULhdi8MU4XAB6fwHFFQPUKL7kxiQAjDf7kWGgCbEBc6HfPpTE73Aopxf4XyWusIPYNC8lIfO
+0esEPHyTgl0/NTvfWVlQu0w1mqUWsWC3n1E36yxMUv0p2rtRPVGx6FIKa1ezWyz1VAXwgOUtpEj3
+hdezUDQVtiiM7570ChepuvYn8B9xRZr1e8wZuhkuNRcS/p2vJpUOsscUOHg8jeh7I+I6yTgam/68
+32E9UBAucrAgcJAjwNNCsE7Z+aT3PUiVlefCA8QuLqDC7i+OtYxCOoyZetdOucj4NznaMtXpY1L7
++RRWlZYgJhvqb0Yo4SKzZf2+4Y4J3JNsC4cr0qBA4wmHGlwrbtdspTTCOtjJ5U65QzxrHYEkDp5H
+Y7sRr1hBfYj15FMsjStTsQ3btaYG2c7md/DPj9X26objMFfnJQxWj8Gd9ad8qj3Qx8DKY6XAFYg7
+PYPZ/vfi5k3Ncq3xgMoWWk/wD3RY1Q1UaI4EDfEel/sCY8OGb5sLFsTN9pbtaO8CWJEe2jIb8Zel
+acsD85QqgP+5iCf9voDrThGKnrTyBr0s34uQB5sVx6S2q8RN+RW4VjfCAvsh+UtuSk96td9J+Fmx
+pdHsO2bTPLj3IXPPOy/mV7scJQgIAjYCZvPKIL6fZzSd9l0Qwg1UGSiDujT5G1OxZDsmw19tuwDf
+RyMde5nqrDQ2SXGBcnuHB+MUGrifhgZuMVuac3uuCrxN+xAOBpKHUcfDRmBhJSaTTId7pwGE8w28
+vS9WdYdC3WC/38CqgSw6tjFfl5cRqKtTrhfky4GlswmEFjBqK+7DC/zzsHpCCCvPwL7P4e34IhAZ
+3uh3X1bgtYw8HKs3MHMX8NY+ogYj0FhD7tgpkCYidmNB3KCdCbLh3HLJG8sBcy/PzI9YcC39lJY5
+bjAXrM570E43pzluA5H/k86+5G9GGO60mLNVZRjY3geieVVDP5zq71hsFpaCvRfyZZ3iA8mJs/sr
+CYz2bFlodDQs1aV4mQDG6HcgjnusVG5e9eKg0XcwifdSXFuTEkawqy2fMsX5HerqWwDSOQdvQ+gf
+e/psxQsqYIULv7D09vyNpriuKpiI8+mDHCMIHCQIIKZzu3HkosfJ6v8yxt8L4EU4TM2j4980Z57h
+ie7xlFJNqdX4k6liY2uID2c3B77YqazYYophYmeo/68QV/3K3LzmgE1d2NfCSd08M7iGYyf8WY83
+2U9ggF0I5rsXEttfgmR2FHyP3WWLyOPrBYH1YUBjl5oPdV6OUftGpIfByOTk3EHNsJguhmXzRMH1
+Z57g9SImEi9Vg12ovzCVW2Y99XA8dVM95u98Edr3Y5W5aU/0ZFdRIrEH1uDfITe8G31eTsMTeAvq
+PtxorxtVs86HKXs/BANr4FocTLswea1xTu5gQXpeglwVLL7o7TobudTYKtx/caqMELC+yqthFV2i
+CIHnDfn8uJ/YjqxF6qEsKT0RqpcTVZ41fkCdiZQGfP/Vc3wPRPUSyPIcyMbb4DqrR4aI5Ek8GTQW
+b6VQz330gn4Hu2tzdVf2CwKCQI7f3PrlnO7r23Cz3UZlrmMpFEX8lPM2JqYh7SULraoxjvrx+8M8
+O8urnOYW1AaaxS6qAXzHB7pUCzIhTdsFnwa8KYk3IXt+w2xRY/4BLWMSTlarOi2lzr23g2haxt2b
+odhKKnEcYbY177brwMTKWzCgYwa/BaXUILIXtKT3jbsdPnFmWT+19lxGvb1+gNpF9fVRBN4KrhID
+Ks9qvJs/KsNCNDwHbxb1sHjCuEGtIKDNZvtGZL2beDG7Wv5ohOqW09QpH0afa/EAZQ/QPDkzOtSK
+RKIvIBtDkkhylellK5Ct4QL4QOHT6hlWPERGnB6xUySpV54+ClfmnbgTEvonifZuJM39Ct6yDqdw
+Yg66hblatIMGhl5XFvA4iTjX5cl+QeBgRQBuNlbjYKK1+mQVo+nTHop1+Gmw269itV5+vVRzHQZS
+4YH3Dba8CAdutqQ6agIFA08rBbP5KqWAGz+JjdGflKpiaXp3full9nt1yP3GFkVuq2IiGEXau6i1
+HQN4cUoKh6eKU9votaReQux7yJNI1URSKYKAIPD+IGCuXsqxWv4ccIul0CvMi3AKrVSOFwQEAUFA
+EBAERiIghCPPhCAgCAgCgsCkICCEMykwSyOCgCAgCAgCQjjyDAgCgoAgIAhMCgJCOJMCszQiCAgC
+goAgIIQjz4AgIAgIAoLApCAghDMpMEsjgoAgIAgIAkI48gwIAoKAICAITAoCQjiTArM0IggIAoKA
+ICCEI8+AICAICAKCwKQgIIQzKTBLI4KAICAICAJCOPIMCAKCgCAgCEwKAkI4kwKzNCIICAKCgCAg
+hCPPgCAgCAgCgsCkICCEMykwSyOCgCAgCAgCQjjyDAgCgoAgIAhMCgJCOJMCszQiCAgCgoAgIIQj
+z4AgIAgIAoLApCAghDMpMEsjgoAgIAgIAkI48gwIAoKAICAITAoCQjiTArM0IggIAoKAICCEI8+A
+ICAICAKCwKQg8H+5iBBezTBkVwAAAABJRU5ErkJggg==
+
+--_005_MN2PR10MB3407D2DF0902B49F056874B4DAB49MN2PR10MB3407namp_--
