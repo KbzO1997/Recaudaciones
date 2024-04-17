@@ -1,0 +1,59 @@
+[2022/05/06 10:40:28]
+Invoked 2-way operation "BillPaymentReversal" on partner "WS_CodigoElectronicoPago_http".
+<messages>
+	<inReversaCEP>
+		<part xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="parameters">
+			<BillPaymentReversalRq xmlns:oracle-xsl-mapper="http://www.oracle.com/xsl/mapper/schemas" xmlns:tns="http://tempuri.org/" xmlns="http://tempuri.org/">
+				<tns:BillPaymentReversalRequest>
+					<tns:Channel>9</tns:Channel>
+					<tns:PrimaryAcctNumber>4381080000000001</tns:PrimaryAcctNumber>
+					<tns:TxCode>45109M</tns:TxCode>
+					<tns:Amount>8142589</tns:Amount>
+					<tns:AcquirerAuditNumber>971799</tns:AcquirerAuditNumber>
+					<tns:TransactionTime>103916</tns:TransactionTime>
+					<tns:TransactionDate>0506</tns:TransactionDate>
+					<tns:BusinessDate>0506</tns:BusinessDate>
+					<tns:CaptureDate>0506</tns:CaptureDate>
+					<tns:PosEntryMode>101</tns:PosEntryMode>
+					<tns:CardSequenceNumber>149</tns:CardSequenceNumber>
+					<tns:AcquirerInstitutionID>0233</tns:AcquirerInstitutionID>
+					<tns:Track2>4381080000000001=18060000000000000000</tns:Track2>
+					<tns:RetrievalReferenceNumber>971799</tns:RetrievalReferenceNumber>
+					<tns:TerminalNumber>0233000000ANXCAJ</tns:TerminalNumber>
+					<tns:CardAcceptorIdCode>6011</tns:CardAcceptorIdCode>
+					<tns:CardAcceptorNameLoc>ACQUIRER NAME            Ecuador      EC</tns:CardAcceptorNameLoc>
+					<tns:CurrencyCode>840</tns:CurrencyCode>
+					<tns:TerminalData>0206TES1+000</tns:TerminalData>
+					<tns:ReceivingInstitutionIdCode>1000000</tns:ReceivingInstitutionIdCode>
+					<tns:AccountId1>0000000000</tns:AccountId1>
+					<tns:FinancialAccount>0000000000</tns:FinancialAccount>
+					<tns:BillReference>0002809858</tns:BillReference>
+					<tns:BillServiceCode>1</tns:BillServiceCode>
+					<tns:BillCompanyCode>2245</tns:BillCompanyCode>
+					<tns:RoutingData>! Q300011 SRC_RTE_UPP</tns:RoutingData>
+					<tns:InputData>! Q000017 00597777000007605</tns:InputData>
+					<tns:BranchCode>0000000000</tns:BranchCode>
+					<tns:ReversalIndicator>R</tns:ReversalIndicator>
+					<tns:OriginalData>020000000097179905061039160005060000000000</tns:OriginalData>
+				</tns:BillPaymentReversalRequest>
+			</BillPaymentReversalRq>
+		</part>
+	</inReversaCEP>
+	<outReversaCEP>
+		<part xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="parameters">
+			<BillPaymentReversalRs xmlns="http://tempuri.org/">
+				<BillPaymentReversalResponse>
+					<SwitchAuditNumber>0000971799</SwitchAuditNumber>
+					<ResultCode>25</ResultCode>
+					<ErrorMessage>ERROR EN AUTORIZADOR</ErrorMessage>
+					<BillerCutoverDate>0506</BillerCutoverDate>
+					<PartialPayment/>
+					<Commissions/>
+					<Amount>8142589</Amount>
+					<AdditionalData/>
+					<ResponseData>! Q100016 0059777700000049</ResponseData>
+				</BillPaymentReversalResponse>
+			</BillPaymentReversalRs>
+		</part>
+	</outReversaCEP>
+</messages>
