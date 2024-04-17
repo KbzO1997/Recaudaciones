@@ -1,0 +1,74 @@
+!***********************************************************************************!
+!*      Archivo           :  cccremny.sqr                                          *!
+!*      Base de datos     :  cob_pagos                                             *!
+!*      Producto          :  Cuentas                                               *!
+!*      Disenado por      :  Guillermo Martillo                                    *!
+!*      Fecha de escritura:  05/NOV/2008                                           *!
+!***********************************************************************************!
+!*                              IMPORTANTE                                         *!
+!*      Este programa es parte de los paquetes bancarios propiedad de              *!
+!*      "BANCO BOLIVARIANO".                                                       *!
+!*      Su uso no autorizado queda expresamente prohibido asi como                 *!
+!*      cualquier alteracion o agregado hecho por alguno de sus                    *!
+!*      usuarios sin el debido consentimiento por escrito de la                    *!
+!*      Presidencia Ejecutiva de BANCO BOLIVARIANO.                                *!
+!***********************************************************************************!
+!*                              PROPOSITO                                          *!
+!*    Subir los datos al creditmoney para que los procese en línea                 *!
+!***********************************************************************************!
+!*                            MODIFICACIONES                                       *!
+!*REF   FECHA         AUTOR           RAZON                                        *!
+!* 1  05/Nov/2008  G.Martillo         Emisión Inicial                              *!
+!* 2  12/Mar/2012  Daniel Pereira V.  CNEL-308-CU-1818/CTE-CC-11473 Incluir regionales de Cnel  *!
+!* 3  09/Ago/2018  Daniel Pereira V.  CNTDEB-AP-SGC00032750-SGC00032768            *!
+!***********************************************************************************!
+
+#include  "definic.inc"
+
+Begin-Setup
+use cob_pagos
+End-Setup
+
+#include "log.inc"
+#include "ctacte.inc"
+
+Begin-Program
+do Inicializar_Programa
+do ParamS (1,$i_fecha_proceso,'','','')
+do ParamN (2,#empresa,'','','')
+
+if #empresa = 1165 or #empresa = 0  !ref 3 
+ do Busca_catalogo
+else
+ do Main_Proceso
+end-if
+
+do finalizar_Programa
+End-Program
+
+Begin-Procedure Busca_catalogo
+begin-select
+b.codigo     &codigo
+  let #empresa = to_number(&codigo)
+  do Main_Proceso
+from cobis..cl_tabla a,
+     cobis..cl_catalogo b
+where a.tabla  = 'cl_empresas_luz'
+  and a.codigo = b.tabla
+  and b.estado = 'V'
+end-select
+End-Procedure
+
+
+Begin-Procedure Main_Proceso
+execute on-error=Error    cob_pagos..sp_carga_categ_cmoney
+	@i_empresa = #empresa,
+	@i_fecha = $i_fecha_proceso
+
+End-Procedure
+
+
+Begin-Procedure Error
+  show $sql-error
+  do Abortar
+End-Procedure
