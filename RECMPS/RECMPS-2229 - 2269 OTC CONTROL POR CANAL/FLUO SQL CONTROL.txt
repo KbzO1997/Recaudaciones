@@ -1,0 +1,11 @@
+select * from DB_OTC.OTC_M_CONVENIO where cnv_codigo= '1800'; 
+
+select * from DB_OTC.OTC_D_SERVICIO where cnv_id = 366;
+
+select * from DB_OTC.OTC_D_SERVICIO_CANAL where SRV_ID=955;
+
+delete from DB_OTC.OTC_D_SERVICIO_CANAL WHERE sc_id IN(2610);
+
+insert into DB_OTC.OTC_D_SERVICIO_CANAL (sc_id, srv_id, can_id) values (2610,880,4);
+
+select SC_ID, SRV_ID,CAN_ID from DB_OTC.OTC_D_SERVICIO_CANAL where SC_ID=187;

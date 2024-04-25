@@ -1,0 +1,44 @@
+Plan hash value: 588364437
+ 
+---------------------------------------------------------------------------------------------------------------
+| Id  | Operation                           | Name                    | Rows  | Bytes | Cost (%CPU)| Time     |
+---------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                    |                         |     1 |    84 |    13   (8)| 00:00:01 |
+|   1 |  HASH GROUP BY                      |                         |     1 |    84 |    13   (8)| 00:00:01 |
+|   2 |   NESTED LOOPS                      |                         |     1 |    84 |    12   (0)| 00:00:01 |
+|   3 |    NESTED LOOPS                     |                         |     1 |    84 |    12   (0)| 00:00:01 |
+|   4 |     NESTED LOOPS                    |                         |     1 |    75 |    11   (0)| 00:00:01 |
+|   5 |      NESTED LOOPS SEMI              |                         |     1 |    56 |    10   (0)| 00:00:01 |
+|   6 |       NESTED LOOPS                  |                         |     2 |    78 |     8   (0)| 00:00:01 |
+|   7 |        NESTED LOOPS                 |                         |     2 |    50 |     6   (0)| 00:00:01 |
+|   8 |         NESTED LOOPS                |                         |     1 |    17 |     3   (0)| 00:00:01 |
+|   9 |          TABLE ACCESS BY INDEX ROWID| OTC_M_FLUJO             |     1 |     8 |     2   (0)| 00:00:01 |
+|* 10 |           INDEX UNIQUE SCAN         | PK_OTC_M_FLUJO          |     1 |       |     1   (0)| 00:00:01 |
+|  11 |          TABLE ACCESS BY INDEX ROWID| OTC_M_CONVENIO          |     1 |     9 |     1   (0)| 00:00:01 |
+|* 12 |           INDEX UNIQUE SCAN         | PK_OTC_M_CONVENIO       |     1 |       |     0   (0)| 00:00:01 |
+|* 13 |         TABLE ACCESS FULL           | OTC_D_SERVICIO          |     2 |    16 |     3   (0)| 00:00:01 |
+|  14 |        TABLE ACCESS BY INDEX ROWID  | OTC_M_GRUPO_SERVICIO    |     1 |    14 |     1   (0)| 00:00:01 |
+|* 15 |         INDEX UNIQUE SCAN           | PK_OTC_M_GRUPO_SERVICIO |     1 |       |     0   (0)| 00:00:01 |
+|* 16 |       TABLE ACCESS BY INDEX ROWID   | OTC_D_CATALOGO          |     1 |    17 |     1   (0)| 00:00:01 |
+|* 17 |        INDEX UNIQUE SCAN            | PK_OTC_D_CATALOGO       |     1 |       |     0   (0)| 00:00:01 |
+|  18 |      TABLE ACCESS BY INDEX ROWID    | OTC_D_CATALOGO          |     1 |    19 |     1   (0)| 00:00:01 |
+|* 19 |       INDEX UNIQUE SCAN             | PK_OTC_D_CATALOGO       |     1 |       |     0   (0)| 00:00:01 |
+|* 20 |     INDEX UNIQUE SCAN               | PK_OTC_M_EMPRESA        |     1 |       |     0   (0)| 00:00:01 |
+|  21 |    TABLE ACCESS BY INDEX ROWID      | OTC_M_EMPRESA           |     1 |     9 |     1   (0)| 00:00:01 |
+---------------------------------------------------------------------------------------------------------------
+ 
+Predicate Information (identified by operation id):
+---------------------------------------------------
+ 
+  10 - access("F"."FLU_ID"=248)
+  12 - access("C"."CNV_ID"="F"."CNV_ID")
+  13 - filter("S"."CNV_ID"="C"."CNV_ID")
+  15 - access("S"."GRP_ID"="G"."GRP_ID")
+  16 - filter("TB"."CTD_CODIGO"='BE')
+  17 - access("TB"."CTD_ID"="G"."CT_ID_TIPO_BANCA")
+  19 - access("TS"."CTD_ID"="G"."CT_ID_TIPO_SERV")
+  20 - access("G"."EMP_ID"="E"."EMP_ID")
+ 
+Note
+-----
+   - this is an adaptive plan
