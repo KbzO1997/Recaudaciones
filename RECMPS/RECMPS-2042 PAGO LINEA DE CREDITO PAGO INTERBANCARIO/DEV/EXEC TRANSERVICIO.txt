@@ -1,0 +1,58 @@
+
+declare @w_return   int,
+	@v_ssn      int,
+	@v_mensaje  varchar(80),
+	@v_codigo   int
+
+
+exec @w_return = cob_pagos..pa_pg_tpag_reca_varios
+@e_ssn                  = 99369673,
+@e_srv                  = 'SRVDESA2',
+@e_user                 = 'msilvag',
+@e_term                 = 'VIRTUAL_BB',
+@e_date                 = '01/05/2023',
+@e_ofi                  = 0,
+@e_rol                  = 252,
+@e_corr                 = 'N',
+@e_ssn_corr             = 0,      
+@e_trn                  = 3925,
+@e_mon                  = 1,
+@e_ruc_cliente          = '',
+@e_servicio             = '1',
+@e_empresa              ='18786',
+@e_efectivo             = 0,
+@e_cheque               = 0,
+@e_debito               = 11.90,
+@e_tarjeta              = 0,
+@e_comision_tot         = 0.30,
+@e_comision_efe         = 0,
+@e_comision_chq         = 0,
+@e_comision_db          = 0.30,
+@e_total                = 11.9,
+@e_cant_cheques         = 0,
+@e_tipo_cta             = 'CTE', 
+@e_cuenta               = '0000088024',
+@e_nombre_cta           = 'PINTURAS UNIDAS S. A.*****',
+@e_autoriza             = 'N',
+@e_canal                = 'VEN',
+@e_ubi                  = 0,
+@e_codigo               = '0703579292001',  
+@e_cod_referencia       = '',
+@e_nombre_cliente       = 'Kevin Bastidas',
+@e_base_imponible       = 0,
+@e_factura              = '', 
+@e_cod_respuesta        = '',
+@e_cod_grupo            = '',
+@e_nomb_tramite         = '',
+@e_pcodigo_operacion    = '', 
+@e_pcodigo_secuencia    = '', 
+@e_phoralocal           = '',
+@e_cod_consultora	= 0,
+@s_cod_respuesta        = @v_codigo out,
+@s_mensaje_respuesta    = @v_mensaje out,
+@s_ssn                  = @v_ssn out
+
+print "retorno: %1!", @w_return
+print "codError: %1!", @v_codigo 
+print "codMsg: %1!", @v_mensaje 
+print "ssn: %1!", @v_ssn 
