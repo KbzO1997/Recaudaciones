@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="c96a6019-6ac1-4d6c-a355-480d4d89b3a9" activeEnvironment="Default" name="WSTercon" soapui-version="5.6.0" abortOnError="false" runType="SEQUENTIAL" resourceRoot="" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="5a0f5b2d-b1c3-41ba-842b-3a0f4ecb14ae" wsaVersion="NONE" name="BolivarianoBinding" type="wsdl" bindingName="{http://54.86.239.96:8001/BankWS/BolivarianoWS/}BolivarianoBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/kbastidz/Desktop/TERCON/TERCON.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/C:/Users/kbastidz/Desktop/TERCON/TERCON.wsdl"><con:part><con:url>file:/C:/Users/kbastidz/Desktop/TERCON/TERCON.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="BolivarianoWS" targetNamespace="http://54.86.239.96:8001/BankWS/BolivarianoWS/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="http://54.86.239.96:8001/BankWS/BolivarianoWS/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://54.86.239.96:8001/BankWS/BolivarianoWS/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xsd:element name="CargarDatosEntrada">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="tipoIdentificacion" type="xsd:string"/>
+            <xsd:element name="parametroBusqueda" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CargarDatosSalida">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="codigoError" type="xsd:string"/>
+            <xsd:element name="mensajeError" type="xsd:string"/>
+            <xsd:element name="identificacion" type="xsd:string"/>
+            <xsd:element name="nombreCliente" type="xsd:string"/>
+            <xsd:element name="deuda" type="xsd:double"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RegistrarPagoBancoEntrada">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="tipoProceso" type="xsd:string"/>
+            <xsd:element name="tipoIdentificacion" type="xsd:string"/>
+            <xsd:element name="identificacion" type="xsd:string"/>
+            <xsd:element name="referencia" type="xsd:string"/>
+            <xsd:element name="monedaPago" type="xsd:string"/>
+            <xsd:element name="valorPago" type="xsd:double"/>
+            <xsd:element name="secuencialPago" type="xsd:string"></xsd:element>
+            <xsd:element name="fechaPago" type="xsd:date"></xsd:element>
+            <xsd:element name="horaPago" type="xsd:time"/>
+            <xsd:element name="canalProceso" type="xsd:string"/>
+            <xsd:element name="codigoBanco" type="xsd:string"/>
+            <xsd:element name="formaPago" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RegistrarPagoBancoSalida">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="codigoError" type="xsd:string"/>
+            <xsd:element name="mensajeError" type="xsd:string"/>
+            <xsd:element name="secuencialPago" type="xsd:string"></xsd:element>
+            <xsd:element name="tipoIdentificacion" type="xsd:string"></xsd:element>
+            <xsd:element name="identificacion" type="xsd:string"></xsd:element>
+            <xsd:element name="valorPago" type="xsd:double"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="CargarDatosRequest">
+    <wsdl:part element="CargarDatosEntrada" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="CargarDatosResponse">
+    <wsdl:part element="CargarDatosSalida" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="RegistrarPagoBancoRequest">
+    <wsdl:part name="parameters" element="RegistrarPagoBancoEntrada"/>
+  </wsdl:message>
+  <wsdl:message name="RegistrarPagoBancoResponse">
+    <wsdl:part name="parameters" element="RegistrarPagoBancoSalida"/>
+  </wsdl:message>
+  <wsdl:portType name="BolivarianoWSType">
+    <wsdl:operation name="CargarDatos">
+      <wsdl:input message="CargarDatosRequest"/>
+      <wsdl:output message="CargarDatosResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarPagoBanco">
+      <wsdl:input message="RegistrarPagoBancoRequest"/>
+      <wsdl:output message="RegistrarPagoBancoResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BolivarianoBinding" type="BolivarianoWSType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CargarDatos">
+      <soap:operation soapAction="http://54.86.239.96:8001/BankWS/BolivarianoWS/CargarDatos"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarPagoBanco">
+      <soap:operation soapAction="http://54.86.239.96:8001/BankWS/BolivarianoWS/RegistrarPagoBanco"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BolivarianoWS">
+    <wsdl:port binding="BolivarianoBinding" name="BolivarianoPort">
+      <soap:address location="http://54.86.239.96:8001/BankWS/BolivarianoWS/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://54.86.239.96:8001/BankWS/BolivarianoWS/</con:endpoint></con:endpoints><con:operation id="b958e868-ea05-4deb-b237-842070614137" isOneWay="false" action="http://54.86.239.96:8001/BankWS/BolivarianoWS/CargarDatos" name="CargarDatos" bindingOperationName="CargarDatos" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="57c4b3b9-072c-4f7f-bfec-aeaca775e8e7" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://54.86.239.96:8001/BankWS/BolivarianoWS/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:bol="http://54.86.239.96:8001/BankWS/BolivarianoWS/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <bol:CargarDatosEntrada>\r
+         <tipoIdentificacion>2</tipoIdentificacion>\r
+         <parametroBusqueda>E61635</parametroBusqueda>\r
+      </bol:CargarDatosEntrada>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://54.86.239.96:8001/BankWS/BolivarianoWS/CargarDatos"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="98b690ca-bfb7-4d81-9504-facae0bf54c1" isOneWay="false" action="http://54.86.239.96:8001/BankWS/BolivarianoWS/RegistrarPagoBanco" name="RegistrarPagoBanco" bindingOperationName="RegistrarPagoBanco" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="fabaab9b-daf1-4bef-8bd9-babb06f0a4a8" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://54.86.239.96:8001/BankWS/BolivarianoWS/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:bol="http://54.86.239.96:8001/BankWS/BolivarianoWS/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <bol:RegistrarPagoBancoEntrada>\r
+         <tipoProceso>1</tipoProceso>\r
+         <tipoIdentificacion>2</tipoIdentificacion>\r
+         <identificacion>I71505</identificacion>\r
+         <referencia/>\r
+         <monedaPago>USD</monedaPago>\r
+         <valorPago>56.0</valorPago>\r
+         <secuencialPago>56535099</secuencialPago>\r
+         <fechaPago>14-02-2022</fechaPago>\r
+         <horaPago>15:52:35</horaPago>\r
+         <canalProceso>WEBBCO</canalProceso>\r
+         <codigoBanco>BOL</codigoBanco>\r
+         <formaPago>DEB</formaPago>\r
+      </bol:RegistrarPagoBancoEntrada>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://54.86.239.96:8001/BankWS/BolivarianoWS/RegistrarPagoBanco"/><con:wsrmConfig version="1.2"/></con:call><con:call id="5fd4b53d-fe0c-4d32-aee7-fc828e580310" name="Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://54.86.239.96:8001/BankWS/BolivarianoWS/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Header xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"></soap:Header>
+    <soapenv:Body>
+        <bol:RegistrarPagoBancoEntrada xmlns:bol="http://54.86.239.96:8001/BankWS/BolivarianoWS/">
+            <tipoProceso>2</tipoProceso>
+            <tipoIdentificacion>2</tipoIdentificacion>
+            <identificacion>E61642</identificacion>
+            <referencia>31315</referencia>
+            <monedaPago>USD</monedaPago>
+            <valorPago>30.98</valorPago>
+            <secuencialPago>47641469</secuencialPago>
+            <fechaPago>2018-02-15</fechaPago>
+            <horaPago>17:20:50</horaPago>
+            <canalProceso>VENBCO</canalProceso>
+            <codigoBanco>BOL</codigoBanco>
+            <formaPago>EFE</formaPago>
+        </bol:RegistrarPagoBancoEntrada>
+    </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://54.86.239.96:8001/BankWS/BolivarianoWS/RegistrarPagoBanco"/><con:wsrmConfig version="1.2"/></con:call><con:call id="3c6d54ed-9b09-44eb-8579-a0bbed63d3f6" name="Request 3"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://54.86.239.96:8001/BankWS/BolivarianoWS/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soap:Header xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"/>\r
+   <soapenv:Body>\r
+      <bol:RegistrarPagoBancoEntrada xmlns:bol="http://54.86.239.96:8001/BankWS/BolivarianoWS/">\r
+         <tipoProceso>2</tipoProceso>\r
+         <tipoIdentificacion>2</tipoIdentificacion>\r
+         <identificacion>E61645</identificacion>\r
+         <referencia/>\r
+         <monedaPago>USD</monedaPago>\r
+         <valorPago>30.98</valorPago>\r
+         <secuencialPago>35652776</secuencialPago>\r
+         <fechaPago>2022-03-08</fechaPago>\r
+         <horaPago>11:29:45</horaPago>\r
+         <canalProceso>WEBBCO</canalProceso>\r
+         <codigoBanco>BOL</codigoBanco>\r
+         <formaPago>DEB</formaPago>\r
+      </bol:RegistrarPagoBancoEntrada>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://54.86.239.96:8001/BankWS/BolivarianoWS/RegistrarPagoBanco"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

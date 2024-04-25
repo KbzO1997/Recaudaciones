@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<wsdl:definitions
+		xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+		xmlns="http://54.86.239.96:8001/BankWS/BolivarianoWS/"
+		xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+		xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BolivarianoWS" targetNamespace="http://54.86.239.96:8001/BankWS/BolivarianoWS/">
+		<wsdl:types>
+			<xsd:schema
+				targetNamespace="http://54.86.239.96:8001/BankWS/BolivarianoWS/" xmlns:xs="http://www.w3.org/2001/XMLSchema"  >
+				<xsd:element name="CargarDatosEntrada" >
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="tipoIdentificacion"
+								type="xsd:string" />
+							<xsd:element name="parametroBusqueda"
+								type="xsd:string"></xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="CargarDatosSalida">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="codigoError" type="xsd:string" />
+							<xsd:element name="mensajeError" type="xsd:string"></xsd:element>
+							<xsd:element name="identificacion" type="xsd:string"></xsd:element>
+							<xsd:element name="nombreCliente" type="xsd:string"></xsd:element>
+							<xsd:element name="deuda" type="xsd:double"></xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="RegistrarPagoBancoEntrada">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="tipoProceso" type="xsd:string"></xsd:element>
+							<xsd:element name="tipoIdentificacion"
+								type="xsd:string"></xsd:element>
+							<xsd:element name="identificacion" type="xsd:string"></xsd:element>
+							<xsd:element name="referencia" type="xsd:string"></xsd:element>
+							<xsd:element name="monedaPago" type="xsd:string"></xsd:element>
+							<xsd:element name="valorPago" type="xsd:double"></xsd:element>
+							<xsd:element name="secuencialPago" type="xsd:string">
+							</xsd:element>
+							<xsd:element name="fechaPago" type="xsd:date">
+							
+							</xsd:element>
+							<xsd:element name="horaPago" type="xsd:time"></xsd:element>
+							<xsd:element name="canalProceso" type="xsd:string"></xsd:element>
+							<xsd:element name="codigoBanco" type="xsd:string"></xsd:element>
+							<xsd:element name="formaPago" type="xsd:string"></xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="RegistrarPagoBancoSalida">
+					<xsd:complexType>
+						<xsd:sequence>
+	
+							<xsd:element name="codigoError" type="xsd:string"></xsd:element>
+							<xsd:element name="mensajeError" type="xsd:string"></xsd:element>
+							<xsd:element name="secuencialPago" type="xsd:string">
+							</xsd:element>
+							<xsd:element name="tipoIdentificacion"
+								type="xsd:string">
+							</xsd:element>
+							<xsd:element name="identificacion" type="xsd:string">
+							</xsd:element>
+							<xsd:element name="valorPago" type="xsd:double"></xsd:element>  
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:schema>
+		</wsdl:types>
+		<wsdl:message name="CargarDatosRequest">
+			<wsdl:part element="CargarDatosEntrada" name="parameters" />
+		</wsdl:message>
+		<wsdl:message name="CargarDatosResponse">
+			<wsdl:part element="CargarDatosSalida"
+				name="parameters" />
+		</wsdl:message>
+		<wsdl:message name="RegistrarPagoBancoRequest">
+			<wsdl:part name="parameters"
+				element="RegistrarPagoBancoEntrada"></wsdl:part>
+		</wsdl:message>
+		<wsdl:message name="RegistrarPagoBancoResponse">
+			<wsdl:part name="parameters"
+				element="RegistrarPagoBancoSalida"></wsdl:part>
+		</wsdl:message>
+		<wsdl:portType name="BolivarianoWSType">
+			<wsdl:operation name="CargarDatos">
+				<wsdl:input message="CargarDatosRequest" />
+				<wsdl:output message="CargarDatosResponse" />
+			</wsdl:operation>
+			<wsdl:operation name="RegistrarPagoBanco">
+				<wsdl:input message="RegistrarPagoBancoRequest"></wsdl:input>
+				<wsdl:output message="RegistrarPagoBancoResponse"></wsdl:output>
+			</wsdl:operation>
+		</wsdl:portType>
+		<wsdl:binding name="BolivarianoBinding" type="BolivarianoWSType">
+			<soap:binding style="document"
+				transport="http://schemas.xmlsoap.org/soap/http" />
+			<wsdl:operation name="CargarDatos">
+				<soap:operation
+					soapAction="http://54.86.239.96:8001/BankWS/BolivarianoWS/CargarDatos" />
+				<wsdl:input>
+					<soap:body use="literal" />
+				</wsdl:input>
+				<wsdl:output>
+					<soap:body use="literal" />
+				</wsdl:output>
+			</wsdl:operation>
+			<wsdl:operation name="RegistrarPagoBanco">
+				<soap:operation
+					soapAction="http://54.86.239.96:8001/BankWS/BolivarianoWS/RegistrarPagoBanco" />
+				<wsdl:input>
+					<soap:body use="literal" />
+				</wsdl:input>
+				<wsdl:output>
+					<soap:body use="literal" />
+				</wsdl:output>
+			</wsdl:operation>
+		</wsdl:binding>
+		<wsdl:service name="BolivarianoWS">
+			<wsdl:port binding="BolivarianoBinding"
+				name="BolivarianoPort">
+				<soap:address location="http://54.86.239.96:8001/BankWS/BolivarianoWS/" />
+			</wsdl:port>
+		</wsdl:service>
+	</wsdl:definitions>
