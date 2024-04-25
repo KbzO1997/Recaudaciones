@@ -1,0 +1,30 @@
+cd /fuentes/cobis/cuentas/servicios/batch/fuentes
+sqr -debug -Mvar pgrepsbsd.sqr operadorRec/Ope+1234Rec
+
+Parametro Prueba #1:  03/21/2024
+Parametro Prueba #2:  03/22/2024
+Parametro Prueba #3: S
+
+---Verificar en la tabla de que se haya registrado las transacciones:
+select * from cob_pagos..pg_h_sbs_servicio where empresa in('4','360')
+
+--REGISTRO DIARIO
+cd /fuentes/cobis/cuentas/ctacte/batch/fuentes
+sqr -debug -Mvar pgrptsbs.sqr operadorRec/Ope+1234Rec
+Parámetro 1: 03/21/2024
+Parámetro 2: N
+Parámetro 3: enter
+
+SELECT * from cob_cuentas..cc_inf_super where is_fecha_corte = '31/03/2024' AND is_causain('4','360')
+
+--ARCHIVO MENSUAL
+sqr -debug -Mvar pgrpsbsf.sqr operadorRec/Ope+1234Rec
+Parámetro 1: 31/03/2024
+Parámetro 2: enter
+Parámetro 3: enter
+
+
+--LISTA
+/respaldo/archivos/cuentas/data/
+--LISTA
+/fuentes/cobis/cuentas/servicios/batch/listados
