@@ -1,0 +1,34 @@
+/******************************************************************/
+--PRO:HP-ACT
+--DEV:DESA1
+/******************************************************************/
+begin
+	-----------------------------------------------------------
+	-- obj: pa_pg_tdeptemp_lc
+	-----------------------------------------------------------
+	
+	set nocount on
+	
+	declare @w_return int,
+		@v_ssn      int,
+		@v_mensaje  varchar(80),
+		@v_codigo   int
+
+	begin
+	
+		exec @w_return = cob_pagos..pa_pg_tdeptemp_lc
+		@e_fecha_proceso	= '12/19/2022',
+		@e_empresa			= 8976
+   		
+	    if @@error <> 0
+		begin
+			print 'Error en SP'
+		end
+		else
+		begin
+			select @w_return
+		end
+    	    end
+end
+/******************************************************************/
+

@@ -1,0 +1,400 @@
+!***************************************************************************!
+!*      Archivo:                svcsena.sqr                               *!
+!*      Base de datos:          cob_pagos                                  *!
+!*      Producto:               Cuentas Corrientes                         *!
+!*      Disenado por:           sandra MERINO                             *!
+!*      Fecha de escritura:     15/JUN/2012                                *!
+!***************************************************************************!
+!*                              IMPORTANTE                                 *!
+!*      Este programa es parte de los paquetes bancarios propiedad de      *!
+!*      "BANCO BOLIVARIANO"                                                *!
+!*      Su uso no autorizado queda expresamente prohibido asi como         *!
+!*      cualquier alteracion o agregado hecho por alguno de sus            *!
+!*      usuarios sin el debido consentimiento por escrito de la            *!
+!*      Presidencia Ejecutiva de BANCO BOLIVARIANO.                        *!
+!***************************************************************************!
+!*                              PROPOSITO                                  *!
+!*      Este programa carga  el archivo SENAE-BANREDy concilia los         *!
+!*      pagos realizados en Banco Bolivariano                              *!
+!***************************************************************************!
+!*                              MODIFICACIONES                             *!
+!* Ref  FECHA           AUTOR             RAZON                            *!
+!* 1    02/Feb/2012     SANDRA MERINO    SENAE 314-CU-1890l                *!
+!* 3    02/Feb/2013	Daniel Pereira V.  CTE-CE-SGC00007428 		   *!
+!* 4    26/Feb/2015	Smerino.           CTE-CE-SGC00019656              *!
+!* 5    05/Sep/2016     Daniel Pereira   DEPTEM-AP-SGC00025705-SGC00025712 *!
+!* 6    27/Nov/2016 Jorge Pazminno   RECA-CC-SGC00026811 - Dep.Temporales2*!
+!* 7    29/Sep/2017     Daniel Pereira    RECA-CE-SGC00029898              *!
+!* 8    18/Oct/2022     Luis Cepeda    RECM-639 - CONCILIACION SENAE       *!
+!***************************************************************************!
+
+
+#include "definic.inc"
+
+Begin-Setup
+ declare-variable
+       default-numeric=decimal
+ end-declare
+use cob_pagos
+End-Setup
+
+#include "log.inc"
+#include "ctacte.inc"
+
+Begin-Program
+  do Inicializar_Programa
+  do ParamS(1,$i_fecha_proceso,'','','')
+
+  let $dia = substr($i_fecha_proceso,4,2)
+  let $mes = substr($i_fecha_proceso,1,2)
+  let $anio = substr($i_fecha_proceso,9,2)
+  let $ruta_archivo = '/respaldo/archivos/cuentas/data/'
+  !C02DDDPICYYMMDD.TXT” C02DDDBOL120928.TXT
+  !let $name_file = 'C02DDCPIC' || $dia || $mes || $anio ||'.DAT'
+  let $name_file = 'C02DDDBOL' || $anio || $mes || $dia ||'.TXT'
+  let $i_archivo_origen = $ruta_archivo  || $name_file
+
+  let #num_reg_canal = 1
+  let $existe_dep = 'N'    
+  let $existe_sen = 'N'
+  do Main
+  do Finalizar_Programa
+End-Program
+
+
+Begin-Procedure Main
+  do Limpia_tabla
+  !do Procesa_Cargar
+   do Cargar_Data
+   !do Conciliar
+End-Procedure
+
+
+Begin-Procedure Limpia_tabla
+!Elimina lo cargado Según la fecha de proceso
+Begin-Sql
+  delete pg_concilia_senae
+  where cn_fecha_proceso    = $i_fecha_proceso
+End-Sql
+Begin-Sql
+  delete cob_pagos..pg_data_pago_sen
+  where cn_fecha_proceso    = $i_fecha_proceso
+End-Sql
+End-Procedure
+
+Begin-Procedure Procesa_Cargar
+let $flag = 'N'
+let $w_fecha_proceso = $i_fecha_proceso
+
+while $flag = 'N'
+
+do Cargar_Data
+
+begin-select
+convert(varchar(10),DATEADD(day, -1, $w_fecha_proceso),101) &w_fecha_proceso
+end-select
+
+  let $w_fecha_proceso = &w_fecha_proceso
+
+  execute -XC cob_cuentas..sp_identificadia
+         @i_fechahoy   = $w_fecha_proceso,
+         @i_tipo       = 'S',
+         @o_compensa   = $feriado  out
+  if $feriado = 'NO'
+    let $flag = 'N'
+  else
+    let $flag = 'S'
+  end-if
+
+  let $dia1 = substr($w_fecha_proceso,4,2)
+  let $mes1 = substr($w_fecha_proceso,1,2)
+  let $name_file1 = 'C02DDCPIC' || $anio || $mes || $dia ||'.txt'
+  let $i_archivo_origen = $ruta_archivo  || $name_file1
+end-while
+End-Procedure
+
+Begin-Procedure Cargar_Data
+
+!open $i_archivo_origen as 1 for-reading record=248 status=#openfileori
+open $i_archivo_origen as 1 for-reading record=275 status=#openfileori
+if #openfileori <> 0
+    show ' '
+    show ' ERROR; En Apertura del Archivo ' $i_archivo_origen
+    do Abortar
+else
+    show ' '
+    show 'CARGANDO ARCHIVO PARA CONCILIACION DE SENAE........' $i_archivo_origen
+    let #flag = 0
+    while #flag = 0
+        read 1  into $cadena:331   !255  !153
+        let $tip_reg=''
+        let #cod_ser = 0
+        let $fech_comp=''
+        let  #total_recau=0
+        let #val_total_recau=0
+        
+        let $tipo_registro = substr($cadena,1,2)
+          
+      if $tipo_registro = 'HE' !LEE CABECERA
+         
+         !*tipo de registro
+         let $tip_reg = substr ($cadena,1,2)
+         
+         !*Codigo de servicio y subservicio
+         let #cod_ser = substr ($cadena,3,6)
+         
+         !*fecha de compensación
+         let $fech_comp = substr ($cadena,9,8)
+         
+         
+         let $dia = substr ($fech_comp,1,2)
+	 let $mes = substr ($fech_comp,3,2)
+     	 let $anio = substr ($fech_comp,5,4)
+     	 let $fech_comp= $mes || '/' || $dia || '/' || $anio   !cambio formato de fecha
+     	 
+     	 
+         
+         !*longitud archivo
+         let $long_arc = substr ($cadena,17,10)
+         
+         !*total trx recaudado
+         let #total_recau = substr ($cadena,27,10)
+         
+         !*total monto recaudado
+         let $total_recau = substr ($cadena,37,20)
+          
+          
+         let $val_total_recau  = substr ($total_recau ,1,18) || '.' || substr($total_recau ,19,2)
+     	 let #val_total_recau = $val_total_recau 
+     	 
+     	 
+     	 
+	 if $tipo_registro =  'HE'  !INSERTA CABECERA DEL ARCHIVO
+	   begin-sql
+	   insert cob_pagos..pg_data_pago_sen
+	   (cn_empresa,cn_fecha_proceso)
+	   values
+	   (940,$i_fecha_proceso)
+          end-sql
+	  end-if
+	  
+ else  !LEE DETALLE
+     
+     	  let $tip_reg_d = substr ($cadena,1,2)
+     	  let $org_reg_d = substr ($cadena,3,2)
+     	  
+     	  let $cod_adq_d = substr ($cadena,5,6)
+     	  let #cod_adq_d = $cod_adq_d 
+     	  
+     	  let $cod_aut_d = substr ($cadena,11,6)
+     	  let #cod_aut_d = $cod_aut_d 
+     	  
+     	  let $fecHor_trx_d = substr ($cadena,17,14) !ddmmyyyyhhmmss
+     	  !show 'fecha hora de trx ' $fecHor_trx_d
+     	   !show 'cadena  ' $cadena
+     	  
+     	  let $dia = substr ($fecHor_trx_d,1,2)
+     	  let $mes = substr ($fecHor_trx_d,3,2)
+     	  let $anio = substr ($fecHor_trx_d,5,4)
+     	  let $hora = substr ($fecHor_trx_d,9,2)
+     	  let $minu = substr ($fecHor_trx_d,11,2)
+     	  let $seg = substr ($fecHor_trx_d,13,2)
+     	  let $fecHor_trx_d= $mes || '/' || $dia || '/' || $anio || ' ' || $hora || ':' || $minu || ':' || $seg  !cambio formato de fecha
+     	   !show 'despues de la conv fecha hora de trx ' $fecHor_trx_d
+     	  
+     	  
+     	  let $tip_msj_d = substr ($cadena,31,4)
+     	  let #tip_msj_d = $tip_msj_d 
+     	   
+     	  let $sub_trx_d = substr ($cadena,35,6)
+     	  let #sub_trx_d = $sub_trx_d
+     	   
+     	  let $tip_disp_d = substr ($cadena,41,1)
+     	  let #tip_disp_d = $tip_disp_d
+     	   
+     	  let $sec_trx_d = substr ($cadena,42,6)
+     	  let #sec_trx_d = $sec_trx_d
+     	   
+     	  let $sec_trx_swift = substr ($cadena,48,6)
+     	  let #sec_trx_swift= $sec_trx_swift
+     	   
+     	  let $resp_trx_d = substr ($cadena,54,2)
+     	  let #resp_trx_d = $resp_trx_d 
+     	   
+     	  let $rev_trx_d = substr ($cadena,56,1)
+     	  let #rev_trx_d = $rev_trx_d  
+     	   
+     	  let $cod_autori_d = substr ($cadena,57,6)
+     	  let #cod_autori_d = $cod_autori_d 
+     	  
+     	  
+     	  let $cod_banred_d = substr ($cadena,63,20)
+     	  let $cod_ang_d = substr ($cadena,83,6)
+     	  let #cod_ang_d=$cod_ang_d
+     	  let $cod_term_d = substr ($cadena,89,8)
+     	  let $num_doc_d = substr ($cadena,97,19)  !REF:5
+     	  let $tip_doc_d = substr ($cadena,116,8)  !REF:5
+     	  let $num_comp_d = substr ($cadena,124,16) !REF:5
+     	  let $loc_doc_d = substr ($cadena,140,6)  !REF:5 !hasta aqui me quede
+     	  !show 'localidad del documento ' $loc_doc_d
+    	  
+    	  let $per_inic_d = substr ($cadena,146,8) !REF:5
+    	  !show 'fecha de inicio 1 ' $per_inic_d
+    	  let $dia = substr ($per_inic_d,1,2)
+	  let $mes = substr ($per_inic_d,3,2)
+     	  let $anio = substr ($per_inic_d,5,4)
+     	  let $per_inic_d = $mes || '/' || $dia || '/' || $anio  !cambio formato de fecha
+     	  !show 'fecha de inicio ' $per_inic_d
+     	  
+     	  let $per_fin_d = substr ($cadena,154,8) !REF:5
+     	 !show 'fecha de fin 1  ' $per_fin_d 
+     	  let $dia = substr ($per_fin_d,1,2)
+	  let $mes = substr ($per_fin_d,3,2)
+     	  let $anio = substr ($per_fin_d,5,4)
+     	  let $per_fin_d = $mes || '/' || $dia ||  '/' || $anio !cambio formato de fecha
+     	  !show 'fecha de fin  ' $per_fin_d 
+     	  
+     	  let $tip_cta_org = substr ($cadena,162,2)  !REF:5
+     	  let $num_cta_org = substr ($cadena,164,12) !REF:5
+     	  let $tip_cta_dest = substr ($cadena,176,2) !REF:5
+     	  let $num_cta_dest = substr ($cadena,178,12) !REF:5
+     	  let $num_tar_d = substr ($cadena,190,20) !REF:5
+     	  let $cod_mon_d = substr ($cadena,210,3) !REF:5
+     	  !let #cod_mon_d = $cod_mon_d
+     	  let $tip_pag_d = substr ($cadena,213,2) !REF:5
+     	  let  #tip_pag_d =$tip_pag_d
+     	  
+     	  
+     	  !*longitud de  20 caracteres 
+     	  let $val_trx1 = substr($cadena,215,20)  !REF:5
+begin-select
+convert(money,$val_trx1)/100 &val_trx1	!REF:5
+end-select
+          !let $val_trx1 = &val_trx1
+     	  !show 'valor trx1  ' $val_trx1  
+     	  !let $val_trx1 = substr ($val_trx1,1,18) || '.' || substr($val_trx1,19,2)
+     	  !show 'valor trx1  ' $val_trx1  
+     	  !let $val_trx1 = edit (to_number('000000000000000019.80'), '9999999.99')
+     	  !show 'valor trx1  ' $val_trx1  
+     	  let #val_trx1 = &val_trx1
+     	 
+      
+     	  
+     	  let $val_trx2 = substr ($cadena,235,20) !REF:5
+     	  !show 'valor trx2  ' $val_trx2 
+     	  let $val_trx2  = substr ($val_trx2,1,18) || '.' || substr($val_trx2,19,2)
+     	  let #val_trx2 = $val_trx2 
+     	  
+     
+     	  let $val_com = substr ($cadena,255,20)  !REF:5
+     	  let $val_com  = substr ($val_com,1,18) || '.' || substr($val_com,19,2)
+     	  let #val_com = $val_com  
+     	  
+      
+     	  let $compensa_d = substr ($cadena,275,1)  !REF:5
+     	 
+     	  
+     end-if
+
+    if #end-file
+       let #flag = 1
+        break
+    else
+                  
+     !show 'entro a insertar de registro  ' $tipo_registro    
+       if $tipo_registro =  'DR'  !INSERTA TABLA LOS DETALLE DEL ARCHIVO  
+                if substr($num_doc_d,1,4) = '0000'  !ref 7 
+                	!move $num_doc_d to #num_doc_d !Ref 08: se comento para evitar que obtenga codigos de empresas diferentes, cuando la transacción pertenece a SENAE
+			let $num_doc_d5 = #num_doc_d
+		else
+		        let $num_doc_d5 = $num_doc_d  !ref 7		      
+                end-if
+		
+    !JPM Ref.6 -->
+    let $cod_emp = substr($num_doc_d5,1,4)
+    let $band_deptmp = 'N'
+    begin-select
+valor      &homolog_deptmp
+       let #empresa = to_number(&homolog_deptmp)
+       let $num_doc_d2 = $num_doc_d
+       let $existe_dep = 'S'
+       let $band_deptmp = 'S'
+    from cobis..cl_tabla th, cobis..cl_catalogo ch
+    where th.tabla = 'sv_homologa_empresa_deptemp'
+      and th.codigo = ch.tabla
+      and ch.codigo = $cod_emp
+      and ch.estado = 'V'
+    end-select
+    !<-- JPM Ref.6
+		!if substr($num_doc_d5,1,4) = '9025'   !REF:5     !JPM Ref.6: cambia forma validar dep.temporal
+		!   let #empresa = 1928
+		!   let $num_doc_d2 = $num_doc_d
+		!   !if $tip_msj_d = '210' and $sub_trx_d = '10001'
+		!	let $existe_dep = 'S'
+		!  ! end-if
+		!else
+    		if $band_deptmp = 'N'
+		   let #empresa = 940
+		   let $num_doc_d2 = substr($num_doc_d,4,19)
+		   !if $tip_msj_d = '210' and $sub_trx_d = '10001'
+			   let $existe_sen = 'S'
+		   !end-if
+		end-if	        
+       
+		  begin-sql
+		  insert cob_pagos..pg_concilia_senae
+		  (cn_empresa , cn_fecha_proceso ,cn_tip_reg ,
+		   cn_cod_adq ,cn_cod_aut ,cn_fecHor_trx ,cn_tip_msj ,cn_sub_trx ,
+		   cn_tip_disp,cn_sec_trx,cn_sec_trx_swift,cn_resp_trx,cn_rev_trx,
+		   cn_cod_autori,cn_cod_banred,cn_cod_ang,cn_cod_term,cn_num_doc ,  
+		   cn_tip_doc,cn_num_comp,cn_loc_doc,cn_per_inic,cn_per_fin,
+		   cn_tip_cta_org,cn_num_cta_org ,cn_tip_cta,cn_num_cta,
+		   cn_num_tar,cn_cod_mon,cn_tip_pag,cn_val_total,cn_val_nc,
+		   cn_val_com,cn_conciliada   !cn_compensa
+		  )
+		  values
+		  (#empresa,$i_fecha_proceso,$tipo_registro,  !REF:5
+		   #cod_adq_d,#cod_aut_d,$fecHor_trx_d,#tip_msj_d,#sub_trx_d,
+		   #tip_disp_d,#sec_trx_d,#sec_trx_swift,#resp_trx_d,#rev_trx_d,
+		   #cod_autori_d ,$cod_banred_d,#cod_ang_d,$cod_term_d,$num_doc_d2,
+		   $tip_doc_d,$num_comp_d,$loc_doc_d,$per_inic_d,$per_fin_d,
+		   $tip_cta_org,$num_cta_org,$tip_cta_dest,$num_cta_dest,
+		   $num_tar_d,$cod_mon_d,#tip_pag_d,#val_trx1,#val_trx2,
+		   #val_com,$compensa_d
+		  )
+		  end-sql
+      end-if
+    end-if
+   end-while
+   show 'CARGA DE ARCHIVO CONCILIA DE SENAE OK ...'
+end-if
+close 1
+End-Procedure
+
+
+Begin-Procedure Conciliar
+if $existe_dep = 'S'
+show 'REALIZANDO CONCILIACION DE DEPOSITO TEMPORAL ........'
+execute -XC pa_pag_b_concilia_deptemp   !REF:5
+@e_fecha_proceso  = $i_fecha_proceso,
+@e_empresa1 = 8466,       !JPM Ref.6: antes quemado 1928, ahora se envia el codigo del grupo contecom
+@e_empresa2 = '0'         !JPM Ref.6: ya no tiene utilidad, antes '1928'
+if #w_return <> 0
+   do Abortar
+end-if
+show 'CONCILIACION REALIZADA OK'
+end-if
+
+show 'REALIZANDO CONCILIACION DE SENAE ........'
+if $existe_sen = 'S'
+execute -XC sp_batch_concilia_sen
+@i_fecha_proceso  = $i_fecha_proceso,
+@i_empresa = 940
+if #w_return <> 0
+   do Abortar
+end-if
+show 'CONCILIACION REALIZADA OK'
+end-if
+
+End-Procedure
+

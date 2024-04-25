@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?><audit_trail flowId="70048257" cid="bpel:391430226">
+<event date="2022-12-15T13:41:04.622-05:00" cat="2" type="2" n="0" sid="0">
+      <message>New instance of BPEL process "1.0" initiated (# "ConsultarDepositoTemporal").</message>
+   </event>
+   <event date="2022-12-15T13:41:04.622-05:00" cat="1" psid="0" label="process" type="2" n="1" sid="BpPrc0.1">
+      <message>_cr_</message>
+   </event>
+   <event date="2022-12-15T13:41:04.622-05:00" cat="1" psid="BpPrc0.1" label="tryBlock of process (39)" type="2" n="2" sid="BpTry0.2">
+      <message>_cr_</message>
+   </event>
+   <event date="2022-12-15T13:41:04.622-05:00" cat="1" psid="BpTry0.2" label="main (101)" type="2" n="3" sid="BpSeq0.3">
+      <message>_cr_</message>
+   </event>
+   <event date="2022-12-15T13:41:04.622-05:00" wikey="391430226-BpRcv0-BpSeq0.3-1" cat="2" label="receiveInput" state="5" type="2" n="4" sid="BpSeq0.3">
+      <message>Received "process" call from partner "consultardepositotemporal_client"</message>
+      <details>
+<inputVariable><part name="payload" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><msne:MensajeEntradaConsultar xmlns:msne="http://www.bolivariano.com/MensajeDepositoTemporal" xmlns:java="java"><canal>IBK</canal><oficina>0</oficina><terminal>0233000000OPE998</terminal><transaccion>62652</transaccion><usuario>ope998</usuario><informacionDepositoTemporal><aplicativoCobis>IBK</aplicativoCobis><empresa>8976</empresa><tipoMoneda>840</tipoMoneda><tipoOperacion>310001</tipoOperacion><comprobante>7400001051000502585</comprobante><declaracion>7400001051000502585</declaracion><codigoAdquiriente>00000597777</codigoAdquiriente><fechaHoraBANRED>2022-12-15T06:41:02.000Z</fechaHoraBANRED><fechaTransaccionLocal>2022-12-15T06:41:02.000Z</fechaTransaccionLocal><fechaCompensacion>2022-12-15T06:41:02.000Z</fechaCompensacion><horaTransaccionLocal>134104</horaTransaccionLocal><secuencialSwitch>0</secuencialSwitch><secuencialAdquiriente>000000993726</secuencialAdquiriente></informacionDepositoTemporal><informacionCore><codigoTRX>62652</codigoTRX><secuencial>49264146</secuencial><servidor>BOLIVSRV</servidor><servidorLocal>BOLIVSRV</servidorLocal></informacionCore></msne:MensajeEntradaConsultar></part></inputVariable></details>
+   </event>
+   <event date="2022-12-15T13:41:04.622-05:00" cat="1" psid="BpSeq0.3" label="consulta (105)" type="2" n="5" sid="BpScp0.4">
+      <message>_cr_</message>
+   </event>
+   <event date="2022-12-15T13:41:04.622-05:00" cat="1" psid="BpScp0.4" label="tryBlock of scope consulta (105)" type="2" n="6" sid="BpTry1.5">
+      <message>_cr_</message>
+   </event>
+   <event date="2022-12-15T13:41:04.622-05:00" cat="1" psid="BpTry1.5" label="consultaDepositoTemporal (229)" type="2" n="7" sid="BpSeq2.6">
+      <message>_cr_</message>
+   </event>
+   <event date="2022-12-15T13:41:04.622-05:00" wikey="391430226-BxExe0-BpSeq2.6-1" cat="2" label="SetName" state="5" type="2" n="8" sid="BpSeq2.6">
+      <message>bpelx:exec executed</message>
+   </event>
+   <event date="2022-12-15T13:41:04.622-05:00" cat="1" psid="BpSeq2.6" label="TransformacionXMLISO (245)" type="2" n="9" sid="BpSeq3.7">
+      <message>_cr_</message>
+   </event>
+   <event date="2022-12-15T13:41:04.622-05:00" wikey="391430226-BpAss5-BpSeq3.7-1" cat="2" to="InHomologarRespuesta" label="setAssign" state="1" type="1" n="10" sid="BpSeq3.7">
+      <message>Updated variable "InHomologarRespuesta"</message>
+   </event>
+   <event date="2022-12-15T13:41:04.622-05:00" wikey="391430226-BpAss5-BpSeq3.7-1" cat="2" label="setAssign" state="5" type="1" n="11" sid="BpSeq3.7">
+      <message>Completed assign</message>
+   </event>
+   <event date="2022-12-15T13:41:04.623-05:00" wikey="391430226-BpAss6-BpSeq3.7-2" cat="2" to="InXMLISO" label="asignaValoresTransformacionXMLISO" state="1" type="1" n="12" sid="BpSeq3.7">
+      <message>Updated variable "InXMLISO"</message>
+   </event>
+   <event date="2022-12-15T13:41:04.623-05:00" wikey="391430226-BpAss6-BpSeq3.7-2" cat="2" label="asignaValoresTransformacionXMLISO" state="5" type="1" n="13" sid="BpSeq3.7">
+      <message>Completed assign</message>
+   </event>
+   <event date="2022-12-15T13:41:04.623-05:00" wikey="391430226-BpInv1-BpSeq3.7-3" cat="2" label="invocaTransformacionXMLISO" state="1" type="2" n="14" sid="BpSeq3.7">
+      <message>Started invocation of operation "convertXMLToISO8583" on partner "ISO8583ServiceHTTP".</message>
+   </event>
+   <event date="2022-12-15T13:41:04.638-05:00" wikey="391430226-BpInv1-BpSeq3.7-3" partnerWSDL="" cat="2" label="invocaTransformacionXMLISO" state="5" type="2" n="15" sid="BpSeq3.7">
+      <message>Invoked 2-way operation "convertXMLToISO8583" on partner "ISO8583ServiceHTTP".</message>
+      <details><messages>
+<InXMLISO><part name="parameters" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><convertXMLToISO8583 xmlns:oracle-xsl-mapper="http://www.oracle.com/xsl/mapper/schemas" xmlns:tns="http://service.iso8583xml.bolivariano.com/" xmlns="http://service.iso8583xml.bolivariano.com/"><message xmlns=""><field_002><value>7400001051000502585</value></field_002><field_003><value>310001</value></field_003><field_007><value>20221215064102</value></field_007><field_011><value>0</value></field_011><field_012><value>134104</value></field_012><field_013><value>1215</value></field_013><field_015><value>1215</value></field_015><field_032><value>00000597777</value></field_032><field_037><value>000000993726</value></field_037><field_041><value>0233000000OPE998</value></field_041><field_049><value>840</value></field_049></message><packager xmlns=""><header>0200</header><preheader>ISO014000073</preheader><field_002><enabled>true</enabled><type>IF_CHAR</type><length>19</length></field_002><field_003><enabled>true</enabled><type>IFA_NUMERIC</type><length>6</length></field_003><field_007><enabled>true</enabled><type>IFA_NUMERIC</type><length>10</length><function><className>com.bolivariano.iso8583xml.function.FunctionUnPadLeft</className><argument>#length</argument></function></field_007><field_011><enabled>true</enabled><type>IFA_NUMERIC</type><length>6</length></field_011><field_012><enabled>true</enabled><type>IFA_NUMERIC</type><length>6</length></field_012><field_013><enabled>true</enabled><type>IFA_NUMERIC</type><length>4</length></field_013><field_015><enabled>true</enabled><type>IFA_NUMERIC</type><length>4</length></field_015><field_032><enabled>true</enabled><type>IFA_FLLNUM</type><length>11</length></field_032><field_037><enabled>true</enabled><type>IFA_NUMERIC</type><length>12</length></field_037><field_041><enabled>true</enabled><type>IF_CHAR</type><length>16</length></field_041><field_049><enabled>true</enabled><type>IFA_NUMERIC</type><length>3</length></field_049></packager></convertXMLToISO8583></part></InXMLISO>
+<OutXMLISO><part name="parameters" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><ns2:convertXMLToISO8583Response xmlns:ns2="http://service.iso8583xml.bolivariano.com/"><return><header><code>0</code><status>CORRECTA</status><systemMessage>Transaccion Correcta</systemMessage><userMessage>Transaccion Correcta</userMessage></header><message>ISO0140000730200623A000108808000740000105100050258531000112150641020000001341041215121511000005977770000009937260233000000OPE998840</message></return></ns2:convertXMLToISO8583Response></part></OutXMLISO></messages></details>
+   </event>
+   <event date="2022-12-15T13:41:04.638-05:00" cat="1" psid="BpSeq3.7" label="transformacionCorrecta (266)" type="2" n="16" sid="BpIf2.8">
+      <message>_cr_</message>
+   </event>
+   <event date="2022-12-15T13:41:04.638-05:00" wikey="391430226-BpIf2_Nd-BpIf2.8-1" cat="2" label="transformacionCorrecta" state="5" type="2" n="17" sid="BpIf2.8">
+      <message>If is selected. Condition is "$OutXMLISO.parameters/return/header/code='0'".</message>
+   </event>
+   <event date="2022-12-15T13:41:04.638-05:00" wikey="391430226-BpEmp0-BpIf2.8-2" cat="2" label="TransformacionCorrecta" state="5" type="2" n="18" sid="BpIf2.8">
+      <message>BPEL "empty" activity is executed.</message>
+   </event>
+   <event date="2022-12-15T13:41:04.638-05:00" cat="1" type="2" n="19" sid="BpIf2.8">
+      <message>_cl_</message>
+   </event>
+   <event date="2022-12-15T13:41:04.638-05:00" cat="1" type="2" n="20" sid="BpSeq3.7">
+      <message>_cl_</message>
+   </event>
+   <event date="2022-12-15T13:41:04.638-05:00" cat="1" psid="BpSeq2.6" label="InvocaProveedor (301)" type="2" n="21" sid="BpSeq5.9">
+      <message>_cr_</message>
+   </event>
+   <event date="2022-12-15T13:41:04.638-05:00" wikey="391430226-BpAss8-BpSeq5.9-1" cat="2" to="InHomologarRespuesta" label="asignaMensajeISOConsulta" state="1" type="1" n="22" sid="BpSeq5.9">
+      <message>Updated variable "InHomologarRespuesta"</message>
+   </event>
+   <event date="2022-12-15T13:41:04.638-05:00" wikey="391430226-BpAss8-BpSeq5.9-1" cat="2" to="taskId" label="asignaMensajeISOConsulta" state="1" type="1" n="23" sid="BpSeq5.9">
+      <message>Updated variable "taskId"</message>
+   </event>
+   <event date="2022-12-15T13:41:04.638-05:00" wikey="391430226-BpAss8-BpSeq5.9-1" cat="2" label="asignaMensajeISOConsulta" state="5" type="1" n="24" sid="BpSeq5.9">
+      <message>Completed assign</message>
+   </event>
+   <event date="2022-12-15T13:41:04.638-05:00" cat="1" psid="BpSeq5.9" label="Socket (312)" type="2" n="25" sid="BpScp1.10">
+      <message>_cr_</message>
+   </event>
+   <event date="2022-12-15T13:41:04.638-05:00" cat="1" psid="BpScp1.10" label="tryBlock of scope Socket (312)" type="2" n="26" sid="BpTry2.11">
+      <message>_cr_</message>
+   </event>
+   <event date="2022-12-15T13:41:04.638-05:00" cat="1" psid="BpTry2.11" label="sequence (350)" type="2" n="27" sid="BpSeq7.12">
+      <message>_cr_</message>
+   </event>
+   <event date="2022-12-15T13:41:04.638-05:00" wikey="391430226-BpAss10-BpSeq7.12-1" cat="2" to="InSocketBanredSenae" label="InSocket" state="1" type="1" n="28" sid="BpSeq7.12">
+      <message>Updated variable "InSocketBanredSenae"</message>
+   </event>
+   <event date="2022-12-15T13:41:04.638-05:00" wikey="391430226-BpAss10-BpSeq7.12-1" cat="2" label="InSocket" state="5" type="1" n="29" sid="BpSeq7.12">
+      <message>Completed assign</message>
+   </event>
+   <event date="2022-12-15T13:41:04.638-05:00" wikey="391430226-BpInv2-BpSeq7.12-2" cat="2" label="SocketBanredSenae" state="1" type="2" n="30" sid="BpSeq7.12">
+      <message>Started invocation of operation "OutboundRequestReply" on partner "BanredSenaeSocket".</message>
+   </event>
+   <event date="2022-12-15T13:41:05.431-05:00" wikey="391430226-BpInv2-BpSeq7.12-2" partnerWSDL="" cat="2" label="SocketBanredSenae" state="5" type="2" n="31" sid="BpSeq7.12">
+      <message>Invoked 2-way operation "OutboundRequestReply" on partner "BanredSenaeSocket".</message>
+      <details><messages>
+<InSocketBanredSenae><part name="MensajeISOSocketEntrada" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><MensajeISOSocketEntrada xmlns="http://www.bolivariano.com/MensajeISOSocket"><mensajeISO>ISO0140000730200623A000108808000740000105100050258531000112150641020000001341041215121511000005977770000009937260233000000OPE998840</mensajeISO><header/></MensajeISOSocketEntrada></part></InSocketBanredSenae>
+<OutSocketBanredSenae><part name="MensajeISOSocketSalida" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><MensajeISOSocketSalida xmlns="http://www.bolivariano.com/MensajeISOSocket"><codigoError>0</codigoError><estado>EXITO</estado><mensajeError/><mensajeISO>ISO0040000730210F02200000A00000000000000000000147400001051000502585310001000000013662027090121500000099372600120&amp;amp; 0000200120! T100098 1792996260001SVMEDICALSUPPLIES S.A.                  4017400001051000502585           000000000000043&amp;amp; 0000200043! T300021 601000000013662999999</mensajeISO></MensajeISOSocketSalida></part></OutSocketBanredSenae></messages></details>
+   </event>
+   <event date="2022-12-15T13:41:05.431-05:00" wikey="391430226-BpAss11-BpSeq7.12-3" cat="2" to="OutSocketBanredSenae" label="ValidaTramaSenae" state="1" type="1" n="32" sid="BpSeq7.12">
+      <message>Updated variable "OutSocketBanredSenae"</message>
+   </event>
+   <event date="2022-12-15T13:41:05.431-05:00" wikey="391430226-BpAss11-BpSeq7.12-3" cat="2" label="ValidaTramaSenae" state="5" type="1" n="33" sid="BpSeq7.12">
+      <message>Completed assign</message>
+   </event>
+   <event date="2022-12-15T13:41:05.431-05:00" cat="1" type="2" n="34" sid="BpSeq7.12">
+      <message>_cl_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.431-05:00" cat="1" type="2" n="35" sid="BpTry2.11">
+      <message>_cl_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.431-05:00" cat="1" type="2" n="36" sid="BpScp1.10">
+      <message>_cl_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.431-05:00" cat="1" psid="BpSeq5.9" label="InvocaProveedorExitoso (376)" type="2" n="37" sid="BpIf3.13">
+      <message>_cr_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.431-05:00" wikey="391430226-BpIf3_Nd-BpIf3.13-1" cat="2" label="InvocaProveedorExitoso" state="5" type="2" n="38" sid="BpIf3.13">
+      <message>If is selected. Condition is "$OutSocketBanredSenae.MensajeISOSocketSalida/ns8:codigoError='0'".</message>
+   </event>
+   <event date="2022-12-15T13:41:05.431-05:00" wikey="391430226-BpEmp1-BpIf3.13-2" cat="2" label="ConsultaExitosa" state="5" type="2" n="39" sid="BpIf3.13">
+      <message>BPEL "empty" activity is executed.</message>
+   </event>
+   <event date="2022-12-15T13:41:05.431-05:00" cat="1" type="2" n="40" sid="BpIf3.13">
+      <message>_cl_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.431-05:00" cat="1" type="2" n="41" sid="BpSeq5.9">
+      <message>_cl_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.431-05:00" cat="1" psid="BpSeq2.6" label="TransformacionISOXML (411)" type="2" n="42" sid="BpSeq9.14">
+      <message>_cr_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.431-05:00" wikey="391430226-BpAss13-BpSeq9.14-1" cat="2" to="InISOXML" label="asignaValoresTransformacionISOXML" state="1" type="1" n="43" sid="BpSeq9.14">
+      <message>Updated variable "InISOXML"</message>
+   </event>
+   <event date="2022-12-15T13:41:05.431-05:00" wikey="391430226-BpAss13-BpSeq9.14-1" cat="2" label="asignaValoresTransformacionISOXML" state="5" type="1" n="44" sid="BpSeq9.14">
+      <message>Completed assign</message>
+   </event>
+   <event date="2022-12-15T13:41:05.432-05:00" wikey="391430226-BpInv3-BpSeq9.14-2" cat="2" label="invocaTransformacionISOXML" state="1" type="2" n="45" sid="BpSeq9.14">
+      <message>Started invocation of operation "convertISO8583ToXML" on partner "ISO8583ServiceHTTP".</message>
+   </event>
+   <event date="2022-12-15T13:41:05.444-05:00" wikey="391430226-BpInv3-BpSeq9.14-2" partnerWSDL="" cat="2" label="invocaTransformacionISOXML" state="5" type="2" n="46" sid="BpSeq9.14">
+      <message>Invoked 2-way operation "convertISO8583ToXML" on partner "ISO8583ServiceHTTP".</message>
+      <details><messages>
+<InISOXML><part name="parameters" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><convertISO8583ToXML xmlns:oracle-xsl-mapper="http://www.oracle.com/xsl/mapper/schemas" xmlns:ns0="http://service.iso8583xml.bolivariano.com/" xmlns="http://service.iso8583xml.bolivariano.com/"><message xmlns="">ISO0040000730210F02200000A00000000000000000000147400001051000502585310001000000013662027090121500000099372600120&amp;amp; 0000200120! T100098 1792996260001SVMEDICALSUPPLIES S.A.                  4017400001051000502585           000000000000043&amp;amp; 0000200043! T300021 601000000013662999999</message><packager xmlns=""><header>0210</header><preheader>ISO004000073</preheader><field_002><enabled>true</enabled><type>IF_CHAR</type><length>19</length></field_002><field_003><enabled>true</enabled><type>IFA_NUMERIC</type><length>7</length></field_003><field_004><enabled>true</enabled><type>IFA_NUMERIC</type><length>11</length></field_004><field_011><enabled>true</enabled><type>IFA_NUMERIC</type><length>6</length></field_011><field_015><enabled>true</enabled><type>IF_CHAR</type><length>4</length></field_015><field_037><enabled>true</enabled><type>IFA_NUMERIC</type><length>12</length></field_037><field_039><enabled>true</enabled><type>IFA_NUMERIC</type><length>2</length></field_039><field_124><enabled>true</enabled><type>IFA_LLLCHAR</type></field_124><field_126><enabled>true</enabled><type>IFA_LLLCHAR</type></field_126></packager></convertISO8583ToXML></part></InISOXML>
+<OutISOXML><part name="parameters" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><ns2:convertISO8583ToXMLResponse xmlns:ns2="http://service.iso8583xml.bolivariano.com/"><return><header><code>0</code><status>CORRECTA</status><systemMessage>Transaccion Correcta</systemMessage><userMessage>Transaccion Correcta</userMessage></header><message><field_002><value>7400001051000502585</value></field_002><field_003><value>3100010</value></field_003><field_004><value>13662</value></field_004><field_011><value>27090</value></field_011><field_015><value>1215</value></field_015><field_037><value>993726</value></field_037><field_039><value>0</value></field_039><field_124><value>&amp;amp; 0000200120! T100098 1792996260001SVMEDICALSUPPLIES S.A.                  4017400001051000502585           000000000000</value></field_124><field_126><value>&amp;amp; 0000200043! T300021 601000000013662999999</value></field_126></message></return></ns2:convertISO8583ToXMLResponse></part></OutISOXML></messages></details>
+   </event>
+   <event date="2022-12-15T13:41:05.444-05:00" cat="1" psid="BpSeq9.14" label="transformacionCorrectaRespuestaValida (426)" type="2" n="47" sid="BpIf4.15">
+      <message>_cr_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.444-05:00" wikey="391430226-BpIf4_Nd-BpIf4.15-1" cat="2" label="transformacionCorrectaRespuestaValida" state="5" type="2" n="48" sid="BpIf4.15">
+      <message>If is selected. Condition is "$OutISOXML.parameters/return/header/code = '0' and $OutISOXML.parameters/return/message/field_039/value = '0'".</message>
+   </event>
+   <event date="2022-12-15T13:41:05.444-05:00" wikey="391430226-BpEmp2-BpIf4.15-2" cat="2" label="TransformacionCorrecta" state="5" type="2" n="49" sid="BpIf4.15">
+      <message>BPEL "empty" activity is executed.</message>
+   </event>
+   <event date="2022-12-15T13:41:05.444-05:00" cat="1" type="2" n="50" sid="BpIf4.15">
+      <message>_cl_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.444-05:00" cat="1" type="2" n="51" sid="BpSeq9.14">
+      <message>_cl_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.444-05:00" cat="1" psid="BpSeq2.6" label="ConsultaCore (493)" type="2" n="52" sid="BpScp2.16">
+      <message>_cr_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.444-05:00" cat="1" psid="BpScp2.16" label="tryBlock of scope ConsultaCore (493)" type="2" n="53" sid="BpTry3.17">
+      <message>_cr_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.444-05:00" cat="1" psid="BpTry3.17" label="ConsultaCore (526)" type="2" n="54" sid="BpSeq13.18">
+      <message>_cr_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.444-05:00" wikey="391430226-BpAss17-BpSeq13.18-1" cat="2" to="taskId" label="asignaTaskId" state="1" type="1" n="55" sid="BpSeq13.18">
+      <message>Updated variable "taskId"</message>
+   </event>
+   <event date="2022-12-15T13:41:05.444-05:00" wikey="391430226-BpAss17-BpSeq13.18-1" cat="2" to="InHomologarRespuesta" label="asignaTaskId" state="1" type="1" n="56" sid="BpSeq13.18">
+      <message>Updated variable "InHomologarRespuesta"</message>
+   </event>
+   <event date="2022-12-15T13:41:05.444-05:00" wikey="391430226-BpAss17-BpSeq13.18-1" cat="2" label="asignaTaskId" state="5" type="1" n="57" sid="BpSeq13.18">
+      <message>Completed assign</message>
+   </event>
+   <event date="2022-12-15T13:41:05.444-05:00" wikey="391430226-BpAss18-BpSeq13.18-2" cat="2" to="InConsultaCore" label="asignaMensajeConsultaCore" state="1" type="1" n="58" sid="BpSeq13.18">
+      <message>Updated variable "InConsultaCore"</message>
+   </event>
+   <event date="2022-12-15T13:41:05.444-05:00" wikey="391430226-BpAss18-BpSeq13.18-2" cat="2" label="asignaMensajeConsultaCore" state="5" type="1" n="59" sid="BpSeq13.18">
+      <message>Completed assign</message>
+   </event>
+   <event date="2022-12-15T13:41:05.445-05:00" wikey="391430226-BpInv4-BpSeq13.18-3" cat="2" label="invocaConsultaCore" state="1" type="2" n="60" sid="BpSeq13.18">
+      <message>Started invocation of operation "ConsultaCore" on partner "ConsultaCore".</message>
+   </event>
+   <event date="2022-12-15T13:41:05.469-05:00" wikey="391430226-BpInv4-BpSeq13.18-3" partnerWSDL="" cat="2" label="invocaConsultaCore" state="5" type="2" n="61" sid="BpSeq13.18">
+      <message>Invoked 2-way operation "ConsultaCore" on partner "ConsultaCore".</message>
+      <details><messages>
+<InConsultaCore><part name="InputParameters" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><InputParameters xmlns:oracle-xsl-mapper="http://www.oracle.com/xsl/mapper/schemas" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/ConsultaCore" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/sp/ConsultaCore"><db:s_ssn>49264146</db:s_ssn><db:s_lsrv>BOLIVSRV</db:s_lsrv><db:s_srv>BOLIVSRV</db:s_srv><db:s_user>ope998</db:s_user><db:s_sesn xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><db:s_term>0233000000OPE998</db:s_term><db:s_date xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><db:s_ofi>0</db:s_ofi><db:s_rol>1</db:s_rol><db:s_org_err xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><db:s_error xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><db:s_sev/><db:s_msg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><db:s_org xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><db:t_corr xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><db:t_ssn_corr xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><db:t_debug>N</db:t_debug><db:t_file xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><db:t_from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><db:t_rty>N</db:t_rty><db:t_trn>62652</db:t_trn><db:i_canal>IBK</db:i_canal><db:i_mon>840</db:i_mon><db:i_cedula xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><db:i_declaracion>7400001051000502585</db:i_declaracion><db:i_papeleta xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><db:i_val>13662</db:i_val><db:i_multa>0</db:i_multa><db:i_interes>0</db:i_interes><db:i_nombre xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><db:i_horario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><db:i_valorNc>0</db:i_valorNc><db:i_codigosenae>0</db:i_codigosenae><db:i_token1>&amp;amp; 0000200120! T100098 1792996260001SVMEDICALSUPPLIES S.A.                  4017400001051000502585           000000000000</db:i_token1><db:i_token3>&amp;amp; 0000200043! T300021 601000000013662999999</db:i_token3><db:i_token3_0 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><db:i_token3_1 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><db:i_token3_2 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><db:i_token3_3 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><db:i_sec_adquiriente>000000993726</db:i_sec_adquiriente><db:i_fecha_trx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><db:i_empresa>8976</db:i_empresa></InputParameters></part></InConsultaCore>
+<OutConsultaCore><part name="OutputParameters" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><OutputParameters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/sp/ConsultaCore"><RowSet><Row><Column name="@o_ssn" sqltype="int">49264146</Column><Column name="@o_consulta" sqltype="int">0</Column><Column name="@o_fecha_efe" sqltype="varchar">12/15/2022</Column><Column name="@o_efe_cobro" sqltype="char">N</Column><Column xsi:nil="true" name="@o_cupo" sqltype="money"/><Column xsi:nil="true" name="@o_dias_gracia" sqltype="tinyint"/><Column xsi:nil="true" name="@o_clte" sqltype="int"/><Column name="@o_nombre_clte" sqltype="varchar">SVMEDICALSUPPLIES S.A.</Column><Column xsi:nil="true" name="@o_oficial" sqltype="int"/><Column xsi:nil="true" name="@o_tipo_cta" sqltype="varchar"/><Column xsi:nil="true" name="@o_cta" sqltype="varchar"/><Column xsi:nil="true" name="@o_cupo_min" sqltype="money"/><Column xsi:nil="true" name="@o_nombre_oficial" sqltype="varchar"/><Column name="@o_nombcta" sqltype="char">00</Column><Column name="@o_costo" sqltype="money">0.3000</Column><Column name="@o_campo_adic" sqltype="varchar">12/15/2022</Column></Row></RowSet><RETURN_VALUE>0</RETURN_VALUE><o_secuencial>000000</o_secuencial><o_val>136.6200000000000000000</o_val><o_ssn>49264146</o_ssn><o_consulta>0</o_consulta><o_fecha_efe xsi:nil="true"/><o_efe_cobro>N</o_efe_cobro><o_cupo xsi:nil="true"/><o_dias_gracia xsi:nil="true"/><o_clte xsi:nil="true"/><o_nombre_clte>SVMEDICALSUPPLIES S.A.</o_nombre_clte><o_oficial xsi:nil="true"/><o_tipo_cta xsi:nil="true"/><o_cta xsi:nil="true"/><o_cupo_min xsi:nil="true"/><o_nombre_oficial xsi:nil="true"/><o_nombcta>00</o_nombcta><o_costo>0.3000000000000000000</o_costo><o_campo_adic>12/15/2022</o_campo_adic><o_valorNc>000000000000</o_valorNc><o_rucoce>1792996260001</o_rucoce><o_nombre_OCE>SVMEDICALSUPPLIES S.A.                  </o_nombre_OCE><o_codigo_senae>401</o_codigo_senae><o_referencia>7400001051000502585           </o_referencia></OutputParameters></part></OutConsultaCore></messages></details>
+   </event>
+   <event date="2022-12-15T13:41:05.469-05:00" cat="1" psid="BpSeq13.18" label="validaRespuestaCore (552)" type="2" n="62" sid="BpIf5.19">
+      <message>_cr_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.469-05:00" wikey="391430226-BpIf5_Nd-BpIf5.19-1" cat="2" label="validaRespuestaCore" state="5" type="2" n="63" sid="BpIf5.19">
+      <message>If is selected. Condition is "$OutConsultaCore.OutputParameters/ns9:RETURN_VALUE=0".</message>
+   </event>
+   <event date="2022-12-15T13:41:05.469-05:00" wikey="391430226-BpEmp3-BpIf5.19-2" cat="2" label="respuestaCoreValida" state="5" type="2" n="64" sid="BpIf5.19">
+      <message>BPEL "empty" activity is executed.</message>
+   </event>
+   <event date="2022-12-15T13:41:05.469-05:00" cat="1" type="2" n="65" sid="BpIf5.19">
+      <message>_cl_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.469-05:00" cat="1" type="2" n="66" sid="BpSeq13.18">
+      <message>_cl_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.469-05:00" cat="1" type="2" n="67" sid="BpTry3.17">
+      <message>_cl_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.469-05:00" cat="1" type="2" n="68" sid="BpScp2.16">
+      <message>_cl_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.469-05:00" wikey="391430226-BpAss20-BpSeq2.6-2" cat="2" to="outputVariable" label="asignaRespuestaCore" state="1" type="1" n="69" sid="BpSeq2.6">
+      <message>Updated variable "outputVariable"</message>
+   </event>
+   <event date="2022-12-15T13:41:05.469-05:00" wikey="391430226-BpAss20-BpSeq2.6-2" cat="2" label="asignaRespuestaCore" state="5" type="1" n="70" sid="BpSeq2.6">
+      <message>Completed assign</message>
+   </event>
+   <event date="2022-12-15T13:41:05.469-05:00" cat="1" psid="BpSeq2.6" label="ValidaRespuestaCore (593)" type="2" n="71" sid="BpScp3.20">
+      <message>_cr_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.469-05:00" cat="1" psid="BpScp3.20" label="tryBlock of scope ValidaRespuestaCore (593)" type="2" n="72" sid="BpTry4.21">
+      <message>_cr_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.469-05:00" cat="1" psid="BpTry4.21" label="sequence (601)" type="2" n="73" sid="BpSeq16.22">
+      <message>_cr_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.469-05:00" wikey="391430226-BpAss21-BpSeq16.22-1" cat="2" to="InHomologarRespuesta" label="asignarMensajeValidarRespuesta" state="1" type="1" n="74" sid="BpSeq16.22">
+      <message>Updated variable "InHomologarRespuesta"</message>
+   </event>
+   <event date="2022-12-15T13:41:05.469-05:00" wikey="391430226-BpAss21-BpSeq16.22-1" cat="2" label="asignarMensajeValidarRespuesta" state="5" type="1" n="75" sid="BpSeq16.22">
+      <message>Completed assign</message>
+   </event>
+   <event date="2022-12-15T13:41:05.469-05:00" cat="1" type="2" n="76" sid="BpSeq16.22">
+      <message>_cl_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.469-05:00" cat="1" type="2" n="77" sid="BpTry4.21">
+      <message>_cl_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.469-05:00" cat="1" type="2" n="78" sid="BpScp3.20">
+      <message>_cl_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.469-05:00" cat="1" type="2" n="79" sid="BpSeq2.6">
+      <message>_cl_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.469-05:00" cat="1" type="2" n="80" sid="BpTry1.5">
+      <message>_cl_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.469-05:00" cat="1" type="2" n="81" sid="BpScp0.4">
+      <message>_cl_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.470-05:00" wikey="391430226-BpRpl0-BpSeq0.3-2" cat="2" label="replyOutput" state="5" type="2" n="82" sid="BpSeq0.3">
+      <message>Reply to partner "consultardepositotemporal_client".</message>
+      <details>
+<outputVariable><part name="payload" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><MensajeSalidaConsultar xmlns:oracle-xsl-mapper="http://www.oracle.com/xsl/mapper/schemas" xmlns:msn="http://www.bolivariano.com/MensajeDepositoTemporal" xmlns="http://www.bolivariano.com/MensajeDepositoTemporal"><codigoError xmlns="">0</codigoError><codigoErrorRemoto xmlns=""/><estado xmlns="">OK</estado><mensajeSistema xmlns=""/><mensajeUsuario xmlns=""/><informacionDepositoTemporal xmlns=""><codigoProveedor>401</codigoProveedor><efectivoComision>0.3000000000000000000</efectivoComision><identificacion>1792996260001</identificacion><nombre>SVMEDICALSUPPLIES S.A.                  </nombre><tipoOperacion>3100010</tipoOperacion><cuenta><nombreCuenta>00</nombreCuenta></cuenta><campoAdicional>12/15/2022</campoAdicional><codigoResultado>0</codigoResultado><consulta>0</consulta><declaracion>7400001051000502585</declaracion><fechaCompensacion>2022-12-15T00:00:00</fechaCompensacion><nombreOCE>SVMEDICALSUPPLIES S.A.                  </nombreOCE><secuencial>000000</secuencial><referencia>7400001051000502585           </referencia><secuencialSwitch>27090</secuencialSwitch><secuencialAdquiriente>993726</secuencialAdquiriente><token1>&amp;amp; 0000200120! T100098 1792996260001SVMEDICALSUPPLIES S.A.                  4017400001051000502585           000000000000</token1><token3>&amp;amp; 0000200043! T300021 601000000013662999999</token3><valorNotaCredito>000000000000</valorNotaCredito><valorTotal>136.6200000000000000000</valorTotal><valoresEfectoCobro><orden>0</orden><valor>N</valor></valoresEfectoCobro></informacionDepositoTemporal><informacionCore xmlns=""><secuencial>49264146</secuencial></informacionCore></MensajeSalidaConsultar></part></outputVariable></details>
+   </event>
+   <event date="2022-12-15T13:41:05.470-05:00" cat="1" type="2" n="83" sid="BpSeq0.3">
+      <message>_cl_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.470-05:00" cat="1" type="2" n="84" sid="BpTry0.2">
+      <message>_cl_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.470-05:00" cat="1" type="2" n="85" sid="BpPrc0.1">
+      <message>_cl_</message>
+   </event>
+   <event date="2022-12-15T13:41:05.470-05:00" cat="2" type="2" n="86" sid="BpPrc0.1">
+      <message>BPEL process instance "391430226" completed</message>
+   </event>
+</audit_trail>

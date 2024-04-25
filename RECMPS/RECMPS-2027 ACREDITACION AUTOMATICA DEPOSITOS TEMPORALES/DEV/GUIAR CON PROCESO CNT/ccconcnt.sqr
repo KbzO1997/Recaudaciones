@@ -1,0 +1,512 @@
+!************************************************************************!
+!*      Archivo:                ccconcnt.sqr                            *!
+!*      Base de datos:          cob_cuentas                             *!
+!*      Producto:               Cuentas                           *!
+!*      Disenado por:           Guillermo Martillo                      *!
+!*      Fecha de escritura:     15/Oct/2009                             *!
+!************************************************************************!
+!*                              IMPORTANTE                              *!
+!*      Este programa es parte de los paquetes bancarios propiedad de   *!
+!*      "BANCO BOLIVARIANO"                                             *!
+!*      Su uso no autorizado queda expresamente prohibido asi como      *!
+!*      cualquier alteracion o agregado hecho por alguno de sus         *!
+!*      usuarios sin el debido consentimiento por escrito de la         *!
+!*      Presidencia Ejecutiva de BANCO BOLIVARIANO.                     *!
+!************************************************************************!
+!*                              PROPOSITO                               *!
+!*      Archivo de Conciliación de CNT  Fija/Movil                      *!
+!*                                                                      *!
+!************************************************************************!
+!*                              MODIFICACIONES                          *!
+!*      FECHA           AUTOR             RAZON                         *!
+!*    15/Oct/2009   Guillermo Martillo    Emisión Inicial               *!
+!*    01/Jun/2011    Raul Altamirano M.   REF1: Migracion Sybase 15     *!
+!*    04/Jun/2012   Sandra merino.        cte-cc-11508                  *!
+!* 4  03/Mar/2013   Daniel Pereira V.     SGC00005780 BACK OFFICE CNT   *!
+!* 5  10/Sep/2013   Daniel Pereira V.     CTE-CC-SGC00010529 Formato de Validacion*!
+!* 6  21/Jul/2015   Daniel Pereira V.     SGC00018785 - Migracion CNT   *!
+!* 7  03/Mar/2016   Daniel Pereira        CTE-CC-SGC00024474		*!
+!* 8  22/Dic/2017   Daniel Pereira V,     RECA-CE-SGC00030604 eliminar espacios en el telefono*!
+!* 9  29/Oct/2018   Maria Jose Silva Tarea:CNTDEB-AP-SGC00032750-SGC00032769 - CNT Domiciliados*!
+!*10  05/May/2021   Maria Jose Silva Tarea:RECMPS-864 - Ejecucion pago LC*!
+!************************************************************************!
+
+#include "definic.inc"
+#define   ANCHO_PAG      210      ! Ancho de pagina
+#define   LARGO_PAG       60      ! Largo de pagina
+#define   DINERO      999,999.99  ! Formato de dinero por defecto
+#define   CHAR         '|'        ! Separador de campo
+#define   CODBANCO    '1007'      ! Codigo Banco
+#define   CODSUC      '000000'      ! Codigo Sucursal
+#define   FOR_MONE    999,999,999.99
+#define   FILLER      '00'
+
+Begin-Setup
+use cob_cuentas
+
+begin-sql
+    if exists (select * from sysobjects where name = 'cc_tran_chequeo_pac')
+       drop table cc_tran_chequeo_pac
+end-sql
+
+begin-sql
+    if exists (select * from sysobjects where name = 'cc_rev_automatico')
+       drop table cc_rev_automatico
+end-sql
+
+begin-sql
+    if exists (select * from sysobjects where name = 'cc_cuenta_pag_reverso')
+       drop table cc_cuenta_pag_reverso
+end-sql
+
+begin-sql
+    create table cc_tran_chequeo_pac
+    ( referencia       varchar(20),
+      secuencial       int
+    )
+end-sql
+
+begin-sql
+    create table cc_rev_automatico
+    (
+      referencia       varchar(20)
+    )
+end-sql
+
+begin-sql
+    create table cc_cuenta_pag_reverso
+    (
+      referencia       varchar(20),
+      ts_correccion  char(1),
+      ts_secuencial  int,
+      ts_ssn_corr  int null,
+      valor      money
+    )
+end-sql
+
+
+End-Setup
+
+#include "printer_cod_imp_cond.inc"   !REF:GYC
+#include "log.inc"
+#include "ctacte.inc"
+
+!------------
+Begin-Program
+!------------
+do Inicializar_Programa
+do ParamS (1,$i_fecha,'','','')
+do Busca_catalogo !REF2
+do finalizar_Programa
+End-Program
+
+Begin-Procedure Busca_catalogo !REF2
+begin-select
+pa_char &codsucfj
+  let $codsucfj = lpad(&codsucfj,6,'0')
+from cobis..cl_parametro
+where pa_nemonico = 'CAGCNT'
+and pa_producto = 'CTE'
+end-select
+
+begin-select
+pa_char   &codbancofj
+  let $codbancofj = lpad(&codbancofj,4,'0')
+from cobis..cl_parametro
+where pa_nemonico = 'CADCNT'
+and pa_producto = 'CTE'
+end-select
+
+begin-select
+pa_char &codsucmv
+  let $codsucmv = lpad(&codsucmv,6,'0')
+from cobis..cl_parametro
+where pa_nemonico = 'CACNTM'
+and pa_producto = 'CTE'
+end-select
+
+begin-select
+pa_char   &codbancomv
+  let $codbancomv = lpad(&codbancomv,4,'0')
+from cobis..cl_parametro
+where pa_nemonico = 'CADCNM'
+and pa_producto = 'CTE'
+end-select
+
+begin-select
+ltrim(rtrim(c.valor))    &codempresa
+   let $i_empresa = &codempresa
+   do Main
+from cobis..cl_catalogo c, cobis..cl_tabla t
+where t.codigo = c.tabla
+and t.tabla = 'sv_genera_archivos_cnt'
+and c.estado  = 'V'
+end-select
+End-Procedure
+
+!--------------------
+Begin-Procedure Main
+!--------------------
+show 'Empresa Generada ' $i_empresa
+!if $i_empresa = '3'
+  let $w_canal = 'EL'
+!else
+  !let $w_canal = ''
+!end-if
+
+
+do Seleccion
+do ReversoAutomatico
+do ReversoPago
+do BuscaRegProblems
+do Cabecera_Archivo
+
+do Detalle
+
+do Pagar_LC_CNT 	!Ref010:msilvag 
+
+End-Procedure
+
+!---------------------
+
+!--Ref010:msilvag Inicio
+
+!************************************!
+Begin-Procedure Pagar_LC_CNT
+!************************************!
+show 'Pago LC ' $i_empresa
+
+let #e_empresa = $i_empresa
+execute -XC cob_pagos..pa_pag_blc_cnt
+		@e_fecha_proceso= $i_fecha, 
+		@e_empresa      = #e_empresa
+!************************************!
+End-Procedure
+!************************************!
+
+!--Ref010:msilvag Fin
+
+!---------------------
+begin-Procedure Cabecera_Archivo
+begin-select
+convert(varchar(10),convert(datetime,$i_fecha),112) &cab_fecha
+  let $cab_fecha = &cab_fecha
+end-select
+
+begin-select -XP
+sum(isnull(ts_valor,0) + isnull(ts_saldo,0) + isnull(ts_monto,0)) &total_cabecera
+count(1)      &reg_cabecera
+
+  let $reg_cabecera = &reg_cabecera
+  if $i_empresa = '3' !REF2
+    let #total_cabecera = &total_cabecera  !REF 5
+    move #total_cabecera to $total_cab !REF 5
+  else
+    move &total_cabecera to #total_cab
+    move #total_cab to $total_cab
+  end-if
+
+from cob_cuentas..cc_tran_servicio
+where substring(ts_tipo_chequera,4,2) = $w_canal !REF2
+and ts_tsfecha = $i_fecha
+and ts_causa = $i_empresa !REF2
+and ts_secuencial in (select secuencial from cc_tran_chequeo_pac)
+!--and substring(isnull(ts_descripcion_ec,'0000'),1,4) <> '0000' !gmartillo 11/12/2009
+end-select
+do Open_File
+do posTotCab
+do posValCab
+if $i_empresa = '3' !REF2
+  let $fila = $codbancofj || {CHAR} || $cab_fecha || {CHAR}  || $codsucfj || {CHAR} || $cc_total_cabeza
+else
+  let $fila = $codbancomv || {CHAR} || $cab_fecha || {CHAR}  || $codsucmv || {CHAR} || $cc_total_cabeza
+end-if
+write 1 from $fila
+end-Procedure
+
+
+Begin-Procedure Detalle
+
+begin-select -XP
+!--substring (ts_referencia,1,2) + convert(varchar(7),ltrim(rtrim(substring (ts_referencia,3,len (ts_referencia))))) &tel_detalle
+str_replace(ts_referencia,'',null) &tel_detalle    !REF8
+ts_referencia &celular!REF2
+ts_valor
+ts_monto
+ts_saldo
+convert(money, ts_autoriz_anula) &ret_detalle !Retencion
+
+  let $telefono = lpad(&tel_detalle,10,'0')
+  let $celular = lpad(&celular,10,'0')!REF2
+
+  let #total = &ts_valor + &ts_monto + &ts_saldo
+  move #total to $total ! {DINERO}
+  move &ret_detalle to $retencion !{DINERO}
+  do posTotDet
+  if $i_empresa = '3' !REF2
+    let $fila = {FILLER} || {CHAR} || $telefono || {CHAR} || $codsucfj || {CHAR} || $codbancofj || {CHAR} || '0000' || {CHAR} || $cc_total_det !|| {CHAR} || $cc_total_det || {CHAR} || $retencion
+  else
+    let $fila = {FILLER} || {CHAR} || $celular || {CHAR} || $codsucmv || {CHAR} || $codbancomv || {CHAR} || '0000' || {CHAR} || $cc_total_det
+  end-if
+  write 1 from $fila
+from cob_cuentas..cc_tran_servicio
+where ts_secuencial in (select secuencial from cc_tran_chequeo_pac)
+and ts_causa = $i_empresa !REF2
+!--and substring(isnull(ts_descripcion_ec,'0000'),1,4) <> '0000' !gmartillo 11/12/2009
+end-select
+!if $i_empresa = '3' !REF2
+!  let $fila = ''
+!else
+  let $fila = 'EOF'
+!end-if
+write 1 from $fila
+close 1
+end-Procedure
+
+!-------------------------
+Begin-Procedure Seleccion
+!-------------------------
+Begin-Select -XP
+ts_referencia   &referencia_c
+ts_secuencial   &secuencial_c
+   let $lo_referencia    = &referencia_c
+   let #lo_secuencial    = &secuencial_c
+      do InsertaRef
+from cob_cuentas..cc_tran_servicio
+where substring(ts_tipo_chequera,4,2) = $w_canal !REF2
+and ts_tsfecha = $i_fecha
+and ts_causa = $i_empresa !REF2
+and ts_secuencial not in ( select isnull(ts_ssn_corr,0)
+                             from cc_tran_servicio
+                             where substring(ts_tipo_chequera,4,2) = $w_canal !REF2
+                               and ts_tsfecha = $i_fecha
+                               and ts_causa = $i_empresa !REF2
+                               and ts_correccion = "S"
+                               and isnull(ts_ssn_corr,0) not in (select isnull(ts_ssn_corr,0)  !gmartillo 11/12/2009
+                      from cc_tran_servicio  !gmartillo 11/12/2009
+                      where substring(ts_tipo_chequera,4,2) = $w_canal !REF2 !gmartillo 11/12/2009
+                      !--ts_tipo_transaccion in (3194,3203)
+                      and ts_tsfecha = $i_fecha !gmartillo 11/12/2009
+                      and ts_causa = $i_empresa !REF2
+                  and ts_correccion = 'N')) !gmartillo 11/12/2009
+  and (ts_tipo_transaccion in (select convert(int,b.codigo)
+                                        from cobis..cl_tabla a, cobis..cl_catalogo b
+                                       where a.tabla = 'sv_trx_nordif'
+                                         and a.codigo = b.tabla
+                                         !and convert(smallint,b.valor) = 3!REF2
+                                         and estado = 'V'))
+  and ts_correccion = "N"
+  ! and (ts_ssn_corr = null or ts_ssn_corr =0) !REF7
+order by ts_hora
+End-Select
+
+end-Procedure
+
+!--------------------------
+Begin-Procedure InsertaRef
+!--------------------------
+begin-sql
+    insert into cc_tran_chequeo_pac values ($lo_referencia, #lo_secuencial)
+end-sql
+End-Procedure
+
+!------------------------
+Begin-Procedure Open_File
+!------------------------
+let $ruta = '/respaldo/archivos/cuentas/data/'        !GYC 2002/DIC/05
+if $i_empresa = '3' !REF2
+  let $archivo_destino = $ruta || 'FSP' || $cab_fecha || '.dat'
+else
+  let $archivo_destino = $ruta || 'BB' || $cab_fecha || '.dat'
+end-if
+open $archivo_destino as 1 for-writing record=20000 status=#filestat
+if #filestat != 0
+  do Abortar
+end-if
+end-procedure
+
+begin-Procedure posTotCab
+begin-select
+CHARINDEX('.',$reg_cabecera) &pos_reg
+  let #pos_reg = &pos_reg
+
+end-select
+let $cc_tot_cab = substr($reg_cabecera,1, #pos_reg - 1)
+end-Procedure
+
+
+begin-Procedure posTotDet
+begin-select
+CHARINDEX('.',$total) &pos_det
+  let #pos_det = &pos_det
+end-select
+let $cc_ent_tot_consumo = substr($total,1, #pos_det)
+let $cc_dec_tot_consumo = substr($total,#pos_det + 1,2)
+let $cc_total_det = $cc_ent_tot_consumo || $cc_dec_tot_consumo
+!select substring('18.580000',1,3)
+!select substring('18.580000',3 + 1 ,2)
+end-Procedure
+
+begin-Procedure posValCab
+begin-select
+CHARINDEX('.',$total_cab) &pos_val
+  let #pos_val = &pos_val
+end-select
+let $cc_ent_tot_cabeza = substr($total_cab,1, #pos_val)
+let $cc_dec_tot_cabeza = substr($total_cab,#pos_val + 1,2)
+let $cc_total_cabeza = $cc_ent_tot_cabeza || $cc_dec_tot_cabeza
+!select substring('18.580000',1,3)
+!select substring('18.580000',3 + 1 ,2)
+end-Procedure
+
+begin-Procedure ReversoPago
+begin-select
+ts_referencia &ref_revpag
+ts_correccion &corr_revpag
+ts_secuencial &sec_revpag
+ts_ssn_corr &secorr_revpag
+isnull(ts_valor,0) + isnull(ts_saldo,0) + isnull(ts_monto,0)  &val_revpag
+  do InsertRefProblemas
+from cob_cuentas..cc_tran_servicio
+where ts_tipo_transaccion in (select convert(int,b.codigo)
+                                          from cobis..cl_tabla a, cobis..cl_catalogo b
+                                         where a.tabla = 'sv_trx_nordif'
+                                           and a.codigo = b.tabla
+                                           !and convert(smallint,b.valor) = 3!REF2
+                                         and estado = 'V')
+and ts_tsfecha = $i_fecha
+and ts_causa = $i_empresa !REF2
+and ts_referencia in (select referencia from cc_rev_automatico)
+order by ts_referencia
+end-select
+end-procedure
+
+begin-Procedure ReversoAutomatico
+begin-select
+distinct ts_referencia &tel_revaut
+  do InsertaRevAutomatico
+from cc_tran_servicio
+  where substring(ts_tipo_chequera,4,2) = $w_canal !REF2
+  and ts_tsfecha = $i_fecha
+  and ts_causa = $i_empresa !REF2
+  and ts_correccion = "S"
+  and ts_tipo_transaccion in (select convert(int,b.codigo)
+                                          from cobis..cl_tabla a, cobis..cl_catalogo b
+                                         where a.tabla = 'sv_trx_nordif'
+                                           and a.codigo = b.tabla
+                                           !and convert(smallint,b.valor) = 3 !REF2
+                                         and estado = 'V')
+  and isnull(ts_ssn_corr,0)  in (select isnull(ts_ssn_corr,0)
+          from cc_tran_servicio
+                where substring(ts_tipo_chequera,4,2) = $w_canal !REF2
+                and ts_tsfecha = $i_fecha
+                and ts_causa = $i_empresa !REF2
+          and ts_correccion = 'N')
+order by ts_referencia                                                                                !REF1: REAM MIGRACION
+end-select
+end-Procedure
+
+!--------------------------
+Begin-Procedure InsertaRevAutomatico
+!--------------------------
+begin-sql
+    insert into cc_rev_automatico values (&tel_revaut)
+end-sql
+End-Procedure
+
+!--------------------------
+Begin-Procedure InsertRefProblemas
+!--------------------------
+begin-sql
+    insert into cc_cuenta_pag_reverso values (&ref_revpag,&corr_revpag,&sec_revpag,
+                &secorr_revpag,&val_revpag)
+end-sql
+End-Procedure
+
+!--------------------------
+Begin-Procedure BuscaRegProblems
+!--------------------------
+begin-select
+referencia &ref_prob
+ts_secuencial &sec_prob
+valor &valor_prob
+  let #pago = 0
+  let #reverso = 0
+  do CuentaPago
+  do cuentaReverso
+  !--show '#pago' #pago
+  !--show '#reverso' #reverso
+  let #pago = #pago + 1
+  let #resultado = #pago - #reverso
+  !--show '#resultado' #resultado
+  !--show 'ts_secuencial'&sec_prob
+  if #resultado <= 0
+    !--show 'Eliminar'
+    do EliminaRegProblems
+  end-if
+from cc_cuenta_pag_reverso
+where ts_correccion = 'N'
+and ts_ssn_corr = null
+order by referencia
+end-select
+End-Procedure
+
+!--------------------------
+Begin-Procedure cuentaPago
+!--------------------------
+!--show '----------------SECUENCIA------------------' &sec_prob
+begin-select
+count(1) &ct_pago
+  let #pago = &ct_pago
+from cob_cuentas..cc_tran_servicio
+where ts_tipo_transaccion in (3194,3203,3925,3926,3928,43547)!Ref009:msilvag
+and ts_tsfecha = $i_fecha
+and ts_causa = $i_empresa !REF2
+and ts_correccion = 'N'
+and ts_ssn_corr = &sec_prob
+end-select
+end-Procedure
+
+!--------------------------
+begin-Procedure cuentaReverso
+!--------------------------
+!--show '----------------SECUENCIA------------------' &sec_prob
+begin-select
+count(1) &ct_reverso
+  let #reverso = &ct_reverso
+from cob_cuentas..cc_tran_servicio
+where ts_tipo_transaccion in (3194,3203,3925,3926,3928,43547)!Ref009:msilvag
+and ts_tsfecha = $i_fecha
+and ts_causa = $i_empresa !REF2
+and ts_correccion = 'S'
+and ts_ssn_corr = &sec_prob
+end-select
+end-Procedure
+
+!--------------------------
+Begin-Procedure EliminaRegProblems
+!--------------------------
+!--show 'Elimina' &sec_prob
+begin-sql
+delete cc_tran_chequeo_pac
+where secuencial = &sec_prob
+end-sql
+
+begin-select
+ts_secuencial &sec_elimina
+  do EliminaRegProblemI
+from cob_cuentas..cc_tran_servicio
+where ts_tipo_transaccion in (3194,3203,3925,3926,3928,43547)!Ref009:msilvag
+and ts_causa = $i_empresa !REF2
+and ts_ssn_corr in (&sec_prob)
+end-select
+End-Procedure
+
+!--------------------------
+Begin-Procedure EliminaRegProblemI
+!--------------------------
+begin-sql
+delete cc_tran_chequeo_pac
+where secuencial = &sec_elimina
+end-sql
+End-Procedure

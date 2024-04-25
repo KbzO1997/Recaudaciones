@@ -1,0 +1,80 @@
+!************************************************************************!
+!*      Archivo:                pgsenaepa.sqr                           *!
+!*      Base de datos:          cob_pagos                               *!
+!*      Producto:               Cuentas Corrientes                      *!
+!*      Disenado por:           Kevin Bastida                           *! 
+!*      Fecha de escritura:     21/Dic/2012                           	*!
+!************************************************************************!
+!*                              IMPORTANTE                              *!
+!*      Este programa es parte de los paquetes bancarios propiedad de   *!
+!*      "BANCO BOLIVARIANO"                                             *!
+!*      Su uso no autorizado queda expresamente prohibido asi como      *!
+!*      cualquier alteracion o agregado hecho por alguno de sus         *!
+!*      usuarios sin el debido consentimiento por escrito de la         *!
+!*      Presidencia Ejecutiva de BANCO BOLIVARIANO.                     *!
+!************************************************************************!
+!*                              PROPOSITO                               *!
+!* Este programa Genera el Archivo de Pagos Exitosos para Deposito Temporales*!
+!*      Recaudación de pago automático Inarpi    						*!
+!************************************************************************!
+!*                              MODIFICACIONES                          *!
+!*      FECHA           AUTOR             RAZON                         *!
+!*   1  21/Dic/2022   Kevin Bastidas.   RECMPS-2027 Emision Inicial  ACREDITACION AUTOMATICA DEPOSITOS TEMPORALES*!
+!************************************************************************!
+
+
+#include  "definic.inc"
+#define TAB             9                     !Codigo ascii del tab
+#define ANCHO_PAG       500                   !Ancho de la hoja
+#define FOR_FECHA_AMD   YYYYMMDD              !Formato de la fecha
+#define FOR_DIN_12      999,999,999,999.99    !Formato para Monto
+#define LARGO_PAG       9000
+
+#define  WPATH      '/respaldo/archivos/cuentas/data/'
+
+Begin-Setup
+  use cob_pagos
+  page-size {LARGO_PAG} {ANCHO_PAG}   !Determinar largo y ancho de pagina
+  no-formfeed 
+End-Setup
+
+#include "log.inc"
+#include "ctacte.inc"
+
+!------------
+Begin-Program
+!------------
+  do Inicializar_Programa
+  do ParamS (1,$i_fecha_proceso,'','','')
+  do ParamS (2,$i_password,'','','')
+  
+  do Main
+  do Finalizar_Programa
+End-Program
+
+!-------------------
+Begin-Procedure Main
+!-------------------
+do Pagar_LC_DepTemp
+End-Procedure
+
+
+!************************************!
+Begin-Procedure Pagar_LC_DEPTEMP
+!************************************!
+show 'Pago LC ' 
+let #e_empresa = 8976
+show 'Empresa:' #e_empresa 
+show 'Fecha Proceso:' $i_fecha_proceso
+
+execute -XC cob_pagos..pa_pag_lc_dep_temporal
+		@e_fecha_proceso= $i_fecha_proceso, 
+		@e_empresa      = #e_empresa
+!************************************!
+End-Procedure
+!************************************!
+
+show 'ARCHIVO DE SENAE GENERADO OK'
+show 'RUTA ARCHIVO: ' $i_archivo
+end-procedure
+
