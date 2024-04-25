@@ -1,0 +1,14 @@
+select ts_hora, ts_causa, * from cob_cuentas..cc_tran_servicio
+where ts_tsfecha = '12/19/2023'
+and ts_usuario in ('WAP','ope998')
+and ts_secuencial in (43577436,44111919,45154733,50878619,53889219,60082546)
+order by ts_hora
+
+delete  from cob_pagos..iess_tran_servicio
+
+delete  from cob_pagos..pg_concilia_iess
+
+cd /fuentes/cobis/cuentas/servicios/batch/fuentes
+sqr -debug -Mvar pgciesss_luis.sqr operadorRec/ClvOpeRec++1
+1
+mes/dia/año
