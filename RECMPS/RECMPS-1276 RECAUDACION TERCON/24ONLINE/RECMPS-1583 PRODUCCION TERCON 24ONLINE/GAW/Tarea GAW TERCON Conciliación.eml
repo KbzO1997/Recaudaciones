@@ -1,0 +1,203 @@
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com (104.47.51.47) by
+ mailweb.bolivariano.com (172.17.3.231) with Microsoft SMTP Server (TLS) id
+ 14.3.498.0; Mon, 14 Mar 2022 15:30:46 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=BKrR1TJyzTW/cwzlIGV5nnDVFn+rZtXt/su9AiTIStbM+6aAbHDMIgbItzRkGr+uZC915rFP4XsxirVxjso0D9Km2gAtYT8VbcmpD+3d1+9xP6eSayltkhyFvJDv/KNSww/nZy7Vc6r67/CCDMNbqtfyMIZpxQ0PczEcCutMEMJ/ZyVDdFGHEVUNeFK4fhZny3P82c70tCZDcislI0zdsnrFqEkXTcT4SWtHnOzAJ/Y/A2iE2bXMuij+Jr8VeSwy1evC1i3SB8E9xHatmOBOmNIjniTr5GHrOrH5SbI3aHIUzNZ0ymwrTFyiiE5u1H6W6OqEUeq45CEPSoBGyJ75+A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Unk7uGN2szlrcmPU9FwioDXlrMzBwPK2CXYZsAN9ZKY=;
+ b=STUabR6AFWCNGCs0zpMouItihl+EW7Tm//TUS1a45QvV6u3bW5cnDbrg+pt8Ckjj3ekFxe6HpPs/5sF1cfeYt4EteJ0ASSWOo+ZeQ2n8vus/9M12pR5RDh4hZMdEB+ry3mokWCz7AzKWtlmenH+M83OsT9ERwW2QdwzSckZlkpO8VwfmL3la7n7bQBGUhToY26I3H00JWvvtqQd2XhBsB2CHzQVa/+aer6WhkeRY7K7SyN0NvdR+cil2Zh/dw1CeXeOcVizuJM5RjUScUXcuNstCiKlCU5JvPcvUKUYZ0my0GSlT90311n0IWL2ZrHERkIRJUEbmovdWDGBSj6hVhQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=bolivariano.com; dmarc=pass action=none
+ header.from=bolivariano.com; dkim=pass header.d=bolivariano.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bolivariano.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Unk7uGN2szlrcmPU9FwioDXlrMzBwPK2CXYZsAN9ZKY=;
+ b=QjMWdLjfRLXYJzZraFNljCkSRYZwKhaZ3vn8hE8NYtqMqbm2cooplXeGz1kM1HN1ujzCewoBEIyk+xF+RhgJwQ8RdOKAfhoUJThLLp6vbG+MJpzT1iu7GkBlMO8Np7p4YgvX8GNEb+3BgcT1YUOAGJeps62AaJtDHXHtWfI2S+SdTJCc7JKeXuSbqQa88ysNtOP0PHssnSsaTEF7TshNX/9E1t+y/Xaw2peWMZ8W77c9NCEUOIsIX85Hfy8vYoR+wtYp2EBbJDxzYGdpOgqOpnTUtx1+YHpXQ+zY/ALa9p9mfjzhvlnLwo7rLtsFYjFgSYbW9vSt1nnc2cn+96jJXA==
+Received: from BN0PR10MB5286.namprd10.prod.outlook.com (2603:10b6:408:127::15)
+ by DM6PR10MB3450.namprd10.prod.outlook.com (2603:10b6:5:67::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5061.22; Mon, 14 Mar
+ 2022 20:30:43 +0000
+Received: from BN0PR10MB5286.namprd10.prod.outlook.com
+ ([fe80::38e9:9fc:cce0:a3d6]) by BN0PR10MB5286.namprd10.prod.outlook.com
+ ([fe80::38e9:9fc:cce0:a3d6%7]) with mapi id 15.20.5061.028; Mon, 14 Mar 2022
+ 20:30:43 +0000
+From: =?iso-8859-1?Q?Omar_Rodr=EDguez_Gallegos?= <orodriguez@bolivariano.com>
+To: "Kevin Bastidas Zavala (Externo)" <kbastidz@bolivariano.com>,
+	=?iso-8859-1?Q?Operadores_Producci=F3n?= <operpro@bolivariano.com>
+CC: Darwin Briones Barzola <dbriones@bolivariano.com>,
+	=?iso-8859-1?Q?Dario_Barco_Le=F3n?= <dbarcol@bolivariano.com>,
+	=?iso-8859-1?Q?Wendy_Cede=F1o_Ley?= <wcedeno@bolivariano.com>, "Jonathan
+  Guerrero Jijon" <jguerrej@bolivariano.com>
+Subject: =?iso-8859-1?Q?RE:_Tarea_GAW_TERCON_Conciliaci=F3n?=
+Thread-Topic: =?iso-8859-1?Q?Tarea_GAW_TERCON_Conciliaci=F3n?=
+Thread-Index: AQHYN79/cymsJau2QEW8qiwUkQB4vKy/VTpw
+Date: Mon, 14 Mar 2022 20:30:43 +0000
+Message-ID: <BN0PR10MB52862702D0AC128046C5D5CAD10F9@BN0PR10MB5286.namprd10.prod.outlook.com>
+References: <622F6B55.3070905@bolivariano.com>
+In-Reply-To: <622F6B55.3070905@bolivariano.com>
+Accept-Language: es-ES, en-US
+Content-Language: es-ES
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=bolivariano.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 92048b71-3a62-4328-17cb-08da05f98388
+x-ms-traffictypediagnostic: DM6PR10MB3450:EE_
+x-ld-processed: 381bee0c-a9ea-4342-81c0-318a50b0845f,ExtAddr
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: mXZIsbh4G1uk43PL8p35rfyr71lig57cpXHLC+vS96LLsUcJQGTMViv8LcJzE/NXu8HswXXWlM7c5bNK0NByxyz2JCRw4V7jJy3wbBrqyhELWO3LFwbZpvg9owIyzq5tQfSX5kwjCOT9I37cHHDng8Ru6meOsOI+STOiMPOujMZiuO1+GZI/T8fCKrQkXMBTZpQ1qy9/U1S/aSaasx40m8wFzsPPZU17TI3fJsOeFtdxXViEf2YSTctZsAnfC4KZB3YZe3SLW2V7RaYbLUr15kC9v40m116XfLGwdUmUzB1OE59Qo3JKZu0Px1gNSHGjMFh206wmyKbebMvwz/7GtPKMh3ClAZBASrMe84Z42xiTg6JCDOkK9qLkn+oHBMM/XLae49/5/xAXs3GQDgK89YdZqWUbzhzzis0XcOMs9U9F4e2V+gmnuqPo8AyXGVUQCkqlNUDLLXcdwAvuPCU6Fi1YIx071H3FfFCNdTjzc7VrIYzAGrcysDIxXMs7pUvhpq7OHqEf0hFU3N/YOk/rYPzGMkSvCvdBAHN9t9soVvItfz6L/i7yls2t9FtIPwzTjeAQAvFRZoisFY1NSz8n6SdOCdp2pjXhjzs9CB5sMV0=
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:es;SCL:-1;SRV:;IPV:NLI;SFV:SKI;H:BN0PR10MB5286.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:;DIR:INB;
+Content-Type: multipart/alternative;
+	boundary="_000_BN0PR10MB52862702D0AC128046C5D5CAD10F9BN0PR10MB5286namp_"
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BN0PR10MB5286.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 92048b71-3a62-4328-17cb-08da05f98388
+X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Mar 2022 20:30:43.7451
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 381bee0c-a9ea-4342-81c0-318a50b0845f
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: Ujq6tAP+Y/5cxdbrXjFYGKggfi8lGilVRlX3pJNSyT6brjJGt3J99xpAZ0c6YcaJHI4r92vQgSx7LwWdnMSrBn3vIXQGQlkqVZmGNoslX+U=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR10MB3450
+X-OrganizationHeadersPreserved: DM6PR10MB3450.namprd10.prod.outlook.com
+Return-Path: orodriguez@bolivariano.com
+X-OriginatorOrg: bolivariano.com
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-MS-Exchange-Organization-AuthSource: BN0PR10MB5286.namprd10.prod.outlook.com
+X-MS-Exchange-Organization-SCL: -1
+X-CrossPremisesHeadersPromoted: EX2K10SRV.bolivariano.fin.ec
+X-CrossPremisesHeadersFiltered: EX2K10SRV.bolivariano.fin.ec
+MIME-Version: 1.0
+
+--_000_BN0PR10MB52862702D0AC128046C5D5CAD10F9BN0PR10MB5286namp_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Ok atendido
+GAW-2423
+
+
+De: Kevin Bastidas Zavala (Externo) <kbastidz@bolivariano.com>
+Enviado el: lunes, 14 de marzo de 2022 11:21
+Para: Operadores Producci=F3n <operpro@bolivariano.com>
+CC: Darwin Briones Barzola <dbriones@bolivariano.com>; Dario Barco Le=F3n <=
+dbarcol@bolivariano.com>; Wendy Cede=F1o Ley <wcedeno@bolivariano.com>; Jon=
+athan Guerrero Jijon <jguerrej@bolivariano.com>
+Asunto: Tarea GAW TERCON Conciliaci=F3n
+
+Estimados,
+
+Por favor su ayuda asignando un n=FAmero para crear la tarea GAW TERCON Con=
+ciliacion
+
+--_000_BN0PR10MB52862702D0AC128046C5D5CAD10F9BN0PR10MB5286namp_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif;
+	color:black;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:#0563C1;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:#954F72;
+	text-decoration:underline;}
+p.msonormal0, li.msonormal0, div.msonormal0
+	{mso-style-name:msonormal;
+	mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif;
+	color:black;}
+span.EstiloCorreo18
+	{mso-style-type:personal-reply;
+	font-family:"Calibri",sans-serif;
+	color:#1F497D;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:70.85pt 3.0cm 70.85pt 3.0cm;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body bgcolor=3D"white" lang=3D"ES-EC" link=3D"#0563C1" vlink=3D"#954F72">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US">Ok atendid=
+o<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif">GAW-2423<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US"><o:p>&nbsp=
+;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US"><o:p>&nbsp=
+;</o:p></span></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0cm =
+0cm 0cm">
+<p class=3D"MsoNormal"><b><span lang=3D"ES" style=3D"font-size:11.0pt;font-=
+family:&quot;Calibri&quot;,sans-serif;color:windowtext">De:</span></b><span=
+ lang=3D"ES" style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sans=
+-serif;color:windowtext"> Kevin Bastidas Zavala (Externo) &lt;kbastidz@boli=
+variano.com&gt;
+<br>
+<b>Enviado el:</b> lunes, 14 de marzo de 2022 11:21<br>
+<b>Para:</b> Operadores Producci=F3n &lt;operpro@bolivariano.com&gt;<br>
+<b>CC:</b> Darwin Briones Barzola &lt;dbriones@bolivariano.com&gt;; Dario B=
+arco Le=F3n &lt;dbarcol@bolivariano.com&gt;; Wendy Cede=F1o Ley &lt;wcedeno=
+@bolivariano.com&gt;; Jonathan Guerrero Jijon &lt;jguerrej@bolivariano.com&=
+gt;<br>
+<b>Asunto:</b> Tarea GAW TERCON Conciliaci=F3n<o:p></o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"color:#1F497D;mso-fareast-language:ES">Estimados,</=
+span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"color:#1F497D;mso-fareast-language:ES">&nbsp;</span=
+><o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D;mso-fareast-language:ES=
+">Por favor su ayuda asignando un n=FAmero para crear la tarea GAW
+<b>TERCON Conciliacion</b></span> <o:p></o:p></p>
+</div>
+</body>
+</html>
+
+--_000_BN0PR10MB52862702D0AC128046C5D5CAD10F9BN0PR10MB5286namp_--

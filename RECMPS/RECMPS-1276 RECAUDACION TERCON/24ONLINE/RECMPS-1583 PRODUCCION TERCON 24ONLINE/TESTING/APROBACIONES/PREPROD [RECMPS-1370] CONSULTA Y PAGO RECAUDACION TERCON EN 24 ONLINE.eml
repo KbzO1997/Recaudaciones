@@ -1,0 +1,1629 @@
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com (104.47.73.170)
+ by mailweb.bolivariano.com (172.17.3.231) with Microsoft SMTP Server (TLS) id
+ 14.3.498.0; Wed, 16 Mar 2022 12:31:48 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=AJcC1LCW++xIqevFyYf3H6+FUtCGxyfjVoymNYcZsv8yLrXs8k6cP1SBhS/tAy8NkxZp0tQO+l7ePRv4qx//A53PtKCE7kjTxuB4SXdZLmMT7WVQ7rrFyztzyUm0xgo98HHozpXLWRzQ/mzWRnTdtodXquFB1phnB/kktPkiyTDEULteC4ZfWbhndggElBkXSokwk8l8uPgLiWYTcLw+uyLZMXAnjWLDS6F//Mh6Ttr+Q5qKTDmBX6azpDqAaJEW8o+IOecG+FFKH8CRXDBuiu6WAdnUZvuXCdwNzcub+e4O1CLUxml59gz7WntMJJ/VN9JFlpBuZZEdPBuVIEAfOA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=bJCpRYjQo4fg+Wjt53jinPs0D7tSgiv+PvIXHjmLyCI=;
+ b=WUU1YZGYVGtCdqziQEvnj0/CuJ7/LcNABqYSXjsgRdgJBr6YkTxwepPRGtA6AWQr1+H1g+54hnA9ZxeKRLPOAbidcASiKc1PXPhVWJEPU4qrW80CKuU0jX4DokCBEzT/8s5dK05yltl2oXBLI80c1d7idhclQNR8XNLr+p2++GwLr7tfYI7Dbz8Rp3o1fMUSDIfgZhkzEDdl4YIUw0mwy0vQQE5H7MF/UFDJNXeTrpeeRzkZF8ls4WP6y3py1aIHwD6RKgyPqux7j6GCXmdf1j8v4bf7xdUWl5J5xFgdFKgCIslUNKLCTzIF4M9d5R6CFD1wyUSyF8OvYBBAy5iB4w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=bolivariano.com; dmarc=pass action=none
+ header.from=bolivariano.com; dkim=pass header.d=bolivariano.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bolivariano.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bJCpRYjQo4fg+Wjt53jinPs0D7tSgiv+PvIXHjmLyCI=;
+ b=0Y3Eu0rrhs275EMC7xUpViiiycinY5cC0jsSzeXJWzDYyXnonVW8+FFPQ3e4O+wJMWcCvBwLiMeorwohXhzUCY9qUcascIYd0N/1pIZS31CX0v2u46fB7/6Kyeqx95EAGUvo6Yeox59sQ/yyCRCu/PubnfvitTgmvpuQ6elq9RbDSK0iILIsSTjYQZv6pORitqxem+8rJciTKB9k9F9igTbZDhu5XPKLiHN/brXD5QCg9z/+xOo8CBzmRK/tGu1lcSG6VJabQm0nlO0IiFIjs/QqbjtV7pAVAanea56Nh9gLt7ryn9cufnikIdo/nlWCWFAKqNKIwGqwspFKoaltdw==
+Received: from CH2PR10MB4262.namprd10.prod.outlook.com (2603:10b6:610:a5::10)
+ by CY4PR1001MB2405.namprd10.prod.outlook.com (2603:10b6:910:3f::33) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5017.26; Wed, 16 Mar
+ 2022 17:31:14 +0000
+Received: from CH2PR10MB4262.namprd10.prod.outlook.com
+ ([fe80::add7:c055:556c:8f69]) by CH2PR10MB4262.namprd10.prod.outlook.com
+ ([fe80::add7:c055:556c:8f69%4]) with mapi id 15.20.5061.028; Wed, 16 Mar 2022
+ 17:31:14 +0000
+From: Katherine Murgueytio Bustos <kmurgueb@bolivariano.com>
+To: "Kevin Bastidas Zavala (Externo)" <kbastidz@bolivariano.com>
+CC: Dario Espinosa Aldean <despinoa@bolivariano.com>, AdmAmbientesPruebas
+	<AdmAmbientesPruebas@bolivariano.com>
+Subject: RE: PREPROD  [RECMPS-1370] CONSULTA Y PAGO RECAUDACION TERCON EN 24
+ ONLINE
+Thread-Topic: PREPROD  [RECMPS-1370] CONSULTA Y PAGO RECAUDACION TERCON EN 24
+ ONLINE
+Thread-Index: AQHYOU6qGiuv1xLuck+RkK7rwdbybazCLNpAgAABUACAAAMJ4IAABGmAgAAO3ZA=
+Date: Wed, 16 Mar 2022 17:31:14 +0000
+Message-ID: <CH2PR10MB4262241CD16104ABA86F4FDEC5119@CH2PR10MB4262.namprd10.prod.outlook.com>
+References: <623208F5.3020501@bolivariano.com>
+ <CH2PR10MB426213AC4C450384FA95F2A6C5119@CH2PR10MB4262.namprd10.prod.outlook.com>
+ <62320C04.80200@bolivariano.com>
+ <CH2PR10MB4262CA48BA9211681F875976C5119@CH2PR10MB4262.namprd10.prod.outlook.com>
+ <62321243.1000100@bolivariano.com>
+In-Reply-To: <62321243.1000100@bolivariano.com>
+Accept-Language: es-ES, en-US
+Content-Language: es-ES
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=bolivariano.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: f2d4c851-2d86-4f70-ad00-08da0772c564
+x-ms-traffictypediagnostic: CY4PR1001MB2405:EE_
+x-ld-processed: 381bee0c-a9ea-4342-81c0-318a50b0845f,ExtAddr
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: JTEyUgf9LAdrNA/axW9PgJptGQl51Igbd79q5B5tRcnrzXAa5Lz0eWdN/mIExdX1AynvS88Tj5qVqiqjBOnewqugKE/wupM9NPuwKna7Fh1BzFbVIzpwav5xdRrQ+95Lek0MsX+oUNp3Kvc+sTVLBsIAGvQB8tL1P17pO5vC7nRBbYMfdmKS1rARlj+fhYhk31DRjSMSYp7gTxKs3sQ2s53Zg/im5lWu2pmtEIIY48SGDzwGgacGxNb+YHoU97AkC/2u9xVAdwdmGs/ERIW9kKPZfe/qJXcSVB3J/7jF74IWsL8nahqllHlJ1HU+L9PXD+7dfahOL0znvOMZ60QlHKRlEUy94PGWi5MI0JytUxW6qHRwHLY3Cuunt87UWVmV4BVAR5FZbGKQogWsnxcIJNGFDrduzQUfd92ORZrAw2xXa2Yht0PmS9lwuUA1xb1yIiFG7p7WLAgoeOP54zgoi8kVU2XVJ62h7qD6zH99MtCW74+la3rzsJieBe+y7B7MOTgI2Sn5oqJO2+agoA5lT7RVGqe+DvJ3/DgunRmaxiiDDFGF39/HbwuwWfmkB9ghgqRC4Qoo1VWmxv/0RovUxtertz45t8yzEWg/8DpTrWQ=
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:es;SCL:-1;SRV:;IPV:NLI;SFV:SKI;H:CH2PR10MB4262.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:;DIR:INB;
+Content-Type: multipart/mixed;
+	boundary="_006_CH2PR10MB4262241CD16104ABA86F4FDEC5119CH2PR10MB4262namp_"
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: CH2PR10MB4262.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f2d4c851-2d86-4f70-ad00-08da0772c564
+X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Mar 2022 17:31:14.4472
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 381bee0c-a9ea-4342-81c0-318a50b0845f
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: CSfGVRkZR4tBIrm5sd/v+8jh6HDsoef0rQ2o6JLR+oQlTVCYPh2HulhHqC9FmK5gjGOj3e5Z2NoaLI9FxEifsn4igG4qULHHnUO9ftXt0Qs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR1001MB2405
+X-OrganizationHeadersPreserved: CY4PR1001MB2405.namprd10.prod.outlook.com
+Return-Path: kmurgueb@bolivariano.com
+X-OriginatorOrg: bolivariano.com
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-MS-Exchange-Organization-AuthSource: CH2PR10MB4262.namprd10.prod.outlook.com
+X-MS-Exchange-Organization-SCL: -1
+X-CrossPremisesHeadersPromoted: EX2K10SRV.bolivariano.fin.ec
+X-CrossPremisesHeadersFiltered: EX2K10SRV.bolivariano.fin.ec
+MIME-Version: 1.0
+
+--_006_CH2PR10MB4262241CD16104ABA86F4FDEC5119CH2PR10MB4262namp_
+Content-Type: multipart/related;
+	boundary="_005_CH2PR10MB4262241CD16104ABA86F4FDEC5119CH2PR10MB4262namp_";
+	type="multipart/alternative"
+
+--_005_CH2PR10MB4262241CD16104ABA86F4FDEC5119CH2PR10MB4262namp_
+Content-Type: multipart/alternative;
+	boundary="_000_CH2PR10MB4262241CD16104ABA86F4FDEC5119CH2PR10MB4262namp_"
+
+--_000_CH2PR10MB4262241CD16104ABA86F4FDEC5119CH2PR10MB4262namp_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Estimado,
+Atendido. Adjunto salida.
+
+
+
+--
+Saludos cordiales,
+Katherine Murgueytio Bustos
+Gesti=F3n y Automatizaci=F3n de Pruebas - Tecnolog=EDa
+Jun=EDn 200 y Panam=E1 - Telf.: (593 4) 230 5000 Ext. 4114
+[firma2021]
+
+
+
+De: Kevin Bastidas Zavala (Externo) <kbastidz@bolivariano.com>
+Enviado el: Wednesday, March 16, 2022 11:37 AM
+Para: Katherine Murgueytio Bustos <kmurgueb@bolivariano.com>
+CC: Dario Espinosa Aldean <despinoa@bolivariano.com>
+Asunto: Re: PREPROD [RECMPS-1370] CONSULTA Y PAGO RECAUDACION TERCON EN 24 =
+ONLINE
+
+Favor su ayuda con una nueva ejecuci=F3n. Adjunto archivos con las correcci=
+ones.
+El 16/3/2022 10:22, Katherine Murgueytio Bustos escribi=F3:
+Estimado,
+Atendido. Adjunto salida.
+
+
+--
+Saludos cordiales,
+Katherine Murgueytio Bustos
+Gesti=F3n y Automatizaci=F3n de Pruebas - Tecnolog=EDa
+Jun=EDn 200 y Panam=E1 - Telf.: (593 4) 230 5000 Ext. 4114
+[firma2021]
+
+
+
+De: Kevin Bastidas Zavala (Externo) <kbastidz@bolivariano.com><mailto:kbast=
+idz@bolivariano.com>
+Enviado el: Wednesday, March 16, 2022 11:11 AM
+Para: Katherine Murgueytio Bustos <kmurgueb@bolivariano.com><mailto:kmurgue=
+b@bolivariano.com>
+CC: Dario Espinosa Aldean <despinoa@bolivariano.com><mailto:despinoa@boliva=
+riano.com>; Jonathan Guerrero Jijon <jguerrej@bolivariano.com><mailto:jguer=
+rej@bolivariano.com>; AdmAmbientesPruebas <AdmAmbientesPruebas@bolivariano.=
+com><mailto:AdmAmbientesPruebas@bolivariano.com>
+Asunto: Re: PREPROD [RECMPS-1370] CONSULTA Y PAGO RECAUDACION TERCON EN 24 =
+ONLINE
+
+Estimada
+Adjunto Informaci=F3n solicitada.
+
+Favor su ayuda con una nueva ejecuci=F3n.
+El 16/3/2022 10:09, Katherine Murgueytio Bustos escribi=F3:
+Estimado Kevin,
+Buenos D=EDas.
+
+Este requerimiento fue atendido por Jean adjunto mail de respuesta, de ser =
+una nueva ejecuci=F3n falt=F3 adjuntar el archivo cckb0001.lis.
+
+Atenta a sus comentarios
+
+
+--
+Saludos cordiales,
+Katherine Murgueytio Bustos
+Gesti=F3n y Automatizaci=F3n de Pruebas - Tecnolog=EDa
+Jun=EDn 200 y Panam=E1 - Telf.: (593 4) 230 5000 Ext. 4114
+[firma2021]
+
+
+
+De: Kevin Bastidas Zavala (Externo) <kbastidz@bolivariano.com><mailto:kbast=
+idz@bolivariano.com>
+Enviado el: Wednesday, March 16, 2022 10:58 AM
+Para: Katherine Murgueytio Bustos <kmurgueb@bolivariano.com><mailto:kmurgue=
+b@bolivariano.com>
+CC: Dario Espinosa Aldean <despinoa@bolivariano.com><mailto:despinoa@boliva=
+riano.com>; Jonathan Guerrero Jijon <jguerrej@bolivariano.com><mailto:jguer=
+rej@bolivariano.com>
+Asunto: PREPROD [RECMPS-1370] CONSULTA Y PAGO RECAUDACION TERCON EN 24 ONLI=
+NE
+
+Buen d=EDa, Estimados
+
+Por favor su ayuda ejecutando nuevamente en el ambiente de Testing, por sol=
+icitud de A&C:
+
+
+ESTE PASE NO CONTIENE NADA RELACIONADO A TARJETAS DE CR=C9DITO
+Requerimiento (ClearQuest)
+
+C=F3digo(s):
+RECMPS-1370
+Solicitud del Usuario:
+En Jira
+Conjunto de Cambio (Changeset):
+Descripci=F3n del cambio o de la soluci=F3n:
+CONSULTA Y PAGO RECAUDACION TERCON 24ONLINE
+Fecha Ejecuci=F3n:
+14/Marzo /2022
+Hora Ejecuci=F3n:
+Inmediato
+Cantidad Archivos Back-End:
+3
+Cantidad Archivos Front-End:
+0
+Cantidad Archivos Middleware:
+0
+Cantidad Archivos xsl
+0
+Cantidad Archivos EAR:
+0
+Observaci=F3n:
+
+Formularios
+
+Frond-End
+N/A
+Back-End
+
+
+Middleware
+N/A
+Orden Procesos a implementar
+IDS:
+IDS/DBA:
+1.      Cyberbank
+
+
+
+Orden Procesos Batch
+N/A
+Tareas MTRA
+N/A
+
+Aprobaciones
+
+Aprobaci=F3n de CONTRALORIA Y PRODUCTOS:
+*         Actualizaci=F3n de datos de producci=F3n.
+*         Controles de auditoria.
+N/A
+Aprobaci=F3n de JEFATURA DE PRODUCCI=D3N:
+*         Revisi=F3n Orden Procesos Batch (Nuevos/Modificados)
+*         Ordenes de Procesos a implementar
+N/A
+Aprobaci=F3n de QA-DBA:
+*         Creaci=F3n, actualizaci=F3n, eliminaci=F3n de nuevos tablas, =EDn=
+dices, vistas, etc.
+*         Carga masiva de informaci=F3n (bcp)
+*         Creaci=F3n de base de datos
+*         Incremento de tama=F1o de base de datos
+*         Store Procedure (SP) nuevos
+*         SQR nuevos o modificados
+N/A
+Aprobaci=F3n de IDS/ARQUITECTURA:
+*         Nuevos productos en servidores NT
+*         Cambios en configuraciones de Servidores
+En confluence
+Aprobaci=F3n de SEGURIDAD INFORMATICA:
+*         Creaci=F3n/Asignaci=F3n de:
+*         Transacciones
+*         Procedimientos
+*         Roles
+*         Creaci=F3n de usuarios y/o permisos en Producci=F3n
+*         Creaci=F3n y/o actualizaci=F3n de Flujos sobre canales para aplic=
+aciones nuevas o existentes
+N/A
+Aprobaci=F3n de MONITOREO DE SEGURIDAD INFORMATICA:
+*         Informe y aval de an=E1lisis de vulnerabilidad de aplicaciones We=
+b.
+N/A
+Aprobaci=F3n de CALIDAD:
+*         Documentaci=F3n de tablas y Store Procedures nuevos y/o modificad=
+os
+*         Documentaci=F3n por servicio: (10 d=EDas previos al pase)
+*         Hardware
+*         Software
+*         Monitoreo
+*         An=E1lisis de la B.D. (Previa aprobaci=F3n de DBA.)
+*         Respaldos (Previa aprobaci=F3n de jefe de producci=F3n)
+*         Documentaci=F3n complementaria
+*         Contingencia (Previa aprobaci=F3n de Proyectos)
+*         Soluci=F3n a problemas
+Aprobaci=F3n de CONTROL DE CAMBIOS:
+*         Variaci=F3n planificada de configuraciones y software de servidor=
+es.
+*         Cambios en varias aplicaciones relacionados a un mismo tema.
+N/A
+Aprobaci=F3n de GERENCIA DE DESARROLLO/INFRAESTRUCTURA/ TECNOLOG=CDA:
+*         Cambios t=E9cnicos que modifiquen el proceso esencial  de las apl=
+icaciones cr=EDticas como son: SAT, 24online, Cajeros, C=E1mara, CSP, MTRA,=
+ Petro-Comercial, Portal Web, Postilion, Swift.
+*         Requerimientos Express (Fuera del Release)
+*         Requerimientos en Quincenas, Fines de Mes y Diciembre.
+N/A
+
+Notificaciones
+
+Mail de notificaci=F3n por parte del L=EDder Aplicativo del pase de optimiz=
+aci=F3n (CC T=E9cnico) al propietario de la informaci=F3n.
+N/A
+Mail de notificaci=F3n al usuario por parte de Productos para los pases de =
+requerimientos Funcionales o proyectos.
+kbastidz@bolivariano.com<mailto:despinoa@bolivariano.com>
+
+Certificaciones
+
+Certificaci=F3n de pruebas T=E9cnicas y Funcionales (AMBIENTE DESARROLLO)
+N/A
+Certificaci=F3n de pruebas T=E9cnicas y Funcionales (AMBIENTE PREPRODUCCI=
+=D3N)
+N/A
+
+
+
+Saludos cordiales,
+
+
+
+--_000_CH2PR10MB4262241CD16104ABA86F4FDEC5119CH2PR10MB4262namp_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40"><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<!--[if !mso]><style>v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style><![endif]--><style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:"Calibri Light";
+	panose-1:2 15 3 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Garamond;
+	panose-1:2 2 4 4 3 3 1 1 8 3;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif;
+	color:black;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+p.msonormal0, li.msonormal0, div.msonormal0
+	{mso-style-name:msonormal;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif;
+	color:black;}
+span.EstiloCorreo18
+	{mso-style-type:personal;
+	font-family:"Calibri",sans-serif;
+	color:#1F497D;}
+span.EstiloCorreo19
+	{mso-style-type:personal;
+	font-family:"Calibri",sans-serif;
+	color:windowtext;}
+span.EstiloCorreo20
+	{mso-style-type:personal;
+	font-family:"Calibri",sans-serif;
+	color:#1F497D;}
+span.EstiloCorreo21
+	{mso-style-type:personal-reply;
+	font-family:"Calibri",sans-serif;
+	color:#1F497D;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:70.85pt 85.05pt 70.85pt 85.05pt;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body bgcolor=3D"white" lang=3D"ES-EC" link=3D"blue" vlink=3D"purple">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US">Estimado,<=
+/span><o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US">Atendido. =
+Adjunto salida.
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"ES-MX" style=3D"color:#1F497D;mso-fare=
+ast-language:ES-MX">--</span><span lang=3D"ES-MX" style=3D"font-size:11.0pt=
+;font-family:&quot;Calibri&quot;,sans-serif;color:#1F497D"><o:p></o:p></spa=
+n></p>
+<p class=3D"MsoNormal"><b><i><span style=3D"font-size:9.0pt;font-family:&qu=
+ot;Calibri&quot;,sans-serif;color:gray">Saludos cordiales,</span></i></b><s=
+pan lang=3D"ES-MX" style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot=
+;,sans-serif;color:#1F497D"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><b><span lang=3D"ES-MX" style=3D"font-size:13.0pt;fo=
+nt-family:&quot;Calibri&quot;,sans-serif;color:#0099A8;mso-fareast-language=
+:ES">Katherine Murgueytio Bustos</span></b><span lang=3D"ES-MX" style=3D"fo=
+nt-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:#1F497D">
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#0099A8;mso-fareast-language:ES-MX">Gesti=F3n =
+y Automatizaci=F3n de Pruebas - Tecnolog=EDa</span><span lang=3D"ES-MX" sty=
+le=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:#1F=
+497D"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"ES-MX" style=3D"font-size:10.0pt;font-=
+family:&quot;Calibri&quot;,sans-serif;color:#A6A6A6;mso-fareast-language:ES=
+">Jun=EDn 200 y Panam=E1 - Telf.: (593 4) 230 5000 Ext. 4114</span><span la=
+ng=3D"ES-MX" style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sans=
+-serif;color:#1F497D"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D"><img width=3D"400" height=3D"50" styl=
+e=3D"width:4.1666in;height:.5208in" id=3D"_x0000_i1027" src=3D"cid:image001=
+.png@01D83931.B7D54DE0" alt=3D"firma2021"></span><span lang=3D"ES-MX" style=
+=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:#1F49=
+7D"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US"><o:p>&nbsp=
+;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US"><o:p>&nbsp=
+;</o:p></span></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span lang=3D"ES" style=3D"font-size:11.0pt;font-=
+family:&quot;Calibri&quot;,sans-serif;color:windowtext">De:</span></b><span=
+ lang=3D"ES" style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sans=
+-serif;color:windowtext"> Kevin Bastidas Zavala (Externo) &lt;kbastidz@boli=
+variano.com&gt;
+<br>
+<b>Enviado el:</b> Wednesday, March 16, 2022 11:37 AM<br>
+<b>Para:</b> Katherine Murgueytio Bustos &lt;kmurgueb@bolivariano.com&gt;<b=
+r>
+<b>CC:</b> Dario Espinosa Aldean &lt;despinoa@bolivariano.com&gt;<br>
+<b>Asunto:</b> Re: PREPROD [RECMPS-1370] CONSULTA Y PAGO RECAUDACION TERCON=
+ EN 24 ONLINE<o:p></o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12.0pt">Favor su ayuda con un=
+a nueva ejecuci=F3n. Adjunto archivos con las correcciones.<o:p></o:p></p>
+<div>
+<p class=3D"MsoNormal">El 16/3/2022 10:22, Katherine Murgueytio Bustos escr=
+ibi=F3:<o:p></o:p></p>
+</div>
+<blockquote style=3D"margin-top:5.0pt;margin-bottom:5.0pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US">Estimado,<=
+/span><o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US">Atendido. =
+Adjunto salida.</span><o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D">&nbsp;</span><o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D">&nbsp;</span><o:p></o:p></p>
+<p class=3D"MsoNormal"><span lang=3D"ES-MX" style=3D"color:#1F497D;mso-fare=
+ast-language:ES-MX">--</span><o:p></o:p></p>
+<p class=3D"MsoNormal"><b><i><span style=3D"font-size:9.0pt;font-family:&qu=
+ot;Calibri&quot;,sans-serif;color:gray">Saludos cordiales,</span></i></b><o=
+:p></o:p></p>
+<p class=3D"MsoNormal"><b><span lang=3D"ES-MX" style=3D"font-size:13.0pt;fo=
+nt-family:&quot;Calibri&quot;,sans-serif;color:#0099A8;mso-fareast-language=
+:ES">Katherine Murgueytio Bustos</span></b><span lang=3D"ES-MX" style=3D"fo=
+nt-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:#1F497D">
+</span><o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#0099A8;mso-fareast-language:ES-MX">Gesti=F3n =
+y Automatizaci=F3n de Pruebas - Tecnolog=EDa</span><o:p></o:p></p>
+<p class=3D"MsoNormal"><span lang=3D"ES-MX" style=3D"font-size:10.0pt;font-=
+family:&quot;Calibri&quot;,sans-serif;color:#A6A6A6;mso-fareast-language:ES=
+">Jun=EDn 200 y Panam=E1 - Telf.: (593 4) 230 5000 Ext. 4114</span><o:p></o=
+:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D"><img width=3D"400" height=3D"50" styl=
+e=3D"width:4.1666in;height:.5208in" id=3D"_x0000_i1025" src=3D"cid:image001=
+.png@01D83931.B7D54DE0" alt=3D"firma2021"></span><o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D">&nbsp;</span><o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US">&nbsp;</sp=
+an><o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US">&nbsp;</sp=
+an><o:p></o:p></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span lang=3D"ES" style=3D"font-size:11.0pt;font-=
+family:&quot;Calibri&quot;,sans-serif;color:windowtext">De:</span></b><span=
+ lang=3D"ES" style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sans=
+-serif;color:windowtext"> Kevin Bastidas Zavala (Externo)
+<a href=3D"mailto:kbastidz@bolivariano.com">&lt;kbastidz@bolivariano.com&gt=
+;</a> <br>
+<b>Enviado el:</b> Wednesday, March 16, 2022 11:11 AM<br>
+<b>Para:</b> Katherine Murgueytio Bustos <a href=3D"mailto:kmurgueb@bolivar=
+iano.com">
+&lt;kmurgueb@bolivariano.com&gt;</a><br>
+<b>CC:</b> Dario Espinosa Aldean <a href=3D"mailto:despinoa@bolivariano.com=
+">&lt;despinoa@bolivariano.com&gt;</a>; Jonathan Guerrero Jijon
+<a href=3D"mailto:jguerrej@bolivariano.com">&lt;jguerrej@bolivariano.com&gt=
+;</a>; AdmAmbientesPruebas
+<a href=3D"mailto:AdmAmbientesPruebas@bolivariano.com">&lt;AdmAmbientesPrue=
+bas@bolivariano.com&gt;</a><br>
+<b>Asunto:</b> Re: PREPROD [RECMPS-1370] CONSULTA Y PAGO RECAUDACION TERCON=
+ EN 24 ONLINE</span><o:p></o:p></p>
+</div>
+</div>
+<p class=3D"MsoNormal">&nbsp;<o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12.0pt">Estimada <br>
+Adjunto Informaci=F3n solicitada. <br>
+<br>
+Favor su ayuda con una nueva ejecuci=F3n.<o:p></o:p></p>
+<div>
+<p class=3D"MsoNormal">El 16/3/2022 10:09, Katherine Murgueytio Bustos escr=
+ibi=F3:<o:p></o:p></p>
+</div>
+<blockquote style=3D"margin-top:5.0pt;margin-bottom:5.0pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US">Estimado K=
+evin,</span><o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US">Buenos D=
+=EDas.</span><o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US">&nbsp;</sp=
+an><o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US">Este reque=
+rimiento fue atendido por Jean adjunto mail de respuesta, de ser una nueva =
+ejecuci=F3n falt=F3 adjuntar el archivo
+<b>cckb0001.lis.</b></span><o:p></o:p></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:11.0pt;font-family:&quot=
+;Calibri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US">&nbsp;<=
+/span></b><o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US">Atenta a s=
+us comentarios</span><o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:windowtext">&nbsp;</span><o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:windowtext">&nbsp;</span><o:p></o:p></p>
+<p class=3D"MsoNormal"><span lang=3D"ES-MX" style=3D"color:windowtext;mso-f=
+areast-language:ES-MX">--</span><o:p></o:p></p>
+<p class=3D"MsoNormal"><b><i><span style=3D"font-size:9.0pt;font-family:&qu=
+ot;Calibri&quot;,sans-serif;color:gray">Saludos cordiales,</span></i></b><o=
+:p></o:p></p>
+<p class=3D"MsoNormal"><b><span lang=3D"ES-MX" style=3D"font-size:13.0pt;fo=
+nt-family:&quot;Calibri&quot;,sans-serif;color:#0099A8;mso-fareast-language=
+:ES">Katherine Murgueytio Bustos</span></b><span lang=3D"ES-MX" style=3D"fo=
+nt-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:windowtext"=
+>
+</span><o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#0099A8;mso-fareast-language:ES-MX">Gesti=F3n =
+y Automatizaci=F3n de Pruebas - Tecnolog=EDa</span><o:p></o:p></p>
+<p class=3D"MsoNormal"><span lang=3D"ES-MX" style=3D"font-size:10.0pt;font-=
+family:&quot;Calibri&quot;,sans-serif;color:#A6A6A6;mso-fareast-language:ES=
+">Jun=EDn 200 y Panam=E1 - Telf.: (593 4) 230 5000 Ext. 4114</span><o:p></o=
+:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:windowtext"><img border=3D"0" width=3D"400" he=
+ight=3D"50" style=3D"width:4.1666in;height:.5208in" id=3D"Imagen_x0020_11" =
+src=3D"cid:image001.png@01D83931.B7D54DE0" alt=3D"firma2021"></span><o:p></=
+o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:windowtext">&nbsp;</span><o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US">&nbsp;</sp=
+an><o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US">&nbsp;</sp=
+an><o:p></o:p></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span lang=3D"ES" style=3D"font-size:11.0pt;font-=
+family:&quot;Calibri&quot;,sans-serif;color:windowtext">De:</span></b><span=
+ lang=3D"ES" style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sans=
+-serif;color:windowtext"> Kevin Bastidas Zavala (Externo)
+<a href=3D"mailto:kbastidz@bolivariano.com">&lt;kbastidz@bolivariano.com&gt=
+;</a> <br>
+<b>Enviado el:</b> Wednesday, March 16, 2022 10:58 AM<br>
+<b>Para:</b> Katherine Murgueytio Bustos <a href=3D"mailto:kmurgueb@bolivar=
+iano.com">
+&lt;kmurgueb@bolivariano.com&gt;</a><br>
+<b>CC:</b> Dario Espinosa Aldean <a href=3D"mailto:despinoa@bolivariano.com=
+">&lt;despinoa@bolivariano.com&gt;</a>; Jonathan Guerrero Jijon
+<a href=3D"mailto:jguerrej@bolivariano.com">&lt;jguerrej@bolivariano.com&gt=
+;</a><br>
+<b>Asunto:</b> PREPROD [RECMPS-1370] CONSULTA Y PAGO RECAUDACION TERCON EN =
+24 ONLINE</span><o:p></o:p></p>
+</div>
+</div>
+<p class=3D"MsoNormal">&nbsp;<o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><b><span style=3D"color:#1F497D">Buen d=EDa, Estimados</span></b>
+<o:p></o:p></p>
+<div>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sa=
+ns-serif;color:#1F497D">&nbsp;</span><o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sa=
+ns-serif;color:#1F497D">Por favor su ayuda ejecutando nuevamente en el ambi=
+ente de Testing, por solicitud de A&amp;C:</span><o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sa=
+ns-serif;color:#1F497D">&nbsp;</span><o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sa=
+ns-serif;color:#1F497D">&nbsp;</span><o:p></o:p></p>
+</div>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12.0pt"><b><span style=3D"fon=
+t-family:&quot;Garamond&quot;,serif;color:#1F497D;background:yellow">ESTE P=
+ASE NO CONTIENE NADA RELACIONADO A TARJETAS DE CR=C9DITO</span></b><o:p></o=
+:p></p>
+<p class=3D"MsoNormal" align=3D"center" style=3D"mso-margin-top-alt:auto;ms=
+o-margin-bottom-alt:auto;text-align:center">
+<b><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Requeri=
+miento (ClearQuest)</span></b><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sa=
+ns-serif">&nbsp;</span><o:p></o:p></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellpadding=3D"0" width=3D"0" =
+style=3D"width:607.1pt;margin-left:5.8pt">
+<tbody>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">C=
+=F3digo(s):
+</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><b>RECMPS-1370</b><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">S=
+olicitud del Usuario:
+</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto">En Jira<o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto">Conjunto de Cambio (Changeset):<o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">D=
+escripci=F3n del cambio o de la soluci=F3n:</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-align:justify">
+<b><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">CONSULT=
+A Y PAGO RECAUDACION TERCON 24ONLINE</span></b><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:8.9pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:8.9pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">F=
+echa Ejecuci=F3n:
+</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:8.9pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><b><u>14/Marzo /2022</u></b><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">H=
+ora Ejecuci=F3n:
+</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><b><u>Inmediato</u></b><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto">Cantidad Archivos Back-End:<o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto">3<o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto">Cantidad Archivos Front-End:<o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">0=
+</span><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto">Cantidad Archivos Middleware:<o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto">0<o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto">Cantidad Archivos xsl<o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">0=
+</span><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto">Cantidad Archivos EAR:<o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">0=
+</span><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">O=
+bservaci=F3n:</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+</tr>
+<tr style=3D"height:13.7pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.7pt"></td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.7pt"></td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sa=
+ns-serif">&nbsp;</span><o:p></o:p></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellpadding=3D"0" width=3D"0" =
+style=3D"width:607.1pt;margin-left:5.8pt">
+<tbody>
+<tr style=3D"height:13.7pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.7pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><b><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif=
+">Formularios</span></b><o:p></o:p></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sa=
+ns-serif">&nbsp;</span><o:p></o:p></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellpadding=3D"0" width=3D"0" =
+style=3D"width:607.1pt;margin-left:5.8pt">
+<tbody>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">F=
+rond</span>-<span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif=
+">End
+</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">N=
+/A</span><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">B=
+ack</span>-<span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif"=
+>End</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"color:#1F497D">&nbsp;
+</span><o:p></o:p></p>
+<div>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"color:#1F497D">&nbsp;</span><o:p></o:p></p>
+</div>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">M=
+iddleware</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto">N/A<o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">O=
+rden Procesos a implementar</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><b><u><span style=3D"font-family:&quot;Calibri Light&quot;,sans-se=
+rif">IDS:</span></u></b><o:p></o:p></p>
+<div>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><b><u>IDS/DBA:</u></b><o:p></o:p></p>
+</div>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+1.<span style=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b>=
+Cyberbank</b><o:p></o:p></p>
+<div>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto">&nbsp;<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><b><span style=3D"font-family:&quot;Garamond&quot;,serif;color:#1F=
+497D">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b><o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><b><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif=
+">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b><o:p></o:p></p>
+</div>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">O=
+rden Procesos Batch</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">N=
+/A</span><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.7pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.7pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">T=
+areas MTRA</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.7pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">N=
+/A</span><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.7pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.7pt"></td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.7pt"></td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sa=
+ns-serif">&nbsp;</span><o:p></o:p></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellpadding=3D"0" width=3D"0" =
+style=3D"width:607.1pt;margin-left:5.8pt">
+<tbody>
+<tr style=3D"height:13.7pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.7pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><b><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif=
+">Aprobaciones</span></b><o:p></o:p></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sa=
+ns-serif">&nbsp;</span><o:p></o:p></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellpadding=3D"0" width=3D"0" =
+style=3D"width:607.1pt;margin-left:5.8pt">
+<tbody>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><b><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif=
+">Aprobaci=F3n de CONTRALORIA Y PRODUCTOS:
+</span></b><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Act=
+ualizaci=F3n de datos de producci=F3n.</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Con=
+troles de auditoria.</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">N=
+/A</span><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><b><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif=
+">Aprobaci=F3n de JEFATURA DE PRODUCCI=D3N:
+</span></b><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Rev=
+isi=F3n Orden Procesos Batch (Nuevos/Modificados)</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Ord=
+enes de Procesos a implementar</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">N=
+/A</span><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><b><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif=
+">Aprobaci=F3n de QA-DBA:
+</span></b><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Cre=
+aci=F3n, actualizaci=F3n, eliminaci=F3n de nuevos tablas, =EDndices, vistas=
+, etc.</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Car=
+ga masiva de informaci=F3n (bcp)</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Cre=
+aci=F3n de base de datos</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Inc=
+remento de tama=F1o de base de datos</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Sto=
+re Procedure (SP) nuevos</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">SQR=
+ nuevos o modificados</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">N=
+/A</span><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><b><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif=
+">Aprobaci=F3n de IDS/ARQUITECTURA:</span></b><span style=3D"font-family:&q=
+uot;Calibri Light&quot;,sans-serif">
+</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Nue=
+vos productos en servidores NT</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Cam=
+bios en configuraciones de Servidores</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto">En confluence<o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><b><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif=
+">Aprobaci=F3n de SEGURIDAD INFORMATICA:</span></b><span style=3D"font-fami=
+ly:&quot;Calibri Light&quot;,sans-serif">
+</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Cre=
+aci=F3n/Asignaci=F3n de:</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Tra=
+nsacciones</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Pro=
+cedimientos</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Rol=
+es</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Cre=
+aci=F3n de usuarios y/o permisos en Producci=F3n</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Cre=
+aci=F3n y/o actualizaci=F3n de Flujos sobre canales para aplicaciones nueva=
+s o existentes
+</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">N=
+/A</span><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><b><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif=
+">Aprobaci=F3n de MONITOREO DE SEGURIDAD INFORMATICA:</span></b><span style=
+=3D"font-family:&quot;Calibri Light&quot;,sans-serif">
+</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Inf=
+orme y aval de an=E1lisis de vulnerabilidad de aplicaciones Web.</span><o:p=
+></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">N=
+/A</span><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><b><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif=
+">Aprobaci=F3n de CALIDAD:</span></b><span style=3D"font-family:&quot;Calib=
+ri Light&quot;,sans-serif">
+</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Doc=
+umentaci=F3n de tablas y Store Procedures nuevos y/o modificados</span><o:p=
+></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Doc=
+umentaci=F3n por servicio: (10 d=EDas previos al pase)</span><o:p></o:p></p=
+>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Har=
+dware</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Sof=
+tware</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Mon=
+itoreo</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">An=
+=E1lisis de la B.D. (Previa aprobaci=F3n de DBA.)</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Res=
+paldos (Previa aprobaci=F3n de jefe de producci=F3n)</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Doc=
+umentaci=F3n complementaria</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Con=
+tingencia (Previa aprobaci=F3n de Proyectos)</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Sol=
+uci=F3n a problemas</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><b><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif=
+">Aprobaci=F3n de CONTROL DE CAMBIOS:</span></b><span style=3D"font-family:=
+&quot;Calibri Light&quot;,sans-serif">
+</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Var=
+iaci=F3n planificada de configuraciones y software de servidores.</span><o:=
+p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Cam=
+bios en varias aplicaciones relacionados a un mismo tema.</span><o:p></o:p>=
+</p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">N=
+/A</span><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><b><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif=
+">Aprobaci=F3n de GERENCIA DE DESARROLLO</span>/</b><b><span style=3D"font-=
+family:&quot;Calibri Light&quot;,sans-serif">INFRAESTRUCTURA</span>/</b><b>=
+<span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">
+ TECNOLOG=CDA:</span></b><span style=3D"font-family:&quot;Calibri Light&quo=
+t;,sans-serif"> </span>
+<o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Cam=
+bios t=E9cnicos que modifiquen el proceso esencial&nbsp; de las aplicacione=
+s cr=EDticas como son: SAT, 24online, Cajeros, C=E1mara, CSP, MTRA, Petro-C=
+omercial, Portal Web, Postilion, Swift.</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Req=
+uerimientos Express (Fuera del Release)</span><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto;text-indent:-.25in">
+<span style=3D"font-size:10.0pt;font-family:Symbol">=B7</span><span style=
+=3D"font-size:7.0pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">Req=
+uerimientos en Quincenas, Fines de Mes y Diciembre.</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">N=
+/A</span><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sa=
+ns-serif">&nbsp;</span><o:p></o:p></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellpadding=3D"0" width=3D"0" =
+style=3D"width:607.1pt;margin-left:5.8pt">
+<tbody>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><b><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif=
+">Notificaciones</span></b><o:p></o:p></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sa=
+ns-serif">&nbsp;</span><o:p></o:p></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellpadding=3D"0" width=3D"0" =
+style=3D"width:607.1pt;margin-left:5.8pt">
+<tbody>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">M=
+ail de notificaci=F3n por parte del L=EDder Aplicativo del pase de optimiza=
+ci=F3n (CC T=E9cnico) al propietario de la informaci=F3n.</span><o:p></o:p>=
+</p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">N=
+/A</span><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">M=
+ail de notificaci=F3n al usuario por parte de Productos para los pases de r=
+equerimientos Funcionales o proyectos.
+</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><a href=3D"mailto:despinoa@bolivariano.com"><span style=3D"color:#=
+0563C1">kbastidz</span>@bolivariano.com</a><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sa=
+ns-serif">&nbsp;</span><o:p></o:p></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellpadding=3D"0" width=3D"0" =
+style=3D"width:607.1pt;margin-left:5.8pt">
+<tbody>
+<tr style=3D"height:13.7pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.7pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><b><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif=
+">Certificaciones</span></b><o:p></o:p></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sa=
+ns-serif">&nbsp;</span><o:p></o:p></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellpadding=3D"0" width=3D"0" =
+style=3D"width:607.1pt;margin-left:5.8pt">
+<tbody>
+<tr style=3D"height:13.5pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:13.5pt"></td>
+</tr>
+<tr style=3D"height:11.35pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:11.35pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">C=
+ertificaci=F3n de pruebas T=E9cnicas y Funcionales (AMBIENTE DESARROLLO)</s=
+pan><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:11.35pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">N=
+/A</span><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:10.25pt">
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:10.25pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">C=
+ertificaci=F3n de pruebas T=E9cnicas y Funcionales (AMBIENTE PREPRODUCCI=D3=
+N)</span><o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt;height:10.25pt">
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-family:&quot;Calibri Light&quot;,sans-serif">N=
+/A</span><o:p></o:p></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sa=
+ns-serif;color:#1F497D">&nbsp;</span><o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sa=
+ns-serif;color:#1F497D">&nbsp;</span><o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sa=
+ns-serif">&nbsp;</span><o:p></o:p></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D">Saludos cordiales,</span><o:p></o:p><=
+/p>
+</blockquote>
+<p class=3D"MsoNormal">&nbsp;<o:p></o:p></p>
+</blockquote>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+</body>
+</html>
+
+--_000_CH2PR10MB4262241CD16104ABA86F4FDEC5119CH2PR10MB4262namp_--
+
+--_005_CH2PR10MB4262241CD16104ABA86F4FDEC5119CH2PR10MB4262namp_
+Content-Type: image/png; name="image001.png"
+Content-Description: image001.png
+Content-Disposition: inline; filename="image001.png"; size=6274;
+	creation-date="Wed, 16 Mar 2022 17:31:13 GMT";
+	modification-date="Wed, 16 Mar 2022 17:31:13 GMT"
+Content-ID: <image001.png@01D83931.B7D54DE0>
+Content-Transfer-Encoding: base64
+
+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
+rkJggg==
+
+--_005_CH2PR10MB4262241CD16104ABA86F4FDEC5119CH2PR10MB4262namp_--
+
+--_006_CH2PR10MB4262241CD16104ABA86F4FDEC5119CH2PR10MB4262namp_
+Content-Type: application/octet-stream;
+	name="cckb0001_03_16_2022_12_29_49.out"
+Content-Description: cckb0001_03_16_2022_12_29_49.out
+Content-Disposition: attachment;
+	filename="cckb0001_03_16_2022_12_29_49.out"; size=3065;
+	creation-date="Wed, 16 Mar 2022 17:30:22 GMT";
+	modification-date="Wed, 16 Mar 2022 17:31:13 GMT"
+Content-Transfer-Encoding: base64
+
+SW5pY2lvIENvbXBpbGFjaW9uIE1hciAxNiAyMDIyIDEyOjI5OjQ5IFBNXG4NClNlcnZpZG9yOiBD
+TUJEVEVTMSBVU1VBUklPOiBhZG1vcmEwMyBcbg0KQ29tcGlsYWNpb24gZGUgbGEgbGlzdGE6ICBj
+Y2tiMDAwMS5saXMgXG4NCkFyY2hpdm86OiAvZnVlbnRlcy9jYXNoL3NxbC9jY2tiMDAwMS5zcWwg
+LyBPS1xuDQpBcmNoaXZvOjogL2Z1ZW50ZXMvY2FzaC9zcWwvY2NrYjAwMDIuc3FsIC8gT0tcbg0K
+QXJjaGl2bzo6IC9mdWVudGVzL2Nhc2gvc3FsL2Nja2IwMDAzLnNxbCAvIE9LXG4NCkNvbXBpbGFu
+ZG8gL2Z1ZW50ZXMvY2FzaC9zcWwvY2NrYjAwMDEuc3FsXG5cbg0KU1AyLTA3MzQ6IHVua25vd24g
+Y29tbWFuZCBiZWdpbm5pbmcgIu+7vy8qKioqKioqKi4uLiIgLSByZXN0IG9mIGxpbmUgaWdub3Jl
+ZC4NCklOSUNJTyBTQ1JJUFQNCk9CVEVOSUVORE8gU0VDVUVOQ0lBUyBNQVhJTUFTIFRBQkxBUyBP
+VEMNCklOU0VSVEFSIEVNUFJFU0EgT0sNCklOU0VSVEFSIEdSVVBPIFNFUlZJQ0lPIE9LDQpJTlNF
+UlRBUiBDT05WRU5JTyBPSw0KKioqKioqKioqKioqKioqKioqKiBEQVRPUyBJTlNFUlRBRE9TICoq
+KioqKioqKioqKioqKioqKioqKioqKioqDQpDT0RJR08gRU1QUkVTQSA6IDQ2MQ0KQ09ESUdPIEdS
+VVBPIFNFUlZJQ0lPIDogNzI3DQpDT0RJR08gQ09OVkVOSU8gOiAzNTANCkNPRElHTyBTRVJWSUNJ
+TyA6IDANClNFUlZJQ0lPIENBTkFMIDogMA0KQ09ESUdPIFNFUlZJQ0lPIENBTkFMIDogMA0KQ09E
+SUdPIElERU5USUZJQ0FET1IgOiAzNTgNCkNPRElHTyBQVU5UTyBGSU5BTCBDT05TVUxUQVIgOiAx
+NzENCkNPRElHTyBQVU5UTyBGSU5BTCBQQUdBUiA6IDE3Mg0KQ09ESUdPIEZMVUpPIENPTlNVTFRB
+IDogMTA2Nw0KQ09ESUdPIEZMVUpPIFBBR08gOiAxMDY3DQpDT0RJR08gRkxVSk8gRU5SSVEgQ09O
+U1VMVEEgOiA0NTQNCkNPRElHTyBGTFVKTyBFTlJJUSBQQUdPIDogNDU1DQpGSU5BTCBTQ1JJUFQN
+Cg0KUEwvU1FMIHByb2NlZHVyZSBzdWNjZXNzZnVsbHkgY29tcGxldGVkLg0KDQoNCiAgICBHUlBf
+SUQgICAgIEVNUF9JRCBDVF9JRF9USVBPX0JBTkNBIENUX0lEX1RJUE9fU0VSViBHUlBfQ09OVkVO
+SU9fVklTSUJMRQ0KLS0tLS0tLS0tLSAtLS0tLS0tLS0tIC0tLS0tLS0tLS0tLS0tLS0gLS0tLS0t
+LS0tLS0tLS0tIC0tLS0tLS0tLS0tLS0tLS0tLS0tDQpHUlBfTUFUUklDVUxBQkxFIEdSUF9NQVRS
+SUNfTVVMVElQTEUgR1JQX1ZBTElEQUJMRQ0KLS0tLS0tLS0tLS0tLS0tLSAtLS0tLS0tLS0tLS0t
+LS0tLS0tIC0tLS0tLS0tLS0tLS0NCiAgICAgICA3MjcJICA0NjEJCSAgICAgMQkJICAgIDI2CQkJ
+ICAxDQoJICAgICAgIDAJCSAgIDAJCSAwDQoNCg0KDQpDb21waWxhbmRvIC9mdWVudGVzL2Nhc2gv
+c3FsL2Nja2IwMDAyLnNxbFxuXG4NClNQMi0wNzM0OiB1bmtub3duIGNvbW1hbmQgYmVnaW5uaW5n
+ICLvu78vKioqKioqKiouLi4iIC0gcmVzdCBvZiBsaW5lIGlnbm9yZWQuDQpJTklDSU8gU0NSSVBU
+DQpPQlRFTklFTkRPIFNFQ1VFTkNJQVMgTUFYSU1BUyBUQUJMQVMgT1RDDQpJTlNFUlRBUiBDT05W
+RU5JTyBPSw0KSU5TRVJUQVIgSURFTlRJRklDQURPUiBPSw0KSU5TRVJUQVIgUFVOVE8gRklOQUwg
+Q09OU1VMVEEgT0sNCklOU0VSVEFSIFBVTlRPIEZJTkFMIFBBR0FSIE9LDQpJTlNFUlRBUiBGTFVK
+TyBDT05TVUxUQSBPSw0KSU5TRVJUQVIgRkxVSk8gUEFHTyBPSw0KSU5TRVJUQVIgRkxVSk8gRU5S
+SVEgQ09OU1VMVEEgT0sNCklOU0VSVEFSIEZMVUpPIEVOUklRIFBBR08gT0sNCioqKioqKioqKioq
+KioqKioqKiogREFUT1MgSU5TRVJUQURPUyAqKioqKioqKioqKioqKioqKioqKioqKioqKg0KQ09E
+SUdPIEVNUFJFU0EgOiA0NjINCkNPRElHTyBHUlVQTyBTRVJWSUNJTyA6IDcyOA0KQ09ESUdPIENP
+TlZFTklPIDogMzUxDQpDT0RJR08gU0VSVklDSU8gOiA5MjgNClNFUlZJQ0lPIENBTkFMIDogMTY1
+DQpDT0RJR08gU0VSVklDSU8gQ0FOQUwgOiAxNjUNCkNPRElHTyBJREVOVElGSUNBRE9SIDogMzU4
+DQpDT0RJR08gUFVOVE8gRklOQUwgQ09OU1VMVEFSIDogMTcxDQpDT0RJR08gUFVOVE8gRklOQUwg
+UEFHQVIgOiAxNzINCkNPRElHTyBGTFVKTyBDT05TVUxUQSA6IDEwNjcNCkNPRElHTyBGTFVKTyBQ
+QUdPIDogMTA2Nw0KQ09ESUdPIEZMVUpPIEVOUklRIENPTlNVTFRBIDogNDU0DQpDT0RJR08gRkxV
+Sk8gRU5SSVEgUEFHTyA6IDQ1NQ0KRklOQUwgU0NSSVBUDQoNClBML1NRTCBwcm9jZWR1cmUgc3Vj
+Y2Vzc2Z1bGx5IGNvbXBsZXRlZC4NCg0KDQogICAgU1JWX0lEIFNSVl9OT01CUkUJCQkJCQkgIEdS
+UF9JRA0KLS0tLS0tLS0tLSAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLSAtLS0tLS0tLS0tDQogICAgQ05WX0lEDQotLS0tLS0tLS0tDQogICAgICAgOTI4
+IDg5ODkgCQkJCQkJICAgICA3MjcNCiAgICAgICAzNTENCg0KDQoNCkNvbXBpbGFuZG8gL2Z1ZW50
+ZXMvY2FzaC9zcWwvY2NrYjAwMDMuc3FsXG5cbg0KU1AyLTA3MzQ6IHVua25vd24gY29tbWFuZCBi
+ZWdpbm5pbmcgIu+7vy8qKioqKioqKi4uLiIgLSByZXN0IG9mIGxpbmUgaWdub3JlZC4NCkFDVFVB
+TElaQURPIE9LDQoNClBML1NRTCBwcm9jZWR1cmUgc3VjY2Vzc2Z1bGx5IGNvbXBsZXRlZC4NCg0K
+DQogICAgRU1QX0lEIEVNUF9JREVOVElGSUMNCi0tLS0tLS0tLS0gLS0tLS0tLS0tLS0tLQ0KRU1Q
+X05PTUJSRQ0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCkVNUF9DT0RJR08NCi0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQpFTVBfREVTQ1JJUENJT04N
+Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQoJMjMgMDkyMTg5NzY2MjAwMQ0KSW1wdWVzdG9zIEFk
+dWFuZXJvcyAoU0VOQUUpDQo5NDANCkltcHVlc3RvcyBBZHVhbmVyb3MgKFNFTkFFKQ0KDQoNCg0K
+RmluIENvbXBpbGFjaW9uIE1hciAxNiAyMDIyIDEyOjI5OjUxIFBNIFxuDQo=
+
+--_006_CH2PR10MB4262241CD16104ABA86F4FDEC5119CH2PR10MB4262namp_--

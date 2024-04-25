@@ -1,0 +1,3008 @@
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (104.47.55.177)
+ by mailweb.bolivariano.com (172.17.3.231) with Microsoft SMTP Server (TLS) id
+ 14.3.498.0; Tue, 3 May 2022 13:58:05 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=QWFik5y292lbjcy+jsRIaBv47lcQLzmBe1afKcnMmOCBJB0iXPLEmIfqB3fbhoUj+ovJGZsXffAfu4Wb0gD22FVEMQsSKZfhiqOBJLnLxAug1gLLwJ/VcIqPsXfCuzg4ryTsqRIJEEIdR7m5jJri8rdVwPKPVoFci9aSYIGLYh1sTRacQpiBMmJOz4vbLjpuf/n7fJMBp24/xQMqBb43cbReXkVxYhzX0lLLdAHgyw1rPU25Qteu+YZxdwJCmbab9tiLk2qYMmCb/Gybh1NxCDmBOG6/ERX6Z0frTrWlYMsYSzrVJoAUi/Ux2Gfw78pOWcWKbOk7S6CaBDtwvczrhw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=mUIGHaLzjHGWIzJ55mZz1+hJn3jHbGJmEWUF99aN5wE=;
+ b=ajKhYvMon3FSm4II6CYjdEBVX/E053H8tDWvFb5qV0MeE9nF36LKA8+/ouMwLLtsr/dLhGrvkS9y6xEnLn8oczlsnO1bwId31W1XgCa0L+ybjuD3jthUX9JzKf1+ysMwZI/mAe5lLeE7s35Oba0ZRxSd2STK6xF0TcRw4/wd87tMGnSTw66MnL8MIBAByqwZBe1ibxp4YRZ/LFYoqBkBVAlFlj2EGD85K/7apN1qX+DcuMviKIubBT3UP+59h+weQE8JKc8ijpvAFPGotGyWFv0Hb1PeglZpZMCpQndmHpEBUkszxCGNX1NVnoHCh4eMCha4MaxJPNei0ATUrNGjog==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=bolivariano.com; dmarc=pass action=none
+ header.from=bolivariano.com; dkim=pass header.d=bolivariano.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bolivariano.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=mUIGHaLzjHGWIzJ55mZz1+hJn3jHbGJmEWUF99aN5wE=;
+ b=oIN95fBSt748jPZBo/WCx8gMZ6BSlNDgaq/qg2xaF4JO85yyvPcRiADNrwl4u8AHVHiDGM8Vttp0fb1Ri7EbhlaUOeEIZKvWIw0nov2GfkLooC3FTrUibsEKp6JZ9KXYamW9bPdg47e0FeHoSC1J6KFLX+v7D6RFJy2folMam8a6E/vZxLxEun698DF6ggQwWhwgUnvPClLveLacqxRr/zJ4SOmMOXtSSuq+jLLvFUYk0KMQKOGpXNPdpLxWIRKpad/mcOMJKXkrwScwh7+DLoBsX8SPOLayjU3tEFI/Ci2SEtCcY3zNuCYa1k11ESaqHS9JMwpnQpIEDu6xmeXc2A==
+Received: from BN8PR10MB3172.namprd10.prod.outlook.com (2603:10b6:408:cc::11)
+ by BN8PR10MB3508.namprd10.prod.outlook.com (2603:10b6:408:ae::32) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5206.24; Tue, 3 May
+ 2022 18:58:01 +0000
+Received: from BN8PR10MB3172.namprd10.prod.outlook.com
+ ([fe80::f1ef:738e:34cc:32e9]) by BN8PR10MB3172.namprd10.prod.outlook.com
+ ([fe80::f1ef:738e:34cc:32e9%6]) with mapi id 15.20.5186.028; Tue, 3 May 2022
+ 18:58:00 +0000
+From: =?iso-8859-1?Q?Dario_Barco_Le=F3n?= <dbarcol@bolivariano.com>
+To: =?iso-8859-1?Q?Wendy_Cede=F1o_Ley?= <wcedeno@bolivariano.com>, "Darwin
+ Briones Barzola" <dbriones@bolivariano.com>,
+	=?iso-8859-1?Q?Carlos_Rodr=EDguez_Murillo?= <crodriguez@bolivariano.com>,
+	"Jonathan  Guerrero Jijon" <jguerrej@bolivariano.com>
+CC: Recaudos <Recaudos@bolivariano365.onmicrosoft.com>
+Subject: =?iso-8859-1?Q?RE:_Divisi=F3n_por_entregables_-_V=EDa_Rapida?=
+Thread-Topic: =?iso-8859-1?Q?Divisi=F3n_por_entregables_-_V=EDa_Rapida?=
+Thread-Index: Adhe/wSYxodxJQNLRuipSLp6cOwlyAAII2TA
+Date: Tue, 3 May 2022 18:58:00 +0000
+Message-ID: <BN8PR10MB3172156B6157299122C3B867A4C09@BN8PR10MB3172.namprd10.prod.outlook.com>
+References: <BN8PR10MB31722BB448EBDA0D03A8B7B6A4C09@BN8PR10MB3172.namprd10.prod.outlook.com>
+In-Reply-To: <BN8PR10MB31722BB448EBDA0D03A8B7B6A4C09@BN8PR10MB3172.namprd10.prod.outlook.com>
+Accept-Language: es-EC, en-US
+Content-Language: es-ES
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=bolivariano.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 5849242d-e693-4317-076d-08da2d36d840
+x-ms-traffictypediagnostic: BN8PR10MB3508:EE_
+x-ld-processed: 381bee0c-a9ea-4342-81c0-318a50b0845f,ExtAddr
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: I/AhbqlMZgzu1KlBwjDjtQbHoUjHTLi7XS6MWm472MVG8EXM06E1gr6UgSIQaNXS7+FKPM+iLJ3iNcp4pwrJHfAp5J/+yufoS0iPc0PgEWP8PWVUCrJEhRwyMXUKMVadofwTHco2cgJqWMXh95zc2j7W5f44LEVXD1/h1XOEB35OjgYuOxkUZ/y2x1JCGUdX8GjMOvaT1ev0bwgChNjIvrHQnqpSULAWkmNJQQE1z1jJPHprvEGBsXZlV2KK26SIOP8c1OFfjQ6qbaUseb3nu/IoY/7H6BaBvh/1PEKTVwAazKZ/mxH1l8Os9u0A6okYpRoZkq7JVonaAHz5PWQ2JUtmKqFtkO9acxDziXZx4g8jRfSpOfQGdG8ih4hAvIwAw2Fd6vZCWgMc8ZTwlmIfM14t5Bogpc5FMc2rqPSx92j+Bh8nHOXdM/Ci23L2I/DHL/jphu79PyTN59xyCy6gsAWSzFYGGZfYCXrecIDWzqOi0vyL1ODcdbR9CkxN2blbPwMeL0Cox583GY37fQ9sVK3lFwozoIVYUaSORulh+eymii5jZxoYaWeb5CVdsKrRWzfhsosbFbQfVsbn2ck209mc7VIihJQBRlB7vmwUhWw=
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:es;SCL:-1;SRV:;IPV:NLI;SFV:SKI;H:BN8PR10MB3172.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:;DIR:INB;
+Content-Type: multipart/related;
+	boundary="_004_BN8PR10MB3172156B6157299122C3B867A4C09BN8PR10MB3172namp_";
+	type="multipart/alternative"
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR10MB3172.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5849242d-e693-4317-076d-08da2d36d840
+X-MS-Exchange-CrossTenant-originalarrivaltime: 03 May 2022 18:58:00.5436
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 381bee0c-a9ea-4342-81c0-318a50b0845f
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: zWipvDI3d8taLJRv5ZzGG49LxIuDAeah3ycbYpWFONqRp+YcaDSEl8HLiLR4aYnxPUayN1kK+xbtFzYxtx4E0g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN8PR10MB3508
+X-OrganizationHeadersPreserved: BN8PR10MB3508.namprd10.prod.outlook.com
+Return-Path: dbarcol@bolivariano.com
+X-OriginatorOrg: bolivariano.com
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-MS-Exchange-Organization-AuthSource: BN8PR10MB3172.namprd10.prod.outlook.com
+X-MS-Exchange-Organization-SCL: -1
+X-CrossPremisesHeadersPromoted: EX2K10SRV.bolivariano.fin.ec
+X-CrossPremisesHeadersFiltered: EX2K10SRV.bolivariano.fin.ec
+MIME-Version: 1.0
+
+--_004_BN8PR10MB3172156B6157299122C3B867A4C09BN8PR10MB3172namp_
+Content-Type: multipart/alternative;
+	boundary="_000_BN8PR10MB3172156B6157299122C3B867A4C09BN8PR10MB3172namp_"
+
+--_000_BN8PR10MB3172156B6157299122C3B867A4C09BN8PR10MB3172namp_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Carlos:
+Por favor f=EDjate en los re-acomodos de fecha de las pruebas, luego nos ju=
+ntamos.
+
+Nombre de tarea
+Duraci=F3n
+Comienzo
+Fin
+Predecesoras
+Nombres de los recursos
+Pruebas Funcionales
+55 d=EDas
+lun 06/27/22
+vie 09/09/22
+   Recaudaci=F3n ANT
+54 d=EDas
+lun 06/27/22
+jue 09/08/22
+      Entregable 1 - Ant
+15 d=EDas
+lun 06/27/22
+vie 07/15/22
+         Pruebas de Canal 24 OnLine
+3 d=EDas
+lun 06/27/22
+mi=E9 06/29/22
+17
+Carlos Rodriguez
+         Pruebas Canal 24 Movil
+3 d=EDas
+jue 06/30/22
+lun 07/04/22
+28
+Carlos Rodriguez
+         Pruebas Backoffice
+3 d=EDas
+mar 07/05/22
+jue 07/07/22
+29
+Carlos Rodriguez
+         Pruebas Estructura de Control
+2 d=EDas
+vie 07/08/22
+lun 07/11/22
+30
+Carlos Rodriguez
+         Pruebas de Cubos y Finanware
+1 d=EDa
+mar 07/12/22
+mar 07/12/22
+31
+Carlos Rodriguez
+         Certificacion con el usuario
+3 d=EDas
+mi=E9 07/13/22
+vie 07/15/22
+32
+Carlos Rodriguez
+      Entregable 2 - ANT pago con TC
+15 d=EDas
+vie 07/22/22
+jue 08/11/22
+         Pruebas de Canal 24 OnLine con TC
+3 d=EDas
+vie 07/22/22
+mar 07/26/22
+33
+Carlos Rodriguez
+         Pruebas Canal 24 Movil con TC
+3 d=EDas
+mi=E9 07/27/22
+vie 07/29/22
+35
+Carlos Rodriguez
+         Pruebas Backoffice
+3 d=EDas
+lun 08/01/22
+mi=E9 08/03/22
+36
+Carlos Rodriguez
+         Pruebas Backoffice Credimatic
+3 d=EDas
+lun 08/01/22
+mi=E9 08/03/22
+36
+Carlos Coronel
+         Pruebas Estructura de Control
+2 d=EDas
+jue 08/04/22
+vie 08/05/22
+37
+Carlos Rodriguez
+         Pruebas de Cubos y Finanware
+1 d=EDa
+lun 08/08/22
+lun 08/08/22
+39
+Carlos Rodriguez
+         Certificacion con el usuario
+3 d=EDas
+mar 08/09/22
+jue 08/11/22
+40
+Carlos Rodriguez
+      Entregable 3 - ANT Resto de Canales
+20 d=EDas
+vie 08/12/22
+jue 09/08/22
+         ATX todas sus formas de pago
+4 d=EDas
+vie 08/12/22
+mi=E9 08/17/22
+41
+Carlos Rodriguez
+         SAT todas sus formas de pago
+4 d=EDas
+jue 08/18/22
+mar 08/23/22
+43
+Carlos Rodriguez
+         Pruebas Backoffice
+4 d=EDas
+mi=E9 08/24/22
+lun 08/29/22
+44
+Carlos Rodriguez
+         Pruebas Backoffice Credimatic
+3 d=EDas
+mi=E9 08/24/22
+vie 08/26/22
+44
+Carlos Coronel
+         Pruebas Estructura de Control
+3 d=EDas
+mar 08/30/22
+jue 09/01/22
+45
+Carlos Rodriguez
+         Pruebas de Cubos y Finanware
+1 d=EDa
+vie 09/02/22
+vie 09/02/22
+47
+Carlos Rodriguez
+         Certificacion con el usuario
+4 d=EDas
+lun 09/05/22
+jue 09/08/22
+48
+Carlos Rodriguez
+   Recaudaci=F3n MoviStar
+55 d=EDas
+lun 06/27/22
+vie 09/09/22
+      Entregable 1 - MoviStar Canales Virtuales
+15 d=EDas
+lun 06/27/22
+vie 07/15/22
+         Pruebas de Canal 24 OnLine
+3 d=EDas
+lun 06/27/22
+mi=E9 06/29/22
+18
+Jose Mu=F1oz
+         Pruebas Canal 24 Movil
+3 d=EDas
+jue 06/30/22
+lun 07/04/22
+52
+Jose Mu=F1oz
+         Pruebas Backoffice
+3 d=EDas
+mar 07/05/22
+jue 07/07/22
+53
+Jose Mu=F1oz
+         Pruebas Estructura de Control
+2 d=EDas
+vie 07/08/22
+lun 07/11/22
+54
+Jose Mu=F1oz
+         Pruebas de Cubos y Finanware
+1 d=EDa
+mar 07/12/22
+mar 07/12/22
+55
+Jose Mu=F1oz
+         Certificacion con el usuario
+3 d=EDas
+mi=E9 07/13/22
+vie 07/15/22
+56
+Jose Mu=F1oz
+      Entregable 2 - MoviStar Canal Fisico
+12 d=EDas
+lun 07/18/22
+mar 08/02/22
+         Pruebas en Canal ATX
+4 d=EDas
+lun 07/18/22
+jue 07/21/22
+57
+Jose Mu=F1oz
+         Pruebas Backoffice
+3 d=EDas
+vie 07/22/22
+mar 07/26/22
+59
+Jose Mu=F1oz
+         Pruebas Estructura de Control
+2 d=EDas
+mi=E9 07/27/22
+jue 07/28/22
+60
+Jose Mu=F1oz
+         Pruebas de Cubos y Finanware
+1 d=EDa
+vie 07/29/22
+vie 07/29/22
+61
+Jose Mu=F1oz
+         Certificacion con el usuario
+2 d=EDas
+lun 08/01/22
+mar 08/02/22
+62
+Jose Mu=F1oz
+      Entregable 3 - Recaudacion Tuenti
+20 d=EDas
+lun 08/15/22
+vie 09/09/22
+         Pruebas de Canal 24 OnLine
+3 d=EDas
+lun 08/15/22
+mi=E9 08/17/22
+63
+Jose Mu=F1oz
+         Pruebas Canal 24 Movil
+3 d=EDas
+jue 08/18/22
+lun 08/22/22
+65
+Jose Mu=F1oz
+         Pruebas en Canal ATX
+4 d=EDas
+mar 08/23/22
+vie 08/26/22
+66
+Jose Mu=F1oz
+         Pruebas Backoffice
+3 d=EDas
+lun 08/29/22
+mi=E9 08/31/22
+67
+Jose Mu=F1oz
+         Pruebas Estructura de Control
+2 d=EDas
+jue 09/01/22
+vie 09/02/22
+68
+Jose Mu=F1oz
+         Pruebas de Cubos y Finanware
+1 d=EDa
+lun 09/05/22
+lun 09/05/22
+69
+Jose Mu=F1oz
+         Certificacion con el usuario
+4 d=EDas
+mar 09/06/22
+vie 09/09/22
+70
+Jose Mu=F1oz
+
+
+
+
+Dar=EDo Barco Le=F3n
+Desarrollo | Tecnolog=EDa
+Junin 200 y Panam=E1. Guayaquil - Ecuador | 4 230 5000 - ext. 3563
+[Firma BB]
+
+De: Dario Barco Le=F3n
+Enviado el: Tuesday, May 3, 2022 10:05 AM
+Para: Wendy Cede=F1o Ley <wcedeno@bolivariano.com>; Darwin Briones Barzola =
+<dbriones@bolivariano.com>; Carlos Rodr=EDguez Murillo <crodriguez@bolivari=
+ano.com>; Jonathan Guerrero Jijon <jguerrej@bolivariano.com>
+CC: Recaudos <Recaudos@bolivariano365.onmicrosoft.com>
+Asunto: Divisi=F3n por entregables - V=EDa Rapida
+
+Lo acordado, ajusto el Project a estos entregables y lo miramos nuevamente.
+
+Primer Entregable ANT
+Primer Entregable MOVISTAR
+ANT - 24Online sin TC
+MOVISTAR - 24Online sin TC
+ANT- 24Movil sin TC
+MOVISTAR- 24Movil sin TC
+backoffice, estructura, cubo
+backoffice, estructura, cubo
+Segundo Entregable ANT
+Segundo Entregable MOVISTAR
+ANT - 24Online con TC
+ATX
+ANT- 24Movil con TC
+backoffice, estructura, cubo
+backoffice, estructura, cubo
+Tercer Entregable ANT
+Primer Entregable TUENTI
+ATX  Completo
+TUENTI - 24Online sin TC
+SAT - Completo
+TUENTI- 24Movil sin TC
+backoffice, estructura, cubo
+ATX
+backoffice, estructura, cubo
+
+
+
+
+Dar=EDo Barco Le=F3n
+Desarrollo | Tecnolog=EDa
+Junin 200 y Panam=E1. Guayaquil - Ecuador | 4 230 5000 - ext. 3563
+[Firma BB]
+
+
+--_000_BN8PR10MB3172156B6157299122C3B867A4C09BN8PR10MB3172namp_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<!--[if !mso]><style>v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style><![endif]--><style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:"Segoe UI";
+	panose-1:2 11 5 2 4 2 4 2 2 3;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;
+	mso-fareast-language:EN-US;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:#0563C1;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:#954F72;
+	text-decoration:underline;}
+p.msonormal0, li.msonormal0, div.msonormal0
+	{mso-style-name:msonormal;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif;}
+span.EstiloCorreo18
+	{mso-style-type:personal;
+	font-family:"Calibri",sans-serif;
+	color:windowtext;}
+span.EstiloCorreo19
+	{mso-style-type:personal-reply;
+	font-family:"Calibri",sans-serif;
+	color:#1F497D;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:70.85pt 85.05pt 70.85pt 85.05pt;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"ES-EC" link=3D"#0563C1" vlink=3D"#954F72">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D">Carlos:<o:p></o:p></sp=
+an></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D">Por favor f=EDjate en =
+los re-acomodos de fecha de las pruebas, luego nos juntamos.<o:p></o:p></sp=
+an></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<table class=3D"MsoNormalTable" border=3D"1" cellspacing=3D"0" cellpadding=
+=3D"0" style=3D"border-collapse:collapse;border:none">
+<tbody>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;backgr=
+ound:#DFE3E8;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:9.0pt;font-family:&quot;Seg=
+oe UI&quot;,sans-serif;color:#363636;background:#DFE3E8;mso-fareast-languag=
+e:ES-EC">Nombre de tarea</span><span style=3D"font-size:9.0pt;font-family:&=
+quot;Segoe UI&quot;,sans-serif;mso-fareast-language:ES-EC"><o:p></o:p></spa=
+n></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border:solid #B1BBCC 1.0pt;border-l=
+eft:none;background:#DFE3E8;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:9.0pt;font-family:&quot;Seg=
+oe UI&quot;,sans-serif;color:#363636;background:#DFE3E8;mso-fareast-languag=
+e:ES-EC">Duraci=F3n</span><span style=3D"font-size:9.0pt;font-family:&quot;=
+Segoe UI&quot;,sans-serif;mso-fareast-language:ES-EC"><o:p></o:p></span></p=
+>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border:solid #B1BBCC 1.0pt;border-l=
+eft:none;background:#DFE3E8;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:9.0pt;font-family:&quot;Seg=
+oe UI&quot;,sans-serif;color:#363636;background:#DFE3E8;mso-fareast-languag=
+e:ES-EC">Comienzo</span><span style=3D"font-size:9.0pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;mso-fareast-language:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border:solid #B1BBCC 1.0pt;border-l=
+eft:none;background:#DFE3E8;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:9.0pt;font-family:&quot;Seg=
+oe UI&quot;,sans-serif;color:#363636;background:#DFE3E8;mso-fareast-languag=
+e:ES-EC">Fin</span><span style=3D"font-size:9.0pt;font-family:&quot;Segoe U=
+I&quot;,sans-serif;mso-fareast-language:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border:solid #B1BBCC 1.0pt;border-l=
+eft:none;background:#DFE3E8;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:9.0pt;font-family:&quot;Seg=
+oe UI&quot;,sans-serif;color:#363636;background:#DFE3E8;mso-fareast-languag=
+e:ES-EC">Predecesoras</span><span style=3D"font-size:9.0pt;font-family:&quo=
+t;Segoe UI&quot;,sans-serif;mso-fareast-language:ES-EC"><o:p></o:p></span><=
+/p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border:solid #B1BBCC 1.0pt;border=
+-left:none;background:#DFE3E8;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:9.0pt;font-family:&quot;Seg=
+oe UI&quot;,sans-serif;color:#363636;background:#DFE3E8;mso-fareast-languag=
+e:ES-EC">Nombres de los recursos</span><span style=3D"font-size:9.0pt;font-=
+family:&quot;Segoe UI&quot;,sans-serif;mso-fareast-language:ES-EC"><o:p></o=
+:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">Pruebas Funcionales</span></b><span style=3D"mso-fareast-language:ES-=
+EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">55 d=EDas</span></b><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">lun 06/27/22</span></b><span style=3D"mso-fareast-language:ES-EC"><o:=
+p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">vie 09/09/22</span></b><span style=3D"mso-fareast-language:ES-EC"><o:=
+p></o:p></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">&nbsp;&nbsp; Recaudaci=F3n ANT</span></b><span style=3D"mso-fareast-l=
+anguage:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">54 d=EDas</span></b><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">lun 06/27/22</span></b><span style=3D"mso-fareast-language:ES-EC"><o:=
+p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">jue 09/08/22</span></b><span style=3D"mso-fareast-language:ES-EC"><o:=
+p></o:p></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Entregable 1 - Ant</span></b><span sty=
+le=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">15 d=EDas</span></b><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">lun 06/27/22</span></b><span style=3D"mso-fareast-language:ES-EC"><o:=
+p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">vie 07/15/22</span></b><span style=3D"mso-fareast-language:ES-EC"><o:=
+p></o:p></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pruebas de Canal 24 OnL=
+ine</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:#FFD965;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#FFD965;mso-fa=
+reast-language:ES-EC">3 d=EDas</span><span style=3D"mso-fareast-language:ES=
+-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">lun 06/27/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">mi=E9 06/29/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o=
+:p></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">17</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Carlos Rodriguez</span><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pruebas Canal 24 Movil<=
+/span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:#FFD965;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#FFD965;mso-fa=
+reast-language:ES-EC">3 d=EDas</span><span style=3D"mso-fareast-language:ES=
+-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">jue 06/30/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">lun 07/04/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">28</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Carlos Rodriguez</span><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:#FFF2CC;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#FFF2CC;mso-fa=
+reast-language:ES-EC">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Prue=
+bas Backoffice</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p>=
+</span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:#FFD965;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#FFD965;mso-fa=
+reast-language:ES-EC">3 d=EDas</span><span style=3D"mso-fareast-language:ES=
+-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">mar 07/05/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">jue 07/07/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">29</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Carlos Rodriguez</span><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pruebas Estructura de C=
+ontrol</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span><=
+/p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:#FFD965;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#FFD965;mso-fa=
+reast-language:ES-EC">2 d=EDas</span><span style=3D"mso-fareast-language:ES=
+-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">vie 07/08/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">lun 07/11/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">30</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Carlos Rodriguez</span><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pruebas de Cubos y Fina=
+nware</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:#FFD965;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#FFD965;mso-fa=
+reast-language:ES-EC">1 d=EDa</span><span style=3D"mso-fareast-language:ES-=
+EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">mar 07/12/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">mar 07/12/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">31</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Carlos Rodriguez</span><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:yellow;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:yellow;mso-far=
+east-language:ES-EC">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Certi=
+ficacion con el usuario</span><span style=3D"mso-fareast-language:ES-EC"><o=
+:p></o:p></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:yellow;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:yellow;mso-far=
+east-language:ES-EC">3 d=EDas</span><span style=3D"mso-fareast-language:ES-=
+EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:yellow;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:yellow;mso-far=
+east-language:ES-EC">mi=E9 07/13/22</span><span style=3D"mso-fareast-langua=
+ge:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">vie 07/15/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">32</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Carlos Rodriguez</span><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Entregable 2 - ANT pago con TC</span><=
+/b><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">15 d=EDas</span></b><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">vie 07/22/22</span></b><span style=3D"mso-fareast-language:ES-EC"><o:=
+p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">jue 08/11/22</span></b><span style=3D"mso-fareast-language:ES-EC"><o:=
+p></o:p></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pruebas de Canal 24 OnL=
+ine con TC</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></sp=
+an></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:#FFD965;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#FFD965;mso-fa=
+reast-language:ES-EC">3 d=EDas</span><span style=3D"mso-fareast-language:ES=
+-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">vie 07/22/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">mar 07/26/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">33</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Carlos Rodriguez</span><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pruebas Canal 24 Movil =
+con TC</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span><=
+/p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:#FFD965;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#FFD965;mso-fa=
+reast-language:ES-EC">3 d=EDas</span><span style=3D"mso-fareast-language:ES=
+-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">mi=E9 07/27/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o=
+:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">vie 07/29/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">35</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Carlos Rodriguez</span><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:#FFF2CC;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#FFF2CC;mso-fa=
+reast-language:ES-EC">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Prue=
+bas Backoffice</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p>=
+</span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:#FFD965;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#FFD965;mso-fa=
+reast-language:ES-EC">3 d=EDas</span><span style=3D"mso-fareast-language:ES=
+-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">lun 08/01/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">mi=E9 08/03/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o=
+:p></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">36</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Carlos Rodriguez</span><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:#DEEBF6;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#DEEBF6;mso-fa=
+reast-language:ES-EC">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Prue=
+bas Backoffice Credimatic</span><span style=3D"mso-fareast-language:ES-EC">=
+<o:p></o:p></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:#DEEBF6;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#DEEBF6;mso-fa=
+reast-language:ES-EC">3 d=EDas</span><span style=3D"mso-fareast-language:ES=
+-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:#DEEBF6;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#DEEBF6;mso-fa=
+reast-language:ES-EC">lun 08/01/22</span><span style=3D"mso-fareast-languag=
+e:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:#DEEBF6;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#DEEBF6;mso-fa=
+reast-language:ES-EC">mi=E9 08/03/22</span><span style=3D"mso-fareast-langu=
+age:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:#DEEBF6;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#DEEBF6;mso-fa=
+reast-language:ES-EC">36</span><span style=3D"mso-fareast-language:ES-EC"><=
+o:p></o:p></span></p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:#DEEBF6;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#DEEBF6;mso-fa=
+reast-language:ES-EC">Carlos Coronel</span><span style=3D"mso-fareast-langu=
+age:ES-EC"><o:p></o:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pruebas Estructura de C=
+ontrol</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span><=
+/p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:#FFD965;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#FFD965;mso-fa=
+reast-language:ES-EC">2 d=EDas</span><span style=3D"mso-fareast-language:ES=
+-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">jue 08/04/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">vie 08/05/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">37</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Carlos Rodriguez</span><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pruebas de Cubos y Fina=
+nware</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:#FFD965;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#FFD965;mso-fa=
+reast-language:ES-EC">1 d=EDa</span><span style=3D"mso-fareast-language:ES-=
+EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">lun 08/08/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">lun 08/08/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">39</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Carlos Rodriguez</span><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Certificacion con el us=
+uario</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:#FFD965;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#FFD965;mso-fa=
+reast-language:ES-EC">3 d=EDas</span><span style=3D"mso-fareast-language:ES=
+-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">mar 08/09/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">jue 08/11/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">40</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Carlos Rodriguez</span><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Entregable 3 - ANT Resto de Canales</s=
+pan></b><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">20 d=EDas</span></b><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">vie 08/12/22</span></b><span style=3D"mso-fareast-language:ES-EC"><o:=
+p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">jue 09/08/22</span></b><span style=3D"mso-fareast-language:ES-EC"><o:=
+p></o:p></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:yellow;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:yellow;mso-far=
+east-language:ES-EC">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ATX t=
+odas sus formas de pago</span><span style=3D"mso-fareast-language:ES-EC"><o=
+:p></o:p></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:yellow;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:yellow;mso-far=
+east-language:ES-EC">4 d=EDas</span><span style=3D"mso-fareast-language:ES-=
+EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:yellow;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:yellow;mso-far=
+east-language:ES-EC">vie 08/12/22</span><span style=3D"mso-fareast-language=
+:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:yellow;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:yellow;mso-far=
+east-language:ES-EC">mi=E9 08/17/22</span><span style=3D"mso-fareast-langua=
+ge:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:yellow;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:yellow;mso-far=
+east-language:ES-EC">41</span><span style=3D"mso-fareast-language:ES-EC"><o=
+:p></o:p></span></p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Carlos Rodriguez</span><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SAT todas sus formas de=
+ pago</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">4 d=EDas</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></s=
+pan></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">jue 08/18/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">mar 08/23/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">43</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Carlos Rodriguez</span><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:#FFF2CC;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#FFF2CC;mso-fa=
+reast-language:ES-EC">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Prue=
+bas Backoffice</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p>=
+</span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">4 d=EDas</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></s=
+pan></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">mi=E9 08/24/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o=
+:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">lun 08/29/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">44</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Carlos Rodriguez</span><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:#DEEBF6;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#DEEBF6;mso-fa=
+reast-language:ES-EC">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Prue=
+bas Backoffice Credimatic</span><span style=3D"mso-fareast-language:ES-EC">=
+<o:p></o:p></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:#DEEBF6;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#DEEBF6;mso-fa=
+reast-language:ES-EC">3 d=EDas</span><span style=3D"mso-fareast-language:ES=
+-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:#DEEBF6;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#DEEBF6;mso-fa=
+reast-language:ES-EC">mi=E9 08/24/22</span><span style=3D"mso-fareast-langu=
+age:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:#DEEBF6;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#DEEBF6;mso-fa=
+reast-language:ES-EC">vie 08/26/22</span><span style=3D"mso-fareast-languag=
+e:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:#DEEBF6;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#DEEBF6;mso-fa=
+reast-language:ES-EC">44</span><span style=3D"mso-fareast-language:ES-EC"><=
+o:p></o:p></span></p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:#DEEBF6;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:#DEEBF6;mso-fa=
+reast-language:ES-EC">Carlos Coronel</span><span style=3D"mso-fareast-langu=
+age:ES-EC"><o:p></o:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pruebas Estructura de C=
+ontrol</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span><=
+/p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">3 d=EDas</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></s=
+pan></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">mar 08/30/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">jue 09/01/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">45</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Carlos Rodriguez</span><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pruebas de Cubos y Fina=
+nware</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">1 d=EDa</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></sp=
+an></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">vie 09/02/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">vie 09/02/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">47</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Carlos Rodriguez</span><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Certificacion con el us=
+uario</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">4 d=EDas</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></s=
+pan></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">lun 09/05/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">jue 09/08/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">48</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Carlos Rodriguez</span><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">&nbsp;&nbsp; Recaudaci=F3n MoviStar</span></b><span style=3D"mso-fare=
+ast-language:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">55 d=EDas</span></b><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">lun 06/27/22</span></b><span style=3D"mso-fareast-language:ES-EC"><o:=
+p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">vie 09/09/22</span></b><span style=3D"mso-fareast-language:ES-EC"><o:=
+p></o:p></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Entregable 1 - MoviStar Canales Virtua=
+les</span></b><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span>=
+</p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">15 d=EDas</span></b><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">lun 06/27/22</span></b><span style=3D"mso-fareast-language:ES-EC"><o:=
+p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">vie 07/15/22</span></b><span style=3D"mso-fareast-language:ES-EC"><o:=
+p></o:p></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pruebas de Canal 24 OnL=
+ine</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">3 d=EDas</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></s=
+pan></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">lun 06/27/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">mi=E9 06/29/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o=
+:p></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">18</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Jose Mu=F1oz</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pruebas Canal 24 Movil<=
+/span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">3 d=EDas</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></s=
+pan></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">jue 06/30/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">lun 07/04/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">52</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Jose Mu=F1oz</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pruebas Backoffice</spa=
+n><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">3 d=EDas</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></s=
+pan></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">mar 07/05/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">jue 07/07/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">53</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Jose Mu=F1oz</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pruebas Estructura de C=
+ontrol</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span><=
+/p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">2 d=EDas</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></s=
+pan></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">vie 07/08/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">lun 07/11/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">54</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Jose Mu=F1oz</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pruebas de Cubos y Fina=
+nware</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">1 d=EDa</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></sp=
+an></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">mar 07/12/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">mar 07/12/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">55</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Jose Mu=F1oz</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Certificacion con el us=
+uario</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">3 d=EDas</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></s=
+pan></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">mi=E9 07/13/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o=
+:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">vie 07/15/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">56</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Jose Mu=F1oz</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Entregable 2 - MoviStar Canal Fisico</=
+span></b><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">12 d=EDas</span></b><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">lun 07/18/22</span></b><span style=3D"mso-fareast-language:ES-EC"><o:=
+p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">mar 08/02/22</span></b><span style=3D"mso-fareast-language:ES-EC"><o:=
+p></o:p></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:yellow;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:yellow;mso-far=
+east-language:ES-EC">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Prueb=
+as en Canal ATX</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:yellow;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:yellow;mso-far=
+east-language:ES-EC">4 d=EDas</span><span style=3D"mso-fareast-language:ES-=
+EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:yellow;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:yellow;mso-far=
+east-language:ES-EC">lun 07/18/22</span><span style=3D"mso-fareast-language=
+:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:yellow;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:yellow;mso-far=
+east-language:ES-EC">jue 07/21/22</span><span style=3D"mso-fareast-language=
+:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:yellow;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:yellow;mso-far=
+east-language:ES-EC">57</span><span style=3D"mso-fareast-language:ES-EC"><o=
+:p></o:p></span></p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:yellow;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:yellow;mso-far=
+east-language:ES-EC">Jose Mu=F1oz</span><span style=3D"mso-fareast-language=
+:ES-EC"><o:p></o:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pruebas Backoffice</spa=
+n><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">3 d=EDas</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></s=
+pan></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">vie 07/22/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">mar 07/26/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">59</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Jose Mu=F1oz</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pruebas Estructura de C=
+ontrol</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span><=
+/p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">2 d=EDas</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></s=
+pan></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">mi=E9 07/27/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o=
+:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">jue 07/28/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">60</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Jose Mu=F1oz</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pruebas de Cubos y Fina=
+nware</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">1 d=EDa</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></sp=
+an></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">vie 07/29/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">vie 07/29/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">61</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Jose Mu=F1oz</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Certificacion con el us=
+uario</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">2 d=EDas</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></s=
+pan></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">lun 08/01/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">mar 08/02/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">62</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Jose Mu=F1oz</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Entregable 3 - Recaudacion Tuenti</spa=
+n></b><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">20 d=EDas</span></b><span style=3D"mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">lun 08/15/22</span></b><span style=3D"mso-fareast-language:ES-EC"><o:=
+p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">vie 09/09/22</span></b><span style=3D"mso-fareast-language:ES-EC"><o:=
+p></o:p></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;Pruebas de Canal 24 OnL=
+ine</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">3 d=EDas</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></s=
+pan></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">lun 08/15/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">mi=E9 08/17/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o=
+:p></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">63</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Jose Mu=F1oz</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pruebas Canal 24 Movil<=
+/span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">3 d=EDas</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></s=
+pan></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">jue 08/18/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">lun 08/22/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">65</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Jose Mu=F1oz</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:yellow;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:yellow;mso-far=
+east-language:ES-EC">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Prueb=
+as en Canal ATX</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:yellow;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:yellow;mso-far=
+east-language:ES-EC">4 d=EDas</span><span style=3D"mso-fareast-language:ES-=
+EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:yellow;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:yellow;mso-far=
+east-language:ES-EC">mar 08/23/22</span><span style=3D"mso-fareast-language=
+:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:yellow;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:yellow;mso-far=
+east-language:ES-EC">vie 08/26/22</span><span style=3D"mso-fareast-language=
+:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:yellow;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:yellow;mso-far=
+east-language:ES-EC">66</span><span style=3D"mso-fareast-language:ES-EC"><o=
+:p></o:p></span></p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:yellow;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;background:yellow;mso-far=
+east-language:ES-EC">Jose Mu=F1oz</span><span style=3D"mso-fareast-language=
+:ES-EC"><o:p></o:p></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pruebas Backoffice</spa=
+n><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">3 d=EDas</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></s=
+pan></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">lun 08/29/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">mi=E9 08/31/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o=
+:p></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">67</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Jose Mu=F1oz</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pruebas Estructura de C=
+ontrol</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span><=
+/p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">2 d=EDas</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></s=
+pan></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">jue 09/01/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">vie 09/02/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">68</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Jose Mu=F1oz</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pruebas de Cubos y Fina=
+nware</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">1 d=EDa</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></sp=
+an></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">lun 09/05/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">lun 09/05/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">69</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Jose Mu=F1oz</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"192" style=3D"width:272.25pt;border:solid #B1BBCC 1.0pt;border=
+-top:none;background:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Certificacion con el us=
+uario</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"62" style=3D"width:60.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">4 d=EDas</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></s=
+pan></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">mar 09/06/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"73" style=3D"width:69.75pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">vie 09/09/22</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+<td width=3D"78" style=3D"width:65.25pt;border-top:none;border-left:none;bo=
+rder-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;background=
+:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">70</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"229" style=3D"width:362.25pt;border-top:none;border-left:none;=
+border-bottom:solid #B1BBCC 1.0pt;border-right:solid #B1BBCC 1.0pt;backgrou=
+nd:white;padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">Jose Mu=F1oz</span><span style=3D"mso-fareast-language:ES-EC"><o:p></o:p=
+></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D;mso-fareast-language:ES=
+-EC"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12.0pt;color:#009999;mso=
+-fareast-language:ES-EC">Dar=EDo Barco Le=F3n<o:p></o:p></span></b></p>
+<p class=3D"MsoNormal"><b><span style=3D"color:#1F497D;mso-fareast-language=
+:ES-EC">Desarrollo | Tecnolog=EDa<o:p></o:p></span></b></p>
+<p class=3D"MsoNormal"><span style=3D"color:gray;mso-fareast-language:ES-EC=
+">Junin 200 y Panam=E1. Guayaquil &#8211; Ecuador | 4 230 5000 &#8211; ext.=
+ 3563<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D;mso-fareast-language:ES=
+-EC"><img width=3D"388" height=3D"63" style=3D"width:4.0416in;height:.6562i=
+n" id=3D"_x0000_i1026" src=3D"cid:image001.png@01D85EF5.CA7085C0" alt=3D"Fi=
+rma BB"></span><span style=3D"color:gray;mso-fareast-language:ES-EC"><o:p><=
+/o:p></span></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span lang=3D"ES" style=3D"mso-fareast-language:E=
+S-EC">De:</span></b><span lang=3D"ES" style=3D"mso-fareast-language:ES-EC">=
+ Dario Barco Le=F3n
+<br>
+<b>Enviado el:</b> Tuesday, May 3, 2022 10:05 AM<br>
+<b>Para:</b> Wendy Cede=F1o Ley &lt;wcedeno@bolivariano.com&gt;; Darwin Bri=
+ones Barzola &lt;dbriones@bolivariano.com&gt;; Carlos Rodr=EDguez Murillo &=
+lt;crodriguez@bolivariano.com&gt;; Jonathan Guerrero Jijon &lt;jguerrej@bol=
+ivariano.com&gt;<br>
+<b>CC:</b> Recaudos &lt;Recaudos@bolivariano365.onmicrosoft.com&gt;<br>
+<b>Asunto:</b> Divisi=F3n por entregables - V=EDa Rapida<o:p></o:p></span><=
+/p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Lo acordado, ajusto el Project a estos entregables y=
+ lo miramos nuevamente.<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellspacing=3D"0" cellpadding=
+=3D"0" width=3D"0" style=3D"width:409.0pt;margin-left:-.15pt;border-collaps=
+e:collapse">
+<tbody>
+<tr style=3D"height:15.0pt">
+<td width=3D"223" nowrap=3D"" valign=3D"bottom" style=3D"width:167.0pt;bord=
+er:solid windowtext 1.0pt;padding:0in 3.5pt 0in 3.5pt;height:15.0pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">Primer Entregable ANT<o:p></o:p></span></b></p>
+</td>
+<td width=3D"80" nowrap=3D"" valign=3D"bottom" style=3D"width:60.0pt;paddin=
+g:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+<td width=3D"243" nowrap=3D"" valign=3D"bottom" style=3D"width:182.0pt;bord=
+er:solid windowtext 1.0pt;padding:0in 3.5pt 0in 3.5pt;height:15.0pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">Primer Entregable MOVISTAR<o:p></o:p></span></b></p>
+</td>
+</tr>
+<tr style=3D"height:15.0pt">
+<td width=3D"223" nowrap=3D"" valign=3D"bottom" style=3D"width:167.0pt;bord=
+er:solid windowtext 1.0pt;border-top:none;padding:0in 3.5pt 0in 3.5pt;heigh=
+t:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">ANT - 24Online sin TC<o:p></o:p></span></p>
+</td>
+<td width=3D"80" nowrap=3D"" valign=3D"bottom" style=3D"width:60.0pt;paddin=
+g:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+<td width=3D"243" nowrap=3D"" valign=3D"bottom" style=3D"width:182.0pt;bord=
+er:solid windowtext 1.0pt;border-top:none;padding:0in 3.5pt 0in 3.5pt;heigh=
+t:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">MOVISTAR - 24Online sin TC<o:p></o:p></span></p>
+</td>
+</tr>
+<tr style=3D"height:15.0pt">
+<td width=3D"223" nowrap=3D"" valign=3D"bottom" style=3D"width:167.0pt;bord=
+er:solid windowtext 1.0pt;border-top:none;padding:0in 3.5pt 0in 3.5pt;heigh=
+t:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">ANT- 24Movil sin TC<o:p></o:p></span></p>
+</td>
+<td width=3D"80" nowrap=3D"" valign=3D"bottom" style=3D"width:60.0pt;paddin=
+g:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+<td width=3D"243" nowrap=3D"" valign=3D"bottom" style=3D"width:182.0pt;bord=
+er:solid windowtext 1.0pt;border-top:none;padding:0in 3.5pt 0in 3.5pt;heigh=
+t:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">MOVISTAR- 24Movil sin TC<o:p></o:p></span></p>
+</td>
+</tr>
+<tr style=3D"height:15.0pt">
+<td width=3D"223" nowrap=3D"" valign=3D"bottom" style=3D"width:167.0pt;bord=
+er:solid windowtext 1.0pt;border-top:none;padding:0in 3.5pt 0in 3.5pt;heigh=
+t:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">backoffice, estructura, cubo<o:p></o:p></span></p>
+</td>
+<td width=3D"80" nowrap=3D"" valign=3D"bottom" style=3D"width:60.0pt;paddin=
+g:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+<td width=3D"243" nowrap=3D"" valign=3D"bottom" style=3D"width:182.0pt;bord=
+er:solid windowtext 1.0pt;border-top:none;padding:0in 3.5pt 0in 3.5pt;heigh=
+t:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">backoffice, estructura, cubo<o:p></o:p></span></p>
+</td>
+</tr>
+<tr style=3D"height:15.0pt">
+<td width=3D"223" nowrap=3D"" valign=3D"bottom" style=3D"width:167.0pt;padd=
+ing:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+<td width=3D"80" nowrap=3D"" valign=3D"bottom" style=3D"width:60.0pt;paddin=
+g:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+<td width=3D"243" nowrap=3D"" valign=3D"bottom" style=3D"width:182.0pt;padd=
+ing:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+</tr>
+<tr style=3D"height:15.0pt">
+<td width=3D"223" nowrap=3D"" valign=3D"bottom" style=3D"width:167.0pt;padd=
+ing:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+<td width=3D"80" nowrap=3D"" valign=3D"bottom" style=3D"width:60.0pt;paddin=
+g:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+<td width=3D"243" nowrap=3D"" valign=3D"bottom" style=3D"width:182.0pt;padd=
+ing:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+</tr>
+<tr style=3D"height:15.0pt">
+<td width=3D"223" nowrap=3D"" valign=3D"bottom" style=3D"width:167.0pt;bord=
+er:solid windowtext 1.0pt;padding:0in 3.5pt 0in 3.5pt;height:15.0pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">Segundo Entregable ANT<o:p></o:p></span></b></p>
+</td>
+<td width=3D"80" nowrap=3D"" valign=3D"bottom" style=3D"width:60.0pt;paddin=
+g:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+<td width=3D"243" nowrap=3D"" valign=3D"bottom" style=3D"width:182.0pt;bord=
+er:solid windowtext 1.0pt;padding:0in 3.5pt 0in 3.5pt;height:15.0pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">Segundo Entregable MOVISTAR<o:p></o:p></span></b></p>
+</td>
+</tr>
+<tr style=3D"height:15.0pt">
+<td width=3D"223" nowrap=3D"" valign=3D"bottom" style=3D"width:167.0pt;bord=
+er:solid windowtext 1.0pt;border-top:none;padding:0in 3.5pt 0in 3.5pt;heigh=
+t:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">ANT - 24Online con TC<o:p></o:p></span></p>
+</td>
+<td width=3D"80" nowrap=3D"" valign=3D"bottom" style=3D"width:60.0pt;paddin=
+g:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+<td width=3D"243" nowrap=3D"" valign=3D"bottom" style=3D"width:182.0pt;bord=
+er:solid windowtext 1.0pt;border-top:none;padding:0in 3.5pt 0in 3.5pt;heigh=
+t:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">ATX&nbsp; <o:p>
+</o:p></span></p>
+</td>
+</tr>
+<tr style=3D"height:15.0pt">
+<td width=3D"223" nowrap=3D"" valign=3D"bottom" style=3D"width:167.0pt;bord=
+er:solid windowtext 1.0pt;border-top:none;padding:0in 3.5pt 0in 3.5pt;heigh=
+t:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">ANT- 24Movil con TC<o:p></o:p></span></p>
+</td>
+<td width=3D"80" nowrap=3D"" valign=3D"bottom" style=3D"width:60.0pt;paddin=
+g:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+<td width=3D"243" nowrap=3D"" valign=3D"bottom" style=3D"width:182.0pt;bord=
+er:solid windowtext 1.0pt;border-top:none;padding:0in 3.5pt 0in 3.5pt;heigh=
+t:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">backoffice, estructura, cubo<o:p></o:p></span></p>
+</td>
+</tr>
+<tr style=3D"height:15.0pt">
+<td width=3D"223" nowrap=3D"" valign=3D"bottom" style=3D"width:167.0pt;bord=
+er:solid windowtext 1.0pt;border-top:none;padding:0in 3.5pt 0in 3.5pt;heigh=
+t:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">backoffice, estructura, cubo<o:p></o:p></span></p>
+</td>
+<td width=3D"80" nowrap=3D"" valign=3D"bottom" style=3D"width:60.0pt;paddin=
+g:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+<td width=3D"243" nowrap=3D"" valign=3D"bottom" style=3D"width:182.0pt;padd=
+ing:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+</tr>
+<tr style=3D"height:15.0pt">
+<td width=3D"223" nowrap=3D"" valign=3D"bottom" style=3D"width:167.0pt;padd=
+ing:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+<td width=3D"80" nowrap=3D"" valign=3D"bottom" style=3D"width:60.0pt;paddin=
+g:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+<td width=3D"243" nowrap=3D"" valign=3D"bottom" style=3D"width:182.0pt;padd=
+ing:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+</tr>
+<tr style=3D"height:15.0pt">
+<td width=3D"223" nowrap=3D"" valign=3D"bottom" style=3D"width:167.0pt;padd=
+ing:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+<td width=3D"80" nowrap=3D"" valign=3D"bottom" style=3D"width:60.0pt;paddin=
+g:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+<td width=3D"243" nowrap=3D"" valign=3D"bottom" style=3D"width:182.0pt;padd=
+ing:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+</tr>
+<tr style=3D"height:15.0pt">
+<td width=3D"223" nowrap=3D"" valign=3D"bottom" style=3D"width:167.0pt;bord=
+er:solid windowtext 1.0pt;padding:0in 3.5pt 0in 3.5pt;height:15.0pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">Tercer Entregable ANT<o:p></o:p></span></b></p>
+</td>
+<td width=3D"80" nowrap=3D"" valign=3D"bottom" style=3D"width:60.0pt;paddin=
+g:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+<td width=3D"243" nowrap=3D"" valign=3D"bottom" style=3D"width:182.0pt;bord=
+er:solid windowtext 1.0pt;padding:0in 3.5pt 0in 3.5pt;height:15.0pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black;mso-fareast-language:E=
+S-EC">Primer Entregable TUENTI<o:p></o:p></span></b></p>
+</td>
+</tr>
+<tr style=3D"height:15.0pt">
+<td width=3D"223" nowrap=3D"" valign=3D"bottom" style=3D"width:167.0pt;bord=
+er:solid windowtext 1.0pt;border-top:none;padding:0in 3.5pt 0in 3.5pt;heigh=
+t:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">ATX&nbsp; Completo<o:p></o:p></span></p>
+</td>
+<td width=3D"80" nowrap=3D"" valign=3D"bottom" style=3D"width:60.0pt;paddin=
+g:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+<td width=3D"243" nowrap=3D"" valign=3D"bottom" style=3D"width:182.0pt;bord=
+er:solid windowtext 1.0pt;border-top:none;padding:0in 3.5pt 0in 3.5pt;heigh=
+t:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">TUENTI - 24Online sin TC<o:p></o:p></span></p>
+</td>
+</tr>
+<tr style=3D"height:15.0pt">
+<td width=3D"223" nowrap=3D"" valign=3D"bottom" style=3D"width:167.0pt;bord=
+er:solid windowtext 1.0pt;border-top:none;padding:0in 3.5pt 0in 3.5pt;heigh=
+t:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">SAT - Completo<o:p></o:p></span></p>
+</td>
+<td width=3D"80" nowrap=3D"" valign=3D"bottom" style=3D"width:60.0pt;paddin=
+g:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+<td width=3D"243" nowrap=3D"" valign=3D"bottom" style=3D"width:182.0pt;bord=
+er:solid windowtext 1.0pt;border-top:none;padding:0in 3.5pt 0in 3.5pt;heigh=
+t:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">TUENTI- 24Movil sin TC<o:p></o:p></span></p>
+</td>
+</tr>
+<tr style=3D"height:15.0pt">
+<td width=3D"223" nowrap=3D"" valign=3D"bottom" style=3D"width:167.0pt;bord=
+er:solid windowtext 1.0pt;border-top:none;padding:0in 3.5pt 0in 3.5pt;heigh=
+t:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">backoffice, estructura, cubo<o:p></o:p></span></p>
+</td>
+<td width=3D"80" nowrap=3D"" valign=3D"bottom" style=3D"width:60.0pt;paddin=
+g:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+<td width=3D"243" nowrap=3D"" valign=3D"bottom" style=3D"width:182.0pt;bord=
+er:solid windowtext 1.0pt;border-top:none;padding:0in 3.5pt 0in 3.5pt;heigh=
+t:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">ATX<o:p></o:p></span></p>
+</td>
+</tr>
+<tr style=3D"height:15.0pt">
+<td width=3D"223" nowrap=3D"" valign=3D"bottom" style=3D"width:167.0pt;padd=
+ing:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+<td width=3D"80" nowrap=3D"" valign=3D"bottom" style=3D"width:60.0pt;paddin=
+g:0in 3.5pt 0in 3.5pt;height:15.0pt">
+</td>
+<td width=3D"243" nowrap=3D"" valign=3D"bottom" style=3D"width:182.0pt;bord=
+er:solid windowtext 1.0pt;border-top:none;padding:0in 3.5pt 0in 3.5pt;heigh=
+t:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"color:black;mso-fareast-language:ES-E=
+C">backoffice, estructura, cubo<o:p></o:p></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:ES-EC"><o:p>&nbs=
+p;</o:p></span></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12.0pt;color:#009999;mso=
+-fareast-language:ES-EC">Dar=EDo Barco Le=F3n<o:p></o:p></span></b></p>
+<p class=3D"MsoNormal"><b><span style=3D"mso-fareast-language:ES-EC">Desarr=
+ollo | Tecnolog=EDa<o:p></o:p></span></b></p>
+<p class=3D"MsoNormal"><span style=3D"color:gray;mso-fareast-language:ES-EC=
+">Junin 200 y Panam=E1. Guayaquil &#8211; Ecuador | 4 230 5000 &#8211; ext.=
+ 3563<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D;mso-fareast-language:ES=
+-EC"><img width=3D"388" height=3D"63" style=3D"width:4.0416in;height:.6562i=
+n" id=3D"Imagen_x0020_9" src=3D"cid:image001.png@01D85EF5.CA7085C0" alt=3D"=
+Firma BB"></span><span style=3D"color:gray;mso-fareast-language:ES-EC"><o:p=
+></o:p></span></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+</body>
+</html>
+
+--_000_BN8PR10MB3172156B6157299122C3B867A4C09BN8PR10MB3172namp_--
+
+--_004_BN8PR10MB3172156B6157299122C3B867A4C09BN8PR10MB3172namp_
+Content-Type: image/png; name="image001.png"
+Content-Description: image001.png
+Content-Disposition: inline; filename="image001.png"; size=7232;
+	creation-date="Tue, 03 May 2022 18:57:58 GMT";
+	modification-date="Tue, 03 May 2022 18:57:58 GMT"
+Content-ID: <image001.png@01D85EF5.CA7085C0>
+Content-Transfer-Encoding: base64
+
+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
+
+--_004_BN8PR10MB3172156B6157299122C3B867A4C09BN8PR10MB3172namp_--

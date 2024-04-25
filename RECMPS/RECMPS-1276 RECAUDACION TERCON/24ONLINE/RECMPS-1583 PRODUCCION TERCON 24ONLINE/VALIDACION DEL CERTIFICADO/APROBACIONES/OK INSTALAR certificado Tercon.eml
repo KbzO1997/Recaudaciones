@@ -1,0 +1,493 @@
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (104.47.55.105)
+ by mailweb.bolivariano.com (172.17.3.231) with Microsoft SMTP Server (TLS) id
+ 14.3.498.0; Wed, 30 Mar 2022 00:34:21 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=RMIyTDbbTPlQzH6z9pnVdmntqgV9Xvq9JYRhurWYsTPgNC7H/Ub5ehiL271GrQxlQX5m+hv595o9x0xdhPVt1y/rKMztwpDuqDleLCnvDjGxGvNdsChksFSwLp5vhJcTeAHclGrEQhEhT0PUq68T2mv6ZP1cpEcAfBe9K7QjoEPp+R38R4fVNUDF0dwwuztJK2itZAKDkLHVLTRi3S2rK8jBpXtmCZkWTo/O8TDedISGuEFOoaL6FUwUrZyducmzjpQhfa0D+jp2owe12fAVy9eQYRnl3nNRdrqV7QYXWG1EZdz3XlGfSyrofsTpPzW+9H0Uqed+HvRtEF8PCtfOeg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=BM979QCJOU7lYgTTBSpHWv4DB/s2LhPGHQedvQlfER8=;
+ b=EhHfY6exNNtPLIOhM/j8ko9th8lkky3Jmed7aiKL9Fl1dw8Ofv5OVCaHkl4802cDm0wpy0LHti0u7SXc2hVsGi/RYlU5QDNx3reEvw23XVj0t6AQZlc5qvhlCzADK/9WiVZAsTUsf2dvzKwNtbdyYbnWZBM0gAGeEEw+G7NvQ+UyuUTccxI+XYgWVBOQIdgVpFdHaMfP2NEJ3P1SppK38AiqJDZJfFjLkv5YLd2ZOjJ+w0ZokAdrJxyaCEc+9LqVy+vRbPXU7DwXe+EhCGhwUExLs4N926wDlZ8+7J96noqidv+s/0lORiWLw2E+QaTylPJGkLIawveqMqOGGnqxlA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=bolivariano.com; dmarc=pass action=none
+ header.from=bolivariano.com; dkim=pass header.d=bolivariano.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bolivariano.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=BM979QCJOU7lYgTTBSpHWv4DB/s2LhPGHQedvQlfER8=;
+ b=o2dYJWc7WEFDDDUqnwKjMAi9omfbxbwZVhcFQglHM3Sg5wSkRi0d31uUDSfYDp2KN6ECukqMZUqkvuxIkAi+B0BWCIfIjz2JSdOZuPwTvXv9LcveplG21mKtmFp0H8K1LH8xdqeLj61kQMPHeriARv1e44R2SMF3pMia3gmBx6zC4gtEFWZ2K4g8D6dVwVhsWCCgJOESRwfSQExjAtS0FLZIh7w4B5EyOC+HLp7mwlLX6ll9Lany0LcZAYuOyyvBA+U9h1j7UcbNwZ0j+tvW+t6VwJflfKDNNFy+s1vbVV3cGNs9tKcq891AzaYQIkmzMsquHm80AGk7KqQgVPfYzA==
+Received: from BN0PR10MB4821.namprd10.prod.outlook.com (2603:10b6:408:125::21)
+ by DM5PR10MB1995.namprd10.prod.outlook.com (2603:10b6:3:113::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5102.19; Wed, 30 Mar
+ 2022 05:34:18 +0000
+Received: from BN0PR10MB4821.namprd10.prod.outlook.com
+ ([fe80::e4b7:c41f:6c62:e9a9]) by BN0PR10MB4821.namprd10.prod.outlook.com
+ ([fe80::e4b7:c41f:6c62:e9a9%9]) with mapi id 15.20.5102.023; Wed, 30 Mar 2022
+ 05:34:18 +0000
+From: =?iso-8859-1?Q?Juan_Rodr=EDguez_Villavicencio?=
+	<jrodriguez@bolivariano.com>
+To: Fernando Rizzo Crespo <frizzoc@bolivariano.com>, IDS-ADMINSRV
+	<IDS-ADMINSRV@bolivariano.com>
+CC: =?iso-8859-1?Q?Administraci=F3n_y_Control?= <admcontrol@bolivariano.com>,
+	"Jonathan  Guerrero Jijon" <jguerrej@bolivariano.com>, Teamrecaudaciones
+	<teamrecaudaciones@bolivariano365.onmicrosoft.com>
+Subject: RE: PROD ORDEN DE PROCESO Instalar certificado Tercon
+Thread-Topic: PROD ORDEN DE PROCESO Instalar certificado Tercon
+Thread-Index: AdhDg5uuP//z/YrrR0aFZxD8L3PqyAAI8pxQABQYXMA=
+Date: Wed, 30 Mar 2022 05:34:18 +0000
+Message-ID: <BN0PR10MB4821075E7744C90B6DD000F7D41F9@BN0PR10MB4821.namprd10.prod.outlook.com>
+References: <BYAPR10MB33673DBD59D98AD2CB428A22C31E9@BYAPR10MB3367.namprd10.prod.outlook.com>
+ <BN0PR10MB5142445E2A8A87739DCB31D4A01E9@BN0PR10MB5142.namprd10.prod.outlook.com>
+In-Reply-To: <BN0PR10MB5142445E2A8A87739DCB31D4A01E9@BN0PR10MB5142.namprd10.prod.outlook.com>
+Accept-Language: es-EC, en-US
+Content-Language: es-ES
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=bolivariano.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 23f77e63-cafe-4a75-d504-08da120eef8e
+x-ms-traffictypediagnostic: DM5PR10MB1995:EE_
+x-ld-processed: 381bee0c-a9ea-4342-81c0-318a50b0845f,ExtAddr
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: i8zpkNRyKqnIyPy8oTjZvQfBq5n1uFxST1tdsHBb+L2BgR3QERSRZp2pmzPIWrMs/INwckczHrvXCRf+e0+GdC+bGYVxlHeMAYJ8zBks70uZ/jStA62ZMT0oVXJUStIM1tFbe94xkxwz8mOFdLLUouzRt43gVwVnGif9SBbS/V7Ldy3gkVh2QiT+jiuSb7LfQtYVs5KRJExqTe9rkT+LzoiTVhBHY3hzn+lfDm5tNBHWFol6OUG7opHoBiXjkTpb3TvyCygy838nZ/9430+FKuGxWq2d+suI2fPUn8Gs4B4jobovh/CPE0FsmeEkmpX8ZXcLAqLNxIN7qBlRCmCyzDC9hN2A7SYsq72bPqYKcJx7CQZYpqmJ51y4zhdMYuY3aHzKCDEnnHOY8kFDqw0gvWsO7zuJ/fseZnPltWTTs0+N+NAHKfJ82GVPheCkdN7ejA2RmxNzLzulipbtV48VbY4uv6r9ooLhPxIdFM4QEWZ/dpZlcDL+8ja88K2q4Xp2O7n3O8Gyo+lXO+KH6dUfW+1qLI2v8+suTOmcnF5m3HeRm/oc4Rcz2YcOeqsXRZfB
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:es;SCL:-1;SRV:;IPV:NLI;SFV:SKI;H:BN0PR10MB4821.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:;DIR:INB;
+Content-Type: multipart/related;
+	boundary="_004_BN0PR10MB4821075E7744C90B6DD000F7D41F9BN0PR10MB4821namp_";
+	type="multipart/alternative"
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BN0PR10MB4821.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 23f77e63-cafe-4a75-d504-08da120eef8e
+X-MS-Exchange-CrossTenant-originalarrivaltime: 30 Mar 2022 05:34:18.3366
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 381bee0c-a9ea-4342-81c0-318a50b0845f
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: Ki208u4pyed2bi4p3eJpsVPKBluwKrXbVafE9h9ssD0I+wppta826KhoTX2o8SRxXL8U58oG2DbanCRR3LQ+Esn38VXwdgWgcby1NijvCO8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR10MB1995
+X-OrganizationHeadersPreserved: DM5PR10MB1995.namprd10.prod.outlook.com
+Return-Path: jrodriguez@bolivariano.com
+X-OriginatorOrg: bolivariano.com
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-MS-Exchange-Organization-AuthSource: BN0PR10MB4821.namprd10.prod.outlook.com
+X-MS-Exchange-Organization-SCL: -1
+X-CrossPremisesHeadersPromoted: EX2K10SRV.bolivariano.fin.ec
+X-CrossPremisesHeadersFiltered: EX2K10SRV.bolivariano.fin.ec
+MIME-Version: 1.0
+
+--_004_BN0PR10MB4821075E7744C90B6DD000F7D41F9BN0PR10MB4821namp_
+Content-Type: multipart/alternative;
+	boundary="_000_BN0PR10MB4821075E7744C90B6DD000F7D41F9BN0PR10MB4821namp_"
+
+--_000_BN0PR10MB4821075E7744C90B6DD000F7D41F9BN0PR10MB4821namp_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Ok realizado
+
+Saludos,
+
+Juan Carlos Rodr=EDguez Villavicencio
+Banco Bolivariano C.A. | Ingenier=EDa de Sistemas - Infraestructura - Tecno=
+log=EDa
+Jun=EDn 200 y Panam=E1. Guayaquil - Ecuador | Telf.: * (+593) 4 230 5000 - =
+Ext. 4219
+ [cid:image003.png@01D8160E.6B0B3740]
+
+
+_____________________________________________
+De: Fernando Rizzo Crespo <frizzoc@bolivariano.com>
+Enviado el: martes, 29 de marzo de 2022 15:00
+Para: IDS-ADMINSRV <IDS-ADMINSRV@bolivariano.com>
+CC: Administraci=F3n y Control <admcontrol@bolivariano.com>; Jonathan Guerr=
+ero Jijon <jguerrej@bolivariano.com>; Teamrecaudaciones <teamrecaudaciones@=
+bolivariano365.onmicrosoft.com>
+Asunto: RV: PROD ORDEN DE PROCESO Instalar certificado Tercon
+
+
+OP Autorizada,
+Por  favor  atender.
+
+
+Saludos Cordiales ,
+
+Fernando Rizzo Crespo
+Administraci=F3n y Control - Tecnolog=EDa
+Jun=EDn 200 y Panam=E1 - Telf.: (593 4) 230 5000 Ext. 4200
+ <Archivo: OP DBA instalar certificado en OSB 12.doc >> [cid:image001.png@0=
+1D7563B.76D0E5E0]
+
+
+_____________________________________________
+De: Jonathan Guerrero Jijon <jguerrej@bolivariano.com>
+Enviado el: martes, 29 de marzo de 2022 10:43
+Para: Administraci=F3n y Control <admcontrol@bolivariano.com>
+CC: Teamrecaudaciones <teamrecaudaciones@bolivariano365.onmicrosoft.com>
+Asunto: PROD ORDEN DE PROCESO Instalar certificado Tercon
+
+
+Buenas d=EDas,
+
+Por favor su ayuda con la aprobaci=F3n de esta OP para instalar certificado=
+ Recaudaci=F3n Tercon
+
+ORDEN DE PROCESO
+Solicitud de acci=F3n                                                      =
+    Validaci=F3n
+  <Archivo: intermedio_tercon.7z >>                     <Mensaje: RE: PROD =
+ORDEN DE PROCESO Validar Certificado en bus12c >>
+Fecha de Ejecuci=F3n      29/Marzo/2022
+Hora de inicio  23:30
+Duraci=F3n        20min
+Tarea/Objetivo  instalar certificado Recaudaci=F3n Tercon
+Motivo  instalar certificado Recaudaci=F3n Tercon
+Servidor(es)    OFMCOREP1, OFMCOREP2, OFMCANP1, OFMCANP2
+Servicio afectado       N/A
+=C1rea afectada   N/A
+Ejecutado por   IDS
+Responsable     Jonathan Guerrero
+Personal de apoyo       N/A
+Afectaci=F3n a documentaci=F3n       <Mensaje: COMUNICADO: DEPOSITO ESPECIA=
+L EN LINEA TERCON - TERMINAL DE CONTENEDORES >>
+Instrucciones      <Mensaje: RE: PROD ORDEN DE PROCESO Instalar certificado=
+ Tercon >>   <Mensaje: RE: Registro de Certificado Digital: TERCON >>
+Autorizaci=F3n     <Objeto OLE: Picture (Device Independent Bitmap) >>
+Persona que verifica luego de ejecuci=F3n Jonathan Guerrero
+
+
+Saludos,
+
+Jonathan Guerrero
+Desarrollo | Tecnolog=EDa
+Banco Bolivariano C.A Jun=EDn 200 y Panam=E1. Guayaquil=AD - Ecuador  | 4 2=
+30 5000 - Ext. 3563
+
+
+
+
+
+--_000_BN0PR10MB4821075E7744C90B6DD000F7D41F9BN0PR10MB4821namp_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<meta name=3D"Generator" content=3D"Microsoft Exchange Server">
+<!-- converted from rtf -->
+<style><!-- .EmailQuote { margin-left: 1pt; padding-left: 4pt; border-left:=
+ #800000 2px solid; } --></style>
+</head>
+<body>
+<font face=3D"Calibri" size=3D"2"><span style=3D"font-size:11pt;">
+<div>Ok realizado</div>
+<div>&nbsp;</div>
+<div>Saludos,</div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font size=3D"4" color=3D"#009999"><span style=3D"font-size:14pt;"><b>=
+Juan Carlos Rodr=EDguez Villavicencio</b></span></font></div>
+<div><font color=3D"#009999"><b>Banco Bolivariano C.A. | </b>Ingenier=EDa d=
+e Sistemas - Infraestructura - Tecnolog=EDa</font></div>
+<div><font color=3D"#A6A6A6">Jun=EDn 200 y Panam=E1. Guayaquil &#8211; Ecua=
+dor | Telf.: <font face=3D"Wingdings" size=3D"2"><span style=3D"font-size:9=
+pt;">(</span></font> (&#43;593) 4 230 5000 - Ext. 4219</font></div>
+<div><font face=3D"Calibri"><img src=3D"cid:image003.png@01D8160E.6B0B3740"=
+><img src=3D"cid:EBD89088FE184F4289A1C314ED4EB367@namprd10.prod.outlook.com=
+"></font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri">_____________________________________________<b=
+r>
+
+<b>De:</b> Fernando Rizzo Crespo &lt;frizzoc@bolivariano.com&gt; <br>
+
+<b>Enviado el:</b> martes, 29 de marzo de 2022 15:00<br>
+
+<b>Para:</b> IDS-ADMINSRV &lt;IDS-ADMINSRV@bolivariano.com&gt;<br>
+
+<b>CC:</b> Administraci=F3n y Control &lt;admcontrol@bolivariano.com&gt;; J=
+onathan Guerrero Jijon &lt;jguerrej@bolivariano.com&gt;; Teamrecaudaciones =
+&lt;teamrecaudaciones@bolivariano365.onmicrosoft.com&gt;<br>
+
+<b>Asunto:</b> RV: PROD ORDEN DE PROCESO Instalar certificado Tercon</font>=
+</div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri" color=3D"#1F497D">OP Autorizada,</font></div>
+<div><font face=3D"Calibri" color=3D"#1F497D">Por&nbsp; favor&nbsp; atender=
+. </font></div>
+<div><font face=3D"Calibri" color=3D"#1F497D">&nbsp;</font></div>
+<div><font face=3D"Calibri" color=3D"#1F497D">&nbsp;</font></div>
+<div><font face=3D"Calibri" size=3D"3" color=3D"#767171"><span style=3D"fon=
+t-size:12pt;"><b>Saludos Cordiales ,</b></span></font></div>
+<div><font face=3D"Calibri" color=3D"#009999">&nbsp;</font></div>
+<div><font face=3D"Calibri" size=3D"3" color=3D"#009999"><span style=3D"fon=
+t-size:13pt;"><b>Fernando Rizzo Crespo</b></span></font></div>
+<div><font face=3D"Calibri" size=3D"2" color=3D"#0099A8"><span style=3D"fon=
+t-size:10pt;">Administraci=F3n y Control - Tecnolog=EDa</span></font></div>
+<div><font face=3D"Calibri" size=3D"2" color=3D"#A6A6A6"><span style=3D"fon=
+t-size:10pt;">Jun=EDn 200 y Panam=E1 &#8211; Telf.: (593 4) 230 5000 Ext. 4=
+200</span></font></div>
+<div><font face=3D"Calibri"><img src=3D"cid:image001.png@01D7563B.76D0E5E0"=
+></font></div>
+<div><font face=3D"Calibri" color=3D"#1F497D">&nbsp;</font></div>
+<div><font face=3D"Calibri" color=3D"#1F497D">&nbsp;</font></div>
+<div><font face=3D"Calibri">_____________________________________________<b=
+r>
+
+<b>De:</b> Jonathan Guerrero Jijon &lt;jguerrej@bolivariano.com&gt; <br>
+
+<b>Enviado el:</b> martes, 29 de marzo de 2022 10:43<br>
+
+<b>Para:</b> Administraci=F3n y Control &lt;admcontrol@bolivariano.com&gt;<=
+br>
+
+<b>CC:</b> Teamrecaudaciones &lt;teamrecaudaciones@bolivariano365.onmicroso=
+ft.com&gt;<br>
+
+<b>Asunto:</b> PROD ORDEN DE PROCESO Instalar certificado Tercon</font></di=
+v>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Garamond" size=3D"3"><span style=3D"font-size:12pt;">Bue=
+nas <font color=3D"#1F497D">d=EDas</font>,</span></font></div>
+<div><font face=3D"Garamond" size=3D"3"><span style=3D"font-size:12pt;">&nb=
+sp;</span></font></div>
+<div><font face=3D"Garamond" size=3D"3"><span style=3D"font-size:12pt;">Por=
+ favor su ayuda con la aprobaci=F3n de esta OP para instalar certificado <b=
+>Recaudaci=F3n Tercon</b></span></font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<table width=3D"776" style=3D"width:466.15pt;margin-left:5.8pt;">
+<col width=3D"776" style=3D"width:466.15pt;">
+<tr height=3D"25" style=3D"height:15pt;">
+<td style=3D"text-align:center;background-color:#5B9BD5;"><font face=3D"Cal=
+ibri Light" size=3D"5" color=3D"#CFCFCF"><span style=3D"font-size:18pt;back=
+ground-color:#5B9BD5;"><b>ORDEN DE PROCESO</b></span></font></td>
+</tr>
+</table>
+<table width=3D"776" style=3D"width:466.15pt;margin-left:5.8pt;">
+<col width=3D"245" style=3D"width:147.2pt;">
+<col width=3D"531" style=3D"width:318.95pt;">
+<tr height=3D"25" style=3D"height:15pt;">
+<td style=3D"background-color:#DEEAF6;"><font face=3D"Calibri Light" size=
+=3D"3"><span style=3D"font-size:12pt;background-color:#DEEAF6;"><b>Solicitu=
+d de acci=F3n</b></span></font></td>
+<td style=3D"background-color:#DEEAF6;"><font face=3D"Calibri" color=3D"#1F=
+497D"><span style=3D"background-color:#DEEAF6;"> <font color=3D"black">&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </f=
+ont> <font color=3D"black">Validaci=F3n</font>
+<div><font face=3D"Calibri" color=3D"#1F497D">&nbsp; &lt;Archivo: intermedi=
+o_tercon.7z &gt;&gt; <font color=3D"black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp; &lt;Mensaje: RE: PROD ORDEN DE PROCESO Validar Certificado en bus12=
+c &gt;&gt; </font></font></div>
+</span></font></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td><font face=3D"Calibri Light" size=3D"3"><span style=3D"font-size:12pt;"=
+><b>Fecha de Ejecuci=F3n</b></span></font></td>
+<td><font face=3D"Calibri Light" size=3D"3"><span style=3D"font-size:12pt;"=
+><span style=3D"background-color:#A5D5E2;"><b>2</b></span><font color=3D"#1=
+F497D"><span style=3D"background-color:#A5D5E2;"><b>9</b></span></font><fon=
+t color=3D"red"><span style=3D"background-color:#A5D5E2;"><b>/</b></span></=
+font><font color=3D"#1F497D"><span style=3D"background-color:#A5D5E2;"><b>M=
+arzo</b></span></font><font color=3D"red"><span style=3D"background-color:#=
+A5D5E2;"><b>/2022</b></span></font></span></font></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td style=3D"background-color:#DEEAF6;"><font face=3D"Calibri Light" size=
+=3D"3"><span style=3D"font-size:12pt;background-color:#DEEAF6;"><b>Hora de =
+inicio</b></span></font></td>
+<td style=3D"background-color:#DEEAF6;"><font face=3D"Calibri Light" size=
+=3D"3"><span style=3D"font-size:12pt;background-color:#DEEAF6;"><span style=
+=3D"background-color:yellow;"><b>23:30</b></span></span></font></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td><font face=3D"Calibri Light" size=3D"3"><span style=3D"font-size:12pt;"=
+><b>Duraci=F3n</b></span></font></td>
+<td><font face=3D"Calibri Light" size=3D"3" color=3D"red"><span style=3D"fo=
+nt-size:12pt;"><span style=3D"background-color:#D2EAF1;"><b>20min</b></span=
+></span></font></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td style=3D"background-color:#DEEAF6;"><font face=3D"Calibri Light" size=
+=3D"3"><span style=3D"font-size:12pt;background-color:#DEEAF6;"><b>Tarea/Ob=
+jetivo</b></span></font></td>
+<td style=3D"background-color:#DEEAF6;"><font face=3D"Garamond"><span style=
+=3D"background-color:#DEEAF6;">instalar certificado <b>Recaudaci=F3n Tercon=
+</b></span></font></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td><font face=3D"Calibri Light" size=3D"3"><span style=3D"font-size:12pt;"=
+><b>Motivo</b></span></font></td>
+<td><font face=3D"Garamond" size=3D"3"><span style=3D"font-size:12pt;">inst=
+alar certificado <b>Recaudaci=F3n Tercon</b></span></font></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td style=3D"background-color:#DEEAF6;"><font face=3D"Calibri Light" size=
+=3D"3"><span style=3D"font-size:12pt;background-color:#DEEAF6;"><b>Servidor=
+(es)</b></span></font></td>
+<td style=3D"text-align:left;background-color:#DEEAF6;"><font face=3D"Segoe=
+ UI" size=3D"2" color=3D"#1F497D"><span style=3D"font-size:10.5pt;backgroun=
+d-color:#DEEAF6;"><b>OFMCOREP1, OFMCOREP2, OFMCANP1, OFMCANP2</b></span></f=
+ont></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td><font face=3D"Calibri Light" size=3D"3"><span style=3D"font-size:12pt;"=
+><b>Servicio afectado</b></span></font></td>
+<td><font face=3D"Calibri Light" size=3D"3"><span style=3D"font-size:12pt;"=
+>N/A</span></font></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td style=3D"background-color:#DEEAF6;"><font face=3D"Calibri Light" size=
+=3D"3"><span style=3D"font-size:12pt;background-color:#DEEAF6;"><b>=C1rea a=
+fectada</b></span></font></td>
+<td style=3D"background-color:#DEEAF6;"><font face=3D"Calibri Light" size=
+=3D"3"><span style=3D"font-size:12pt;background-color:#DEEAF6;">N/A</span><=
+/font></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td><font face=3D"Calibri Light" size=3D"3"><span style=3D"font-size:12pt;"=
+><b>Ejecutado por</b></span></font></td>
+<td><font face=3D"Calibri Light" size=3D"3" color=3D"#1F497D"><span style=
+=3D"font-size:12pt;"><b>IDS</b></span></font></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td style=3D"background-color:#DEEAF6;"><font face=3D"Calibri Light" size=
+=3D"3"><span style=3D"font-size:12pt;background-color:#DEEAF6;"><b>Responsa=
+ble</b></span></font></td>
+<td style=3D"background-color:#DEEAF6;"><font face=3D"Calibri Light" size=
+=3D"3" color=3D"#1F497D"><span style=3D"font-size:12pt;background-color:#DE=
+EAF6;">Jonathan Guerrero</span></font></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td><font face=3D"Calibri Light" size=3D"3"><span style=3D"font-size:12pt;"=
+><b>Personal de apoyo</b></span></font></td>
+<td><font face=3D"Calibri Light" size=3D"3"><span style=3D"font-size:12pt;"=
+>N/A</span></font></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td style=3D"background-color:#DEEAF6;"><font face=3D"Calibri Light" size=
+=3D"3"><span style=3D"font-size:12pt;background-color:#DEEAF6;"><b>Afectaci=
+=F3n a documentaci=F3n</b></span></font></td>
+<td style=3D"background-color:#DEEAF6;"><font face=3D"Calibri"><span style=
+=3D"background-color:#DEEAF6;"> &lt;Mensaje: COMUNICADO: DEPOSITO ESPECIAL =
+EN LINEA TERCON - TERMINAL DE CONTENEDORES &gt;&gt; </span></font></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td><font face=3D"Calibri Light" size=3D"3"><span style=3D"font-size:12pt;"=
+><b>Instrucciones</b></span></font></td>
+<td><font face=3D"Calibri Light" size=3D"3"><span style=3D"font-size:12pt;"=
+>&nbsp;&nbsp; &lt;Mensaje: RE: PROD ORDEN DE PROCESO Instalar certificado T=
+ercon &gt;&gt;&nbsp;&nbsp; &lt;Mensaje: RE: Registro de Certificado Digital=
+: TERCON &gt;&gt; </span></font></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td style=3D"background-color:#DEEAF6;"><font face=3D"Calibri Light" size=
+=3D"3"><span style=3D"font-size:12pt;background-color:#DEEAF6;"><b>Autoriza=
+ci=F3n</b></span></font></td>
+<td style=3D"background-color:#DEEAF6;"><font face=3D"Calibri"><span style=
+=3D"background-color:#DEEAF6;"> &lt;Objeto OLE: Picture (Device Independent=
+ Bitmap) &gt;&gt; </span></font></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td><font face=3D"Calibri Light" size=3D"3"><span style=3D"font-size:12pt;"=
+><b>Persona que verifica luego de ejecuci=F3n</b></span></font></td>
+<td><font face=3D"Calibri Light" size=3D"3" color=3D"#1F497D"><span style=
+=3D"font-size:12pt;">Jonathan Guerrero</span></font></td>
+</tr>
+</table>
+<div><font face=3D"Calibri" color=3D"#1F497D">&nbsp;</font></div>
+<div><font face=3D"Calibri" color=3D"#009999">&nbsp;</font></div>
+<div><font face=3D"Calibri" color=3D"#1F497D">Saludos,</font></div>
+<div><font face=3D"Calibri" color=3D"#009999">&nbsp;</font></div>
+<div><font face=3D"Calibri" color=3D"#009999"><b>Jonathan Guerrero</b></fon=
+t></div>
+<div><font face=3D"Calibri" size=3D"2"><span style=3D"font-size:10pt;"><b>D=
+esarrollo | Tecnolog=EDa</b></span></font></div>
+<div><font face=3D"Calibri" size=3D"2" color=3D"#A5A5A5"><span style=3D"fon=
+t-size:10pt;">Banco Bolivariano C.A Jun=EDn 200 y Panam=E1. Guayaquil=AD &#=
+8211; Ecuador  | 4 230 5000 - Ext. 3563</span></font></div>
+<div><font face=3D"Calibri" color=3D"#1F497D">&nbsp;</font></div>
+<div><font face=3D"Calibri" color=3D"#1F497D">&nbsp;</font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+</span></font>
+</body>
+</html>
+
+--_000_BN0PR10MB4821075E7744C90B6DD000F7D41F9BN0PR10MB4821namp_--
+
+--_004_BN0PR10MB4821075E7744C90B6DD000F7D41F9BN0PR10MB4821namp_
+Content-Type: image/jpeg; name="Picture (Device Independent Bitmap) 1.jpg"
+Content-Description: Picture (Device Independent Bitmap) 1.jpg
+Content-Disposition: inline;
+	filename="Picture (Device Independent Bitmap) 1.jpg";
+	creation-date="Wed, 30 Mar 2022 05:34:16 GMT";
+	modification-date="Wed, 30 Mar 2022 05:34:17 GMT"
+Content-ID: <EBD89088FE184F4289A1C314ED4EB367@namprd10.prod.outlook.com>
+Content-Transfer-Encoding: base64
+
+/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a
+HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy
+MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAA/AYQDASIA
+AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA
+AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3
+ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm
+p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA
+AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx
+BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK
+U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3
+uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii
+gAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKA
+CiiigAooooAKKKKACiiigAooooAKKKKAGSzRW8TSzSLHGoyWY4ArDm8a+H4WIbUFbH9xGYfoK4Hx
+1rs9/q0lmkhFrbnaFB4YjqTWNN4a1SBLV5oEjW6IEJeRQGJGR9K7qeFjypze589iM4q+0lDDwuo7
+vU9SHjzw6Tj7cR9Ym/wrRsPEWk6nJ5dpfRPIeiE4Y/ga8bPhjVxqAsHtdlyV3IjuBvH+ye9Z9xb3
+em3jRTJJBcRHlTwRV/Vab+FmP9s4qGtSmrejR9D0VzngrW5Na0JXnbdcQt5bt6+h+tdHXBOLjJxZ
+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
+/9k=
+
+--_004_BN0PR10MB4821075E7744C90B6DD000F7D41F9BN0PR10MB4821namp_--
