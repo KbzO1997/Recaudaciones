@@ -1,0 +1,16 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: rec-broadnet-application-yml
+  namespace: bb-dev-otc
+data:
+  application.yml: >
+    recms-broadnet:
+      sybase:
+        datasource:
+          username: operadorRec
+          password: Ope+1234Rec
+          hostPort: 172.16.23.22:2050
+          jdbcUrl: jdbc:sybase:Tds:172.16.23.22:2030
+          driverClassName: com.sybase.jdbc4.jdbc.SybDriver
+          dbName: cob_pagos
