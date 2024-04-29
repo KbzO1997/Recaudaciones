@@ -1,0 +1,14 @@
+SELECT sd_cliente, sd_codigo 
+FROM  cob_pagos..pg_dbautomatico_servicio 
+where sd_empresa = 1330
+and sd_estado NOT IN('E','S','R')
+
+
+select sd_cliente,  sd_codigo, isnull(en_ced_ruc,p_pasaporte) IDENTIFICACION, isnull(cc_nombre, ah_nombre) CLIENTE
+from cob_pagos..pg_dbautomatico_servicio 
+left join cob_cuentas..cc_ctacte on sd_cuentadb = cc_cta_banco
+left join cob_ahorros..ah_cuenta on sd_cuentadb = ah_cta_banco
+inner join cobis..cl_ente on isnull(cc_cliente, ah_cliente) = en_ente
+where 
+sd_empresa = 1330
+and sd_estado NOT IN('E','S','R')

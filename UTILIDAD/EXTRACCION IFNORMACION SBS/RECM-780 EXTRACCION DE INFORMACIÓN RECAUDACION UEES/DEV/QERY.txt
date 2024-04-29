@@ -1,0 +1,3 @@
+select hs_tipo_chequera CANAL, hs_monto + hs_valor + hs_saldo MONTO, hs_referencia SUBMINISTRO, hs_secuencial SECUENCIAL, hs_tsfecha FECHA
+FROM cob_cuentas_acum..cc_his_servicio_acum where hs_tipo_transaccion in(3925,3926,3928) and hs_causa = '1125' and hs_correccion = 'N' and
+hs_tsfecha between '07/01/2023' and '08/31/2023' 
