@@ -1,0 +1,833 @@
+{\rtf1\ansi\deff0\adeflang1025
+{\fonttbl{\f0\froman\fprq2\fcharset0 Times New Roman;}{\f1\froman\fprq2\fcharset2 Symbol;}{\f2\fswiss\fprq2\fcharset0 Arial;}{\f3\fnil\fprq2\fcharset0 Microsoft YaHei;}{\f4\fnil\fprq2\fcharset0 Lucida Sans;}{\f5\fswiss\fprq0\fcharset128 Lucida Sans;}}
+{\colortbl;\red0\green0\blue0;\red255\green255\blue0;\red128\green128\blue128;}
+{\stylesheet{\s0\snext0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082 Predeterminado;}
+{\s15\sbasedon0\snext16\sb240\sa120\keepn\hich\af3\dbch\af4\afs28\loch\f2\fs28 Encabezado;}
+{\s16\sbasedon0\snext16\sb0\sa120 Cuerpo de texto;}
+{\s17\sbasedon16\snext17\sb0\sa120\dbch\af5 Lista;}
+{\s18\sbasedon0\snext18\sb120\sa120\noline\i\dbch\af5\afs24\ai\fs24 Etiqueta;}
+{\s19\sbasedon0\snext19\noline\dbch\af5 Índice;}
+}{\info{\creatim\yr2024\mo4\dy9\hr14\min51}{\revtim\yr0\mo0\dy0\hr0\min0}{\printim\yr0\mo0\dy0\hr0\min0}{\comment OpenOffice}{\vern4000}}\deftab709
+
+{\*\pgdsctbl
+{\pgdsc0\pgdscuse195\pgwsxn11906\pghsxn16838\marglsxn1134\margrsxn1134\margtsxn1134\margbsxn1134\pgdscnxt0 Predeterminado;}}
+\formshade\paperh16838\paperw11906\margl1134\margr1134\margt1134\margb1134\sectd\sbknone\sectunlocked1\pgndec\pgwsxn11906\pghsxn16838\marglsxn1134\margrsxn1134\margtsxn1134\margbsxn1134\ftnbj\ftnstart1\ftnrstcont\ftnnar\aenddoc\aftnrstcont\aftnstart1\aftnnrlc
+\pgndec\pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!**************************************************************************************************!}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!* Archivo           :  }{{\*\bkmkstart __DdeLink__0_1770858728}\rtlch \ltrch\loch
+recexlat}{{\*\bkmkend __DdeLink__0_1770858728}\rtlch \ltrch\loch
+.sqr                                                              *!}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!* Base de datos     :  cob_pagos                                                          \tab \tab   *!}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!* Producto          :  Recaudaciones                                                             *!}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!* Disenado por      :  Kevin Bastidas                                                            *!}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!* Fecha de escritura:  09/Ene/2024                                                               *!}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!**************************************************************************************************!}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!*                                    IMPORTANTE                                                  *!}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!* Este programa es parte de los paquetes bancarios propiedad de BANCO BOLIVARIANO.               *!}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!* Su uso no autorizado queda expresamente prohibido asi como cualquier alteracion o agregado     *!}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!* hecho por alguno de sus usuarios sin el debido consentimiento por escrito de la                *!}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!* Presidencia Ejecutiva de BANCO BOLIVARIANO o su representante.                                 *!}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!**************************************************************************************************!}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!* PROPOSITO:                                                                                     *!}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!* Proceso que generar archivo .build para en envio masivo de mensajeria por Latinia              *!}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!**************************************************************************************************!}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!* MODIFICACIONES:                                                                                *!}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!**************************************************************************************************!}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!* REF FECHA        AUTOR            TAREA RATIONAL     RAZON                                     *!}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!*   0 09/Ene/2024  Kevin Bastidas.  RECMPS-XXXX        Emision Inicial                        \tab   *!}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\chcbpat2\rtlch \ltrch\loch
+!*   1 09/Abr/2024  Kevin Bastidas.  RECM-889           CONTROL DE ARCHIVOS POR REGISTROS         *!}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!**************************************************************************************************!}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!===================================================================================================}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+Begin-Setup}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!===================================================================================================}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+use cob_pagos}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+End-Setup}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+#include "log.inc"}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!===================================================================================================}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+Begin-Program}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!===================================================================================================}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+do Inicializar_Programa}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab do ParamS (1,$i_fecpro,'','','')}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab do ParamN (2,#i_empresa,'','','')}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab do ParamN (3,#i_numarchivo,'','','')}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab do Main}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+do Finalizar_Programa}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+End-Program}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!===================================================================================================}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+Begin-Procedure Main}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!===================================================================================================}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+     }{\rtlch \ltrch\loch
+show ' '}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+let $inicio = datenow()}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+show '----------------------------------------------------------------'}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+show '->> Inicio Proceso Envio Notificacioens Masivas Latinia: ' $inicio}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+show '----------------------------------------------------------------'}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+show ' '}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+\tab \tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab show ' Ejecutando proceso de exportar archivo plano'\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+execute on-error=Error do=GenerarArchivoLatinia cob_pagos..pa_rec_cfilreader_latinia $i_fecpro, #i_empresa, #i_numarchivo}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab INTO\tab &cab_canal\tab \tab \tab varchar(5),}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab &cab_servicio\tab \tab varchar(5),}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab &cab_cantidad\tab \tab varchar(5),}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab &cab_tiene_detalle  varchar(40),}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab &cab_empresa\tab \tab varchar(5)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab let $fin = datenow()}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab show ' '}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+show '----------------------------------------------------------------'}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+show '->> FinEnvio Notificaciones Masivas Latinia: ' $fin}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+show '----------------------------------------------------------------'}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+show ' '}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+End-Procedure}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!===================================================================================================}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+Begin-Procedure GenerarArchivoLatinia}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!===================================================================================================}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+show ' '}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+let $inicio = datenow()}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+show '----------------------------------------------------------------'}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+show '->> Inicio Proceso Genera Archivo Latinia: ' &cab_canal '-' &cab_servicio '-' $inicio    }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+show '->> Cantidad de archivos: ' &cab_cantidad    }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab show '----------------------------------------------------------------'}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+show ' '}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab }{\chcbpat2\rtlch \ltrch\loch
+if (&cab_cantidad <> '0') !--REF 1 Valid Archivo}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+        }{\rtlch \ltrch\loch
+let $requerimiento = '0'}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $secuencial_ant = ''\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $linea = '0' }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $esp = '|'\tab \tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $ente = '0' !--KBastidz}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $cab = ''}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = ''}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $tab = chr(9)  !'\tab ' !ref06:roleonc   ! '\\t' ref07:JPI}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $total = '0'  }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $arch_ant = ''   }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $nombre_archivo = ''\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab date-time () 'MM/DD/YYYY' &w_fechoy}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab date-time () HH:MI &w_hormin}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $w_mes = substr(&w_fechoy,1,2)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $w_dia = substr(&w_fechoy,4,2)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $w_ano = substr(&w_fechoy,7,4)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $w_hh = substr(&w_hormin,1,2)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $w_min = substr(&w_hormin,4,2)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $w_seg = substr(&w_hormin,7,2)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $canal_str = SUBSTR(&cab_canal,1,3)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $nemonico = &cab_servicio}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $w_feclis = $w_ano || $w_mes || $w_dia  !|| $w_hh || $w_min || $w_seg}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $nombre_archivo = $canal_str || $nemonico || $w_feclis || &cab_empresa}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab if &cab_tiene_detalle = 'SUS'}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab let $sep = '|'}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab let $notif = '#ref_user'}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab let $nombre_archivo = $nombre_archivo || '.' || 'laetmp'}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab do CrearArchivoLatinia($nombre_archivo)\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab else}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab let $sep = '##'}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab let $notif = 'Avisos24'}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab let $nombre_archivo = $nombre_archivo || '.' || 'buildtmp'}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab do CrearArchivoLatinia($nombre_archivo)\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab end-if \tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab \tab \tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab if &cab_tiene_detalle = 'SMS' }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab let $cab = 'BOLIVARIANO'|| $esp || &cab_servicio || $esp || $esp || 'inot2' || $esp || $esp || &cab_cantidad  !ref01:jqp}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab write 1 from $cab}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab if &cab_tiene_detalle = 'N' or &cab_tiene_detalle = 'DET'  }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab let $cab = 'BOLIVARIANO'|| $esp || &cab_servicio || $esp || $esp || 'inot2' || $esp || $notif || $esp || &cab_cantidad\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab write 1 from $cab}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab !ref03 fin}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab if &cab_tiene_detalle = 'DET' }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab let $det = ''        }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab let $secuencial_ant = ''\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab let $det = ''        }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab let $secuencial_ant = ''}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab else}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab do ProcesoSinDetalle}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+  }{\rtlch \ltrch\loch
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab do Cierra_Archivo}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab do CopiaArchivosReady($nombre_archivo)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab else}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab show '->> Fin Proceso Genera Archivo Latinia 0 Archivos: '}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+end-if}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab let $fin = datenow()}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+show ' '}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+show '----------------------------------------------------------------'}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+show '->> Fin Proceso Genera Archivo Latinia: ' &cab_canal '-' &cab_servicio '-' $fin    }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+show '----------------------------------------------------------------'}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+    }{\rtlch \ltrch\loch
+show ' '}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+End-Procedure}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!===================================================================================================}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+Begin-Procedure CrearArchivoLatinia($nombre_reporte)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!===================================================================================================}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+let $name_file = $nombre_reporte }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+let $nombre_reporte = '/respaldo/archivos/cuentas/data/'|| $nombre_reporte}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+let #registros = 50000}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+open $nombre_reporte as 1 for-writing record=#registros status=#filestat}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+if #filestat <> 0}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+      }{\rtlch \ltrch\loch
+show 'Error al crear el archivo'}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+      }{\rtlch \ltrch\loch
+show #filestat}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+      }{\rtlch \ltrch\loch
+do Abortar}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+end-if}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+End-Procedure}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!===================================================================================================}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+begin-procedure Cierra_Archivo}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!===================================================================================================}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+show 'Se cierra archivo'}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+if #filestat = 0}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+  }{\rtlch \ltrch\loch
+close 1}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+end-if}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+end-procedure}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!=============================================}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+begin-procedure CopiaArchivosReady($nombre_archivo)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!=============================================}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+   }{\rtlch \ltrch\loch
+let $w_comando = 'mv /respaldo/archivos/cuentas/data/' || $nombre_archivo }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+   }{\rtlch \ltrch\loch
+let $w_comando = $w_comando || ' /respaldo/archivos/cuentas/data/' || substr($nombre_archivo,1, length($nombre_archivo)-3)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+   }{\rtlch \ltrch\loch
+let $w_mensaje = 'Archivos a reemplazar: ' || $w_comando}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+   }{\rtlch \ltrch\loch
+show $w_mensaje   }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+   }{\rtlch \ltrch\loch
+call system using $w_comando #w_status   }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+end-procedure}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!=============================================}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!===================================================================================================}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+begin-procedure ProcesoSinDetalle}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!===================================================================================================}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+execute -xc on-error=Error do=GenerarDetalleN cob_pagos..pa_rec_cnotificacion_sindet &cab_servicio, &cab_canal, $i_fecpro, #i_empresa, #i_numarchivo}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab into &ev_secuencial\tab \tab varchar(30)\tab         }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &ev_servicio\tab \tab varchar(5)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &ev_mail\tab \tab \tab varchar(256)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &cuenta             varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &cuenta_len         int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &telefono           varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &telefono_len       int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &valor              varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &valor_len          int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &fecha              varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &fecha_len          int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &cheque             varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &cheque_len         int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &cta                varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &cta_len            int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &tarjeta            varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &tarjeta_len        int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &desc_producto      varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &desc_producto_len  int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &desc_servicio      varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &desc_servicio_len  int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &total              varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &total_len          int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &minimo             varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &minimo_len         int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &cupo               varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &cupo_len           int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &planilla           varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &planilla_len       int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &nombre             varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &nombre_len         int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &cta_deb            varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &cta_deb_len        int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &prod_deb           varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &prod_deb_len       int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &cta_cre            varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &cta_cre_len        int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &prod_cre           varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &prod_cre_len       int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &costo              varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &costo_len          int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &empresa            varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &empresa_len        int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &desc_canal         varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &desc_canal_len     int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &fecha_tope         varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &fecha_tope_len     int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &valor1             varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &valor1_len         int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &valor2             varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &valor2_len         int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &motivo             varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &motivo_len         int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &login              varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &login_len          int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab      &ssn                varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &ssn_len            int}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  &cliente            varchar(64)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab  }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab write 1 from '<EOF>'}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+end-procedure }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!===================================================================================================}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+begin-procedure GenerarDetalleN}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!===================================================================================================\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if &cab_tiene_detalle = 'SUS' !ref03 ini}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = 'BOLIVARIANO'  || $sep || &ev_servicio || $sep || $notif || $sep || &cliente || $sep || 'id=' || &ev_secuencial || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab else }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $ev_mail = &ev_mail}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $separadorMail = substr($ev_mail, length($ev_mail), 1)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab if $separadorMail = ';'}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab let $ev_mail = substr($ev_mail, 1, length($ev_mail)-1)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab end-if}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab if &cab_tiene_detalle = 'SMS' }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab let $ev_mail = 'phone=' || $ev_mail !ref01:jqp}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab let $det = &ev_secuencial  || $esp || $ev_mail || $esp || $esp || $esp || $esp  || $esp || &ev_servicio || $esp }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab else}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab if instr($ev_mail, '@', 1) = 0 and isnumber($ev_mail) = 1}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab \tab let $ev_mail = 'phone=' || $ev_mail }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab else}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab     let $ev_mail = replace($ev_mail, ';', '##email=')}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab \tab let $ev_mail = 'email=' || $ev_mail }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab end-if\tab \tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab \tab let $det = &ev_secuencial  || $esp || $esp || &cliente || $esp || $ev_mail || $esp || $esp || &ev_servicio || $esp  !--KBastida MIS $ente}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab end-if \tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&cuenta,'')) > 1 and SUBSTR(&cuenta,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&cuenta,1,instr(&cuenta, '=', 1)) || SUBSTR(&cuenta,instr(&cuenta, '=', 1)+1,&cuenta_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&telefono,'')) > 1 and SUBSTR(&telefono,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&telefono,1,instr(&telefono, '=', 1)) || SUBSTR(&telefono,instr(&telefono, '=', 1)+1,&telefono_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&valor,'')) > 1 and SUBSTR(&valor,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&valor,1,instr(&valor, '=', 1)) || SUBSTR(&valor,instr(&valor, '=', 1)+1,&valor_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if \tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&fecha,'')) > 1 and SUBSTR(&fecha,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&fecha,1,instr(&fecha, '=', 1)) || SUBSTR(&fecha,instr(&fecha, '=', 1)+1,&fecha_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if \tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&cheque,'')) > 1 and SUBSTR(&cheque,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&cheque,1,instr(&cheque, '=', 1)) || SUBSTR(&cheque,instr(&cheque, '=', 1)+1,&cheque_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if \tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&cta,'')) > 1 and SUBSTR(&cta,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&cta,1,instr(&cta, '=', 1)) || SUBSTR(&cta,instr(&cta, '=', 1)+1,&cta_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&tarjeta,'')) > 1 and SUBSTR(&tarjeta,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&tarjeta,1,instr(&tarjeta, '=', 1)) || SUBSTR(&tarjeta,instr(&tarjeta, '=', 1)+1,&tarjeta_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&desc_producto,'')) > 1 and SUBSTR(&desc_producto,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&desc_producto,1,instr(&desc_producto, '=', 1)) || SUBSTR(&desc_producto,instr(&desc_producto, '=', 1)+1,&desc_producto_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&desc_servicio,'')) > 1 and SUBSTR(&desc_servicio,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&desc_servicio,1,instr(&desc_servicio, '=', 1)) || SUBSTR(&desc_servicio,instr(&desc_servicio, '=', 1)+1,&desc_servicio_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&total,'')) > 1 and SUBSTR(&total,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&total,1,instr(&total, '=', 1)) || SUBSTR(&total,instr(&total, '=', 1)+1,&total_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&minimo,'')) > 1 and SUBSTR(&minimo,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&minimo,1,instr(&minimo, '=', 1)) || SUBSTR(&minimo,instr(&minimo, '=', 1)+1,&minimo_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&cupo,'')) > 1 and SUBSTR(&cupo,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&cupo,1,instr(&cupo, '=', 1)) || SUBSTR(&cupo,instr(&cupo, '=', 1)+1,&cupo_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&planilla,'')) > 1 and SUBSTR(&planilla,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&planilla,1,instr(&planilla, '=', 1)) || SUBSTR(&planilla,instr(&planilla, '=', 1)+1,&planilla_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&nombre,'')) > 1 and SUBSTR(&nombre,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&nombre,1,instr(&nombre, '=', 1)) || SUBSTR(&nombre,instr(&nombre, '=', 1)+1,&nombre_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&cta_deb,'')) > 1 and SUBSTR(&cta_deb,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&cta_deb,1,instr(&cta_deb, '=', 1)) || SUBSTR(&cta_deb,instr(&cta_deb, '=', 1)+1,&cta_deb_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&prod_deb,'')) > 1 and SUBSTR(&prod_deb,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&prod_deb,1,instr(&prod_deb, '=', 1)) || SUBSTR(&prod_deb,instr(&prod_deb, '=', 1)+1,&prod_deb_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&cta_cre,'')) > 1 and SUBSTR(&cta_cre,1,1) <> '=' }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&cta_cre,1,instr(&cta_cre, '=', 1)) || SUBSTR(&cta_cre,instr(&cta_cre, '=', 1)+1,&cta_cre_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&prod_cre,'')) > 1 and SUBSTR(&prod_cre,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&prod_cre,1,instr(&prod_cre, '=', 1)) || SUBSTR(&prod_cre,instr(&prod_cre, '=', 1)+1,&prod_cre_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&costo,'')) > 1 and SUBSTR(&costo,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&costo,1,instr(&costo, '=', 1)) || SUBSTR(&costo,instr(&costo, '=', 1)+1,&costo_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&empresa,'')) > 1 and SUBSTR(&empresa,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&empresa,1,instr(&empresa, '=', 1)) || SUBSTR(&empresa,instr(&empresa, '=', 1)+1,&empresa_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&desc_canal,'')) > 1 and SUBSTR(&desc_canal,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&desc_canal,1,instr(&desc_canal, '=', 1)) || SUBSTR(&desc_canal,instr(&desc_canal, '=', 1)+1,&desc_canal_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&fecha_tope,'')) > 1 and SUBSTR(&fecha_tope,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&fecha_tope,1,instr(&fecha_tope, '=', 1)) || SUBSTR(&fecha_tope,instr(&fecha_tope, '=', 1)+1,&fecha_tope_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&valor1,'')) > 1 and SUBSTR(&valor1,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&valor1,1,instr(&valor1, '=', 1)) || SUBSTR(&valor1,instr(&valor1, '=', 1)+1,&valor1_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&valor2,'')) > 1 and SUBSTR(&valor2,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&valor2,1,instr(&valor2, '=', 1)) || SUBSTR(&valor2,instr(&valor2, '=', 1)+1,&valor2_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&motivo,'')) > 1 and SUBSTR(&motivo,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&motivo,1,instr(&motivo, '=', 1)) || SUBSTR(&motivo,instr(&motivo, '=', 1)+1,&motivo_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&login,'')) > 1 and SUBSTR(&login,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&login,1,instr(&login, '=', 1)) || SUBSTR(&login,instr(&login, '=', 1)+1,&login_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if length(nvl(&ssn,'')) > 1 and SUBSTR(&ssn,1,1) <> '='}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || SUBSTR(&ssn,1,instr(&ssn, '=', 1)) || SUBSTR(&ssn,instr(&ssn, '=', 1)+1,&ssn_len) || $sep }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab !ref03 ini}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab if &cab_tiene_detalle <> 'SUS'}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = SUBSTR($det,0,length($det)-2)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = $det || $esp || $esp !ref01:jqp}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab else}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab \tab let $det = SUBSTR($det,0,length($det)-1)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab end-if}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab !ref03 fin}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+\tab write 1 from $det\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+end-procedure  }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!===================================================================================================}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+Begin-Procedure Error}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+!===================================================================================================}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+  }{\rtlch \ltrch\loch
+show $sql-error}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch
+  }{\rtlch \ltrch\loch
+do Abortar}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af6\langfe2052\dbch\af4\afs24\lang1081\loch\f0\fs24\lang3082{\rtlch \ltrch\loch
+End-procedure}
+\par }

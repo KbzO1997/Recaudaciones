@@ -1,0 +1,1106 @@
+!************************************************************************!
+!*      Archivo:                ccdbtcnt.sqr                            *!
+!*      Base de datos:          cob_pagos                               *!
+!*      Producto:               Cuentas		                        *!
+!*      Disenado por:           Guillermo Martillo                      *!
+!*      Fecha de escritura:     16/Sep/2009                             *!
+!************************************************************************!
+!*                              IMPORTANTE                              *!
+!*      Este programa es parte de los paquetes bancarios propiedad de   *!
+!*      "BANCO BOLIVARIANO"                                             *!
+!*      Su uso no autorizado queda expresamente prohibido asi como      *!
+!*      cualquier alteracion o agregado hecho por alguno de sus         *!
+!*      usuarios sin el debido consentimiento por escrito de la         *!
+!*      Presidencia Ejecutiva de BANCO BOLIVARIANO.                     *!
+!************************************************************************!
+!*                              PROPOSITO                               *!
+!*      Débitos automáticos de CNT		                        *!
+!*                                                                      *!
+!************************************************************************!
+!*                              MODIFICACIONES                          *!
+!*      FECHA           AUTOR           	RAZON                   *!
+!*    16/Sep/2009   Guillermo Martillo	   Emisión Inicial		*!
+!*2   26/Ene/2010   Ana Mendez          CTE-CC-8296 Incluir telf red inteligente  *!
+!*3   26/Marzo/2010 Ana Mendez          CTE-CC-8686 VALIDAR EL VALOR TOTAL  *!
+!*4   04/May/2011   Raul Altamirano M.	Migracion Sybase 15		*!
+!*5   06/Junio/2012 sandra merino .	CTE-CC-11501			*!	
+!*6   09/Marzo/2014 Dario Barco         RECA-CC-SGC00019906             *!	
+!*7   18/Marzo/2014 Dario Barco         RECA-CC-SGC00019906             *!	
+!*8   15/Junio/2015 Dario Barco         CTE-CE-SGC00021150              *!
+!*9   12/Feb/2019   María Jo. Silva     RECA-CE-SGC00034517             *!	
+!*10  23/Ago/2020   Luis Gusñay C.      RECM-171 PROCESAMIENTO INCOMPLETO DE DEBITOS CNT EN BATCH*!	
+!*11  13/Oct/2020   Luis Gusñay C.      RECM-193 PROCESO DEBITOS CNT FIJO*!	
+!************************************************************************!
+
+#define   ANCHO_REP      200      ! Ancho de pagina
+#define   ANCHO_PAG      200      ! Ancho de pagina
+#define   LARGO_PAG       60      ! Largo de pagina
+
+
+#include "printer_cod_imp_cond.inc"   !REF:GYC
+#include "definic.inc"
+
+!Ref009:msilvag Inicio
+Begin-Setup
+   use cob_cuentas		
+End-Setup
+!Ref009:msilvag Fin
+
+#include "log.inc"
+#include "ctacte.inc"
+#define   DINERO      999,999.99  ! Formato de dinero por defecto  
+#define   ENTERO      999999
+#define   LASER           '<37><33><10>(cobis1.jdt) STARTLM<10>'
+
+#define   path  '/respaldo/archivos/cuentas/data/' 
+
+!------------
+Begin-Program   !REF:GYC
+!------------
+do Inicializar_Programa
+do ParamS (1,$fecha_proceso,'','','')
+do Nombre_Filial (1,$N_Banco)  
+let $N_Programa = 'ccdbtcnt.sqr'  
+let $fecha = 'FECHA DE PROCESO : '  || $fecha_proceso 
+let #inicio = 1
+do Main
+do finalizar_Programa
+End-Program   !REF:GYC
+
+!---------------
+Begin-Heading 9
+!---------------
+!if #inicio <> 1 
+  let $w_titulo2 = 'ESTADO  : ' || $w_estado 
+  let $w_titulo  = 'REPORTE DEBITOS AUTOMATICOS DE SERVICIOS TELEFONICOS.'
+  if #Flag = 0  
+      do Cabecera_reporte($w_titulo,$fecha,'',$N_Banco,$N_oficina,$N_Usuario,$N_Programa)
+      
+      !let #inicio = 2     
+      print '           '  (3) center
+      position (+1)
+      print $w_titulo2  ( , 1)
+      position (+1)
+      print $w_empresa  ( , 1)
+      position (+1)
+      print $tit_cli  ( , 1)
+      !do Lin_Horizontal
+      do Line_Horizontal_reporte
+      do Centrar ('CLIENTE',1)
+      do Centrar ('NOMBRE',2)
+      do Centrar ('CODIGO',3)
+      do Centrar ('VALOR PAGAR',4)
+      do Centrar ('VALOR DEBITADO',5)
+      do Centrar ('TIPO.CTA',6)
+      do Centrar ('CUENTA',7)
+      do Centrar ('MOTIVO',8)
+      do Line_Horizontal_reporte
+  end-if  
+  if #Flag = 1   
+      let $w_titulo  = 'REPORTE DEBITOS AUTOMATICOS DE SERVICIOS TELEFONICOS'
+      !do Cabecera2($w_titulo,$fecha,'',$N_Banco,$N_oficina,$N_Usuario,$N_Programa)
+      do Cabecera_reporte($w_titulo,$fecha,'',$N_Banco,$N_oficina,$N_Usuario,$N_Programa)
+      !let #inicio = 2
+      print '           '  (3) center
+      position (+1)
+      print $w_titulo2  ( , 1)
+      position (+1)
+      print $w_empresa  ( , 1)
+      position (+1)
+      print $tit_cli  ( , 1)
+      !do Lin_Horizontal
+      do Line_Horizontal_reporte
+      do Centrar ('CLIENTE',1)
+      do Centrar ('NOMBRE',2)
+      do Centrar ('CODIGO',3)
+      do Centrar ('V.PAGAR',4)
+      do Centrar ('V.DEBITADO',5)
+      do Centrar ('TIPO.CTA',6)
+      do Centrar ('CUENTA',7)
+      do Centrar ('MOTIVO',8)
+      do Line_Horizontal_reporte
+  end-if  
+! end-if 
+End-Heading  
+
+!--------------------------
+Begin-Procedure Main
+!--------------------------
+let $w_fue_ejecutado = 'N' !REF dbl20150309 
+do BorraDatos
+
+if $w_fue_ejecutado = 'N'   !REF dbl20150309
+   do Obtengo_secuencia
+   do FileName
+   do GeneraListado
+   show 'GENERANDO LINEA CREDITO'
+   do LineaCredito
+   do LineaCreditoDomingo
+   SHOW 'LINEA CREDITO OK'
+end-if 
+End-Procedure
+
+!--------------------------
+Begin-Procedure FileName
+!--------------------------
+!Leer el nombre del archivo de catalogo
+Begin-Select
+ltrim(rtrim(c.valor))                 &valor
+c.codigo			      &parempresa
+	let $i_empresa = &parempresa
+	do renombraFile (&valor,$w_arch_carga)
+	do InsertaRegistros
+	do BorraArchivo       !Ref2
+	do debitoCNT          !Ref2
+	
+from cobis..cl_catalogo c, cobis..cl_tabla t
+where t.codigo = c.tabla
+and t.tabla = 'cc_archivos_cnt'
+and c.estado = 'V' !--ref011
+!and c.codigo = $i_empresa
+for read only
+End-Select
+End-Procedure
+
+begin-Procedure InsertaRegistros
+if $w_arch_carga <> ''
+		let #empresa = $i_empresa
+		evaluate #empresa 
+			when = 1
+				let $empresaingresa = '113'
+				break
+			when = 2
+				let $empresaingresa = '113'
+				break
+			when = 3
+				let $empresaingresa = '113'
+				break
+			when = 200
+				let $empresaingresa = '113'
+				break
+			when = 40
+				let $empresaingresa = '112'
+				break
+		end-evaluate
+		
+		begin-sql on-error=ErrorDB
+			delete cob_cuentas..cc_debito_cnt 
+			where cc_empresa = #empresa
+			
+			dump tran cob_cuentas with truncate_only
+		end-sql
+		open $w_arch_carga as 1 for-reading record=70 status=#openfileori
+		if #openfileori <> 0
+	   		show ' '
+	   		show ' ERROR: En apertura del archivo: ' $w_arch_carga
+		   	do Abortar
+		else
+	   		show ' '
+	   		show ' CARGANDO ARCHIVO DE CNT SUCURSAL:  ' $i_empresa  ' ...........'
+		end-if
+	
+		read 1 into $w_tipo_cabeza:1 $w_banco:4 $w_sucursual:6 $f_vencimiento:8
+		
+		while 1
+			read 1 into $w_tipo:1 $w_cta:20 $telefono:10 $w_consumo:12 $w_iva:6 $w_ice:6 $w_total:12 $w_codigo:3 status=#readfileori
+		
+			if #end-file
+				break
+			else
+		         	!Contador de Registros
+		        	let #contador = #contador + 1
+			        !let 
+	      		end-if	    		
+	      		
+		
+			if $w_tipo = '2'
+				begin-sql on-error=ErrorDB
+					insert into cob_cuentas..cc_debito_cnt 
+					values (#contador,#empresa,$w_tipo,$w_cta,$telefono,$w_consumo,
+					$w_iva,$w_ice,$w_total,$w_codigo,'F',$fecha_proceso,null,
+					$f_vencimiento,$fecha_proceso,null,null,null,null,null,
+					$w_arch_carga,$empresaingresa)
+					!dump tran cob_cuentas with truncate_only
+				end-sql 
+			end-if 
+	
+		
+		end-while
+		close 1 
+	end-if
+end-Procedure
+
+!-------------------------
+Begin-Procedure renombraFile ($w_arch_orig,:$w_arch_carga)
+!-------------------------
+!mv gmc*.prv acctorg082808.sql
+let $w_arch_carga = $w_arch_orig || '.txt'
+let $w_comando1 = 'rm -f ' || {path} || $w_arch_carga        !Ref3
+call system using $w_comando1 #w_status
+if #w_status <> 0
+	show 'Error en: '  $w_comando1
+end-if 
+
+let $comando = 'ls ' || {path} || $w_arch_orig || '*.OPF >' || {path} || $w_arch_carga
+let #archivo = 0 
+call system using $comando #retorno
+if #retorno <> 0
+	!show 'Error en: '  $comando 
+	let #archivo = 1
+	!do Abortar
+end-if
+
+if #archivo = 0 
+	let $tmp_archivo = {path} || $w_arch_carga
+	open $tmp_archivo as 2 for-reading record=65 status=#openfile
+	if #openfile <> 0
+   		show ' '
+   		show ' ERROR: En apertura del archivo: ' $tmp_archivo
+   		!do Abortar
+	end-if
+	read 2 into $w_archivo:64 status=#readfileori
+	close 2
+	let $w_arch_carga = $w_archivo
+else
+	let $w_arch_carga = ''
+end-if 
+End-Procedure
+
+!-------------------------
+Begin-Procedure debitoCNT 
+!-------------------------
+show 'REALIZANDO DEBITOS EMPRESA ' $i_empresa
+let #empresa = $i_empresa
+!INI lgusnayc ref010
+
+execute on-error=ErrorSP @#status_rtn=cob_cuentas..pa_pag_idebitos_cnt
+	@e_fecha = $fecha_proceso,
+	@e_empresa = #empresa
+
+if #status_rtn <> 0
+    show 'Retorno programa ' #status_rtn
+
+end-if
+
+show 'GENERANDO ARCHIVOS DE RESPUESTA CNT'
+do Archivorespuesta
+show 'ARCHIVOS DE RESPUESTA OK'
+end-Procedure
+
+Begin-Procedure ErrorSP
+  show $sql-error
+  do Abortar
+End-Procedure
+!FIN lgusnayc ref010
+
+!gmartillo 09/03/2009        
+Begin-Procedure Obtengo_secuencia
+let $w_existe = 'N'
+begin-select
+se_numero  &w_secuencia
+   let $w_existe = 'S'
+   let #w_secuencia = &w_secuencia
+   let #w_sec = #w_secuencia
+from cobis..ba_secuencial
+end-select
+let #w_secuencia = #w_secuencia + 1000 !lgusnayc ref010 sec para LC x Empresa
+if $w_existe = 'N'
+   show 'ERROR: No se puede obtener el Secuencial'
+   do Abortar
+else
+   do Actualiza_secuencia
+end-if
+End-Procedure
+!gmartillo 09/03/2009
+Begin-Procedure Actualiza_secuencia
+begin-sql
+update cobis..ba_secuencial
+set se_numero = #w_secuencia
+end-sql
+End-Procedure
+
+Begin-Procedure Error
+!show $sql-error
+End-Procedure 
+
+Begin-Procedure ErrorDB
+show $sql-error
+do Abortar
+End-Procedure 
+
+begin-Procedure BorraArchivo
+if $w_arch_carga <> ''
+	let $w_comando3 = 'rm -f ' || $w_arch_carga        !Ref3
+	call system using $w_comando3 #w_estado
+	if #w_estado <> 0
+		show 'Error en: '  $w_comando3
+		do Abortar
+	end-if
+end-if 
+end-procedure
+
+Begin-Procedure Before_Empresa
+begin-select
+b.valor &nom_empresa
+from cobis..cl_tabla a , cobis..cl_catalogo b 
+where a.tabla = 'sv_empresas_luz'
+and b.tabla = a.codigo
+and b.codigo = &cc_empresacnt
+end-select
+let $befEmpresa = &cc_empresacnt
+let $w_empresa = 'EMPRESA : ' || &cc_empresacnt || ' - ' || &nom_empresa
+!do TotalEmpresa
+End-Procedure
+
+Begin-Procedure Before_Estado
+let $w_estado = &cc_estado 
+let $w_estadotot = &cc_estado 
+if $w_estado = 'P'
+   let $w_estado = 'P - Procesado'
+   let #Flag = 0
+else
+   let $w_estado = 'E - Error'
+   let #Flag = 1
+end-if
+let $befEstado = &cc_estado 
+!new-page
+!do TotalEstado
+end-Procedure
+
+Begin-Procedure Before_Cliente
+evaluate &cc_tipo_cliente
+	when = 'BBB'
+		let $tit_cli = 'ABONADO: BANCO BOLIVARIANO'
+		break
+	when = 'CNT'
+		let $tit_cli = 'ABONADO: CLIENTES'
+		break
+end-evaluate
+let $befCli = &cc_tipo_cliente
+end-Procedure
+
+
+Begin-Procedure After_Cliente
+do ImpTotalAbonado
+let #valor_bb = 0
+let #valor_deb_bb = 0
+let #reg_bb = 0
+let #valor_cnt = 0 
+let #valor_deb_cnt = 0
+let #reg_cnt = 0
+!let #ok_bb = 0
+!let #bad_bb = 0
+!let #ok_cnt = 0
+!let #bad_cnt = 0
+new-page
+End-Procedure
+
+Begin-Procedure After_Quiebre
+new-page
+End-Procedure
+
+Begin-Procedure After_Estado
+do ImpTotalEstado
+let #totalok = 0
+let #totalbad = 0
+let #regbad = 0
+let #regok = 0 
+new-page
+End-Procedure
+
+Begin-Procedure After_Empresa
+do ImpTotalEmpresa
+let #valor_pacif = 0
+let #reg_pacif = 0
+let #valor_deb_pacif = 0
+let #valor_sto = 0 
+let #reg_sto = 0
+let #valor_deb_sto = 0 
+let #ok_pacif = 0
+let #bad_pacif = 0
+let #ok_sto = 0
+let #bad_sto = 0
+!let #valor_bb = 0
+!let #valor_deb_bb = 0
+!let #reg_bb = 0
+!let #valor_cnt = 0 
+!let #valor_deb_cnt = 0
+!let #reg_cnt = 0
+let #ok_bb = 0
+let #bad_bb = 0
+let #ok_cnt = 0
+let #bad_cnt = 0
+new-page
+End-Procedure
+
+
+Begin-Procedure GeneraListado
+let #Flag = 1
+do Columnas (10,50,15,15,15,10,15,50,0,0,0,0,0,0,0,0,0,0,0,0)
+Begin-Select 
+!cc_empresa () on-break print=never before=Before_Empresa after=After_Quiebre level=1
+cc_empresacnt () on-break print=never before=Before_Empresa after=After_Empresa level=1
+cc_estado () on-break print=never before=Before_Estado  after=After_Estado level=2
+cc_tipo_cliente () on-break print=never before=Before_Cliente  after=After_Cliente level=3
+cc_ente
+cc_nombre
+substring(cc_telefono,1,10)  &telefono_pago                                       !Ref2
+convert(money,substring(cc_total,1,10) + '.' + substring(cc_total,11,2)) &cc_total_pagar
+cc_tipo_cta
+substring(cc_cta_banco,11,10) &cc_cta_banco
+cc_error
+cc_codigo  
+	!let #w_ente = &cc_ente
+	if &cc_codigo ='000'
+		let #valor_debito = &cc_total_pagar
+		if &cc_empresacnt = '112'
+			let #ok_sto = #ok_sto + 1
+		else 
+			let #ok_pacif = #ok_pacif + 1
+		end-if 
+		
+	else
+		if &cc_empresacnt = '112'
+			let #bad_sto = #bad_sto + 1
+		else 
+			let #bad_pacif = #bad_pacif + 1
+		end-if 
+		
+		let #valor_debito = 0
+	end-if 
+	let #registro_imprime = 1
+	move &cc_ente to $w_ente  '999999'
+	do TotalAbonado
+	do TotalEstado
+	do TotalEmpresa
+	Do Procesa_Reporte  
+from cob_cuentas..cc_debito_cnt
+where cc_fecha_debito = $fecha_proceso
+	!cc_empresa = #empresa
+order by cc_empresacnt,cc_estado,cc_tipo_cliente,cc_empresa
+End-Select  
+end-Procedure
+
+begin-Procedure TotalAbonado
+evaluate $befCli
+	WHEN = 'BBB'
+		let #valor_bb = #valor_bb + &cc_total_pagar
+		let #valor_deb_bb = #valor_deb_bb + #valor_debito
+		let #reg_bb = #reg_bb + 1 
+		!if &cc_estado = 'P'
+		!	let #ok_bb = #ok_bb +1 
+		!else
+		!	let #bad_bb = #bad_bb +1 
+		!end-if
+	   	break
+	   	
+	WHEN = 'CNT'
+		let #valor_cnt = #valor_cnt + &cc_total_pagar
+		let #valor_deb_cnt = #valor_deb_cnt + #valor_debito
+		let #reg_cnt = #reg_cnt + 1 
+		!if &cc_estado = 'P'
+		!	let #ok_cnt = #ok_cnt + 1 
+		!else 
+		!	let #bad_cnt = #bad_cnt + 1 
+		!end-if
+	   	break
+end-evaluate
+end-Procedure 
+
+begin-Procedure TotalEstado
+evaluate &cc_estado
+	when = 'P'
+		let #totalok = #totalok +  &cc_total_pagar
+		let #regok = #regok + 1
+		break
+	when = 'F' 
+		let #totalbad = #totalbad + &cc_total_pagar
+		let #regbad = #regbad + 1
+		break
+end-evaluate
+end-Procedure
+
+Begin-Procedure Procesa_Reporte  
+do PrintS(1,$w_ente,'',0)
+do PrintS(2,&cc_nombre,'',0)
+do PrintS(3,&telefono_pago,'',0)
+do PrintN(4,&cc_total_pagar,'{DINERO}',0) 
+do PrintN(5,#valor_debito,'{DINERO}',0) 
+do PrintS(6,&cc_tipo_cta,'',1)
+do PrintS(7,&cc_cta_banco,'',1)
+do PrintS(8,&cc_error,'',1)
+next-listing  
+end-Procedure
+
+Begin-Procedure ImpTotalEstado
+
+position (+1)
+!do PrintS (2, 'TOTAL ESTADO','',0)
+if $w_estadotot = 'P'
+	position (+1)
+	do PrintS (3, 'CANTIDAD: ','',0)
+	do PrintS (4, 'TOTAL: ','',0)
+	position (+1)
+	do PrintS (2, 'TOTAL ETADO: PROCESADO','',0)
+	!do PrintN (2, #totalok,'{DINERO}',0)
+	do PrintN (3, #regok,'{DINERO}',0)
+	do PrintN (4, #totalok,'{DINERO}',0)
+else 
+	position (+1)
+	do PrintS (3, 'CANTIDAD: ','',0)
+	do PrintS (4, 'TOTAL: ','',0)
+	position (+1)
+	do PrintS (2, 'TOTAL ESTADO: ERROR','',0)
+	!do PrintN (3, #totalbad,'{DINERO}',0)
+	do PrintN (3, #regbad,'{DINERO}',0)
+	do PrintN (4, #totalbad,'{DINERO}',0)
+end-if
+position (+2)
+end-Procedure 
+
+Begin-Procedure ImpTotalEmpresa
+let $tmp_empresa =  'TOTAL '|| $w_empresa
+
+position (+1)
+do PrintS (2, $tmp_empresa ,'',0)
+
+if $befEmpresa = '113'
+	let #no_debitado_empresa = #valor_pacif - #valor_deb_pacif
+	position (+2)
+	do PrintS (3, 'CANTIDAD','',0)
+	do PrintS (4, 'TOTAL','',0)
+	position (+1)
+	do PrintS (2, 'PROCESADOS','',0)
+	do PrintN (3, #ok_pacif,'{DINERO}',0)
+	!do PrintS (2, '        TOTAL DEBITADO: ','',0)
+	do PrintN (4, #valor_deb_pacif,'{DINERO}',0)
+	
+	position (+2)
+	do PrintS (3, 'CANTIDAD','',0)
+	do PrintS (4, 'TOTAL','',0)
+	position (+1)
+	do PrintS (2, 'ERROR','',0)
+	do PrintN (3, #bad_pacif,'{DINERO}',0)
+	!do PrintS (2, '        TOTAL DEBITADO: ','',0)
+	do PrintN (4, #no_debitado_empresa,'{DINERO}',0)
+else
+	let #no_debitado_sto = #valor_sto - #valor_deb_sto
+	position (+2)
+	do PrintS (3, 'CANTIDAD','',0)
+	do PrintS (4, 'TOTAL','',0)
+	position (+1)
+	do PrintS (2, 'PROCESADOS','',0)
+	do PrintN (3, #ok_sto,'{DINERO}',0)
+	!do PrintS (2, '        TOTAL DEBITADO: ','',0)
+	do PrintN (4, #valor_deb_sto,'{DINERO}',0)
+		
+	position (+2)
+	do PrintS (3, 'CANTIDAD','',0)
+	do PrintS (4, 'TOTAL','',0)
+	position (+1)
+	do PrintS (2, 'ERROR','',0)
+	do PrintN (3, #bad_sto,'{DINERO}',0)
+	do PrintN (4, #no_debitado_sto,'{DINERO}',0)
+end-if
+position (+2)
+End-Procedure
+
+Begin-Procedure ImpTotalAbonado
+position (+1)
+if $befCli = 'BBB'
+	let #total_bb_pagar = #valor_bb - #valor_deb_bb
+	do PrintS (2, 'ABONADO: BANCO BOLIVARIANO','',0)
+	position (+1)
+	do PrintS (3, 'CANTIDAD','',0)
+	do PrintS (4, 'TOTAL','',0)
+	position (+1)
+	do PrintN (3, #reg_bb,'{DINERO}',0)
+	do PrintN (4, #valor_bb,'{DINERO}',0)
+else
+	let #total_cnt_pagar = #valor_cnt - #valor_deb_cnt
+	do PrintS (2, 'ABONADO: CLIENTES','',0)
+	position (+1)
+	do PrintS (3, 'CANTIDAD','',0)
+	do PrintS (4, 'TOTAL','',0)
+	position (+1)
+	do PrintN (3, #reg_cnt,'{DINERO}',0)
+	do PrintN (4, #valor_cnt,'{DINERO}',0)
+end-if
+position (+2)
+end-Procedure
+
+Begin-Procedure Totales
+!position (+1)
+
+position (+1)
+do PrintS (2, 'TOTAL REGION PACIFICO Y ANDINA: ','',0)
+do PrintN (3, #valor_gen_pacif,'{DINERO}',0)
+
+position (+1)
+do PrintS (2, '        TOTAL REGISTROS: ','',0)
+do PrintN (3, #reg_gen_pacif,'{DINERO}',0)
+
+position (+1)
+do PrintS (2, '        TOTAL DEBITADO: ','',0)
+
+do PrintN (3, #valor_gen_deb_pacif,'{DINERO}',0)
+
+position (+1)
+do PrintS (2, 'TOTAL EMPRESA STO DOMINGO: ','',0)
+do PrintN (3, #valor_gen_sto,'{DINERO}',0)
+
+position (+1)
+do PrintS (2, '        TOTAL REGISTROS: ','',0)
+do PrintN (3, #reg_gen_sto,'{DINERO}',0)
+
+position (+1)
+do PrintS (2, '        TOTAL DEBITADO: ','',0)
+do PrintN (3, #valor_gen_deb_sto,'{DINERO}',0)
+end-Procedure
+
+Begin-Procedure Line_Horizontal_reporte
+let   $chr_hor = '-'
+let   #ultima_pos =   {ANCHO_REP} - 1
+print $chr_hor    (+1,1,#ultima_pos)  fill
+position (+1)
+End-Procedure
+
+Begin-Procedure Cabecera_reporte ($titulo,$subtitulo1,$fecha_emision,$empresa,$oficina,
+                          $moneda,$archivo)
+let #pos = {ANCHO_REP} -23
+BEGIN-SELECT 
+convert(char(10),getdate(),101) &fecha_actual
+convert(char(8),getdate(),108) &hora
+END-SELECT
+!date-time () 'MM/DD/YYYY' &fecha_actual
+!date-time () HH:MI &hora
+let $hora = 'HORA ' || &hora
+do Mes_Espaniol ($fecha_emision,$fecha_emi)
+do Mes_Espaniol (&fecha_actual,$fecha_imp)
+print $empresa                             (1,1)
+print $titulo                              (1) center
+let $fecha_imp = 'FECHA IMP.: ' || $fecha_imp
+print $fecha_imp                           (1,#pos)
+print $oficina                             (2,1)
+print $subtitulo1                          (2) center
+page-number  (2,#pos) 'PAG.      : '
+print $moneda                              (3,1)
+print $fecha_emi                           (3) center
+print $archivo                             (3,#pos)
+print $hora  (4,#pos)           
+End-Procedure      
+
+begin-Procedure TotalEmpresa
+evaluate &cc_empresacnt
+	WHEN = '113'
+		let #valor_pacif = #valor_pacif + &cc_total_pagar
+		let #valor_gen_pacif = #valor_gen_pacif + &cc_total_pagar
+		
+		let #valor_deb_pacif = #valor_deb_pacif + #valor_debito
+		let #valor_gen_deb_pacif = #valor_gen_deb_pacif + #valor_debito
+		
+		let #reg_pacif = #reg_pacif + 1
+		let #reg_gen_pacif = #reg_gen_pacif + 1
+		!let #ok_pacifico = #ok
+		!let #bad_pacifico = #bad
+	   	break
+	WHEN = '112'
+		let #valor_sto = #valor_sto + &cc_total_pagar
+		let #valor_gen_sto = #valor_gen_sto + &cc_total_pagar
+		
+		let #valor_deb_sto = #valor_deb_sto + #valor_debito
+		let #valor_gen_deb_sto = #valor_gen_deb_sto + #valor_debito
+		
+		let #reg_sto = #reg_sto + 1
+		let #reg_gen_sto = #reg_gen_sto + 1
+
+		!let #ok_sto = #ok
+		!let #bad_sto = #bad
+	   	break	
+	end-evaluate
+end-Procedure 
+
+
+begin-Procedure LineaCredito
+Begin-Select 
+sum(convert(money,substring(cc_total,1,10) + '.' + substring(cc_total,11,2))) &cc_total_linea
+sum(convert(money,substring(cc_consumo,1,10) + '.' + substring(cc_consumo,11,2))) &cc_base
+count(1) &reg_linea_credito
+	let #cc_total_linea = &cc_total_linea
+	let #cc_base = &cc_base
+	let $empresa_linea = '113'
+	let #empresa_credito = 113
+	let #reg_linea_credito = &reg_linea_credito
+	do insertaLineaCredito
+from cob_cuentas..cc_debito_cnt
+where cc_estado = 'P'
+and cc_empresa in (1,2,3,200)
+end-select
+end-Procedure 
+
+begin-Procedure LineaCreditoDomingo
+Begin-Select 
+sum(convert(money,substring(cc_total,1,10) + '.' + substring(cc_total,11,2))) &cc_total_linea_sto
+sum(convert(money,substring(cc_consumo,1,10) + '.' + substring(cc_consumo,11,2))) &cc_base_sto
+count(1) &reg_linea_credito_sto
+	let #cc_total_linea = &cc_total_linea_sto
+	let #cc_base = &cc_base_sto
+	let $empresa_linea = '112'
+	let #empresa_credito = 112
+	let #reg_linea_credito = &reg_linea_credito_sto
+	do insertaLineaCredito
+from cob_cuentas..cc_debito_cnt
+where cc_empresa = 40
+and cc_estado = 'P'
+end-select
+end-Procedure 
+
+
+begin-Procedure insertaLineaCredito
+let #w_sec  = #w_sec + 1
+!if #cc_base > 0 
+if #cc_total_linea > 0  !Ref3
+do Parametros
+!do ComprobanteRetencion
+begin-sql on-error=ErrorDB
+insert into cob_cuentas..cc_tran_servicio (ts_secuencial, ts_tipo_transaccion, ts_oficina,
+ts_usuario, ts_rol, ts_terminal,
+ts_reentry, ts_origen, ts_nodo, ts_tsfecha, ts_clase,
+ts_referencia, ts_hora,
+ts_moneda, ts_tipo, ts_valor,ts_saldo,ts_monto,ts_contratado,
+ts_aporte_iess, ts_causa,ts_fecha,ts_fecha_aper, ts_descuento_iess, ts_fonres_iess,
+ts_ocasional)
+values (#w_sec, 3227, 0,'operador', 999, 'consola', 
+null, 'L', 'BOLIVSRV', $fecha_proceso, 'P', 'TRFBCE',$fecha_proceso,
+1, 'L',#cc_total_linea,0,0,#cc_total_linea,
+#costo_diario,$empresa_linea,$fecha_proceso,$fecha_proceso, #costo_diario, #w_val_retencion,
+#cc_total_linea)
+end-sql
+
+begin-sql on-error=ErrorDB
+insert cob_pagos..pg_control_ncrecaudacion
+( pn_empresa,   pn_fecha_rec,  pn_fecha_pago,  pn_valor,      pn_retencion,     pn_costo_recauda,
+pn_cont_trn,  pn_forma_pago, pn_estado,      pn_secuencial, pn_retimpret,     pn_cta_banco, 
+pn_fecha_efec,pn_tipo_empresa, pn_sec_servicio, pn_valor_uno)  
+values 
+(#empresa_credito,$fecha_proceso,$fecha_pago,#cc_total_linea,0,#costo_diario,
+#reg_linea_credito,&pe_fpago,'P',$w_comprobante,#w_val_retencion, &pe_cuenta, 
+$fecha_proceso, 0, null, #cc_base) 
+end-sql
+end-if
+
+end-Procedure
+
+begin-Procedure Parametros
+let #empresa = $i_empresa
+begin-select 
+pe_fpago
+pe_cuenta
+pe_dias
+pe_costo
+pe_porcentaje
+pe_laborables
+pe_impret
+pe_porc_retimp
+pe_producto
+round((isnull(pe_costo,0) * isnull(#reg_linea_credito,0)),2) &costo_diario
+	let #costo_diario = &costo_diario
+	if &pe_impret = 1
+		let #w_val_retencion = round(#cc_base *  &pe_porc_retimp,2)
+		do ComprobanteRetencion
+	end-if 
+	
+	if &pe_laborables = 'N'
+		do diasCredito	
+	else 
+		let $fecha_pago_tmp = $fecha_proceso
+		let #cont = 0
+		do calculoDiaCreditoN
+	end-if
+from cob_pagos..pg_person_empresa
+where pe_empresa = #empresa_credito
+end-select
+end-Procedure
+
+
+begin-Procedure diasCredito
+begin-select 
+dateadd(dd,&pe_dias,$fecha_proceso) &f_pag_lin_dir
+	let $fecha_pago_tmp = &f_pag_lin_dir
+	
+	do calculoDiaCredito
+end-select
+end-Procedure 
+
+begin-Procedure calculoDiaCredito
+while 1
+let #existe = 0
+begin-select
+df_fecha
+	do diasCreditoUno
+	let #existe = 1
+from  cobis..cl_dias_feriados
+where df_fecha = $fecha_pago_tmp
+and df_ciudad = 1 
+end-select 
+if #existe = 0
+	break 
+end-if 
+end-while  
+let $fecha_pago = $fecha_pago_tmp
+end-Procedure 
+
+
+begin-Procedure diasCreditoUno
+
+begin-select 
+dateadd(dd,1,$fecha_pago_tmp) &f_pago_normal
+	let $fecha_pago_tmp = &f_pago_normal
+	
+end-select
+end-Procedure 
+
+begin-Procedure calculoDiaCreditoN
+while 1
+let #existe = 0
+begin-select 
+df_fecha &df_fechaN
+	let #existe = 1
+from  cobis..cl_dias_feriados
+where df_fecha = $fecha_pago_tmp
+and df_ciudad = 1 
+end-select
+if #existe = 0 
+	let #cont = #cont + 1
+	if #cont > &pe_dias 
+		break
+	end-if
+	do diasCreditoUnoN
+else 
+	do diasCreditoUnoN
+end-if
+end-while
+let $fecha_pago = $fecha_pago_tmp
+end-Procedure
+
+begin-Procedure diasCreditoUnoN
+begin-select 
+dateadd(dd,1,$fecha_pago_tmp) &f_pago_normalN
+	let $fecha_pago_tmp = &f_pago_normalN
+end-select
+end-Procedure 
+
+Begin-Procedure ComprobanteRetencion
+!let #w_sec  = #w_sec + 1
+do SecComprobante
+let $w_sec_comp = #w_sec_comprobante
+do Posicion
+let $w_sec_tmp = substr($w_sec_comp,1,#pos - 1)
+
+begin-select
+right("0000000"+ $w_sec_tmp, 7) &w_comprobante
+	let $w_comprobante = '001-005-' || &w_comprobante
+end-select 
+
+end-Procedure
+
+Begin-Procedure SecComprobante
+let #w_sec_comprobante = 0 
+execute -XC on-error = ErrorDB  cobis..sp_cseqnos
+@t_debug      = "N",
+@t_file       = "nccorpei.sp",
+@t_from       = "sp_ncorpei",
+@i_tabla      = 'cc_comprobante',
+@o_siguiente  = #w_sec_comprobante out
+end-Procedure 
+
+begin-Procedure Posicion
+begin-select
+CHARINDEX('.', $w_sec_comp) &pos
+	let #pos = &pos
+end-select
+end-Procedure 
+
+begin-Procedure CabeceraRespuesta
+let $cab_registro = '1'
+let #w_empresa_cab = $i_empresa
+let $w_empresa_cab = #w_empresa_cab
+
+do posEmpresaCab
+let $cab_subanco =  lpad($w_cab_empresa,6,'0')
+
+let $cab_banco = '1007'
+begin-select 
+convert(varchar(10),convert(datetime,$fecha_proceso),112) &cab_fecha
+	let $cab_fecha = &cab_fecha
+end-select
+end-Procedure 
+
+begin-Procedure posEmpresaCab
+begin-select
+CHARINDEX('.',$w_empresa_cab) &pos_empcab
+	let #pos_empcab = &pos_empcab
+end-select 
+let $w_cab_empresa = substr($w_empresa_cab,1, #pos_empcab - 1)
+end-Procedure
+
+begin-Procedure FinTotArchivo
+let $tot_registro = '3'
+let $tot_cta_andinatel  = '99999999999999'
+let $tot_tl_registro = lpad($cc_rep_reg,5,'0') !de 5
+let $tot_tl_consumo = lpad($cc_rep_consumo,12,'0') ! de 12 10,2
+let $tot_tl_iva = lpad($cc_rep_iva,9,'0') ! de 9 7,2
+let $tot_tl_ice = lpad($cc_rep_ice,9,'0') ! de 9 7,2
+let $tot_total =  lpad($cc_rep_total,12,'0') ! de 12 10,2
+end-Procedure 
+
+
+begin-Procedure TotalesRespuesta
+let #empresa = $i_empresa
+begin-select 
+sum(convert(money,substring(cc_total,1,10) + '.' + substring(cc_total,11,2))) &cc_rep_tot_total
+sum(convert(money,substring(cc_consumo,1,10) + '.' + substring(cc_consumo,11,2))) &cc_rep_tot_consumo
+sum(convert(money,substring(cc_iva,1,4) + '.' + substring(cc_iva,5,2))) &cc_rep_tot_iva
+sum(convert(money,substring(cc_ice,1,4) + '.' + substring(cc_ice,5,2))) &cc_rep_tot_ice
+count(1) &cc_rep_tot_registros
+	let $cc_rep_tot_total = &cc_rep_tot_total
+	let $cc_rep_tot_consumo = &cc_rep_tot_consumo
+	let $cc_rep_tot_iva = &cc_rep_tot_iva
+	let $cc_rep_tot_ice = &cc_rep_tot_ice
+	let $cc_rep_tot_registros = &cc_rep_tot_registros
+	do posTotRespuesta	
+	do posTotConsumo
+	do posTotIva
+	do posTotIce
+	do posTotReg
+from cob_cuentas..cc_debito_cnt
+where cc_empresa = #empresa
+end-select
+end-Procedure
+
+
+begin-Procedure posTotReg
+begin-select
+CHARINDEX('.',$cc_rep_tot_registros) &pos_reg
+	let #pos_reg = &pos_reg
+	
+end-select 
+let $cc_ent_tot_reg = substr($cc_rep_tot_registros,1, #pos_reg - 1)
+let $cc_rep_reg = $cc_ent_tot_reg
+end-Procedure
+
+begin-Procedure posTotRespuesta
+begin-select
+CHARINDEX('.',$cc_rep_tot_total) &pos_total
+	let #pos_total = &pos_total
+end-select 
+let $cc_ent_tot_total = substr($cc_rep_tot_total,1, #pos_total - 1)
+let $cc_dec_tot_total = substr($cc_rep_tot_total,#pos_total + 1,2)
+let $cc_rep_total = $cc_ent_tot_total || $cc_dec_tot_total
+end-Procedure
+
+begin-Procedure posTotConsumo
+begin-select
+CHARINDEX('.',$cc_rep_tot_consumo) &pos_consumo
+	let #pos_consumo = &pos_consumo
+end-select 
+let $cc_ent_tot_consumo = substr($cc_rep_tot_consumo,1, #pos_consumo - 1)
+let $cc_dec_tot_consumo = substr($cc_rep_tot_consumo,#pos_consumo + 1,2)
+let $cc_rep_consumo = $cc_ent_tot_consumo || $cc_dec_tot_consumo
+end-Procedure
+
+begin-Procedure posTotIva
+begin-select
+CHARINDEX('.',$cc_rep_tot_iva) &pos_iva
+	let #pos_iva = &pos_iva
+end-select 
+let $cc_ent_tot_iva = substr($cc_rep_tot_iva,1, #pos_iva - 1)
+let $cc_dec_tot_iva = substr($cc_rep_tot_iva,#pos_iva + 1 ,2)
+let $cc_rep_iva = $cc_ent_tot_iva || $cc_dec_tot_iva
+end-Procedure
+
+begin-Procedure posTotIce
+begin-select
+CHARINDEX('.',$cc_rep_tot_ice ) &pos_ice
+	let #pos_ice = &pos_ice
+end-select 
+let $cc_ent_tot_ice = substr($cc_rep_tot_ice ,1, #pos_ice - 1)
+let $cc_dec_tot_ice = substr($cc_rep_tot_ice ,#pos_ice + 1 ,2)
+let $cc_rep_ice = $cc_ent_tot_ice || $cc_dec_tot_ice
+end-Procedure
+
+begin-Procedure NombeArchivo
+let #empresa = $i_empresa
+begin-select 
+distinct cc_nom_archivo &archResp
+	let $archresp = &archResp
+from cob_cuentas..cc_debito_cnt
+where cc_empresa = #empresa
+order by cc_nom_archivo		!REF4: REAM MIGRACION
+end-select
+end-Procedure
+
+begin-Procedure Archivorespuesta
+do NombeArchivo
+open $archresp as 3 for-writing record=400 status=#filestat2
+if #filestat2  <> 0                                     !Ref2 validar el open del archivo
+   show ' error crear archivo '  $archresp 
+   do abortar
+end-if
+!show 'crear archivo'  $archresp 
+do CabeceraRespuesta
+let $linea = $cab_registro || $cab_banco || $cab_subanco  || $cab_fecha
+!let $linea = $cab_registro || $cab_banco  || $cab_fecha
+write 3 from $linea
+!--INI ref011
+let #empresa = $i_empresa
+let $linea = ''
+begin-select 
+cc_tipo  &cc_rep_tipo
+cc_cta_banco &cc_rep_cta
+cc_telefono &cc_rep_tlf
+cc_consumo &cc_rep_consumo
+cc_iva &cc_rep_iva
+cc_ice &cc_rep_ice
+cc_total &cc_rep_total
+cc_codigo &cc_rep_codigo
+	let $linea = &cc_rep_tipo || &cc_rep_cta || &cc_rep_tlf || &cc_rep_consumo || &cc_rep_iva || &cc_rep_ice || &cc_rep_total || &cc_rep_codigo
+	write 3 from $linea
+from cob_cuentas..cc_debito_cnt
+where cc_empresa = #empresa
+order by cc_id
+end-select
+!--fin ref011
+do TotalesRespuesta
+do FinTotArchivo
+let $linea = $tot_registro || $tot_cta_andinatel ||$cab_fecha  || $tot_tl_registro || $tot_tl_consumo || $tot_tl_iva || $tot_tl_ice || $tot_total
+write 3 from $linea
+close 3
+end-Procedure
+
+!--------------------------
+begin-Procedure BorraDatos
+!--------------------------
+do Verifica_Ejecucion
+if #w_cargado = 0
+	do TruncaTabla
+else
+     show ' '   
+     show ' El proceso ya se ejecuto HOY...'   !REF dbl20150518
+     let $w_fue_ejecutado = 'S'
+end-if           
+end-Procedure
+
+!----------------------------------
+Begin-Procedure Verifica_Ejecucion		!REF dbl20150518
+!----------------------------------
+   execute -XC on-error=ErrorDB cob_cuentas..sp_existe_reg_cnt
+           @i_fecha      = $fecha_proceso,
+           @o_registros  = #w_cargado out
+End-Procedure
+
+begin-Procedure TruncaTabla
+begin-sql
+truncate table cob_cuentas..cc_debito_cnt
+end-sql
+end-Procedure

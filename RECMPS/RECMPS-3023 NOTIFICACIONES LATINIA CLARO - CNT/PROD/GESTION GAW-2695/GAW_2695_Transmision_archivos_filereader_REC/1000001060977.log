@@ -1,0 +1,89 @@
+2/6/24 10:33:47 a. m.         INFO      Start Date and Time: 2/6/24 10:33:47 a. m.
+2/6/24 10:33:47 a. m.         INFO      Job Number: 1000001060977
+2/6/24 10:33:47 a. m.         INFO      Project Name: /Formato Original y elimina al transmitir x RED/GAW-2695-Transmision de archivos filereader REC
+2/6/24 10:33:47 a. m.         INFO      Submitted By: dpereira
+2/6/24 10:33:47 a. m.         INFO      Submitted From: Administrator UI
+2/6/24 10:33:47 a. m.         INFO      GoAnywhere 7.3.1 running on Linux 4.18.0-305.el8.x86_64 (amd64)
+2/6/24 10:33:47 a. m.         INFO      Executing project 'GAW-2695-Transmision de archivos filereader REC'
+2/6/24 10:33:47 a. m.         INFO      Project location: /home/ec2-user/HelpSystems/GoAnywhere/userdata/DesarrolloBB/Projects/Formato Original y elimina al transmitir x RED/GAW-2695-Transmision de archivos filereader REC.xml
+2/6/24 10:33:47 a. m.         INFO      Executing module 'Main'
+2/6/24 10:33:47 a. m.         INFO      Executing task 'createWorkspace 1.0'
+2/6/24 10:33:47 a. m.         INFO      Workspace directory for this job is set to '/home/ec2-user/HelpSystems/GoAnywhere/userdata/DesarrolloBB/Workspace/1000001060977'.
+2/6/24 10:33:47 a. m.         INFO      Finished task 'createWorkspace 1.0'
+2/6/24 10:33:47 a. m.         INFO      Executing task 'setVariable 2.0 (Set NameSize)'
+2/6/24 10:33:47 a. m.         INFO      Variable 'NameSize' was created and set to 'Nombres y peso de archivos transmitidos al destino:'.
+2/6/24 10:33:47 a. m.         INFO      Finished task 'setVariable 2.0 (Set NameSize)'
+2/6/24 10:33:47 a. m.         INFO      Executing task 'timestamp 1.0'
+2/6/24 10:33:47 a. m.         INFO      Timestamp variable 'fechafiltro' was created and set to '20240206'
+2/6/24 10:33:47 a. m.         INFO      Timestamp variable 'fechaproceso' was created and set to '06-02-2024 10:33:47'
+2/6/24 10:33:47 a. m.         INFO      Finished task 'timestamp 1.0'
+2/6/24 10:33:47 a. m.         INFO      Executing task 'setVariable 2.0 (ServidorOrigen)'
+2/6/24 10:33:47 a. m.         INFO      Variable 'ServidorOrigen' was created and set to '11 UNIX PRODUCCION R'.
+2/6/24 10:33:47 a. m.         INFO      Finished task 'setVariable 2.0 (ServidorOrigen)'
+2/6/24 10:33:47 a. m.         INFO      Executing task 'setVariable 2.0 (ServidorDestino)'
+2/6/24 10:33:47 a. m.         INFO      Variable 'ServidorDestino' was created and set to '11 UNIX PRODUCCION R'.
+2/6/24 10:33:47 a. m.         INFO      Finished task 'setVariable 2.0 (ServidorDestino)'
+2/6/24 10:33:47 a. m.         INFO      Executing task 'setVariable 2.0 (filtro)'
+2/6/24 10:33:47 a. m.         INFO      Variable 'filtro' was created and set to 'DBADAPSB20240206*.build'.
+2/6/24 10:33:47 a. m.         INFO      Finished task 'setVariable 2.0 (filtro)'
+2/6/24 10:33:47 a. m.         INFO      Executing task 'setVariable 2.0 (cantDestino)'
+2/6/24 10:33:47 a. m.         INFO      Variable 'cantDestino' was created and set to '0'.
+2/6/24 10:33:47 a. m.         INFO      Finished task 'setVariable 2.0 (cantDestino)'
+2/6/24 10:33:47 a. m.         INFO      Executing task 'setVariable 2.0 (Retransmitir)'
+2/6/24 10:33:47 a. m.         INFO      Variable 'Retransmitir' was created and set to 'SI'.
+2/6/24 10:33:47 a. m.         INFO      Finished task 'setVariable 2.0 (Retransmitir)'
+2/6/24 10:33:47 a. m.         INFO      Executing task 'sftp 1.0 (SFTP Origen)'
+2/6/24 10:33:47 a. m.         INFO      Connecting to '172.16.30.212' at port '22' as user 'anaranjh'
+2/6/24 10:33:48 a. m.         INFO      Executing sub-task 'get'
+2/6/24 10:33:55 a. m.         INFO      Setting the data type to BINARY
+2/6/24 10:33:55 a. m.         INFO      Downloading '/respaldo/archivos/cuentas/data/DBADAPSB2024020638.build' to '/home/ec2-user/HelpSystems/GoAnywhere/userdata/DesarrolloBB/Workspace/1000001060977/DBADAPSB2024020638.build'
+2/6/24 10:33:55 a. m.         INFO      File '/respaldo/archivos/cuentas/data/DBADAPSB2024020638.build' successfully downloaded to '/home/ec2-user/HelpSystems/GoAnywhere/userdata/DesarrolloBB/Workspace/1000001060977/DBADAPSB2024020638.build' (679 bytes)
+2/6/24 10:33:55 a. m.         INFO      1 files were downloaded successfully
+2/6/24 10:33:55 a. m.         INFO      Finished sub-task 'get'
+2/6/24 10:33:55 a. m.         INFO      Closed the FTP connection
+2/6/24 10:33:55 a. m.         INFO      Finished task 'sftp 1.0 (SFTP Origen)'
+2/6/24 10:33:55 a. m.         INFO      Entering loop 'forEachLoop (For-Each Get)'
+2/6/24 10:33:55 a. m.         INFO      Exiting loop 'forEachLoop (For-Each Get)'
+2/6/24 10:33:55 a. m.         INFO      Executing task 'setVariable 2.0 (Set numberfilesupload)'
+2/6/24 10:33:55 a. m.         INFO      Variable 'numberfilesupload' was created and set to '0'.
+2/6/24 10:33:55 a. m.         INFO      Finished task 'setVariable 2.0 (Set numberfilesupload)'
+2/6/24 10:33:55 a. m.         INFO      Skipping if block as the condition "${numberfilesdownload == 0}" was not met
+2/6/24 10:33:55 a. m.         INFO      Entering if block as the condition "${Retransmitir=='SI'}" was met
+2/6/24 10:33:55 a. m.         INFO      Entering loop 'forEachLoop (For-Each Get)'
+2/6/24 10:33:55 a. m.         INFO      Executing task 'rename 1.0'
+2/6/24 10:33:55 a. m.         INFO      1 files were renamed successfully
+2/6/24 10:33:55 a. m.         INFO      Finished task 'rename 1.0'
+2/6/24 10:33:55 a. m.         INFO      Executing task 'print 1.0'
+2/6/24 10:33:55 a. m.         INFO      """"""""""""""""""""""""""""""
+                                        SUBIENDO1 /home/ec2-user/HelpSystems/GoAnywhere/userdata/DesarrolloBB/Workspace/1000001060977/DBADAPSB20240206_1.ready
+                                        """"""""""""""""""""""""""""""
+2/6/24 10:33:55 a. m.         INFO      Finished task 'print 1.0'
+2/6/24 10:33:55 a. m.         INFO      Executing task 'sftp 1.0 (SFTP Destino)'
+2/6/24 10:33:56 a. m.         INFO      Executing sub-task 'put'
+2/6/24 10:33:57 a. m.         INFO      1 files were uploaded successfully
+2/6/24 10:33:57 a. m.         INFO      Finished sub-task 'put'
+2/6/24 10:33:57 a. m.         INFO      Executing sub-task 'chmod'
+2/6/24 10:33:57 a. m.         INFO      1 files and 0 directories had permissions set to '777'
+2/6/24 10:33:57 a. m.         INFO      Finished sub-task 'chmod'
+2/6/24 10:33:57 a. m.         INFO      Finished task 'sftp 1.0 (SFTP Destino)'
+2/6/24 10:33:57 a. m.         INFO      Executing task 'setVariable 2.0 (Set numberfilesupload)'
+2/6/24 10:33:57 a. m.         WARN      Variable 'numberfilesupload' was replaced with '1'.
+2/6/24 10:33:57 a. m.         INFO      Finished task 'setVariable 2.0 (Set numberfilesupload)'
+2/6/24 10:33:57 a. m.         INFO      Exiting loop 'forEachLoop (For-Each Get)'
+2/6/24 10:33:57 a. m.         INFO      Finished if block
+2/6/24 10:33:57 a. m.         INFO      Executing task 'deleteWorkspace 1.0'
+2/6/24 10:33:57 a. m.         INFO      Workspace directory '/home/ec2-user/HelpSystems/GoAnywhere/userdata/DesarrolloBB/Workspace/1000001060977' was deleted successfully
+2/6/24 10:33:57 a. m.         INFO      Finished task 'deleteWorkspace 1.0'
+2/6/24 10:33:57 a. m.         INFO      Executing task 'sendEmail 2.0 (Send Email to Operator)'
+2/6/24 10:33:57 a. m.         INFO      Connecting to mail server: 172.17.3.231
+2/6/24 10:33:57 a. m.         INFO      Opened the connection
+2/6/24 10:33:58 a. m.         INFO      Message is delivered successfully
+2/6/24 10:33:58 a. m.         INFO      The message has been delivered to the following 2 addresses: 
+                                        msilva@bolivariano.com
+                                        daguirri@bolivariano.com
+2/6/24 10:33:58 a. m.         INFO      Message 'GAW-2695-Transmision de archivos filereader REC - TRANSMISION CORRECTA' was sent to 2 recipient(s)
+2/6/24 10:33:58 a. m.         INFO      Finished task 'sendEmail 2.0 (Send Email to Operator)'
+2/6/24 10:33:58 a. m.         INFO      Closed the connection
+2/6/24 10:33:58 a. m.         INFO      Finished module 'Main'
+2/6/24 10:33:58 a. m.         INFO      Finished project 'GAW-2695-Transmision de archivos filereader REC'
+2/6/24 10:33:58 a. m.         INFO      End Date and Time: 2/6/24 10:33:58 a. m.

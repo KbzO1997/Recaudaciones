@@ -1,0 +1,19 @@
+tú estabas apuntando directamente al recurso, resourceId="SMTP Bolivariano" lo cual no es una buena practica porque si algún recurso cambia de nombre debes
+de realizar todo el proceso de actualizacón de la gaw, lo mejor es utilizar variables.
+ 
+Adicional tu tarea estaba en la ruta /default lo cual esta incorrecto lo correcto es que este en una carpeta según lo que realice. existen 3 dominios 
+por lo general se usan los de default y desarrollo pero deben ir dentro de una carpeta.
+ 
+Los recursos estan asociados a estos dominios, por eso el recurso SMTP te funcionaba en el dominio default, pero al cambiarlo al de desarrollo dejo de funcionar.
+ 
+lo que hice fue cambiar el nombre del recurso por una variable
+
+Yo ---
+ahh ya ya entiendo, entonces tomo ese xml como para test en desarrollo 
+y el q te envie por correo lo dejo tal y como esta para prodcuccion? 
+---
+
+Bryan Silva Mercado
+ahorita el archivo esta en la ruta /formato original y elimina x RED lo puedes dejar en la misma ruta pero en el dominio default si gustas y probar con el nombre del recurso directamente o la variable de carpeta SMTPBOLIVARIANO
+
+lo que si te confirmo es que el recurso en pro se llama SMTP Bolivariano

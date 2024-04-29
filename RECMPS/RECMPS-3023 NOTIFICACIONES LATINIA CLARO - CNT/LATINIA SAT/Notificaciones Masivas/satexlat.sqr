@@ -1,0 +1,626 @@
+!**************************************************************************************************!
+!* Archivo           :  satexlat.sqr                                                              *!
+!* Base de datos     :  db_biz_servicios                                                          *!
+!* Producto          :  Servicios                                                                 *!
+!* Disenado por      :  Roberto Leon                                                              *!
+!* Fecha de escritura:  17/Jun/2020                                                               *!
+!**************************************************************************************************!
+!*                                    IMPORTANTE                                                  *!
+!* Este programa es parte de los paquetes bancarios propiedad de BANCO BOLIVARIANO.               *!
+!* Su uso no autorizado queda expresamente prohibido asi como cualquier alteracion o agregado     *!
+!* hecho por alguno de sus usuarios sin el debido consentimiento por escrito de la                *!
+!* Presidencia Ejecutiva de BANCO BOLIVARIANO o su representante.                                 *!
+!**************************************************************************************************!
+!* PROPOSITO:                                                                                     *!
+!* Proceso que generar archivo .build para en envio masivo de mensajeria por Latinia              *!
+!**************************************************************************************************!
+!* MODIFICACIONES:                                                                                *!
+!**************************************************************************************************!
+!* REF FECHA        AUTOR            TAREA RATIONAL     RAZON                                     *!
+!*   0 17/Jun/2020  Roberto Leon.    SAT-1288           Emision Inicial                           *!
+!*  01 20/Ene/2021  Jorge Quinonez   SAT-3367           Ajustar Archivo de Estructura de          *!
+!*                                                      Notificaciones en Batch de Latinia        *!
+!*  01 18/Feb/2021  Roberto Leon.    SAT-3689           Ajsute SMS y secuencial                   *!
+!*  02 22/Jun/2021  Jorge Quinonez.  SATM-752           Mejora en proceso satexlat por            *!
+!*														desbordamiento de variable                *!
+!*  03 28/Jun/2021  Roberto Leon.    SAT-4813           Ajsute notificacion suscrita              *!
+!*  04 17/Ago/2021  jvillavc         SATM-821           Cambiar ruta de reporte generado          *!
+!*  05 09/Dic/2021  Hector Jimenez   SAT-6331           Trama para enviar mas de un correo        *!
+!*  06 21/Feb/2022  Roberto Leon     SAT-6083           Ajustes para el envio de notif con adjunto*!
+!*  06 21/Feb/2022  Roberto Leon     SATM-1135          Ajuste novedad en batch                   *!
+!*  07 28/Jul/2022  Joffre Pita      SAT-7774           Ajustar notificaciones con detalle de facturas *!
+!*                               (más de  100) por el servicio pago a proveedores (archivo adjunto)*!
+!*  08 28/Ago/2022  Joffre Pita      SAT-7855           Ajustar notificaciones con detalle de facturas (hasta 100) por el servicio pago a proveedores *!
+!**************************************************************************************************!
+
+
+!===================================================================================================
+Begin-Setup
+!===================================================================================================
+use db_biz_servicios
+End-Setup
+
+#include "log.inc"
+
+!===================================================================================================
+Begin-Program
+!===================================================================================================
+    do Inicializar_Programa
+	do ParamS (1,$i_fecpro,'','','')
+	do Main
+    do Finalizar_Programa
+End-Program
+
+
+!===================================================================================================
+Begin-Procedure Main
+!===================================================================================================
+     show ' '
+    let $inicio = datenow()
+    show '----------------------------------------------------------------'
+    show '->> Inicio Proceso Envio Notificacioens Masivas Latinia: ' $inicio
+    show '----------------------------------------------------------------'
+    show ' '
+    		
+	show ' Ejecutando proceso de exportar archivo plano'	
+    execute on-error=Error do=GenerarArchivoLatinia db_biz_servicios..pa_sat_cnotificacion_latinia $i_fecpro
+	INTO	&cab_canal			varchar(5),
+			&cab_servicio		varchar(5),
+			&cab_cantidad		varchar(5),
+			&cab_tiene_detalle  varchar(40)
+			
+	let $fin = datenow()
+	
+	show ' '
+    show '----------------------------------------------------------------'
+    show '->> FinEnvio Notificaciones Masivas Latinia: ' $fin
+    show '----------------------------------------------------------------'
+    show ' '
+End-Procedure
+
+
+!===================================================================================================
+Begin-Procedure GenerarArchivoLatinia
+!===================================================================================================
+    
+    show ' '
+    let $inicio = datenow()
+    show '----------------------------------------------------------------'
+    show '->> Inicio Proceso Genera Archivo Latinia: ' &cab_canal '-' &cab_servicio '-' $inicio    
+    show '----------------------------------------------------------------'
+    show ' '
+ !ref03 ini   	
+	let $requerimiento = '0'
+	let $secuencial_ant = ''	
+	let $linea = '0' !ref06:roleonc
+	let $esp = '|'		
+	let $ente = '0' !ref01:jqp
+	let $cab = ''
+	let $det = ''
+	let $tab = chr(9)  !'	' !ref06:roleonc   ! '\t' ref07:JPI
+	let $total = '0'  ! ref07:JPI
+	let $arch_ant = ''   ! ref07:JPI
+	let $nombre_archivo = ''	
+	
+	date-time () 'MM/DD/YYYY' &w_fechoy
+	date-time () HH:MI &w_hormin
+
+	let $w_mes = substr(&w_fechoy,1,2)
+	let $w_dia = substr(&w_fechoy,4,2)
+	let $w_ano = substr(&w_fechoy,7,4)
+
+	let $w_hh = substr(&w_hormin,1,2)
+	let $w_min = substr(&w_hormin,4,2)
+	let $w_seg = substr(&w_hormin,7,2)
+
+	let $canal_str = SUBSTR(&cab_canal,1,3)
+	let $nemonico = &cab_servicio
+
+	let $w_feclis = $w_ano || $w_mes || $w_dia || $w_hh || $w_min || $w_seg
+	let $nombre_archivo = $canal_str || $nemonico || $w_feclis
+	
+if &cab_tiene_detalle = 'SUS'
+	let $sep = '|'
+	let $notif = '#ref_user'
+	let $nombre_archivo = $nombre_archivo || '.' || 'laetmp'
+	do CrearArchivoLatinia($nombre_archivo)	
+else
+	let $sep = '##'
+	let $notif = 'Avisos24'
+	let $nombre_archivo = $nombre_archivo || '.' || 'readytmp'
+	do CrearArchivoLatinia($nombre_archivo)	
+end-if 	
+	
+if &cab_tiene_detalle = 'SMS' 
+	let $cab = 'BOLIVARIANO'|| $esp || &cab_servicio || $esp || $esp || 'inot2' || $esp || $esp || &cab_cantidad  !ref01:jqp
+	write 1 from $cab
+end-if 
+if &cab_tiene_detalle = 'N' or &cab_tiene_detalle = 'DET'  !ref06:roleonc
+	let $cab = 'BOLIVARIANO'|| $esp || &cab_servicio || $esp || $esp || 'inot2' || $esp || $notif || $esp || &cab_cantidad	!ref01:jqp
+	write 1 from $cab
+end-if 
+!ref03 fin
+	
+if &cab_tiene_detalle = 'DET' 
+	do ProcesoConDetalleEnNotif  !ref08:JPI
+	let $det = ''        !ref08:JPI
+	let $secuencial_ant = ''	!ref08:JPI
+	do ProcesoConDetalle	
+	!do Cierra_Archivo	 !ref06:roleonc
+	let $det = ''        !ref06:roleonc
+	let $secuencial_ant = ''	!ref07:roleonc
+	do ProcesoRptDetalle !ref06:roleonc
+else
+    do ProcesoSinDetalle
+end-if 
+  	
+	do Cierra_Archivo
+	!do ActualizaCanalProcesado
+	do CopiaArchivosReady($nombre_archivo)
+	let $fin = datenow()
+    show ' '
+    show '----------------------------------------------------------------'
+    show '->> Fin Proceso Genera Archivo Latinia: ' &cab_canal '-' &cab_servicio '-' $fin    
+    show '----------------------------------------------------------------'
+    show ' '
+End-Procedure
+
+!===================================================================================================
+begin-procedure ProcesoConDetalle
+!===================================================================================================
+!ref06:roleonc ini
+execute -xc on-error=Error do=GenerarDetalle db_biz_servicios..pa_sat_cnotificacion_condet &cab_servicio, &cab_canal, '1' 
+	INTO	&ev_secuencial_d	varchar(30)
+			&ev_requerimiento	varchar(30)	
+			&ev_req_sat         varchar(30)
+			&ev_servicio_d		varchar(5)
+			&ev_mail_d			varchar(256)
+			&ed_campo			varchar(50)
+			&ed_valor			varchar(60)		
+			&ev_linea			varchar(30)
+		if $det<>''
+			let $det = $det || '##' || 'file=' || &ev_req_sat || '.xls' || $esp || $esp !ref01:jqp	 ! ref07:JPI Se cambia extension
+			write 1 from $det
+			write 1 from '<EOF>'   !ref08:JPI
+			do Cierra_Archivo	 !ref08:jpi
+		else
+			write 1 from '<EOF>'   !ref08:JPI
+		end-if
+end-procedure  	
+
+!===================================================================================================
+begin-procedure ProcesoRptDetalle
+!===================================================================================================
+execute -xc on-error=Error do=GenerarDetalleExporta db_biz_servicios..pa_sat_cnotificacion_condet &cab_servicio, &cab_canal, '2'
+	INTO	&tx_secuencial_d	varchar(30)
+			&tx_req_sat         varchar(30)
+			&tx_campo			varchar(50)
+			&tx_valor			varchar(60)
+			&tx_linea			varchar(30)
+			&tx_total			varchar(60)
+			
+	if $det<>''	
+		let $det = $det || chr(13) !  ref07:JPI
+		let $det = $det || $tab || $tab || 'TOTAL' || $tab || $total  ! ref07:JPI
+		let $det = $det || chr(13) !  ref07:JPI
+		let $det = $det || $tab || $tab || 'Nro Registros' || $tab || $linea  ! ref07:JPI			
+		write 1 from $det	
+	end-if
+end-procedure  	
+!ref06:roleonc fin
+!===================================================================================================
+begin-procedure GenerarDetalle
+!===================================================================================================	
+	
+	if $secuencial_ant <> &ev_secuencial_d
+		if $det<>''			
+			let $det = $det || '##' || 'file=' || $arch_ant || '.xls' || $esp || $esp !ref01:jqp ref06:roleonc  ! ref07:JPI	Se cambia la extension
+			write 1 from $det
+		end-if
+		let $ev_mail_d = &ev_mail_d
+		let $separadorMail = substr($ev_mail_d, length($ev_mail_d), 1)
+		if $separadorMail = ';'
+			let $ev_mail_d = substr($ev_mail_d, 1, length($ev_mail_d)-1)
+		end-if
+		let $ev_mail_d = replace($ev_mail_d, ';', '##email=')
+		let $ev_mail_d = 'email=' || $ev_mail_d
+		let $det = &ev_secuencial_d || $esp || $esp || $ente || $esp || $ev_mail_d || $esp || $esp || &ev_servicio_d || $esp ||  &ed_campo || '=' || &ed_valor !ref06:roleonc
+		let $secuencial_ant = &ev_secuencial_d
+	else
+        if &ed_campo = 'TOTAL'  ! ref07:JPI
+			let $det = $det || '##' || &ed_campo || '=' || edit(&ed_valor, '999,999.99')  ! ref08:JPI Formato numero
+			let $det = $det || '##' || 'MONTO' || '=' || edit(&ed_valor, '999,999.99')  ! ref07:JPI
+			let $det = $det || '##' || 'detalle' || '=' || 'adjunto'  ! ref08:JPI
+		else
+			let $det = $det || '##' || &ed_campo || '=' || &ed_valor
+		end-if  ! ref07:JPI
+	end-if
+	let $arch_ant = &ev_req_sat   ! ref07:JPI
+	
+end-procedure
+!ref06:roleonc ini
+!===================================================================================================
+begin-procedure GenerarDetalleExporta
+!===================================================================================================	
+	
+	if $secuencial_ant <> &tx_secuencial_d	
+		if $det<>''			
+		
+			let $det = $det || chr(13) !  ref07:JPI
+			let $det = $det || $tab || $tab || 'TOTAL' || $tab || $total  ! ref07:JPI
+			let $det = $det || chr(13) !  ref07:JPI
+			let $det = $det || $tab || $tab || 'Nro Registros' || $tab || $linea  ! ref07:JPI
+			
+			write 1 from $det
+			do Cierra_Archivo
+		end-if			
+		do CrearArchivoDetFact(&cab_servicio,'xls',&tx_req_sat)  !ref07:jpi Se cambia extension de archivo
+		
+		let $det = 'TIPO DOCUMENTO' || $tab !ref07:jpi
+		let $det = $det || 'REFERENCIA' || $tab !ref07:jpi
+		let $det = $det || 'SIGNO' || $tab !ref07:jpi
+		let $det = $det || 'VALOR' || chr(13) !ref07:jpi
+		
+		let $det = $det || &tx_valor || $tab		
+		let $secuencial_ant = &tx_secuencial_d
+		let $linea = '1'
+		let $total = &tx_total   !ref07:JPI
+	else
+		if $linea <> &tx_linea
+			write 1 from $det
+			let $det = ''
+			let $linea = &tx_linea
+			let $total = &tx_total   !ref07:JPI
+		end-if	
+		let $det = $det || &tx_valor || $tab
+	end-if
+	
+end-procedure
+!ref06:roleonc fin
+
+!ref08:JPI INI
+!===================================================================================================
+begin-procedure ProcesoConDetalleEnNotif
+!===================================================================================================
+!show ' ProcesoConDetalleEnNotif '
+execute -xc on-error=Error do=GenerarDetalleEnNotif db_biz_servicios..pa_sat_cnotificacion_condet &cab_servicio, &cab_canal, '3'
+	INTO	&ev_secuencial_dn	varchar(30)
+			&ev_req_dn			varchar(30)	
+			&ev_servicio_dn		varchar(5)
+			&ev_mail_dn			varchar(256)
+			&ed_campo_dn		varchar(50)
+			&ed_valor_dn		varchar(60)		
+	if $det<>''
+		let $det = $det || $esp || $esp !ref01:jqp	
+		write 1 from $det	
+		!write 1 from '<EOF>'
+	end-if
+
+end-procedure  
+
+!===================================================================================================
+begin-procedure GenerarDetalleEnNotif
+!===================================================================================================	
+	if $secuencial_ant <> &ev_secuencial_dn		
+		if $det<>''
+			let $det = $det || $esp || $esp !ref01:jqp
+			write 1 from $det
+		end-if
+		let $ev_mail_dn = &ev_mail_dn
+		let $separadorMail = substr($ev_mail_dn, length($ev_mail_dn), 1)
+		if $separadorMail = ';'
+			let $ev_mail_dn = substr($ev_mail_dn, 1, length($ev_mail_dn)-1)
+		end-if
+		let $ev_mail_dn = replace($ev_mail_dn, ';', '##email=')
+		let $ev_mail_dn = 'email=' || $ev_mail_dn
+		let $det = &ev_secuencial_dn || $esp || $esp || $ente || $esp || $ev_mail_dn || $esp || $esp || &ev_servicio_dn || $esp || &ed_campo_dn || '=' || &ed_valor_dn
+		let $secuencial_ant = &ev_secuencial_dn
+	else
+		if &ed_campo_dn = 'TOTAL'  ! ref08:JPI
+			!let $ed_valor_dn = edit(&ed_valor_dn, '999,999.99')
+			let $det = $det || '##' || &ed_campo_dn || '=' || edit(&ed_valor_dn, '999,999.99')  ! ref08:JPI Formato numero
+			let $det = $det || '##' || 'MONTO' || '=' || edit(&ed_valor_dn, '999,999.99')  ! ref08:JPI
+			let $det = $det || '##' || 'detalle' || '=' || 'detalle'  ! ref08:JPI
+		else
+			let $det = $det || '##' || &ed_campo_dn || '=' || &ed_valor_dn
+		end-if  ! ref08:JPI
+	end-if
+end-procedure
+	
+!ref08:JPI FIN
+
+!===================================================================================================
+begin-procedure ProcesoSinDetalle
+!===================================================================================================
+execute -xc on-error=Error do=GenerarDetalleN db_biz_servicios..pa_sat_cnotificacion_sindet &cab_servicio, &cab_canal
+	into &ev_secuencial		varchar(30)	        
+	     &ev_servicio		varchar(5)
+	     &ev_mail			varchar(256)
+	     &cuenta             varchar(64)
+		 &cuenta_len         int
+	     &telefono           varchar(64)
+		 &telefono_len       int
+	     &valor              varchar(64)
+		 &valor_len          int
+	     &fecha              varchar(64)
+		 &fecha_len          int
+	     &cheque             varchar(64)
+		 &cheque_len         int
+	     &cta                varchar(64)
+		 &cta_len            int
+	     &tarjeta            varchar(64)
+		 &tarjeta_len        int
+	     &desc_producto      varchar(64)
+		 &desc_producto_len  int
+	     &desc_servicio      varchar(64)
+		 &desc_servicio_len  int
+	     &total              varchar(64)
+		 &total_len          int
+	     &minimo             varchar(64)
+		 &minimo_len         int
+	     &cupo               varchar(64)
+		 &cupo_len           int
+	     &planilla           varchar(64)
+		 &planilla_len       int
+	     &nombre             varchar(64)
+		 &nombre_len         int
+	     &cta_deb            varchar(64)
+		 &cta_deb_len        int
+	     &prod_deb           varchar(64)
+		 &prod_deb_len       int
+	     &cta_cre            varchar(64)
+		 &cta_cre_len        int
+	     &prod_cre           varchar(64)
+		 &prod_cre_len       int
+	     &costo              varchar(64)
+		 &costo_len          int
+	     &empresa            varchar(64)
+		 &empresa_len        int
+	     &desc_canal         varchar(64)
+		 &desc_canal_len     int
+	     &fecha_tope         varchar(64)
+		 &fecha_tope_len     int
+	     &valor1             varchar(64)
+		 &valor1_len         int
+	     &valor2             varchar(64)
+		 &valor2_len         int
+	     &motivo             varchar(64)
+		 &motivo_len         int
+	     &login              varchar(64)
+		 &login_len          int
+	     &ssn                varchar(64)
+		 &ssn_len            int
+		 &cliente            varchar(64)
+		 
+	write 1 from '<EOF>'
+	
+end-procedure  
+
+!===================================================================================================
+begin-procedure GenerarDetalleN
+!===================================================================================================	
+	if &cab_tiene_detalle = 'SUS' !ref03 ini
+		let $det = 'BOLIVARIANO'  || $sep || &ev_servicio || $sep || $notif || $sep || &cliente || $sep || 'id=' || &ev_secuencial || $sep 
+	else !ref03 fin
+		let $ev_mail = &ev_mail
+		let $separadorMail = substr($ev_mail, length($ev_mail), 1)
+		if $separadorMail = ';'
+			let $ev_mail = substr($ev_mail, 1, length($ev_mail)-1)
+		end-if
+		if &cab_tiene_detalle = 'SMS' 
+			let $ev_mail = 'phone=' || $ev_mail !ref01:jqp
+			let $det = &ev_secuencial  || $esp || $ev_mail || $esp || $esp || $esp || $esp  || $esp || &ev_servicio || $esp 
+		else
+			if instr($ev_mail, '@', 1) = 0 and isnumber($ev_mail) = 1
+				let $ev_mail = 'phone=' || $ev_mail !ref01:jqp
+			else
+			    let $ev_mail = replace($ev_mail, ';', '##email=')
+				let $ev_mail = 'email=' || $ev_mail !ref01:jqp
+			end-if		
+			let $det = &ev_secuencial  || $esp || $esp || $ente || $esp || $ev_mail || $esp || $esp || &ev_servicio || $esp !ref01:jqp
+		end-if 	
+	end-if!ref03
+	
+	if length(nvl(&cuenta,'')) > 1 and SUBSTR(&cuenta,1,1) <> '='
+		let $det = $det || SUBSTR(&cuenta,1,instr(&cuenta, '=', 1)) || SUBSTR(&cuenta,instr(&cuenta, '=', 1)+1,&cuenta_len) || $sep 
+	end-if 
+	if length(nvl(&telefono,'')) > 1 and SUBSTR(&telefono,1,1) <> '='
+		let $det = $det || SUBSTR(&telefono,1,instr(&telefono, '=', 1)) || SUBSTR(&telefono,instr(&telefono, '=', 1)+1,&telefono_len) || $sep 
+	end-if 
+	if length(nvl(&valor,'')) > 1 and SUBSTR(&valor,1,1) <> '='
+		let $det = $det || SUBSTR(&valor,1,instr(&valor, '=', 1)) || SUBSTR(&valor,instr(&valor, '=', 1)+1,&valor_len) || $sep 
+	end-if 	
+	if length(nvl(&fecha,'')) > 1 and SUBSTR(&fecha,1,1) <> '='
+		let $det = $det || SUBSTR(&fecha,1,instr(&fecha, '=', 1)) || SUBSTR(&fecha,instr(&fecha, '=', 1)+1,&fecha_len) || $sep 
+	end-if 	
+	if length(nvl(&cheque,'')) > 1 and SUBSTR(&cheque,1,1) <> '='
+		let $det = $det || SUBSTR(&cheque,1,instr(&cheque, '=', 1)) || SUBSTR(&cheque,instr(&cheque, '=', 1)+1,&cheque_len) || $sep 
+	end-if 	
+	if length(nvl(&cta,'')) > 1 and SUBSTR(&cta,1,1) <> '='
+		let $det = $det || SUBSTR(&cta,1,instr(&cta, '=', 1)) || SUBSTR(&cta,instr(&cta, '=', 1)+1,&cta_len) || $sep 
+	end-if 
+	if length(nvl(&tarjeta,'')) > 1 and SUBSTR(&tarjeta,1,1) <> '='
+		let $det = $det || SUBSTR(&tarjeta,1,instr(&tarjeta, '=', 1)) || SUBSTR(&tarjeta,instr(&tarjeta, '=', 1)+1,&tarjeta_len) || $sep 
+	end-if 
+	if length(nvl(&desc_producto,'')) > 1 and SUBSTR(&desc_producto,1,1) <> '='
+		let $det = $det || SUBSTR(&desc_producto,1,instr(&desc_producto, '=', 1)) || SUBSTR(&desc_producto,instr(&desc_producto, '=', 1)+1,&desc_producto_len) || $sep 
+	end-if 
+	if length(nvl(&desc_servicio,'')) > 1 and SUBSTR(&desc_servicio,1,1) <> '='
+		let $det = $det || SUBSTR(&desc_servicio,1,instr(&desc_servicio, '=', 1)) || SUBSTR(&desc_servicio,instr(&desc_servicio, '=', 1)+1,&desc_servicio_len) || $sep 
+	end-if 
+	if length(nvl(&total,'')) > 1 and SUBSTR(&total,1,1) <> '='
+		let $det = $det || SUBSTR(&total,1,instr(&total, '=', 1)) || SUBSTR(&total,instr(&total, '=', 1)+1,&total_len) || $sep 
+	end-if 
+	if length(nvl(&minimo,'')) > 1 and SUBSTR(&minimo,1,1) <> '='
+		let $det = $det || SUBSTR(&minimo,1,instr(&minimo, '=', 1)) || SUBSTR(&minimo,instr(&minimo, '=', 1)+1,&minimo_len) || $sep 
+	end-if 
+	if length(nvl(&cupo,'')) > 1 and SUBSTR(&cupo,1,1) <> '='
+		let $det = $det || SUBSTR(&cupo,1,instr(&cupo, '=', 1)) || SUBSTR(&cupo,instr(&cupo, '=', 1)+1,&cupo_len) || $sep 
+	end-if 
+	if length(nvl(&planilla,'')) > 1 and SUBSTR(&planilla,1,1) <> '='
+		let $det = $det || SUBSTR(&planilla,1,instr(&planilla, '=', 1)) || SUBSTR(&planilla,instr(&planilla, '=', 1)+1,&planilla_len) || $sep 
+	end-if 
+	if length(nvl(&nombre,'')) > 1 and SUBSTR(&nombre,1,1) <> '='
+		let $det = $det || SUBSTR(&nombre,1,instr(&nombre, '=', 1)) || SUBSTR(&nombre,instr(&nombre, '=', 1)+1,&nombre_len) || $sep 
+	end-if 
+	if length(nvl(&cta_deb,'')) > 1 and SUBSTR(&cta_deb,1,1) <> '='
+		let $det = $det || SUBSTR(&cta_deb,1,instr(&cta_deb, '=', 1)) || SUBSTR(&cta_deb,instr(&cta_deb, '=', 1)+1,&cta_deb_len) || $sep 
+	end-if 
+	if length(nvl(&prod_deb,'')) > 1 and SUBSTR(&prod_deb,1,1) <> '='
+		let $det = $det || SUBSTR(&prod_deb,1,instr(&prod_deb, '=', 1)) || SUBSTR(&prod_deb,instr(&prod_deb, '=', 1)+1,&prod_deb_len) || $sep 
+	end-if 
+	if length(nvl(&cta_cre,'')) > 1 and SUBSTR(&cta_cre,1,1) <> '=' 
+		let $det = $det || SUBSTR(&cta_cre,1,instr(&cta_cre, '=', 1)) || SUBSTR(&cta_cre,instr(&cta_cre, '=', 1)+1,&cta_cre_len) || $sep 
+	end-if 
+	if length(nvl(&prod_cre,'')) > 1 and SUBSTR(&prod_cre,1,1) <> '='
+		let $det = $det || SUBSTR(&prod_cre,1,instr(&prod_cre, '=', 1)) || SUBSTR(&prod_cre,instr(&prod_cre, '=', 1)+1,&prod_cre_len) || $sep 
+	end-if 
+	if length(nvl(&costo,'')) > 1 and SUBSTR(&costo,1,1) <> '='
+		let $det = $det || SUBSTR(&costo,1,instr(&costo, '=', 1)) || SUBSTR(&costo,instr(&costo, '=', 1)+1,&costo_len) || $sep 
+	end-if 
+	if length(nvl(&empresa,'')) > 1 and SUBSTR(&empresa,1,1) <> '='
+		let $det = $det || SUBSTR(&empresa,1,instr(&empresa, '=', 1)) || SUBSTR(&empresa,instr(&empresa, '=', 1)+1,&empresa_len) || $sep 
+	end-if 
+	if length(nvl(&desc_canal,'')) > 1 and SUBSTR(&desc_canal,1,1) <> '='
+		let $det = $det || SUBSTR(&desc_canal,1,instr(&desc_canal, '=', 1)) || SUBSTR(&desc_canal,instr(&desc_canal, '=', 1)+1,&desc_canal_len) || $sep 
+	end-if 
+	if length(nvl(&fecha_tope,'')) > 1 and SUBSTR(&fecha_tope,1,1) <> '='
+		let $det = $det || SUBSTR(&fecha_tope,1,instr(&fecha_tope, '=', 1)) || SUBSTR(&fecha_tope,instr(&fecha_tope, '=', 1)+1,&fecha_tope_len) || $sep 
+	end-if 
+	if length(nvl(&valor1,'')) > 1 and SUBSTR(&valor1,1,1) <> '='
+		let $det = $det || SUBSTR(&valor1,1,instr(&valor1, '=', 1)) || SUBSTR(&valor1,instr(&valor1, '=', 1)+1,&valor1_len) || $sep 
+	end-if 
+	if length(nvl(&valor2,'')) > 1 and SUBSTR(&valor2,1,1) <> '='
+		let $det = $det || SUBSTR(&valor2,1,instr(&valor2, '=', 1)) || SUBSTR(&valor2,instr(&valor2, '=', 1)+1,&valor2_len) || $sep 
+	end-if 
+	if length(nvl(&motivo,'')) > 1 and SUBSTR(&motivo,1,1) <> '='
+		let $det = $det || SUBSTR(&motivo,1,instr(&motivo, '=', 1)) || SUBSTR(&motivo,instr(&motivo, '=', 1)+1,&motivo_len) || $sep 
+	end-if 
+	if length(nvl(&login,'')) > 1 and SUBSTR(&login,1,1) <> '='
+		let $det = $det || SUBSTR(&login,1,instr(&login, '=', 1)) || SUBSTR(&login,instr(&login, '=', 1)+1,&login_len) || $sep 
+	end-if 
+	if length(nvl(&ssn,'')) > 1 and SUBSTR(&ssn,1,1) <> '='
+		let $det = $det || SUBSTR(&ssn,1,instr(&ssn, '=', 1)) || SUBSTR(&ssn,instr(&ssn, '=', 1)+1,&ssn_len) || $sep 
+	end-if
+	!ref03 ini
+	
+	if &cab_tiene_detalle <> 'SUS'
+		let $det = SUBSTR($det,0,length($det)-2)
+		let $det = $det || $esp || $esp !ref01:jqp
+	else
+		let $det = SUBSTR($det,0,length($det)-1)
+	end-if
+	!ref03 fin
+	write 1 from $det	
+end-procedure  
+!let $det = $det || SUBSTR(&cta_cre,length(&cta_cre)-3,3) || '##'
+!===================================================================================================
+begin-procedure ActualizaCanalProcesado
+!===================================================================================================
+execute on-error=Error db_biz_servicios..pa_sat_anotificacion_latinia &cab_servicio, &cab_canal
+end-procedure  	
+
+
+!===================================================================================================
+Begin-Procedure CrearArchivoLatinia($nombre_reporte)!ref03 
+!===================================================================================================
+
+let $name_file = $nombre_reporte 
+let $nombre_reporte = '/fuentes/aplicaciones/sat/servicios/batch/mensajeria/'|| $nombre_reporte
+
+!Inicio ref02:jqp
+let #registros = 50000
+execute db_biz_admempresa..sp_con_parametroconf
+    @i_empresa           = 0,
+    @i_producto          = 1,
+    @i_servicio          = 'T',
+    @i_parametro         = 'REGSLATINIA',
+    @o_pa_val_numerico   = #registros output
+!Fin ref02:jqp
+open $nombre_reporte as 1 for-writing record=#registros status=#filestat !ref02:jqp
+if #filestat <> 0
+      show 'Error al crear el archivo'
+      show #filestat
+      do Abortar
+end-if
+End-Procedure
+
+!ref06:roleonc ini
+!===================================================================================================
+Begin-Procedure CrearArchivoDetFact($nemonico,$ext,$req_sat)
+!===================================================================================================
+date-time () 'MM/DD/YYYY' &w_fechoy
+date-time () HH:MI &w_hormin
+
+let $w_mes = substr(&w_fechoy,1,2)
+let $w_dia = substr(&w_fechoy,4,2)
+let $w_ano = substr(&w_fechoy,7,4)
+
+let $w_hh = substr(&w_hormin,1,2)
+let $w_min = substr(&w_hormin,4,2)
+let $w_seg = substr(&w_hormin,7,2)
+
+let $w_feclis = $w_ano || $w_mes || $w_dia || $w_hh || $w_min || $w_seg
+let $nombre_reporte = $req_sat
+
+let $nombre_reporte = '/fuentes/aplicaciones/sat/servicios/batch/mensajeria/'|| $nemonico ||'/'|| $nombre_reporte || '.' || $ext
+
+let #registros = 50000
+execute db_biz_admempresa..sp_con_parametroconf
+    @i_empresa           = 0,
+    @i_producto          = 1,
+    @i_servicio          = 'T',
+    @i_parametro         = 'REGSLATINIA',
+    @o_pa_val_numerico   = #registros output
+
+open $nombre_reporte as 1 for-writing record=#registros status=#filestat 
+if #filestat <> 0
+      show 'Error al crear el archivo 2'
+      show #filestat
+      do Abortar
+end-if
+End-Procedure
+!ref06:roleonc fin
+
+!=============================================
+begin-procedure CopiaArchivosReady($nombre_archivo)
+!=============================================
+   let $w_comando = 'mv /fuentes/aplicaciones/sat/servicios/batch/mensajeria/' || $nombre_archivo 
+   let $w_comando = $w_comando || ' /fuentes/aplicaciones/sat/servicios/batch/mensajeria/' || substr($nombre_archivo,1, length($nombre_archivo)-3)
+   let $w_mensaje = 'Archivos a reemplazar: ' || $w_comando
+   show $w_mensaje   
+   call system using $w_comando #w_status   
+   do GrabaLog   
+!=============================================
+end-procedure
+!=============================================
+
+!=============================================
+Begin-Procedure GrabaLog
+!=============================================
+if $w_mensaje <> ''
+	execute -xc db_biz_cobros..sp_log_his 
+             @i_opcion 		= 'I',
+             @i_error 		= 0,
+             @i_mensaje		= $w_mensaje,
+             @i_sp 		= 'bpdrptcon.sqr'
+end-if
+!=============================================
+End-Procedure
+!=============================================
+
+!===================================================================================================
+begin-procedure Cierra_Archivo
+!===================================================================================================
+show 'Se cierra archivo'
+if #filestat = 0
+  close 1
+end-if
+end-procedure
+
+!===================================================================================================
+Begin-Procedure Error
+!===================================================================================================
+  show $sql-error
+  do Abortar
+End-procedure
