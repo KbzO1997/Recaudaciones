@@ -1,0 +1,16 @@
+PARA ESTE PROBLEMA QUE SE DA EN EL SP pa_pg_tpag_comision
+
+select @s_mensaje_respuesta = 'ERROR UPD_TOTALES_RC'
+return 111111
+
+BUSCAR ESTE SP
+sp_tr_param_trncaja_rc
+"@i_tipo", 0, SQLVARCHAR, "I"
+
+FORMULARIO DONDE TIENEN QUE AGREGAR LAS TRANSACCIONES 
+FTRAN2586
+
+select * from    cob_remesas..re_trn_caja
+where   tg_transaccion in(62688, 62689, 62686, 62687)
+
+cob_remesas..sp_helptext sp_upd_totales_rc, null, null, showsql

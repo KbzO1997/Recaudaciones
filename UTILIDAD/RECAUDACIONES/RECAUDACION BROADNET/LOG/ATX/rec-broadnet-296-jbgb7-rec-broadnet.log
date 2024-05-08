@@ -1,0 +1,43 @@
+Starting the Java application using /opt/jboss/container/java/run/run-java.sh ...
+INFO exec  java -Xms64m -Xmx1024m -XX:+UseParallelGC -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -XX:MaxMetaspaceSize=256m -XX:ParallelGCThreads=1 -Djava.util.concurrent.ForkJoinPool.common.parallelism=1 -XX:CICompilerCount=2 -XX:+ExitOnOutOfMemoryError -Dfile.encoding=ISO-8859-1 -cp "." -jar /deployments/quarkus-run.jar  
+__  ____  __  _____   ___  __ ____  ______ 
+ --/ __ \/ / / / _ | / _ \/ //_/ / / / __/ 
+ -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \   
+--\___\_\____/_/ |_/_/|_/_/|_|\____/___/   
+2022-10-24 08:09:13.148  WARN rec-broadnet-296-jbgb7 --- [       Thread-0] i.q.n.r.NettyRecorder                    : Netty DefaultChannelId initialization (with io.netty.machineId system property set to a3:5c:11:29:dc:58:4d:a9) took more than a second
+2022-10-24 08:36:34.329  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.ProcessorService               : Inicia transacci�n.
+2022-10-24 08:36:34.332  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.ProcessorService               : Transformaci�n de mensaje de entrada.
+2022-10-24 08:36:34.733  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.ProcessorService               : Inicia proceso pago
+2022-10-24 08:36:34.733  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetService                : INICIA Ejecutar Pago
+2022-10-24 08:36:34.926  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetJPOS                   : MTI: 0200
+2022-10-24 08:36:34.926  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetJPOS                   : FIELD_2: 827828
+2022-10-24 08:36:34.926  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetJPOS                   : FIELD_3: 280000
+2022-10-24 08:36:34.926  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetJPOS                   : FIELD_4: 000000001000
+2022-10-24 08:36:34.926  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetJPOS                   : FIELD_11: 258801
+2022-10-24 08:36:34.926  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetJPOS                   : FIELD_12: 083634
+2022-10-24 08:36:34.927  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetJPOS                   : FIELD_13: 1024
+2022-10-24 08:36:34.927  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetJPOS                   : FIELD_22: 012
+2022-10-24 08:36:34.927  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetJPOS                   : FIELD_24: 026
+2022-10-24 08:36:34.927  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetJPOS                   : FIELD_25: 00
+2022-10-24 08:36:34.927  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetJPOS                   : FIELD_38: 258801
+2022-10-24 08:36:34.927  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetJPOS                   : FIELD_41: ATM00001
+2022-10-24 08:36:34.928  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetJPOS                   : FIELD_42: 016010BBOL00001
+2022-10-24 08:36:34.928  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetJPOS                   : FIELD_112: 26150911111111          
+2022-10-24 08:36:34.928  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetJPOS                   : FIELD_114: 01
+2022-10-24 08:36:34.928  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetJPOS                   : FIELD_116: 00010001
+2022-10-24 08:36:34.928  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetJPOS                   : FIELD_118: 20221021
+2022-10-24 08:36:34.928  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetJPOS                   : TIMEOUT: 5000
+2022-10-24 08:36:35.592  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetJPOS                   : CODIGO RESPUESTA: 91
+2022-10-24 08:36:35.592 ERROR rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetJPOS                   : ERROR EN RESPUESTA ISO 91
+2022-10-24 08:36:35.592 ERROR rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetService                : ERROR RECHARGE: 91: org.jpos.iso.ISOException: 91
+	at com.bolivariano.microservice.recbroadnet.service.BroadnetJPOS.recharge(BroadnetJPOS.java:51)
+	at com.bolivariano.microservice.recbroadnet.service.BroadnetJPOS_ClientProxy.recharge(Unknown Source)
+: org.jpos.iso.ISOException: 91
+
+2022-10-24 08:36:35.593  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetService                : CODIGO ERROR ISO VAL: 91
+2022-10-24 08:36:35.593  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetService                : CODIGO ERROR ISO PARA HOMOLOGAR 91
+2022-10-24 08:36:35.593  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.BroadnetService                : MENSAJE ERROR ISO HOMOLOGADO AUTORIZADOR FUERA DE LINEA
+2022-10-24 08:36:35.593  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.ProcessorService               : FINALIZA CONVERSION
+2022-10-24 08:36:35.593  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.s.ProcessorService               : Transformaci�n de mensaje de salida.
+2022-10-24 08:36:35.605  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.m.MessageProducer                : ENVIANDO MENSAJE DE RESPUESTA A LA COLA : MS_REC_BROADNET_RESP
+2022-10-24 08:36:35.626  INFO rec-broadnet-296-jbgb7 --- [pool-6-thread-1] c.b.m.r.m.MessageProducer                : MENSAJE: {"codigo":"0","mensajeUsuario":"PROCESO EJECUTADO","estado":"OK","mensajeSalidaEjecutarPago":{"banderaOffline":null,"codigoError":"91","datosAdicionales":null,"fechaDebito":null,"fechaPago":null,"mensajeUsuario":"AUTORIZADOR FUERA DE LINEA","mensajeSistema":"AUTORIZADOR FUERA DE LINEA","montoTotal":null,"referencia":null},"mensajeSalidaConsultarDeuda":null}

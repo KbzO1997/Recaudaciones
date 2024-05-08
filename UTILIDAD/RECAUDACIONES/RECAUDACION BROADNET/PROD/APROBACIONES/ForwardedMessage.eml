@@ -1,0 +1,723 @@
+Received: from BN0PR10MB5109.namprd10.prod.outlook.com (2603:10b6:408:124::23)
+ by BYAPR10MB3367.namprd10.prod.outlook.com with HTTPS; Wed, 16 Nov 2022
+ 19:29:27 +0000
+Received: from BLAPR10MB4865.namprd10.prod.outlook.com (2603:10b6:208:334::5)
+ by BN0PR10MB5109.namprd10.prod.outlook.com (2603:10b6:408:124::23) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5813.18; Wed, 16 Nov
+ 2022 19:29:26 +0000
+Received: from BLAPR10MB4865.namprd10.prod.outlook.com
+ ([fe80::6420:84c1:5234:a934]) by BLAPR10MB4865.namprd10.prod.outlook.com
+ ([fe80::6420:84c1:5234:a934%9]) with mapi id 15.20.5813.019; Wed, 16 Nov 2022
+ 19:29:26 +0000
+From: Pablo Ricaurte Arias <pricaurte@bolivariano.com>
+To: "Jonathan  Guerrero Jijon" <jguerrej@bolivariano.com>, Middleware
+	<Middleware@bolivariano.com>
+CC: =?iso-8859-1?Q?Dario_Barco_Le=F3n?= <dbarcol@bolivariano.com>
+Subject: RE: PROD PASE [RECESABREC-36] [RECAUDACION MOVISTAR COMPRA DE
+ PAQUETES EN CANAL VENTANILLA]
+Thread-Topic: PROD PASE [RECESABREC-36] [RECAUDACION MOVISTAR COMPRA DE
+ PAQUETES EN CANAL VENTANILLA]
+Thread-Index: Adj5MjklCuqyaMKbSd6pE9Z1bUjIiAAv3v7g
+Date: Wed, 16 Nov 2022 19:29:26 +0000
+Message-ID: <BLAPR10MB48658C1272E249AD84FF49D3AE079@BLAPR10MB4865.namprd10.prod.outlook.com>
+References: <BYAPR10MB33676E8E07340CB5279126A7C3049@BYAPR10MB3367.namprd10.prod.outlook.com>
+In-Reply-To: <BYAPR10MB33676E8E07340CB5279126A7C3049@BYAPR10MB3367.namprd10.prod.outlook.com>
+Accept-Language: es-EC, en-US
+Content-Language: es-ES
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-MS-Exchange-Organization-AuthSource: BLAPR10MB4865.namprd10.prod.outlook.com
+X-MS-Has-Attach:
+X-MS-Exchange-Organization-Network-Message-Id: 0ab4abce-ceda-4481-0e74-08dac808df80
+X-MS-TNEF-Correlator:
+X-MS-Exchange-Organization-RecordReviewCfmType: 0
+x-ms-exchange-organization-originalclientipaddress: 200.126.48.5
+x-ms-exchange-organization-originalserveripaddress: 2603:10b6:208:334::5
+x-ms-publictraffictype: Email
+x-microsoft-antispam: BCL:0;
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=bolivariano.com;
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:es;SCL:-1;SRV:;IPV:NLI;SFV:SKI;H:BLAPR10MB4865.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:;DIR:INB;
+x-ms-exchange-crosstenant-originalarrivaltime: 16 Nov 2022 19:29:26.0878 (UTC)
+x-ms-exchange-transport-crosstenantheadersstamped: BN0PR10MB5109
+x-ms-exchange-crosstenant-fromentityheader: Hosted
+x-ms-exchange-crosstenant-id: 381bee0c-a9ea-4342-81c0-318a50b0845f
+x-ms-office365-filtering-correlation-id: 0ab4abce-ceda-4481-0e74-08dac808df80
+x-ms-traffictypediagnostic: BLAPR10MB4865:EE_|BN0PR10MB5109:EE_
+x-ms-exchange-crosstenant-network-message-id: 0ab4abce-ceda-4481-0e74-08dac808df80
+x-ms-exchange-crosstenant-mailboxtype: HOSTED
+x-ms-exchange-crosstenant-userprincipalname: W5IBgLPK/PPSapvK864N3v5LaPqZcCsz3kr8wDURmQ72Lr0p0nyc/8KcqAILZsSndoF4Wa8yyyFp+JI2emvtf1dARIyVz5iuOc4PQ1W0mDI=
+x-ms-exchange-transport-endtoendlatency: 00:00:01.4989330
+x-ms-exchange-processed-by-bccfoldering: 15.20.5813.019
+x-ms-exchange-crosstenant-authas: Internal
+x-ms-exchange-crosstenant-authsource: BLAPR10MB4865.namprd10.prod.outlook.com
+X-Microsoft-Antispam-Mailbox-Delivery: ucf:0;jmr:0;auth:0;dest:I;ENG:(910001)(944506478)(944626604)(920097)(425001)(930097);
+X-Microsoft-Antispam-Message-Info: Xz60liNxueMGy55bbcwJippphHvOsHu8P8RN6AL2iasE3PuhLSfldK5kCvGfwIUB2BIeYG083eTDvI5Y/1DMP8qrmpzVP9FOz+W+e2KyQ6cTeopIv3lBsoXcxSIShoIzWJjxreECHuqUMiDtsHUI1YGSKzNA1N+Bv8lHgOoeQAxyK/7R8i62JpRC0TPjtNLw0bP9VDTFABrWaoMW7NULc7LC9NIr4jhgbCtRAP7nvmgDgd3Sw4rVa2f2NAYzbYbkziECkFksg420nh6AlNQe0m8YjGuThW/jxTGrWM5lvK4WMlQcC1VUGNI+6jg/QlD45H6xHwg9bn8ifERr58hnO78cAQicDFozDJZ9N341Xulne8ioSQT+MBADAMaUYE1He6+lQ7LYPaP1v2VkDKNs4eO1ntwiVMcDv1NMU0csqsPieTJ+jlUEzfkq80pctMF/DkX0Eu7c663JHwA152phLD0xMve3VqQhNtbAYpH4EOWIrrhhFdNmxWTSeLHE8F3ArJ1IuRU2aHlEOq2Cg1b4peerRvwbNoz1Rbv0FW5JU8rGs49g6cXTj1yZitTsZ9xq2w9pR8zNV8qPf5LavlNoFSIpxO+Qd83PYVFHLTRv6rpQic2NPZLkOXjGKzx85IRRWqgzth3kGX6Iz4nUcmaKkI+94zfhBYv+49aR69wM7uIRw29QfsjqB8yfW0NE5/Kzaff/sTkg3JxW4U8Zg0y/+wpjp4cTzH90sIwbe7f3Hxa1BXlGglbAJILyu99pZCsntBQYLpWZwruHSc/CRcwfkg==
+Content-Type: multipart/alternative;
+	boundary="_000_BLAPR10MB48658C1272E249AD84FF49D3AE079BLAPR10MB4865namp_"
+MIME-Version: 1.0
+
+--_000_BLAPR10MB48658C1272E249AD84FF49D3AE079BLAPR10MB4865namp_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Aprobado, favor continuar.
+
+_____________________________________________
+De: Jonathan Guerrero Jijon <jguerrej@bolivariano.com>
+Enviado el: martes, 15 de noviembre de 2022 04:29 p. m.
+Para: Middleware <Middleware@bolivariano.com>
+CC: Dario Barco Le=F3n <dbarcol@bolivariano.com>
+Asunto: PROD PASE [RECESABREC-36] [RECAUDACION MOVISTAR COMPRA DE PAQUETES =
+EN CANAL VENTANILLA]
+Importancia: Alta
+
+
+
+
+
+Buenas tardes
+
+Por favor su ayuda con el siguiente pase
+
+
+
+Requerimiento (ClearQuest)
+
+C=F3digo(s):      RECESABREC-36
+RECESABREC-252
+RECESABREC-263
+RECESABREC-264
+
+Solicitud del Usuario:  En Jira
+Conjunto de Cambio (Changeset): 28461
+Descripci=F3n del cambio o de la soluci=F3n:        RECAUDACION MOVISTAR CO=
+MPRA DE PAQUETES EN CANAL VENTANILLA
+Fecha Ejecuci=F3n:        11/16/2022
+Hora Ejecuci=F3n:         23:30
+Cantidad Archivos Back-End:     1
+Cantidad Archivos Front-End:    0
+Cantidad Archivos Middleware:   3
+Cantidad Archivos xsl   0
+Cantidad Archivos EAR:  0
+Observaci=F3n:
+
+Formularios
+
+Frond-End       N/A
+Back-End
+ <Archivo: BEPASE.doc >>
+
+Middleware
+ <Archivo: FMWPASEESB_bb-otc.docx >>
+
+
+ <Archivo: FMWPASEESB_bb-recaudos.docx >>
+
+
+Orden Procesos a implementar
+
+IDS MS OTC-CORE
+
+ <Archivo: fproceso-otc-core.docx >>
+
+IDS MS OTC-GATEWAY-COBIS
+
+
+
+ <Archivo: fproceso-otc-gateway-cobis.docx >>
+
+IDS MS REC-REVERSO
+
+
+ <Archivo: fproceso-rec-reverso.docx >>
+
+Orden Procesos Batch
+N/A
+
+Tareas MTRA     N/A
+
+Aprobaciones
+
+Aprobaci=F3n de CONTRALORIA Y PRODUCTOS:
+-       Actualizaci=F3n de datos de producci=F3n.
+-       Controles de auditoria. En confluence
+Aprobaci=F3n de JEFATURA DE PRODUCCI=D3N:
+-       Revisi=F3n Orden Procesos Batch (Nuevos/Modificados)
+-       Ordenes de Procesos a implementar       N/A
+Aprobaci=F3n de QA-DBA:
+-       Creaci=F3n, actualizaci=F3n, eliminaci=F3n de nuevos tablas, =EDndi=
+ces, vistas, etc.
+-       Carga masiva de informaci=F3n (bcp)
+-       Creaci=F3n de base de datos
+-       Incremento de tama=F1o de base de datos
+-       Store Procedure (SP) nuevos
+-       SQR nuevos o modificados        En confluence
+Aprobaci=F3n de IDS/ARQUITECTURA:
+-       Nuevos productos en servidores NT
+-       Cambios en configuraciones de Servidores        N/A
+Aprobaci=F3n de SEGURIDAD INFORMATICA:
+-       Creaci=F3n/Asignaci=F3n de:
+o       Transacciones
+o       Procedimientos
+o       Roles
+-       Creaci=F3n de usuarios y/o permisos en Producci=F3n
+-       Creaci=F3n y/o actualizaci=F3n de Flujos sobre canales para aplicac=
+iones nuevas o existentes        N/A
+Aprobaci=F3n de MONITOREO DE SEGURIDAD INFORMATICA:
+-       Informe y aval de an=E1lisis de vulnerabilidad de aplicaciones Web.=
+       N/A
+Aprobaci=F3n de CALIDAD:
+-       Documentaci=F3n de tablas y Store Procedures nuevos y/o modificados
+-       Documentaci=F3n por servicio: (10 d=EDas previos al pase)
+o       Hardware
+o       Software
+o       Monitoreo
+o       An=E1lisis de la B.D. (Previa aprobaci=F3n de DBA.)
+o       Respaldos (Previa aprobaci=F3n de jefe de producci=F3n)
+-       Documentaci=F3n complementaria
+o       Contingencia (Previa aprobaci=F3n de Proyectos)
+o       Soluci=F3n a problemas    En confluence
+Aprobaci=F3n de CONTROL DE CAMBIOS:
+-       Variaci=F3n planificada de configuraciones y software de servidores=
+.
+-       Cambios en varias aplicaciones relacionados a un mismo tema.    N/A
+Aprobaci=F3n de GERENCIA DE DESARROLLO/INFRAESTRUCTURA/ TECNOLOG=CDA:
+-       Cambios t=E9cnicos que modifiquen el proceso esencial  de las aplic=
+aciones cr=EDticas como son: SAT, 24online, Cajeros, C=E1mara, CSP, MTRA, P=
+etro-Comercial, Portal Web, Postilion, Swift.
+-       Requerimientos Express (Fuera del Release)
+-       Requerimientos en Quincenas, Fines de Mes y Diciembre.  N/A
+
+Notificaciones
+
+Mail de notificaci=F3n por parte del L=EDder Aplicativo del pase de optimiz=
+aci=F3n (CC T=E9cnico) al propietario de la informaci=F3n.     N/A
+Mail de notificaci=F3n al usuario por parte de Productos para los pases de =
+requerimientos Funcionales o proyectos.        jguerrej@bolivariano.com<mai=
+lto:jguerrej@bolivariano.com>
+
+Certificaciones
+
+Certificaci=F3n de pruebas T=E9cnicas y Funcionales (AMBIENTE DESARROLLO)  =
+ En confluence
+Certificaci=F3n de pruebas T=E9cnicas y Funcionales (AMBIENTE PREPRODUCCI=
+=D3N)        N/A
+
+Gracias
+
+
+Saludos,
+
+Jonathan Guerrero
+Desarrollo | Tecnolog=EDa
+Banco Bolivariano C.A Jun=EDn 200 y Panam=E1. Guayaquil=AD - Ecuador  | 4 2=
+30 5000 - Ext. 3563
+
+
+
+
+
+
+
+--_000_BLAPR10MB48658C1272E249AD84FF49D3AE079BLAPR10MB4865namp_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<meta name=3D"Generator" content=3D"Microsoft Exchange Server">
+<!-- converted from rtf -->
+<style><!-- .EmailQuote { margin-left: 1pt; padding-left: 4pt; border-left:=
+ #800000 2px solid; } --></style>
+</head>
+<body>
+<font face=3D"Calibri" size=3D"2"><span style=3D"font-size:11pt;">
+<div><font color=3D"#1F497D">Aprobado, favor continuar.</font></div>
+<div><font face=3D"Calibri" color=3D"#1F497D">&nbsp;</font></div>
+<div><font face=3D"Calibri">_____________________________________________<b=
+r>
+
+<b>De:</b> Jonathan Guerrero Jijon &lt;jguerrej@bolivariano.com&gt; <br>
+
+<b>Enviado el:</b> martes, 15 de noviembre de 2022 04:29 p. m.<br>
+
+<b>Para:</b> Middleware &lt;Middleware@bolivariano.com&gt;<br>
+
+<b>CC:</b> Dario Barco Le=F3n &lt;dbarcol@bolivariano.com&gt;<br>
+
+<b>Asunto:</b> PROD PASE [RECESABREC-36] [RECAUDACION MOVISTAR COMPRA DE PA=
+QUETES EN CANAL VENTANILLA]<br>
+
+<b>Importancia:</b> Alta</font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri" color=3D"#1F497D">Buenas tardes</font></div>
+<div><font face=3D"Calibri" color=3D"#1F497D">&nbsp;</font></div>
+<div><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10pt;">Por=
+ favor su ayuda con el siguiente pase</span></font></div>
+<div><font face=3D"Calibri" color=3D"#1F497D">&nbsp;</font></div>
+<div><font face=3D"Calibri" color=3D"#1F497D">&nbsp;</font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<table width=3D"996" style=3D"width:598.1pt;margin-left:5.8pt;">
+<col width=3D"996" style=3D"width:598.1pt;">
+<tr height=3D"22" style=3D"height:13.7pt;">
+<td style=3D"text-align:center;"><font face=3D"Segoe UI" size=3D"2"><span s=
+tyle=3D"font-size:10pt;"><b>Requerimiento (ClearQuest)</b></span></font></t=
+d>
+</tr>
+</table>
+<table width=3D"996" style=3D"width:598.1pt;margin-left:5.8pt;">
+<col width=3D"542" style=3D"width:325.65pt;">
+<col width=3D"454" style=3D"width:272.45pt;">
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Calibri"></font></td>
+<td><font face=3D"Calibri"></font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">C=F3d=
+igo(s): </span></font></td>
+<td><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10.5pt;"><b=
+>RECESABREC-3</b><font color=3D"#1F497D"><b>6</b></font>
+<div><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10.5pt;"><=
+b>RECESABREC-</b><font color=3D"#1F497D"><b>252</b></font></span></font></d=
+iv>
+<div><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10.5pt;"><=
+b>RECESABREC-</b><font color=3D"#1F497D"><b>263</b></font></span></font></d=
+iv>
+<div><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10.5pt;"><=
+b>RECESABREC-</b><font color=3D"#1F497D"><b>264</b></font></span></font></d=
+iv>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+</span></font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">Solic=
+itud del Usuario: </span></font></td>
+<td><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10.5pt;">En=
+ <font color=3D"#1F497D">Jira</font></span></font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1" color=3D"red"><span style=3D"font-si=
+ze:8pt;">Conjunto de Cambio (Changeset):</span></font></td>
+<td><font face=3D"Segoe UI" size=3D"3" color=3D"#1F497D"><span style=3D"fon=
+t-size:12pt;"><b>28461</b></span></font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">Descr=
+ipci=F3n del cambio o de la soluci=F3n:</span></font></td>
+<td><font face=3D"-apple-system" size=3D"4"><span style=3D"font-size:13.5pt=
+;">RECAUDACION MOVISTAR COMPRA DE PAQUETES EN CANAL VENTANILLA</span></font=
+></td>
+</tr>
+<tr height=3D"14" style=3D"height:8.9pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">Fecha=
+ Ejecuci=F3n: </span></font></td>
+<td><font face=3D"Segoe UI" size=3D"3"><span style=3D"font-size:13pt;"><spa=
+n style=3D"background-color:yellow;"><b><u>1</u></b></span><font color=3D"#=
+1F497D"><span style=3D"background-color:yellow;"><b><u>1</u></b></span></fo=
+nt><font color=3D"red"><span style=3D"background-color:yellow;"><b><u>/</u>=
+</b></span></font><font color=3D"#1F497D"><span style=3D"background-color:y=
+ellow;"><b><u>16</u></b></span></font><font color=3D"red"><span style=3D"ba=
+ckground-color:yellow;"><b><u>/202</u></b></span></font><span style=3D"back=
+ground-color:yellow;"><b><u>2</u></b></span></span></font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">Hora =
+Ejecuci=F3n: </span></font></td>
+<td><font face=3D"Segoe UI" size=3D"3"><span style=3D"font-size:13pt;"><spa=
+n style=3D"background-color:yellow;"><b><u>23:30</u></b></span></span></fon=
+t></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1" color=3D"red"><span style=3D"font-si=
+ze:8pt;">Cantidad Archivos Back-End:</span></font></td>
+<td><font face=3D"Segoe UI" size=3D"2" color=3D"#1F497D"><span style=3D"fon=
+t-size:10.5pt;">1</span></font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1" color=3D"red"><span style=3D"font-si=
+ze:8pt;">Cantidad Archivos Front-End:</span></font></td>
+<td><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10.5pt;">0<=
+/span></font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1" color=3D"red"><span style=3D"font-si=
+ze:8pt;">Cantidad Archivos Middleware:</span></font></td>
+<td><font face=3D"Segoe UI" size=3D"2" color=3D"#1F497D"><span style=3D"fon=
+t-size:10.5pt;">3</span></font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Tahoma" size=3D"1" color=3D"red"><span style=3D"font-size=
+:8pt;">Cantidad Archivos xsl</span></font></td>
+<td><font face=3D"Segoe UI" size=3D"2" color=3D"#1F497D"><span style=3D"fon=
+t-size:10.5pt;">0</span></font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1" color=3D"red"><span style=3D"font-si=
+ze:8pt;">Cantidad Archivos EAR:</span></font></td>
+<td><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10.5pt;">0<=
+/span></font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">Obser=
+vaci=F3n:</span></font></td>
+<td><font face=3D"Calibri"></font></td>
+</tr>
+<tr height=3D"22" style=3D"height:13.7pt;">
+<td><font face=3D"Calibri"></font></td>
+<td><font face=3D"Calibri"></font></td>
+</tr>
+</table>
+<table width=3D"996" style=3D"width:598.1pt;margin-left:5.8pt;">
+<col width=3D"996" style=3D"width:598.1pt;">
+<tr height=3D"22" style=3D"height:13.7pt;">
+<td><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10.5pt;"><b=
+>Formularios</b></span></font></td>
+</tr>
+</table>
+<table width=3D"996" style=3D"width:598.1pt;margin-left:5.8pt;">
+<col width=3D"542" style=3D"width:325.65pt;">
+<col width=3D"454" style=3D"width:272.45pt;">
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Calibri"></font></td>
+<td><font face=3D"Calibri"></font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">Frond=
+<font color=3D"#1F497D">-</font>End </span></font></td>
+<td><font face=3D"Calibri">N/A</font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">Back<=
+font color=3D"#1F497D">-</font>End</span></font></td>
+<td><font face=3D"Calibri">&nbsp;
+<div><font face=3D"Calibri"> &lt;Archivo: BEPASE.doc &gt;&gt; </font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+</font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">Middl=
+eware</span></font></td>
+<td><font face=3D"Calibri">&nbsp;
+<div><font face=3D"Calibri"> &lt;Archivo: FMWPASEESB_bb-otc.docx &gt;&gt; <=
+/font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri"> &lt;Archivo: FMWPASEESB_bb-recaudos.docx &gt;&=
+gt; </font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+</font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">Orden=
+ Procesos a implementar</span></font></td>
+<td><font face=3D"Calibri">&nbsp;
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri"><span style=3D"background-color:yellow;"><b>IDS=
+ MS </b></span><font color=3D"#1F497D"><b>OTC-CORE</b></font></font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri"> &lt;Archivo: fproceso-otc-core.docx &gt;&gt; <=
+/font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri"><span style=3D"background-color:yellow;"><b>IDS=
+ MS </b></span><font color=3D"#1F497D"><b>OTC-GATEWAY-COBIS</b></font></fon=
+t></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri" color=3D"#1F497D">&nbsp;</font></div>
+<div><font face=3D"Calibri" color=3D"#1F497D">&nbsp;</font></div>
+<div><font face=3D"Calibri"> &lt;Archivo: fproceso-otc-gateway-cobis.docx &=
+gt;&gt; </font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri"><span style=3D"background-color:yellow;"><b>IDS=
+ MS REC-REVERSO</b></span></font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri"> &lt;Archivo: fproceso-rec-reverso.docx &gt;&gt=
+; </font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+</font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">Orden=
+ Procesos Batch</span></font></td>
+<td><font face=3D"Calibri">&nbsp;
+<div><font face=3D"Calibri">N/A&nbsp;&nbsp;&nbsp; </font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+</font></td>
+</tr>
+<tr height=3D"22" style=3D"height:13.7pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">Tarea=
+s MTRA</span></font></td>
+<td><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10.5pt;">N/=
+A</span></font></td>
+</tr>
+<tr height=3D"22" style=3D"height:13.7pt;">
+<td><font face=3D"Calibri"></font></td>
+<td><font face=3D"Calibri"></font></td>
+</tr>
+</table>
+<table width=3D"996" style=3D"width:598.1pt;margin-left:5.8pt;">
+<col width=3D"996" style=3D"width:598.1pt;">
+<tr height=3D"22" style=3D"height:13.7pt;">
+<td><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10pt;"><b>A=
+probaciones</b></span></font></td>
+</tr>
+</table>
+<table width=3D"996" style=3D"width:598.1pt;margin-left:5.8pt;">
+<col width=3D"542" style=3D"width:325.65pt;">
+<col width=3D"454" style=3D"width:272.45pt;">
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Calibri"></font></td>
+<td><font face=3D"Calibri"></font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;"><b>Ap=
+robaci=F3n de CONTRALO</b><b>R</b><b>IA Y PRODUCTOS: </b>
+<ul style=3D"margin:0;padding-left:36pt;">
+<font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">
+<li>Actualizaci=F3n de datos de producci=F3n.</li><li>Controles de auditori=
+a.</li></span></font>
+</ul>
+</span></font></td>
+<td><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10.5pt;"><s=
+pan style=3D"background-color:yellow;">En </span><font color=3D"#1F497D"><s=
+pan style=3D"background-color:yellow;">confluence</span></font></span></fon=
+t></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;"><b>Ap=
+robaci=F3n de JEFATURA DE PRODUCCI=D3N: </b>
+<ul style=3D"margin:0;padding-left:36pt;">
+<font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">
+<li>Revisi=F3n Orden Procesos Batch (Nuevos/Modificados)</li><li>Ordenes de=
+ Procesos a implementar</li></span></font>
+</ul>
+</span></font></td>
+<td><font face=3D"Segoe UI" size=3D"2" color=3D"#1F497D"><span style=3D"fon=
+t-size:10.5pt;">N/A</span></font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;"><b>Ap=
+robaci=F3n de QA-DBA: </b>
+<ul style=3D"margin:0;padding-left:36pt;">
+<font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">
+<li>Creaci=F3n, actualizaci=F3n, eliminaci=F3n de nuevos tablas, =EDndices,=
+ vistas, etc.</li><li>Carga masiva de informaci=F3n (bcp)</li><li>Creaci=F3=
+n de base de datos</li><li>Incremento de tama=F1o de base de datos</li><li>=
+Store Procedure (SP) nuevos</li><li>SQR nuevos o modificados</li></span></f=
+ont>
+</ul>
+</span></font></td>
+<td><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10.5pt;"><s=
+pan style=3D"background-color:yellow;">En </span><font color=3D"#1F497D"><s=
+pan style=3D"background-color:yellow;">confluence</span></font></span></fon=
+t></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;"><b>Ap=
+robaci=F3n de IDS/ARQUITECTURA:</b>
+<ul style=3D"margin:0;padding-left:36pt;">
+<font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">
+<li>Nuevos productos en servidores NT</li><li>Cambios en configuraciones de=
+ Servidores</li></span></font>
+</ul>
+</span></font></td>
+<td><font face=3D"Segoe UI" size=3D"2" color=3D"#1F497D"><span style=3D"fon=
+t-size:10.5pt;">N/A</span></font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;"><b>Ap=
+robaci=F3n de SEGURIDAD INFORMATICA:</b>
+<ul style=3D"margin:0;padding-left:36pt;">
+<font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">
+<li>Creaci=F3n/Asignaci=F3n de:</li></span></font>
+</ul>
+<ul style=3D"margin:0;padding-left:72pt;">
+<font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">
+<li>Transacciones</li><li>Procedimientos</li><li>Roles</li></span></font>
+</ul>
+<ul style=3D"margin:0;padding-left:36pt;">
+<font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">
+<li>Creaci=F3n de usuarios y/o permisos en Producci=F3n</li><li>Creaci=F3n =
+y/o actualizaci=F3n de Flujos sobre canales para aplicaciones nuevas o exis=
+tentes </li></span></font>
+</ul>
+</span></font></td>
+<td><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10.5pt;">N/=
+A</span></font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;"><b>Ap=
+robaci=F3n de MONITOREO DE SEGURIDAD INFORMATICA:</b>
+<ul style=3D"margin:0;padding-left:36pt;">
+<font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">
+<li>Informe y aval de an=E1lisis de vulnerabilidad de aplicaciones Web.</li=
+></span></font>
+</ul>
+</span></font></td>
+<td><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10.5pt;">N/=
+A</span></font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;"><b>Ap=
+robaci=F3n de CALIDAD:</b>
+<ul style=3D"margin:0;padding-left:36pt;">
+<font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">
+<li>Documentaci=F3n de tablas y Store Procedures nuevos y/o modificados</li=
+><li>Documentaci=F3n por servicio: (10 d=EDas previos al pase)</li></span><=
+/font>
+</ul>
+<ul style=3D"margin:0;padding-left:72pt;">
+<font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">
+<li>Hardware</li><li>Software</li><li>Monitoreo</li><li>An=E1lisis de la B.=
+D. (Previa aprobaci=F3n de DBA.)</li><li>Respaldos (Previa aprobaci=F3n de =
+jefe de producci=F3n)</li></span></font>
+</ul>
+<ul style=3D"margin:0;padding-left:36pt;">
+<font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">
+<li>Documentaci=F3n complementaria</li></span></font>
+</ul>
+<ul style=3D"margin:0;padding-left:72pt;">
+<font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">
+<li>Contingencia (Previa aprobaci=F3n de Proyectos)</li><li>Soluci=F3n a pr=
+oblemas</li></span></font>
+</ul>
+</span></font></td>
+<td><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10.5pt;"><s=
+pan style=3D"background-color:yellow;">En </span><font color=3D"#1F497D"><s=
+pan style=3D"background-color:yellow;">confluence</span></font></span></fon=
+t></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;"><b>Ap=
+robaci=F3n de CONTROL DE CAMBIOS:</b>
+<ul style=3D"margin:0;padding-left:36pt;">
+<font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">
+<li>Variaci=F3n planificada de configuraciones y software de servidores.</l=
+i><li>Cambios en varias aplicaciones relacionados a un mismo tema.</li></sp=
+an></font>
+</ul>
+</span></font></td>
+<td><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10.5pt;">N/=
+A</span></font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;"><b>Ap=
+robaci=F3n de GERENCIA DE DESARROLLO</b><font color=3D"#1F497D"><b>/</b></f=
+ont><b>INFRAESTRUCTURA</b><font color=3D"#1F497D"><b>/</b></font><b> TECNOL=
+OG=CDA:</b>
+<ul style=3D"margin:0;padding-left:36pt;">
+<font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">
+<li>Cambios t=E9cnicos que modifiquen el proceso esencial&nbsp; de las apli=
+caciones cr=EDticas como son: SAT, 24online, Cajeros, C=E1mara, CSP, MTRA, =
+Petro-Comercial, Portal Web, Postilion, Swift.</li><li>Requerimientos Expre=
+ss (Fuera del Release)</li><li>Requerimientos en Quincenas, Fines de Mes y =
+Diciembre.</li></span></font>
+</ul>
+</span></font></td>
+<td><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10.5pt;">N/=
+A</span></font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Calibri"></font></td>
+<td><font face=3D"Calibri"></font></td>
+</tr>
+</table>
+<table width=3D"996" style=3D"width:598.1pt;margin-left:5.8pt;">
+<col width=3D"996" style=3D"width:598.1pt;">
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10pt;"><b>N=
+otificaciones</b></span></font></td>
+</tr>
+</table>
+<table width=3D"996" style=3D"width:598.1pt;margin-left:5.8pt;">
+<col width=3D"542" style=3D"width:325.65pt;">
+<col width=3D"454" style=3D"width:272.45pt;">
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Calibri"></font></td>
+<td><font face=3D"Calibri"></font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">Mail =
+de notificaci=F3n por parte del L=EDder Aplicativo del pase de optimizaci=
+=F3n (CC T=E9cnico) al propietario de la informaci=F3n.</span></font></td>
+<td><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10.5pt;">N/=
+A</span></font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">Mail =
+de notificaci=F3n al usuario por parte de Productos para los pases de reque=
+rimientos Funcionales o proyectos.<font size=3D"2"><span style=3D"font-size=
+:11pt;"> </span></font></span></font></td>
+<td><font face=3D"Calibri"><a href=3D"mailto:jguerrej@bolivariano.com"><fon=
+t color=3D"blue"><u>jguerrej</u></font><font face=3D"Segoe UI" size=3D"2" c=
+olor=3D"blue"><span style=3D"font-size:10.5pt;"><u>@bolivariano.com</u></sp=
+an></font></a></font></td>
+</tr>
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Calibri"></font></td>
+<td><font face=3D"Calibri"></font></td>
+</tr>
+</table>
+<table width=3D"996" style=3D"width:598.1pt;margin-left:5.8pt;">
+<col width=3D"996" style=3D"width:598.1pt;">
+<tr height=3D"22" style=3D"height:13.7pt;">
+<td><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10pt;"><b>C=
+ertificaciones</b></span></font></td>
+</tr>
+</table>
+<table width=3D"996" style=3D"width:598.1pt;margin-left:5.8pt;">
+<col width=3D"542" style=3D"width:325.65pt;">
+<col width=3D"454" style=3D"width:272.45pt;">
+<tr height=3D"21" style=3D"height:13.5pt;">
+<td><font face=3D"Calibri"></font></td>
+<td><font face=3D"Calibri"></font></td>
+</tr>
+<tr height=3D"18" style=3D"height:11.35pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">Certi=
+ficaci=F3n de pruebas T=E9cnicas y Funcionales (AMBIENTE DESARROLLO)</span>=
+</font></td>
+<td><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10.5pt;"><s=
+pan style=3D"background-color:yellow;">En </span><font color=3D"#1F497D"><s=
+pan style=3D"background-color:yellow;">confluence</span></font></span></fon=
+t></td>
+</tr>
+<tr height=3D"17" style=3D"height:10.25pt;">
+<td><font face=3D"Segoe UI" size=3D"1"><span style=3D"font-size:8pt;">Certi=
+ficaci=F3n de pruebas T=E9cnicas y Funcionales (AMBIENTE PREPRODUCCI=D3N)</=
+span></font></td>
+<td><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10.5pt;">N/=
+A</span></font></td>
+</tr>
+</table>
+<div><font face=3D"Calibri" color=3D"#1F497D">&nbsp;</font></div>
+<div><font face=3D"Segoe UI" size=3D"2"><span style=3D"font-size:10.5pt;">G=
+racias</span></font></div>
+<div><font face=3D"Calibri" color=3D"#1F497D">&nbsp;</font></div>
+<div><font face=3D"Calibri" color=3D"#009999">&nbsp;</font></div>
+<div><font face=3D"Calibri" size=3D"3" color=3D"#1F497D"><span style=3D"fon=
+t-size:12pt;">Saludos,</span></font></div>
+<div><font face=3D"Calibri" color=3D"#009999">&nbsp;</font></div>
+<div><font face=3D"Calibri" size=3D"3" color=3D"#009999"><span style=3D"fon=
+t-size:12pt;"><b>Jonathan Guerrero</b></span></font></div>
+<div><font face=3D"Calibri"><b>Desarrollo | Tecnolog=EDa</b></font></div>
+<div><font face=3D"Calibri" color=3D"#A5A5A5">Banco Bolivariano C.A Jun=EDn=
+ 200 y Panam=E1. Guayaquil=AD &#8211; Ecuador  | 4 230 5000 - Ext. 3563</fo=
+nt></div>
+<div><font face=3D"Calibri" color=3D"#A5A5A5">&nbsp;</font></div>
+<div><font face=3D"Calibri" color=3D"#1F497D">&nbsp;</font></div>
+<div><font face=3D"Calibri" color=3D"#1F497D">&nbsp;</font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+<div><font face=3D"Calibri">&nbsp;</font></div>
+</span></font>
+</body>
+</html>
+
+--_000_BLAPR10MB48658C1272E249AD84FF49D3AE079BLAPR10MB4865namp_--
