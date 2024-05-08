@@ -1,0 +1,635 @@
+!**********************************************************************!
+!*  Archivo: 			ccopserv2.sqr                                  	*!
+!*  Base de datos: 		cob_cuentas                                     *!
+!*  Motor de Base:      SYBASE                                        	*!
+!*  Servidor:           HP-ACT                                        	*!
+!*  Aplicacion:         CyberBank                                     	*!
+!*  Producto: 			Cuentas Corrientes                            	*!
+!*  Disenado por: 		Galo Yanez                          			*!
+!*  Fecha de escritura: 03/Abril/2002                                   *!
+!*  Procesamiento:      OLTP                                          	*!
+!************************************************************************!
+!*                              IMPORTANTE                              *!
+!*      Este programa es parte de los paquetes bancarios propiedad de   *!
+!*      "BANCO BOLIVARIANO".                                            *!
+!*      Su uso no autorizado queda expresamente prohibido asi como      *!
+!*      cualquier alteracion o agregado hecho por alguno de sus         *!
+!*      usuarios sin el debido consentimiento por escrito de la         *!
+!*      Presidencia Ejecutiva de BANCO BOLIVARIANO o su representante   *!
+!************************************************************************!
+!*                              PROPOSITO                               *!
+!*      Emite el diario de operaciones monetarias por cuenta            *!
+!*      Sacando las transacciones de cc_tran_servicio_resp              *!
+!************************************************************************!
+!*                            MODIFICACIONES                            *!
+!*      FECHA           AUTOR           RAZON                           *!
+!*   #  14.Oct.2003  Galo Yanez  Cambiar older sqr commands.   		*!
+!*      Nov 17/2003     Galo Yanez      Utilizar tablas individuales    *!
+!*                                      para generar resumen de totales *!
+!*      Nov 17/2005     Erika Sanchez B Mostrar datos extra en trn 3208 *!
+!*      Jul 31/2008     Erika Sanchez B Arreglar problema de linea perdi*!
+!*                                      da en cada nueva pagina.        *!
+!* 5    May 29/2012     J.Pazminno      Tarea: LEYCHEQUES-313-CU-1866   *!
+!* 6    Ago 17/2012     J.Pazminno      CTE-CC-SGC00003736              *!
+!*                                      - Regularizar trx de servicio   *!
+!* 7    29/Jul/2016     María José Silva G. Avance de Efectivo Canal CNB*!
+!*                                      Tarea: RECA-CE-SGC00026062      *!
+!* 8    29/Ago/2016     P.Holguin.V     Compensacion Iva 		*!
+!*                                      Tarea: CTE-CC-SGC00025809       *!
+!* 9    29/Mar/2016     Pablo Ricaurte  Debitos automaticos Primax      *!
+!*                                      Tarea: RECA-CC-SGC00027803      *!
+!*10    14/Ago/2017     Pablo Holguin   CTE-CC-SGC00029495              *!
+!                                       Agregar campo Banco corresponsal*!
+!*11    07/JUN/2018     Paul Hoyos V.  FACOFF-AP-SGC00029747-SGC00030151*!
+!*12    07/JUL/2018     Paul Hoyos V.  FACOFF-AP-SGC00029747-SGC00030151*!
+!*13    07/AGO/2018     Paul Hoyos V.  CTE-CE-SGC00032640               *!
+!*14    07/Jun/2018     Danny Olaya S.  DEPONL-AP-SGC00031612-SGC00032075!
+!*                                      Deposito Especial ECUAQUIMICA   *!
+!*15    15/Jul/2019     Daniel Pereira  RECMPS-21  Recaudacion MSC      *!
+!*16    09/Feb/2021     Daniel Pereira  RECMPS-655 Pago de servicios con TC *!
+!*      01/Feb/2022     Galo Yanez	    Modificar causal a 4 digitos	   *!
+!*				                 Tarea: ALCCAU-AP-SGC00036523-SGC00036526  *!
+!*17  25/08/2022  		Kevin Bastidas	RECESABREC-124 BackOffice Broadnet *!
+!*18  23/11/2022  		Kevin Bastidas	RECESABREC-86 BackOffice Ant	*!
+!************************************************************************!
+
+#include  "definic.inc"
+                                       ! Antes era 210
+#define   ANCHO_PAG                195 !Ancho de la pagina a imprimir  !REF 5-10-12 antes 132;142;195
+#define   LARGO_PAG                 60 !Largo de la pagina a imprimir  !REF 13 PHOYOSV 20180822
+#define   SALIDA  '<37><33><10>(dfl.jdt) STARTLM<10>'      !KFAH:10may2000
+!******** Para compilar aniadir en la linea de comandos -Mvar ********!
+
+Begin-Setup
+use cob_cuentas
+End-Setup
+
+#include "printer_dfl.inc"   !REF:GYC
+
+#include "log.inc"
+#include "ctacte.inc"
+
+Begin-Program   !REF:GYC
+do Inicializar_Programa
+do ParamN (1,#i_filial,'cobis..cl_filial','fi_filial = ','No existe la filial')
+do Main
+do Finalizar_Programa
+End-Program   !REF:GYC
+
+Begin-Heading 8   !6   ESA 31JUL2008
+!* Define los titulos del reporte *!
+do Cabecera ($nombre_filial,
+   'DIARIO DE OPERACIONES DE SERVICIOS (CUENTAS DE CORRIENTES)',
+   $nombre_oficina, $nombre_moneda,'ccopserv.sqr',$t11_fecha_proceso)
+do Lin_Horizontal
+
+do PrintS (1,'No.CUENTA','',0)
+do PrintS (2,'NOMBRE   ','',0)
+do PrintS (3,'          EFECTIVO','',0)
+do PrintS (4,'            CHEQUE','',0)
+do PrintS (5,'CLASE','',0)
+do PrintS (6,'CAUSA','',0)
+do PrintS (7,' CHEQUE','',0)
+do PrintS (8,'CH.DESD','',0)
+do PrintS (9,'CH.HAST','',0)
+do PrintS (10,' HORA','',0)
+do PrintS (11,'TERMINAL','',0)
+do PrintS (12,'CANAL','',0)               !JPM Ref. 5
+do PrintS (13,'DETALLE','',0)             !Ref10 pholguiv
+do Lin_Horizontal
+End-Heading
+
+Begin-Procedure Main
+do Nombre_Filial (#i_filial,$nombre_filial)
+!*           1  2  3  4  5 6 7 8 9 1011 12 1314
+do Columnas (11,25,18,18,5,7,7,7,7,5,10,10,50,2,0,0,0,0,0,0)    !JPM Ref 5: agregar columna !ref17 Aumnt. Column. 6
+do Transacciones
+End-Procedure
+
+
+Begin-Procedure Transacciones
+do Trunca_Tabla
+!* Procesa las transacciones monetarias de la oficina activa *!
+
+Begin-Select
+ts_oficina () on-break print=never before=Before_Oficina after=After_Oficina level = 1
+ts_moneda () on-break print=never before=Before_Moneda after=After_Oficina level = 2
+cc_cta_banco
+isnull(ts_cta_banco,ts_cta_banco_dep) &cta_banco
+ts_usuario () on-break print=never before=Before_Usuario after=After_Usuario level=3
+ts_tipo_transaccion () on-break print=never before=Before_Transa after=After_Transa level=4
+ts_valor
+ts_monto
+ts_contratado
+ts_saldo
+ts_secuencial
+ts_ocasional
+ts_aporte_iess
+ts_descuento_iess
+tn_trn_code
+tn_descripcion
+ts_corresponsal
+ts_clase
+!--substring(ts_causa,1,3) 	&ts_causa  !ref 15	!-- GYC 2022/Feb/01
+substring(ts_causa,1,5) 	&ts_causa  !ref17 KBastida Aumento de longitud 
+ts_terminal
+of_nombre
+cc_nombre
+ts_oficina_cta
+ts_hora
+ts_cheque
+ts_cheque_desde
+ts_cheque_hasta
+ts_correccion                   !* DSC980112 *!
+of_oficina
+convert(char(8),ts_hora,8)      &hora_transa
+ts_referencia
+ts_endoso
+ts_cheque_rec     !ESA 17NOV2005
+ts_autoriz_aut      !ESA 17NOV2005
+ts_campo_alt_uno    &canal   !JPM Ref. 5  --->
+ts_tipo_chequera    &tipo_chequera  !Ref007:msilvag
+ts_descripcion_ec		    !Ref10 pholguiv
+isnull(ts_cta_banco_dep,'')    &ts_cta_banco_dep  !PHOYOSV 20180607 REF_11
+isnull(ts_cta_asociada,'')	&ts_cta_asociada  !ref16
+isnull(ts_cta_banco,'')	&ts_cta_banco  !Ref 18 KBastida TC ANT
+
+isnull(ts_plazo,'')		&ts_plazo	!ref16
+
+   let $ts_cta_asociada = substr(&ts_cta_asociada,7,10)  !ref16
+   let $ts_cta_banco 	= substr(&ts_cta_banco,7,10)  !Ref 18 KBastida TC ANT
+   
+   let $ts_plazo = &ts_plazo   !ref16
+   let $ts_cta_banco_dep = &ts_cta_banco_dep      !PHOYOSV 20180607 REF_11
+ evaluate &ts_tipo_transaccion
+  when = 3028
+    let $canal = &canal
+    break
+  when = 3029
+    let $canal = &canal
+    break
+  when = 3507
+    let $canal = &canal
+    break
+  when = 3014     !JPM  Ref 6-->
+    let $canal = &canal
+    break
+  when = 3545
+    let $canal = &canal
+    break
+  when = 3738
+    let $canal = &canal
+    break
+  when = 3937
+    let $canal = &canal
+    break         !<-- JPM Ref 6
+  when-other
+    let $canal = ''
+    break
+ end-evaluate
+ !<--- JPM Ref. 5
+ if &ts_correccion = 'S'       !* DSC980112 *!
+    let #factor = -1
+ else
+    let #factor = 1
+ end-if                        !* DSC980112 *!
+
+ let $canal_trx = &tipo_chequera    !Ref007:msilvag
+
+ let #quiebre = 0
+ do Imprime_Registro !*** IMPRIME LINEA DE DETALLE ***!
+
+ next-listing
+ do Actualizar_Reg_Proc
+from  cc_tran_servicio_resp, cobis..cl_ttransaccion, cc_ctacte, cobis..cl_oficina !OJO REGRESAR REF_12
+where ts_tipo_transaccion *= tn_trn_code
+  and of_filial           = convert(tinyint,#i_filial)
+  and ts_oficina          = of_oficina
+  and cc_cta_banco        =* isnull(ts_cta_banco,ts_cta_banco_dep)
+  and ts_tipo_transaccion <> 43545                      !ref9 pricaura cambio por primax
+order by ts_oficina, ts_moneda,ts_usuario,ts_tipo_transaccion,ts_cta_banco,ts_secuencial
+End-Select
+End-Procedure
+
+Begin-Procedure Imprime_Registro
+  let #cheqe = 0
+
+  if (&ts_tipo_transaccion > 10401 and &ts_tipo_transaccion < 10405) or
+     (&ts_tipo_transaccion > 10461 and &ts_tipo_transaccion < 10465)
+     do PrintS(1,'CORRESPONSAL','',0)
+     do PrintS(2,&ts_corresponsal,'',0)
+     let #valor = &ts_saldo
+  else
+  if (&ts_tipo_transaccion = 3070 or &ts_tipo_transaccion = 3328)
+     do PrintS(1,'CAUSA:','',0)
+     do PrintS(2,&ts_causa,'',0)
+     let #valor = &ts_aporte_iess          !* EFECTIVO
+     let #cheqe = &ts_descuento_iess       !* CHEQUES
+  else
+    if (&ts_tipo_transaccion = 3032 or &ts_tipo_transaccion = 3113 or &ts_tipo_transaccion = 3335)   !Ref08 pholguiv --agrega trx diferida 3335 !* RE 19990408 *!
+       do PrintS(1,'CAUSA:','',0)
+       do PrintS(2,&ts_causa,'',0)
+       let #valor = &ts_saldo       !* EFECTIVO
+       let #cheqe = &ts_valor       !* CHEQUES
+    else
+    if (&ts_tipo_transaccion = 3142 or &ts_tipo_transaccion = 3141 or &ts_tipo_transaccion = 3137
+            or &ts_tipo_transaccion = 3121 or &ts_tipo_transaccion = 3168 or &ts_tipo_transaccion = 3169 )    !*** KFAH:10may2000  ***!
+       do PrintS(1,'referencia:','',0)
+       do PrintS(2,&ts_referencia,'',0)
+       let #valor = &ts_saldo       !* EFECTIVO
+       let #cheqe = &ts_valor       !* CHEQUES
+    else
+    !Ref007:msilvag Inicio
+    if (&ts_tipo_transaccion = 43335  and $canal_trx = 'CNB') or (&ts_tipo_transaccion = 43337  and $canal_trx = 'CNB' )
+        let #valor = &ts_monto
+    else
+    !Ref007:msilvag Fin
+    if (&ts_tipo_transaccion = 10431)    !*** KFAH:10may2000  ***!
+       do PrintS(1,'referencia:','',0)
+       do PrintS(2,&ts_corresponsal,'',0)
+       let #valor = &ts_valor       !* EFECTIVO
+       let #cheqe = &ts_monto       !* CHEQUES
+    else
+    if (&ts_tipo_transaccion = 3208)    !*** ESA 17/NOV/2005 ***!
+  let $numero =  to_char(&ts_cheque_rec)
+  let $premio = &ts_autoriz_aut
+  let $cod_giro = &ts_referencia
+  let $referencia = $cod_giro || ' - ' || $numero || ' - ' || $premio
+       do PrintS(1,'referencia:','',0)
+       do PrintS(2,$referencia,'',0)
+       if &ts_valor = 0
+          let #valor = &ts_saldo
+       else
+          let #valor = &ts_valor
+       end-if
+    else
+    if (&ts_tipo_transaccion = 3173)    !*** RE 11/OCT/2000 ***!
+       do PrintS(1,'referencia:','',0)
+       do PrintS(2,&ts_referencia,'',0)
+       let #valor = &ts_valor                                   !* EFECTIVO
+       let #cheqe = &ts_saldo + &ts_monto + &ts_ocasional       !* CHEQUES-ND-RETENCION
+    else
+    !ref 15 ini
+      if (&ts_tipo_transaccion = 43569)   
+        do PrintS(1,&cta_banco,'XXX-XXXXXXX',0)
+        do PrintS(2,&cc_nombre,'',0)
+      	let #cheqe = &ts_saldo
+        let #valor = &ts_valor     
+      else
+    !ref 15 fin
+    !ref 16 ini
+	if (&ts_causa = '7749' and &ts_plazo = ' ') 
+	  do PrintS(1,&cta_banco,'XXX-XXXXXXX',0)
+	  do PrintS(2,&cc_nombre,'',0)
+	  let #cheqe = &ts_saldo
+	  let #valor = &ts_valor     
+	else
+	if (&ts_causa = '7749' and &ts_plazo <> ' ') 
+		  do PrintS(1,$ts_cta_asociada,'',0)
+		  do PrintS(2,&cc_nombre,'',0)
+		  let #cheqe = &ts_saldo
+		  let #valor = &ts_contratado     
+	else
+    !ref 16 fin
+       do PrintS(1,&cta_banco,'XXX-XXXXXXX',0)
+       do PrintS(2,&cc_nombre,'',0)
+       if &ts_valor = 0
+          let #valor = &ts_saldo
+	  
+  else  
+    let #valor = &ts_valor
+       end-if
+    end-if	
+    end-if
+    end-if
+    end-if
+    end-if !Ref007:msilvag
+    end-if
+    end-if
+  end-if
+  end-if
+  end-if
+  end-if
+
+
+	!Ref 18 KBastida TC ANT
+	if (&ts_causa = '18786' and &ts_contratado = 0) 
+	  do PrintS(1,&cta_banco,'XXX-XXXXXXX',0)
+	  do PrintS(2,&cc_nombre,'',0)
+	  let #cheqe = &ts_saldo
+	  let #valor = &ts_valor     
+	else	
+	if (&ts_causa = '18786' and &ts_contratado <> 0) 
+		  do PrintS(1,$ts_cta_banco,'',0)
+		  do PrintS(2,&cc_nombre,'',0)
+		  let #cheqe = &ts_saldo
+		  let #valor = &ts_contratado     	
+		!else  
+        !do PrintS(1,&cta_banco,'XXX-XXXXXXX',0)
+        !do PrintS(2,&cc_nombre,'',0)
+        !if &ts_valor = 0
+        !   let #valor = &ts_saldo
+		!	end-if 
+    end-if 
+	end-if   
+	!Ref 18 Fin
+	
+
+  do PrintN(3,#valor,'{FOR_DIN}',0)
+  do PrintN(4,#cheqe,'{FOR_DIN}',0)
+  
+  !ini ref16
+  if &ts_causa = '7749' and &ts_cta_asociada <> ' '
+  	if &ts_plazo <> ' '
+  		do PrintS(5,'DIF','',0)
+  	else
+  		do PrintS(5,'EFE','',0)
+  	end-if
+  else
+  	do PrintS(5,&ts_clase,'',0)
+  end-if
+  !fin ref16
+  
+  !Ref 18 KBastida TC ANT
+  if &ts_causa = '18786' and &ts_cta_banco <> ' '
+  	if &ts_contratado <> 0
+  		do PrintS(5,'DIF','',0)
+  	else
+  		do PrintS(5,'EFE','',0)
+  	end-if
+  else
+  	do PrintS(5,&ts_clase,'',0)
+  end-if
+  !Ref 18 Fin
+
+  let $w_causa = '  '|| &ts_causa
+  do PrintS(6,$w_causa,'',0)
+  if &ts_endoso > 0
+     do PrintN(7,&ts_endoso, '{FOR_CHQ}', 0)
+  end-if
+  if &ts_cheque > 0
+     do PrintN(7,&ts_cheque, '{FOR_CHQ}', 0)
+  end-if
+  if &ts_cheque_desde > 0
+     do PrintN(8,&ts_cheque_desde, '{FOR_CHQ}', 0)
+  end-if
+  if &ts_cheque_hasta > 0
+     do PrintN(9,&ts_cheque_hasta, '{FOR_CHQ}', 0)
+  end-if
+  let #suma_total = #suma_total + (#valor * #factor)   !* DSC980112 *!
+  let #cheq_total = #cheq_total + (#cheqe * #factor)   !* DSC980112 *!
+  let #total      = #valor      + #cheqe
+
+  do PrintS (10,&hora_transa,'',0)
+  do PrintS (11,&ts_terminal,'',0)
+  do PrintS (12,$canal,'',0)             !JPM Ref 5
+
+    !--Ref10 valida corresponsal--
+  if (&ts_tipo_transaccion = 3875)
+       do Corresponsal
+       do PrintS (13,&corresponsal,'',0)
+  end-if
+  if &ts_tipo_transaccion = 3188 and &ts_causa = '10'   !PHOYOSV 20180607 INI REF_05
+   do PrintS (13,$ts_cta_banco_dep,'',0)
+  end-if                                                !PHOYOSV 20180607 FIN REF_05
+  
+  if &ts_causa = '7749' and &ts_cta_asociada <> ' '  !ref16
+    do PrintS (13,'TARJETA','',0)
+  end-if
+
+  if &ts_correccion = 'S'                !* DSC980112 *!
+     do PrintS (14,'*','',0)  !JPM Ref 5: antes col 12
+     let #total = #total * -1
+     let #reg   = -1
+  else
+     do PrintS (14,' ','',0)  !JPM Ref 5: antes col 12
+     let #reg   = 1
+  end-if                                 !* DSC980112 *!
+
+!**************** LEE EN re_transa (DSC971013)
+let #existe = 0
+Begin-Select
+tr_tipo_tran &t
+  let #existe = 1
+from cob_remesas..re_transa_cs
+where tr_tipo_tran = &ts_tipo_transaccion
+  and tr_causa     = &ts_causa
+End-Select
+
+
+if #existe = 1
+   do Actualiza_Tabla
+else
+   do Inserta_Tabla
+end-if
+!**************** (DSC971013)
+End-Procedure
+
+Begin-Procedure Actualiza_Tabla
+!------------------------------
+begin-sql
+  update cob_remesas..re_transa_cs
+  set tr_valor = tr_valor + #total, tr_contador = tr_contador + #reg   !* DSC
+  where tr_tipo_tran = &ts_tipo_transaccion
+    and tr_causa     = &ts_causa
+end-sql
+End-Procedure
+
+Begin-Procedure Inserta_Tabla
+!------------------------------
+Begin-Select
+tn_descripcion &descripcion
+from cobis..cl_ttransaccion
+where tn_trn_code = &ts_tipo_transaccion
+End-Select
+begin-sql
+   insert into cob_remesas..re_transa_cs
+   values(null,&ts_tipo_transaccion,null,&ts_causa,&descripcion,1,#total)
+end-sql
+End-Procedure
+
+Begin-Procedure Before_Transa
+  let $codigo_transa = '(' || to_char(&tn_trn_code) || ')'
+  position (+1)
+  do PrintS (1,'TRANSACCION:','',0)
+  do PrintS (2,&tn_descripcion,'',0)
+  do PrintS (3,$codigo_transa,'',0)
+  position (+1)
+End-Procedure
+
+Begin-Procedure After_Transa
+  !* Imprime los totales por transaccion *!
+  do PrintS (1,'TOTALES:','',0)
+  do PrintN (3,#suma_total,'{FOR_DIN}',0)
+  do PrintN (4,#cheq_total,'{FOR_DIN}',0)
+  let #suma_total = 0
+  let #cheq_total = 0
+  position (+1)
+End-Procedure
+
+
+Begin-Procedure After_Usuario
+next-listing
+next-listing
+do PrintS (1,'RESUMEN:','',0)
+do PrintS (2,'** POR OPERADOR **','',0)
+next-listing
+do PrintS (1,'TRANS.','',0)
+do PrintS (2,'DESCRIPCION','',0)
+do PrintS (3,'     T O T A L E S','',0)
+do PrintS (4,'OBSERVACION','',0)
+do PrintS (5,' N.TRN','',0)
+next-listing
+Begin-Select
+tr_tipo_tran
+tr_causa
+tr_signo
+tr_detalle
+tr_contador
+tr_valor
+   let $tabla = ''
+   do PrintN (1,&tr_tipo_tran,'999999',0)
+   do PrintS (2,&tr_detalle,'',0)
+   do PrintN (3,&tr_valor,'{FOR_DIN}',0)
+   do PrintN (5,&tr_contador,'99999',0)
+   if &tr_tipo_tran = 3032               !* Otros Ingresos
+      let $tabla = 'cc_causa_oioe'
+   else
+   if &tr_tipo_tran = 3086               !* Otros Egresos
+      let $tabla = 'cc_causa_oe'
+   else
+   if &tr_tipo_tran = 3570 or
+      &tr_tipo_tran = 3751
+      let $tabla = 'cc_causa_nd'
+   else
+   if &tr_tipo_tran = 10401 or
+      &tr_tipo_tran = 10402 or
+      &tr_tipo_tran = 10403 or
+      &tr_tipo_tran = 10404 or
+      &tr_tipo_tran = 10461 or
+      &tr_tipo_tran = 10462 or
+      &tr_tipo_tran = 10463 or
+      &tr_tipo_tran = 10464
+      let $tabla = 're_corresponsal'
+   else
+   !VIVI, 09/05/2003
+   if &tr_tipo_tran = 3060 or &tr_tipo_tran = 3064 or &tr_tipo_tran = 3641
+            let $tabla = 'cc_usodefondos'
+   end-if
+   end-if
+   end-if
+   end-if
+   end-if
+   do Lee_Causa
+   if $tabla <> ''
+      do PrintS (4,&causa,'',0)
+   end-if
+   let $w_causa = '  '|| &tr_causa
+   do PrintS (6,$w_causa,'',0)
+
+   !VIVI, SE CAMBIA POR POSITION PARA CORREGIR QUE SE PIERDE INFORMACION
+   !next-listing
+   position (+1)
+
+   let #break = 0
+   do Actualizar_Reg_Proc
+from cob_remesas..re_transa_cs
+End-Select
+new-page
+do Trunca_Tabla
+let #quiebre = 1
+End-Procedure
+
+
+Begin-Procedure Trunca_Tabla
+!---------------------------
+begin-sql
+  truncate table cob_remesas..re_transa_cs
+end-sql
+End-Procedure
+
+
+Begin-Procedure Lee_Causa
+!------------------------
+Begin-Select
+valor &causa
+from cobis..cl_catalogo
+where tabla = (select codigo from cobis..cl_tabla where tabla = $tabla)
+  and codigo = &tr_causa
+End-Select
+End-Procedure
+
+
+Begin-Procedure Before_Usuario
+!* Encera variables de totales *!
+ position (+1)
+ do PrintS (1,'OPERADOR :','',0)
+ do PrintS (2,&ts_usuario,'',0)
+ position (+1)
+ let #suma_total = 0
+ let #cheq_total = 0
+ do Decimales
+End-Procedure
+
+Begin-Procedure After_Oficina
+if #quiebre = 0
+   new-page
+   let #quiebre = 1
+end-if
+End-Procedure
+
+Begin-Procedure Before_Oficina
+!* Encera variables de totales *!
+ do Generar_Listado (&ts_oficina)
+ do Nombre_Oficina (#i_filial,&ts_oficina,$nombre_oficina)
+ let $nombre_oficina = 'OFICINA : ' || $nombre_oficina
+ do Nombre_Moneda (&ts_moneda, $nombre_moneda)
+ let $nombre_moneda = 'MONEDA : ' || $nombre_moneda
+ do Decimales
+End-Procedure
+
+Begin-Procedure Before_Moneda
+!* Encera variables de totales *!
+ do Nombre_Moneda (&ts_moneda, $nombre_moneda)
+ let $nombre_moneda = 'MONEDA : ' || $nombre_moneda
+ do Decimales
+End-Procedure
+
+Begin-Procedure Decimales
+!* Encuentra parametro de decimales *!
+let #num_deci = 0
+Begin-Select
+mo_decimales
+  if &mo_decimales = 'S'
+    do Num_Deci
+  end-if
+from cobis..cl_moneda
+where mo_moneda = convert(tinyint,#i_moneda)
+End-Select
+End-Procedure
+
+Begin-Procedure Num_Deci
+Begin-Select
+pa_tinyint
+from  cobis..cl_parametro
+where pa_nemonico = 'DCI'
+  and pa_producto = 'CTE'
+End-Select
+if isnull(&pa_tinyint)
+  let #num_deci = 0
+else
+  let #num_deci = &pa_tinyint
+end-if
+End-Procedure
+
+!Ref10 Extrae corresponsal
+!-------------------------------
+Begin-Procedure Corresponsal
+Begin-select
+ltrim(rtrim(im_corresponsal)) + '  ' + ltrim(rtrim(ds_nom_banco)) &corresponsal
+from cob_cuentas..cc_inf_msg
+inner join cob_comext..ce_dir_swift on ds_dir_swift=im_corresponsal
+where im_ref_transf_env= &ts_descripcion_ec
+End-Select
+End-Procedure
+!-------------------------------

@@ -1,0 +1,1169 @@
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (104.47.55.103)
+ by mailweb.bolivariano.com (172.17.3.231) with Microsoft SMTP Server (TLS) id
+ 14.3.498.0; Thu, 16 Mar 2023 15:06:16 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=SHuVe/ruJLuN5pk14If2ZhtVBYOxaPxi4xpaxCJCofaVvMCY0j1qrdAW70KChQH5TgIrVpFcZKefhCO47NKQ/BPnyUvGmbgXCT/KQ22Ww6QIz6hnG04jMpPCTdV741moEIrpfUl1NYcLu1095RjO7GK3Y/qJmKF2JWvQTWsFMd9dP6QgmDMpbCmbob5+xvweybC8YqAvMTkv/7myL9ICgdc74Oe/PvqjF1i87FgPwD5ojLDXBmVP+v4TxYjlPqmQEmlsd17y1dKwZl41RaFN1tvQjryQ7uqmBUyd44pnK3dJ6ZwuDfwhecdwqxktM3uqjdynlDKY6FDH004hDqUbEQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=fHR26lA6fCaAVt36qDWZk7+rE3PTdPBp+VtC4rgaSBI=;
+ b=f2gcOFV/Wc8yQ8quChzAUm9p0QbcRRYBnps6kGwfT7i9afFZ/DmBBQ6+cpKFEEhBOeSfu7OcC3mhD3s7BLKXYDcznNRyVQ7jDjnSCrSue3Jlz9Mgt9Ithi3J/C9gYMnE1AmCMOgdPqg69N3256hIMyTYLGlhwcTm2o6mk4hUW5vc4NS7UhFYlOuYTf4cy2GCGTD4PpXFvRn4xd2VcVef+CqgJxioUFLYj2xE3MZMB+Zxct4l5Y6s7Xg3hEyu2J8UkEmcVNtL0rTx25x+i1f61cad4iUhFNcljZVoLN9+CXuIFMSKZHCX/uppvbmRRVOgCiKy7gev6grVzGLAzRQNDQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=bolivariano.com; dmarc=pass action=none
+ header.from=bolivariano.com; dkim=pass header.d=bolivariano.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bolivariano.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fHR26lA6fCaAVt36qDWZk7+rE3PTdPBp+VtC4rgaSBI=;
+ b=mH1C7PPNt9vXsJC8d+2kHPU+lyAG/0DSC5Y4glzwsCao3PRmOZx4eTFnQ7T1FuaX7AKS1lj5zU6XBZENRvZwiH0RF8DLW/8TcSX8aV2Kt2cHV1PZq3clufjI7qjay8DwI2ph3PtNqnhzZpiRedAjRdgS1KD6BW1bOmcwUNZLqZ5e7FVOMVLnJwy3i3UEEK4pqwfO1tHAxDpzW6NeYuP1S55GJDcNl5lDY23jiTzxhroOqXaWR/MBo3Z7GvOV1/SRdzdGhdLjhEHkAjYBzm72zB5i1Kkr1tRDo3IpfTXzUGNTg7QNFy5LosZyJ8kyEsWmoZMSCFPS51wBORvJr0waiA==
+Received: from MWHPR10MB1486.namprd10.prod.outlook.com (2603:10b6:300:24::13)
+ by CH0PR10MB5354.namprd10.prod.outlook.com (2603:10b6:610:df::23) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.33; Thu, 16 Mar
+ 2023 20:06:12 +0000
+Received: from MWHPR10MB1486.namprd10.prod.outlook.com
+ ([fe80::5f4:f3a:9f22:3c74]) by MWHPR10MB1486.namprd10.prod.outlook.com
+ ([fe80::5f4:f3a:9f22:3c74%9]) with mapi id 15.20.6178.031; Thu, 16 Mar 2023
+ 20:06:12 +0000
+From: =?iso-8859-1?Q?Jaime_Ram=EDrez_Cevallos_=28Quito=29?=
+	<jramirez@bolivariano.com>
+To: CV - SAT <cvsat@bolivariano.com>, =?iso-8859-1?Q?Wendy_Cede=F1o_Ley?=
+	<wcedeno@bolivariano.com>
+CC: =?iso-8859-1?Q?Ma=2E_Fernanda_Hungr=EDa_Jaramillo?=
+	<mhungria@bolivariano.com>, Daniel Martillo Jeremias
+	<lmartillo@bolivariano.com>, Roberto Alvarado Salcedo
+	<ralvaras@bolivariano.com>,
+	=?iso-8859-1?Q?Estructuras_y_Par=E1metros_del_Sistema?=
+	<estpsist@bolivariano.com>, Byron Tircio Esparza <btircio@bolivariano.com>,
+	Recaudos <Recaudos@bolivariano365.onmicrosoft.com>,
+	=?iso-8859-1?Q?Eymi_Drouet_Cede=F1o?= <edrouetc@bolivariano.com>, "Alberto
+ Espinoza Cabrera" <aeespinoza@bolivariano.com>, Emilio Rivadeneira Puga
+	<erivadep@bolivariano.com>, Lissette Sanga Hernandez
+	<lsangah@bolivariano.com>
+Subject: RE: PERSONALIZACION DE EMPRESA AGENCIA NACIONAL DE TRANSITO
+Thread-Topic: PERSONALIZACION DE EMPRESA AGENCIA NACIONAL DE TRANSITO
+Thread-Index: AdlXSHvZjd5iTg9wTGOUoMEIwAb4SgAAhhHAAAJfeCAABw7PoAAyfOHg
+Disposition-Notification-To: =?iso-8859-1?Q?Jaime_Ram=EDrez_Cevallos_=28Quito=29?=
+	<jramirez@bolivariano.com>
+Return-Receipt-To: <jramirez@bolivariano.com>
+Date: Thu, 16 Mar 2023 20:06:12 +0000
+Message-ID: <MWHPR10MB14860E508A37CA6CC3D56948C1BC9@MWHPR10MB1486.namprd10.prod.outlook.com>
+References: <BLAPR10MB5201DCAE91175D84FA9F1D0DA0BF9@BLAPR10MB5201.namprd10.prod.outlook.com>
+ <MW4PR10MB6607F9DB4335CA9E0C0C93C5D9BF9@MW4PR10MB6607.namprd10.prod.outlook.com>
+ <MWHPR10MB148697A99C2D74F824D72246C1BF9@MWHPR10MB1486.namprd10.prod.outlook.com>
+ <DM8PR10MB5431205B608B970B4226C119A2BF9@DM8PR10MB5431.namprd10.prod.outlook.com>
+In-Reply-To: <DM8PR10MB5431205B608B970B4226C119A2BF9@DM8PR10MB5431.namprd10.prod.outlook.com>
+Accept-Language: es-US, en-US
+Content-Language: es-ES
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator:
+x-bromium-msgid: 7fae1834-e87b-4de4-b148-147fc9fcbdf6
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=bolivariano.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: MWHPR10MB1486:EE_|CH0PR10MB5354:EE_
+x-ms-office365-filtering-correlation-id: 0e1f17b1-c721-4c42-f405-08db2659e422
+x-ld-processed: 381bee0c-a9ea-4342-81c0-318a50b0845f,ExtAddr
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 97qKw/PzMJeMtQzJPbQHV7ToVDvLICVXfd0dhreBe6u7mhzR+bz3HGs8Jw4BeVR2u9F4VQMTL4NpE09C1ZpS00yJKlgDsXiLgLAAP3zuIPFcmtKI/Sj10FgqXCSiila3+kwjXdTGSzQt7RnKK+NcfARfBPHlLHgF2ccS/WVNM9rKbDrOLfwzK+lgti+xZEDToF0LT77pqLkBxBrqBALlkaLHpIR+UutbZ1/bMcxQULaxlcgkS0HZTAV1Z4dKut6Cw1AOldIWib76s1ouOnUZJuMk++I/YsF9C2Go0pDbpC+cTI83GIheOUBVnSjMez2r7tPnDgKSA9alwHwl2B3OM1KSUWCrTkeZjX7cACPf49B6EagTywe+q2hxBr+AG1WMv8OTdHGv6RciJKY6Tcx+VHyg3EOVRFjvrp/s/QpywzfKMbP9UijUvGEdeX3PPAioPD5P8oQ+VFbfafuxiLkJm3mr+3mW/oJI3/rdcP20rOBusBWWK4lJtVwSuv8GoPq5+hdDsnwqj5Ifk1TYmsjQxwPcGyWPRnfMQBtEnsrA2OU2c8w9KDxEo55NBvUBIzPu3oMPWYjvZot2oksrOhACsA==
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:es;SCL:-1;SRV:;IPV:NLI;SFV:SKI;H:MWHPR10MB1486.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:;DIR:INB;
+Content-Type: multipart/mixed;
+	boundary="_007_MWHPR10MB14860E508A37CA6CC3D56948C1BC9MWHPR10MB1486namp_"
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: MWHPR10MB1486.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0e1f17b1-c721-4c42-f405-08db2659e422
+X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Mar 2023 20:06:12.3872
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 381bee0c-a9ea-4342-81c0-318a50b0845f
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: jp5wjBuQityjNddiy2ZoNerM2sfr5tR+yab31eArl2hmmQtk1fLaHB7gOQxeJRFqezXUzlOrmpNzPrjXqziigrUH0WpOfBTxO+JS9/6W7aM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR10MB5354
+X-OrganizationHeadersPreserved: CH0PR10MB5354.namprd10.prod.outlook.com
+Return-Path: jramirez@bolivariano.com
+X-OriginatorOrg: bolivariano.com
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-MS-Exchange-Organization-AuthSource: MWHPR10MB1486.namprd10.prod.outlook.com
+X-MS-Exchange-Organization-SCL: -1
+X-CrossPremisesHeadersPromoted: EX2K10SRV.bolivariano.fin.ec
+X-CrossPremisesHeadersFiltered: EX2K10SRV.bolivariano.fin.ec
+MIME-Version: 1.0
+
+--_007_MWHPR10MB14860E508A37CA6CC3D56948C1BC9MWHPR10MB1486namp_
+Content-Type: multipart/related;
+	boundary="_006_MWHPR10MB14860E508A37CA6CC3D56948C1BC9MWHPR10MB1486namp_";
+	type="multipart/alternative"
+
+--_006_MWHPR10MB14860E508A37CA6CC3D56948C1BC9MWHPR10MB1486namp_
+Content-Type: multipart/alternative;
+	boundary="_000_MWHPR10MB14860E508A37CA6CC3D56948C1BC9MWHPR10MB1486namp_"
+
+--_000_MWHPR10MB14860E508A37CA6CC3D56948C1BC9MWHPR10MB1486namp_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Estimados confirmo el ingreso en MIS: #2287859 AGENCIA NACIONAL DE REGULACI=
+ON Y CONTROL DEL TRANSPORTE TERRESTRE TRANSITO Y SEGURIDAD VIAL.
+
+Adjunto RUC.
+
+De: CV - SAT <cvsat@bolivariano.com>
+Enviado el: mi=E9rcoles, marzo 15, 2023 14:02
+Para: Jaime Ram=EDrez Cevallos (Quito) <jramirez@bolivariano.com>; Wendy Ce=
+de=F1o Ley <wcedeno@bolivariano.com>
+CC: Ma. Fernanda Hungr=EDa Jaramillo <mhungria@bolivariano.com>; Daniel Mar=
+tillo Jeremias <lmartillo@bolivariano.com>; Roberto Alvarado Salcedo <ralva=
+ras@bolivariano.com>; Estructuras y Par=E1metros del Sistema <estpsist@boli=
+variano.com>; Byron Tircio Esparza <btircio@bolivariano.com>; Recaudos <Rec=
+audos@bolivariano365.onmicrosoft.com>; Eymi Drouet Cede=F1o <edrouetc@boliv=
+ariano.com>; Alberto Espinoza Cabrera <aeespinoza@bolivariano.com>; Emilio =
+Rivadeneira Puga <erivadep@bolivariano.com>
+Asunto: RE: PERSONALIZACION DE EMPRESA AGENCIA NACIONAL DE TRANSITO
+
+Estimados buenas tardes,
+
+
+Quedamos pendientes de los documentos originales respectivos para proceder.
+
+
+Saludos Cordiales,
+
+=D3scar N=E1jera C=F3rdova
+Central de Verificaciones SAT
+Jun=EDn 200 y Panam=E1 - Telf.: (593 4) 5-50 5050
+
+De: Jaime Ram=EDrez Cevallos (Quito) <jramirez@bolivariano.com<mailto:jrami=
+rez@bolivariano.com>>
+Enviado el: Wednesday, March 15, 2023 10:38 AM
+Para: Roberto Alvarado Salcedo <ralvaras@bolivariano.com<mailto:ralvaras@bo=
+livariano.com>>; Wendy Cede=F1o Ley <wcedeno@bolivariano.com<mailto:wcedeno=
+@bolivariano.com>>; CV - SAT <cvsat@bolivariano.com<mailto:cvsat@bolivarian=
+o.com>>
+CC: Ma. Fernanda Hungr=EDa Jaramillo <mhungria@bolivariano.com<mailto:mhung=
+ria@bolivariano.com>>; Daniel Martillo Jeremias <lmartillo@bolivariano.com<=
+mailto:lmartillo@bolivariano.com>>; Estructuras y Par=E1metros del Sistema =
+<estpsist@bolivariano.com<mailto:estpsist@bolivariano.com>>; Byron Tircio E=
+sparza <btircio@bolivariano.com<mailto:btircio@bolivariano.com>>; Recaudos =
+<Recaudos@bolivariano365.onmicrosoft.com<mailto:Recaudos@bolivariano365.onm=
+icrosoft.com>>; Eymi Drouet Cede=F1o <edrouetc@bolivariano.com<mailto:edrou=
+etc@bolivariano.com>>
+Asunto: RE: PERSONALIZACION DE EMPRESA AGENCIA NACIONAL DE TRANSITO
+
+Buen d=EDa, estoy de acuerdo, igualmente salvo mejor criterio.
+
+De: Roberto Alvarado Salcedo <ralvaras@bolivariano.com<mailto:ralvaras@boli=
+variano.com>>
+Enviado el: mi=E9rcoles, marzo 15, 2023 10:23
+Para: Wendy Cede=F1o Ley <wcedeno@bolivariano.com<mailto:wcedeno@bolivarian=
+o.com>>; CV - SAT <cvsat@bolivariano.com<mailto:cvsat@bolivariano.com>>; Ja=
+ime Ram=EDrez Cevallos (Quito) <jramirez@bolivariano.com<mailto:jramirez@bo=
+livariano.com>>
+CC: Ma. Fernanda Hungr=EDa Jaramillo <mhungria@bolivariano.com<mailto:mhung=
+ria@bolivariano.com>>; Daniel Martillo Jeremias <lmartillo@bolivariano.com<=
+mailto:lmartillo@bolivariano.com>>; Estructuras y Par=E1metros del Sistema =
+<estpsist@bolivariano.com<mailto:estpsist@bolivariano.com>>; Byron Tircio E=
+sparza <btircio@bolivariano.com<mailto:btircio@bolivariano.com>>; Recaudos =
+<Recaudos@bolivariano365.onmicrosoft.com<mailto:Recaudos@bolivariano365.onm=
+icrosoft.com>>; Eymi Drouet Cede=F1o <edrouetc@bolivariano.com<mailto:edrou=
+etc@bolivariano.com>>
+Asunto: RE: PERSONALIZACION DE EMPRESA AGENCIA NACIONAL DE TRANSITO
+
+Buenos d=EDas,
+
+Estimados no existe ninguna clausula especial en el convenio que supere el =
+umbral de las tarifas aprobadas, considero se mantenga uniforme con el rest=
+o de los recaudos salvo mejor criterio.
+
+=D8  24online - $0.25
+=D8  24m=F3vil - $0.25
+=D8  SAT - $0.25
+=D8  Ventanilla - $0.57
+
+Jaime / Sus comentarios por favor.
+
+Saludos,
+
+Roberto Alvarado S.
+Operaciones Centrales | Ejecuci=F3n de Operaciones | Pagos y Recaudaciones
+Jun=EDn 200 y Panam=E1 Guayaquil - Ecuador | (593) 4 230 5000 - Ext. 2190
+[cid:image001.png@01D95810.FDEC1990]
+
+De: Wendy Cede=F1o Ley <wcedeno@bolivariano.com<mailto:wcedeno@bolivariano.=
+com>>
+Enviado el: Wednesday, March 15, 2023 9:18 AM
+Para: CV - SAT <cvsat@bolivariano.com<mailto:cvsat@bolivariano.com>>; Rober=
+to Alvarado Salcedo <ralvaras@bolivariano.com<mailto:ralvaras@bolivariano.c=
+om>>; Jaime Ram=EDrez Cevallos (Quito) <jramirez@bolivariano.com<mailto:jra=
+mirez@bolivariano.com>>
+CC: Ma. Fernanda Hungr=EDa Jaramillo <mhungria@bolivariano.com<mailto:mhung=
+ria@bolivariano.com>>; Daniel Martillo Jeremias <lmartillo@bolivariano.com<=
+mailto:lmartillo@bolivariano.com>>; Estructuras y Par=E1metros del Sistema =
+<estpsist@bolivariano.com<mailto:estpsist@bolivariano.com>>; Byron Tircio E=
+sparza <btircio@bolivariano.com<mailto:btircio@bolivariano.com>>; Recaudos =
+<Recaudos@bolivariano365.onmicrosoft.com<mailto:Recaudos@bolivariano365.onm=
+icrosoft.com>>; Eymi Drouet Cede=F1o <edrouetc@bolivariano.com<mailto:edrou=
+etc@bolivariano.com>>
+Asunto: PERSONALIZACION DE EMPRESA AGENCIA NACIONAL DE TRANSITO
+
+Estimados buenos d=EDas, adjunto la parametrizaci=F3n de la personalizaci=
+=F3n de empresas para la nueva empresa recaudadora Agencia Nacional de Tr=
+=E1nsito - ANT, para que procedan en cuanto reciban la documentaci=F3n corr=
+espondiente.
+
+Roberto/Jaime por favor confirmar los costos por comisi=F3n por los canales=
+ para que E&P proceda con el ingreso:
+-          24online
+-          24m=F3vil
+-          SAT
+-          Ventanilla
+
+Nota: importante que la empresa se encuentre creada en el Mis, de acuerdo a=
+ las =E1reas de control.
+
+Cualquier duda o inquietud a las =F3rdenes.
+
+Wendy Cede=F1o Ley
+Productos Empresas | Innovaci=F3n y Mercadeo
+Jun=EDn 208 y Pedro Carbo. Guayaquil-Ecuador | (593) 42305000 - Ext. 4912
+[cid:image002.png@01D95810.FDEC1990]
+
+
+--_000_MWHPR10MB14860E508A37CA6CC3D56948C1BC9MWHPR10MB1486namp_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40"><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<!--[if !mso]><style>v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style><![endif]--><style><!--
+/* Font Definitions */
+@font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;
+	mso-fareast-language:EN-US;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:#0563C1;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:#954F72;
+	text-decoration:underline;}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{mso-style-priority:34;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;
+	mso-fareast-language:EN-US;}
+p.msonormal0, li.msonormal0, div.msonormal0
+	{mso-style-name:msonormal;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif;}
+span.EstiloCorreo19
+	{mso-style-type:personal;
+	font-family:"Calibri",sans-serif;
+	color:windowtext;}
+span.EstiloCorreo20
+	{mso-style-type:personal;
+	font-family:"Calibri",sans-serif;
+	color:#1F497D;}
+span.EstiloCorreo21
+	{mso-style-type:personal;
+	font-family:"Calibri",sans-serif;
+	color:#1F497D;}
+span.EstiloCorreo22
+	{mso-style-type:personal;
+	font-family:"Calibri",sans-serif;
+	color:windowtext;}
+span.EstiloCorreo23
+	{mso-style-type:personal-reply;
+	font-family:"Calibri",sans-serif;
+	color:#1F497D;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:70.85pt 85.05pt 70.85pt 85.05pt;}
+div.WordSection1
+	{page:WordSection1;}
+/* List Definitions */
+@list l0
+	{mso-list-id:762451840;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1613725436 -85584056 805961731 805961733 805961729 =
+805961731 805961733 805961729 805961731 805961733;}
+@list l0:level1
+	{mso-level-start-at:0;
+	mso-level-number-format:bullet;
+	mso-level-text:-;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:"Calibri",sans-serif;
+	mso-fareast-font-family:Calibri;}
+@list l0:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:"Courier New";}
+@list l0:level3
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l0:level4
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Symbol;}
+@list l0:level5
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:"Courier New";}
+@list l0:level6
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l0:level7
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Symbol;}
+@list l0:level8
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:"Courier New";}
+@list l0:level9
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l1
+	{mso-list-id:2044163144;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1754405038 805961739 -1 -1 -1 -1 -1 -1 -1 -1;}
+@list l1:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0D8;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l1:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:"Courier New";}
+@list l1:level3
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l1:level4
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Symbol;}
+@list l1:level5
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:"Courier New";}
+@list l1:level6
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l1:level7
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Symbol;}
+@list l1:level8
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:"Courier New";}
+@list l1:level9
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"ES-EC" link=3D"#0563C1" vlink=3D"#954F72">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D">Estimados confirmo el =
+ingreso en MIS: #2287859 AGENCIA NACIONAL DE REGULACION Y CONTROL DEL TRANS=
+PORTE TERRESTRE TRANSITO Y SEGURIDAD VIAL.
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D">Adjunto RUC. <o:p></o:=
+p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span lang=3D"ES" style=3D"mso-fareast-language:E=
+S-EC">De:</span></b><span lang=3D"ES" style=3D"mso-fareast-language:ES-EC">=
+ CV - SAT &lt;cvsat@bolivariano.com&gt;
+<br>
+<b>Enviado el:</b> mi=E9rcoles, marzo 15, 2023 14:02<br>
+<b>Para:</b> Jaime Ram=EDrez Cevallos (Quito) &lt;jramirez@bolivariano.com&=
+gt;; Wendy Cede=F1o Ley &lt;wcedeno@bolivariano.com&gt;<br>
+<b>CC:</b> Ma. Fernanda Hungr=EDa Jaramillo &lt;mhungria@bolivariano.com&gt=
+;; Daniel Martillo Jeremias &lt;lmartillo@bolivariano.com&gt;; Roberto Alva=
+rado Salcedo &lt;ralvaras@bolivariano.com&gt;; Estructuras y Par=E1metros d=
+el Sistema &lt;estpsist@bolivariano.com&gt;; Byron Tircio Esparza
+ &lt;btircio@bolivariano.com&gt;; Recaudos &lt;Recaudos@bolivariano365.onmi=
+crosoft.com&gt;; Eymi Drouet Cede=F1o &lt;edrouetc@bolivariano.com&gt;; Alb=
+erto Espinoza Cabrera &lt;aeespinoza@bolivariano.com&gt;; Emilio Rivadeneir=
+a Puga &lt;erivadep@bolivariano.com&gt;<br>
+<b>Asunto:</b> RE: PERSONALIZACION DE EMPRESA AGENCIA NACIONAL DE TRANSITO<=
+o:p></o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D">Estimados buenas tarde=
+s,<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D">Quedamos pendientes de=
+ los documentos originales respectivos para proceder.<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<div>
+<p class=3D"MsoNormal" style=3D"background:white"><b><span lang=3D"ES-MX" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Tahoma&quot;,sans-serif;color:#0=
+099A8;mso-fareast-language:ES-EC">Saludos Cordiales,</span></b><span style=
+=3D"color:black;mso-fareast-language:ES-EC"><o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
+10.0pt;font-family:&quot;Tahoma&quot;,sans-serif;color:#1F497D;mso-fareast-=
+language:ES-EC">&nbsp;</span><span style=3D"color:black;mso-fareast-languag=
+e:ES-EC"><o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"background:white"><b><span lang=3D"ES-MX" s=
+tyle=3D"font-size:10.0pt;font-family:&quot;Tahoma&quot;,sans-serif;color:#0=
+099A8;mso-fareast-language:ES-EC">=D3scar N=E1jera C=F3rdova</span></b><spa=
+n style=3D"color:black;mso-fareast-language:ES-EC"><o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"background:white"><span lang=3D"ES-MX" styl=
+e=3D"font-size:10.0pt;font-family:&quot;Tahoma&quot;,sans-serif;color:#0099=
+A8;mso-fareast-language:ES-EC">Central de Verificaciones SAT</span><span st=
+yle=3D"color:black;mso-fareast-language:ES-EC"><o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
+10.0pt;font-family:&quot;Tahoma&quot;,sans-serif;color:gray;mso-fareast-lan=
+guage:ES-EC">Jun=EDn 200 y Panam=E1 - Telf.: (593 4) 5-50 5050</span><span =
+style=3D"color:black;mso-fareast-language:ES-EC"><o:p></o:p></span></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span lang=3D"ES" style=3D"mso-fareast-language:E=
+S-EC">De:</span></b><span lang=3D"ES" style=3D"mso-fareast-language:ES-EC">=
+ Jaime Ram=EDrez Cevallos (Quito) &lt;<a href=3D"mailto:jramirez@bolivarian=
+o.com">jramirez@bolivariano.com</a>&gt;
+<br>
+<b>Enviado el:</b> Wednesday, March 15, 2023 10:38 AM<br>
+<b>Para:</b> Roberto Alvarado Salcedo &lt;<a href=3D"mailto:ralvaras@boliva=
+riano.com">ralvaras@bolivariano.com</a>&gt;; Wendy Cede=F1o Ley &lt;<a href=
+=3D"mailto:wcedeno@bolivariano.com">wcedeno@bolivariano.com</a>&gt;; CV - S=
+AT &lt;<a href=3D"mailto:cvsat@bolivariano.com">cvsat@bolivariano.com</a>&g=
+t;<br>
+<b>CC:</b> Ma. Fernanda Hungr=EDa Jaramillo &lt;<a href=3D"mailto:mhungria@=
+bolivariano.com">mhungria@bolivariano.com</a>&gt;; Daniel Martillo Jeremias=
+ &lt;<a href=3D"mailto:lmartillo@bolivariano.com">lmartillo@bolivariano.com=
+</a>&gt;; Estructuras y Par=E1metros del Sistema &lt;<a href=3D"mailto:estp=
+sist@bolivariano.com">estpsist@bolivariano.com</a>&gt;;
+ Byron Tircio Esparza &lt;<a href=3D"mailto:btircio@bolivariano.com">btirci=
+o@bolivariano.com</a>&gt;; Recaudos &lt;<a href=3D"mailto:Recaudos@bolivari=
+ano365.onmicrosoft.com">Recaudos@bolivariano365.onmicrosoft.com</a>&gt;; Ey=
+mi Drouet Cede=F1o &lt;<a href=3D"mailto:edrouetc@bolivariano.com">edrouetc=
+@bolivariano.com</a>&gt;<br>
+<b>Asunto:</b> RE: PERSONALIZACION DE EMPRESA AGENCIA NACIONAL DE TRANSITO<=
+o:p></o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D">Buen d=EDa, estoy de a=
+cuerdo, igualmente salvo mejor criterio.
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span lang=3D"ES" style=3D"mso-fareast-language:E=
+S-EC">De:</span></b><span lang=3D"ES" style=3D"mso-fareast-language:ES-EC">=
+ Roberto Alvarado Salcedo &lt;<a href=3D"mailto:ralvaras@bolivariano.com">r=
+alvaras@bolivariano.com</a>&gt;
+<br>
+<b>Enviado el:</b> mi=E9rcoles, marzo 15, 2023 10:23<br>
+<b>Para:</b> Wendy Cede=F1o Ley &lt;<a href=3D"mailto:wcedeno@bolivariano.c=
+om">wcedeno@bolivariano.com</a>&gt;; CV - SAT &lt;<a href=3D"mailto:cvsat@b=
+olivariano.com">cvsat@bolivariano.com</a>&gt;; Jaime Ram=EDrez Cevallos (Qu=
+ito) &lt;<a href=3D"mailto:jramirez@bolivariano.com">jramirez@bolivariano.c=
+om</a>&gt;<br>
+<b>CC:</b> Ma. Fernanda Hungr=EDa Jaramillo &lt;<a href=3D"mailto:mhungria@=
+bolivariano.com">mhungria@bolivariano.com</a>&gt;; Daniel Martillo Jeremias=
+ &lt;<a href=3D"mailto:lmartillo@bolivariano.com">lmartillo@bolivariano.com=
+</a>&gt;; Estructuras y Par=E1metros del Sistema &lt;<a href=3D"mailto:estp=
+sist@bolivariano.com">estpsist@bolivariano.com</a>&gt;;
+ Byron Tircio Esparza &lt;<a href=3D"mailto:btircio@bolivariano.com">btirci=
+o@bolivariano.com</a>&gt;; Recaudos &lt;<a href=3D"mailto:Recaudos@bolivari=
+ano365.onmicrosoft.com">Recaudos@bolivariano365.onmicrosoft.com</a>&gt;; Ey=
+mi Drouet Cede=F1o &lt;<a href=3D"mailto:edrouetc@bolivariano.com">edrouetc=
+@bolivariano.com</a>&gt;<br>
+<b>Asunto:</b> RE: PERSONALIZACION DE EMPRESA AGENCIA NACIONAL DE TRANSITO<=
+o:p></o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Buenos d=EDas,<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Estimados no existe ninguna clausula especial en el =
+convenio que supere el umbral de las tarifas aprobadas, considero se manten=
+ga uniforme con el resto de los recaudos salvo mejor criterio.<o:p></o:p></=
+p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal" style=3D"margin-left:.5in;text-indent:-.25in;mso-lis=
+t:l1 level1 lfo2">
+<![if !supportLists]><span style=3D"font-family:Wingdings"><span style=3D"m=
+so-list:Ignore">=D8<span style=3D"font:7.0pt &quot;Times New Roman&quot;">&=
+nbsp;
+</span></span></span><![endif]>24online - <i>$0.25</i><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"margin-left:.5in;text-indent:-.25in;mso-lis=
+t:l1 level1 lfo2">
+<![if !supportLists]><span style=3D"font-family:Wingdings"><span style=3D"m=
+so-list:Ignore">=D8<span style=3D"font:7.0pt &quot;Times New Roman&quot;">&=
+nbsp;
+</span></span></span><![endif]>24m=F3vil - <i>$0.25</i><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"margin-left:.5in;text-indent:-.25in;mso-lis=
+t:l1 level1 lfo2">
+<![if !supportLists]><span style=3D"font-family:Wingdings"><span style=3D"m=
+so-list:Ignore">=D8<span style=3D"font:7.0pt &quot;Times New Roman&quot;">&=
+nbsp;
+</span></span></span><![endif]>SAT - <i>$0.25</i><o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"margin-left:.5in;text-indent:-.25in;mso-lis=
+t:l1 level1 lfo2">
+<![if !supportLists]><span style=3D"font-family:Wingdings"><span style=3D"m=
+so-list:Ignore">=D8<span style=3D"font:7.0pt &quot;Times New Roman&quot;">&=
+nbsp;
+</span></span></span><![endif]>Ventanilla - <i>$0.57</i><o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Jaime / Sus comentarios por favor.<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Saludos,<o:p></o:p></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D;mso-fareast-language:ES=
+-EC"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><b><span lang=3D"ES-MX" style=3D"font-size:12.0pt;co=
+lor:#0099A8;mso-fareast-language:ES-MX">Roberto Alvarado S.<o:p></o:p></spa=
+n></b></p>
+<p class=3D"MsoNormal"><b><span lang=3D"ES-MX" style=3D"font-size:10.0pt;co=
+lor:#0099A8;mso-fareast-language:ES-MX">Operaciones Centrales | Ejecuci=F3n=
+ de Operaciones | Pagos y Recaudaciones<o:p></o:p></span></b></p>
+<p class=3D"MsoNormal"><span lang=3D"ES-MX" style=3D"font-size:10.0pt;color=
+:gray;mso-fareast-language:ES-MX">Jun=EDn 200 y Panam=E1 Guayaquil &#8211; =
+Ecuador | (593) 4 230 5000 - Ext. 2190<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><img border=3D"0" width=3D"368" height=3D"58" style=
+=3D"width:3.8333in;height:.6041in" id=3D"Imagen_x0020_2" src=3D"cid:image00=
+1.png@01D95810.FDEC1990"><span lang=3D"ES-MX" style=3D"color:#1F497D;mso-fa=
+reast-language:ES-MX"><o:p></o:p></span></p>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span lang=3D"ES" style=3D"mso-fareast-language:E=
+S-EC">De:</span></b><span lang=3D"ES" style=3D"mso-fareast-language:ES-EC">=
+ Wendy Cede=F1o Ley &lt;<a href=3D"mailto:wcedeno@bolivariano.com">wcedeno@=
+bolivariano.com</a>&gt;
+<br>
+<b>Enviado el:</b> Wednesday, March 15, 2023 9:18 AM<br>
+<b>Para:</b> CV - SAT &lt;<a href=3D"mailto:cvsat@bolivariano.com">cvsat@bo=
+livariano.com</a>&gt;; Roberto Alvarado Salcedo &lt;<a href=3D"mailto:ralva=
+ras@bolivariano.com">ralvaras@bolivariano.com</a>&gt;; Jaime Ram=EDrez Ceva=
+llos (Quito) &lt;<a href=3D"mailto:jramirez@bolivariano.com">jramirez@boliv=
+ariano.com</a>&gt;<br>
+<b>CC:</b> Ma. Fernanda Hungr=EDa Jaramillo &lt;<a href=3D"mailto:mhungria@=
+bolivariano.com">mhungria@bolivariano.com</a>&gt;; Daniel Martillo Jeremias=
+ &lt;<a href=3D"mailto:lmartillo@bolivariano.com">lmartillo@bolivariano.com=
+</a>&gt;; Estructuras y Par=E1metros del Sistema &lt;<a href=3D"mailto:estp=
+sist@bolivariano.com">estpsist@bolivariano.com</a>&gt;;
+ Byron Tircio Esparza &lt;<a href=3D"mailto:btircio@bolivariano.com">btirci=
+o@bolivariano.com</a>&gt;; Recaudos &lt;<a href=3D"mailto:Recaudos@bolivari=
+ano365.onmicrosoft.com">Recaudos@bolivariano365.onmicrosoft.com</a>&gt;; Ey=
+mi Drouet Cede=F1o &lt;<a href=3D"mailto:edrouetc@bolivariano.com">edrouetc=
+@bolivariano.com</a>&gt;<br>
+<b>Asunto:</b> PERSONALIZACION DE EMPRESA AGENCIA NACIONAL DE TRANSITO<o:p>=
+</o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Estimados buenos d=EDas, adjunto la parametrizaci=F3=
+n de la personalizaci=F3n de empresas para la nueva empresa recaudadora Age=
+ncia Nacional de Tr=E1nsito &#8211; ANT, para que procedan en cuanto reciba=
+n la documentaci=F3n correspondiente.
+<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Roberto/Jaime por favor confirmar los costos por com=
+isi=F3n por los canales para que E&amp;P proceda con el ingreso:<o:p></o:p>=
+</p>
+<p class=3D"MsoNormal" style=3D"margin-left:.5in;text-indent:-.25in;mso-lis=
+t:l0 level1 lfo4">
+<![if !supportLists]><span style=3D"mso-list:Ignore">-<span style=3D"font:7=
+.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;
+</span></span><![endif]>24online<o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"margin-left:.5in;text-indent:-.25in;mso-lis=
+t:l0 level1 lfo4">
+<![if !supportLists]><span style=3D"mso-list:Ignore">-<span style=3D"font:7=
+.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;
+</span></span><![endif]>24m=F3vil<o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"margin-left:.5in;text-indent:-.25in;mso-lis=
+t:l0 level1 lfo4">
+<![if !supportLists]><span style=3D"mso-list:Ignore">-<span style=3D"font:7=
+.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;
+</span></span><![endif]>SAT<o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"margin-left:.5in;text-indent:-.25in;mso-lis=
+t:l0 level1 lfo4">
+<![if !supportLists]><span style=3D"mso-list:Ignore">-<span style=3D"font:7=
+.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;
+</span></span><![endif]>Ventanilla <o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Nota: importante que la empresa se encuentre creada =
+en el Mis, de acuerdo a las =E1reas de control.<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Cualquier duda o inquietud a las =F3rdenes.<o:p></o:=
+p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><b><span lang=3D"ES-MX" style=3D"font-size:12.0pt;co=
+lor:#0099A8;mso-fareast-language:ES-MX">Wendy Cede=F1o Ley<o:p></o:p></span=
+></b></p>
+<p class=3D"MsoNormal"><b><span lang=3D"ES-MX" style=3D"font-size:10.0pt;co=
+lor:#0099A8;mso-fareast-language:ES-MX">Productos Empresas | Innovaci=F3n y=
+ Mercadeo<o:p></o:p></span></b></p>
+<p class=3D"MsoNormal"><span lang=3D"ES-MX" style=3D"font-size:10.0pt;color=
+:gray;mso-fareast-language:ES-MX">Jun=EDn 208 y Pedro Carbo. Guayaquil-Ecua=
+dor | (593) 42305000 - Ext. 4912<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:gray;mso-fareast-language:ES-EC=
+"><img border=3D"0" width=3D"368" height=3D"58" style=3D"width:3.8333in;hei=
+ght:.6041in" id=3D"_x0000_i1026" src=3D"cid:image002.png@01D95810.FDEC1990"=
+></span><span lang=3D"ES-MX" style=3D"mso-fareast-language:ES-MX"><o:p></o:=
+p></span></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+</body>
+</html>
+
+--_000_MWHPR10MB14860E508A37CA6CC3D56948C1BC9MWHPR10MB1486namp_--
+
+--_006_MWHPR10MB14860E508A37CA6CC3D56948C1BC9MWHPR10MB1486namp_
+Content-Type: image/png; name="image001.png"
+Content-Description: image001.png
+Content-Disposition: inline; filename="image001.png"; size=199;
+	creation-date="Thu, 16 Mar 2023 20:06:09 GMT";
+	modification-date="Thu, 16 Mar 2023 20:06:10 GMT"
+Content-ID: <image001.png@01D95810.FDEC1990>
+Content-Transfer-Encoding: base64
+
+iVBORw0KGgoAAAANSUhEUgAAAXAAAAA6CAMAAACec/KzAAAAAXNSR0ICQMB9xQAAAANQTFRFAAAA
+p3o92gAAAAF0Uk5TAEDm2GYAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAZdEVYdFNvZnR3YXJlAE1p
+Y3Jvc29mdCBPZmZpY2V/7TVxAAAAK0lEQVR42u3BAQEAAACCIP+vbkhAAQAAAAAAAAAAAAAAAAAA
+AAAAAADAowFTmgABzYnXngAAAABJRU5ErkJggg==
+
+--_006_MWHPR10MB14860E508A37CA6CC3D56948C1BC9MWHPR10MB1486namp_
+Content-Type: image/png; name="image002.png"
+Content-Description: image002.png
+Content-Disposition: inline; filename="image002.png"; size=10954;
+	creation-date="Thu, 16 Mar 2023 20:06:11 GMT";
+	modification-date="Thu, 16 Mar 2023 20:06:11 GMT"
+Content-ID: <image002.png@01D95810.FDEC1990>
+Content-Transfer-Encoding: base64
+
+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
+AABJRU5ErkJggg==
+
+--_006_MWHPR10MB14860E508A37CA6CC3D56948C1BC9MWHPR10MB1486namp_--
+
+--_007_MWHPR10MB14860E508A37CA6CC3D56948C1BC9MWHPR10MB1486namp_
+Content-Type: application/pdf;
+	name="RUC AGENCIA NACIONAL DE TRANSITO.pdf-actualizado (1).pdf"
+Content-Description: RUC AGENCIA NACIONAL DE TRANSITO.pdf-actualizado (1).pdf
+Content-Disposition: attachment;
+	filename="RUC AGENCIA NACIONAL DE TRANSITO.pdf-actualizado (1).pdf";
+	size=10812; creation-date="Thu, 16 Mar 2023 19:08:50 GMT";
+	modification-date="Thu, 16 Mar 2023 20:06:09 GMT"
+Content-Transfer-Encoding: base64
+
+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
+Uy9EZXZpY2VSR0I+Pi9Qcm9jU2V0IFsvUERGIC9UZXh0IC9JbWFnZUIgL0ltYWdlQyAvSW1hZ2VJ
+XS9Gb250PDwvRjEgMiAwIFIvRjIgMyAwIFIvRjMgNCAwIFI+Pi9YT2JqZWN0PDwvaW1nMSA2IDAg
+Ui9pbWcwIDUgMCBSPj4+Pi9QYXJlbnQgOCAwIFIvTWVkaWFCb3hbMCAwIDU5NSA4NTVdPj4KZW5k
+b2JqCjEwIDAgb2JqCjw8L0NvbG9yU3BhY2UvRGV2aWNlR3JheS9TdWJ0eXBlL0ltYWdlL0hlaWdo
+dCA1Ny9GaWx0ZXIvRmxhdGVEZWNvZGUvVHlwZS9YT2JqZWN0L1dpZHRoIDU3L0xlbmd0aCAyNi9C
+aXRzUGVyQ29tcG9uZW50IDg+PnN0cmVhbQp4nO3BMQEAAADCoP6pZw0PoAAAAE4NuhWlBAplbmRz
+dHJlYW0KZW5kb2JqCjExIDAgb2JqCjw8L0NvbG9yU3BhY2UvRGV2aWNlUkdCL1N1YnR5cGUvSW1h
+Z2UvSGVpZ2h0IDU3L0ZpbHRlci9GbGF0ZURlY29kZS9UeXBlL1hPYmplY3QvV2lkdGggNTcvU01h
+c2sgMTAgMCBSL0xlbmd0aCA2NjUvQml0c1BlckNvbXBvbmVudCA4Pj5zdHJlYW0KeJztkkFqJEEQ
+A/3/T9ceFhZbEVKXx7BgmDo0PdWZypByznmf9/l958MOC/6+8HKURU2I/yve02OE3lA2vuoglY2C
+eH/kUTDGookRT79qmFvwNdQR6bbTwhlp/BCVX2NiO1rTLLyA2tqZiSJFmbo72NeY3lAbxv95jhXc
+HwbIES0lzT8aX+ZRtRb1SOazLAdpCPH8Ln/T1JrGxp+xAgUeVOo3RkfOZ2a7zZKHmg31RoQ1TVbr
+9b8RlQpwCRM1o2xM3yLN2g0wtxlITZ+5NbYGf8PJ3pFb2N/FKqj5h1rDo0e+Dyq9ocFmZLSPJHc+
+NymFcR0UXzWrhhr1KkUdjYuaekk7/DqAebY1fWmBB9VrqRJYvXN0C0Fp2UvIJqhB7Vmce765jhZ4
+FGzOY+kNI4r3eTqxL/f1iDqmU3x3cVzct67WrtMblcIH9mPX52TYpe87Wz45izxnblAT45Sfp8qf
+6mUADBHaH0dbxpT2wrRP34XOei1VYkRiNxaY8+m70PuW6nBNI0rC6eoi0ruMNCB1XPOlBhsq7TAK
+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
+5SPnkMe7z/mCTwVl7l7GaISf/Zujfroo8hV3dfAKmd9OngwvnGBwMaDaCb+6Iowax3C3wnyADMYi
+B+UQpSVyDeHqLk+rTCTiZBV3CvBRmtYN7g7uGK3DWMMdlVu3EKrOxKrU4rqYxeXXovIZqiFDRckV
+8mWVwpwHvC8rPNRi6kpz/HWewU1WzmIx6i4ul8LZ8hjs6Sybi9DIJX6BPYqmVDvKs1jrVi1q0uIx
+4B6aVewg/t0qbcWRsjIV3H27zeYxJtN4vogTnlrjHMLAFd3/zFPck6e1WSG+y+sI9AKTRJEV1sck
+Bxg/3mf5997TvLAF+jbbMCvTRPiUOzk0rGgMUwWVDbb9CWYDxk4PRcBs0o+wZ8bv+RhE609BtP7I
+Q6H9rD4BKeuvREr1cWjT8E88SvWFR+HA60ciVs6liqHqf69PPsgoht3mdMVqkTcV4XaJt5f8/wGV
+4xI8CmVuZHN0cmVhbQplbmRvYmoKOSAwIG9iago8PC9UYWJzL1MvR3JvdXA8PC9TL1RyYW5zcGFy
+ZW5jeS9UeXBlL0dyb3VwL0NTL0RldmljZVJHQj4+L0NvbnRlbnRzIDEyIDAgUi9UeXBlL1BhZ2Uv
+UmVzb3VyY2VzPDwvQ29sb3JTcGFjZTw8L0NTL0RldmljZVJHQj4+L1Byb2NTZXQgWy9QREYgL1Rl
+eHQgL0ltYWdlQiAvSW1hZ2VDIC9JbWFnZUldL0ZvbnQ8PC9GMSAyIDAgUi9GMiAzIDAgUi9GMyA0
+IDAgUj4+L1hPYmplY3Q8PC9pbWczIDExIDAgUi9pbWcyIDEwIDAgUj4+Pj4vUGFyZW50IDggMCBS
+L01lZGlhQm94WzAgMCA1OTUgODU1XT4+CmVuZG9iagoxMyAwIG9iagpbMSAwIFIvWFlaIDAgODY1
+IDBdCmVuZG9iagoxNCAwIG9iagpbOSAwIFIvWFlaIDAgODY1IDBdCmVuZG9iagoyIDAgb2JqCjw8
+L1N1YnR5cGUvVHlwZTEvVHlwZS9Gb250L0Jhc2VGb250L0hlbHZldGljYS9FbmNvZGluZy9XaW5B
+bnNpRW5jb2Rpbmc+PgplbmRvYmoKMTUgMCBvYmoKPDwvRGVzY2VudCAtMjEwL0NhcEhlaWdodCA3
+MTUvU3RlbVYgODAvVHlwZS9Gb250RGVzY3JpcHRvci9GbGFncyAyNjIxNzYvRm9udEJCb3hbLTYy
+NyAtMzc2IDIwMDAgMTAxN10vRm9udE5hbWUvQXJpYWwtQm9sZE1UL0l0YWxpY0FuZ2xlIDAvQXNj
+ZW50IDcyOD4+CmVuZG9iagozIDAgb2JqCjw8L1N1YnR5cGUvVHJ1ZVR5cGUvRmlyc3RDaGFyIDMy
+L1R5cGUvRm9udC9CYXNlRm9udC9BcmlhbC1Cb2xkTVQvRm9udERlc2NyaXB0b3IgMTUgMCBSL0Vu
+Y29kaW5nL1dpbkFuc2lFbmNvZGluZy9MYXN0Q2hhciAyNTAvV2lkdGhzWzI3NyAwIDAgMCAwIDAg
+MCAwIDAgMCAwIDAgMCAwIDI3NyAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMzMzIDAgMCAwIDAgMCAw
+IDcyMiA3MjIgNzIyIDcyMiA2NjYgNjEwIDAgMCAyNzcgNTU2IDAgNjEwIDgzMyA3MjIgNzc3IDY2
+NiAwIDcyMiA2NjYgNjEwIDcyMiAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgNTU2IDYxMCA1NTYgNjEw
+IDU1NiAzMzMgNjEwIDYxMCAyNzcgMjc3IDAgMjc3IDg4OSA2MTAgNjEwIDYxMCA2MTAgMzg5IDU1
+NiAzMzMgNjEwIDU1NiA3NzcgMCA1NTYgNTAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAw
+IDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAg
+MCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAw
+IDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAg
+MCAwIDU1NiAwIDAgMCAwIDAgMCAwIDU1NiAwIDAgMCAwIDAgMCAwIDAgMCA2MTAgMCAwIDAgMCAw
+IDAgNjEwXT4+CmVuZG9iagoxNiAwIG9iago8PC9EZXNjZW50IC0yMTAvQ2FwSGVpZ2h0IDcxNi9T
+dGVtViA4MC9UeXBlL0ZvbnREZXNjcmlwdG9yL0ZsYWdzIDMyL0ZvbnRCQm94Wy02NjQgLTMyNCAy
+MDAwIDEwMDVdL0ZvbnROYW1lL0FyaWFsTVQvSXRhbGljQW5nbGUgMC9Bc2NlbnQgNzI4Pj4KZW5k
+b2JqCjQgMCBvYmoKPDwvU3VidHlwZS9UcnVlVHlwZS9GaXJzdENoYXIgMzIvVHlwZS9Gb250L0Jh
+c2VGb250L0FyaWFsTVQvRm9udERlc2NyaXB0b3IgMTYgMCBSL0VuY29kaW5nL1dpbkFuc2lFbmNv
+ZGluZy9MYXN0Q2hhciAyMTgvV2lkdGhzWzI3NyAwIDAgMCAwIDAgMCAwIDMzMyAzMzMgMCAwIDI3
+NyAzMzMgMjc3IDI3NyA1NTYgNTU2IDU1NiA1NTYgNTU2IDU1NiA1NTYgNTU2IDU1NiA1NTYgMjc3
+IDI3NyAwIDAgMCAwIDEwMTUgNjY2IDY2NiA3MjIgNzIyIDY2NiA2MTAgNzc3IDcyMiAyNzcgNTAw
+IDAgNTU2IDgzMyA3MjIgNzc3IDY2NiA3NzcgNzIyIDY2NiA2MTAgNzIyIDY2NiAwIDY2NiA2NjYg
+NjEwIDAgMCAwIDAgMCAwIDU1NiA1NTYgNTAwIDU1NiA1NTYgMCA1NTYgNTU2IDIyMiAwIDAgMjIy
+IDgzMyA1NTYgNTU2IDAgMCAzMzMgNTAwIDI3NyA1NTYgMCAwIDAgNTAwIDUwMCAwIDAgMCAwIDAg
+MCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMzUwIDAgMCAwIDAgMCAw
+IDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAg
+MCAwIDAgMCAwIDAgMCAwIDAgNjY2IDAgMCAwIDAgMCAwIDAgNjY2IDAgMCAwIDI3NyAwIDAgMCA3
+MjIgMCA3NzcgMCAwIDAgMCAwIDAgNzIyXT4+CmVuZG9iago4IDAgb2JqCjw8L0tpZHNbMSAwIFIg
+OSAwIFJdL1R5cGUvUGFnZXMvQ291bnQgMi9JVFhUKDIuMS43KT4+CmVuZG9iagoxNyAwIG9iago8
+PC9OYW1lc1soSlJfUEFHRV9BTkNIT1JfMF8xKSAxMyAwIFIoSlJfUEFHRV9BTkNIT1JfMF8yKSAx
+NCAwIFJdPj4KZW5kb2JqCjE4IDAgb2JqCjw8L0Rlc3RzIDE3IDAgUj4+CmVuZG9iagoxOSAwIG9i
+ago8PC9OYW1lcyAxOCAwIFIvVHlwZS9DYXRhbG9nL1BhZ2VzIDggMCBSL1ZpZXdlclByZWZlcmVu
+Y2VzPDwvUHJpbnRTY2FsaW5nL0FwcERlZmF1bHQ+Pj4+CmVuZG9iagoyMCAwIG9iago8PC9Nb2RE
+YXRlKEQ6MjAyMjEyMTIxNDM4MDYtMDUnMDAnKS9DcmVhdG9yKEphc3BlclJlcG9ydHMgTGlicmFy
+eSB2ZXJzaW9uIDYuNi4wKS9DcmVhdGlvbkRhdGUoRDoyMDIyMTIxMjE0MzgwNi0wNScwMCcpL1By
+b2R1Y2VyKGlUZXh0IDIuMS43IGJ5IDFUM1hUKT4+CmVuZG9iagp4cmVmCjAgMjEKMDAwMDAwMDAw
+MCA2NTUzNSBmIAowMDAwMDA0NDQyIDAwMDAwIG4gCjAwMDAwMDgwMjcgMDAwMDAgbiAKMDAwMDAw
+ODI4MiAwMDAwMCBuIAowMDAwMDA5MTI0IDAwMDAwIG4gCjAwMDAwMDAwMTUgMDAwMDAgbiAKMDAw
+MDAwMTM1MSAwMDAwMCBuIAowMDAwMDAyMjAyIDAwMDAwIG4gCjAwMDAwMDk3ODIgMDAwMDAgbiAK
+MDAwMDAwNzY1OSAwMDAwMCBuIAowMDAwMDA0NzM1IDAwMDAwIG4gCjAwMDAwMDQ5MTUgMDAwMDAg
+biAKMDAwMDAwNTc0NyAwMDAwMCBuIAowMDAwMDA3OTU1IDAwMDAwIG4gCjAwMDAwMDc5OTEgMDAw
+MDAgbiAKMDAwMDAwODExNSAwMDAwMCBuIAowMDAwMDA4OTY2IDAwMDAwIG4gCjAwMDAwMDk4NTEg
+MDAwMDAgbiAKMDAwMDAwOTkzNCAwMDAwMCBuIAowMDAwMDA5OTY4IDAwMDAwIG4gCjAwMDAwMTAw
+NzMgMDAwMDAgbiAKdHJhaWxlcgo8PC9JbmZvIDIwIDAgUi9JRCBbPGY3NmY4ODljNjNhODVlNGRj
+ZTI1MTczYTA5ODFlYTY5PjxjOGY4OGYyOThlNjU3MDY2NTJmZDc2ZGZhMDIxZDZkZj5dL1Jvb3Qg
+MTkgMCBSL1NpemUgMjE+PgpzdGFydHhyZWYKMTAyNDEKJSVFT0YK
+
+--_007_MWHPR10MB14860E508A37CA6CC3D56948C1BC9MWHPR10MB1486namp_--

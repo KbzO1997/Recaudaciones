@@ -1,0 +1,24 @@
+copiar a la cc_tran_servicio_resp y cc_tran_monet_resp
+
+
+  insert  cob_cuentas..cc_tran_servicio_resp
+    select  *
+    from    cob_cuentas..cc_tran_servicio
+where ts_tsfecha in ('11/09/2021)
+
+
+ insert  cob_cuentas..cc_tran_monet_resp
+    select  *
+    from    cob_cuentas..cc_tran_monet where
+tm_fecha  in ('11/09/2021')
+
+
+modificar el sp sp_genera_diferidos_rc   capiccdi.sp 
+cc_tran_servicio ts_tsfecha = '11/09/2021' fecha de transacciones en diferidos
+
+
+ejecutar el sp con fecha dia despues de la fecha de las transacciones
+
+exec cob_cuentas..sp_genera_diferidos_rc
+@i_fecha = '11/10/2021'
+

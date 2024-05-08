@@ -1,0 +1,197 @@
+!***********************************************************************************!
+!*              Archivo:                recacnbrd.sqr                           *!
+!*              Motor BD:               sybase                                     *!
+!*              Base de datos:          cob_pagos                                  *!
+!*              Aplicacion:             Recaudaciones                              *!
+!*              Disenado por:           Dario Espinosa                             *!
+!*              Fecha de escritura:     07-Marz-2022                                *!
+!***********************************************************************************!
+!*                                 IMPORTANTE                                      *!
+!*      "Este programa es parte de los paquetes bancarios propiedad de             *!
+!*      BANCO BOLIVARIANO S.A.                                                     *!
+!*      Su uso no autorizado queda expresamente prohibido asi como                 *!
+!*      cualquier alteracion o agregado hecho por alguno de sus                    *!
+!*      usuarios sin el debido consentimiento por escrito de la                    *!
+!*      Presidencia Ejecutiva de BANCO BOLIVARIANO o su representante."            *!
+!***********************************************************************************!
+!*                                  PROPOSITO                                      *!
+!* Genera Archivo de conciliacion de BANRED que se enviar diariamente mediante    *!
+!* tarea GAW                                                                     *!
+!***********************************************************************************!
+!*                               MODIFICACIONES:                                   *!
+!* REF FECHA        	AUTOR         TAREA JIRA                  DESCRIPCION      *!
+!* 01  07-Marz-2022  Dario Espinosa   RECM-1368                   Emision Inicial  *!
+!* 02  09-Agos-2022  Dario Espinosa   RECM-597     LIBRERIA COBIS EN BATCH CONCILIACION CNEL  *!
+!***********************************************************************************!
+
+#include "definic.inc"
+#define ANCHO_PAG      120 
+#define BDATOS         cob_pagos !Base de datos actual 
+#define LARGO_PAG      60
+#define NOMBRE_PROG    recacnbrd
+#define NOMBRE_REPORTE 
+#define LASER          '<37><33><10>(dfl.jdt) STARTLM<10>'
+
+Begin-Setup
+use cob_pagos
+End-Setup
+
+#include "printer_dfl.inc"
+#include "log.inc"
+#include "ctacte.inc"
+
+Begin-Program   
+   do Inicializar_Programa
+   do ParamS (1,$i_fecha_corte,'','','')
+   do ParamS (2,$i_reprocesa,'','','')
+   do GeneraArchivoTxt
+   do Finalizar_Programa
+End-Program   
+
+Begin-Procedure GeneraArchivoTxt
+
+
+let $v_tipo_servicio = ''
+let $v_treg_cabecera = ''
+let $v_nombre_archivo = ''
+let $v_tot_registros = ''
+let $v_log_archivo = ''
+let $v_total_recaudado = ''
+
+execute -XC @#v_return = cob_pagos..pa_pg_bconcilia_reca_banred 
+          @e_fecha_corte     = $i_fecha_corte,
+          @e_reproceso       = $i_reprocesa,
+          @s_treg_cabecera   = $v_treg_cabecera out,
+          @s_tipo_servicio   = $v_tipo_servicio out,
+          @s_total_registros = $v_tot_registros out,
+          @s_long_archivo    = $v_log_archivo out,
+          @s_total_recaudado = $v_total_recaudado out,
+          @s_nombre_archivo  = $v_nombre_archivo out
+  if #v_return != 0
+    show '**** ERROR: En ejecucion de cob_pagos..pa_reca_bproc_info_bred ****'
+    do Abortar
+  end-if
+
+if $v_nombre_archivo = ''
+    show '**** ERROR: Nombre del Archivo no puede ser nulo ****'
+    do Abortar
+end-if
+
+let $nombre_reporte = '/respaldo/archivos/cuentas/data/'||$v_nombre_archivo
+
+open $nombre_reporte as 1 for-writing record=20000 status=#filestat  
+if #filestat <> 0
+   show 'Error al crear el archivo ' $nombre_reporte
+   show #filestat
+   do Abortar
+end-if
+
+do GeneraInfoReporte
+close 1
+show 'Archivo Generado correctamente... Ruta: ' $nombre_reporte
+End-Procedure
+
+Begin-Procedure GeneraInfoReporte
+
+let $v_fcorte = substr($i_fecha_corte,4,2) || substr($i_fecha_corte,1,2) || substr($i_fecha_corte,7,4)
+
+
+let $v_linea = $v_treg_cabecera  || $v_tipo_servicio || $v_fcorte || $v_log_archivo || $v_tot_registros ||$v_total_recaudado
+write 1 from $v_linea
+
+execute -XC do=EscribeLinea
+     cob_pagos..pa_pg_gconcilia_reca_banred  
+     into  &tc_tipo_registro     char(2),
+           &tc_ori_registro      char(2),
+           &tc_adquiriente       varchar(6),
+           &tc_autorizador       varchar(6),
+           &tc_hora_tran         varchar(14),
+           &tc_tipo_proceso      varchar(4),
+           &tc_subtipo_trans     varchar(6),
+           &tc_tipo_disp         char(3),
+           &tc_secuencial        varchar(12),
+           &tc_sec_bred          varchar(12),
+           &tc_respuesta         varchar(4),
+           &tc_ind_rev           char(1),
+           &tc_cod_autoriz       varchar(10),
+           &tc_cod_bred          varchar(20),
+           &tc_oficina           varchar(6),
+           &tc_terminal          varchar(8),
+           &tc_referencia        varchar(20),
+           &tc_tipo_doc          varchar(8),
+           &tc_num_comprob       varchar(16),
+           &tc_ciudad_of         varchar(22),
+           &tc_fecha_ini         varchar(8),
+           &tc_fecha_fin         varchar(8),
+           &tc_tipocta_bred      char(2),
+           &tc_cta_banco         varchar(16),
+           &tc_tcta_bco_dest     char(2),
+           &tc_cta_bco_dest      varchar(16),
+           &tc_num_tarjeta       varchar(20),
+           &tc_cod_moneda        char(3),
+           &tc_tipo_pago         char(2),
+           &tc_valor             varchar(20),
+           &tc_valor_scom        varchar(20),
+           &tc_comision_txt      varchar(20),
+           &tc_compensa          char(1),
+           &tc_unidad_nego       varchar(6),
+           &tc_med_aut           varchar(1),
+           &tc_bco_emisor        varchar(4),
+           &tc_filler            varchar(57)
+
+End-Procedure
+
+
+!--------------------------------------
+Begin-Procedure EscribeLinea 
+!--------------------------------------
+
+move &tc_tipo_registro  to  $tc_tipo_registro  
+move &tc_ori_registro   to  $tc_ori_registro   
+move &tc_adquiriente    to  $tc_adquiriente    
+move &tc_autorizador    to  $tc_autorizador    
+move &tc_hora_tran      to  $tc_hora_tran      
+move &tc_tipo_proceso   to  $tc_tipo_proceso   
+move &tc_subtipo_trans  to  $tc_subtipo_trans  
+move &tc_tipo_disp      to  $tc_tipo_disp      
+move &tc_secuencial     to  $tc_secuencial     
+move &tc_sec_bred       to  $tc_sec_bred       
+move &tc_respuesta      to  $tc_respuesta      
+move &tc_ind_rev        to  $tc_ind_rev        
+move &tc_cod_autoriz    to  $tc_cod_autoriz    
+move &tc_cod_bred       to  $tc_cod_bred       
+move &tc_oficina        to  $tc_oficina        
+move &tc_terminal       to  $tc_terminal       
+move &tc_referencia     to  $tc_referencia     
+move &tc_tipo_doc       to  $tc_tipo_doc       
+move &tc_num_comprob    to  $tc_num_comprob    
+move &tc_ciudad_of      to  $tc_ciudad_of      
+move &tc_fecha_ini      to  $tc_fecha_ini      
+move &tc_fecha_fin      to  $tc_fecha_fin      
+move &tc_tipocta_bred   to  $tc_tipocta_bred   
+move &tc_cta_banco      to  $tc_cta_banco      
+move &tc_tcta_bco_dest  to  $tc_tcta_bco_dest  
+move &tc_cta_bco_dest   to  $tc_cta_bco_dest   
+move &tc_num_tarjeta    to  $tc_num_tarjeta    
+move &tc_cod_moneda     to  $tc_cod_moneda     
+move &tc_tipo_pago      to  $tc_tipo_pago      
+move &tc_valor          to  $tc_valor          
+move &tc_valor_scom     to  $tc_valor_scom     
+move &tc_comision_txt   to  $tc_comision_txt   
+move &tc_compensa       to  $tc_compensa       
+move &tc_unidad_nego    to  $tc_unidad_nego    
+move &tc_med_aut        to  $tc_med_aut 
+move &tc_bco_emisor     to  $tc_bco_emisor 
+move &tc_filler         to  $tc_filler         
+
+let $v_linea =             $tc_tipo_registro || $tc_ori_registro || $tc_adquiriente  || $tc_autorizador || $tc_hora_tran  || $tc_tipo_proceso  || $tc_subtipo_trans 
+let $v_linea = $v_linea || $tc_tipo_disp     || $tc_secuencial   || $tc_sec_bred     || $tc_respuesta   || $tc_ind_rev    || $tc_cod_autoriz   || $tc_cod_bred ||  $tc_oficina 
+let $v_linea = $v_linea || $tc_terminal      || $tc_referencia   || $tc_tipo_doc     || $tc_num_comprob || $tc_ciudad_of  || $tc_fecha_ini     || $tc_fecha_fin || $tc_tipocta_bred 
+let $v_linea = $v_linea || $tc_cta_banco     || $tc_tcta_bco_dest|| $tc_cta_bco_dest || $tc_num_tarjeta || $tc_cod_moneda || $tc_tipo_pago     || $tc_valor ||     $tc_valor_scom 
+let $v_linea = $v_linea || $tc_comision_txt  || $tc_compensa     || $tc_unidad_nego  || $tc_med_aut     || $tc_bco_emisor || $tc_filler 
+
+write 1 from $v_linea
+
+!--------------------------------------
+End-Procedure
+!--------------------------------------

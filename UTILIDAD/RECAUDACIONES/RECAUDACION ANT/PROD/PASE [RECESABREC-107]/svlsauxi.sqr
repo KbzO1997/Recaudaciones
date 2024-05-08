@@ -1,0 +1,1241 @@
+!**********************************************************************!
+!*  Archivo: 			svlsauxi.sqr                                  *!
+!*  Base de datos: 		cob_pagos                                     *!
+!*  Motor de Base:      SYBASE                                        *!
+!*  Servidor:           HP-ACT                                        *!
+!*  Aplicacion:         CyberBank                                     *!
+!*  Producto: 			Cuentas Corrientes                            *!
+!*  Disenado por: 		Keytel F. Almeida H.                          *!
+!*  Fecha de escritura: 25/Feb/2000                                   *!
+!*  Procesamiento:      OLTP                                          *!
+!*  Ult.ControlTarea:   J-RECESABREC-86                               *!
+!*  Ult.Referencia:     REF 32                                        *!
+!**********************************************************************!
+!*                              IMPORTANTE                            *!
+!*   Este programa es parte de los paquetes bancarios propiedad del   *!
+!*   "BANCO BOLIVARIANO".                                             *!
+!*   Su uso no autorizado queda expresamente prohibido asi como       *!
+!*   cualquier alteracion o agregado hecho por alguno de sus usuarios *!
+!*   sin el debido consentimiento por escrito de la Presidencia       *!
+!*   Ejecutiva del BANCO BOLIVARIANO o su representante               *!
+!**********************************************************************!
+!*                              PROPOSITO                             *!
+!*   Genera reporte de pago agua por usuario                          *!
+!**********************************************************************!
+!*     FECHA             AUTOR                MODIFICACIONES          *!
+!*  25/Feb/2000  Keytel F. Almeida H.  Emision inicial                *!
+!*  17/Jul/2000  Keytel F. Almeida H.  Considerar fecha de proceso y  *!
+!*               no el campo de hora. (referencia KFAH:17jul2000)     *!
+!*  11/sep/2001  R. Castillo         Adicionar el campo Comprobante *!
+!*  27/Nov/2002  Galo Yanez   Nuevo esquema para telefonos  *!
+!*   #  14.Oct.2003  Galo Yanez  Cambiar older sqr commands.          *!
+!*  06/Dic/2004  Jorge Pazminno  Considerar comision por pago servcios*!
+!*  09/May/2006  Hugo Yépez      No considerar colegios mig al sat    *!
+!*  16/May/2006  Hugo Yépez      Considerar el estado ct_est_catalogo *!
+!*  20/Sep/2006  Luis F. Chacha  Aumentar espacio a columna de Cod.   *!
+!*                               catastral y restar a la del nombre   *!
+!*  19/Sep/2007  Luis F. Chacha  Separar las causas de Colegios       *!
+!*  10/Nov/2007  Luis F. Chacha  Generar Auxiliar para CORPEI IMEXPE  *!
+!*  26/Dic/2007  Luis F. Chacha  Generar Auxiliar para M. Ibarra      *!
+!*  26/May/2008  German Medina   Generar Auxiliar para el SOAT        *!
+!*  08/Ago/2008  German Medina   Generar Auxiliar para la CTG         *!
+!*  10/Mar/2009  Luis F. Chacha  Corregir listados de Pacifictel      *!
+!*15  15/OCT/2009     Ana Mendez   Backoffice recaudacion PORTA-250-CU-1423 *!
+!*16 29/Dic/2011 Daniel Pereira  MTAC-CU-1729 y  MTAC-CU-1730 Adicionar causa de Claro para colum costo*!
+!*17 15/Feb/2012 Daniel Pereira V. CNEL-308-CU-1819 considerar empresas grupo CNEL*!
+!*18 30/Oct/2013 Andrés Macancela J.   Correccion de Proceso Venta    *!
+!*				       Tarjetas Paykard	      	      *!
+!*19 27/Agt/2013 Daniel Pereira  SGC00010841 BACKOFFICE CONECEL TV SATELITAL *!
+!*20 08/Agt/2016 Jorge Pazminno  SGC00025765 BACKOFFICE TASA RECOLECCION BASURA*!
+!*21 14/Sep/2016 Daniel Pereira  DEPTEM-AP-SGC00025705-SGC00025712    *!
+!*22 09/Ene/2017 Daniel Pereira  RECA-CC-SGC00026811                  *!
+!*23 09/Ago/2017 Daniel Pereira  RECA-CE-SGC00029312 correccion campo TCREDITO*!
+!*24 30/Ago/2017 Danny Olaya S.  MEER-AP-SGC00026606-SGC00028066 Reemplazar REFERENCIA por CTA_CONTRATO*!
+!*27 15/Ene/2018 María Jo. Silva RECA-CE-SGC00034225 Presentar pago TC Municipio GYE*!
+!*28 30/Ene/2019 Danny Olaya S.  RECA-CC-SGC00034364 Presentar pago TC Municipios*!
+!*29 06/Jun/2019 Danny Olaya S.  RECA-CE-SGC00035614  Ajustes Recargas CNT y TUENTI*!
+!*30 12/Feb/2021 Josué Rocafuerte.  RECMPS-401 Mejoras en Auxiliar para CVIALCO/TELETAG*!
+!*31 12/Abr/2022 Jonathan Guerrero RECM-506 Predio Completo Municipio Gye*!
+!*32 23/Nov/2022 Kevin Bastidas  RECESABREC-86	A06 AGENCIA NACIONAL DE TRANSITO 24ONLINE Y 24MOVIL*!
+!**********************************************************************!
+
+#include "definic.inc"
+#define   ANCHO_PAG                210    ! Ancho de pagina
+#define   NOM_ARCH                 svlsauxi.sqr
+#define  SALIDA  '<37><33><10>(cobis1.jdt) STARTLM<10>'
+
+Begin-Setup
+use cob_pagos
+Begin-Sql on-error=STOP -c1
+    create table ##temptot (causa       varchar(4) null,
+                            trn         int  null,
+                            ofic        int null,
+                            d_ofic      varchar(30) null,
+                            cont        int  null,
+                            efect       float null,
+                            cheque      float null,
+                            nd          float null,
+                            banred      float null,
+                            total       float null,
+                            costo       float null,
+          retencion   float null)! RCA 12/Sep/2001
+End-Sql
+End-Setup
+
+#include "printer_cobis1.inc"   !REF:GYC
+
+#include "log.inc"
+#include "ctacte.inc"
+
+Begin-Program   !REF:GYC
+do Inicializar_Programa
+do ParamN (1,#i_filial,'cobis..cl_filial','fi_filial = ','No existe la filial')
+do ParamS (2,$i_fecha_proceso,'','','')
+let $det = 'N'
+let $acred_grp = 'N' !DAPV/03142012/CNEL
+let $refer = 'REFERENCIA' !Ref 24
+   do Muestra_Tiempo
+   show '*---------------------------*'
+   show '*Hora de inicio ---> ' &hora
+   show '*---------------------------*'
+do Main
+   do Muestra_Tiempo
+   show '*---------------------------*'
+   show '*Hora de final  ---> ' &hora
+   show '*---------------------------*'
+do finalizar_Programa
+End-Program   !REF:GYC
+
+Begin-Heading 10
+  let $w_titulo    = 'REPORTE DE PAGO DE SERVICIOS '     !||  &d_empresa
+  let $w_subtitulo = 'RECAUDACIONES POR ' || &d_trn
+  let $w_subtitulo2 = 'Oficina: ' || &d_oficina
+  let $w_subtitulo3 = $nombre_empresa
+  let $w_programa = 'svlsauxi.sqr'
+  let $refer = $ref_meer !ref24
+  do Encabezado($w_titulo, $w_subtitulo, $w_subtitulo2, $i_fecha_proceso, $w_empresa ,
+               $d_oficina, $w_programa,$w_subtitulo3)
+  position (+1)
+  do Lin_Horizontal
+  do Centrar ('USUARIO',1)
+  do Centrar ('T.PAGO',2)
+  do Centrar ('NOMBRE',3)
+  do Centrar ($refer,4) !Ref 24    !do Centrar ('REFERENCIA',4)
+  do Centrar ('EFECTIVO',5)
+  do Centrar ('CHEQUES',6)
+  do Centrar ('ND',7)
+  !do Centrar ('RETEN',8)
+  do Centrar ('TCREDITO',8) !GAMC - 08/08/2008 - Se cambio para la columna de tarjetas, actualmente no se cobra retencion
+  !do Centrar ('TIPO',9)
+  !do Centrar ('COMPROB. RET  ',10)
+  do Centrar ('BANRED',9)    ! AME Ref15
+  do Centrar ('TOTAL',10)
+  do Centrar ('CORR',11)
+  do Centrar ('COSTO',12)    ! AME Ref15
+  do Lin_Horizontal
+End-Heading
+
+Begin-Procedure Main
+ !do Columnas (15,8,25,10,15,15,15,15,5,15,15,15,5,15,0,0,0,0,0,0)  !lfcm 19-septiembre-2006
+ !do Columnas (15,8,20,15,15,15,15,15,5,15,15,15,5,15,0,0,0,0,0,0)  !lfcm 19-septiembre-2006
+  do Columnas (15,8,20,35,15,15,15,15,15,15,5,15,0,0,0,0,0,0,0,0)      ! AME Ref15
+ do Nombre_Filial(#i_filial,$w_empresa)
+ do Procesar
+ do Procesar_Grupos
+End-Procedure
+
+!***
+!***   and convert(varchar(10),ts_hora,101) = &w_fecha_dia    KFAH:17jul2000
+Begin-Procedure Procesar
+begin-select
+convert(varchar(10),getdate(),101) &w_fecha_dia
+end-select
+
+Begin-Select
+ts_tipo_transaccion             () on-break print=never before=antes_trn after=despues_trn level=1
+ts_causa               &ts_causa () on-break print=never before=antes_empresa after=despues_empresa level=2   !lfcm 03-10-2009
+ts_oficina                      () on-break print=never before=antes_oficina after=despues_oficina level=3
+ts_usuario                      () on-break print=never before=antes_usuario after=despues_usuario level=4
+ts_clase              !() on-break print=never after=despues_servicio level=5
+ts_valor
+ts_saldo
+isnull(ts_monto,0)              &ts_monto
+isnull(ts_descuento_iess,0)     &ts_descuento_iess
+isnull(ts_aporte_iess,0)        &ts_aporte_iess
+(isnull(ts_saldo,0) + isnull(ts_monto,0) + isnull(ts_valor,0) + isnull(ts_descuento_iess,0) + isnull(ts_contratado,0)- isnull(ts_aporte_iess,0)) + isnull(ts_ocasional,0) &w_total 
+case when ts_causa = '7749' and ts_stick_imp is not null and ts_corresponsal = '001' then ts_campo_alt_dos+'-'+ts_stick_imp else ts_referencia end &ts_referencia 
+ts_agente                 &ts_agente  !lfcm 26-nov-2007
+ts_tsfecha
+convert(varchar(10), ts_hora, 101)    &wts_hora
+convert(varchar(5), ts_hora, 108)    &w_hora
+ts_correccion
+isnull(ts_cta_banco, '0000000000')      &wts_cta_banco
+substring(ts_nombre,1,25)     &wts_nombre
+substring(ts_descripcion_ec,1,20)     &wts_descripcion_ec !GAMC - 08/08/2008 - CTG
+ts_contratado &tcredito !GAMC - 08/08/2008 - CTG
+ts_ocasional &reten  !RCA 11/Sep/2001
+ts_cta_asociada  &ts_comprob !RCA 11/Sep/2001
+ts_tipo_chequera
+ts_tipocta
+ts_reentry
+isnull(ts_autoriz_aut,'0')      &wts_comision !/*JPM 06122004*/
+ts_fonres_iess                  &wts_fonres_iess                !lfcm 23-nov-2007  Total del Pago Corpei
+ts_autorizante			&ts_autorizante  !REF: 21
+case when exists(select 1 from cobis..cl_tabla t inner join cobis..cl_catalogo c on t.codigo = c.tabla where t.tabla = 'pg_reca_emp_elect_meer' and c.estado = 'V' and c.codigo = a.ts_causa) then 'S' else 'N' end &wts_meer !ref24
+ let #comision = to_number(&wts_comision)    !/*JPM 06122004*/
+  let #cliente = &ts_referencia
+  let $proceso = &ts_clase
+  let #efectivo = &ts_valor
+  let #cheque = &ts_saldo
+
+  if &ts_causa = '39' or &ts_causa = '103' !DAPV --29/Dic/2011 - CLARO Ref #16 ref029
+    let #comision = 0
+  end-if
+
+  if &ts_causa = '862'  !GAMC - 23/05/2008 - SOAT
+    or ((&ts_tipo_transaccion = 3925 or &ts_tipo_transaccion = 3926 or &ts_tipo_transaccion = 3927) and &ts_causa = '8269') !JPM TRB IWS
+    let #costo  = #comision
+  else
+    let #costo  = &ts_aporte_iess + #comision  !/*JPM 06122004*/
+  end-if
+  let #nd = 0
+  let #banred = 0
+  !let #reten = &reten - GAMC - 08/08/2008 - CTG se comoneto esta linea esta dentro del if &ts_causa = '2572' mas abajo
+
+  if &ts_descuento_iess > 0
+     let #banred = &ts_descuento_iess - &ts_aporte_iess
+  end-if
+  if &ts_monto > 0
+     let #nd = &ts_monto - &ts_aporte_iess
+  end-if
+
+  !let #total = &w_total - #comision          !/*JPM 06122004*/   !lfcm 19-septiembre-2006
+  !GAMC - 14/08/2008 - Se quito el comentario
+  let #total = &w_total                             !lfcm 19-septiembre-2006
+  if &ts_causa = '2572'  or &ts_causa = '2575' !GAMC - 08/08/2008 - CTG
+    let #reten = &tcredito
+    let $w_nombre = &wts_descripcion_ec
+    let #total = &w_total + &ts_aporte_iess
+    let #nd = &ts_monto
+  else
+    let $w_nombre = &wts_nombre
+    let #reten = &reten
+  end-if
+  if &ts_causa = '862' and &ts_monto > 0 !GAMC - 23/05/2008 - SOAT
+    let #nd = &ts_monto
+    let #total = #total + &ts_aporte_iess
+  end-if
+	
+	!Ref027:msilvag Inicio Municipio GYE
+	if &ts_causa = '7749' or &ts_causa = '1417' or &ts_causa = '1430' or &ts_causa = '1800' or &ts_causa = '2235' or &ts_causa = '2236' or &ts_causa = '2237' or &ts_causa = '2319' or &ts_causa = '18786' !Ref028 incluimos el resto de municipios /*<REF 32, Add ANT TC REF 32>*/
+	
+		let #reten = &tcredito
+	end-if
+	!Ref027:msilvag Fin
+
+  !-->lfcm 23-nov-2007
+  if &ts_tipo_transaccion = 3967 or &ts_tipo_transaccion = 3334
+     let #total = &wts_fonres_iess
+     let #efectivo = &ts_saldo
+     let #cheque = &ts_valor
+  end-if
+  !--<lfcm 23-nov-2007
+
+  !--ref18
+  if &ts_causa = '300'
+      let #reten   = &tcredito
+      let #nd      = &ts_saldo 
+      let #cheque  = &ts_monto
+  end-if                                                
+  !--ref18
+
+  !--ref 23	
+  let $empresa_dep = &ts_causa 
+  do ValidaCausa    	
+  
+  if $w_existe_dep = 'S'
+     let #reten   = 0
+     let #total = &w_total - &reten  !ref 24
+  end-if
+  !--ref 23
+
+  if &ts_correccion = 'S'
+     let $correccion = 'S'
+
+     let #val_efe_ofic = #val_efe_ofic - #efectivo
+     let #val_efe_trn = #val_efe_trn - #efectivo
+     let #val_efe_empr = #val_efe_empr - #efectivo
+     let #val_efe_usua = #val_efe_usua - #efectivo
+     let #val_efe_serv = #val_efe_serv - #efectivo
+
+     let #val_chq_ofic = #val_chq_ofic - #cheque
+     let #val_chq_trn  = #val_chq_trn - #cheque
+     let #val_chq_empr = #val_chq_empr - #cheque
+     let #val_chq_usua = #val_chq_usua - #cheque
+     let #val_chq_serv = #val_chq_serv - #cheque
+
+     let #val_nd_ofic = #val_nd_ofic - #nd
+     let #val_nd_trn  = #val_nd_trn - #nd
+     let #val_nd_empr = #val_nd_empr - #nd
+     let #val_nd_usua = #val_nd_usua - #nd
+     let #val_nd_serv = #val_nd_serv - #nd
+
+     let #val_ret_ofic = #val_ret_ofic - #reten
+     let #val_ret_trn  = #val_ret_trn - #reten
+     let #val_ret_empr = #val_ret_empr - #reten
+     let #val_ret_usua = #val_ret_usua - #reten
+     let #val_ret_serv = #val_ret_serv - #reten
+
+     let #val_banred_ofic = #val_banred_ofic - #banred
+     let #val_banred_trn  = #val_banred_trn - #banred
+     let #val_banred_empr = #val_banred_empr - #banred
+         let #val_banred_usua = #val_banred_usua - #banred
+         let #val_banred_serv = #val_banred_serv - #banred
+
+     let #val_tot_ofic = #val_tot_ofic - #total
+     let #val_tot_trn  = #val_tot_trn - #total
+     let #val_tot_empr = #val_tot_empr - #total
+   let #val_tot_usua = #val_tot_usua - #total
+   let #val_tot_serv = #val_tot_serv - #total
+
+     let #val_costo_ofic = #val_costo_ofic - #costo
+     let #val_costo_trn  = #val_costo_trn  - #costo
+     let #val_costo_empr = #val_costo_empr - #costo
+     let #val_costo_usua = #val_costo_usua - #costo
+     let #val_costo_serv = #val_costo_serv - #costo
+
+   let #con_tot_ofic = #con_tot_ofic - 1
+   let #con_tot_trn = #con_tot_trn - 1
+   let #con_tot_empr = #con_tot_empr - 1
+   let #con_tot_usua = #con_tot_usua - 1
+   let #con_tot_serv = #con_tot_serv - 1
+  else
+     let $correccion = 'N'
+     let #val_efe_ofic = #val_efe_ofic + #efectivo
+     let #val_efe_trn = #val_efe_trn + #efectivo
+     let #val_efe_empr = #val_efe_empr + #efectivo
+     let #val_efe_usua = #val_efe_usua + #efectivo
+     let #val_efe_serv = #val_efe_serv + #efectivo
+
+     let #val_chq_ofic = #val_chq_ofic + #cheque
+     let #val_chq_trn = #val_chq_trn + #cheque
+     let #val_chq_empr = #val_chq_empr + #cheque
+     let #val_chq_usua = #val_chq_usua + #cheque
+     let #val_chq_serv = #val_chq_serv + #cheque
+
+     let #val_nd_ofic = #val_nd_ofic + #nd
+     let #val_nd_trn = #val_chq_trn + #cheque
+     let #val_nd_empr = #val_nd_empr + #nd
+     let #val_nd_usua = #val_nd_usua + #nd
+     let #val_nd_serv = #val_nd_serv + #nd
+
+     let #val_ret_ofic = #val_ret_ofic + #reten
+     let #val_ret_trn  = #val_ret_trn + #reten
+     let #val_ret_empr = #val_ret_empr + #reten
+     let #val_ret_usua = #val_ret_usua + #reten
+     let #val_ret_serv = #val_ret_serv + #reten
+
+     let #val_banred_ofic = #val_banred_ofic + #banred
+     let #val_banred_trn  = #val_banred_trn + #banred
+     let #val_banred_empr = #val_banred_empr + #banred
+     let #val_banred_usua = #val_banred_usua + #banred
+     let #val_banred_serv = #val_banred_serv + #banred
+
+     let #val_tot_ofic = #val_tot_ofic + #total
+     let #val_tot_trn = #val_tot_trn + #total
+     let #val_tot_empr = #val_tot_empr + #total
+     let #val_tot_usua = #val_tot_usua + #total
+     let #val_tot_serv = #val_tot_serv + #total
+
+     let #val_costo_ofic = #val_costo_ofic + #costo
+     let #val_costo_trn  = #val_costo_trn  + #costo
+     let #val_costo_empr = #val_costo_empr + #costo
+     let #val_costo_usua = #val_costo_usua + #costo
+     let #val_costo_serv = #val_costo_serv + #costo
+
+
+   let #con_tot_ofic = #con_tot_ofic + 1
+   let #con_tot_trn  = #con_tot_trn + 1
+   let #con_tot_empr = #con_tot_empr + 1
+   let #con_tot_usua = #con_tot_usua + 1
+   let #con_tot_serv = #con_tot_serv + 1
+  end-if
+
+  !do PrintS(1,&ts_usuario,'',0)
+  if &ts_tipo_transaccion = 3194 or &ts_tipo_transaccion = 3203
+     let $tipo_pago = substr(&ts_tipo_chequera,4,2) || '-' || &ts_reentry
+     do PrintS(2,$tipo_pago,'',0)
+  else
+     do PrintS(2,&ts_clase,'',0)
+  end-if
+  !do PrintS(3,&wts_nombre,'',0)
+  do PrintS(3,$w_nombre,'',0) !GAMC - 08/08/2008 - CTG
+
+  
+	
+  !--lfcm 26-nov-2007
+  if &ts_tipo_transaccion = 3967 or &ts_tipo_transaccion = 3334
+     let $agente = &ts_agente
+     do PrintS(4,$agente,'',0)
+  else
+    if length(&ts_referencia) <= length(&ts_agente)and(&ts_tipo_transaccion = 3925 or &ts_tipo_transaccion = 3926 or &ts_tipo_transaccion = 3927) and &ts_causa != '8461'  !REF 18  !REF 30
+      do PrintS(4,&ts_agente,'',0)
+    else    	
+      if $w_existe_dep = 'S' !&ts_causa  '1928'   !REF: 22
+        do PrintS(4,&ts_autorizante,'',0)  !REF: 21
+      else 
+	 if &wts_meer ='S'  !ref24
+	   do PrintS(4,&ts_comprob,'',0) !ref24
+      else  !REF: 21																   
+        do PrintS(4,&ts_referencia,'',0)	   								  				   
+         end-if !REF: 24
+      end-if !REF: 22
+    end-if
+  end-if  !REF: 21
+
+
+  do PrintN(5,#efectivo,'{FOR_DIN_S}',0)
+  do PrintN(6,#cheque,'{FOR_DIN_S}',0)
+  do PrintN(7,#nd,'{FOR_DIN_S}',0)
+  do PrintN(8,#reten,'{FOR_DIN_S}',0)
+
+  if &ts_tipo_transaccion = 3194 or &ts_tipo_transaccion = 3203
+     if &ts_tipocta = 'A'
+  let $cta = 'AHO'
+  !do PrintS(9,$cta,'',0)
+     end-if
+     if &ts_tipocta = 'C'
+  let $cta = 'CTE'
+  !do PrintS(9,$cta,'',0)
+     end-if
+  end-if
+  if &ts_tipo_transaccion = 3194 or &ts_tipo_transaccion = 3203
+     if &wts_cta_banco <> '0000000000'
+        !do PrintS(10,&wts_cta_banco,'{FOR_CTA}',0)
+     end-if
+  else
+     !do PrintS(10,&ts_comprob,'',0)
+  end-if
+
+  do PrintN(9,#banred,'{FOR_DIN_S}',0)   ! Ref15
+  do PrintN(10,#total,'{FOR_DIN_S}',0)
+  do PrintS(11,$correccion,'',0)
+  do PrintN(12,#costo,'{FOR_DIN_S}',0)    ! Ref15
+
+  next-listing
+
+from cob_cuentas..cc_tran_servicio a            !lfcm 19-octubre-2007
+where ts_tipo_transaccion in  (select convert (int, codigo)
+                              from cobis..cl_catalogo
+                             where tabla = (select codigo
+                                              from cobis..cl_tabla
+                                              where tabla = 'sv_servicios')
+                                              and estado = 'V')
+  and ts_tsfecha = $i_fecha_proceso
+  !and (select pe_acedita_grp from cob_pagos..pg_person_empresa where convert(varchar,  pe_empresa )= a.ts_causa) is null   !DAPV/03142012/CNEL
+  and isnull((select (select pe_acedita_grp
+                      from cob_pagos..pg_person_empresa b
+                      where b.pe_empresa =  x.pe_cod_grupo )
+              from cob_pagos..pg_person_empresa  x
+              where convert(varchar,x.pe_empresa) = a.ts_causa ) ,'N')  <> 'S' !DAPV/03142012/CNEL
+order by ts_causa,ts_tipo_transaccion, ts_oficina, ts_usuario, ts_clase,ts_referencia             !lfcm 03-10-2009
+End-Select
+End-Procedure
+
+!*******************************************************************************
+!****          Crea nuevo codigo de archivo por tipo de empresa              ***
+!*******************************************************************************
+Begin-Procedure antes_empresa
+do Before_Pagina
+let #emp = &ts_causa
+let $causa = &ts_causa
+begin-select
+a.valor  &d_empresa
+from cobis..cl_catalogo a, cobis..cl_tabla b
+where  b.tabla  = 'sv_empresas_servicios'                !sv_empresas_agua
+  and  b.codigo = a.tabla
+  and  convert(int,a.codigo) = convert(int,&ts_causa)
+end-select
+let $nombre_empresa = 'EMPRESA : ' || &d_empresa
+
+!ref24 inicio
+begin-select
+a.valor  &d_empresa_meer
+from cobis..cl_catalogo a, cobis..cl_tabla b
+where  b.tabla  = 'pg_reca_emp_elect_meer'
+  and  b.codigo = a.tabla
+  and  convert(int,a.codigo) = convert(int,&ts_causa)
+  and  a.estado = 'V'
+end-select
+
+ if &d_empresa_meer <>''    
+  let $ref_meer = 'CTA.CONTRATO'
+ else
+  let $ref_meer = 'REFERENCIA'
+ end-if
+!ref24 fin
+
+do Nombre_Listado
+End-Procedure
+
+Begin-Procedure antes_trn
+do Before_Pagina
+let #trn = &ts_tipo_transaccion
+begin-select
+substring(tn_descripcion,1,60) &d_trn
+from cobis..cl_ttransaccion
+where  tn_trn_code = &ts_tipo_transaccion
+end-select
+begin-select
+a.valor  &d_horario
+from cobis..cl_catalogo a, cobis..cl_tabla b
+where  b.tabla  = 'sv_servicios'
+  and  b.codigo = a.tabla
+  and  convert(int,a.codigo) = convert(int,&ts_tipo_transaccion)
+end-select
+End-Procedure
+
+!*******************************************************************************
+!****                        Busca nombre de oficina                         ***
+!*******************************************************************************
+Begin-Procedure antes_oficina
+do Before_Pagina
+let #ofic = &ts_oficina
+
+begin-select
+of_nombre  &d_oficina
+from cobis..cl_oficina
+where  of_oficina = &ts_oficina
+end-select
+End-Procedure
+
+!*******************************************************************************
+!****                        Busca nombre de oficina                         ***
+!*******************************************************************************
+Begin-Procedure antes_usuario
+do PrintS(1,&ts_usuario,'',0)
+next-listing
+End-Procedure
+
+!*******************************************************************************
+!****                        imprime totales para empresa                    ***
+!*******************************************************************************
+Begin-Procedure despues_empresa
+new-page
+do After_Pagina
+  next-listing
+do Totofic_Empresa
+  next-listing
+  do PrintS(1,'TOT. EMPRESA','',0)
+  do PrintN(2,#con_tot_empr,'99999',0)
+  do PrintN(5,#val_efe_empr,'{FOR_DIN_S}',0)
+  do PrintN(6,#val_chq_empr,'{FOR_DIN_S}',0)
+  do PrintN(7,#val_nd_empr,'{FOR_DIN_S}',0)
+  do PrintN(8,#val_ret_empr,'{FOR_DIN_S}',0)
+  do PrintN(9,#val_banred_empr,'{FOR_DIN_S}',0)   !Ref15
+  do PrintN(10,#val_tot_empr,'{FOR_DIN_S}',0)
+  do PrintN(12,#val_costo_empr,'{FOR_DIN_S}',0)    !Ref15
+let #con_tot_empr = 0
+let #val_efe_empr = 0
+let #val_chq_empr = 0
+let #val_nd_empr = 0
+let #val_ret_empr = 0
+let #val_banred_empr = 0
+let #val_tot_empr = 0
+let #val_costo_empr = 0
+End-Procedure
+!*******************************************************************************
+!****                        imprime totales para trn (Normal Diferido)      ***
+!*******************************************************************************
+Begin-Procedure despues_trn
+!new-page
+!do After_Pagina
+  next-listing
+!do Totofic_Empresa
+  next-listing
+!  let $wd_trn = 'TOT. ' || &d_trn
+!  do PrintS(1,$wd_trn ,'',0)
+!  do PrintN(2,#con_tot_trn,'99999',0)
+!  do PrintN(5,#val_efe_trn,'{FOR_DIN_S}',0)
+!  do PrintN(6,#val_chq_trn,'{FOR_DIN_S}',0)
+!  do PrintN(7,#val_nd_trn,'{FOR_DIN_S}',0)
+!  do PrintN(8,#val_banred_trn,'{FOR_DIN_S}',0)
+!  do PrintN(9,#val_tot_trn,'{FOR_DIN_S}',0)
+!  do PrintN(11,#val_costo_trn,'{FOR_DIN_S}',0)
+let #con_tot_trn = 0
+let #val_efe_trn = 0
+let #val_chq_trn = 0
+let #val_nd_trn = 0
+let #val_ret_trn = 0
+let #val_banred_trn = 0
+let #val_tot_trn = 0
+let #val_costo_trn = 0
+End-Procedure
+!*******************************************************************************
+!****                        imprime totales para oficina                    ***
+!*******************************************************************************
+Begin-Procedure despues_oficina
+do Inserta_Total
+do After_Pagina
+  next-listing
+  next-listing
+  do PrintS(1,'TOT. OFICINA','',0)
+  do PrintN(2,#con_tot_ofic,'99999',0)
+  do PrintN(5,#val_efe_ofic,'{FOR_DIN_S}',0)
+  do PrintN(6,#val_chq_ofic,'{FOR_DIN_S}',0)
+  do PrintN(7,#val_nd_ofic,'{FOR_DIN_S}',0)
+  do PrintN(8,#val_ret_ofic,'{FOR_DIN_S}',0)
+  do PrintN(9,#val_banred_ofic,'{FOR_DIN_S}',0)    !Ref15
+  do PrintN(10,#val_tot_ofic,'{FOR_DIN_S}',0)
+  do PrintN(12,#val_costo_ofic,'{FOR_DIN_S}',0)     !Ref15
+let #con_tot_ofic = 0
+let #val_efe_ofic = 0
+let #val_chq_ofic = 0
+let #val_nd_ofic = 0
+let #val_ret_ofic = 0
+let #val_banred_ofic = 0
+let #val_tot_ofic = 0
+let #val_costo_ofic = 0
+End-Procedure
+!*******************************************************************************
+!****                        imprime totales para usuarios                   ***
+!*******************************************************************************
+Begin-Procedure despues_usuario
+
+  do PrintS(1,'TOT. USUARIO','',0)
+  do PrintN(2,#con_tot_usua,'99999',0)
+  do PrintN(5,#val_efe_usua,'{FOR_DIN_S}',0)
+  do PrintN(6,#val_chq_usua,'{FOR_DIN_S}',0)
+  do PrintN(7,#val_nd_usua,'{FOR_DIN_S}',0)
+  do PrintN(8,#val_ret_usua,'{FOR_DIN_S}',0)
+  do PrintN(9,#val_banred_usua,'{FOR_DIN_S}',0)  ! Ref15
+  do PrintN(10,#val_tot_usua,'{FOR_DIN_S}',0)
+  do PrintN(12,#val_costo_usua,'{FOR_DIN_S}',0)   !Ref15
+
+let #con_tot_usua = 0
+let #val_efe_usua = 0
+let #val_chq_usua = 0
+let #val_nd_usua = 0
+let #val_ret_usua = 0
+let #val_banred_usua = 0
+let #val_tot_usua = 0
+let #val_costo_usua = 0
+next-listing
+next-listing
+End-Procedure
+!*******************************************************************************
+!****                        imprime totales para servicios                  ***
+!*******************************************************************************
+Begin-Procedure despues_servicio
+
+  do PrintN(1,#con_tot_serv,'99999',0)
+  do PrintS(2,$proceso,'',3)
+  do PrintN(5,#val_efe_serv,'{FOR_DIN_S}',0)
+  do PrintN(6,#val_chq_serv,'{FOR_DIN_S}',0)
+  do PrintN(7,#val_nd_serv,'{FOR_DIN_S}',0)
+  do PrintN(8,#val_ret_serv,'{FOR_DIN_S}',0)
+  do PrintN(9,#val_banred_serv,'{FOR_DIN_S}',0)  !Ref15
+  do PrintN(10,#val_tot_serv,'{FOR_DIN_S}',0)
+  do PrintN(12,#val_costo_serv,'{FOR_DIN_S}',0)   !Ref15
+next-listing
+let #con_tot_serv = 0
+let #val_efe_serv = 0
+let #val_chq_serv = 0
+let #val_nd_serv = 0
+let #val_ret_serv = 0
+let #val_banred_serv = 0
+let #val_tot_serv = 0
+let #val_costo_serv = 0
+End-Procedure
+
+Begin-Procedure Inserta_Total
+Begin-Sql  -c1
+insert into ##temptot
+!values ($causa,#trn,#ofic,&d_oficina,#con_tot_ofic,#val_efe_ofic,#val_chq_ofic,#val_nd_ofic,#val_banred_ofic,#val_tot_ofic,#val_costo_ofic)
+values ($causa,#trn,#ofic,&d_oficina,#con_tot_ofic,#val_efe_ofic,#val_chq_ofic,#val_nd_ofic,#val_banred_ofic,#val_tot_ofic,#val_costo_ofic, #val_ret_ofic)
+End-Sql
+End-Procedure
+
+Begin-Procedure Totofic_Empresa
+   position (+2)
+  do PrintS(3,'RESUMEN DE TOTALES POR OFICINA','',0)
+   position (+2)
+Begin-Select  -c1
+causa
+ofic
+d_ofic
+cont
+efect
+cheque
+nd
+banred
+total
+costo
+retencion ! RCA 12/Sep/2001
+
+  do PrintS(1,&d_ofic,'',0)
+  do PrintN(2,&cont,'99999',0)
+  do PrintN(5,&efect,'{FOR_DIN_S}',0)
+  do PrintN(6,&cheque,'{FOR_DIN_S}',0)
+  do PrintN(7,&nd,'{FOR_DIN_S}',0)
+  do PrintN(8,&retencion,'{FOR_DIN_S}',0)
+  do PrintN(9,&banred,'{FOR_DIN_S}',0)     !Ref15
+  do PrintN(10,&total,'{FOR_DIN_S}',0)
+  do PrintN(12,&costo,'{FOR_DIN_S}',0)     !Ref15
+  next-listing
+from ##temptot
+where causa = $causa
+and trn = #trn
+order by causa,ofic
+
+End-Select
+End-Procedure
+
+!*******************************************************************************
+!*****    Procedimientos generales utilizados para el encabezamiento     *******
+!*******************************************************************************
+Begin-Procedure Encabezado($titulo,$subtitulo,$subtitulo2,$fecha_proceso,$empresa,$oficina,$programa,$subtitulo3)
+let #pos = {ANCHO_PAG} -23
+!date-time () 'MM/DD/YYYY' &fecha_actual
+!date-time () HH:MI &hora
+BEGIN-SELECT
+convert(char(10),getdate(),101) &fecha_actual
+convert(char(8),getdate(),108) &hora
+END-SELECT
+let $hora = 'Hora      : ' || &hora
+do Mes_Espaniol (&fecha_actual,$fecha_imp)
+do Mes_Espaniol ($fecha_proceso,$fecha_pro)
+print $empresa                             (1,1)
+print $titulo                              (1) center
+let $fecha_imp = 'Fecha Impr: ' || $fecha_imp
+print $fecha_imp                           (1,#pos)
+print $subtitulo2                          (2,1)
+let $fecha_pro = 'FECHA DE RECAUDACION ' || $fecha_pro
+print $subtitulo                           (2) center
+print $programa                            (2,#pos)
+print $fecha_pro                          (3) center
+page-number  (3,#pos) 'Pag.      : '
+
+print $subtitulo3  (4) center
+
+print $hora  (4,#pos)
+End-Procedure
+
+!*******************************************************************************
+!*****    Procedimientos para generar nuevo nombre de archivo            *******
+!*******************************************************************************
+Begin-Procedure Nombre_Listado
+Begin-Select
+convert(char(2),datepart(mm,getdate())) &mm_listado_b
+convert(char(2),datepart(dd,getdate())) &dd_listado_b
+substring(convert(char(4),datepart(yy,getdate())),3,2) &aa_listado_b
+convert(char(2),datepart(hh,getdate())) &hh_listado_b
+convert(char(2),datepart(mi,getdate())) &mn_listado_b
+End-Select
+
+!ref029 Ini
+
+if #emp = 103
+	let $emp = to_char(1342) || &d_horario
+else
+	let $emp = to_char(#emp) || &d_horario
+end-if
+!ref029 Fin
+
+let $archivo_fuente = 'svlsauxi'
+move &mm_listado_b to $mes_listado '00'
+move &dd_listado_b to $dia_listado '00'
+move &hh_listado_b to $hor_listado '00'
+move &mn_listado_b to $min_listado '00'
+let $fecha_definitiva = $mes_listado || $dia_listado || &aa_listado_b || '_'
+let $fecha_definitiva = $fecha_definitiva || $hor_listado || $min_listado
+let $nombre_listado = '../listados/' || $archivo_fuente || '_'
+let $nombre_listado = $nombre_listado || $fecha_definitiva
+let $nombre_listado = $nombre_listado || '_emp' || $emp || '.lis'
+new-report $nombre_listado
+End-Procedure
+
+Begin-Procedure Muestra_Tiempo
+Begin-Select
+convert(char(8),getdate(),8)    &hora
+End-Select
+End-Procedure
+
+
+Begin-Procedure antes_regional
+begin-select
+a.valor  &d_regional
+from cobis..cl_catalogo a, cobis..cl_tabla b
+where  b.tabla  = 'sv_empresas_servicios'                !
+  and  b.codigo = a.tabla
+  and  convert(int,a.codigo) = convert(int,&ts_causaG)
+end-select
+
+let $nombre_regional = 'REGIONAL : '
+do Lin_Horizontal
+do PrintS(1,$nombre_regional,'',0)
+do PrintS(3,&d_regional,'',0)
+do Lin_Horizontal
+End-Procedure
+
+Begin-Procedure despues_regional
+!next-listing
+End-Procedure
+
+Begin-Procedure Procesar_Grupos !DAPV/03142012/CNEL
+begin-select
+convert(varchar(10),getdate(),101) &w_fecha_diaG
+end-select
+
+Begin-Select
+ts_tipo_transaccion     &ts_tipo_transaccionG   () on-break print=never before=antes_trnG after=despues_trnG level=1
+pe_cod_grupo            &ts_grupoG              () on-break print=never before=antes_empresaG after=despues_empresaG level= 2
+ts_causa                &ts_causaG              () on-break print=never before=antes_regional after=despues_regional level = 5
+ts_oficina              &ts_oficinaG            () on-break print=never before=antes_oficinaG after=despues_oficinaG level=3
+ts_usuario              &ts_usuarioG            () on-break print=never before=antes_usuarioG after=despues_usuarioG level=4
+ts_clase                &ts_claseG
+ts_valor                &ts_valorG
+ts_saldo                &ts_saldoG
+isnull(ts_monto,0)              &ts_montoG
+isnull(ts_descuento_iess,0)     &ts_descuento_iessG
+isnull(ts_aporte_iess,0)        &ts_aporte_iessG
+(isnull(ts_saldo,0) + isnull(ts_monto,0) + isnull(ts_valor,0) + isnull(ts_descuento_iess,0) + isnull(ts_contratado,0)- isnull(ts_aporte_iess,0)) + isnull(ts_ocasional,0) &w_totalG
+ts_referencia             &ts_referenciaG           
+ts_agente                 &ts_agenteG
+ts_tsfecha                &ts_tsfechaG
+convert(varchar(10), ts_hora, 101)    &wts_horaG
+convert(varchar(5), ts_hora, 108)     &w_horaG
+ts_correccion                         &ts_correccionG
+isnull(ts_cta_banco, '0000000000')    &wts_cta_bancoG
+substring(ts_nombre,1,25)             &wts_nombreG
+substring(ts_descripcion_ec,1,20)     &wts_descripcion_ecG
+ts_contratado                         &tcreditoG
+ts_ocasional                          &retenG
+ts_cta_asociada                       &ts_comprobG
+ts_tipo_chequera                      &ts_tipo_chequeraG
+ts_tipocta                            &ts_tipoctaG
+ts_reentry                            &ts_reentryG
+isnull(ts_autoriz_aut,'0')            &wts_comisionG
+ts_fonres_iess                        &wts_fonres_iessG
+  let #comision = to_number(&wts_comisionG)
+  let #cliente = &ts_referenciaG
+  let $proceso = &ts_claseG
+  let #efectivo = &ts_valorG
+  let #cheque = &ts_saldoG
+
+  let #nd = 0
+  let #banred = 0
+
+  if &ts_descuento_iessG > 0
+     let #banred = &ts_descuento_iessG - &ts_aporte_iessG
+  end-if
+  if &ts_monto > 0
+     let #nd = &ts_monto - &ts_aporte_iessG
+  end-if
+
+  let #total = &w_totalG
+  if &ts_causaG = '2572'  or &ts_causaG = '2575'
+    let #reten = &tcreditoG
+    let $w_nombre = &wts_descripcion_ecG
+    let #total = &w_totalG + &ts_aporte_iessG
+    let #nd = &ts_montoG
+  else
+    let $w_nombre = &wts_nombreG
+    let #reten = &retenG
+  end-if
+  if &ts_causaG = '862' and &ts_montoG > 0
+    let #nd = &ts_montoG
+    let #total = #total + &ts_aporte_iessG
+  end-if
+
+  if &ts_tipo_transaccionG = 3967 or &ts_tipo_transaccionG = 3334
+     let #total = &wts_fonres_iessG
+     let #efectivo = &ts_saldoG
+     let #cheque = &ts_valorG
+  end-if
+
+
+  if &ts_correccionG = 'S'
+     let $correccion = 'S'
+
+     let #val_efe_ofic = #val_efe_ofic - #efectivo
+     let #val_efe_trn = #val_efe_trn - #efectivo
+     let #val_efe_empr = #val_efe_empr - #efectivo
+     let #val_efe_usua = #val_efe_usua - #efectivo
+     let #val_efe_serv = #val_efe_serv - #efectivo
+
+     let #val_chq_ofic = #val_chq_ofic - #cheque
+     let #val_chq_trn  = #val_chq_trn - #cheque
+     let #val_chq_empr = #val_chq_empr - #cheque
+     let #val_chq_usua = #val_chq_usua - #cheque
+     let #val_chq_serv = #val_chq_serv - #cheque
+
+     let #val_nd_ofic = #val_nd_ofic - #nd
+     let #val_nd_trn  = #val_nd_trn - #nd
+     let #val_nd_empr = #val_nd_empr - #nd
+     let #val_nd_usua = #val_nd_usua - #nd
+     let #val_nd_serv = #val_nd_serv - #nd
+
+     let #val_ret_ofic = #val_ret_ofic - #reten
+     let #val_ret_trn  = #val_ret_trn - #reten
+     let #val_ret_empr = #val_ret_empr - #reten
+     let #val_ret_usua = #val_ret_usua - #reten
+     let #val_ret_serv = #val_ret_serv - #reten
+
+     let #val_banred_ofic = #val_banred_ofic - #banred
+     let #val_banred_trn  = #val_banred_trn - #banred
+     let #val_banred_empr = #val_banred_empr - #banred
+         let #val_banred_usua = #val_banred_usua - #banred
+         let #val_banred_serv = #val_banred_serv - #banred
+
+     let #val_tot_ofic = #val_tot_ofic - #total
+     let #val_tot_trn  = #val_tot_trn - #total
+     let #val_tot_empr = #val_tot_empr - #total
+   let #val_tot_usua = #val_tot_usua - #total
+   let #val_tot_serv = #val_tot_serv - #total
+
+     let #val_costo_ofic = #val_costo_ofic - #costo
+     let #val_costo_trn  = #val_costo_trn  - #costo
+     let #val_costo_empr = #val_costo_empr - #costo
+     let #val_costo_usua = #val_costo_usua - #costo
+     let #val_costo_serv = #val_costo_serv - #costo
+
+   let #con_tot_ofic = #con_tot_ofic - 1
+   let #con_tot_trn = #con_tot_trn - 1
+   let #con_tot_empr = #con_tot_empr - 1
+   let #con_tot_usua = #con_tot_usua - 1
+   let #con_tot_serv = #con_tot_serv - 1
+  else
+     let $correccion = 'N'
+     let #val_efe_ofic = #val_efe_ofic + #efectivo
+     let #val_efe_trn = #val_efe_trn + #efectivo
+     let #val_efe_empr = #val_efe_empr + #efectivo
+     let #val_efe_usua = #val_efe_usua + #efectivo
+     let #val_efe_serv = #val_efe_serv + #efectivo
+
+     let #val_chq_ofic = #val_chq_ofic + #cheque
+     let #val_chq_trn = #val_chq_trn + #cheque
+     let #val_chq_empr = #val_chq_empr + #cheque
+     let #val_chq_usua = #val_chq_usua + #cheque
+     let #val_chq_serv = #val_chq_serv + #cheque
+
+     let #val_nd_ofic = #val_nd_ofic + #nd
+     let #val_nd_trn = #val_chq_trn + #cheque
+     let #val_nd_empr = #val_nd_empr + #nd
+     let #val_nd_usua = #val_nd_usua + #nd
+     let #val_nd_serv = #val_nd_serv + #nd
+
+     let #val_ret_ofic = #val_ret_ofic + #reten
+     let #val_ret_trn  = #val_ret_trn + #reten
+     let #val_ret_empr = #val_ret_empr + #reten
+     let #val_ret_usua = #val_ret_usua + #reten
+     let #val_ret_serv = #val_ret_serv + #reten
+
+     let #val_banred_ofic = #val_banred_ofic + #banred
+     let #val_banred_trn  = #val_banred_trn + #banred
+     let #val_banred_empr = #val_banred_empr + #banred
+     let #val_banred_usua = #val_banred_usua + #banred
+     let #val_banred_serv = #val_banred_serv + #banred
+
+     let #val_tot_ofic = #val_tot_ofic + #total
+     let #val_tot_trn = #val_tot_trn + #total
+     let #val_tot_empr = #val_tot_empr + #total
+     let #val_tot_usua = #val_tot_usua + #total
+     let #val_tot_serv = #val_tot_serv + #total
+
+     let #val_costo_ofic = #val_costo_ofic + #costo
+     let #val_costo_trn  = #val_costo_trn  + #costo
+     let #val_costo_empr = #val_costo_empr + #costo
+     let #val_costo_usua = #val_costo_usua + #costo
+     let #val_costo_serv = #val_costo_serv + #costo
+
+
+   let #con_tot_ofic = #con_tot_ofic + 1
+   let #con_tot_trn  = #con_tot_trn + 1
+   let #con_tot_empr = #con_tot_empr + 1
+   let #con_tot_usua = #con_tot_usua + 1
+   let #con_tot_serv = #con_tot_serv + 1
+  end-if
+
+  if &ts_tipo_transaccionG = 3194 or &ts_tipo_transaccionG = 3203
+     let $tipo_pago = substr(&ts_tipo_chequeraG,4,2) || '-' || &ts_reentryG
+     do PrintS(2,$tipo_pagoG,'',0)
+  else
+     do PrintS(2,&ts_claseG,'',0)
+  end-if
+  do PrintS(3,$w_nombre,'',0)
+
+  if &ts_tipo_transaccionG = 3967 or &ts_tipo_transaccionG = 3334
+     let $agente = &ts_agenteG
+     do PrintS(4,$agenteG,'',0)
+  else
+    do PrintS(4,&ts_referenciaG,'',0)
+  end-if
+
+
+  do PrintN(5,#efectivo,'{FOR_DIN_S}',0)
+  do PrintN(6,#cheque,'{FOR_DIN_S}',0)
+  do PrintN(7,#nd,'{FOR_DIN_S}',0)
+  do PrintN(8,#reten,'{FOR_DIN_S}',0)
+
+  if &ts_tipo_transaccionG = 3194 or &ts_tipo_transaccionG = 3203
+     if &ts_tipoctaG = 'A'
+  let $cta = 'AHO'
+     end-if
+     if &ts_tipoctaG = 'C'
+  let $cta = 'CTE'
+     end-if
+  end-if
+
+  do PrintN(9,#banred,'{FOR_DIN_S}',0)
+  do PrintN(10,#total,'{FOR_DIN_S}',0)
+  do PrintS(11,$correccion,'',0)
+  do PrintN(12,#costo,'{FOR_DIN_S}',0)
+
+  next-listing
+
+from cob_cuentas..cc_tran_servicio,cob_pagos..pg_person_empresa  f
+where ts_tipo_transaccion in  (select convert (int, codigo)
+                              from cobis..cl_catalogo
+                             where tabla = (select codigo
+                                              from cobis..cl_tabla
+                                              where tabla = 'sv_servicios')
+                                              and estado = 'V')
+  and ts_tsfecha = $i_fecha_proceso
+  and convert(varchar, f.pe_empresa) = ts_causa
+  !and  pe_acedita_grp  is not null
+  and isnull((select pe_acedita_grp  from cob_pagos..pg_person_empresa g where g.pe_empresa = f.pe_cod_grupo),'N') = 'S'   !DAPV/03142012/CNEL
+order by  ts_tipo_transaccion, pe_cod_grupo, ts_causa,ts_oficina, ts_usuario, ts_clase,ts_referencia
+End-Select
+End-Procedure
+
+
+Begin-Procedure antes_trnG !DAPV/03142012/CNEL
+do Before_Pagina
+let #trn = &ts_tipo_transaccionG
+begin-select
+substring(tn_descripcion,1,60) &d_trnG
+from cobis..cl_ttransaccion
+where  tn_trn_code = &ts_tipo_transaccionG
+end-select
+begin-select
+a.valor  &d_horarioG
+from cobis..cl_catalogo a, cobis..cl_tabla b
+where  b.tabla  = 'sv_servicios'
+  and  b.codigo = a.tabla
+  and  convert(int,a.codigo) = convert(int,&ts_tipo_transaccionG)
+end-select
+End-Procedure
+
+!*******************************************************************************
+!****                        imprime totales para trn (Normal Diferido)      ***
+!*******************************************************************************
+Begin-Procedure despues_trnG !DAPV/03142012/CNEL
+  next-listing
+  next-listing
+let #con_tot_trn = 0
+let #val_efe_trn = 0
+let #val_chq_trn = 0
+let #val_nd_trn = 0
+let #val_ret_trn = 0
+let #val_banred_trn = 0
+let #val_tot_trn = 0
+let #val_costo_trn = 0
+End-Procedure
+
+
+
+!*******************************************************************************
+!****          Crea nuevo codigo de archivo por tipo de empresa              ***
+!*******************************************************************************
+Begin-Procedure antes_empresaG !DAPV/03142012/CNEL
+do Before_Pagina
+let #emp = &ts_causaG
+let $causa = &ts_causaG
+let $cod_grupo = ''
+let $acred_grp = 'N'
+
+begin-select
+convert(char(6),pe_cod_grupo)   &cod_grupoG
+from cob_pagos..pg_person_empresa
+  where pe_empresa = convert(int,&ts_causaG)
+end-select
+let $cod_grupo = &cod_grupoG
+
+if &cod_grupoG <> ''
+begin-select
+isnull(pe_acedita_grp,'N')   &acred_grpG
+from cob_pagos..pg_person_empresa
+  where pe_empresa = convert(int,$cod_grupoG)
+end-select
+  let $acred_grp = &acred_grpG
+  let #emp = $cod_grupo
+  let $causa = $cod_grupo
+end-if
+
+if $acred_grp = 'N'
+  let $acred_grp = 'N'
+  let #emp = &ts_causaG
+  let $causa = &ts_causaG
+end-if
+begin-select
+a.valor  &d_empresaG
+from cobis..cl_catalogo a, cobis..cl_tabla b
+where  b.tabla  = 'sv_empresas_servicios'
+  and  b.codigo = a.tabla
+  and  convert(int,a.codigo) = convert(int,$causa)
+end-select
+
+
+let $nombre_empresa = 'EMPRESA : ' || &d_empresaG
+do Nombre_ListadoG
+End-Procedure
+
+!*******************************************************************************
+!****                        imprime totales para empresa                    ***
+!*******************************************************************************
+Begin-Procedure despues_empresaG !DAPV/03142012/CNEL
+new-page
+do After_Pagina
+  next-listing
+do Totofic_Empresa
+  next-listing
+  do PrintS(1,'TOT. EMPRESA','',0)
+  do PrintN(2,#con_tot_empr,'99999',0)
+  do PrintN(5,#val_efe_empr,'{FOR_DIN_S}',0)
+  do PrintN(6,#val_chq_empr,'{FOR_DIN_S}',0)
+  do PrintN(7,#val_nd_empr,'{FOR_DIN_S}',0)
+  do PrintN(8,#val_ret_empr,'{FOR_DIN_S}',0)
+  do PrintN(9,#val_banred_empr,'{FOR_DIN_S}',0)
+  do PrintN(10,#val_tot_empr,'{FOR_DIN_S}',0)
+  do PrintN(12,#val_costo_empr,'{FOR_DIN_S}',0)
+let #con_tot_empr = 0
+let #val_efe_empr = 0
+let #val_chq_empr = 0
+let #val_nd_empr = 0
+let #val_ret_empr = 0
+let #val_banred_empr = 0
+let #val_tot_empr = 0
+let #val_costo_empr = 0
+End-Procedure
+
+
+!*******************************************************************************
+!*****    Procedimientos para generar nuevo nombre de archivo            *******
+!*******************************************************************************
+Begin-Procedure Nombre_ListadoG !DAPV/03142012/CNEL
+Begin-Select
+convert(char(2),datepart(mm,getdate())) &mm_listado_bG
+convert(char(2),datepart(dd,getdate())) &dd_listado_bG
+substring(convert(char(4),datepart(yy,getdate())),3,2) &aa_listado_bG
+convert(char(2),datepart(hh,getdate())) &hh_listado_bG
+convert(char(2),datepart(mi,getdate())) &mn_listado_bG
+End-Select
+let $emp = to_char(#emp) || &d_horarioG
+let $archivo_fuente = 'svlsauxi'
+move &mm_listado_b to $mes_listado '00'
+move &dd_listado_b to $dia_listado '00'
+move &hh_listado_b to $hor_listado '00'
+move &mn_listado_b to $min_listado '00'
+let $fecha_definitiva = $mes_listado || $dia_listado || &aa_listado_bG || '_'
+let $fecha_definitiva = $fecha_definitiva || $hor_listado || $min_listado
+let $nombre_listado = '../listados/' || $archivo_fuente || '_'
+let $nombre_listado = $nombre_listado || $fecha_definitiva
+let $nombre_listado = $nombre_listado || '_emp' || $emp || '.lis'
+new-report $nombre_listado
+End-Procedure
+
+
+
+!*******************************************************************************
+!****                        Busca nombre de oficina                         ***
+!*******************************************************************************
+Begin-Procedure antes_oficinaG !DAPV/03142012/CNEL
+do Before_Pagina
+let #ofic = &ts_oficinaG
+
+begin-select
+of_nombre  &d_oficinaG
+from cobis..cl_oficina
+where  of_oficina = &ts_oficinaG
+end-select
+End-Procedure
+
+
+!*******************************************************************************
+!****                        imprime totales para oficina                    ***
+!*******************************************************************************
+Begin-Procedure despues_oficinaG !DAPV/03142012/CNEL
+do Inserta_Total
+do After_Pagina
+  next-listing
+  next-listing
+  do PrintS(1,'TOT. OFICINA','',0)
+  do PrintN(2,#con_tot_ofic,'99999',0)
+  do PrintN(5,#val_efe_ofic,'{FOR_DIN_S}',0)
+  do PrintN(6,#val_chq_ofic,'{FOR_DIN_S}',0)
+  do PrintN(7,#val_nd_ofic,'{FOR_DIN_S}',0)
+  do PrintN(8,#val_ret_ofic,'{FOR_DIN_S}',0)
+  do PrintN(9,#val_banred_ofic,'{FOR_DIN_S}',0)
+  do PrintN(10,#val_tot_ofic,'{FOR_DIN_S}',0)
+  do PrintN(12,#val_costo_ofic,'{FOR_DIN_S}',0)
+let #con_tot_ofic = 0
+let #val_efe_ofic = 0
+let #val_chq_ofic = 0
+let #val_nd_ofic = 0
+let #val_ret_ofic = 0
+let #val_banred_ofic = 0
+let #val_tot_ofic = 0
+let #val_costo_ofic = 0
+End-Procedure
+
+
+!*******************************************************************************
+!****                        Busca nombre de oficina                         ***
+!*******************************************************************************
+Begin-Procedure antes_usuarioG !DAPV/03142012/CNEL
+do PrintS(1,&ts_usuarioG,'',0)
+next-listing
+End-Procedure
+
+!*******************************************************************************
+!****                        imprime totales para usuarios                   ***
+!*******************************************************************************
+Begin-Procedure despues_usuarioG !DAPV/03142012/CNEL
+
+  do PrintS(1,'TOT. USUARIO','',0)
+  do PrintN(2,#con_tot_usua,'99999',0)
+  do PrintN(5,#val_efe_usua,'{FOR_DIN_S}',0)
+  do PrintN(6,#val_chq_usua,'{FOR_DIN_S}',0)
+  do PrintN(7,#val_nd_usua,'{FOR_DIN_S}',0)
+  do PrintN(8,#val_ret_usua,'{FOR_DIN_S}',0)
+  do PrintN(9,#val_banred_usua,'{FOR_DIN_S}',0)
+  do PrintN(10,#val_tot_usua,'{FOR_DIN_S}',0)
+  do PrintN(12,#val_costo_usua,'{FOR_DIN_S}',0)
+
+let #con_tot_usua = 0
+let #val_efe_usua = 0
+let #val_chq_usua = 0
+let #val_nd_usua = 0
+let #val_ret_usua = 0
+let #val_banred_usua = 0
+let #val_tot_usua = 0
+let #val_costo_usua = 0
+next-listing
+next-listing
+End-Procedure
+
+
+Begin-Procedure ValidaCausa  !REF: 22
+let $w_existe_dep = 'N'
+begin-select
+1
+  let $w_existe_dep = 'S'
+from cobis..cl_catalogo a, cobis..cl_tabla b
+where  b.tabla  = 'sv_homologa_empresa_deptemp'                
+  and  b.codigo = a.tabla
+  and  a.valor = $empresa_dep
+  and a.estado = 'V'
+end-select
+End-Procedure
+

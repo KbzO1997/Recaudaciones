@@ -1,0 +1,154 @@
+###################################ANT###################################
+__________________________________________CONSULTA_____________________________________________________________________
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:BillInquiryRq>
+         <tem:BillInquiryRequest>
+            <tem:Channel>4</tem:Channel>
+            <tem:PrimaryAcctNumber>4381080000000006</tem:PrimaryAcctNumber>
+            <tem:TxCode>310000</tem:TxCode>
+            <tem:AcquirerAuditNumber>901370</tem:AcquirerAuditNumber>
+            <tem:TransactionTime>124336</tem:TransactionTime>
+            <tem:TransactionDate>01022022</tem:TransactionDate>
+            <tem:AcquirerInstitutionID>0208</tem:AcquirerInstitutionID>
+            <tem:Track2>4381080000000006=18060000000000000000</tem:Track2>
+            <tem:TerminalID>00011941</tem:TerminalID>
+            <tem:CurrencyCode>840</tem:CurrencyCode>
+            <tem:BillReference>1390141250001</tem:BillReference>
+            <!--1:Cedula/Ruc/Cuenta -->
+            <tem:BillServiceCode>1</tem:BillServiceCode>
+            <tem:BillCompanyCode>2331</tem:BillCompanyCode>
+            <tem:Medio>12</tem:Medio>
+            <tem:BranchId>0000000000</tem:BranchId>
+            <tem:AditionalData>{"additionalData":{"detail":{"inquiryObligation":{"header":{"detailData":{"infoInquiry":[{"name":"codAgencia","value":"593"},{"name":"codLocalidad","value":"131301130101"},{"name":"TIPO_IDENTIFICACION","value":"CED"},{"name":"PROVINCIA","value":"GUA"}]}}}}}}</tem:AditionalData>
+         </tem:BillInquiryRequest>
+      </tem:BillInquiryRq>
+   </soapenv:Body>
+</soapenv:Envelope>	 
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+      <BillInquiryRs xmlns="http://tempuri.org/">
+         <BillInquiryResponse>
+            <SwitchAuditNumber>100000000002</SwitchAuditNumber>
+            <ResultCode>00000</ResultCode>
+            <ErrorMessage>TRANSACCION EXITOSA</ErrorMessage>
+            <Amount>22175</Amount>
+            <ResponseData>{"additionalData":{"detail":{"paymentObligation":{"header":{"category":"C","idRubroBCE":"","nameRubroBCE":""},"infoPerson":{"documentType":"IDENTIFICACION","documentID":"0920911062","fullName":"GARCIA MOREIRA KATIUSKA ZULAY","legalPerson":[{"legalTypePerson":"","legalNameOwner":"","legalDocumentIDOwner":""}]},"additionalBiller":[{"name":"TIPO_IDENTIFICACION","value":"CED"},{"name":"SERVICIO","value":"CIT"},{"name":"PROVINCIA","value":"GUA"}],"documents":[{"documentType":"CONTRAPARTIDA","number":"0920911062","documentDate":"","reference1":"CERTIFICADO DEL CONDUCTOR","reference2":"","serviceName":" TIPO DE SERVICIO","dueDate":"","amount":"45.94","authorizationCode":"","base":"","discount":"","interest":"","penalty":"","retention":"","previousPaymentBalance":"","order":0,"taxes":[{"name":"IVA","reference":"Pago del IVA","value":"0.00"},{"name":"ISD","reference":"Pago del ISD","value":"0.00"},{"name":"ICE","reference":"Pago del ICE","value":"0.00"}]}]}}}}</ResponseData>
+            <CommissionsClient>! P300048 000000000000PISA00000000N0000000000SPISD00000000</CommissionsClient>
+            <CommissionsComerce>0000000000</CommissionsComerce>
+            <BillerCutoverDate>01022022</BillerCutoverDate>
+            <PartialPayment>N</PartialPayment>
+         </BillInquiryResponse>
+      </BillInquiryRs>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+__________________________________________PAGO_____________________________________________________________________
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:BillPaymentRq>
+         <tem:BillPaymentRequest>
+            <tem:Channel>4</tem:Channel>
+            <tem:PrimaryAcctNumber>4381080000000006</tem:PrimaryAcctNumber>
+            <tem:TxCode>44109M</tem:TxCode>
+            <tem:AcquirerAuditNumber>113881</tem:AcquirerAuditNumber>
+            <tem:TransactionTime>125500</tem:TransactionTime>
+            <tem:TransactionDate>01022022</tem:TransactionDate>
+            <tem:AcquirerInstitutionID>0208</tem:AcquirerInstitutionID>
+            <tem:Track2>4381080000000006=18060000000000000000</tem:Track2>
+            <tem:TerminalID>00008002</tem:TerminalID>
+            <tem:CurrencyCode>840</tem:CurrencyCode>
+            <!--Factura -->
+            <tem:BillReference>109620</tem:BillReference>
+            <tem:BillServiceCode>1</tem:BillServiceCode>
+            <tem:BillCompanyCode>2331</tem:BillCompanyCode>
+            <tem:Medio>12</tem:Medio>
+            <tem:BranchId>1</tem:BranchId>
+            <tem:AccountId1>2100209340</tem:AccountId1>
+            <tem:Amount>316</tem:Amount>
+            <tem:FormaPago>1</tem:FormaPago>
+            <tem:IndicatorReversal>0</tem:IndicatorReversal>
+            <tem:Trazabilidad>1</tem:Trazabilidad>
+            <tem:Unicidad>1</tem:Unicidad>
+            <tem:AditionalData>{"additionalData":{"detail":{"paymentObligation":{"header":{"detailData":{"infoPayment":[{"name":"codAgencia","value":"593"},{"name":"codLocalidad","value":"1390141250001"},{"name":"SERVICIO","value":"CIT"},{"name":"PROVINCIA","value":"GUA"},{"name":"TIPO_IDENTIFICACION","value":"CED"}],"infoPerson":{"category":"C","documentType":"IDENTIFICACION","documentID":"1203247968","fullName":"GARCIA MOREIRA KATIUSKA ZULAY"}}}}}}}</tem:AditionalData>
+         </tem:BillPaymentRequest>
+      </tem:BillPaymentRq>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+      <BillPaymentRs xmlns="http://tempuri.org/">
+         <BillPaymentResponse>
+            <SwitchAuditNumber>100000000003</SwitchAuditNumber>
+            <ResultCode>00000</ResultCode>
+            <ErrorMessage>TRANSACCION EXITOSA</ErrorMessage>
+            <ResponseData>{"additionalData":{"detail":{"reversalObligation":{"header":{"documents":{"billerAuthorizationCode":"411248210"}}}}}}</ResponseData>
+            <BillerCutoverDate>01022022</BillerCutoverDate>
+            <SequenceAcquire>0000000000</SequenceAcquire>
+            <StandIN>1</StandIN>
+         </BillPaymentResponse>
+      </BillPaymentRs>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+
+__________________________________________REVERSO_____________________________________________________________________
+
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:BillPaymentReversalRq>
+         <tem:BillPaymentReversalRequest>
+            <tem:Channel>4</tem:Channel>
+            <tem:PrimaryAcctNumber>4381080000000006</tem:PrimaryAcctNumber>
+            <tem:TxCode>44109M</tem:TxCode>
+            <tem:AcquirerAuditNumber>113881</tem:AcquirerAuditNumber>
+            <tem:TransactionTime>125500</tem:TransactionTime>
+            <tem:TransactionDate>01022022</tem:TransactionDate>
+            <tem:AcquirerInstitutionID>0208</tem:AcquirerInstitutionID>
+            <tem:Track2>4381080000000006=18060000000000000000</tem:Track2>
+            <tem:TerminalID>00008002</tem:TerminalID>
+            <tem:CurrencyCode>840</tem:CurrencyCode>
+             <!--factura -->
+            <tem:BillReference>109620</tem:BillReference>
+            <tem:BillServiceCode>1</tem:BillServiceCode>
+            <tem:BillCompanyCode>2331</tem:BillCompanyCode>
+            <tem:SwitchAuditNumber>100000000003</tem:SwitchAuditNumber>
+            <tem:SequenceAcquire>113881</tem:SequenceAcquire>
+            <tem:BillerCutoverDate>01022022</tem:BillerCutoverDate>
+            <tem:Medio>12</tem:Medio>
+            <tem:BranchId>20189999</tem:BranchId>
+            <tem:AccountId1>2100209340</tem:AccountId1>
+            <tem:Amount>316</tem:Amount>
+            <tem:FormaPago>1</tem:FormaPago>
+            <tem:IndicatorReversal>1</tem:IndicatorReversal>
+            <tem:Trazabilidad>0c4619297b1d49179491094be081c367</tem:Trazabilidad>
+            <tem:Unicidad>536D5367E28273B46DE4CEB86D90B1B4CA2636555C2CB1F1AD07B568D11FFC34</tem:Unicidad>
+            <tem:AditionalData>{"additionalData":{"detail":{"reversalObligation":{"header":{"detailData":{"infoReversal":[{"name":"codAgencia","value":"593"},{"name":"codLocalidad","value":"131301130101"},{"name":"billerAuthorizationCode","value":"411248210"}]}}}}}}</tem:AditionalData>
+         </tem:BillPaymentReversalRequest>
+      </tem:BillPaymentReversalRq>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+      <BillPaymentReversalRs xmlns="http://tempuri.org/">
+         <BillPaymentReversalResponse>
+            <SwitchAuditNumber>100000000003</SwitchAuditNumber>
+            <ResultCode>00000</ResultCode>
+            <ErrorMessage>TRANSACCION EXITOSA</ErrorMessage>
+            <ResponseData/>
+            <BillerCutoverDate>01022022</BillerCutoverDate>
+            <SequenceAcquire>113881</SequenceAcquire>
+            <StandIN>1</StandIN>
+         </BillPaymentReversalResponse>
+      </BillPaymentReversalRs>
+   </soapenv:Body>
+</soapenv:Envelope>
+
