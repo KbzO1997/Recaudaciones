@@ -1,0 +1,12 @@
+PAGO EN VIRTUALIZADOR
+EN EL CSP CUANDO PAGAS SE GRABA POR LA FECHA CONTABLE Y ESTA DESACTUALIZADA, TODO PAGO 
+SE VA A DESARROLLO1 
+
+ERROR:
+>SELECT permission denied on object cb_cotizacion,
+                database cob_conta, owner dbo
+
+SOLUCION:
+grant select on cb_cotizacion to apl_csp_hpdes --apl_osb_hpdes
+
+"cob_procesador", "fp_pago_ecutel"

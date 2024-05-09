@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.1.4-b01-.--><xs:schema version="1.0" targetNamespace="http://cobros.ecutel/" xmlns:tns="http://cobros.ecutel/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="aplicaPago" type="tns:aplicaPago"/>
+  <xs:element name="aplicaPagoAsp" type="tns:aplicaPagoAsp"/>
+  <xs:element name="aplicaPagoAspResponse" type="tns:aplicaPagoAspResponse"/>
+  <xs:element name="aplicaPagoResponse" type="tns:aplicaPagoResponse"/>
+  <xs:element name="aplicaReverso" type="tns:aplicaReverso"/>
+  <xs:element name="aplicaReversoResponse" type="tns:aplicaReversoResponse"/>
+  <xs:element name="consultaDeuda" type="tns:consultaDeuda"/>
+  <xs:element name="consultaDeudaAsp" type="tns:consultaDeudaAsp"/>
+  <xs:element name="consultaDeudaAspResponse" type="tns:consultaDeudaAspResponse"/>
+  <xs:element name="consultaDeudaResponse" type="tns:consultaDeudaResponse"/>
+  <xs:complexType name="aplicaPagoAsp">
+    <xs:sequence>
+      <xs:element name="id_tipo_identificacion" type="xs:string" minOccurs="0"/>
+      <xs:element name="num_identificacion" type="xs:string" minOccurs="0"/>
+      <xs:element name="valor" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_forma_pago" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_institucion" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_canal" type="xs:string" minOccurs="0"/>
+      <xs:element name="fecha_contable" type="xs:string" minOccurs="0"/>
+      <xs:element name="fecha_trx" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_pago_banco" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_terminal" type="xs:string" minOccurs="0"/>
+      <xs:element name="num_trx_atm" type="xs:string" minOccurs="0"/>
+      <xs:element name="valor_recibido" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="aplicaPagoAspResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaDeuda">
+    <xs:sequence>
+      <xs:element name="id_tipo_identificacion" type="xs:string" minOccurs="0"/>
+      <xs:element name="num_identificacion" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_institucion" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_canal" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaDeudaResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="aplicaPago">
+    <xs:sequence>
+      <xs:element name="id_tipo_identificacion" type="xs:string" minOccurs="0"/>
+      <xs:element name="num_identificacion" type="xs:string" minOccurs="0"/>
+      <xs:element name="valor" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_forma_pago" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_institucion" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_canal" type="xs:string" minOccurs="0"/>
+      <xs:element name="fecha_contable" type="xs:string" minOccurs="0"/>
+      <xs:element name="fecha_trx" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_pago_banco" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="aplicaPagoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaDeudaAsp">
+    <xs:sequence>
+      <xs:element name="id_tipo_identificacion" type="xs:string" minOccurs="0"/>
+      <xs:element name="num_identificacion" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_institucion" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_canal" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_terminal" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaDeudaAspResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="aplicaReverso">
+    <xs:sequence>
+      <xs:element name="id_tipo_identificacion" type="xs:string" minOccurs="0"/>
+      <xs:element name="num_identificacion" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_institucion" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_canal" type="xs:string" minOccurs="0"/>
+      <xs:element name="fecha_contable" type="xs:string" minOccurs="0"/>
+      <xs:element name="fecha_trx" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_pago_banco" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="aplicaReversoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

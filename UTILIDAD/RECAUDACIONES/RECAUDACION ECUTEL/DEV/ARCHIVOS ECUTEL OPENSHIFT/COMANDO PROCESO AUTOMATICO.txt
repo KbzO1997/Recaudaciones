@@ -1,0 +1,5 @@
+--crear el deployment config
+oc new-app --as-deployment-config --build-env MAVEN_MIRROR_URL=https://nexus.apps.ocpmsbbdevqa.bolivariano.fin.ec/repository/maven-public --build-env MAVEN_OPTS=-Dmaven.wagon.http.ssl.insecure=true --build-env TRUST_PATH=/secret/truststore.jks --build-env TRUSTSTORE_PASS=desarrollo --build-env CERTIFICATE_KEY_STORE=/secret/identity.jks --name rec-ecutel -i openjdk-11:latest -e TZ=America/Guayaquil -e LOGGING_LEVEL_ROOT=INFO --source-secret=git-secret https://gitlab.apps.ocpmsbbdevqa.bolivariano.fin.ec/recaudos/rec-ecutel
+
+-- asociar el configmap al deployment config
+oc set volume dc/rec-ecutel --add --name=application-properties --type=configmap --configmap-name=rec-ecutel-application-properties --mount-path=/deployments/config/application-properties --sub-path=application.properties

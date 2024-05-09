@@ -1,0 +1,157 @@
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  name: rec-ecutel
+  namespace: bb-dev-recaudosempresas
+  labels:
+    app: rec-ecutel
+    app.kubernetes.io/component: rec-ecutel
+    app.kubernetes.io/instance: rec-ecutel
+    app.kubernetes.io/name: openjdk-11
+    app.openshift.io/runtime: quarkus                                     
+spec:
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 600
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources: {}
+    activeDeadlineSeconds: 21600
+  triggers:
+    - type: ConfigChange
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - rec-ecutel
+        from:
+          kind: ImageStreamTag
+          namespace: bb-dev-recaudosempresas
+          name: 'rec-ecutel:latest'
+        lastTriggeredImage: >-
+          image-registry.openshift-image-registry.svc:5000/bb-dev-recaudosempresas/rec-ecutel:latest
+  replicas: 1
+  revisionHistoryLimit: 10
+  test: false
+  selector:
+    deploymentconfig: rec-ecutel
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        deploymentconfig: rec-ecutel
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+    spec:
+      volumes:
+        - name: application-properties
+          configMap:
+            name: rec-ecutel-application-properties
+            defaultMode: 420                                      
+        - name: truststore-jks
+          secret:
+            secretName: truststore-jks
+            defaultMode: 420
+      containers:
+        - resources:
+            limits:
+              cpu: 150m
+              memory: 512Mi
+            requests:
+              cpu: 75m
+              memory: 256Mi
+          readinessProbe:
+            httpGet:
+              path: /q/health/ready
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 120
+            timeoutSeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3                         
+          terminationMessagePath: /dev/termination-log
+          name: rec-ecutel
+          livenessProbe:
+            httpGet:
+              path: /q/health/live
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 90
+            timeoutSeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3                        
+          env:
+            - name: LOGGING_LEVEL_ROOT
+              value: INFO
+            - name: TZ
+              value: America/Guayaquil
+            - name: ROOT_LOGGING_LEVEL
+              value: ERROR
+            - name: JAVA_OPTS
+              value: '-Xms64m -Xmx1024m'
+            - name: JAVA_OPTS_APPEND
+              value: '-Dfile.encoding=ISO-8859-1'
+            - name: GC_MAX_METASPACE_SIZE
+              value: '256'                                        
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8443
+              protocol: TCP
+            - containerPort: 8778
+              protocol: TCP
+          imagePullPolicy: Always
+          startupProbe:
+            httpGet:
+              path: /q/health/started
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 120
+            timeoutSeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3                       
+          volumeMounts:
+            - name: application-properties
+              mountPath: /deployments/config/application.properties
+              subPath: application.properties                                          
+            - name: truststore-jks
+              mountPath: /secret/truststore.jks
+              subPath: truststore.jks
+          terminationMessagePolicy: File
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/bb-dev-recaudosempresas/rec-ecutel:latest
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+      hostAliases:
+        - ip: 172.16.11.16
+          hostnames:
+            - jms.bolivariano.fin.ec
+        - ip: 172.16.30.209
+          hostnames:
+            - frameworkdes.bbframework.com
+        - ip: 52.184.228.101
+          hostnames:
+            - devec.cargoamc.com
+      affinity:
+        podecuteliAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 10
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: deploymentconfig
+                      operator: In
+                      values:                                               
+                        - rec-ecutel
+                topologyKey: kubernetes.io/hostname

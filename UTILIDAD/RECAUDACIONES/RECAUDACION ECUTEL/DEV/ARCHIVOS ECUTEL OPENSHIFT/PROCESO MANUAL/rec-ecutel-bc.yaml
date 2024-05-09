@@ -1,0 +1,64 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  name: rec-ecutel
+  generation: 100
+  namespace: bb-dev-recaudosempresas
+  labels:
+    app: rec-ecutel
+    app.kubernetes.io/component: rec-ecutel
+    app.kubernetes.io/instance: rec-ecutel
+    app.kubernetes.io/name: openjdk-11
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'rec-ecutel:latest'
+  resources: {}
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Source
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        namespace: bb-images
+        name: 'openjdk-11:latest'
+      env:
+        - name: MAVEN_MIRROR_URL
+          value: >-
+            https://nexus.apps.ocpmsbbdevqa.bolivariano.fin.ec/repository/maven-public
+        - name: MAVEN_OPTS
+          value: '-Dmaven.wagon.http.ssl.insecure=true'
+  postCommit: {}
+  source:
+    type: Git
+    git:
+      uri: 'https://gitlab.apps.ocpmsbbdevqa.bolivariano.fin.ec/recaudos/rec-ecutel'
+    sourceSecret:
+      name: git-secret
+  triggers:
+    - type: GitHub
+      github:
+        secret: OqszWEgV4EF3dj1RF5fE
+    - type: Generic
+      generic:
+        secret: Yd2oiHhcrJHc6fdbxGcq
+    - type: ConfigChange
+    - type: ImageChange
+      imageChange:
+        lastTriggeredImageID: >-
+          registry.access.redhat.com/ubi8/openjdk-11:latest
+  runPolicy: Serial
+status:
+  lastVersion: 198
+  imageChangeTriggers:
+    - lastTriggeredImageID: >-
+        registry.access.redhat.com/ubi8/openjdk-11:latest
+      from:
+        namespace: bb-images
+        name: 'openjdk-11:latest'
+      lastTriggerTime: null

@@ -1,0 +1,65 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: rec-ecutel-application-properties
+  namespace: bb-dev-recaudosempresas
+data:
+  application.properties: >
+
+    quarkus.cxf.client."ecutel-service".service-interface=ecutel.cobros.WSCobrosLineaEcutel
+    
+    quarkus.cxf.client."ecutel-service".client-endpoint-url=http://172.16.23.135:10040/cobrosecutel/WS_CobrosLinea_Ecutel
+    
+    #quarkus.cxf.client."telecom-service".client-endpoint-url=https://rec-virtualizador-bb-dev-recaudosempresas.apps.ocpmsbbdevqa.bolivariano.fin.ec/cobrosecutel/WS_CobrosLinea_Ecutel?wsdl
+    
+    quarkus.log.min-level=DEBUG
+    
+    quarkus.log.level=INFO
+    
+    quarkus.log.category."com.bolivariano.microservice".min-level=DEBUG
+    
+    quarkus.log.category."com.bolivariano.microservice".level=INFO
+    
+    quarkus.log.console.format=[%d{yyyy-MM-dd HH:mm:ss.SSS}][%p][%h][%c{1}][%M][%m]%n
+
+    
+    quarkus.vertx.worker-pool-size=90
+    
+    quarkus.vertx.internal-blocking-pool-size=90
+    
+    quarkus.vertx.max-event-loop-execute-time=60S
+
+    
+    telecom.provider.connTimeout=2000
+    
+    telecom.provider.connRequestTimeout=2000
+    
+    telecom.provider.readTimeout=5000
+
+    
+    telecom.mq.host=jms.bolivariano.fin.ec
+    
+    telecom.mq.port=1926
+    
+    telecom.mq.channel=REC_CHL_MS
+    
+    telecom.mq.queueManager=CSPBRK_QM
+    
+    telecom.mq.requestQueue=MS_REC_ECUTEL_REQ
+    
+    telecom.mq.responseQueue=MS_REC_ECUTEL_RESP
+    
+    telecom.mq.poolJms=5
+    
+    telecom.mq.delayReconnect=5000
+    
+    telecom.mq.timeToLive=50000
+    
+    telecom.mq.characterSet=1208
+
+    
+    telecom.truststore.path=/secret/truststore.jks
+    
+    telecom.truststore.password=otpms
+    
+    telecom.truststore.type=JKS
