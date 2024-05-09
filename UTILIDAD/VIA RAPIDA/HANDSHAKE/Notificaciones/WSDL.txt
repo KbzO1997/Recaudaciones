@@ -1,0 +1,37 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://notification_gateway.microservice.bolivariano.com/microservicio/NotificationGateway" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:sch="http://notification_gateway.microservice.bolivariano.com/estructura" targetNamespace="http://notification_gateway.microservice.bolivariano.com/microservicio/NotificationGateway">
+<wsdl:types>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://notification_gateway.microservice.bolivariano.com/microservicio/NotificationGateway" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:sch="http://notification_gateway.microservice.bolivariano.com/estructura">
+<xsd:import namespace="http://notification_gateway.microservice.bolivariano.com/estructura" schemaLocation="https://avisos24gatewayms-bb-dev-canales.apps.ocpmsbbdevqa.bolivariano.fin.ec/services/Notificaciones/Avisos24GatewayMS?xsd=../schema/Notificaciones.xsd"> </xsd:import>
+</xsd:schema>
+</wsdl:types>
+<wsdl:message name="enviarNotificacionResponse">
+<wsdl:part element="sch:mensajeSalidaEnviarNotificacion" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="enviarNotificacionRequest">
+<wsdl:part element="sch:mensajeEntradaEnviarNotificacion" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:portType name="notificacionesPortType">
+<wsdl:operation name="enviarNotificacion">
+<wsdl:input message="tns:enviarNotificacionRequest"> </wsdl:input>
+<wsdl:output message="tns:enviarNotificacionResponse"> </wsdl:output>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="notificacionesSOAP11Binding" type="tns:notificacionesPortType">
+<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="enviarNotificacion">
+<soap:operation soapAction="http://notification_gateway.microservice.bolivariano.com/microservicio/NotificationGateway/enviarNotificacion"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="NotificacionesSOAPService">
+<wsdl:port binding="tns:notificacionesSOAP11Binding" name="notificacionesSOAP11BindingQSPort">
+<soap:address location="https://avisos24gatewayms-bb-dev-canales.apps.ocpmsbbdevqa.bolivariano.fin.ec/services/Notificaciones/Avisos24GatewayMS"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>
