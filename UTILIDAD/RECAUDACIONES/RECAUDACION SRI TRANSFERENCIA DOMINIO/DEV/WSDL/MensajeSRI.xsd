@@ -1,0 +1,312 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema targetNamespace="http://www.bolivariano.com/MensajeSRI" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msr="http://www.bolivariano.com/MensajeSRI" xmlns:sri="http://www.bolivariano.com/SRI" xmlns:veh="http://www.bolivariano.com/Vehiculo" xmlns:mbl="http://www.bolivariano.com/MensajeBolivariano" xmlns:cbb="http://www.bolivariano.com/CoreBB" xmlns:prd="http://www.bolivariano.com/Producto" xmlns:cs="http://www.bolivariano.com/Comision" xmlns:fp="http://www.bolivariano.com/FormaPago">
+   <xs:import namespace="http://www.bolivariano.com/MensajeBolivariano" schemaLocation="MensajeBolivariano.xsd"/>
+   <xs:import namespace="http://www.bolivariano.com/SRI" schemaLocation="SRI.xsd"/>
+   <xs:import namespace="http://www.bolivariano.com/Vehiculo" schemaLocation="Vehiculo.xsd"/>
+   <xs:import namespace="http://www.bolivariano.com/CoreBB" schemaLocation="CoreBB.xsd"/>
+   <xs:import namespace="http://www.bolivariano.com/Producto" schemaLocation="Producto.xsd"/>
+   <xs:import namespace="http://www.bolivariano.com/Comision" schemaLocation="Comision.xsd"/>
+   <xs:import namespace="http://www.bolivariano.com/FormaPago" schemaLocation="FormaPago.xsd"/>
+   <xs:element name="MensajeEntradaConsultarMatriculaSRI" type="msr:MensajeEntradaConsultar"/>
+   <xs:element name="MensajeSalidaConsultarMatriculaSRI" type="msr:MensajeSalidaConsultar"/>
+   <xs:element name="MensajeEntradaPagarMatriculaSRI" type="msr:MensajeEntradaPagar"/>
+   <xs:element name="MensajeSalidaPagarMatriculaSRI" type="msr:MensajeSalidaPagar"/>
+   <xs:element name="MensajeEntradaReversarMatriculaSRI" type="msr:MensajeEntradaReversar"/>
+   <xs:element name="MensajeSalidaReversarMatriculaSRI" type="msr:MensajeSalidaReversar"/>
+   <xs:element name="sriFault" type="msr:SRIFault"/>
+   <xs:element name="MensajeEntradaConsultarRise" type="msr:MensajeEntradaConsultarRise"/>
+   <xs:element name="MensajeSalidaConsultarRise" type="msr:MensajeSalidaConsultarRise"/>
+   <xs:element name="MensajeEntradaPagarRise" type="msr:MensajeEntradaPagarRise"/>
+   <xs:element name="MensajeSalidaPagarRise" type="msr:MensajeSalidaPagarRise"/>
+   <xs:element name="MensajeEntradaReversarRise" type="msr:MensajeEntradaReversarRise"/>
+   <xs:element name="MensajeSalidaReversarRise" type="msr:MensajeSalidaReversarRise"/>
+   <xs:element name="MensajeEntradaConsultarTransferenciaDominio" type="msr:MensajeEntradaConsultarTransferenciaDominio"/>
+   <xs:element name="MensajeSalidaConsultarTransferenciaDominio" type="msr:MensajeSalidaConsultarTransferenciaDominio"/>
+   <xs:element name="MensajeEntradaPagarTransferenciaDominio" type="msr:MensajeEntradaPagarTransferenciaDominio"/>
+   <xs:element name="MensajeSalidaPagarTransferenciaDominio" type="msr:MensajeSalidaPagarTransferenciaDominio"/>
+   <xs:element name="MensajeEntradaReversarTransferenciaDominio" type="msr:MensajeEntradaReversarTransferenciaDominio"/>
+   <xs:element name="MensajeSalidaReversarTransferenciaDominio" type="msr:MensajeSalidaReversarTransferenciaDominio"/>
+   <xs:element name="MensajeEntradaConsultarOtrasFormasPago" type="msr:MensajeEntradaConsultarOtrasFormasPago"/>
+   <xs:element name="MensajeSalidaConsultarOtrasFormasPago" type="msr:MensajeSalidaConsultarOtrasFormasPago"/>
+   <xs:element name="MensajeEntradaPagarOtrasFormasPago" type="msr:MensajeEntradaPagarOtrasFormasPago"/>
+   <xs:element name="MensajeSalidaPagarOtrasFormasPago" type="msr:MensajeSalidaPagarOtrasFormasPago"/>
+   <xs:element name="MensajeEntradaReversarOtrasFormasPago" type="msr:MensajeEntradaReversarOtrasFormasPago"/>
+   <xs:element name="MensajeSalidaReversarOtrasFormasPago" type="msr:MensajeSalidaReversarOtrasFormasPago"/>
+   <xs:complexType name="MensajeEntradaConsultar">
+      <xs:annotation>
+         <xs:documentation>Mensaje de entrada consultar (agrupa entidades y
+                              atributos de negocio).</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeEntrada">
+            <xs:sequence>
+               <xs:element name="informacionSRI" type="sri:SRI" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionVehiculo" type="veh:Vehiculo" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionCore" type="cbb:CoreBB" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MensajeSalidaConsultar">
+      <xs:annotation>
+         <xs:documentation>Mensaje de salida consultar (agrupa entidades y
+                              atributos de negocio).</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeSalida">
+            <xs:sequence>
+               <xs:element name="informacionSRI" type="sri:SRI" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionVehiculo" type="veh:Vehiculo" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionCore" type="cbb:CoreBB" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MensajeEntradaPagar">
+      <xs:annotation>
+         <xs:documentation>Mensaje de entrada pagar (agrupa entidades y
+                              atributos de negocio).</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeEntrada">
+            <xs:sequence>
+               <xs:element name="informacionSRI" type="sri:SRI" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionVehiculo" type="veh:Vehiculo" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionCore" type="cbb:CoreBB" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="tipoTransaccionFlujo" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MensajeSalidaPagar">
+      <xs:annotation>
+         <xs:documentation>Mensaje de salida pagar (agrupa entidades y
+                              atributos de negocio).</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeSalida">
+            <xs:sequence>
+               <xs:element name="informacionSRI" type="sri:SRI" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionVehiculo" type="veh:Vehiculo" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionCore" type="cbb:CoreBB" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MensajeEntradaReversar">
+      <xs:annotation>
+         <xs:documentation>Mensaje de entrada reversar (agrupa entidades y
+                              atributos de negocio).</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeEntrada">
+            <xs:sequence>
+               <xs:element name="informacionSRI" type="sri:SRI" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionVehiculo" type="veh:Vehiculo" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionCore" type="cbb:CoreBB" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="tipoTransaccionFlujo" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MensajeSalidaReversar">
+      <xs:annotation>
+         <xs:documentation>Mensaje de salida reversar (agrupa entidades y
+                              atributos de negocio).</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeSalida">
+            <xs:sequence>
+               <xs:element name="informacionSRI" type="sri:SRI" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionVehiculo" type="veh:Vehiculo" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionCore" type="cbb:CoreBB" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="SRIFault">
+      <xs:sequence>
+         <xs:element name="codigo" type="xs:string"/>
+         <xs:element name="nombre" type="xs:string"/>
+         <xs:element name="descripcion" type="xs:string"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="MensajeEntradaConsultarRise">
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeEntrada">
+            <xs:sequence>
+               <xs:element name="informacionSRI" type="sri:SRI" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionCore" type="cbb:CoreBB" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MensajeSalidaConsultarRise">
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeSalida">
+            <xs:sequence>
+               <xs:element name="razonSocial" type="xs:string" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="valorGlobal" type="xs:double" minOccurs="0" maxOccurs="1" default="0.00"/>
+               <xs:element name="detalleGlobal" type="xs:string" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="valorAFecha" type="xs:double" minOccurs="0" maxOccurs="1" default="0.00"/>
+               <xs:element name="detalleAFecha" type="xs:string" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="valorComision" type="xs:double" minOccurs="0" maxOccurs="1" default="0.00"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MensajeEntradaPagarRise">
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeEntrada">
+            <xs:sequence>
+               <xs:element name="informacionSRI" type="sri:SRI" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionCore" type="cbb:CoreBB" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="datosPago" type="fp:FormaPago" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MensajeSalidaPagarRise">
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeSalida">
+            <xs:sequence>
+               <xs:element name="detallePago" type="xs:string" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="numeroComprobante" type="xs:string" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="fechaRecaudacion" type="xs:date" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="fechaContable" type="xs:dateTime" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="autorizacionSRI" type="xs:string" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="fechaVenSRI" type="xs:string" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="notaVenta" type="xs:string" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="baseImponible" type="xs:double" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="valorTasa" type="xs:double" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="valorImpuesto" type="xs:double" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MensajeEntradaReversarRise">
+      <xs:complexContent>
+         <xs:extension base="msr:MensajeEntradaPagarRise"/>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MensajeSalidaReversarRise">
+      <xs:complexContent>
+         <xs:extension base="msr:MensajeSalidaPagarRise"/>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MensajeEntradaConsultarTransferenciaDominio">
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeEntrada">
+            <xs:sequence>
+               <xs:element name="informacionSRI" type="sri:SRI" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionVehiculo" type="veh:Vehiculo" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionCore" type="cbb:CoreBB" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MensajeSalidaConsultarTransferenciaDominio">
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeSalida">
+            <xs:sequence>
+               <xs:element name="informacionSRI" type="sri:SRI" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionVehiculo" type="veh:Vehiculo" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionCore" type="cbb:CoreBB" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MensajeEntradaPagarTransferenciaDominio">
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeEntrada">
+            <xs:sequence>
+               <xs:element name="informacionSRI" type="sri:SRI" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionVehiculo" type="veh:Vehiculo" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionCore" type="cbb:CoreBB" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MensajeSalidaPagarTransferenciaDominio">
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeSalida">
+            <xs:sequence>
+               <xs:element name="informacionSRI" type="sri:SRI" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionVehiculo" type="veh:Vehiculo" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionCore" type="cbb:CoreBB" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MensajeEntradaReversarTransferenciaDominio">
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeEntrada">
+            <xs:sequence>
+               <xs:element name="informacionSRI" type="sri:SRI" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionVehiculo" type="veh:Vehiculo" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionCore" type="cbb:CoreBB" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MensajeSalidaReversarTransferenciaDominio">
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeSalida">
+            <xs:sequence>
+               <xs:element name="informacionSRI" type="sri:SRI" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionVehiculo" type="veh:Vehiculo" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionCore" type="cbb:CoreBB" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MensajeEntradaConsultarOtrasFormasPago">
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeEntrada">
+            <xs:sequence>
+               <xs:element name="informacionSRI" type="sri:SRI" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionCore" type="cbb:CoreBB" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MensajeSalidaConsultarOtrasFormasPago">
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeSalida">
+            <xs:sequence>
+               <xs:element name="informacionSRI" type="sri:SRI" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MensajeEntradaPagarOtrasFormasPago">
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeEntrada">
+            <xs:sequence>
+               <xs:element name="informacionSRI" type="sri:SRI" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionCore" type="cbb:CoreBB" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MensajeSalidaPagarOtrasFormasPago">
+      <xs:complexContent>
+         <xs:extension base="msr:MensajeSalidaConsultarOtrasFormasPago"/>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MensajeEntradaReversarOtrasFormasPago">
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeEntrada">
+            <xs:sequence>
+               <xs:element name="informacionSRI" type="sri:SRI" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="informacionCore" type="cbb:CoreBB" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MensajeSalidaReversarOtrasFormasPago">
+      <xs:complexContent>
+         <xs:extension base="msr:MensajeSalidaPagarOtrasFormasPago"/>
+      </xs:complexContent>
+   </xs:complexType>
+</xs:schema>

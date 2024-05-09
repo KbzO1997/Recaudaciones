@@ -1,0 +1,310 @@
+!**********************************************************************!
+!*    Archivo           : svlspagtrd.sqr                              *!
+!*    Base de datos     : cob_servicios                               *!
+!*    Producto          : Cuentas Corrientes                          *!
+!*    Disenado por      : Rosa Castillo	Calle			      *!
+!*    Fecha de escritura: 8/Mar/2002                                  *!
+!**********************************************************************!
+!*                              IMPORTANTE                            *!
+!*   Este programa es parte de los paquetes bancarios propiedad del   *!
+!*   "BANCO BOLIVARIANO".                                             *!
+!*   Su uso no autorizado queda expresamente prohibido asi como       *!
+!*   cualquier alteracion o agregado hecho por alguno de sus usuarios *!
+!*   sin el debido consentimiento por escrito de la Presidencia       *!
+!*   Ejecutiva del BANCO BOLIVARIANO o su representante               *!
+!**********************************************************************!
+!*                              PROPOSITO                             *!
+!*   Genera reporte de  PAGO DEL 1% POR TRANSFERENCIA DE DOMINIO DE   *!
+!*   MATRICULACION DE VEHICULOS            			      *!
+!**********************************************************************!
+!*     FECHA             AUTOR                MODIFICACIONES          *!
+!*  08/Mar/2002  R.Castillo		Emision Inicial		      *!
+!*  07/May/2002  Galo Yanez		Imprime fecha contrato	      *!
+!*   #  14.Oct.2003  Galo Yanez  Cambiar older sqr commands.   *!
+!*   #  09.Sep.2020  Josué Rocafuerte  Cambio en codicion para ts_endoso*!
+!**********************************************************************!
+!*** '<37><33><10>(ofi.jdt) STARLM<10>' ***!
+
+#include "definic.inc"
+#define   ANCHO_PAG                250    ! Ancho de pagina
+#define   LARGO_PAG                100
+#define   NOM_ARCH                 svlspagmat.sqr
+#define   FOR_DIN                  99,999,999,999
+#define   FOR_DIN_D                99,999,999.99
+#define  SALIDA  '<37><33><10>(cobis1.jdt) STARTLM<10>'     !KFAH:13abr2000
+
+Begin-Setup
+use cob_servicios
+End-Setup
+
+#include "printer_cobis1.inc"   !REF:GYC
+
+#include "log.inc"
+#include "ctacte.inc"
+
+Begin-Program   !REF:GYC
+do Inicializar_Programa
+do ParamN (1,#i_filial,'cobis..cl_filial','fi_filial = ','No existe la filial')
+do ParamS (2,$i_fecha_proceso,'','','')
+do Main
+do finalizar_Programa
+End-Program   !REF:GYC
+
+Begin-Heading 10
+
+  let $w_titulo    = 'REPORTE DE PAGO IMP 1% TRANSFERENCIA DE DOMINIO DE VEHICULOS' 
+  let $w_subtitulo = 'RECAUDACIONES POR VENTANILLA'
+  let $w_subtitulo2 = 'Oficina: ' || &d_oficina
+  let $w_programa = 'svlspagtrd.sqr'
+  do Encabezado($w_titulo, $w_subtitulo, $w_subtitulo2, $i_fecha_proceso, $w_empresa ,
+               $d_oficina, $w_programa)
+
+  position (+1)
+  do Lin_Horizontal                                                       
+  do Centrar ('PLACA',1)
+  do Centrar ('AUTORIZA',2)
+  do Centrar ('VAL. AVALUO',3)
+  do Centrar ('VAL. CONTRATO',4)
+  do Centrar ('CED/RUC COMPRADOR',5)
+  do Centrar ('EFECTIVO',6)
+  do Centrar ('CHEQUE',7)
+  do Centrar ('DEBITO',8)
+  do Centrar ('TARJETA CREDITO',9)
+  do Centrar ('TOTAL',10)                                     
+  do Centrar ('CORR.',11)
+  do Centrar ('USUARIO',12)
+  do Centrar ('TERMINAL',13)
+  do Centrar ('FECHA CONTRATO',14)			!GYC 2002/MAY/07
+  do Centrar ('HORA',15)
+  do Centrar ('COMISION',16)
+  do Lin_Horizontal
+
+End-Heading
+
+Begin-Procedure Main
+ do Columnas (30,8,16,16,14,16,16,16,16,16,8,8,10,15,10,16,0,0,0,0)   
+ do Nombre_Filial(#i_filial,$w_empresa)
+ let #w_oficina = 999
+ do Procesar
+End-Procedure
+
+
+! Información de las Tablas de Servicios y Movimientos recadu 1% imp trans. Dominio
+
+Begin-Procedure Procesar
+Begin-Select
+ts_oficina        () on-break print=never before=antes_oficina after=despues_oficina level=1 
+convert(int, ts_propietario)        &w_propietario
+ts_saldo
+ts_valor
+ts_monto
+ts_ocasional
+ts_referencia
+ts_tsfecha
+convert(varchar(5), ts_hora, 108)    &w_hora
+ts_correccion
+ts_usuario
+ts_moneda
+ts_terminal
+td_valor_contra
+td_valor_avaluo
+td_estado
+td_ced_ruc
+td_fecha_contrato				!GYC 2002/MAY/07
+ts_descuento_iess
+
+
+
+  let #autorizacion = &w_propietario
+  let $cliente = &ts_referencia  
+  let #efectivo = &ts_saldo
+  let #cheque = &ts_valor
+  let #tarjeta = &ts_monto 
+  let #debito  = &ts_ocasional 
+  let #valctr = &td_valor_contra
+  let #valava = &td_valor_avaluo
+  let #com = &ts_descuento_iess
+
+
+  let #total = #efectivo + #cheque + #tarjeta + #debito 
+ 
+  if &ts_correccion = 'S'
+     let $correccion = 'S'
+     let #val_efe_ofic = #val_efe_ofic - &ts_saldo
+     let #val_efe_empr = #val_efe_empr - &ts_saldo
+     let #val_chq_ofic = #val_chq_ofic - #cheque
+     let #val_chq_empr = #val_chq_empr - #cheque
+     let #val_deb_ofic = #val_deb_ofic - #debito
+     let #val_deb_empr = #val_deb_empr - #debito
+     let #val_tar_ofic = #val_tar_ofic - #tarjeta
+     let #val_tar_empr = #val_tar_empr - #tarjeta
+     let #val_tot_ofic = #val_tot_ofic - #total
+     let #val_tot_empr = #val_tot_empr - #total
+     let #val_ctr_ofic = #val_ctr_ofic - #valctr
+     let #val_ctr_empr = #val_ctr_empr - #valctr
+     let #val_ava_ofic = #val_ava_ofic - #valava
+     let #val_ava_empr = #val_ava_empr - #valava
+
+     let #val_com_ofic = #val_com_ofic - #com
+     let #val_com_empr = #val_com_empr - #com
+
+     let #con_tot_ofic = #con_tot_ofic - 1
+     let #con_tot_empr = #con_tot_empr - 1
+
+  else
+     let $correccion = 'N'
+     let #val_efe_ofic = #val_efe_ofic + #efectivo
+     let #val_efe_empr = #val_efe_empr + #efectivo
+     let #val_chq_ofic = #val_chq_ofic + #cheque
+     let #val_chq_empr = #val_chq_empr + #cheque
+     let #val_deb_ofic = #val_deb_ofic + #debito
+     let #val_deb_empr = #val_deb_empr + #debito
+     let #val_tar_ofic = #val_tar_ofic + #tarjeta
+     let #val_tar_empr = #val_tar_empr + #tarjeta
+     let #val_tot_ofic = #val_tot_ofic + #total
+     let #val_tot_empr = #val_tot_empr + #total
+     let #val_ctr_ofic = #val_ctr_ofic + #valctr
+     let #val_ctr_empr = #val_ctr_empr + #valctr
+     let #val_ava_ofic = #val_ava_ofic + #valava
+     let #val_ava_empr = #val_ava_empr + #valava
+
+     let #val_com_ofic = #val_com_ofic + #com
+     let #val_com_empr = #val_com_empr + #com
+
+     let #con_tot_ofic = #con_tot_ofic + 1
+     let #con_tot_empr = #con_tot_empr + 1
+
+  end-if	 
+
+  do PrintS(1,$cliente,'xxxxxxxxxx',0)
+  do PrintN(2,#autorizacion,'99999999',0)
+  do PrintN(3,#valava,'{FOR_DIN_D}',0)
+  do PrintN(4,#valctr,'{FOR_DIN_D}',0)
+  do PrintS(5,&td_ced_ruc,'',0)
+  do PrintN(6,#efectivo,'{FOR_DIN_D}',0)
+  do PrintN(7,#cheque,'{FOR_DIN_D}',0)
+  do PrintN(8,#debito,'{FOR_DIN_D}',0) 
+  do PrintN(9,#tarjeta,'{FOR_DIN_D}',0) 
+  do PrintN(10,#total,'{FOR_DIN_D}',0)
+  do PrintS(11,$correccion,'',0)
+  do PrintS(12,&ts_usuario,'',0)
+  do PrintS(13,&ts_terminal,'',0)
+  do PrintS(14,&td_fecha_contrato,'',0)			!GYC 2002/MAY/07
+  do PrintS(15,&w_hora,'',0)
+  do PrintN(16,#com,'{FOR_DIN_D}',0)
+  next-listing
+
+from cob_cuentas..cc_tran_servicio,
+     cob_servicios..sv_transf_dominio
+where ts_tipo_transaccion in (3295,3336)               !  = 3295    ame 01/07/2004
+  and ts_tsfecha = $i_fecha_proceso
+  and td_fecha = ts_tsfecha
+  and td_codig_autor = convert(int, ts_propietario)	
+order by  ts_oficina, ts_usuario, ts_referencia, ts_correccion
+End-Select
+End-Procedure
+
+
+!*******************************************************************************
+!****                        Busca nombre de oficina                         ***
+!*******************************************************************************
+Begin-Procedure antes_oficina
+do before_pagina
+
+begin-select
+of_nombre  &d_oficina
+from cobis..cl_oficina
+where  of_oficina = &ts_oficina
+end-select
+!***  Generar listado por oficina  KFAH:12abr2000 ***!
+if #w_oficina <> &ts_oficina
+   do Generar_Listado(&ts_oficina)
+end-if
+let #w_oficina = &ts_oficina
+End-Procedure
+
+!*******************************************************************************
+!****                        Busca nombre de oficina                         ***
+!*******************************************************************************
+Begin-Procedure despues_empresa
+do after_pagina
+
+  next-listing
+  next-listing
+  do PrintS(1,'TOT. EMPRESA','',0)
+  do PrintN(2,#con_tot_empr,'99999',0)
+  do PrintN(3,#val_ctr_empr,'{FOR_DIN_D}',0)
+  do PrintN(4,#val_ava_empr,'{FOR_DIN_D}',0)
+  do PrintN(6,#val_efe_empr,'{FOR_DIN_D}',0)
+  do PrintN(7,#val_chq_empr,'{FOR_DIN_D}',0)
+  do PrintN(8,#val_deb_empr,'{FOR_DIN_D}',0)
+  do PrintN(9,#val_tar_empr,'{FOR_DIN_D}',0) 
+  do PrintN(10,#val_tot_empr,'{FOR_DIN_D}',0)
+  do PrintN(16,#val_com_empr,'{FOR_DIN_D}',0)
+
+  let #con_tot_empr = 0
+  let #val_efe_empr = 0
+  let #val_chq_empr = 0
+  let #val_deb_empr = 0
+  let #val_tar_empr = 0
+  let #val_tot_empr = 0
+  let #val_ctr_empr = 0
+  let #val_ava_empr = 0
+  let #val_com_empr = 0
+
+
+End-Procedure
+!
+
+Begin-Procedure despues_oficina
+do after_pagina
+  next-listing
+  next-listing
+  do PrintS(1,'TOT. OFICINA','',0)
+  do PrintN(2,#con_tot_ofic,'99999',0)
+  do PrintN(3,#val_ava_ofic,'{FOR_DIN_D}',0)
+  do PrintN(4,#val_ctr_ofic,'{FOR_DIN_D}',0)
+  do PrintN(6,#val_efe_ofic,'{FOR_DIN_D}',0)
+  do PrintN(7,#val_chq_ofic,'{FOR_DIN_D}',0)
+  do PrintN(8,#val_deb_ofic,'{FOR_DIN_D}',0)
+  do PrintN(9,#val_tar_ofic,'{FOR_DIN_D}',0)
+  do PrintN(10,#val_tot_ofic,'{FOR_DIN_D}',0)
+  do PrintN(16,#val_com_ofic,'{FOR_DIN_D}',0)
+let #con_tot_ofic = 0
+let #val_efe_ofic = 0
+let #val_chq_ofic = 0
+let #val_deb_ofic = 0
+let #val_tar_ofic = 0
+let #val_tot_ofic = 0
+let #val_ctr_ofic = 0
+let #val_ava_ofic = 0
+let #val_com_ofic = 0
+End-Procedure
+
+
+!*******************************************************************************
+!*****    Procedimientos generales utilizados para el encabezamiento     *******
+!*******************************************************************************
+Begin-Procedure Encabezado($titulo,$subtitulo,$subtitulo2,$fecha_proceso,$empresa,$oficina,$programa)                                     
+let #pos = {ANCHO_PAG} -23                                                      
+!date-time () 'MM/DD/YYYY' &fecha_actual
+!date-time () HH:MI &hora
+BEGIN-SELECT 
+convert(char(10),getdate(),101) &fecha_actual
+convert(char(8),getdate(),108) &hora
+END-SELECT
+let $hora = 'Hora      : ' || &hora
+do Mes_Espaniol (&fecha_actual,$fecha_imp)
+do Mes_Espaniol ($fecha_proceso,$fecha_pro)
+print $empresa                             (1,1)
+print $titulo                              (1) center
+let $fecha_imp = 'Fecha Impr: ' || $fecha_imp
+print $fecha_imp                           (1,#pos)                             
+print $subtitulo2                          (2,1)
+let $fecha_pro = 'FECHA DE RECAUDACION ' || $fecha_pro
+print $subtitulo                           (2) center
+print $programa                            (2,#pos)
+print $fecha_pro                          (3) center
+page-number  (3,#pos) 'Pag.      : '
+print $hora  (4,#pos)
+End-Procedure

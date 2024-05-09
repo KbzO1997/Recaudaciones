@@ -1,0 +1,187 @@
+Starting the Java application using /opt/jboss/container/java/run/run-java.sh ...
+INFO exec  java -Xms64m -Xmx1024m -XX:+UseParallelGC -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -XX:MaxMetaspaceSize=256m -XX:ParallelGCThreads=1 -Djava.util.concurrent.ForkJoinPool.common.parallelism=1 -XX:CICompilerCount=2 -XX:+ExitOnOutOfMemoryError -Dfile.encoding=ISO-8859-1 -cp "." -jar /deployments/quarkus-run.jar  
+__  ____  __  _____   ___  __ ____  ______ 
+ --/ __ \/ / / / _ | / _ \/ //_/ / / / __/ 
+ -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \   
+--\___\_\____/_/ |_/_/|_/_/|_|\____/___/   
+2023-06-22 07:39:21.764  WARN rec-pago-564-7lnq2 --- [       Thread-0] i.q.n.r.NettyRecorder                    : Netty DefaultChannelId initialization (with io.netty.machineId system property set to 6b:7e:b3:9f:a0:7f:5f:2b) took more than a second
+{"codigo":"0","mensajeUsuario":"PAGO EJECUTADO","estado":"OK","mensajeSalidaEjecutarPago":{"banderaO ...
+2023-06-22 10:47:42.834  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.m.MessageConsumer                : Retorno message String
+2023-06-22 10:47:42.834  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.m.MessageConsumer                : Mensaje de respuesta: {"codigo":"0","mensajeUsuario":"PAGO EJECUTADO","estado":"OK","mensajeSalidaEjecutarPago":{"banderaOffline":null,"codigoError":"0","datosAdicionales":{"datoAdicional":[]},"fechaDebito":null,"fechaPago":null,"mensajeUsuario":"15","mensajeSistema":"15","montoTotal":null,"referencia":"763125"},"mensajeSalidaConsultarDeuda":null}
+2023-06-22 10:47:43.101  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.SupplierProcessService         : RECIBE MENSAJE A PROVEEDOR
+2023-06-22 10:47:43.102  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.SupplierProcessService         : RESPUESTA PROVEEDOR: {"codigo":"0","mensajeUsuario":"PAGO EJECUTADO","estado":"OK","mensajeSalidaEjecutarPago":{"banderaOffline":null,"codigoError":"0","datosAdicionales":{"datoAdicional":[]},"fechaDebito":null,"fechaPago":null,"mensajeUsuario":"15","mensajeSistema":"15","montoTotal":null,"referencia":"763125"},"mensajeSalidaConsultarDeuda":null}
+2023-06-22 10:47:43.256  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.SupplierProcessService         : RESPUESTA DE GATEWAY: 0
+2023-06-22 10:47:43.256  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.SupplierProcessService         : 0
+2023-06-22 10:47:43.257  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.SupplierProcessService         : SETEAN MENSAJE DE SALIDA
+2023-06-22 10:47:43.257  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.SupplierProcessService         : FIN EJECUTA PROVEEDOR ...
+2023-06-22 10:47:43.257  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.SupplierBankProcessService     : RESPUESTA PROVEEDOR: MensajeSalidaEjecutarPago{banderaOffline=null, codigoError='0', datosAdicionales=com.bolivariano.microservice.recpago.domain.mensajeotc.MensajeSalidaEjecutarPago$DatosAdicionales@24ba2b04, fechaDebito=null, fechaPago=null, mensajeUsuario='15', mensajeSistema='15', montoTotal=0.0, referencia='null'}
+2023-06-22 10:47:43.257  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.SupplierBankProcessService     : EJECUTA CORE
+2023-06-22 10:47:43.257  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : Verificando Canal: VEN
+2023-06-22 10:47:43.257  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : Conectandose a Desarrollo 1
+2023-06-22 10:47:43.260  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : cob_pagos..pa_pg_tpag_reca_varios INPUT PARAMETERS
+2023-06-22 10:47:43.260  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_ssn=135882283
+2023-06-22 10:47:43.260  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_srv=SRVDESA2
+2023-06-22 10:47:43.260  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_user=msilvag
+2023-06-22 10:47:43.260  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_term=VIRTUAL_BB
+2023-06-22 10:47:43.260  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_date=06/22/2023
+2023-06-22 10:47:43.260  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_ofi=0
+2023-06-22 10:47:43.260  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_rol=252
+2023-06-22 10:47:43.260  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_corr=N
+2023-06-22 10:47:43.261  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_ssn_corr=0
+2023-06-22 10:47:43.261  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_trn=3295
+2023-06-22 10:47:43.261  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_mon=1
+2023-06-22 10:47:43.261  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_ruc_cliente=1306529684
+2023-06-22 10:47:43.261  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_servicio=SRI-TRNF-DOM
+2023-06-22 10:47:43.261  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_empresa=9718
+2023-06-22 10:47:43.261  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_efectivo=0.00
+2023-06-22 10:47:43.261  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_cheque=0.00
+2023-06-22 10:47:43.261  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_debito=65.63
+2023-06-22 10:47:43.261  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_tarjeta=0
+2023-06-22 10:47:43.261  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_tarjeta_cta=
+2023-06-22 10:47:43.261  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_tarjeta_plazo=
+2023-06-22 10:47:43.261  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_comision_tot=0.6
+2023-06-22 10:47:43.262  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_comision_efe=0.00
+2023-06-22 10:47:43.262  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_comision_chq=0.00
+2023-06-22 10:47:43.262  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_comision_db=0.60
+2023-06-22 10:47:43.262  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_total=65.63
+2023-06-22 10:47:43.262  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_cant_cheques=0
+2023-06-22 10:47:43.262  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_tipo_cta=CTE
+2023-06-22 10:47:43.262  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_cuenta=0000088024
+2023-06-22 10:47:43.262  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_nombre_cta=PINTURAS UNIDAS S. A.*****
+2023-06-22 10:47:43.262  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_autoriza=N
+2023-06-22 10:47:43.262  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_canal=VEN
+2023-06-22 10:47:43.262  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_ubi=0
+2023-06-22 10:47:43.263  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_codigo=PVX0132
+2023-06-22 10:47:43.263  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_cod_referencia=
+2023-06-22 10:47:43.263  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_nombre_cliente=
+2023-06-22 10:47:43.263  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_base_imponible=0
+2023-06-22 10:47:43.356  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_factura=575.37
+2023-06-22 10:47:43.356  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_cod_respuesta=6,500.00
+2023-06-22 10:47:43.356  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_cod_grupo=
+2023-06-22 10:47:43.356  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_nomb_tramite=
+2023-06-22 10:47:43.357  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_pcodigo_operacion=
+2023-06-22 10:47:43.357  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_pcodigo_secuencia=
+2023-06-22 10:47:43.357  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_phoralocal=
+2023-06-22 10:47:43.357  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_cod_consultora=
+2023-06-22 10:47:43.357  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : EJECUTA SP {? = call cob_pagos..pa_pg_tpag_reca_varios(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }
+2023-06-22 10:47:43.465  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : FINALIZA EJECUTA SP
+2023-06-22 10:47:43.557  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : RESPUESTA SP --> 0
+2023-06-22 10:47:43.558  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : cob_pagos..pa_pg_tpag_reca_varios Output Parameters
+2023-06-22 10:47:43.558  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_ssn=135882283
+2023-06-22 10:47:43.558  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_horario=N
+2023-06-22 10:47:43.559  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_tasa=0.12
+2023-06-22 10:47:43.559  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_base_imp=0.54
+2023-06-22 10:47:43.559  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_impuesto=0.06
+2023-06-22 10:47:43.559  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_servicio_not=PAGSB
+2023-06-22 10:47:43.559  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_nomb_ente=PINTURAS UNIDAS S. A.*****
+2023-06-22 10:47:43.559  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_cod_ente=1233
+2023-06-22 10:47:43.559  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_desccanal=VENTANILLA
+2023-06-22 10:47:43.559  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_celular=null
+2023-06-22 10:47:43.559  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_correo=crodriguez@bolivariano.com
+2023-06-22 10:47:43.559  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_desc_empresa=SERVICIOS VARIOS
+2023-06-22 10:47:43.559  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_prod_deb=CTE
+2023-06-22 10:47:43.560  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_valor=65.63
+2023-06-22 10:47:43.560  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_fecha_deb=06/22/2023
+2023-06-22 10:47:43.560  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_hora_deb=10:47:43
+2023-06-22 10:47:43.560  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_valor_comi=0.60
+2023-06-22 10:47:43.560  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_cta_lat=024
+2023-06-22 10:47:43.560  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_tipo_serv=FACTURA
+2023-06-22 10:47:43.560  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_envia_notf=1
+2023-06-22 10:47:43.560  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_cod_respuesta=0
+2023-06-22 10:47:43.560  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_mensaje_respuesta=OK
+2023-06-22 10:47:43.560  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_valor_tot=66.23
+2023-06-22 10:47:43.661  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : Respuesta despues de pago core<ns2:salidaEjecutarPago xmlns:ns2="http://www.bolivariano.com/mensaje/MensajeOTC"><ns2:codigoError>0</ns2:codigoError><ns2:datosAdicionales><ns2:datoAdicional><codigo>vp_s_fecha_contable</codigo><valor>06/22/2023</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_ssn</codigo><valor>135882283</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_comision</codigo></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_tasa</codigo></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_base_imp</codigo></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_impuesto</codigo></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_empresa</codigo></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_recaudacion</codigo></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_referencia1</codigo></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_referencia2</codigo></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_referencia3</codigo></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_ssn</codigo><valor>135882283</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_horario</codigo><valor>N</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_tasa</codigo><valor>0.12</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_base_imp</codigo><valor>0.54</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_impuesto</codigo><valor>0.06</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_servicio_not</codigo><valor>PAGSB</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_nomb_ente</codigo><valor>PINTURAS UNIDAS S. A.*****</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_cod_ente</codigo><valor>1233</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_desccanal</codigo><valor>VENTANILLA</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_celular</codigo><valor></valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_correo</codigo><valor>crodriguez@bolivariano.com</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_desc_empresa</codigo><valor>SERVICIOS VARIOS</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_prod_deb</codigo><valor>CTE</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_valor</codigo><valor>65.63</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_fecha_deb</codigo><valor>06/22/2023</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_hora_deb</codigo><valor>10:47:43</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_valor_comi</codigo><valor>0.60</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_cta_lat</codigo><valor>024</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_tipo_serv</codigo><valor>FACTURA</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_envia_notf</codigo><valor>1</valor></ns2:datoAdicional></ns2:datosAdicionales><ns2:fechaDebito>2023-06-22T10:47:27</ns2:fechaDebito><ns2:fechaPago>2023-06-22T10:47:27</ns2:fechaPago><ns2:mensajeUsuario>OK</ns2:mensajeUsuario><ns2:mensajeSistema>OK</ns2:mensajeSistema><ns2:montoTotal>66.23</ns2:montoTotal></ns2:salidaEjecutarPago>
+2023-06-22 10:47:43.661  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : CIERRA CONEXION!
+2023-06-22 10:47:43.662  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.BankProcessService             : CODIGO RESPUESTA: 0
+2023-06-22 10:47:43.662  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.SupplierBankProcessService     : VALIDA PREVIA MANUAL:true
+2023-06-22 10:47:43.662  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.SupplierBankProcessService     : TIPO PROCESO:M
+2023-06-22 10:47:43.662  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.BankProcessService             : ENVIANOTF:1
+2023-06-22 10:47:43.662  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.BankProcessService             : TIPOS PROCESOS NOTIFICACION: ***M,A***
+2023-06-22 10:47:43.662  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.BankProcessService             : VALOR PAGO:65.63
+2023-06-22 10:47:43.662  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.BankProcessService             : MINIMO VALOR PAGO:0.0
+2023-06-22 10:47:43.662  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.BankProcessService             : VALIDA FORMA PAGO:true
+2023-06-22 10:47:43.662  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.BankProcessService             : ENVIA A NOTIFICACION
+2023-06-22 10:47:43.663  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.BankProcessService             : FIN Ejecuta NOTIFICACION ...
+2023-06-22 10:47:43.663  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.SupplierBankProcessService     : 66340867b562 135882283 ***TIEMPO TOTAL BANCO/PROVEEDOR: 8905 ***  TIEMPO TOTAL VALIDACION CORE: 216 *** TIEMPO TOTAL BANCO: 404 ***  TIEMPO TOTAL PROVEEDOR: 8271 *** TIEMPO TOTAL NOTIFICACION: 0
+2023-06-22 10:47:43.663  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.PaymentService                 : 66340867b562 135882283 Proceso manual envia respuesta
+2023-06-22 10:47:43.663  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.PaymentService                 : 66340867b562 135882283 Mensaje de respuesta antes del update: 0
+2023-06-22 10:47:43.663  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.PaymentService                 : 66340867b562 135882283 Codigo respuesta final: 0
+2023-06-22 10:47:43.756  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : INICIO EJECUTA NOTIFICACION
+2023-06-22 10:47:43.757  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : PATH --> /secret/truststore.jks
+2023-06-22 10:47:43.757  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : TYPE --> otpms
+2023-06-22 10:47:43.857  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : header setId: VEN20230622104743135882
+2023-06-22 10:47:43.857  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : header setRefCompany: BOLIVARIANO
+2023-06-22 10:47:43.857  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : header setRefService: PAGSB
+2023-06-22 10:47:43.857  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : header setRefMsgLabel: Avisos24
+2023-06-22 10:47:43.858  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : header setKeyValue: 1233
+2023-06-22 10:47:43.858  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : header setChannels: VEN
+2023-06-22 10:47:43.858  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : info setLoginEnterprise: BOLIVARIANO
+2023-06-22 10:47:43.858  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : info setRefContract: PAGSB
+2023-06-22 10:47:43.858  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setNombre: PINTURAS UNIDAS S. A.*****
+2023-06-22 10:47:43.858  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setDesccanal: VENTANILLA
+2023-06-22 10:47:43.858  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setDeservicio: FACTURA
+2023-06-22 10:47:43.858  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setFechaTope: 2023-06-22
+2023-06-22 10:47:43.858  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setEmpresa: SERVICIOS VARIOS
+2023-06-22 10:47:43.858  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setPlanilla: PVX0132
+2023-06-22 10:47:43.858  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setFecha1: 10:47:43
+2023-06-22 10:47:43.858  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setProdeb: CTE
+2023-06-22 10:47:43.858  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setCtadeb: 024
+2023-06-22 10:47:43.858  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setValor: 65.63
+2023-06-22 10:47:43.858  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setValor2: 0.60
+2023-06-22 10:47:43.859  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setValortope: 66.23
+2023-06-22 10:47:43.859  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setGsm: 
+2023-06-22 10:47:43.859  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setEmail: crodriguez@bolivariano.com
+2023-06-22 10:47:43.859  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setPhone: 
+2023-06-22 10:47:43.859  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : addressesGsm setClassName: gsm
+2023-06-22 10:47:43.859  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : addressesGsm setType: to
+2023-06-22 10:47:43.859  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : addressesGsm setRef:
+2023-06-22 10:47:43.859  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : addressesEmail setClassName: email
+2023-06-22 10:47:43.859  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : addressesEmail setType: to
+2023-06-22 10:47:43.859  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : addressesEmail setRef:crodriguez@bolivariano.com
+2023-06-22 10:47:43.864  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : REQUEST NOTIFICACION -> {
+  "header" : {
+    "id" : "VEN20230622104743135882",
+    "refCompany" : "BOLIVARIANO",
+    "refService" : "PAGSB",
+    "keyValue" : "1233",
+    "channels" : "VEN",
+    "refMsgLabel" : "Avisos24"
+  },
+  "info" : {
+    "loginEnterprise" : "BOLIVARIANO",
+    "refContract" : "PAGSB"
+  },
+  "data" : {
+    "nombre" : "PINTURAS UNIDAS S. A.*****",
+    "desccanal" : "VENTANILLA",
+    "deservicio" : "FACTURA",
+    "empresa" : "SERVICIOS VARIOS",
+    "planilla" : "PVX0132",
+    "fecha_tope" : "2023-06-22",
+    "fecha1" : "10:47:43",
+    "prodeb" : "CTE",
+    "ctadeb" : "024",
+    "valor" : "65.63",
+    "valor2" : "0.60",
+    "valortope" : "66.23",
+    "gsm" : "",
+    "email" : "crodriguez@bolivariano.com",
+    "phone" : ""
+  },
+  "addresses" : [ {
+    "className" : "gsm",
+    "type" : "to",
+    "ref" : ""
+  }, {
+    "className" : "email",
+    "type" : "to",
+    "ref" : "crodriguez@bolivariano.com"
+  } ]
+}
+2023-06-22 10:47:44.358  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : RESPONSE NOTIFICACION -> {
+  "msg" : "ok",
+  "result" : "Ok"
+}
+2023-06-22 10:47:44.358  INFO rec-pago-564-7lnq2 --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : FIN EJECUTA NOTIFICACION
+2023-06-22 10:47:45.426  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.m.MessageSender                  : Rsp: <?xml version="1.0" encoding="UTF-8" standalone="yes"?><mensajeSalidaGateway xmlns="http://www.bolivariano.com/mensaje/MensajeOSB"><codigo>0</codigo><mensajeUsuario>Transaccion Exitosa</mensajeUsuario><mensaje><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="yes"?><ns2:salidaEjecutarPago xmlns:ns2="http://www.bolivariano.com/mensaje/MensajeOTC"><ns2:codigoError>0</ns2:codigoError><ns2:datosAdicionales><ns2:datoAdicional><codigo>vp_s_fecha_contable</codigo><valor>06/22/2023</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_ssn</codigo><valor>135882283</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_comision</codigo></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_tasa</codigo></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_base_imp</codigo></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_impuesto</codigo></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_empresa</codigo></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_recaudacion</codigo></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_referencia1</codigo></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_referencia2</codigo></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_referencia3</codigo></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_ssn</codigo><valor>135882283</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_horario</codigo><valor>N</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_tasa</codigo><valor>0.12</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_base_imp</codigo><valor>0.54</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_impuesto</codigo><valor>0.06</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_servicio_not</codigo><valor>PAGSB</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_nomb_ente</codigo><valor>PINTURAS UNIDAS S. A.*****</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_cod_ente</codigo><valor>1233</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_desccanal</codigo><valor>VENTANILLA</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_celular</codigo><valor></valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_correo</codigo><valor>crodriguez@bolivariano.com</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_desc_empresa</codigo><valor>SERVICIOS VARIOS</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_prod_deb</codigo><valor>CTE</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_valor</codigo><valor>65.63</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_fecha_deb</codigo><valor>06/22/2023</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_hora_deb</codigo><valor>10:47:43</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_valor_comi</codigo><valor>0.60</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_cta_lat</codigo><valor>024</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_tipo_serv</codigo><valor>FACTURA</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_envia_notf</codigo><valor>1</valor></ns2:datoAdicional></ns2:datosAdicionales><ns2:fechaDebito>2023-06-22T10:47:27</ns2:fechaDebito><ns2:fechaPago>2023-06-22T10:47:27</ns2:fechaPago><ns2:mensajeUsuario>OK</ns2:mensajeUsuario><ns2:mensajeSistema>OK</ns2:mensajeSistema><ns2:montoTotal>66.23</ns2:montoTotal></ns2:salidaEjecutarPago>]]></mensaje></mensajeSalidaGateway>
+2023-06-22 10:47:46.050  INFO rec-pago-564-7lnq2 --- [pool-7-thread-1] c.b.m.r.s.PaymentService                 : 66340867b562 135882283 Tiempo total ejecucion: 11576

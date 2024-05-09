@@ -1,0 +1,21 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  name: rec-sri
+  generation: 1
+  namespace: bb-dev-recaudosempresas
+  labels:
+    app: rec-sri
+    app.kubernetes.io/component: rec-sri
+    app.kubernetes.io/instance: rec-sri
+    app.kubernetes.io/name: openjdk-11
+spec:
+  lookupPolicy:
+    local: false
+status:
+  dockerImageRepository: >-
+    image-registry.openshift-image-registry.svc:5000/bb-dev-recaudosempresas/rec-sri
+  publicDockerImageRepository: >-
+    default-route-openshift-image-registry.apps.ocpmsbbdevqa.bolivariano.fin.ec/bb-dev-recaudosempresas/rec-sri

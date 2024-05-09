@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:simpleType name="codigoBanco">
+		<xs:annotation>
+			<xs:documentation>Codigo de Entidad</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="fechaRecaudacion">
+		<xs:annotation>
+			<xs:documentation>Fecha de recaudacion para los pagos realizados</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="nombreBanco">
+		<xs:annotation>
+			<xs:documentation>Nombre de la Entidad</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="monto">
+		<xs:annotation>
+			<xs:documentation>Monto recaudado, para un tipo de deuda</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="numeroTransacciones">
+		<xs:annotation>
+			<xs:documentation>Numero de transacciones ejecutadas por concepto de pagos</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="tipoTx">
+		<xs:annotation>
+			<xs:documentation>Tipo de transaccion ejecutada TX_DIRECTA, TX_REVERSA</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="codLogMon">
+		<xs:annotation>
+			<xs:documentation>Codigo de log del monitor transaccional del SRI</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="codTranIFI">
+		<xs:annotation>
+			<xs:documentation>Codigo de transaccion de la Entidad Financiera desde la que se ejecuto el pago</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="codTranIFIRev">
+		<xs:annotation>
+			<xs:documentation>Codigo de transaccion de la Entidad Financiera desde la que se ejecuto el pago</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="codValRec">
+		<xs:annotation>
+			<xs:documentation>Codigo de recaudacion registrada</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="placaCpnCamv">
+		<xs:annotation>
+			<xs:documentation>Placa, CAMV, CPN, del vehiculo sobre el cual se ejecuto el pago</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="valorDebitar">
+		<xs:annotation>
+			<xs:documentation>Valor pagado por el contribuyente.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="fechaPago">
+		<xs:annotation>
+			<xs:documentation>Fecha de ejecucion del pago</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="estadoDebito">
+		<xs:annotation>
+			<xs:documentation>Estado de debito, SI o NO</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SI"/>
+			<xs:enumeration value="NO"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="pago">
+		<xs:annotation>
+			<xs:documentation>Elemento que representa la informacion del pago</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="codTranIFIRev" type="codTranIFIRev" use="required"/>
+		<xs:attribute name="tipoTx" type="tipoTx" use="required"/>
+		<xs:attribute name="codLogMon" type="codLogMon" use="required"/>
+		<xs:attribute name="codTranIFI" type="codTranIFI" use="required"/>
+		<xs:attribute name="codValRec" type="codValRec" use="required"/>
+		<xs:attribute name="placaCpnCamv" type="placaCpnCamv" use="required"/>
+		<xs:attribute name="valorDebitar" use="required">
+			<xs:simpleType>
+				<xs:restriction base="valorDebitar"/>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="fechaPago" type="fechaPago" use="required"/>
+		<xs:attribute name="estadoDebito" type="estadoDebito" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="cabecera">
+		<xs:annotation>
+			<xs:documentation>Elemento que representa la informacion global de las recaudaciones</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="codigoBanco" type="codigoBanco"/>
+			<xs:element name="nombreBanco" type="nombreBanco"/>
+			<xs:element name="fechaRecaudacion" type="fechaRecaudacion"/>
+			<xs:element name="numeroTransaccionesDirectasAJUSTES" type="numeroTransacciones" minOccurs="0"/>
+			<xs:element name="numeroTransaccionesReversadasAJUSTES" type="numeroTransacciones" minOccurs="0"/>
+			<xs:element name="numeroTransaccionesTotalesAJUSTES" type="numeroTransacciones" minOccurs="0"/>
+			<xs:element name="montoTransaccionesDirectasAJUSTES" type="monto" minOccurs="0"/>
+			<xs:element name="montoTransaccionesReversasAJUSTES" type="monto" minOccurs="0"/>
+			<xs:element name="montoTotalTransaccionesAJUSTES" type="monto" minOccurs="0"/>
+			<xs:element name="numeroTransaccionesDirectasMATRICULA" type="numeroTransacciones" minOccurs="0"/>
+			<xs:element name="numeroTransaccionesReversadasMATRICULA" type="numeroTransacciones" minOccurs="0"/>
+			<xs:element name="numeroTransaccionesTotalesMATRICULA" type="numeroTransacciones" minOccurs="0"/>
+			<xs:element name="montoTransaccionesDirectasMATRICULA" type="monto" minOccurs="0"/>
+			<xs:element name="montoTransaccionesReversasMATRICULA" type="monto" minOccurs="0"/>
+			<xs:element name="montoTotalTransaccionesMATRICULA" type="monto" minOccurs="0"/>
+			<xs:element name="numeroTransaccionesDirectasTRANSF_DOM" type="numeroTransacciones" minOccurs="0"/>
+			<xs:element name="numeroTransaccionesReversadasTRANSF_DOM" type="numeroTransacciones" minOccurs="0"/>
+			<xs:element name="numeroTransaccionesTotalesTRANSF_DOM" type="numeroTransacciones" minOccurs="0"/>
+			<xs:element name="montoTransaccionesDirectasTRANSF_DOM" type="monto" minOccurs="0"/>
+			<xs:element name="montoTransaccionesReversasTRANSF_DOM" type="monto" minOccurs="0"/>
+			<xs:element name="montoTotalTransaccionesTRANSF_DOM" type="monto" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="detallesPagos">
+		<xs:annotation>
+			<xs:documentation>Elemento que representa la informacion de los pagos realizados</xs:documentation>
+		</xs:annotation>
+		<xs:sequence maxOccurs="4">
+			<xs:element name="detallePago" type="detallePago"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="detallePago">
+		<xs:annotation>
+			<xs:documentation>Elemento que representa la informacion de los pagos ejecutados por cada tipo de deuda</xs:documentation>
+		</xs:annotation>
+		<xs:sequence maxOccurs="unbounded">
+			<xs:element name="pago" type="pago"/>
+		</xs:sequence>
+		<xs:attribute name="tipoPago" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="recaudacionVehiculos">
+		<xs:annotation>
+			<xs:documentation>Elememnto padre de todos los demas</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="cabecera" type="cabecera"/>
+				<xs:element name="detallesPagos" type="detallesPagos"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

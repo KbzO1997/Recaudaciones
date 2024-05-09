@@ -1,0 +1,42 @@
+<!ELEMENT dbRequest ((spParameter | arrayParameter)*)>
+<!ELEMENT spParameter EMPTY>
+<!ELEMENT arrayParameter (arrayData*)>
+<!ELEMENT arrayData EMPTY>
+
+<!ATTLIST dbRequest
+	MCN				CDATA 		#REQUIRED
+	id				CDATA		#REQUIRED
+	user      			CDATA   	#REQUIRED
+	chanel				CDATA		#IMPLIED
+	destino  			CDATA		#REQUIRED
+	ruta  	  			CDATA		#IMPLIED
+	RMCN				CDATA 		#IMPLIED
+	recibo    			CDATA   	#IMPLIED
+	result    			CDATA   	#IMPLIED
+	ssn       			CDATA   	#IMPLIED
+	old_ssn       			CDATA   	#IMPLIED
+	reentry_sec 			CDATA 		#IMPLIED
+	TR				(Q | R) 	#REQUIRED
+	ORG				(C | Y ) 	#REQUIRED
+	TO        			(S | N) 	#IMPLIED
+	reversa   			(S | N) 	#IMPLIED
+	type 				(F | P)		#IMPLIED
+	base 				CDATA		#REQUIRED
+	pkg				CDATA		#IMPLIED
+	name				CDATA		#REQUIRED
+>
+<!ATTLIST spParameter
+	name				CDATA		#REQUIRED
+	dataType			(int | float | string | date | cursor) #REQUIRED
+	maxlen				CDATA		"-1"
+	io				(I | O | IO)	"I"
+	value 				CDATA		#IMPLIED
+>
+<!ATTLIST arrayParameter
+	name 				CDATA 		#REQUIRED
+>
+
+<!ATTLIST arrayData
+	isnull 				(true | false) #REQUIRED	
+	value 				CDATA 		#IMPLIED
+>

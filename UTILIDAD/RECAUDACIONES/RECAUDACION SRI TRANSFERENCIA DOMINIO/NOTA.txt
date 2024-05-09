@@ -1,0 +1,52 @@
+SRI COMPUESTOS
+
+Pago de RISE
+Matriculación Vehicular – Matrícula y Ajuste.
+Transferencia de Dominio
+Otras formas de pago (OFP)
+Impuestos fiscales
+
+Conección tcp con MS
+
+
+SP DE CSP TRANSFERENCIA DOMINIO - MAT VEHICULAR
+--Mat Vehicular
+cob_servicios..sp_tr_pago_matrvehi_rc
+
+--Revisar
+cob_internet..sp_banking_servicios_bv
+
+--Graba en la tranServicio
+cob_servicios..sp_imp_x_transfer_dominio_rc
+
+Agregar esta validacion al sp del pago Via Rapida
+if @i_total <> @i_efe + @i_cheq + @i_deb + @i_tarjeta
+begin
+   exec cobis..sp_cerror
+        @t_debug  = @t_debug,
+        @t_file   = @t_file,
+        @t_from   = @w_sp_name,
+        @i_num    = 072174,
+        @i_msg    = 'VALORES DE PAGO NO CUADRAN - VUELVA A REALIZAR LA TRANSACCION'
+   return 1
+end
+
+Select o_fecvensri = pa_char
+from cobis..cl_parametro
+where pa_nemonico = 'FECVAL'
+  and pa_producto = 'CTE'
+
+select o_autorisri = pa_char
+from cobis..cl_parametro
+where pa_nemonico = 'NUMAUT'
+  and pa_producto = 'CTE'
+
+--------------------------------
+--------------------------------
+REVISAR EL INSERT DE ESTA TABLA from cob_servicios..sv_transf_dominio
+--------------------------------
+--------------------------------
+
+Revisar esta tabla
+INSERTA EL PAGO DE TRANSFERENCIA DE DOMINIO
+cob_pagos..pg_p_rubro_ser_dam

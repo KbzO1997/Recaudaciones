@@ -1,0 +1,122 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: rec-sri-application-properties
+  namespace: bb-dev-recaudosempresas
+data:
+  application.properties: >
+
+    quarkus.cxf.client."ecutel-service".service-interface=ecutel.cobros.WSCobrosLineaEcutel
+    
+    quarkus.vertx.worker-pool-size=90
+    
+    quarkus.vertx.internal-blocking-pool-size=90
+    
+    quarkus.vertx.max-event-loop-execute-time=60S
+    
+    # LOG
+    quarkus.log.console.format=%d{yyyy-MM-dd HH:mm:ss.SSS} %5p %h --- [%15.15t] %-40.40c{1.} : %m%n%e
+    
+    #Nivel minimo que se puede setear en quarkus.log.level
+    
+    quarkus.log.min-level=DEBUG
+    
+    quarkus.log.level=INFO
+
+    quarkus.log.category."com.bolivariano.microservice".min-level=DEBUG
+
+    quarkus.log.category."com.bolivariano.microservice".level=INFO
+  
+    quarkus.http.port=10001
+
+    sri.provider.connTimeout=2000
+
+    sri.provider.connRequestTimeout=2000
+
+    sri.provider.readTimeout=7000
+
+    sri.provider.formatoTiempo=HHmmss
+
+    sri.provider.formatoFecha=MMdd
+
+    sri.provider.formatoFechaContable4=MMdd
+
+    sri.provider.formatoFechaContable6=yyyyMMdd
+
+    sri.provider.posEntryMode=012
+
+    sri.provider.networkId=026
+
+    sri.provider.posConditionCode=00
+
+    sri.provider.merchantId=016010BBOL00001
+
+    sri.provider.terminalId=ATM00001
+
+    sri.provider.codigoCajero=00010001
+
+    sri.provider.processingCodeAhorro=10
+
+    sri.provider.processingCodeCte=20
+
+    sri.provider.processingCodeDef=00
+
+    sri.provider.bancoFormatoFechaContable=MM/dd/yyyy
+
+    sri.provider.codigoDatoAdicionalFechaContable=vp_s_fecha_contable
+
+    sri.parametrosEmpresa[0].empresa=19574
+
+    sri.parametrosEmpresa[1].empresa=19574
+
+
+    sri.mq.host=jms.bolivariano.fin.ec
+
+    sri.mq.port=1926
+
+    sri.mq.channel=REC_CHL_MS
+
+    sri.mq.queueManager=CSPBRK_QM
+
+    sri.mq.queueRequest=MS_REC_SRI_REQ
+
+    sri.mq.queueReplay=MS_REC_SRI_RESP
+
+    sri.mq.poolJms=50
+
+    sri.mq.delayReconnect=5000
+
+    sri.mq.timeToLive=50000
+
+    sri.mq.characterSet=1208
+
+    sri.truststore.path=/secret/truststore.jks
+
+    sri.truststore.password=otpms
+
+    sri.truststore.type=JKS
+
+
+    sri.frameworkSeguridad.url=https://frameworkdes.bbframework.com/WSFrameWork/ServicioSeguridadSCL.asmx?wsdl
+
+    sri.frameworkSeguridad.connTimeout=2000
+
+    sri.frameworkSeguridad.readTimeout=7000
+
+    sri.frameworkSeguridad.idAplicacion=453
+
+    sri.frameworkSeguridad.usuarioApl=apl_csp
+
+    #ISO
+    
+    sri.iso8583xml.url=https://transformador-iso-bb-dev-utilitarios.apps.ocpmsbbdevqa.bolivariano.fin.ec/services/ISO8583XMLBean/ISO8583XMLBeanService?wsdl
+    
+    sri.iso8583xml.connTimeout=2000
+    
+    sri.iso8583xml.readTimeout=5000
+
+    sri.tcp.host=10.1.7.47
+
+    sri.tcp.port=7777
+
+    sri.tcp.timeout=20000

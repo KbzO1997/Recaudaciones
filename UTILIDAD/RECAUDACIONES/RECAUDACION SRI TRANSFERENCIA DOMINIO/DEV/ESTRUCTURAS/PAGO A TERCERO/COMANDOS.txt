@@ -1,0 +1,14 @@
+PAGO A TERCEROS
+REGISTRO DIARIO
+cd /fuentes/cobis/cuentas/ctacte/batch/fuentes
+sqr -debug -Mvar pgrptsbs.sqr operadorRec/Ope+1234Rec 
+=> FECHA, REPROCESO
+06/19/2023
+N
+
+SELECT is_FechTransaccion,* from cob_cuentas..cc_inf_super where is_fecha_corte = '30/06/2023'
+order by is_FechTransaccion desc
+
+ARCHIVO MENSUAL
+sqr -debug -Mvar pgrpsbsf.sqr operadorRec/Ope+1234Rec
+06/30/2023

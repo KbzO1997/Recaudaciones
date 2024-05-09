@@ -1,0 +1,261 @@
+<wsdl:definitions name="SRI" targetNamespace="http://www.bolivariano.com/ws/SRI/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.bolivariano.com/ws/SRI/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsd1="http://www.bolivariano.com/MensajeSRI">
+ <wsdl:types>
+  <xsd:schema>
+   <xsd:import namespace="http://www.bolivariano.com/MensajeSRI" schemaLocation="MensajesCanonicos/MensajeSRI.xsd"/>
+  </xsd:schema>
+ </wsdl:types>
+ <wsdl:message name="MensajeEntradaConsultarMatriculaSRI">
+  <wsdl:part element="xsd1:MensajeEntradaConsultarMatriculaSRI" name="parameters"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeSalidaConsultarMatriculaSRI">
+  <wsdl:part element="xsd1:MensajeSalidaConsultarMatriculaSRI" name="parameters"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeEntradaPagarMatriculaSRI">
+  <wsdl:part element="xsd1:MensajeEntradaPagarMatriculaSRI" name="parameters"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeSalidaPagarMatriculaSRI">
+  <wsdl:part element="xsd1:MensajeSalidaPagarMatriculaSRI" name="parameters"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeEntradaReversarMatriculaSRI">
+  <wsdl:part element="xsd1:MensajeEntradaReversarMatriculaSRI" name="parameters"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeSalidaReversarMatriculaSRI">
+  <wsdl:part element="xsd1:MensajeSalidaReversarMatriculaSRI" name="parameters"/>
+ </wsdl:message>
+ <wsdl:portType name="SRIPortType">
+  <wsdl:operation name="consultarMatriculaSRI">
+   <wsdl:input message="tns:MensajeEntradaConsultarMatriculaSRI"/>
+   <wsdl:output message="tns:MensajeSalidaConsultarMatriculaSRI"/>
+   <wsdl:fault message="tns:SRIFault" name="SRIConsultarFault"/>
+  </wsdl:operation>
+  <wsdl:operation name="pagarMatriculaSRI">
+   <wsdl:input message="tns:MensajeEntradaPagarMatriculaSRI"/>
+   <wsdl:output message="tns:MensajeSalidaPagarMatriculaSRI"/>
+   <wsdl:fault message="tns:SRIFault" name="SRIPagarFault"/>
+  </wsdl:operation>
+  <wsdl:operation name="reversarMatriculaSRI">
+   <wsdl:input message="tns:MensajeEntradaReversarMatriculaSRI"/>
+   <wsdl:output message="tns:MensajeSalidaReversarMatriculaSRI"/>
+   <wsdl:fault message="tns:SRIFault" name="SRIReversarFault"/>
+  </wsdl:operation>
+  <wsdl:operation name="consultarRise">
+   <wsdl:input message="tns:MensajeEntradaConsultarRise"/>
+   <wsdl:output message="tns:MensajeSalidaConsultarRise"/>
+   <wsdl:fault message="tns:SRIFault" name="SRIConsultarFault"/>
+  </wsdl:operation>
+  <wsdl:operation name="pagarRise">
+   <wsdl:input message="tns:MensajeEntradaPagarRise"/>
+   <wsdl:output message="tns:MensajeSalidaPagarRise"/>
+   <wsdl:fault message="tns:SRIFault" name="SRIPagarFault"/>
+  </wsdl:operation>
+  <wsdl:operation name="reversarRise">
+   <wsdl:input message="tns:MensajeEntradaReversarRise"/>
+   <wsdl:output message="tns:MensajeSalidaReversarRise"/>
+   <wsdl:fault message="tns:SRIFault" name="SRIReversarFault"/>
+  </wsdl:operation>
+  <wsdl:operation name="consultarTransferenciaDominio">
+   <wsdl:input message="tns:MensajeEntradaConsultarTransferenciaDominio"/>
+   <wsdl:output message="tns:MensajeSalidaConsultarTransferenciaDominio"/>
+   <wsdl:fault message="tns:SRIFault" name="SRIConsultarFault"/>
+  </wsdl:operation>
+  <wsdl:operation name="pagarTransferenciaDominio">
+   <wsdl:input message="tns:MensajeEntradaPagarTransferenciaDominio"/>
+   <wsdl:output message="tns:MensajeSalidaPagarTransferenciaDominio"/>
+   <wsdl:fault message="tns:SRIFault" name="SRIPagarFault"/>
+  </wsdl:operation>
+  <wsdl:operation name="reversarTransferenciaDominio">
+   <wsdl:input message="tns:MensajeEntradaReversarTransferenciaDominio"/>
+   <wsdl:output message="tns:MensajeSalidaReversarTransferenciaDominio"/>
+   <wsdl:fault message="tns:SRIFault" name="SRIReversarFault"/>
+  </wsdl:operation>
+  <wsdl:operation name="consultarOtrasFormaPago">
+   <wsdl:input message="tns:MensajeEntradaConsultarOtrasFormaPago"/>
+   <wsdl:output message="tns:MensajeSalidaConsultarOtrasFormaPago"/>
+   <wsdl:fault message="tns:SRIFault" name="SRIConsultarFault"/>
+  </wsdl:operation>
+  <wsdl:operation name="pagarOtrasFormaPago">
+   <wsdl:input message="tns:MensajeEntradaPagarOtrasFormaPago"/>
+   <wsdl:output message="tns:MensajeSalidaPagarOtrasFormaPago"/>
+   <wsdl:fault message="tns:SRIFault" name="SRIPagarFault"/>
+  </wsdl:operation>
+  <wsdl:operation name="reversarOtrasFormaPago">
+   <wsdl:input message="tns:MensajeEntradaReversarOtrasFormaPago"/>
+   <wsdl:output message="tns:MensajeSalidaReversarOtrasFormaPago"/>
+   <wsdl:fault message="tns:SRIFault" name="SRIReversarFault"/>
+  </wsdl:operation>
+ </wsdl:portType>
+ <wsdl:binding name="SRIBindingSOAP" type="tns:SRIPortType">
+  <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <wsdl:operation name="consultarMatriculaSRI">
+   <soap:operation soapAction="http://www.bolivariano.com/ws/SRI/consultarMatriculaSRI"/>
+   <wsdl:input>
+    <soap:body use="literal"/>
+   </wsdl:input>
+   <wsdl:output>
+    <soap:body use="literal"/>
+   </wsdl:output>
+  </wsdl:operation>
+  <wsdl:operation name="pagarMatriculaSRI">
+   <soap:operation soapAction="http://www.bolivariano.com/ws/SRI/pagarMatriculaSRI"/>
+   <wsdl:input>
+    <soap:body use="literal"/>
+   </wsdl:input>
+   <wsdl:output>
+    <soap:body use="literal"/>
+   </wsdl:output>
+  </wsdl:operation>
+  <wsdl:operation name="reversarMatriculaSRI">
+   <soap:operation soapAction="http://www.bolivariano.com/ws/SRI/reversarMatriculaSRI"/>
+   <wsdl:input>
+    <soap:body use="literal"/>
+   </wsdl:input>
+   <wsdl:output>
+    <soap:body use="literal"/>
+   </wsdl:output>
+  </wsdl:operation>
+  <wsdl:operation name="consultarRise">
+   <soap:operation style="document" soapAction="http://www.bolivariano.com/ws/SRI//consultarRise"/>
+   <wsdl:input>
+    <soap:body use="literal" parts="part"/>
+   </wsdl:input>
+   <wsdl:output>
+    <soap:body use="literal" parts="part"/>
+   </wsdl:output>
+  </wsdl:operation>
+  <wsdl:operation name="pagarRise">
+   <soap:operation style="document" soapAction="http://www.bolivariano.com/ws/SRI//pagarRise"/>
+   <wsdl:input>
+    <soap:body use="literal" parts="part"/>
+   </wsdl:input>
+   <wsdl:output>
+    <soap:body use="literal" parts="part"/>
+   </wsdl:output>
+  </wsdl:operation>
+  <wsdl:operation name="reversarRise">
+   <soap:operation style="document" soapAction="http://www.bolivariano.com/ws/SRI//reversarRise"/>
+   <wsdl:input>
+    <soap:body use="literal" parts="part"/>
+   </wsdl:input>
+   <wsdl:output>
+    <soap:body use="literal" parts="part"/>
+   </wsdl:output>
+  </wsdl:operation>
+  <wsdl:operation name="consultarTransferenciaDominio">
+   <soap:operation style="document" soapAction="http://www.bolivariano.com/ws/SRI//consultarTransferenciaDominio"/>
+   <wsdl:input>
+    <soap:body use="literal" parts="part"/>
+   </wsdl:input>
+   <wsdl:output>
+    <soap:body use="literal" parts="part"/>
+   </wsdl:output>
+  </wsdl:operation>
+  <wsdl:operation name="pagarTransferenciaDominio">
+   <soap:operation style="document" soapAction="http://www.bolivariano.com/ws/SRI//pagarTransferenciaDominio"/>
+   <wsdl:input>
+    <soap:body use="literal" parts="part"/>
+   </wsdl:input>
+   <wsdl:output>
+    <soap:body use="literal" parts="part"/>
+   </wsdl:output>
+  </wsdl:operation>
+  <wsdl:operation name="reversarTransferenciaDominio">
+   <soap:operation style="document" soapAction="http://www.bolivariano.com/ws/SRI//reversarTransferenciaDominio"/>
+   <wsdl:input>
+    <soap:body use="literal" parts="part"/>
+   </wsdl:input>
+   <wsdl:output>
+    <soap:body use="literal" parts="part"/>
+   </wsdl:output>
+  </wsdl:operation>
+  <wsdl:operation name="consultarOtrasFormaPago">
+   <soap:operation style="document" soapAction="http://www.bolivariano.com/ws/SRI//consultarOtrasFormaPago"/>
+   <wsdl:input>
+    <soap:body use="literal" parts="part"/>
+   </wsdl:input>
+   <wsdl:output>
+    <soap:body use="literal" parts="part"/>
+   </wsdl:output>
+  </wsdl:operation>
+  <wsdl:operation name="pagarOtrasFormaPago">
+   <soap:operation style="document" soapAction="http://www.bolivariano.com/ws/SRI//pagarOtrasFormaPago"/>
+   <wsdl:input>
+    <soap:body use="literal" parts="part"/>
+   </wsdl:input>
+   <wsdl:output>
+    <soap:body use="literal" parts="part"/>
+   </wsdl:output>
+  </wsdl:operation>
+  <wsdl:operation name="reversarOtrasFormaPago">
+   <soap:operation style="document" soapAction="http://www.bolivariano.com/ws/SRI//reversarOtrasFormaPago"/>
+   <wsdl:input>
+    <soap:body use="literal" parts="part"/>
+   </wsdl:input>
+   <wsdl:output>
+    <soap:body use="literal" parts="part"/>
+   </wsdl:output>
+  </wsdl:operation>
+ </wsdl:binding>
+ <wsdl:service name="SRIService">
+  <wsdl:port binding="tns:SRIBindingSOAP" name="SRIPortType">
+   <!-- <soap:address location="http://esbsswsd1:8011/SRI/proxy/SRI"/> -->
+   <soap:address location="https://soa.bolivariano.fin.ec:4443/SRI/proxy/SRI"/>
+  </wsdl:port>
+ </wsdl:service>
+ <wsdl:message name="SRIFault">
+  <wsdl:part name="SRIFault" type="xsd1:SRIFault"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeEntradaConsultarTransferenciaDominio">
+  <wsdl:part name="part" element="xsd1:MensajeEntradaConsultarTransferenciaDominio"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeSalidaConsultarTransferenciaDominio">
+  <wsdl:part name="part" element="xsd1:MensajeSalidaConsultarTransferenciaDominio"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeEntradaConsultarRise">
+  <wsdl:part name="part" element="xsd1:MensajeEntradaConsultarRise"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeSalidaConsultarRise">
+  <wsdl:part name="part" element="xsd1:MensajeSalidaConsultarRise"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeEntradaConsultarOtrasFormaPago">
+  <wsdl:part name="part" element="xsd1:MensajeEntradaConsultarOtrasFormasPago"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeSalidaConsultarOtrasFormaPago">
+  <wsdl:part name="part" element="xsd1:MensajeSalidaConsultarOtrasFormasPago"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeEntradaPagarTransferenciaDominio">
+  <wsdl:part name="part" element="xsd1:MensajeEntradaPagarTransferenciaDominio"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeSalidaPagarTransferenciaDominio">
+  <wsdl:part name="part" element="xsd1:MensajeSalidaPagarTransferenciaDominio"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeEntradaPagarRise">
+  <wsdl:part name="part" element="xsd1:MensajeEntradaPagarRise"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeSalidaPagarRise">
+  <wsdl:part name="part" element="xsd1:MensajeSalidaPagarRise"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeEntradaPagarOtrasFormaPago">
+  <wsdl:part name="part" element="xsd1:MensajeEntradaPagarOtrasFormasPago"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeSalidaPagarOtrasFormaPago">
+  <wsdl:part name="part" element="xsd1:MensajeSalidaPagarOtrasFormasPago"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeEntradaReversarRise">
+  <wsdl:part name="part" element="xsd1:MensajeEntradaReversarRise"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeSalidaReversarRise">
+  <wsdl:part name="part" element="xsd1:MensajeSalidaReversarRise"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeEntradaReversarTransferenciaDominio">
+  <wsdl:part name="part" element="xsd1:MensajeEntradaReversarTransferenciaDominio"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeSalidaReversarTransferenciaDominio">
+  <wsdl:part name="part" element="xsd1:MensajeSalidaReversarTransferenciaDominio"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeEntradaReversarOtrasFormaPago">
+  <wsdl:part name="part" element="xsd1:MensajeEntradaReversarOtrasFormasPago"/>
+ </wsdl:message>
+ <wsdl:message name="MensajeSalidaReversarOtrasFormaPago">
+  <wsdl:part name="part" element="xsd1:MensajeSalidaReversarOtrasFormasPago"/>
+ </wsdl:message>
+</wsdl:definitions>

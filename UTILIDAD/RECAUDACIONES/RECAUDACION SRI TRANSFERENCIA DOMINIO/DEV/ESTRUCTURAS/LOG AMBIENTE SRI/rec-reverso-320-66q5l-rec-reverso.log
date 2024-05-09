@@ -1,0 +1,167 @@
+Starting the Java application using /opt/jboss/container/java/run/run-java.sh ...
+INFO exec  java -Xms64m -Xmx1024m -XX:+UseParallelGC -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -XX:MaxMetaspaceSize=256m -XX:ParallelGCThreads=1 -Djava.util.concurrent.ForkJoinPool.common.parallelism=1 -XX:CICompilerCount=2 -XX:+ExitOnOutOfMemoryError -Dfile.encoding=ISO-8859-1 -cp "." -jar /deployments/quarkus-run.jar  
+__  ____  __  _____   ___  __ ____  ______ 
+ --/ __ \/ / / / _ | / _ \/ //_/ / / / __/ 
+ -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \   
+--\___\_\____/_/ |_/_/|_/_/|_|\____/___/   
+2023-06-22 07:38:29.686  WARN rec-reverso-320-66q5l --- [       Thread-0] i.q.n.r.NettyRecorder                    : Netty DefaultChannelId initialization (with io.netty.machineId system property set to 6f:27:53:2c:06:ff:53:79) took more than a second
+{"codigo":"0","mensajeUsuario":"Reverso ejecutado","estado":"OK","mensajeSalidaEjecutarPago":{"bande ...
+2023-06-22 10:50:35.749  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.m.MessageConsumer                : RETORNO MESSAGE STRING
+2023-06-22 10:50:35.749  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.m.MessageConsumer                : MENSAJE DE RESPUESTA: {"codigo":"0","mensajeUsuario":"Reverso ejecutado","estado":"OK","mensajeSalidaEjecutarPago":{"banderaOffline":null,"codigoError":"0","datosAdicionales":{"datoAdicional":[]},"fechaDebito":null,"fechaPago":null,"mensajeUsuario":"15","mensajeSistema":"15","montoTotal":null,"referencia":"763125"},"mensajeSalidaConsultarDeuda":null}
+2023-06-22 10:50:36.019  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.SupplierProcessService         : RECIBE MENSAJE A PROVEEDOR
+2023-06-22 10:50:36.020  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.SupplierProcessService         : RESPUESTA PROVEEDOR: {"codigo":"0","mensajeUsuario":"Reverso ejecutado","estado":"OK","mensajeSalidaEjecutarPago":{"banderaOffline":null,"codigoError":"0","datosAdicionales":{"datoAdicional":[]},"fechaDebito":null,"fechaPago":null,"mensajeUsuario":"15","mensajeSistema":"15","montoTotal":null,"referencia":"763125"},"mensajeSalidaConsultarDeuda":null}
+2023-06-22 10:50:36.066  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.SupplierProcessService         : RESPUESTA DE GATEWAY: 0
+2023-06-22 10:50:36.066  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.SupplierProcessService         : 0
+2023-06-22 10:50:36.066  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.SupplierProcessService         : SETEAN MENSAJE DE SALIDA
+2023-06-22 10:50:36.067  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.SupplierProcessService         : FIN EJECUTA PROVEEDOR ...
+2023-06-22 10:50:36.067  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.SupplierBankProcessService     : RESPUESTA PROVEEDOR: MensajeSalidaEjecutarPago{banderaOffline=null, codigoError='0', datosAdicionales=com.bolivariano.microservice.recreverso.domain.mensajeotc.MensajeSalidaEjecutarPago$DatosAdicionales@7797523b, fechaDebito=null, fechaPago=null, mensajeUsuario='15', mensajeSistema='15', montoTotal=0.0, referencia='null'}
+2023-06-22 10:50:36.067  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.SupplierBankProcessService     : EJECUTA CORE
+2023-06-22 10:50:36.067  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : Verificando Canal: VEN
+2023-06-22 10:50:36.067  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : Conectandose a Desarrollo 1
+2023-06-22 10:50:36.070  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : cob_pagos..pa_pg_tpag_reca_varios INPUT PARAMETERS
+2023-06-22 10:50:36.070  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_ssn=135882374
+2023-06-22 10:50:36.071  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_srv=SRVDESA2
+2023-06-22 10:50:36.071  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_user=msilvag
+2023-06-22 10:50:36.071  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_term=VIRTUAL_BB
+2023-06-22 10:50:36.071  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_date=06/22/2023
+2023-06-22 10:50:36.071  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_ofi=0
+2023-06-22 10:50:36.071  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_rol=252
+2023-06-22 10:50:36.071  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_corr=S
+2023-06-22 10:50:36.071  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_ssn_corr=135882283
+2023-06-22 10:50:36.072  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_trn=3295
+2023-06-22 10:50:36.072  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_mon=1
+2023-06-22 10:50:36.072  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_ruc_cliente=1306529684
+2023-06-22 10:50:36.072  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_servicio=SRI-TRNF-DOM
+2023-06-22 10:50:36.072  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_empresa=9718
+2023-06-22 10:50:36.072  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_efectivo=0.00
+2023-06-22 10:50:36.072  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_cheque=0.00
+2023-06-22 10:50:36.072  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_debito=65.63
+2023-06-22 10:50:36.072  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_tarjeta=0
+2023-06-22 10:50:36.072  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_tarjeta_cta=
+2023-06-22 10:50:36.073  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_tarjeta_plazo=
+2023-06-22 10:50:36.073  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_comision_tot=0.6
+2023-06-22 10:50:36.073  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_comision_efe=0.00
+2023-06-22 10:50:36.073  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_comision_chq=0.00
+2023-06-22 10:50:36.073  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_comision_db=0.60
+2023-06-22 10:50:36.073  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_total=65.63
+2023-06-22 10:50:36.073  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_cant_cheques=0
+2023-06-22 10:50:36.073  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_tipo_cta=CTE
+2023-06-22 10:50:36.074  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_cuenta=0000088024
+2023-06-22 10:50:36.074  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_nombre_cta=PINTURAS UNIDAS S. A.*****
+2023-06-22 10:50:36.074  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_autoriza=N
+2023-06-22 10:50:36.074  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_canal=VEN
+2023-06-22 10:50:36.074  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_ubi=0
+2023-06-22 10:50:36.074  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_codigo=PVX0132
+2023-06-22 10:50:36.074  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_cod_referencia=
+2023-06-22 10:50:36.074  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_nombre_cliente=null
+2023-06-22 10:50:36.074  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_base_imponible=0
+2023-06-22 10:50:36.074  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_factura=575.37
+2023-06-22 10:50:36.075  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_cod_respuesta=6,500.00
+2023-06-22 10:50:36.075  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_cod_grupo=
+2023-06-22 10:50:36.075  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_nomb_tramite=
+2023-06-22 10:50:36.075  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_pcodigo_operacion=
+2023-06-22 10:50:36.075  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_pcodigo_secuencia=
+2023-06-22 10:50:36.075  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_phoralocal=
+2023-06-22 10:50:36.075  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @e_cod_consultora=null
+2023-06-22 10:50:36.075  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : EJECUTA SP {? = call cob_pagos..pa_pg_tpag_reca_varios(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }
+2023-06-22 10:50:36.274  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : FINALIZA EJECUTA SP
+2023-06-22 10:50:36.364  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : RESPUESTA SP --> 0
+2023-06-22 10:50:36.365  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_cod_respuesta=0
+2023-06-22 10:50:36.365  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : FECHA DEBITO: 06/22/2023
+2023-06-22 10:50:36.365  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : @s_mensaje_respuesta=OK
+2023-06-22 10:50:36.371  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : Response Reverso Core-> {"banderaOffline":null,"codigoError":"0","datosAdicionales":{"datoAdicional":[{"codigo":"vp_s_fecha_contable","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"06/22/2023","visible":null},{"codigo":"vp_s_ssn","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"135882374","visible":null},{"codigo":"vp_s_comision","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"","visible":null},{"codigo":"vp_s_tasa","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"","visible":null},{"codigo":"vp_s_base_imp","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"","visible":null},{"codigo":"vp_s_impuesto","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"","visible":null},{"codigo":"vp_s_empresa","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"","visible":null},{"codigo":"vp_s_recaudacion","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"","visible":null},{"codigo":"vp_s_referencia1","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"","visible":null},{"codigo":"vp_s_referencia2","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"","visible":null},{"codigo":"vp_s_referencia3","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"","visible":null},{"codigo":"rr_s_ssn","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"135882374","visible":null},{"codigo":"rr_s_horario","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"N","visible":null},{"codigo":"rr_s_tasa","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"0.12","visible":null},{"codigo":"rr_s_base_imp","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"0.54","visible":null},{"codigo":"rr_s_impuesto","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"0.06","visible":null},{"codigo":"rr_s_servicio_not","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"PAGSR","visible":null},{"codigo":"rr_s_nomb_ente","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"PINTURAS UNIDAS S. A.*****","visible":null},{"codigo":"rr_s_cod_ente","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"1233","visible":null},{"codigo":"rr_s_desccanal","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"VENTANILLA","visible":null},{"codigo":"rr_s_celular","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"","visible":null},{"codigo":"rr_s_correo","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"crodriguez@bolivariano.com","visible":null},{"codigo":"rr_s_desc_empresa","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"SERVICIOS VARIOS","visible":null},{"codigo":"rr_s_prod_deb","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"CTE","visible":null},{"codigo":"rr_s_valor","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"65.63","visible":null},{"codigo":"rr_s_fecha_deb","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"06/22/2023","visible":null},{"codigo":"rr_s_hora_deb","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"10:50:36","visible":null},{"codigo":"rr_s_valor_comi","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"0.60","visible":null},{"codigo":"rr_s_cta_lat","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"024","visible":null},{"codigo":"rr_s_tipo_serv","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"FACTURA","visible":null},{"codigo":"rr_s_fecha_contable","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"06/22/2023","visible":null},{"codigo":"rp_s_envia_notf","etiqueta":null,"editable":null,"formato":null,"listasSeleccion":null,"longitud":null,"mascara":null,"regexp":null,"tipo":null,"valor":"1","visible":null}]},"fechaDebito":null,"fechaPago":"2023-06-22T10:47:27","mensajeUsuario":"OK","mensajeSistema":"OK","montoTotal":66.23,"referencia":null}
+2023-06-22 10:50:36.371  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.d.CoreDao                        : CIERRA CONEXION!
+2023-06-22 10:50:36.371  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.BankProcessService             : CODIGO RESPUESTA: 0
+2023-06-22 10:50:36.371  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.SupplierBankProcessService     : VALIDA PREVIA MANUAL:true
+2023-06-22 10:50:36.371  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.SupplierBankProcessService     : TIPO PROCESO:M
+2023-06-22 10:50:36.372  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.BankProcessService             : ENVIANOTF:1
+2023-06-22 10:50:36.372  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.BankProcessService             : TIPOS PROCESOS NOTIFICACION: ***M,A***
+2023-06-22 10:50:36.372  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.BankProcessService             : VALOR PAGO:65.63
+2023-06-22 10:50:36.372  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.BankProcessService             : MINIMO VALOR PAGO:0.0
+2023-06-22 10:50:36.372  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.BankProcessService             : VALIDA FORMA PAGO:true
+2023-06-22 10:50:36.372  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.BankProcessService             : ENVIA A NOTIFICACION
+2023-06-22 10:50:36.373  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.BankProcessService             : FIN Ejecuta NOTIFICACION ...
+2023-06-22 10:50:36.373  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.SupplierBankProcessService     : a20030a9dc58 135882374 ***TIEMPO TOTAL PROVEEDOR/BANCO: 7299 ***  TIEMPO TOTAL VALIDACION CORE: 7299 *** TIEMPO TOTAL BANCO: 304 ***  TIEMPO TOTAL PROVEEDOR: 6703 *** TIEMPO TOTAL NOTIFICACION: 1
+2023-06-22 10:50:36.373  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.ReverseService                 : a20030a9dc58 135882374 Proceso manual envia respuesta
+2023-06-22 10:50:36.373  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.ReverseService                 : a20030a9dc58 135882374 Mensaje de respuesta antes del update: 0
+2023-06-22 10:50:36.373  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.ReverseService                 : a20030a9dc58 135882374 Codigo respuesta final: 0
+2023-06-22 10:50:36.460  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : INICIO EJECUTA NOTIFICACION
+2023-06-22 10:50:36.461  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : PATH --> /secret/truststore.jks
+2023-06-22 10:50:36.461  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : PASSWORD --> otpms
+2023-06-22 10:50:36.461  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : TYPE --> otpms
+2023-06-22 10:50:36.463  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : header setId: VEN20230622105036135882
+2023-06-22 10:50:36.463  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : header setRefCompany: BOLIVARIANO
+2023-06-22 10:50:36.463  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : header setRefService: PAGSR
+2023-06-22 10:50:36.463  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : header setRefMsgLabel: Avisos24
+2023-06-22 10:50:36.463  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : header setKeyValue: 1233
+2023-06-22 10:50:36.463  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : header setChannels: VEN
+2023-06-22 10:50:36.463  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : info setLoginEnterprise: BOLIVARIANO
+2023-06-22 10:50:36.463  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : info setRefContract: PAGSR
+2023-06-22 10:50:36.464  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setNombre: PINTURAS UNIDAS S. A.*****
+2023-06-22 10:50:36.464  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setDesccanal: VENTANILLA
+2023-06-22 10:50:36.464  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setDeservicio: FACTURA
+2023-06-22 10:50:36.464  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setFechaTope: 2023-06-22
+2023-06-22 10:50:36.464  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setEmpresa: SERVICIOS VARIOS
+2023-06-22 10:50:36.464  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setPlanilla: PVX0132
+2023-06-22 10:50:36.464  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setFecha1: 10:50:36
+2023-06-22 10:50:36.464  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setProdeb: CTE
+2023-06-22 10:50:36.464  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setCtadeb: 024
+2023-06-22 10:50:36.465  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setValor: 65.63
+2023-06-22 10:50:36.465  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setValor2: 0.60
+2023-06-22 10:50:36.465  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setValortope: 66.23
+2023-06-22 10:50:36.465  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setGsm: 
+2023-06-22 10:50:36.465  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setEmail: crodriguez@bolivariano.com
+2023-06-22 10:50:36.465  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : data setPhone: 
+2023-06-22 10:50:36.465  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : addressesGsm setClassName: gsm
+2023-06-22 10:50:36.465  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : addressesGsm setType: to
+2023-06-22 10:50:36.465  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : addressesGsm setRef:
+2023-06-22 10:50:36.465  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : addressesEmail setClassName: email
+2023-06-22 10:50:36.465  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : addressesEmail setType: to
+2023-06-22 10:50:36.466  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : addressesEmail setRef:crodriguez@bolivariano.com
+2023-06-22 10:50:36.573  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : REQUESTNOTIFICACION -> {
+  "header" : {
+    "id" : "VEN20230622105036135882",
+    "refCompany" : "BOLIVARIANO",
+    "refService" : "PAGSR",
+    "keyValue" : "1233",
+    "channels" : "VEN",
+    "refMsgLabel" : "Avisos24"
+  },
+  "info" : {
+    "loginEnterprise" : "BOLIVARIANO",
+    "refContract" : "PAGSR"
+  },
+  "data" : {
+    "nombre" : "PINTURAS UNIDAS S. A.*****",
+    "desccanal" : "VENTANILLA",
+    "deservicio" : "FACTURA",
+    "empresa" : "SERVICIOS VARIOS",
+    "planilla" : "PVX0132",
+    "fecha_tope" : "2023-06-22",
+    "fecha1" : "10:50:36",
+    "prodeb" : "CTE",
+    "ctadeb" : "024",
+    "valor" : "65.63",
+    "valor2" : "0.60",
+    "valortope" : "66.23",
+    "gsm" : "",
+    "email" : "crodriguez@bolivariano.com",
+    "phone" : ""
+  },
+  "addresses" : [ {
+    "className" : "gsm",
+    "type" : "to",
+    "ref" : ""
+  }, {
+    "className" : "email",
+    "type" : "to",
+    "ref" : "crodriguez@bolivariano.com"
+  } ]
+}
+2023-06-22 10:50:37.062  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : RESPONSENOTIFICACION -> {
+  "msg" : "ok",
+  "result" : "Ok"
+}
+2023-06-22 10:50:37.062  INFO rec-reverso-320-66q5l --- [vert.x-eventloo] c.b.m.r.s.NotificationService            : FIN EJECUTA NOTIFICACION
+2023-06-22 10:50:37.955  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.m.MessageSender                  : Rsp: <?xml version="1.0" encoding="UTF-8" standalone="yes"?><mensajeSalidaGateway xmlns="http://www.bolivariano.com/mensaje/MensajeOSB"><codigo>0</codigo><mensajeUsuario>Transaccion Exitosa</mensajeUsuario><mensaje><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="yes"?><ns2:salidaEjecutarPago xmlns:ns2="http://www.bolivariano.com/mensaje/MensajeOTC"><ns2:codigoError>0</ns2:codigoError><ns2:datosAdicionales><ns2:datoAdicional><codigo>vp_s_fecha_contable</codigo><valor>06/22/2023</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_ssn</codigo><valor>135882374</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_comision</codigo><valor></valor></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_tasa</codigo><valor></valor></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_base_imp</codigo><valor></valor></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_impuesto</codigo><valor></valor></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_empresa</codigo><valor></valor></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_recaudacion</codigo><valor></valor></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_referencia1</codigo><valor></valor></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_referencia2</codigo><valor></valor></ns2:datoAdicional><ns2:datoAdicional><codigo>vp_s_referencia3</codigo><valor></valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rr_s_ssn</codigo><valor>135882374</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rr_s_horario</codigo><valor>N</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rr_s_tasa</codigo><valor>0.12</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rr_s_base_imp</codigo><valor>0.54</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rr_s_impuesto</codigo><valor>0.06</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rr_s_servicio_not</codigo><valor>PAGSR</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rr_s_nomb_ente</codigo><valor>PINTURAS UNIDAS S. A.*****</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rr_s_cod_ente</codigo><valor>1233</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rr_s_desccanal</codigo><valor>VENTANILLA</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rr_s_celular</codigo><valor></valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rr_s_correo</codigo><valor>crodriguez@bolivariano.com</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rr_s_desc_empresa</codigo><valor>SERVICIOS VARIOS</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rr_s_prod_deb</codigo><valor>CTE</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rr_s_valor</codigo><valor>65.63</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rr_s_fecha_deb</codigo><valor>06/22/2023</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rr_s_hora_deb</codigo><valor>10:50:36</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rr_s_valor_comi</codigo><valor>0.60</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rr_s_cta_lat</codigo><valor>024</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rr_s_tipo_serv</codigo><valor>FACTURA</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rr_s_fecha_contable</codigo><valor>06/22/2023</valor></ns2:datoAdicional><ns2:datoAdicional><codigo>rp_s_envia_notf</codigo><valor>1</valor></ns2:datoAdicional></ns2:datosAdicionales><ns2:fechaPago>2023-06-22T10:47:27</ns2:fechaPago><ns2:mensajeUsuario>OK</ns2:mensajeUsuario><ns2:mensajeSistema>OK</ns2:mensajeSistema><ns2:montoTotal>66.23</ns2:montoTotal></ns2:salidaEjecutarPago>]]></mensaje></mensajeSalidaGateway>
+2023-06-22 10:50:38.582  INFO rec-reverso-320-66q5l --- [pool-7-thread-1] c.b.m.r.s.ReverseService                 : a20030a9dc58 135882374 Tiempo total ejecucion: 9717

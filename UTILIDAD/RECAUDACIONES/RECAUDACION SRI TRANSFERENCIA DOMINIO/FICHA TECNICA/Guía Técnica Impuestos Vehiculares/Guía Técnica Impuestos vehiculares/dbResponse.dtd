@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT 	cellData EMPTY>
+<!ATTLIST 	cellData
+	isnull 	CDATA #REQUIRED
+	value 	CDATA #REQUIRED
+>
+<!ELEMENT 	colDef EMPTY>
+<!ATTLIST 	colDef
+	name 	CDATA #REQUIRED
+	type 	(date | int | numeric | string) #REQUIRED
+>
+<!ELEMENT 	cursorParameter (resultsetMetadata, resultsetData)>
+<!ELEMENT 	dbResponse (responseBlock+)>
+<!ATTLIST 	dbResponse
+	MCN 	CDATA #REQUIRED
+	id 	CDATA #REQUIRED
+	destino CDATA #REQUIRED
+	ruta 	CDATA #REQUIRED
+	recibo 	CDATA #REQUIRED
+	result 	CDATA #REQUIRED
+	ssn 	CDATA #REQUIRED
+	user 	CDATA #REQUIRED
+>
+<!ELEMENT parameterBlock (parameterValue)>
+<!ATTLIST parameterBlock
+	name 	CDATA #REQUIRED
+	isnull 	(false | true) #REQUIRED
+>
+<!ELEMENT parameterValue (scalarParameter | cursorParameter)>
+<!ELEMENT responseBlock (parameterBlock | returnBlock)>
+<!ELEMENT resultsetData (rowData+)>
+<!ELEMENT resultsetMetadata (colDef+)>
+<!ELEMENT returnBlock EMPTY>
+<!ATTLIST returnBlock
+	isnull 	CDATA #REQUIRED
+	value 	CDATA #REQUIRED
+>
+<!ELEMENT rowData (cellData+)>
+<!ELEMENT scalarParameter EMPTY>
+<!ATTLIST scalarParameter
+	value 	CDATA #REQUIRED
+>
+
