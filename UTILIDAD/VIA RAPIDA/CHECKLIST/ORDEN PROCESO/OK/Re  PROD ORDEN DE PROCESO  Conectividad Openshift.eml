@@ -1,0 +1,576 @@
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com (104.47.56.168)
+ by mailweb.bolivariano.com (172.17.3.231) with Microsoft SMTP Server (TLS) id
+ 14.3.498.0; Wed, 21 Sep 2022 08:47:16 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=AzfTxjKM6J/gjg0Dp490tjijBpDBhtQNE0ApaThFKRQpE9gW548XP440lAnV4PohmQPxu1IsV5kzQFudijSrIsgNTQBUPBudWmac60buNnNrTDl4f2eos5UMgFAqB5r8Zk6N1Sm34kt8sNKZJOark/6kq5EQAybg5h1FwiOIhjrSgfgQk/KH7j3yXhBcpJRdzHmIotdB9Jh/NQQ3lfQQ/n5ccV3Mt7FbjI/c453lVdMVbKLMyEP94tAf7EtIY2dStLlLF20iyj16sAjmEuE8yZ7Cs739qGWdQ5Lf8w1Olfd754btemJqkXdbhPm2e/iR1Lylmasw9YTyJbGYlJpucw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=1v1aVld0bpsAOgdRuw55pZFXuO1EiSOj9IKgiHyR1yA=;
+ b=e2EfU00vl7+iVR6Z6Q1n5aSCoYLbyUQzmxdOmiKBnduCTR0evQZrYsIATdnWld92as1I9ie/vHoOXu2LZN9hs4ynMHAbfJYWqEQ2qQIy0rHmOlM1yS9htu2fsj6OSUeUfOKjcoJcYOpX4D2ZPuCN37WZbulA9c3u/ccCbDEa2+t52K7c3zndbo1NtBifS2tdpqY5FDTnEd8yS7riyRe0bd4Viadu+SyJf2iAXtOih2Y5G66W0OvqUTgFOX+1z783ZXIJD07rpBmJllyXfFe05MOs25vurpVMAGuXSa82CEdNxTY9ov2DakU+zxgaZ+jVYmN/C5pM7G+nF5C+6uqGAw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=bolivariano.com; dmarc=pass action=none
+ header.from=bolivariano.com; dkim=pass header.d=bolivariano.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bolivariano.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=1v1aVld0bpsAOgdRuw55pZFXuO1EiSOj9IKgiHyR1yA=;
+ b=KqoGESTgEJIkXUNWx4OZbRqkTdQBRgW9QcBW6NvbTDVq4VsUzvCHEUDG5tDEF2tsyeY5lo097/OuEZM79qaqlIoJK51Tyh9qqOcQl3xVBTrY1ZQoHnjf8ICg4vlKEk0PsRm1aiCrjG/EmmwZe1KKOdLFDpbc+P2cQyru9BNI5QEkw+fer8hUk4k9OeXlpnmUpZg5ucKfLAoyC25eOXbTQ3XqSIUB7Sadetnhfjg4/G0D7V0eFwOiS0DcWnOO0qDDrrB54c8gcQJW6u6iqNArKaABZDuBSAMDvy832QWsTDIrTwPRbw9HUFGk1P3gc1CuJFmSVR70e2+ifgHPkwxCDg==
+Received: from DS7PR10MB5376.namprd10.prod.outlook.com (2603:10b6:5:3a9::20)
+ by SJ0PR10MB5696.namprd10.prod.outlook.com (2603:10b6:a03:3ef::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.14; Wed, 21 Sep
+ 2022 13:47:13 +0000
+Received: from DS7PR10MB5376.namprd10.prod.outlook.com
+ ([fe80::6830:e838:a04d:55e6]) by DS7PR10MB5376.namprd10.prod.outlook.com
+ ([fe80::6830:e838:a04d:55e6%7]) with mapi id 15.20.5654.017; Wed, 21 Sep 2022
+ 13:47:13 +0000
+From: Marcos Del Rosario Camposano <mrosario@bolivariano.com>
+To: Recaudos <Recaudos@bolivariano365.onmicrosoft.com>, Fernando Rizzo Crespo
+	<frizzoc@bolivariano.com>, "Jonathan  Guerrero Jijon"
+	<jguerrej@bolivariano.com>
+CC: Middleware <Middleware@bolivariano.com>,
+	=?Windows-1252?Q?Administraci=F3n_y_Control?= <admcontrol@bolivariano.com>
+Subject: RE: PROD ORDEN DE PROCESO: Conectividad Openshift
+Thread-Topic: PROD ORDEN DE PROCESO: Conectividad Openshift
+Thread-Index: AdjNNPj+uqI/+k2tRZW2DNJ7eqQbnQAiu2OQAAAoQnE=
+Date: Wed, 21 Sep 2022 13:47:13 +0000
+Message-ID: <DS7PR10MB537671C19D3D104BC8782F90C74F9@DS7PR10MB5376.namprd10.prod.outlook.com>
+References: <BYAPR10MB33675E5533C26D06E23BCBD3C34F9@BYAPR10MB3367.namprd10.prod.outlook.com>
+ <BN0PR10MB5142A06C0A3D354F994E1435A04F9@BN0PR10MB5142.namprd10.prod.outlook.com>
+In-Reply-To: <BN0PR10MB5142A06C0A3D354F994E1435A04F9@BN0PR10MB5142.namprd10.prod.outlook.com>
+Accept-Language: es-EC, en-US
+Content-Language: es-EC
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator:
+msip_labels:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=bolivariano.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DS7PR10MB5376:EE_|SJ0PR10MB5696:EE_
+x-ms-office365-filtering-correlation-id: 9e97ec9c-c598-4cce-4df1-08da9bd7c9eb
+x-ld-processed: 381bee0c-a9ea-4342-81c0-318a50b0845f,ExtAddr
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: KyuWAJ8ApP7d9nLi2FqlGx0sbnwegPGqOqPG3NgdmJk1rxS8xjGZ0yqpIK+Zh1fRG5082eT+OhKC3TAR4ob1543ff2fI/Ilf3V0TL24GxutV3mp/+zC+FNSaPwFE8/XUwBInOR67EpHwrq4Yy9EkfAQnzdJVpRMQ91Cc9sOTs0NvpLcf4sEJBiOKY0mL9f6p9WRklSQ6ZPEPBJaA1CYAj0PrKpSJ9NoEyItx/MNCOKVgXygTT+V0W94NLyn6ioSfmHuWfXrF84X3nEfUvNeOseeFRLFslNw51s+FiyXcEwy8mZjEHZA6IAfBfb/o7btzDkR/ulXTniw2nE3B0pLyAxbNcl5bianCRrVY8a3P9Ygm9zTQbvbLBK9ACXwxKXvkFxNNgDU/4BFPdzs05ph6w/aaGGg7KZERbzwI4jLjOvlwrKc9s/EuTqWe94aZnDEDrbp7m2CXsm1Gb2dWLV96TSGutemC2mpRgskoJnNYN7e5vU1LBjy6tW599HRLm4qGgYcO0UUhjDnFuZeU0VYD1+MXq+2ZW6YgN1Ss6X+Jmn8R44DlsN7CEFD8j4v1bzZc/ZSli/Q56+RwotY39OdKH4qlWyWiXeFtQ+cashb3g5Elgj+jkeVoinB5hzS56xMr6Zl0UtEKckmxci4d0bbXuT4QDcvS1YLdLOasqGIWUyv53D7uYuW5PqGyk3CGOxpCNHv563+YrEJBvW6PlpzWWQ==
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:es;SCL:-1;SRV:;IPV:NLI;SFV:SKI;H:DS7PR10MB5376.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:;DIR:INB;
+Content-Type: multipart/related;
+	boundary="_005_DS7PR10MB537671C19D3D104BC8782F90C74F9DS7PR10MB5376namp_";
+	type="multipart/alternative"
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DS7PR10MB5376.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9e97ec9c-c598-4cce-4df1-08da9bd7c9eb
+X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Sep 2022 13:47:13.3476
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 381bee0c-a9ea-4342-81c0-318a50b0845f
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 0D9N1uiOfyQc9pf/zwMMH94yw+MUeE418YhNZCbKrKpLtgH5p//2U6/hwrw3poYw5DKxxReFFmfNImLoeLeAdXqCphIbI/JBS20pVyTqdZE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB5696
+X-OrganizationHeadersPreserved: SJ0PR10MB5696.namprd10.prod.outlook.com
+Return-Path: mrosario@bolivariano.com
+X-OriginatorOrg: bolivariano.com
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-MS-Exchange-Organization-AuthSource: DS7PR10MB5376.namprd10.prod.outlook.com
+X-MS-Exchange-Organization-SCL: -1
+X-CrossPremisesHeadersPromoted: EX2K10SRV.bolivariano.fin.ec
+X-CrossPremisesHeadersFiltered: EX2K10SRV.bolivariano.fin.ec
+MIME-Version: 1.0
+
+--_005_DS7PR10MB537671C19D3D104BC8782F90C74F9DS7PR10MB5376namp_
+Content-Type: multipart/alternative;
+	boundary="_000_DS7PR10MB537671C19D3D104BC8782F90C74F9DS7PR10MB5376namp_"
+
+--_000_DS7PR10MB537671C19D3D104BC8782F90C74F9DS7PR10MB5376namp_
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+Atendido.
+[cid:29d38711-09fb-4056-b2b9-ce789cadcdce]
+
+Consulta, esta conexi=F3n no deber=EDa ser desde las pods directamente?
+________________________________
+De: Fernando Rizzo Crespo <frizzoc@bolivariano.com>
+Enviado: mi=E9rcoles, 21 de septiembre de 2022 8:44
+Para: Middleware <Middleware@bolivariano.com>
+Cc: Administraci=F3n y Control <admcontrol@bolivariano.com>; Jonathan Guerr=
+ero Jijon <jguerrej@bolivariano.com>; Recaudos <Recaudos@bolivariano365.onm=
+icrosoft.com>
+Asunto: RV: PROD ORDEN DE PROCESO: Conectividad Openshift
+
+OP Autorizada,
+Por  favor  atender.
+
+
+Saludos Cordiales ,
+
+Fernando Rizzo Crespo
+Planeaci=F3n y Control - Tecnolog=EDa
+Jun=EDn 200 y Panam=E1  Guayaquil=96Ecuador | Telf.: (593 4) 230 5000 Ext. =
+4200
+[cid:image002.png@01D86B7D.D9216C80][cid:5BF9F34FF80A326A756E5EFC38EFA75205=
+441BF3@1]
+
+
+_____________________________________________
+De: Jonathan Guerrero Jijon <jguerrej@bolivariano.com>
+Enviado el: mi=E9rcoles, 21 de septiembre de 2022 8:07
+Para: Administraci=F3n y Control <admcontrol@bolivariano.com>
+CC: Recaudos <Recaudos@bolivariano365.onmicrosoft.com>
+Asunto: PROD ORDEN DE PROCESO: Conectividad Openshift
+
+
+
+
+Buenos d=EDas.
+
+Por favor su ayuda con la siguiente orden de proceso.
+
+ORDEN DE PROCESO
+Solicitud de acci=F3n     RE: Solicitud De Informaci=F3n Url Produccion<cid=
+:13C89093DAD3678A18F69C80690ADD742C5D62AF@1> COMUNICADO: COMPRA DE COMBOS M=
+OVISTAR DESDE EL CANAL 24ONLINE<cid:F8BF1CE2EB6F04EF0D3A36616406A2494A77540=
+E@1>
+Fecha de Ejecuci=F3n      21/Septiembre/2022
+Hora de inicio  Inmediato
+Duraci=F3n        5 minutos
+Tarea/Objetivo  VALIDAR CONECTIVIDAD CON PROVEEDOR BROADNET
+Motivo  Ejecuci=F3n de Telnet
+Servidor(es)    BASTIONOCPSRV
+Servicio afectado       Ninguno
+=C1rea afectada   Ninguna
+Ejecutado por   MIDDLEWARE
+Responsable     Jonathan Guerrero
+Personal de apoyo       N/A
+Afectaci=F3n a documentaci=F3n      N/A
+Instrucciones   ORDEN DE PROCESO TELNET OPENSHIFT.doc<cid:73417E8374E0DD8ED=
+9F3074E3D28B24361729BEC@1>
+Autorizaci=F3n    Dario Barco
+Persona que verifica luego de ejecuci=F3n Jonathan Guerrero
+
+
+
+
+Saludos cordiales,
+
+Dario Espinosa
+Desarrollo | Tecnolog=EDa
+Banco Bolivariano C.A Jun=EDn 200 y Panam=E1. Guayaquil=AD =96 Ecuador | 4 =
+230 5000 - Ext. 3563
+
+
+
+--_000_DS7PR10MB537671C19D3D104BC8782F90C74F9DS7PR10MB5376namp_
+Content-Type: text/html; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+<html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=
+252">
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 11pt;=
+ color: rgb(0, 0, 0);">
+Atendido.</div>
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 11pt;=
+ color: rgb(0, 0, 0);">
+<img style=3D"max-width:100%" class=3D"w-502 h-104" size=3D"5570" contentty=
+pe=3D"image/png" data-outlook-trace=3D"F:1|T:1" src=3D"cid:29d38711-09fb-40=
+56-b2b9-ce789cadcdce"><br>
+</div>
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 11pt;=
+ color: rgb(0, 0, 0);">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 11pt;=
+ color: rgb(0, 0, 0);">
+Consulta, esta conexi=F3n no deber=EDa ser desde las pods directamente?&nbs=
+p;</div>
+<div id=3D"appendonsend"></div>
+<hr style=3D"display:inline-block;width:98%" tabindex=3D"-1">
+<div id=3D"divRplyFwdMsg" dir=3D"ltr"><font face=3D"Calibri, sans-serif" st=
+yle=3D"font-size:11pt" color=3D"#000000"><b>De:</b> Fernando Rizzo Crespo &=
+lt;frizzoc@bolivariano.com&gt;<br>
+<b>Enviado:</b> mi=E9rcoles, 21 de septiembre de 2022 8:44<br>
+<b>Para:</b> Middleware &lt;Middleware@bolivariano.com&gt;<br>
+<b>Cc:</b> Administraci=F3n y Control &lt;admcontrol@bolivariano.com&gt;; J=
+onathan Guerrero Jijon &lt;jguerrej@bolivariano.com&gt;; Recaudos &lt;Recau=
+dos@bolivariano365.onmicrosoft.com&gt;<br>
+<b>Asunto:</b> RV: PROD ORDEN DE PROCESO: Conectividad Openshift</font>
+<div>&nbsp;</div>
+</div>
+<div class=3D"BodyFragment"><font face=3D"Calibri" size=3D"2"><span style=
+=3D"font-size:11pt;">
+<div><font color=3D"#1F497D">OP Autorizada,</font></div>
+<div><font color=3D"#1F497D">Por&nbsp; favor&nbsp; atender. </font></div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div><font face=3D"Calibri" size=3D"3" color=3D"#767171"><span style=3D"fon=
+t-size:12pt;"><b>Saludos Cordiales ,</b></span></font></div>
+<div><font color=3D"#009999">&nbsp;</font></div>
+<div><font face=3D"Calibri" size=3D"3" color=3D"#009999"><span style=3D"fon=
+t-size:13pt;"><b>Fernando Rizzo Crespo</b></span></font></div>
+<div><font face=3D"Calibri" size=3D"2" color=3D"#0099A8"><span style=3D"fon=
+t-size:10pt;">Planeaci=F3n y Control - Tecnolog=EDa</span></font></div>
+<div><font face=3D"Calibri" size=3D"2" color=3D"#A6A6A6"><span style=3D"fon=
+t-size:10pt;">Jun=EDn 200 y Panam=E1&nbsp; Guayaquil=96Ecuador
+<font color=3D"gray">| </font>Telf.: (593 4) 230 5000 Ext. 4200</span></fon=
+t></div>
+<div><img data-outlook-trace=3D"F:0|T:1" src=3D"cid:image002.png@01D86B7D.D=
+9216C80"><img data-outlook-trace=3D"F:1|T:1" src=3D"cid:5BF9F34FF80A326A756=
+E5EFC38EFA75205441BF3@1"></div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>_____________________________________________<br>
+<b>De:</b> Jonathan Guerrero Jijon &lt;jguerrej@bolivariano.com&gt; <br>
+<b>Enviado el:</b> mi=E9rcoles, 21 de septiembre de 2022 8:07<br>
+<b>Para:</b> Administraci=F3n y Control &lt;admcontrol@bolivariano.com&gt;<=
+br>
+<b>CC:</b> Recaudos &lt;Recaudos@bolivariano365.onmicrosoft.com&gt;<br>
+<b>Asunto:</b> PROD ORDEN DE PROCESO: Conectividad Openshift</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div><font face=3D"Garamond">Buen<font color=3D"#1F497D">o</font>s <font co=
+lor=3D"#1F497D">
+d=EDas</font>.</font></div>
+<div><font face=3D"Garamond">&nbsp;</font></div>
+<div><font face=3D"Garamond">Por favor su ayuda con la siguiente orden de p=
+roceso<font color=3D"#1F497D"><b>.</b></font></font></div>
+<div><font color=3D"#1F497D">&nbsp;</font></div>
+<table width=3D"776" style=3D"width:466.15pt;">
+<col width=3D"776" style=3D"width:466.15pt;">
+<tbody>
+<tr height=3D"25" style=3D"height:15pt;">
+<td style=3D"text-align:center;background-color:#5B9BD5;"><font size=3D"5" =
+color=3D"#CFCFCF"><span style=3D"font-size:18pt;background-color:#5B9BD5;">=
+ORDEN DE PROCESO</span></font></td>
+</tr>
+</tbody>
+</table>
+<table width=3D"776" style=3D"width:466.15pt;">
+<col width=3D"245" style=3D"width:147.2pt;"><col width=3D"531" style=3D"wid=
+th:318.95pt;">
+<tbody>
+<tr height=3D"25" style=3D"height:15pt;">
+<td style=3D"background-color:#DEEAF6;"><span style=3D"background-color:#DE=
+EAF6;"><b>Solicitud de acci=F3n</b></span></td>
+<td style=3D"background-color:#DEEAF6;"><span style=3D"background-color:#DE=
+EAF6;"><a href=3D"cid:13C89093DAD3678A18F69C80690ADD742C5D62AF@1">RE: Solic=
+itud De Informaci=F3n Url Produccion</a>
+<font color=3D"#1F497D"></font><a href=3D"cid:F8BF1CE2EB6F04EF0D3A36616406A=
+2494A77540E@1">COMUNICADO: COMPRA DE COMBOS MOVISTAR DESDE EL CANAL 24ONLIN=
+E</a>
+</span></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td><b>Fecha de Ejecuci=F3n</b></td>
+<td><font color=3D"#1F497D"><span style=3D"background-color:yellow;"><b>21<=
+/b></span><font color=3D"red"><span style=3D"background-color:yellow;"><b>/=
+</b></span></font><span style=3D"background-color:yellow;"><b>Septiembre</b=
+></span><font color=3D"red"><span style=3D"background-color:yellow;"><b>/20=
+2</b></span></font><span style=3D"background-color:yellow;"><b>2</b></span>=
+</font></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td style=3D"background-color:#DEEAF6;"><span style=3D"background-color:#DE=
+EAF6;"><b>Hora de inicio</b></span></td>
+<td style=3D"background-color:#DEEAF6;"><font color=3D"#1F497D"><span style=
+=3D"background-color:#DEEAF6;"><span style=3D"background-color:yellow;"><b>=
+Inmediato</b></span></span></font></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td><b>Duraci=F3n</b></td>
+<td>5<font color=3D"#1F497D"> </font>minutos</td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td style=3D"background-color:#DEEAF6;"><span style=3D"background-color:#DE=
+EAF6;"><b>Tarea/Objetivo</b></span></td>
+<td style=3D"background-color:#DEEAF6;"><font color=3D"#1F497D"><span style=
+=3D"background-color:#DEEAF6;">VALIDAR
+<font color=3D"black">CONECTIVIDAD </font>CON PROVEEDOR BROADNET</span></fo=
+nt></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td><b>Motivo</b></td>
+<td>Ejecuci=F3n de Telnet</td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td style=3D"background-color:#DEEAF6;"><span style=3D"background-color:#DE=
+EAF6;"><b>Servidor(es)</b></span></td>
+<td style=3D"background-color:#DEEAF6;"><font size=3D"3"><span style=3D"fon=
+t-size:12pt;background-color:#DEEAF6;">BASTIONOCPSRV</span></font></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td><b>Servicio afectado</b></td>
+<td><b>Ninguno</b></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td style=3D"background-color:#DEEAF6;"><span style=3D"background-color:#DE=
+EAF6;"><b>=C1rea afectada</b></span></td>
+<td style=3D"background-color:#DEEAF6;"><span style=3D"background-color:#DE=
+EAF6;"><b>Ninguna</b></span></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td><b>Ejecutado por</b></td>
+<td><font size=3D"3" color=3D"#1F497D"><span style=3D"font-size:12pt;"><b>M=
+IDDLEWARE</b></span></font></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td style=3D"background-color:#DEEAF6;"><span style=3D"background-color:#DE=
+EAF6;"><b>Responsable</b></span></td>
+<td style=3D"background-color:#DEEAF6;"><font color=3D"#1F497D"><span style=
+=3D"background-color:#DEEAF6;">Jonathan Guerrero</span></font></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td><b>Personal de apoyo</b></td>
+<td>N/A</td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td style=3D"background-color:#DEEAF6;"><span style=3D"background-color:#DE=
+EAF6;"><b>Afectaci=F3n a documentaci=F3n</b></span></td>
+<td style=3D"background-color:#DEEAF6;"><span style=3D"background-color:#DE=
+EAF6;">N/A</span></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td><b>Instrucciones</b></td>
+<td><a href=3D"cid:73417E8374E0DD8ED9F3074E3D28B24361729BEC@1">ORDEN DE PRO=
+CESO TELNET OPENSHIFT.doc</a>
+</td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td style=3D"background-color:#DEEAF6;"><span style=3D"background-color:#DE=
+EAF6;"><b>Autorizaci=F3n</b></span></td>
+<td style=3D"background-color:#DEEAF6;"><span style=3D"background-color:#DE=
+EAF6;">Dario Barco</span></td>
+</tr>
+<tr height=3D"25" style=3D"height:15pt;">
+<td><b>Persona que verifica luego de ejecuci=F3n</b></td>
+<td><font color=3D"#1F497D">Jonathan Guerrero</font></td>
+</tr>
+</tbody>
+</table>
+<div><font color=3D"#1F497D">&nbsp;</font></div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div><font color=3D"#1F497D">Saludos cordiales,</font></div>
+<div><font color=3D"#009999">&nbsp;</font></div>
+<div><font color=3D"#009999"><b>Dario Espinosa</b></font></div>
+<div><b>Desarrollo | Tecnolog=EDa</b></div>
+<div><font color=3D"#A5A5A5">Banco Bolivariano C.A Jun=EDn 200 y Panam=E1. =
+Guayaquil=AD =96 Ecuador | 4 230 5000 - Ext. 3563</font></div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+</span></font></div>
+</body>
+</html>
+
+--_000_DS7PR10MB537671C19D3D104BC8782F90C74F9DS7PR10MB5376namp_--
+
+--_005_DS7PR10MB537671C19D3D104BC8782F90C74F9DS7PR10MB5376namp_
+Content-Type: image/jpeg; name="ATT11706.jpg"
+Content-Description: ATT11706.jpg
+Content-Disposition: inline; filename="ATT11706.jpg"; size=4731;
+	creation-date="Wed, 21 Sep 2022 13:43:58 GMT";
+	modification-date="Wed, 21 Sep 2022 13:46:19 GMT"
+Content-ID: <5BF9F34FF80A326A756E5EFC38EFA75205441BF3@1>
+Content-Transfer-Encoding: base64
+
+/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a
+HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy
+MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAA6AXADASIA
+AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA
+AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3
+ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm
+p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA
+AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx
+BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK
+U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3
+uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iqT
+2d20jMupzopJIURx4HtytN+w3n/QWuP+/UX/AMTTsZe0l/I/w/zL9FUPsN5/0Frj/v1F/wDE0fYb
+z/oLXH/fqL/4miwe0l/I/wAP8y/RVD7Def8AQWuP+/UX/wATR9hvP+gtcf8AfqL/AOJosHtJfyP8
+P8y/RVD7Def9Ba4/79Rf/E0fYbz/AKC1x/36i/8AiaLB7SX8j/D/ADL9FUPsN5/0Frj/AL9Rf/E0
+fYbz/oLXH/fqL/4miwe0l/I/w/zL9FUPsN5/0Frj/v1F/wDE0fYbz/oLXH/fqL/4miwe0l/I/wAP
+8y/RVD7Def8AQWuP+/UX/wATR9hvP+gtcf8AfqL/AOJosHtJfyP8P8y/RVD7Def9Ba4/79Rf/E0f
+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
+
+--_005_DS7PR10MB537671C19D3D104BC8782F90C74F9DS7PR10MB5376namp_
+Content-Type: image/png; name="image.png"
+Content-Description: image.png
+Content-Disposition: inline; filename="image.png"; size=5570;
+	creation-date="Wed, 21 Sep 2022 13:46:27 GMT";
+	modification-date="Wed, 21 Sep 2022 13:46:27 GMT"
+Content-ID: <29d38711-09fb-4056-b2b9-ce789cadcdce>
+Content-Transfer-Encoding: base64
+
+iVBORw0KGgoAAAANSUhEUgAAAfYAAABoCAYAAAAD8NI7AAAViUlEQVR4Ae1cTZIcxZrUAVi8MTBJ
+3V1VaolZMTwheIzpFJJYsMFkY6ZBBhLSY8GKHZeYq7wDzAHmKDybI8TYV8JHLueLiMzqrO6qKF+k
+fX/uX2RmeNUX1cK49Zd/+Uv5+OOPy+3bd8rZ2UV5/vw/ytOnz8rTZ9+UZx9cz8qzZ8/Ks6fvr2+/
+/bb4Ot138PTp0+Lr5t/BkydPtp/D58+fl7dv35bPPvusrFarsl6vy71798qDBw+2NnK4ovb+2pTN
+elM2m3d2vd6UD67NpqzvxXXvnd2sy2a9focPji+/A2vgWjQQn+3vvvuuPH78uHzyySfV69bPP/9c
+fvnll/Lrr7+W3377rbx48Z/l5fcvy6tXr8vf3/5c3r75e3nz05vy0+ufyutXr8vrH+N6tb1evXpV
+fJ3uO/jxxx+Lr5t9Bz/88EN5+fJl+f7778uLFy/KxcVFuX379tZeXl6W+/fvbwd7DN+oxYXhvh3+
+Kwz4dwP6/UBfl/VqXVbrP67Nuqw2m7LaAL+6li8yHxp8cLIGPtRAfK6/+eab7XfvmzdvSnbd+uKL
+h+XRoy9K2Hubdblz+3a5vHev3L98UB7c/9fy6fb6tHx6//31IGqX9z/4guAvC/vvfxmN/C5CYL5u
+9h3EL/K44ssvfoF/9NFH5fz8/P9/seNLMXSIwc428jHAg/uux7s+qxjqdF2sV+ViO+TfaXtNv/5H
+1rif7TS+y0bb51vbof7wr+Xx438vl/dWZbNelVWc7M8uytmdi3J+96KszlZlfb4um4tNWV+st/76
+3Bs+mhjmPk8MEF839w5iQOv7jz2MAR1Wa1mMX/B/HuzxPbAqF3Eg+NN1sf2OmKsX4/2daQ1cjwa2
+v9g///zfytdf/61cXJyX9fq8bDbn5eL8rNy5faecn52XTZzo44S+/VNe1N5d3qTr2SS/Z7/nlgYw
+4M/OzrYDPRvs/CtdffTe/pv79lf6H+87Bns63OPP+R/+SR89bK1Va+DmNXDr4cOH2//Y5ssvvyx3
+7twpq9XdcvngrFysbvtP7f5zY1MD+DOv7Yf/Bnad7yOGMQb73bt3tz4Guw7wLK5+CV/88Ys9GexV
+jj8vzc+L39vND7xT2YNbjx49Kp9//tfy1d++3v5X8Rer87K5PC9nZ/FvbN4Iv4O6Bra/8D74r6vx
+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
+
+--_005_DS7PR10MB537671C19D3D104BC8782F90C74F9DS7PR10MB5376namp_--
