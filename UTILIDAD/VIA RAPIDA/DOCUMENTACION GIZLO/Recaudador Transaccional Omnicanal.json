@@ -1,0 +1,2448 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Recaudador Transaccional Omnicanal",
+        "version": "2.0",
+        "description": "Recaudador Transaccional Omnicanal (OTC) ",
+        "contact": {
+            "name": "Gizlo Soluciones Empresariales y Tecnologicas",
+            "url": "https://gizlocorp.com",
+            "email": "info@gizlocorp.com"
+        },
+        "license": {
+            "name": "The Unlicense",
+            "url": "http://unlicense.org"
+        }
+    },
+    "servers": [
+        {
+            "url": "/otc/v2.0/api",
+            "description": ""
+        }
+    ],
+    "paths": {
+        "/pagar": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MensajeEntradaPagar"
+                            },
+                            "examples": {
+                                "mensajeEntradaPagar": {
+                                    "value": {
+                                        "canal": "some text",
+                                        "cuenta": "some text",
+                                        "datosAdicionales": [
+                                            {
+                                                "codigo": "some text",
+                                                "valor": "some text"
+                                            },
+                                            {
+                                                "codigo": "some text",
+                                                "valor": "some text"
+                                            }
+                                        ],
+                                        "depuracion": "some text",
+                                        "esquemaFirma": "some text",
+                                        "fecha": "2018-02-10T09:30Z",
+                                        "fechaPago": "2018-02-10T09:30Z",
+                                        "moneda": "some text",
+                                        "nombreCliente": "some text",
+                                        "oficina": "some text",
+                                        "recibos": [
+                                            {
+                                                "comprobante": "some text",
+                                                "concepto": "some text",
+                                                "cuota": "some text",
+                                                "datosAdicionales": [
+                                                    {
+                                                        "codigo": "some text",
+                                                        "valor": "some text"
+                                                    },
+                                                    {
+                                                        "codigo": "some text",
+                                                        "valor": "some text"
+                                                    }
+                                                ],
+                                                "dato1": "some text",
+                                                "dato2": "some text",
+                                                "dividendo": "some text",
+                                                "fecha": "some text",
+                                                "formaPago": "some text",
+                                                "identificador": "some text",
+                                                "impuesto": "some text",
+                                                "interes": 68.38,
+                                                "interesesPagados": 16.18,
+                                                "interesesPendientes": 81.64,
+                                                "numeroPredial": "some text",
+                                                "pago": 44.19,
+                                                "referencia": "some text",
+                                                "secuencia": "some text",
+                                                "tipoProceso": "some text",
+                                                "totalAPagar": 67.79,
+                                                "valor": 22.21
+                                            },
+                                            {
+                                                "comprobante": "some text",
+                                                "concepto": "some text",
+                                                "cuota": "some text",
+                                                "datosAdicionales": [
+                                                    {
+                                                        "codigo": "some text",
+                                                        "valor": "some text"
+                                                    },
+                                                    {
+                                                        "codigo": "some text",
+                                                        "valor": "some text"
+                                                    }
+                                                ],
+                                                "dato1": "some text",
+                                                "dato2": "some text",
+                                                "dividendo": "some text",
+                                                "fecha": "some text",
+                                                "formaPago": "some text",
+                                                "identificador": "some text",
+                                                "impuesto": "some text",
+                                                "interes": 81.31,
+                                                "interesesPagados": 74.55,
+                                                "interesesPendientes": 85.86,
+                                                "numeroPredial": "some text",
+                                                "pago": 73.34,
+                                                "referencia": "some text",
+                                                "secuencia": "some text",
+                                                "tipoProceso": "some text",
+                                                "totalAPagar": 81.52,
+                                                "valor": 37.72
+                                            }
+                                        ],
+                                        "secuencial": "some text",
+                                        "servicio": {
+                                            "codTipoServicio": "some text",
+                                            "codigoConvenio": "some text",
+                                            "codigoEmpresa": "some text",
+                                            "codigoTipoBanca": "some text",
+                                            "codigoTipoIdentificador": "some text",
+                                            "datosAdicionales": [
+                                                {
+                                                    "codigo": "some text",
+                                                    "valor": "some text"
+                                                },
+                                                {
+                                                    "codigo": "some text",
+                                                    "valor": "some text"
+                                                }
+                                            ],
+                                            "identificador": "some text"
+                                        },
+                                        "tipoCuenta": "some text",
+                                        "transaccion": "some text",
+                                        "usuario": "some text",
+                                        "valorComision": 23.1,
+                                        "valorPago": 83.78
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "OTC"
+                ],
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/201Pagar"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Error"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401Error"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403Error"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405Error"
+                    },
+                    "406": {
+                        "$ref": "#/components/responses/406Error"
+                    },
+                    "415": {
+                        "$ref": "#/components/responses/415Error"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429Error"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500Error"
+                    }
+                },
+                "operationId": "ejecutarPago",
+                "summary": "Ejecutar Pago"
+            }
+        },
+        "/consultar": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MensajeEntradaConsultar"
+                            },
+                            "examples": {
+                                "mensajeEntradaConsultar": {
+                                    "value": {
+                                        "canal": "some text",
+                                        "depuracion": "some text",
+                                        "fecha": "2018-02-10T09:30Z",
+                                        "oficina": "some text",
+                                        "secuencial": "some text",
+                                        "transaccion": "some text",
+                                        "usuario": "some text",
+                                        "servicios": [
+                                            {
+                                                "codTipoServicio": "some text",
+                                                "codigoConvenio": "some text",
+                                                "codigoEmpresa": "some text",
+                                                "codigoTipoBanca": "some text",
+                                                "codigoTipoIdentificador": "some text",
+                                                "datosAdicionales": [
+                                                    {
+                                                        "codigo": "some text",
+                                                        "valor": "some text"
+                                                    },
+                                                    {
+                                                        "codigo": "some text",
+                                                        "valor": "some text"
+                                                    }
+                                                ],
+                                                "identificador": "some text"
+                                            },
+                                            {
+                                                "codTipoServicio": "some text",
+                                                "codigoConvenio": "some text",
+                                                "codigoEmpresa": "some text",
+                                                "codigoTipoBanca": "some text",
+                                                "codigoTipoIdentificador": "some text",
+                                                "datosAdicionales": [
+                                                    {
+                                                        "codigo": "some text",
+                                                        "valor": "some text"
+                                                    },
+                                                    {
+                                                        "codigo": "some text",
+                                                        "valor": "some text"
+                                                    }
+                                                ],
+                                                "identificador": "some text"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "OTC"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200Consultar"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Error"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401Error"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403Error"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405Error"
+                    },
+                    "406": {
+                        "$ref": "#/components/responses/406Error"
+                    },
+                    "415": {
+                        "$ref": "#/components/responses/415Error"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429Error"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500Error"
+                    }
+                },
+                "operationId": "consultarDeuda",
+                "summary": "Consultar Deuda"
+            }
+        },
+        "/reversar": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MensajeEntradaReversar"
+                            },
+                            "examples": {
+                                "mensajeEntradaReversar": {
+                                    "value": {
+                                        "canal": "some text",
+                                        "cuenta": "some text",
+                                        "datosAdicionales": [
+                                            {
+                                                "codigo": "some text",
+                                                "valor": "some text"
+                                            },
+                                            {
+                                                "codigo": "some text",
+                                                "valor": "some text"
+                                            }
+                                        ],
+                                        "depuracion": "some text",
+                                        "esquemaFirma": "some text",
+                                        "fechaPago": "2018-02-10T09:30Z",
+                                        "moneda": "some text",
+                                        "nombreCliente": "some text",
+                                        "oficina": "some text",
+                                        "recibos": [
+                                            {
+                                                "comprobante": "some text",
+                                                "concepto": "some text",
+                                                "cuota": "some text",
+                                                "datosAdicionales": [
+                                                    {
+                                                        "codigo": "some text",
+                                                        "valor": "some text"
+                                                    },
+                                                    {
+                                                        "codigo": "some text",
+                                                        "valor": "some text"
+                                                    }
+                                                ],
+                                                "dato1": "some text",
+                                                "dato2": "some text",
+                                                "dividendo": "some text",
+                                                "fecha": "some text",
+                                                "formaPago": "some text",
+                                                "identificador": "some text",
+                                                "impuesto": "some text",
+                                                "interes": 12.13,
+                                                "interesesPagados": 91.33,
+                                                "interesesPendientes": 70.01,
+                                                "numeroPredial": "some text",
+                                                "pago": 90.21,
+                                                "referencia": "some text",
+                                                "secuencia": "some text",
+                                                "tipoProceso": "some text",
+                                                "totalAPagar": 80.55,
+                                                "valor": 96.81
+                                            },
+                                            {
+                                                "comprobante": "some text",
+                                                "concepto": "some text",
+                                                "cuota": "some text",
+                                                "datosAdicionales": [
+                                                    {
+                                                        "codigo": "some text",
+                                                        "valor": "some text"
+                                                    },
+                                                    {
+                                                        "codigo": "some text",
+                                                        "valor": "some text"
+                                                    }
+                                                ],
+                                                "dato1": "some text",
+                                                "dato2": "some text",
+                                                "dividendo": "some text",
+                                                "fecha": "some text",
+                                                "formaPago": "some text",
+                                                "identificador": "some text",
+                                                "impuesto": "some text",
+                                                "interes": 33.11,
+                                                "interesesPagados": 13.13,
+                                                "interesesPendientes": 34.76,
+                                                "numeroPredial": "some text",
+                                                "pago": 38.75,
+                                                "referencia": "some text",
+                                                "secuencia": "some text",
+                                                "tipoProceso": "some text",
+                                                "totalAPagar": 29.36,
+                                                "valor": 63.27
+                                            }
+                                        ],
+                                        "secuencial": "some text",
+                                        "servicio": {
+                                            "codTipoServicio": "some text",
+                                            "codigoConvenio": "some text",
+                                            "codigoEmpresa": "some text",
+                                            "codigoTipoBanca": "some text",
+                                            "codigoTipoIdentificador": "some text",
+                                            "datosAdicionales": [
+                                                {
+                                                    "codigo": "some text",
+                                                    "valor": "some text"
+                                                },
+                                                {
+                                                    "codigo": "some text",
+                                                    "valor": "some text"
+                                                }
+                                            ],
+                                            "identificador": "some text"
+                                        },
+                                        "tipoCuenta": "some text",
+                                        "transaccion": "some text",
+                                        "usuario": "some text",
+                                        "valorComision": 53.73,
+                                        "valorPago": 84.2
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "OTC"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Error"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401Error"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403Error"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405Error"
+                    },
+                    "406": {
+                        "$ref": "#/components/responses/406Error"
+                    },
+                    "415": {
+                        "$ref": "#/components/responses/415Error"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429Error"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500Error"
+                    }
+                },
+                "operationId": "ejecutarReverso",
+                "summary": "Ejecutar Reverso"
+            }
+        },
+        "/consultarEmpresas": {
+            "description": "",
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MensajeEntradaConsultarEmpresas"
+                            },
+                            "examples": {
+                                "mensajeEntradaConsultarEmpresas": {
+                                    "value": {
+                                        "canal": "some text",
+                                        "depuracion": "some text",
+                                        "fecha": "2018-02-10T09:30Z",
+                                        "nombreEmpresa": "some text",
+                                        "oficina": "some text",
+                                        "secuencial": "some text",
+                                        "tipoBanca": "some text",
+                                        "tipoMatriculacion": "MATRICULABLE",
+                                        "tipoServicio": "some text",
+                                        "transaccion": "some text",
+                                        "usuario": "some text"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "OTC"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200ConsultarEmpresas"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Error"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401Error"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403Error"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405Error"
+                    },
+                    "406": {
+                        "$ref": "#/components/responses/406Error"
+                    },
+                    "415": {
+                        "$ref": "#/components/responses/415Error"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429Error"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500Error"
+                    }
+                },
+                "operationId": "consultarEmpresa",
+                "summary": "Consultar Empresas"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "DatoAdicional": {
+                "type": "object",
+                "properties": {
+                    "codigo": {
+                        "type": "string"
+                    },
+                    "valor": {
+                        "type": "string"
+                    },
+                    "listasSeleccion": {
+                        "description": "",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ListaSeleccion"
+                        }
+                    }
+                }
+            },
+            "Recibo": {
+                "type": "object",
+                "properties": {
+                    "comprobante": {
+                        "type": "string"
+                    },
+                    "concepto": {
+                        "type": "string"
+                    },
+                    "cuota": {
+                        "type": "string"
+                    },
+                    "datosAdicionales": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DatoAdicional"
+                        }
+                    },
+                    "dato1": {
+                        "type": "string"
+                    },
+                    "dato2": {
+                        "type": "string"
+                    },
+                    "dividendo": {
+                        "type": "string"
+                    },
+                    "fecha": {
+                        "type": "string"
+                    },
+                    "formaPago": {
+                        "type": "string"
+                    },
+                    "identificador": {
+                        "type": "string"
+                    },
+                    "impuesto": {
+                        "type": "string"
+                    },
+                    "interes": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "interesesPagados": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "interesesPendientes": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "numeroPredial": {
+                        "type": "string"
+                    },
+                    "pago": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "referencia": {
+                        "type": "string"
+                    },
+                    "secuencia": {
+                        "type": "string"
+                    },
+                    "tipoProceso": {
+                        "type": "string"
+                    },
+                    "totalAPagar": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "valor": {
+                        "format": "double",
+                        "type": "number"
+                    }
+                }
+            },
+            "Servicio": {
+                "type": "object",
+                "properties": {
+                    "codTipoServicio": {
+                        "type": "string"
+                    },
+                    "codigoConvenio": {
+                        "type": "string"
+                    },
+                    "codigoEmpresa": {
+                        "type": "string"
+                    },
+                    "codigoTipoBanca": {
+                        "type": "string"
+                    },
+                    "codigoTipoIdentificador": {
+                        "type": "string"
+                    },
+                    "datosAdicionales": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DatoAdicional"
+                        }
+                    },
+                    "identificador": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Convenio": {
+                "type": "object",
+                "properties": {
+                    "codigo": {
+                        "type": "string"
+                    },
+                    "etiquetaCodigo": {
+                        "type": "string"
+                    },
+                    "tipoIdentificadores": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TipoIdentificador"
+                        }
+                    }
+                }
+            },
+            "Empresa": {
+                "type": "object",
+                "properties": {
+                    "codigoEmpresa": {
+                        "type": "string"
+                    },
+                    "etiquetaEmpresa": {
+                        "type": "string"
+                    },
+                    "convenioVisible": {
+                        "type": "boolean"
+                    },
+                    "convenios": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Convenio"
+                        }
+                    },
+                    "matriculable": {
+                        "type": "boolean"
+                    },
+                    "matriculacionMultiple": {
+                        "type": "boolean"
+                    },
+                    "validable": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "RegionalArea": {
+                "type": "object",
+                "properties": {
+                    "codigo": {
+                        "type": "string"
+                    },
+                    "identificador": {
+                        "description": "Identificador para canal",
+                        "type": "string"
+                    }
+                }
+            },
+            "TipoIdentificador": {
+                "type": "object",
+                "properties": {
+                    "codigo": {
+                        "type": "string"
+                    },
+                    "datosAdicionales": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DatoAdicional"
+                        }
+                    },
+                    "regionalAreas": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/RegionalArea"
+                        }
+                    }
+                }
+            },
+            "OTCError": {
+                "minProperties": 1,
+                "required": [
+                    "codigoError",
+                    "mensaje"
+                ],
+                "type": "object",
+                "properties": {
+                    "codigoError": {
+                        "description": "Código de error textual de bajo nivel, por ejemplo, com.bolivariano.Field.Missing",
+                        "type": "string",
+                        "x-namespaced-enum": [
+                            "com.bolivariano.Field.Expected",
+                            "com.bolivariano.Field.Invalid",
+                            "com.bolivariano.Field.InvalidDate",
+                            "com.bolivariano.Field.Missing",
+                            "com.bolivariano.Field.Unexpected",
+                            "com.bolivariano.Header.Invalid",
+                            "com.bolivariano.Header.Missing",
+                            "com.bolivariano.Reauthenticate",
+                            "com.bolivariano.Resource.ConsentMismatch",
+                            "com.bolivariano.Resource.InvalidConsentStatus",
+                            "com.bolivariano.Resource.InvalidFormat",
+                            "com.bolivariano.Resource.NotFound",
+                            "com.bolivariano.Rules.AfterCutOffDateTime",
+                            "com.bolivariano.Rules.DuplicateReference",
+                            "com.bolivariano.Signature.Invalid",
+                            "com.bolivariano.Signature.InvalidClaim",
+                            "com.bolivariano.Signature.Malformed",
+                            "com.bolivariano.Signature.Missing",
+                            "com.bolivariano.Signature.MissingClaim",
+                            "com.bolivariano.Signature.Unexpected",
+                            "com.bolivariano.UnexpectedError",
+                            "com.bolivariano.Unsupported.AccountIdentifier",
+                            "com.bolivariano.Unsupported.AccountSecondaryIdentifier",
+                            "com.bolivariano.Unsupported.Currency",
+                            "com.bolivariano.Unsupported.Frequency",
+                            "com.bolivariano.Unsupported.LocalInstrument",
+                            "com.bolivariano.Unsupported.Scheme"
+                        ]
+                    },
+                    "mensaje": {
+                        "description": "Una descripción del error que ocurrió. p. ej., 'No se proporciona un campo obligatorio' o 'RequestedExecutionDateTime debe ser en el futuro' OBIE no estandariza este campo",
+                        "maxLength": 500,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "ruta": {
+                        "description": "Referencia recomendada pero opcional a la ruta JSON del campo con error, por ejemplo, Data.Initiation.InstructedAmount.Currency",
+                        "maxLength": 500,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "url": {
+                        "description": "URL para ayudar a solucionar el problema, o proporcionar más información, o referencia de API, o ayuda, etc.",
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "MensajeSalidaError": {
+                "description": "Una serie de códigos de error detallados, mensajes y URL a la documentación para ayudar a solucionarlos.",
+                "required": [
+                    "codigo",
+                    "mensaje",
+                    "errores"
+                ],
+                "type": "object",
+                "properties": {
+                    "codigo": {
+                        "description": "Código de error textual de alto nivel, para ayudar a categorizar los errores.",
+                        "maxLength": 40,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "Una referencia única para la instancia de error, para fines de auditoría, en caso de errores desconocidos / no clasificados.",
+                        "maxLength": 40,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "mensaje": {
+                        "description": "Breve mensaje de error, por ejemplo, \"Hay algún problema con los parámetros de solicitud proporcionados'",
+                        "maxLength": 500,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "errores": {
+                        "minItems": 1,
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/OTCError"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "MensajeEntradaConsultarEmpresas": {
+                "type": "object",
+                "properties": {
+                    "canal": {
+                        "description": "Identificador de Canal",
+                        "type": "string"
+                    },
+                    "depuracion": {
+                        "type": "string"
+                    },
+                    "fecha": {
+                        "format": "date-time",
+                        "description": "fecha de transaccion",
+                        "type": "string"
+                    },
+                    "nombreEmpresa": {
+                        "description": "texto para buscar las empresas que contengan en su nombre ese texto",
+                        "type": "string"
+                    },
+                    "oficina": {
+                        "type": "string"
+                    },
+                    "secuencial": {
+                        "type": "string"
+                    },
+                    "tipoBanca": {
+                        "description": "utilizado para filtrar aquellos servicios que no apliquen a empresas o individuos",
+                        "type": "string"
+                    },
+                    "tipoMatriculacion": {
+                        "description": "MATRICULABLE, NO_MATRICULABLE",
+                        "enum": [
+                            "MATRICULABLE",
+                            "NO_MATRICULABLE"
+                        ],
+                        "type": "string"
+                    },
+                    "tipoServicio": {
+                        "description": "tipo de servicio",
+                        "type": "string"
+                    },
+                    "transaccion": {
+                        "type": "string"
+                    },
+                    "usuario": {
+                        "type": "string"
+                    }
+                }
+            },
+            "MensajeSalidaConsultarEmpresas": {
+                "type": "object",
+                "properties": {
+                    "empresas": {
+                        "description": "Lista de Empresas Recaudadoras",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Empresa"
+                        }
+                    },
+                    "mensajeUsuario": {
+                        "description": "mensaje para presentar en el canal",
+                        "type": "string"
+                    },
+                    "codigoRespuesta": {
+                        "description": "codigo de respuesta.",
+                        "type": "string"
+                    }
+                }
+            },
+            "MensajeEntradaConsultar": {
+                "required": [
+                    "servicio"
+                ],
+                "type": "object",
+                "properties": {
+                    "canal": {
+                        "description": "identificador de Canal",
+                        "type": "string"
+                    },
+                    "depuracion": {
+                        "type": "string"
+                    },
+                    "fecha": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "oficina": {
+                        "type": "string"
+                    },
+                    "secuencial": {
+                        "type": "string"
+                    },
+                    "transaccion": {
+                        "type": "string"
+                    },
+                    "usuario": {
+                        "type": "string"
+                    },
+                    "servicio": {
+                        "$ref": "#/components/schemas/Servicio",
+                        "description": "servicio a consultar"
+                    }
+                }
+            },
+            "MensajeEntradaPagar": {
+                "type": "object",
+                "properties": {
+                    "canal": {
+                        "type": "string"
+                    },
+                    "cuenta": {
+                        "type": "string"
+                    },
+                    "datosAdicionales": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DatoAdicional"
+                        }
+                    },
+                    "depuracion": {
+                        "type": "string"
+                    },
+                    "esquemaFirma": {
+                        "type": "string"
+                    },
+                    "fecha": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "fechaPago": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "moneda": {
+                        "type": "string"
+                    },
+                    "nombreCliente": {
+                        "type": "string"
+                    },
+                    "oficina": {
+                        "type": "string"
+                    },
+                    "recibos": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Recibo"
+                        }
+                    },
+                    "secuencial": {
+                        "type": "string"
+                    },
+                    "servicio": {
+                        "$ref": "#/components/schemas/Servicio"
+                    },
+                    "tipoCuenta": {
+                        "type": "string"
+                    },
+                    "transaccion": {
+                        "type": "string"
+                    },
+                    "usuario": {
+                        "type": "string"
+                    },
+                    "valorComision": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "valorPago": {
+                        "format": "double",
+                        "type": "number"
+                    }
+                }
+            },
+            "MensajeEntradaReversar": {
+                "type": "object",
+                "properties": {
+                    "canal": {
+                        "type": "string"
+                    },
+                    "cuenta": {
+                        "type": "string"
+                    },
+                    "datosAdicionales": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DatoAdicional"
+                        }
+                    },
+                    "depuracion": {
+                        "type": "string"
+                    },
+                    "esquemaFirma": {
+                        "type": "string"
+                    },
+                    "fechaPago": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "moneda": {
+                        "type": "string"
+                    },
+                    "nombreCliente": {
+                        "type": "string"
+                    },
+                    "oficina": {
+                        "type": "string"
+                    },
+                    "recibos": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Recibo"
+                        }
+                    },
+                    "secuencial": {
+                        "type": "string"
+                    },
+                    "servicio": {
+                        "$ref": "#/components/schemas/Servicio"
+                    },
+                    "tipoCuenta": {
+                        "type": "string"
+                    },
+                    "transaccion": {
+                        "type": "string"
+                    },
+                    "usuario": {
+                        "type": "string"
+                    },
+                    "valorComision": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "valorPago": {
+                        "format": "double",
+                        "type": "number"
+                    }
+                }
+            },
+            "MensajeSalidaConsultar": {
+                "type": "object",
+                "properties": {
+                    "datosAdicionales": {
+                        "description": "Lista de detalles(datos extras)",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DatoAdicional"
+                        }
+                    },
+                    "fechaVencimiento": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "formaPago": {
+                        "description": "Cuando es combo se arma un listado con lo que se recibe en recibos usando el campo totalAPagar de cada recibo(ejemplo recarga celular)",
+                        "type": "string"
+                    },
+                    "formaPagoRecibos": {
+                        "description": "En el caso de que se esta trabajando con un servicio con multiples facturas, se indica como el la forma de seleccion de las mismas",
+                        "type": "string"
+                    },
+                    "identificadorDeuda": {
+                        "description": "Identificador unico de la deuda",
+                        "type": "string"
+                    },
+                    "limiteMontoMaximo": {
+                        "format": "double",
+                        "description": "indica si se debe validar un monto minimo, por defecto se valida que sea mayor a cero.",
+                        "type": "number"
+                    },
+                    "limiteMontoMinimo": {
+                        "format": "double",
+                        "description": "indica si se debe validar un monto minimo, por defecto se valida que sea mayor a cero.",
+                        "type": "number"
+                    },
+                    "mensajeUsuario": {
+                        "description": "mensaje de usuario",
+                        "type": "string"
+                    },
+                    "montoMinimo": {
+                        "format": "double",
+                        "description": "monto minimo",
+                        "type": "number"
+                    },
+                    "montoTotal": {
+                        "format": "double",
+                        "description": "monto total a pagar",
+                        "type": "number"
+                    },
+                    "nombreCliente": {
+                        "type": "string"
+                    },
+                    "recibos": {
+                        "description": "lista de recibos pendientes",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Recibo"
+                        }
+                    },
+                    "textoAyuda": {
+                        "description": "Codigo de texto de ayuda para ser mostrado al cliente",
+                        "type": "string"
+                    },
+                    "codigoRespuesta": {
+                        "description": "codigo de respuesta",
+                        "type": "string"
+                    }
+                }
+            },
+            "ListaSeleccion": {
+                "description": "Lista de valores para campos adicionales",
+                "required": [
+                    "codigo"
+                ],
+                "type": "object",
+                "properties": {
+                    "codigo": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "etiqueta": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "MensajeSalidaPagar": {
+                "type": "object",
+                "properties": {
+                    "banderaOffline": {
+                        "type": "boolean"
+                    },
+                    "datosAdicionales": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DatoAdicional"
+                        }
+                    },
+                    "fechaDebito": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "fechaPago": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "mensajeUsuario": {
+                        "type": "string"
+                    },
+                    "montoTotal": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "referencia": {
+                        "type": "string"
+                    },
+                    "codigoRespuesta": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "responses": {
+            "401Error": {
+                "headers": {
+                    "x-fapi-interaction-id": {
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An RFC4122 UID used as a correlation id."
+                    }
+                },
+                "description": "Unauthorized"
+            },
+            "404Error": {
+                "headers": {
+                    "x-fapi-interaction-id": {
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An RFC4122 UID used as a correlation id."
+                    }
+                },
+                "description": "Not found"
+            },
+            "405Error": {
+                "headers": {
+                    "x-fapi-interaction-id": {
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An RFC4122 UID used as a correlation id."
+                    }
+                },
+                "description": "Method Not Allowed"
+            },
+            "406Error": {
+                "headers": {
+                    "x-fapi-interaction-id": {
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An RFC4122 UID used as a correlation id."
+                    }
+                },
+                "description": "Not Acceptable"
+            },
+            "415Error": {
+                "headers": {
+                    "x-fapi-interaction-id": {
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An RFC4122 UID used as a correlation id."
+                    }
+                },
+                "description": "Unsupported Media Type"
+            },
+            "429Error": {
+                "headers": {
+                    "Retry-After": {
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Number in seconds to wait"
+                    },
+                    "x-fapi-interaction-id": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An RFC4122 UID used as a correlation id."
+                    }
+                },
+                "description": "Too Many Requests"
+            },
+            "500Error": {
+                "headers": {
+                    "x-fapi-interaction-id": {
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An RFC4122 UID used as a correlation id."
+                    }
+                },
+                "content": {
+                    "application/json; charset=utf-8": {
+                        "schema": {
+                            "$ref": "#/components/schemas/MensajeSalidaError"
+                        }
+                    },
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/MensajeSalidaError"
+                        }
+                    },
+                    "application/jose+jwe": {
+                        "schema": {
+                            "$ref": "#/components/schemas/MensajeSalidaError"
+                        }
+                    }
+                },
+                "description": "Internal Server Error"
+            },
+            "403Error": {
+                "headers": {
+                    "x-fapi-interaction-id": {
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An RFC4122 UID used as a correlation id."
+                    }
+                },
+                "content": {
+                    "application/json; charset=utf-8": {
+                        "schema": {
+                            "$ref": "#/components/schemas/MensajeSalidaError"
+                        }
+                    },
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/MensajeSalidaError"
+                        }
+                    },
+                    "application/jose+jwe": {
+                        "schema": {
+                            "$ref": "#/components/schemas/MensajeSalidaError"
+                        }
+                    }
+                },
+                "description": "Forbidden"
+            },
+            "400Error": {
+                "headers": {
+                    "x-fapi-interaction-id": {
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An RFC4122 UID used as a correlation id."
+                    }
+                },
+                "content": {
+                    "application/json; charset=utf-8": {
+                        "schema": {
+                            "$ref": "#/components/schemas/MensajeSalidaError"
+                        }
+                    },
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/MensajeSalidaError"
+                        }
+                    },
+                    "application/jose+jwe": {
+                        "schema": {
+                            "$ref": "#/components/schemas/MensajeSalidaError"
+                        }
+                    }
+                },
+                "description": "Bad request"
+            },
+            "200ConsultarEmpresas": {
+                "headers": {
+                    "x-fapi-interaction-id": {
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An RFC4122 UID used as a correlation id."
+                    }
+                },
+                "content": {
+                    "application/json; charset=utf-8": {
+                        "schema": {
+                            "$ref": "#/components/schemas/MensajeSalidaConsultarEmpresas"
+                        },
+                        "examples": {
+                            "mensajeSalidaConsultarEmpresas": {
+                                "value": {
+                                    "empresas": [
+                                        {
+                                            "codigoEmpresa": "some text",
+                                            "etiquetaEmpresa": "some text",
+                                            "convenioVisible": true,
+                                            "convenios": [
+                                                {
+                                                    "codigo": "some text",
+                                                    "etiquetaCodigo": "some text",
+                                                    "tipoIdentificadores": [
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "codigo": "some text",
+                                                    "etiquetaCodigo": "some text",
+                                                    "tipoIdentificadores": [
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "matriculable": true,
+                                            "matriculacionMultiple": true,
+                                            "validable": true
+                                        },
+                                        {
+                                            "codigoEmpresa": "some text",
+                                            "etiquetaEmpresa": "some text",
+                                            "convenioVisible": true,
+                                            "convenios": [
+                                                {
+                                                    "codigo": "some text",
+                                                    "etiquetaCodigo": "some text",
+                                                    "tipoIdentificadores": [
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "codigo": "some text",
+                                                    "etiquetaCodigo": "some text",
+                                                    "tipoIdentificadores": [
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "matriculable": true,
+                                            "matriculacionMultiple": true,
+                                            "validable": true
+                                        }
+                                    ],
+                                    "mensajeUsuario": "some text",
+                                    "codigoRespuesta": "some text"
+                                }
+                            }
+                        }
+                    },
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/MensajeSalidaConsultarEmpresas"
+                        },
+                        "examples": {
+                            "mensajeSalidaConsultarEmpresas": {
+                                "value": {
+                                    "empresas": [
+                                        {
+                                            "codigoEmpresa": "some text",
+                                            "etiquetaEmpresa": "some text",
+                                            "convenioVisible": true,
+                                            "convenios": [
+                                                {
+                                                    "codigo": "some text",
+                                                    "etiquetaCodigo": "some text",
+                                                    "tipoIdentificadores": [
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "codigo": "some text",
+                                                    "etiquetaCodigo": "some text",
+                                                    "tipoIdentificadores": [
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "matriculable": true,
+                                            "matriculacionMultiple": true,
+                                            "validable": true
+                                        },
+                                        {
+                                            "codigoEmpresa": "some text",
+                                            "etiquetaEmpresa": "some text",
+                                            "convenioVisible": true,
+                                            "convenios": [
+                                                {
+                                                    "codigo": "some text",
+                                                    "etiquetaCodigo": "some text",
+                                                    "tipoIdentificadores": [
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "codigo": "some text",
+                                                    "etiquetaCodigo": "some text",
+                                                    "tipoIdentificadores": [
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "matriculable": true,
+                                            "matriculacionMultiple": true,
+                                            "validable": true
+                                        }
+                                    ],
+                                    "mensajeUsuario": "some text",
+                                    "codigoRespuesta": "some text"
+                                }
+                            }
+                        }
+                    },
+                    "application/jose+jwe": {
+                        "schema": {
+                            "$ref": "#/components/schemas/MensajeSalidaConsultarEmpresas"
+                        },
+                        "examples": {
+                            "mensajeSalidaConsultarEmpresas": {
+                                "value": {
+                                    "empresas": [
+                                        {
+                                            "codigoEmpresa": "some text",
+                                            "etiquetaEmpresa": "some text",
+                                            "convenioVisible": true,
+                                            "convenios": [
+                                                {
+                                                    "codigo": "some text",
+                                                    "etiquetaCodigo": "some text",
+                                                    "tipoIdentificadores": [
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "codigo": "some text",
+                                                    "etiquetaCodigo": "some text",
+                                                    "tipoIdentificadores": [
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "matriculable": true,
+                                            "matriculacionMultiple": true,
+                                            "validable": true
+                                        },
+                                        {
+                                            "codigoEmpresa": "some text",
+                                            "etiquetaEmpresa": "some text",
+                                            "convenioVisible": true,
+                                            "convenios": [
+                                                {
+                                                    "codigo": "some text",
+                                                    "etiquetaCodigo": "some text",
+                                                    "tipoIdentificadores": [
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "codigo": "some text",
+                                                    "etiquetaCodigo": "some text",
+                                                    "tipoIdentificadores": [
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "codigo": "some text",
+                                                            "datosAdicionales": [
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text",
+                                                                    "valor": "some text"
+                                                                }
+                                                            ],
+                                                            "regionalAreas": [
+                                                                {
+                                                                    "codigo": "some text"
+                                                                },
+                                                                {
+                                                                    "codigo": "some text"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "matriculable": true,
+                                            "matriculacionMultiple": true,
+                                            "validable": true
+                                        }
+                                    ],
+                                    "mensajeUsuario": "some text",
+                                    "codigoRespuesta": "some text"
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "Consultar Empresas"
+            },
+            "200Consultar": {
+                "headers": {
+                    "x-fapi-interaction-id": {
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An RFC4122 UID used as a correlation id."
+                    }
+                },
+                "content": {
+                    "application/json; charset=utf-8": {
+                        "schema": {
+                            "$ref": "#/components/schemas/MensajeSalidaConsultar"
+                        },
+                        "examples": {
+                            "mensajeSalidaConsultar": {
+                                "value": {
+                                    "datosAdicionales": [
+                                        {
+                                            "codigo": "some text",
+                                            "valor": "some text"
+                                        },
+                                        {
+                                            "codigo": "some text",
+                                            "valor": "some text"
+                                        }
+                                    ],
+                                    "fechaVencimiento": "2018-02-10T09:30Z",
+                                    "formaPago": "some text",
+                                    "formaPagoRecibos": "some text",
+                                    "identificadorDeuda": "some text",
+                                    "limiteMontoMaximo": 59.38,
+                                    "limiteMontoMinimo": 83.73,
+                                    "mensajeUsuario": "some text",
+                                    "montoMinimo": 0.07,
+                                    "montoTotal": 35.93,
+                                    "nombreCliente": "some text",
+                                    "recibos": [
+                                        {
+                                            "comprobante": "some text",
+                                            "concepto": "some text",
+                                            "cuota": "some text",
+                                            "datosAdicionales": [
+                                                {
+                                                    "codigo": "some text",
+                                                    "valor": "some text"
+                                                },
+                                                {
+                                                    "codigo": "some text",
+                                                    "valor": "some text"
+                                                }
+                                            ],
+                                            "dato1": "some text",
+                                            "dato2": "some text",
+                                            "dividendo": "some text",
+                                            "fecha": "some text",
+                                            "formaPago": "some text",
+                                            "identificador": "some text",
+                                            "impuesto": "some text",
+                                            "interes": 73.4,
+                                            "interesesPagados": 81.35,
+                                            "interesesPendientes": 26.01,
+                                            "numeroPredial": "some text",
+                                            "pago": 62.71,
+                                            "referencia": "some text",
+                                            "secuencia": "some text",
+                                            "tipoProceso": "some text",
+                                            "totalAPagar": 60.43,
+                                            "valor": 17.51
+                                        },
+                                        {
+                                            "comprobante": "some text",
+                                            "concepto": "some text",
+                                            "cuota": "some text",
+                                            "datosAdicionales": [
+                                                {
+                                                    "codigo": "some text",
+                                                    "valor": "some text"
+                                                },
+                                                {
+                                                    "codigo": "some text",
+                                                    "valor": "some text"
+                                                }
+                                            ],
+                                            "dato1": "some text",
+                                            "dato2": "some text",
+                                            "dividendo": "some text",
+                                            "fecha": "some text",
+                                            "formaPago": "some text",
+                                            "identificador": "some text",
+                                            "impuesto": "some text",
+                                            "interes": 34.55,
+                                            "interesesPagados": 69.05,
+                                            "interesesPendientes": 31.55,
+                                            "numeroPredial": "some text",
+                                            "pago": 49.54,
+                                            "referencia": "some text",
+                                            "secuencia": "some text",
+                                            "tipoProceso": "some text",
+                                            "totalAPagar": 1.79,
+                                            "valor": 54.39
+                                        }
+                                    ],
+                                    "textoAyuda": "some text",
+                                    "codigoRespuesta": "some text"
+                                }
+                            }
+                        }
+                    },
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/MensajeSalidaConsultar"
+                        },
+                        "examples": {
+                            "mensajeSalidaConsultar": {
+                                "value": {
+                                    "datosAdicionales": [
+                                        {
+                                            "codigo": "some text",
+                                            "valor": "some text"
+                                        },
+                                        {
+                                            "codigo": "some text",
+                                            "valor": "some text"
+                                        }
+                                    ],
+                                    "fechaVencimiento": "2018-02-10T09:30Z",
+                                    "formaPago": "some text",
+                                    "formaPagoRecibos": "some text",
+                                    "identificadorDeuda": "some text",
+                                    "limiteMontoMaximo": 87.96,
+                                    "limiteMontoMinimo": 75.67,
+                                    "mensajeUsuario": "some text",
+                                    "montoMinimo": 95.44,
+                                    "montoTotal": 36.29,
+                                    "nombreCliente": "some text",
+                                    "recibos": [
+                                        {
+                                            "comprobante": "some text",
+                                            "concepto": "some text",
+                                            "cuota": "some text",
+                                            "datosAdicionales": [
+                                                {
+                                                    "codigo": "some text",
+                                                    "valor": "some text"
+                                                },
+                                                {
+                                                    "codigo": "some text",
+                                                    "valor": "some text"
+                                                }
+                                            ],
+                                            "dato1": "some text",
+                                            "dato2": "some text",
+                                            "dividendo": "some text",
+                                            "fecha": "some text",
+                                            "formaPago": "some text",
+                                            "identificador": "some text",
+                                            "impuesto": "some text",
+                                            "interes": 5.39,
+                                            "interesesPagados": 26.69,
+                                            "interesesPendientes": 0.74,
+                                            "numeroPredial": "some text",
+                                            "pago": 3.78,
+                                            "referencia": "some text",
+                                            "secuencia": "some text",
+                                            "tipoProceso": "some text",
+                                            "totalAPagar": 40.32,
+                                            "valor": 83.58
+                                        },
+                                        {
+                                            "comprobante": "some text",
+                                            "concepto": "some text",
+                                            "cuota": "some text",
+                                            "datosAdicionales": [
+                                                {
+                                                    "codigo": "some text",
+                                                    "valor": "some text"
+                                                },
+                                                {
+                                                    "codigo": "some text",
+                                                    "valor": "some text"
+                                                }
+                                            ],
+                                            "dato1": "some text",
+                                            "dato2": "some text",
+                                            "dividendo": "some text",
+                                            "fecha": "some text",
+                                            "formaPago": "some text",
+                                            "identificador": "some text",
+                                            "impuesto": "some text",
+                                            "interes": 4.61,
+                                            "interesesPagados": 19.75,
+                                            "interesesPendientes": 14.4,
+                                            "numeroPredial": "some text",
+                                            "pago": 81.71,
+                                            "referencia": "some text",
+                                            "secuencia": "some text",
+                                            "tipoProceso": "some text",
+                                            "totalAPagar": 56.9,
+                                            "valor": 3.35
+                                        }
+                                    ],
+                                    "textoAyuda": "some text",
+                                    "codigoRespuesta": "some text"
+                                }
+                            }
+                        }
+                    },
+                    "application/jose+jwe": {
+                        "schema": {
+                            "$ref": "#/components/schemas/MensajeSalidaConsultar"
+                        },
+                        "examples": {
+                            "mensajeSalidaConsultar": {
+                                "value": {
+                                    "datosAdicionales": [
+                                        {
+                                            "codigo": "some text",
+                                            "valor": "some text"
+                                        },
+                                        {
+                                            "codigo": "some text",
+                                            "valor": "some text"
+                                        }
+                                    ],
+                                    "fechaVencimiento": "2018-02-10T09:30Z",
+                                    "formaPago": "some text",
+                                    "formaPagoRecibos": "some text",
+                                    "identificadorDeuda": "some text",
+                                    "limiteMontoMaximo": 73.69,
+                                    "limiteMontoMinimo": 29.04,
+                                    "mensajeUsuario": "some text",
+                                    "montoMinimo": 13.31,
+                                    "montoTotal": 70.35,
+                                    "nombreCliente": "some text",
+                                    "recibos": [
+                                        {
+                                            "comprobante": "some text",
+                                            "concepto": "some text",
+                                            "cuota": "some text",
+                                            "datosAdicionales": [
+                                                {
+                                                    "codigo": "some text",
+                                                    "valor": "some text"
+                                                },
+                                                {
+                                                    "codigo": "some text",
+                                                    "valor": "some text"
+                                                }
+                                            ],
+                                            "dato1": "some text",
+                                            "dato2": "some text",
+                                            "dividendo": "some text",
+                                            "fecha": "some text",
+                                            "formaPago": "some text",
+                                            "identificador": "some text",
+                                            "impuesto": "some text",
+                                            "interes": 90.5,
+                                            "interesesPagados": 83.74,
+                                            "interesesPendientes": 99.11,
+                                            "numeroPredial": "some text",
+                                            "pago": 62.38,
+                                            "referencia": "some text",
+                                            "secuencia": "some text",
+                                            "tipoProceso": "some text",
+                                            "totalAPagar": 0.86,
+                                            "valor": 63.72
+                                        },
+                                        {
+                                            "comprobante": "some text",
+                                            "concepto": "some text",
+                                            "cuota": "some text",
+                                            "datosAdicionales": [
+                                                {
+                                                    "codigo": "some text",
+                                                    "valor": "some text"
+                                                },
+                                                {
+                                                    "codigo": "some text",
+                                                    "valor": "some text"
+                                                }
+                                            ],
+                                            "dato1": "some text",
+                                            "dato2": "some text",
+                                            "dividendo": "some text",
+                                            "fecha": "some text",
+                                            "formaPago": "some text",
+                                            "identificador": "some text",
+                                            "impuesto": "some text",
+                                            "interes": 41.17,
+                                            "interesesPagados": 46.96,
+                                            "interesesPendientes": 37.44,
+                                            "numeroPredial": "some text",
+                                            "pago": 58.58,
+                                            "referencia": "some text",
+                                            "secuencia": "some text",
+                                            "tipoProceso": "some text",
+                                            "totalAPagar": 57.68,
+                                            "valor": 96.11
+                                        }
+                                    ],
+                                    "textoAyuda": "some text",
+                                    "codigoRespuesta": "some text"
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "Consultar Deuda"
+            },
+            "201Pagar": {
+                "headers": {
+                    "x-fapi-interaction-id": {
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An RFC4122 UID used as a correlation id."
+                    }
+                },
+                "content": {
+                    "application/json; charset=utf-8": {
+                        "schema": {
+                            "$ref": "#/components/schemas/MensajeSalidaPagar"
+                        },
+                        "examples": {
+                            "mensajeSalidaPagar": {
+                                "value": {
+                                    "banderaOffline": true,
+                                    "datosAdicionales": [
+                                        {
+                                            "codigo": "some text",
+                                            "valor": "some text"
+                                        },
+                                        {
+                                            "codigo": "some text",
+                                            "valor": "some text"
+                                        }
+                                    ],
+                                    "fechaDebito": "2018-02-10T09:30Z",
+                                    "fechaPago": "2018-02-10T09:30Z",
+                                    "mensajeUsuario": "some text",
+                                    "montoTotal": 75.74,
+                                    "referencia": "some text",
+                                    "codigoRespuesta": "some text"
+                                }
+                            }
+                        }
+                    },
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/MensajeSalidaPagar"
+                        },
+                        "examples": {
+                            "mensajeSalidaPagar": {
+                                "value": {
+                                    "banderaOffline": true,
+                                    "datosAdicionales": [
+                                        {
+                                            "codigo": "some text",
+                                            "valor": "some text"
+                                        },
+                                        {
+                                            "codigo": "some text",
+                                            "valor": "some text"
+                                        }
+                                    ],
+                                    "fechaDebito": "2018-02-10T09:30Z",
+                                    "fechaPago": "2018-02-10T09:30Z",
+                                    "mensajeUsuario": "some text",
+                                    "montoTotal": 98.63,
+                                    "referencia": "some text",
+                                    "codigoRespuesta": "some text"
+                                }
+                            }
+                        }
+                    },
+                    "application/jose+jwe": {
+                        "schema": {
+                            "$ref": "#/components/schemas/MensajeSalidaPagar"
+                        },
+                        "examples": {
+                            "mensajeSalidaPagar": {
+                                "value": {
+                                    "banderaOffline": true,
+                                    "datosAdicionales": [
+                                        {
+                                            "codigo": "some text",
+                                            "valor": "some text"
+                                        },
+                                        {
+                                            "codigo": "some text",
+                                            "valor": "some text"
+                                        }
+                                    ],
+                                    "fechaDebito": "2018-02-10T09:30Z",
+                                    "fechaPago": "2018-02-10T09:30Z",
+                                    "mensajeUsuario": "some text",
+                                    "montoTotal": 89.03,
+                                    "referencia": "some text",
+                                    "codigoRespuesta": "some text"
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "Ejecutar Pago"
+            }
+        }
+    }
+}
