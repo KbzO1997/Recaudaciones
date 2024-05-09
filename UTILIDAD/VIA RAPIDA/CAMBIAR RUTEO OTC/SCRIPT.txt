@@ -1,0 +1,36 @@
+--SCRIPT PARA APUNTAR A LOS COMBOS DE CLARO QUE ESTAN EN EL  BUS 
+--SCRIPT PARA CAMBIAR LOS ARCHIVOS DE TRANSFORMACION
+
+select * from OTC_M_PUNTO_FINAL where END_ID in(213,215,216,214)
+
+update OTC_M_PUNTO_FINAL
+set
+END_PETICION = 'RMS_BROADNET_P_IN.xsl',
+END_RESPUESTA = 'RMS_BROADNET_P_OUT.xsl'
+WHERE END_ID = 216
+
+
+update OTC_M_PUNTO_FINAL 
+set 
+END_PUNTO_FINAL = 'Recaudaciones/Microservicio',
+END_OPERACION = 'Consultar', 
+END_AMBIENTE  = 'RMS',
+END_PETICION = 'RMS_BROADNET_C_IN.xsl'
+where END_ID = 213
+
+update OTC_M_PUNTO_FINAL 
+set 
+END_PUNTO_FINAL = 'OTCRouter/DatosRecargas/proxy/obtenerValoresClaroPaquete',
+END_OPERACION = 'consultarMontosRecargas', 
+END_AMBIENTE  = '12c',
+END_PETICION = 'CLAROCP_C_IN.xsl'
+where END_ID = 213
+
+--12c
+--CLAROCP_C_IN.xsl
+--consultarMontosRecargas
+--OTCRouter/DatosRecargas/proxy/obtenerValoresClaroPaquete
+--CLAROCP_C_IN.xsl
+
+
+select * from OTC_M_PUNTO_FINAL where end_nombre like '%Claro%'
