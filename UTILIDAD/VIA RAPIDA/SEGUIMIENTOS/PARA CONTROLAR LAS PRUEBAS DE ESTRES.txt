@@ -1,0 +1,26 @@
+AGREGAR EN EL CONFIGMAP DE LOS PROYECTOS EN OPENSHIFT
+oc project bb-dev-recaudos
+
+
+
+oc set resources dc/rec-consulta --limits=cpu=1000m,memory=1Gi --requests=cpu=10m,memory=1Gi
+oc set resources dc/rec-pago --limits=cpu=1000m,memory=1Gi --requests=cpu=10m,memory=1Gi
+oc set resources dc/rec-reverso --limits=cpu=1000m,memory=1Gi --requests=cpu=10m,memory=1Gi
+oc set resources dc/rec-reverso-general --limits=cpu=1000m,memory=1Gi --requests=cpu=10m,memory=1Gi
+
+
+
+oc project bb-dev-recaudosempresas
+
+
+
+oc set resources dc/rec-ant --limits=cpu=1000m,memory=1Gi --requests=cpu=10m,memory=1Gi
+oc set resources dc/rec-broadnet --limits=cpu=1000m,memory=1Gi --requests=cpu=10m,memory=1Gi
+
+
+
+oc project bb-dev-otc
+
+
+
+oc set resources dc/otc-gateway-cobis --limits=cpu=1000m,memory=1Gi --requests=cpu=10m,memory=1Gi
