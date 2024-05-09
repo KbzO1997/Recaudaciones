@@ -1,0 +1,12 @@
+declare @w_trn              int   
+select @w_trn =  62684  --62675 
+
+select * from cobis..cl_ttransaccion where tn_trn_code = @w_trn
+
+select * from cobis..ad_pro_transaccion where pt_transaccion = @w_trn
+
+select * from cobis..ad_tr_autorizada where ta_transaccion = @w_trn
+
+select * from cobis..ad_procedure where pd_procedure = @w_trn
+
+select * from cob_remesas..re_tran_contable where tc_tipo_tran = @w_trn
