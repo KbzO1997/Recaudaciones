@@ -1,0 +1,182 @@
+<xsd1:MensajeEntradaPagarRise xmlns:xsd1="http://www.bolivariano.com/MensajeSRI" xmlns:java="java">
+<canal>VEN</canal>
+<depuracion>N</depuracion>
+<fecha>2023-08-04T08:46:57.041-05:00</fecha>
+<oficina>0</oficina>
+<terminal>VIRTUAL_BB</terminal>
+<transaccion>3935</transaccion>
+<usuario>msilvag</usuario>
+-<informacionSRI>
+<aplicativoCobis>S</aplicativoCobis>
+<autorizacion>N</autorizacion>
+<codigoAutorizacion>660804</codigoAutorizacion>
+<debito>751.66</debito>
+<debitoComision>0.29</debitoComision>
+<efectivo>0.00</efectivo>
+<efectivoComision>0.00</efectivoComision>
+<empresa>8369</empresa>
+<identificacion>0150092831001</identificacion>
+<nombre>FAREZ CAJAMARCA JOSE LUIS</nombre>
+<opcion>P</opcion>
+<tipoCanal>VENTANILLA</tipoCanal>
+<tipoMoneda>1</tipoMoneda>
+<tipoPago>A_LA_FECHA</tipoPago>
+<rubroPersona>RISE</rubroPersona>
+<servicioPersona>SRI</servicioPersona>
+<ubicacion>0</ubicacion>
+<valorCheque>0.00</valorCheque>
+<valorTotalCancelar>751.66</valorTotalCancelar>
+-<cuenta>
+<cuenta>0000088024</cuenta>
+<tipoCuenta>CTE</tipoCuenta>
+-<identificaciones>
+<identificacion>0150092831001</identificacion>
+</identificaciones>
+<valorTotal>751.66</valorTotal>
+</cuenta>
+<descripcionRubro>FEBRERO 2020 A DICIEMBRE 2021</descripcionRubro>
+<provifi>109</provifi>
+<rubro>A_LA_FECHA</rubro>
+</informacionSRI>
+-<informacionCore>
+<fechaProcesoKernel>2023-08-04T08:46:57.041-05:00</fechaProcesoKernel>
+<rolBPM>252</rolBPM>
+<secuencial>137108450</secuencial>
+<servidor>SRVDESA3</servidor>
+<servidorLocal>SRVDESA3</servidorLocal>
+<sesion>0</sesion>
+</informacionCore>
+-<datosPago>
+<valorPagoTotal>751.66</valorPagoTotal>
+<valorComisionTotal>0.29</valorComisionTotal>
+-<debitoCuenta>
+<tipoCuenta>CTE</tipoCuenta>
+<cuenta>0000088024</cuenta>
+<valor>751.66</valor>
+<valorComision>0.29</valorComision>
+</debitoCuenta>
+</datosPago>
+</xsd1:MensajeEntradaPagarRise>
+
+<!--Proveedor-->
+<dbRequest user="msilvag" MCN="137108450" pkg="TSW_PCK_SISTEMA_RISE" name="TSW_PRO_PAGO" base="">
+    <spParameter name="PSI_CODIGO_AGENCIA_IFI" dataType="string" io="I" maxlen="0" value="0"/>
+    <spParameter name="PSI_CODIGO_CANAL_PAGO_IFI" dataType="string" io="I" maxlen="0" value="VENTANILLA"/>
+    <spParameter name="PSI_NOMBRE_OPERADOR_IFI" dataType="string" io="I" maxlen="0" value="msilvag"/>
+    <spParameter name="PSI_PROVINCIA_IFI" dataType="string" io="I" maxlen="0" value="109"/>
+    <spParameter name="PSI_NUMERO_RUC" dataType="string" io="I" maxlen="0" value="0150092831001"/>
+    <spParameter name="PSI_TIPO_PAGO" dataType="string" io="I" maxlen="0" value="A_LA_FECHA"/>
+    <spParameter name="PNI_VALOR_PAGO" dataType="float" io="I" maxlen="0" value="75166"/>
+    <spParameter name="PNI_CODIGO_ENTIDAD_IFI" dataType="float" io="I" maxlen="0" value="7"/>
+    <spParameter name="PSO_DETALLE_PAGO" dataType="float" io="IO" maxlen="1000"/>
+    <spParameter name="PSO_NUMERO_COMPROBANTE" dataType="float" io="IO" maxlen="12"/>
+    <spParameter name="PSO_FECHA_RECAUDACION" dataType="string" io="IO" maxlen="8"/>
+    <spParameter name="PNO_RESULTADO_TRANSACCION" dataType="string" io="IO" maxlen="30"/>
+    </dbRequest>
+    </part>
+    </inSRI>
+    -<outSRI>
+    -<part xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="dbResponse">
+    -<dbResponse MCN="137108450" id="571" destino="LINKSRV" ruta="LINKSRV" recibo="432720010" result="0" ssn="432760010" user="msilvag" base="" pkg="TSW_PCK_SISTEMA_RISE" name="TSW_PRO_PAGO">
+    -<parameterBlock name="PSO_DETALLE_PAGO" isnull="false">
+    -<parameterValue>
+    <scalarParameter value="FEBRERO 2020 A DICIEMBRE 2021"/>
+    </parameterValue>
+    </parameterBlock>
+    -<parameterBlock name="PSO_NUMERO_COMPROBANTE" isnull="false">
+    -<parameterValue>
+    <scalarParameter value="00712810468"/>
+    </parameterValue>
+    </parameterBlock>
+    -<parameterBlock name="PSO_FECHA_RECAUDACION" isnull="false">
+    -<parameterValue>
+    <scalarParameter value="04082023"/>
+    </parameterValue>
+    </parameterBlock>
+    -<parameterBlock name="PNO_RESULTADO_TRANSACCION" isnull="false">
+    -<parameterValue>
+    <scalarParameter value="0"/>
+    </parameterValue>
+    </parameterBlock>
+    </dbResponse>
+
+    <!--Pago Core-->
+
+    <inCore>
+        -<part xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="InputParameters">
+        -<InputParameters xmlns:oraxsl="http://www.oracle.com/XSL/Transform/java" xmlns:oracle-xsl-mapper="http://www.oracle.com/xsl/mapper/schemas" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/sp_procesa_rise" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/sp/sp_procesa_rise">
+        <db:s_ssn>137108450</db:s_ssn>
+        <db:s_srv>SRVDESA3</db:s_srv>
+        <db:s_lsrv>SRVDESA3</db:s_lsrv>
+        <db:s_user>msilvag</db:s_user>
+        <db:s_term>VIRTUAL_BB</db:s_term>
+        <db:s_date>2023-08-04T00:00:00.000-05:00</db:s_date>
+        <db:s_ofi>0</db:s_ofi>
+        <db:s_rol>252</db:s_rol>
+        <db:s_org_err xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <db:s_error xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <db:s_sev>0</db:s_sev>
+        <db:s_org>D</db:s_org>
+        <db:t_corr>N</db:t_corr>
+        <db:t_trn>3935</db:t_trn>
+        <db:i_aplcobis>S</db:i_aplcobis>
+        <db:i_tsn>0</db:i_tsn>
+        <db:i_mon>1</db:i_mon>
+        <db:i_canal>VEN</db:i_canal>
+        <db:i_operacion>P</db:i_operacion>
+        <db:i_identificacion>0150092831001</db:i_identificacion>
+        <db:i_razon_soc>FAREZ CAJAMARCA JOSE LUIS</db:i_razon_soc>
+        <db:i_efectivo>0.00</db:i_efectivo>
+        <db:i_cheque>0.00</db:i_cheque>
+        <db:i_debito>751.66</db:i_debito>
+        <db:i_subtotal>751.66</db:i_subtotal>
+        <db:i_comision_tot>0.29</db:i_comision_tot>
+        <db:i_comision_efe>0.00</db:i_comision_efe>
+        <db:i_total>751.66</db:i_total>
+        <db:i_tipo_cta>CTE</db:i_tipo_cta>
+        <db:i_cuenta>0000088024</db:i_cuenta>
+        <db:i_autoriza>N</db:i_autoriza>
+        <db:i_pterminal>VIRTUAL_BB</db:i_pterminal>
+        <db:i_rubro>A_LA_FECHA</db:i_rubro>
+        <db:i_comprobante/>
+        <db:i_sec_rise>00712810468</db:i_sec_rise>
+        <db:i_ubi>0</db:i_ubi>
+        </InputParameters>
+        </part>
+        </inCore>
+        -<outCore>
+        -<part xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="OutputParameters">
+        -<OutputParameters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/sp/sp_procesa_rise">
+        <RETURN_VALUE>0</RETURN_VALUE>
+        <o_sec_rise>712810468</o_sec_rise>
+        <o_pmcn xsi:nil="true"/>
+        <o_fecha_contable>08/04/2023 08:47:02</o_fecha_contable>
+        <o_autorisri>1108488204</o_autorisri>
+        <o_fecvensri>JULIO/2011</o_fecvensri>
+        <o_nota_venta>001-019-</o_nota_venta>
+        <o_ssn>137108450</o_ssn>
+        <o_sec_reverso>137108450</o_sec_reverso>
+        <o_comision xsi:nil="true"/>
+        <o_provincia xsi:nil="true"/>
+        <o_horario xsi:nil="true"/>
+        <o_nombcta>PINTURAS UNIDAS S. A.*****</o_nombcta>
+        <o_tasa>0.1200000000000000000</o_tasa>
+        <o_base_imp>0.26</o_base_imp>
+        <o_impuesto>0.03</o_impuesto>
+        <o_servicio_not>PAGSB</o_servicio_not>
+        <o_nomb_ente>PINTURAS UNIDAS S. A.*****</o_nomb_ente>
+        <o_cod_ente>1233</o_cod_ente>
+        <o_desccanal>VENTANILLA</o_desccanal>
+        <o_celular xsi:nil="true"/>
+        <o_correo>crodriguez@bolivariano.com</o_correo>
+        <o_desc_empresa>SRI</o_desc_empresa>
+        <o_prod_deb>CTE</o_prod_deb>
+        <o_valor>751.66</o_valor>
+        <o_fecha_deb>08/04/2023</o_fecha_deb>
+        <o_hora_deb>08:47:02</o_hora_deb>
+        <o_valor_comi>0.29</o_valor_comi>
+        <o_valor_tot>751.95</o_valor_tot>
+        <o_cta_lat>024</o_cta_lat>
+        </OutputParameters>
+        </part>
+        </outCore>

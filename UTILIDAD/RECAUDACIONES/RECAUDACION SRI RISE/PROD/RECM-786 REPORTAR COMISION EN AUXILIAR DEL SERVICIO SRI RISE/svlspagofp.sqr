@@ -1,0 +1,426 @@
+!**********************************************************************!
+!*    Archivo           : svlspagofp.sqr                              *!
+!*    Base de datos     : cob_servicios                               *!
+!*    Producto          : Cuentas Corrientes                          *!
+!*    Disenado por      : Hugo E. Yépez                               *!
+!*    Fecha de escritura: 01/Dic/2005                                 *!
+!**********************************************************************!
+!*                              IMPORTANTE                            *!
+!*   Este programa es parte de los paquetes bancarios propiedad del   *!
+!*   "BANCO BOLIVARIANO".                                             *!
+!*   Su uso no autorizado queda expresamente prohibido asi como       *!
+!*   cualquier alteracion o agregado hecho por alguno de sus usuarios *!
+!*   sin el debido consentimiento por escrito de la Presidencia       *!
+!*   Ejecutiva del BANCO BOLIVARIANO o su representante               *!
+!**********************************************************************!
+!*                              PROPOSITO                             *!
+!*   Genera reporte de recaudaciones de OTRAS FORMAS DE PAGO DE SRI   *!
+!**********************************************************************!
+!*     FECHA        AUTOR        MODIFICACIONES                       *!
+!*  01/Dic/2005  Hugo Yépez      Emision Inicial                      *!
+!*  26/Mar/2007  Luis Chacha     Pago con Tarjeta de Credito          *!
+!*  15/OCT/2008  German Medina C Recausaciones RISE-SRI               *!
+!**********************************************************************!
+
+#include "definic.inc"
+
+#define   ANCHO_PAG                220    ! Ancho de pagina
+#define   LARGO_PAG                100
+#define   NOM_ARCH                 svlspagofp.sqr
+#define   FOR_DIN                  99,999,999,999
+#define   FOR_DIN_D                99,999,999.99
+#define  SALIDA  '<37><33><10>(cobis1.jdt) STARTLM<10>'
+
+Begin-Setup
+use cob_servicios
+End-Setup
+
+#include "printer_cobis1.inc"
+#include "log.inc"
+#include "ctacte.inc"
+
+Begin-Program
+do Inicializar_Programa
+do ParamN (1,#i_filial,'cobis..cl_filial','fi_filial = ','No existe la filial')
+do ParamS (2,$i_fecha_proceso,'','','')
+let #contador = 1 !gamc 15OCT08
+do Nombre_reporte
+do Main
+do Reporte_rise !gamc 15OCT08 - Llama al procedimiento del Rise
+do finalizar_Programa
+End-Program
+
+Begin-Heading 10  
+  if #contador = 2
+  	let $w_titulo    = 'LISTADO DE RECAUDACIONES DIARIAS DE RISE-SRI'
+	let $w_subtitulo = ''
+	let $w_subtitulo2 = 'Oficina : ' || &d_oficina
+	let $w_subtitulo3 = 'Canal   : ' || $w_canal
+	let $w_subtitulo4 = 'Usuario : ' || $w_usuario
+	let $w_programa = 'svlspagofp.sqr'
+	do Encabezado($w_titulo, $w_subtitulo, $w_subtitulo2, $w_subtitulo3, $w_subtitulo4, $i_fecha_proceso, $w_empresa, $d_oficina, $w_programa)
+	position (+1)
+	do Lin_Horizontal                                                       
+	do Centrar ('Ruc',1)
+	do Centrar ('Razón Social',2)
+	do Centrar ('Comprobante',3)
+	!do Centrar ('Impto',4)
+	!do Centrar ('Adhesivo',5)
+	do Centrar ('Efectivo',4)
+	do Centrar ('Cheque',5)
+	do Centrar ('Cuenta',6)
+	do Centrar ('Nota deb',7)
+	!do Centrar ('Efe.cobro',10)
+	!do Centrar ('T.Credito', 11)
+	do Centrar ('Total',8)
+	do Centrar ('Comisión',9)
+	do Centrar ('Corr',10)
+    do Lin_Horizontal
+  end-if
+  if #contador = 1  	  
+	  let $w_titulo    = 'LISTADO DE RECAUDACIONES DIARIAS DE IMPUESTOS FISCALES CON CEP'
+	  let $w_subtitulo = ''
+	  let $w_subtitulo2 = 'Oficina : ' || &d_oficina
+	  let $w_subtitulo3 = 'Canal   : ' || $w_canal
+	  let $w_subtitulo4 = 'Usuario : ' || $w_usuario
+	  let $w_programa = 'svlspagofp.sqr'
+	  do Encabezado($w_titulo, $w_subtitulo, $w_subtitulo2, $w_subtitulo3, $w_subtitulo4, $i_fecha_proceso, $w_empresa, $d_oficina, $w_programa)
+	  position (+1)
+	  do Lin_Horizontal                                                       
+	  do Centrar ('Ruc',1)
+	  do Centrar ('Razón Social',2)
+	  do Centrar ('Cep',3)
+	  do Centrar ('Impto',4)
+	  do Centrar ('Adhesivo',5)
+	  do Centrar ('Efectivo',6)
+	  do Centrar ('Cheque',7)
+	  do Centrar ('Cuenta',8)
+	  do Centrar ('Nota deb',9)
+	  do Centrar ('Efe.cobro',10)
+	  do Centrar ('T.Credito', 11)
+	  do Centrar ('Total',12)
+	  do Centrar ('Comisión',13)
+	  do Centrar ('Corr',14)
+	  do Lin_Horizontal	  
+  end-if
+  
+End-Heading
+
+Begin-Procedure Main
+!do Columnas (15,30,15,5,15,15,15,10,15,15,15,15,4,0,0,0,0,0,0,0)
+do Columnas (15,30,15,5,15,15,15,10,15,15,15,15,15,4,0,0,0,0,0,0)
+do Nombre_Filial(#i_filial,$w_empresa)
+let #w_oficina = 999
+do Procesar
+End-Procedure
+
+
+Begin-Procedure Procesar
+let #val_tot_gen = 0
+let #val_com_gen = 0
+let #con_tot_gen = 0
+Begin-Select
+ts_oficina () on-break print=never before=antes_oficina after=despues_oficina level=1
+ts_tipo_chequera () on-break print=never before=antes_canal after=despues_canal level=2
+ts_usuario () on-break print=never before=antes_usuario after=despues_usuario level=3
+convert(varchar(5), ts_hora, 108)  &w_hora
+ts_ced_ruc
+ts_referencia
+ts_nombre
+ts_stick_imp
+ts_cta_banco
+ts_campo_alt_dos
+ts_saldo
+ts_valor
+ts_monto
+ts_aporte_iess
+ts_contratado
+ts_fonres_iess     !lfcm 26-marzo-2007 Se agrega por Pago con Tarjeta de Credito
+ts_descuento_iess
+ts_correccion
+
+   if #contador = 1
+	   let #w_efectivo = &ts_valor
+	   let #w_cheque   = &ts_saldo
+	   let #w_nd       = &ts_aporte_iess
+	   let #w_nc       = &ts_monto
+	   let #w_efe_cob  = &ts_contratado
+	   let #w_tarjeta    = &ts_fonres_iess    !lfcm 26-marzo-2007 Se agrega por Pago con Tarjeta de Credito
+	   !let #w_total    = #w_efectivo + #w_cheque + #w_nd + #w_nc + #w_efe_cob
+	   let #w_total    = #w_efectivo + #w_cheque + #w_nd + #w_nc + #w_efe_cob + #w_tarjeta !lfcm 26-marzo-2007 Pago con Tarjeta de Credito
+	   let #w_comision = &ts_descuento_iess
+
+	   if &ts_correccion = 'S'
+		  let $correccion = 'S'
+		  let #val_tot_ofic = #val_tot_ofic - #w_total
+		  let #val_com_ofic = #val_com_ofic - #w_comision
+		  let #con_tot_ofic = #con_tot_ofic - 1
+		  let #val_tot_canal = #val_tot_canal - #w_total
+		  let #val_com_canal = #val_com_canal - #w_comision
+		  let #con_tot_canal = #con_tot_canal - 1
+		  let #val_tot_usuario = #val_tot_usuario - #w_total
+		  let #val_com_usuario = #val_com_usuario - #w_comision
+		  let #con_tot_usuario = #con_tot_usuario - 1
+		  let #val_tot_gen = #val_tot_gen - #w_total
+		  let #val_com_gen = #val_com_gen - #w_comision
+		  let #con_tot_gen = #con_tot_gen - 1
+	   else
+		  let $correccion = 'N'
+		  let #val_tot_ofic = #val_tot_ofic + #w_total
+		  let #val_com_ofic = #val_com_ofic + #w_comision
+		  let #con_tot_ofic = #con_tot_ofic + 1
+		  let #val_tot_canal = #val_tot_canal + #w_total
+		  let #val_com_canal = #val_com_canal + #w_comision
+		  let #con_tot_canal = #con_tot_canal + 1
+		  let #val_tot_usuario = #val_tot_usuario + #w_total
+		  let #val_com_usuario = #val_com_usuario + #w_comision
+		  let #con_tot_usuario = #con_tot_usuario + 1
+		  let #val_tot_gen = #val_tot_gen + #w_total
+		  let #val_com_gen = #val_com_gen + #w_comision
+		  let #con_tot_gen = #con_tot_gen + 1
+	   end-if
+
+	   do PrintS(1,&ts_ced_ruc,'xxxxxxxxxxxxxxx',0)
+	   do PrintS(2,&ts_nombre,'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',0)
+	   do PrintS(3,&ts_referencia,'xxxxxxxxxxxxxxx',0)
+	   do PrintS(4,&ts_stick_imp,'xxxx',0)
+	   do PrintS(5,&ts_campo_alt_dos,'xxxxxxxxxxxxxxx',0)
+	   do PrintN(6,#w_efectivo,'{FOR_DIN_D}',0)
+	   do PrintN(7,#w_cheque,'{FOR_DIN_D}',0)
+	   do PrintS(8,&ts_cta_banco,'xxxxxxxxxx',0)
+	   do PrintN(9,#w_nd,'{FOR_DIN_D}',0)
+	   do PrintN(10,#w_efe_cob,'{FOR_DIN_D}',0)
+	   do PrintN(11,#w_tarjeta,'{FOR_DIN_D}',0)  !lfcm 26-marzo-2007 Se agrega por Tarjeta de Credito
+	   do PrintN(12,#w_total,'{FOR_DIN_D}',0)
+	   do PrintN(13,#w_comision,'{FOR_DIN_D}',0)
+	   do PrintS(14,$correccion,'',0)
+   end-if
+   if #contador = 2
+       	  let #w_efectivo = &ts_valor
+	      let #w_cheque   = &ts_saldo
+	      let #w_nd       = &ts_monto  
+	      let #w_total    = #w_efectivo + #w_cheque + #w_nd
+	      let #w_comision = &ts_fonres_iess
+	   
+	      if &ts_correccion = 'S'
+	         let $correccion = 'S'
+	         let #val_tot_ofic = #val_tot_ofic - #w_total
+	         let #val_com_ofic = #val_com_ofic - #w_comision
+	         let #con_tot_ofic = #con_tot_ofic - 1
+	         let #val_tot_canal = #val_tot_canal - #w_total
+	         let #val_com_canal = #val_com_canal - #w_comision
+	         let #con_tot_canal = #con_tot_canal - 1
+	         let #val_tot_usuario = #val_tot_usuario - #w_total
+	         let #val_com_usuario = #val_com_usuario - #w_comision
+	         let #con_tot_usuario = #con_tot_usuario - 1
+	         let #val_tot_gen = #val_tot_gen - #w_total
+	         let #val_com_gen = #val_com_gen - #w_comision
+	         let #con_tot_gen = #con_tot_gen - 1
+	      else
+	         let $correccion = 'N'
+	         let #val_tot_ofic = #val_tot_ofic + #w_total
+	         let #val_com_ofic = #val_com_ofic + #w_comision
+	         let #con_tot_ofic = #con_tot_ofic + 1
+	         let #val_tot_canal = #val_tot_canal + #w_total
+	         let #val_com_canal = #val_com_canal + #w_comision
+	         let #con_tot_canal = #con_tot_canal + 1
+	         let #val_tot_usuario = #val_tot_usuario + #w_total
+	         let #val_com_usuario = #val_com_usuario + #w_comision
+	         let #con_tot_usuario = #con_tot_usuario + 1
+	         let #val_tot_gen = #val_tot_gen + #w_total
+	         let #val_com_gen = #val_com_gen + #w_comision
+	         let #con_tot_gen = #con_tot_gen + 1
+	      end-if
+	   
+	      !do PrintS(4,&ts_stick_imp,'xxxx',0)
+	      !do PrintS(5,&ts_campo_alt_dos,'xxxxxxxxxxxxxxx',0)
+	      !do PrintN(10,#w_efe_cob,'{FOR_DIN_D}',0)
+	      !do PrintN(11,#w_tarjeta,'{FOR_DIN_D}',0)  !lfcm 26-marzo-2007 Se agrega por Tarjeta de Credito
+	   
+	   
+	      do PrintS(1,&ts_referencia,'xxxxxxxxxxxxx',0)
+	      do PrintS(2,&ts_nombre,'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',0)
+	      do PrintS(3,&ts_stick_imp,'xxxxxxxxxx',0)   
+	      do PrintN(4,#w_efectivo,'{FOR_DIN_D}',0)
+	      do PrintN(5,#w_cheque,'{FOR_DIN_D}',0)
+	      do PrintS(6,&ts_cta_banco,'xxxxxxxxxx',0)
+	      do PrintN(7,#w_nd,'{FOR_DIN_D}',0)
+	      do PrintN(8,#w_total,'{FOR_DIN_D}',0)
+	      do PrintN(9,#w_comision,'{FOR_DIN_D}',0)
+          do PrintS(10,$correccion,'',0)
+   end-if
+   next-listing
+
+from cob_cuentas..cc_tran_servicio
+!where ts_tipo_transaccion in (3611,3612)
+where ts_tipo_transaccion in (#ts_ttran1, #ts_ttran2) !gamc 23OCT08
+  and ts_tsfecha = $i_fecha_proceso  
+order by ts_oficina, ts_referencia, ts_hora
+End-Select
+next-listing
+next-listing
+do PrintS(01,'TOT. GENERAL','',0)
+do PrintN(02,#con_tot_gen,'99999',0)
+!do PrintN(11,#val_tot_gen,'{FOR_DIN_D}',0)    !lfcm 26-marzo-2007 Por pago con Tarjeta de Credito
+do PrintN(12,#val_tot_gen,'{FOR_DIN_D}',0)     !lfcm 26-marzo-2007 Por pago con Tarjeta de Credito
+!do PrintN(12,#val_com_gen,'{FOR_DIN_D}',0)    !lfcm 26-marzo-2007 Por pago con Tarjeta de Credito
+do PrintN(13,#val_com_gen,'{FOR_DIN_D}',0)     !lfcm 26-marzo-2007 Por pago con Tarjeta de Credito
+End-Procedure
+
+!*******************************************************************************
+!****                        Busca nombre de oficina                         ***
+!*******************************************************************************
+Begin-Procedure antes_oficina
+do before_pagina
+begin-select
+of_nombre  &d_oficina
+from cobis..cl_oficina
+where of_oficina = &ts_oficina
+end-select
+!if #w_oficina <> &ts_oficina
+!   do Generar_Listado(&ts_oficina)
+!end-if
+let #w_oficina = &ts_oficina
+End-Procedure
+
+!*******************************************************************************
+!****                        Busca nombre de oficina                         ***
+!*******************************************************************************
+Begin-Procedure despues_oficina
+do after_pagina
+next-listing
+next-listing
+if #contador = 1
+	do PrintS(01,'TOT. OFICINA','',0)
+	do PrintN(02,#con_tot_ofic,'99999',0)
+	!do PrintN(11,#val_tot_ofic,'{FOR_DIN_D}',0)    !lfcm 26-marzo-2007 Por pago con Tarjeta de Credito
+	do PrintN(12,#val_tot_ofic,'{FOR_DIN_D}',0)     !lfcm 26-marzo-2007 Por pago con Tarjeta de Credito
+	!do PrintN(12,#val_com_ofic,'{FOR_DIN_D}',0)    !lfcm 26-marzo-2007 Por pago con Tarjeta de Credito
+	do PrintN(13,#val_com_ofic,'{FOR_DIN_D}',0)     !lfcm 26-marzo-2007 Por pago con Tarjeta de Credito
+end-if
+if #contador = 2
+	do PrintS(01,'TOT. OFICINA','',0)
+	do PrintN(02,#con_tot_ofic,'99999',0)	
+	do PrintN(8,#val_tot_ofic,'{FOR_DIN_D}',0)
+	do PrintN(9,#val_com_ofic,'{FOR_DIN_D}',0)
+end-if
+let #con_tot_ofic = 0
+let #val_tot_ofic = 0
+let #val_com_ofic = 0
+End-Procedure
+
+Begin-Procedure antes_canal
+do before_pagina
+let $w_canal = &ts_tipo_chequera
+End-Procedure
+
+Begin-Procedure despues_canal
+do after_pagina
+next-listing
+if #contador = 1
+	do PrintS(01,'TOT. CANAL','',0)
+	do PrintN(02,#con_tot_canal,'99999',0)
+	!do PrintN(11,#val_tot_canal,'{FOR_DIN_D}',0)     !lfcm 26-marzo-2007 Por pago con Tarjeta de Credito
+	do PrintN(12,#val_tot_canal,'{FOR_DIN_D}',0)      !lfcm 26-marzo-2007 Por pago con Tarjeta de Credito
+	!do PrintN(12,#val_com_canal,'{FOR_DIN_D}',0)     !lfcm 26-marzo-2007 Por pago con Tarjeta de Credito
+	do PrintN(13,#val_com_canal,'{FOR_DIN_D}',0)      !lfcm 26-marzo-2007 Por pago con Tarjeta de Credito
+end-if
+if #contador = 2
+	do PrintS(01,'TOT. CANAL','',0)
+	do PrintN(02,#con_tot_canal,'99999',0)	
+	do PrintN(8,#val_tot_canal,'{FOR_DIN_D}',0)
+	do PrintN(9,#val_com_canal,'{FOR_DIN_D}',0)
+end-if
+let #con_tot_canal = 0
+let #val_tot_canal = 0
+let #val_com_canal = 0
+End-Procedure
+
+Begin-Procedure antes_usuario
+do before_pagina
+let $w_usuario = &ts_usuario
+End-Procedure
+
+Begin-Procedure despues_usuario
+do after_pagina
+next-listing
+if #contador = 1
+	do PrintS(01,'TOT. USUARIO','',0)
+	do PrintN(02,#con_tot_usuario,'99999',0)
+	!do PrintN(11,#val_tot_usuario,'{FOR_DIN_D}',0)    !lfcm 26-marzo-2007 Por pago con Tarjeta de Credito
+	do PrintN(12,#val_tot_usuario,'{FOR_DIN_D}',0)     !lfcm 26-marzo-2007 Por pago con Tarjeta de Credito
+	!do PrintN(12,#val_com_usuario,'{FOR_DIN_D}',0)    !lfcm 26-marzo-2007 Por pago con Tarjeta de Credito
+	do PrintN(13,#val_com_usuario,'{FOR_DIN_D}',0)     !lfcm 26-marzo-2007 Por pago con Tarjeta de Credito
+end-if
+if #contador = 2
+	do PrintS(01,'TOT. USUARIO','',0)
+	do PrintN(02,#con_tot_usuario,'99999',0)	
+	do PrintN(8,#val_tot_usuario,'{FOR_DIN_D}',0)
+	do PrintN(9,#val_com_usuario,'{FOR_DIN_D}',0)
+end-if
+let #con_tot_usuario = 0
+let #val_tot_usuario = 0
+let #val_com_usuario = 0
+End-Procedure
+
+!*******************************************************************************
+!*****    Procedimientos generales utilizados para el encabezamiento     *******
+!*******************************************************************************
+Begin-Procedure Encabezado($titulo,$subtitulo,$subtitulo2,$subtitulo3,$subtitulo4,$fecha_proceso,$empresa,$oficina,$programa)
+let #pos = {ANCHO_PAG} - 23
+BEGIN-SELECT
+convert(char(10),getdate(),101) &fecha_actual
+convert(char(8),getdate(),108)  &hora
+END-SELECT
+let $hora = 'Hora      : ' || &hora
+do Mes_Espaniol (&fecha_actual,$fecha_imp)
+do Mes_Espaniol ($fecha_proceso,$fecha_pro)
+print $empresa     (1,1)
+print $titulo      (1) center
+let $fecha_imp = 'Fecha Impr: ' || $fecha_imp
+print $fecha_imp   (1,#pos)
+print $subtitulo2  (2,1)
+let $fecha_pro = 'FECHA DE RECAUDACION ' || $fecha_pro
+print $subtitulo   (2) center
+print $programa    (2,#pos)
+print $subtitulo3  (3,1)
+print $fecha_pro   (3) center
+page-number        (3,#pos) 'Pag.      : '
+print $subtitulo4  (4,1)
+print $hora        (4,#pos)
+End-Procedure
+
+!---------------------------------------------
+Begin-Procedure Nombre_reporte
+!---------------------------------------------
+let #ts_ttran1 = 3611
+let #ts_ttran2 = 3612
+Begin-Select
+convert(char(10),getdate(),101) &w_fechoy
+convert(char(8),getdate(),108) &w_hormin
+End-Select
+let $nombre_reporte = 'svlspagofp_' || substr(&w_fechoy,1,2) || substr(&w_fechoy,4,2) || substr(&w_fechoy,9,2) || '_' || substr(&w_hormin,1,2) || substr(&w_hormin,4,2) || '.lis'
+let $nombre_reporte = '../listados/' || $nombre_reporte
+new-report $nombre_reporte
+End-Procedure
+
+!gamc 15OCT08 - RISE
+!---------------------------------------------
+Begin-Procedure Reporte_rise
+!---------------------------------------------
+Begin-Select
+convert(char(10),getdate(),101) &w_fechoy2
+convert(char(8),getdate(),108) &w_hormin2
+End-Select
+let $nombre_reporte = 'svlsofprise_' || substr(&w_fechoy2,1,2) || substr(&w_fechoy2,4,2) || substr(&w_fechoy2,9,2) || '_' || substr(&w_hormin2,1,2) || substr(&w_hormin2,4,2) || '.lis'
+let $nombre_reporte = '../listados/' || $nombre_reporte
+new-report $nombre_reporte
+let #ts_ttran1 = 3934
+let #ts_ttran2 = 3935
+let #contador = 2
+do Columnas (15,30,15,15,15,15,15,15,15,4,0,0,0,0,0,0,0,0,0,0)
+do Nombre_Filial(#i_filial,$w_empresa)
+let #w_oficina = 999
+do Procesar
+
+End-Procedure
