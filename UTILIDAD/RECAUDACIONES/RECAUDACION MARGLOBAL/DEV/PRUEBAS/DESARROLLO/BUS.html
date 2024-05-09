@@ -1,0 +1,47 @@
+<!--Request Document Response Document-->
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Header xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    </soap:Header>
+    <soapenv:Body>
+        <men:MensajeEntradaConsultar xmlns:men="http://www.bolivariano.com/CashManagement/MensajesDepositoenLinea">
+            <canal>IBK</canal>
+            <fecha>2023-10-30T00:00:00.000-05:00</fecha>
+            <oficina>0</oficina>
+            <terminal>term24</terminal>
+            <transaccion>62675</transaccion>
+            <secuencial>48574009</secuencial>
+            <usuario>ope998</usuario>
+            <codigoEmpresa>451</codigoEmpresa>
+            <codigoSubempresa>22289</codigoSubempresa>
+            <tipoIdentificacion>2</tipoIdentificacion>
+            <codigo>690380218202310</codigo>
+        </men:MensajeEntradaConsultar>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+<!--Response Document Response Document-->
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Header xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    </soap:Header>
+    <soapenv:Body>
+        <mc:MensajeSalidaConsultar xmlns:mc="http://www.bolivariano.com/CashManagement/MensajesDepositoenLinea"
+            xmlns:mar="http://extranet.marglobal.com/Bolivariano/">
+            <codigoError>0000</codigoError>
+            <codigoErrorRemoto>0000</codigoErrorRemoto>
+            <mensajeUsuario>Transaccion Exitosa</mensajeUsuario>
+            <informacionDeposito>
+                <identificacion>0992156562001</identificacion>
+                <nombreCliente>FARLETZA S.A.</nombreCliente>
+                <numeroDocumento>0</numeroDocumento>
+                <deuda>2768.000000</deuda>
+            </informacionDeposito>
+        </mc:MensajeSalidaConsultar>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+<!--WS-->
+<bol:ConsultaValoresxTrx xmlns:bol="http://extranet.marglobal.com/Bolivariano/">
+    <bol:codEmpresa>451</bol:codEmpresa>
+    <bol:NroTrx>690380218202310</bol:NroTrx>
+</bol:ConsultaValoresxTrx>

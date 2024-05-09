@@ -1,0 +1,21 @@
+MARGLOBAL 
+https://extranet.marglobal.com/BankWS/BolivarianoWS.asmx
+
+http://186.5.34.67:9356/BankWS/BolivarianoWS.asmx
+
+LINK DE DOC
+http://186.5.34.67:9356/BankWsDesa/BolivarianoWs.asmx
+
+--NUEVO
+update otc_m_tipo_identificador 
+set 
+tid_mascara = '000000000000000',
+tid_regexp = '^([0-9]){10,15}$'
+where cnv_id = 375;
+
+--ANTIGUO
+update otc_m_tipo_identificador 
+set 
+tid_mascara = '"	000000000000"',
+tid_regexp = '^([0-9]){10,12}$'
+where cnv_id = 375;

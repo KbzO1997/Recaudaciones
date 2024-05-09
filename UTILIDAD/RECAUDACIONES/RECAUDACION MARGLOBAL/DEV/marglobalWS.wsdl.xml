@@ -1,0 +1,197 @@
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://extranet.marglobal.com/Bolivariano/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://extranet.marglobal.com/Bolivariano/">
+<wsdl:types>
+<s:schema elementFormDefault="qualified" targetNamespace="http://extranet.marglobal.com/Bolivariano/">
+<s:element name="ConfirmacionPago">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="codEmpresa" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="NroTrx" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="CodTrx" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ConfirmacionPagoResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="ConfirmacionPagoResult" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ConsultaValoresxTrx">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="codEmpresa" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="NroTrx" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ConsultaValoresxTrxResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="ConsultaValoresxTrxResult" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ReversarConfirmacion">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="codEmpresa" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="NroTrx" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="CodTrx" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ReversarConfirmacionResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="ReversarConfirmacionResult" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ReversarConfirmacionManual">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="codEmpresa" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="NroTrx" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="CodTrx" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ReversarConfirmacionManualResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="ReversarConfirmacionManualResult" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+</s:schema>
+</wsdl:types>
+<wsdl:message name="ConfirmacionPagoSoapIn">
+<wsdl:part name="parameters" element="tns:ConfirmacionPago"/>
+</wsdl:message>
+<wsdl:message name="ConfirmacionPagoSoapOut">
+<wsdl:part name="parameters" element="tns:ConfirmacionPagoResponse"/>
+</wsdl:message>
+<wsdl:message name="ConsultaValoresxTrxSoapIn">
+<wsdl:part name="parameters" element="tns:ConsultaValoresxTrx"/>
+</wsdl:message>
+<wsdl:message name="ConsultaValoresxTrxSoapOut">
+<wsdl:part name="parameters" element="tns:ConsultaValoresxTrxResponse"/>
+</wsdl:message>
+<wsdl:message name="ReversarConfirmacionSoapIn">
+<wsdl:part name="parameters" element="tns:ReversarConfirmacion"/>
+</wsdl:message>
+<wsdl:message name="ReversarConfirmacionSoapOut">
+<wsdl:part name="parameters" element="tns:ReversarConfirmacionResponse"/>
+</wsdl:message>
+<wsdl:message name="ReversarConfirmacionManualSoapIn">
+<wsdl:part name="parameters" element="tns:ReversarConfirmacionManual"/>
+</wsdl:message>
+<wsdl:message name="ReversarConfirmacionManualSoapOut">
+<wsdl:part name="parameters" element="tns:ReversarConfirmacionManualResponse"/>
+</wsdl:message>
+<wsdl:portType name="BolivarianoWsSoap">
+<wsdl:operation name="ConfirmacionPago">
+<wsdl:input message="tns:ConfirmacionPagoSoapIn"/>
+<wsdl:output message="tns:ConfirmacionPagoSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="ConsultaValoresxTrx">
+<wsdl:input message="tns:ConsultaValoresxTrxSoapIn"/>
+<wsdl:output message="tns:ConsultaValoresxTrxSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="ReversarConfirmacion">
+<wsdl:input message="tns:ReversarConfirmacionSoapIn"/>
+<wsdl:output message="tns:ReversarConfirmacionSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="ReversarConfirmacionManual">
+<wsdl:input message="tns:ReversarConfirmacionManualSoapIn"/>
+<wsdl:output message="tns:ReversarConfirmacionManualSoapOut"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="BolivarianoWsSoap" type="tns:BolivarianoWsSoap">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="ConfirmacionPago">
+<soap:operation soapAction="http://extranet.marglobal.com/Bolivariano/ConfirmacionPago" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ConsultaValoresxTrx">
+<soap:operation soapAction="http://extranet.marglobal.com/Bolivariano/ConsultaValoresxTrx" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ReversarConfirmacion">
+<soap:operation soapAction="http://extranet.marglobal.com/Bolivariano/ReversarConfirmacion" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ReversarConfirmacionManual">
+<soap:operation soapAction="http://extranet.marglobal.com/Bolivariano/ReversarConfirmacionManual" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="BolivarianoWsSoap12" type="tns:BolivarianoWsSoap">
+<soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="ConfirmacionPago">
+<soap12:operation soapAction="http://extranet.marglobal.com/Bolivariano/ConfirmacionPago" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ConsultaValoresxTrx">
+<soap12:operation soapAction="http://extranet.marglobal.com/Bolivariano/ConsultaValoresxTrx" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ReversarConfirmacion">
+<soap12:operation soapAction="http://extranet.marglobal.com/Bolivariano/ReversarConfirmacion" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ReversarConfirmacionManual">
+<soap12:operation soapAction="http://extranet.marglobal.com/Bolivariano/ReversarConfirmacionManual" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="BolivarianoWs">
+<wsdl:port name="BolivarianoWsSoap" binding="tns:BolivarianoWsSoap">
+<soap:address location="https://extranet.marglobal.com/BankWsDesa/BolivarianoWs.asmx"/>
+</wsdl:port>
+<wsdl:port name="BolivarianoWsSoap12" binding="tns:BolivarianoWsSoap12">
+<soap12:address location="https://extranet.marglobal.com/BankWsDesa/BolivarianoWs.asmx"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>

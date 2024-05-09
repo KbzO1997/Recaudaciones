@@ -1,0 +1,16 @@
+select * from otc_m_convenio where cnv_codigo = '22289';
+select * from otc_m_tipo_identificador where cnv_id = 375;
+
+--NUEVO
+update otc_m_tipo_identificador 
+set 
+tid_mascara = '000000000000000',
+tid_regexp = '^([0-9]){10,15}$'
+where cnv_id = 375;
+
+--ANTIGUO
+update otc_m_tipo_identificador 
+set 
+tid_mascara = '"	000000000000"',
+tid_regexp = '^([0-9]){10,12}$'
+where cnv_id = 375;
