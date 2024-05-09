@@ -1,0 +1,67 @@
+=============>REQUEST PAGARCONSUMO<==========
+<men:MensajeEntradaPagarConsumo xmlns:men="http://www.bolivariano.com/MensajeCredimatic">
+<informacionTarjeta xmlns="">
+<mesPago>5</mesPago>
+<numeroTarjeta>48135100243230023028</numeroTarjeta>
+<Recaudo>
+<codigoComercio>888802</codigoComercio>
+<tipoOperacion>9311</tipoOperacion>
+<cuenta>
+<valorDebito>83.07</valorDebito>
+</cuenta>
+</Recaudo>
+<CoreBB>
+<secuencial>39936497</secuencial>
+<transaccionesterminal>87654321</transaccionesterminal>
+</CoreBB>
+</informacionTarjeta>
+</men:MensajeEntradaPagarConsumo>
+
+=============>RESPONSE PAGARCONSUMO<==========
+<soap:Envelope 	xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+<soap:Header/>
+<soap:Body 	xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
+<MensajeSalidaPagarConsumo 	xmlns:oracle-xsl-mapper="http://www.oracle.com/xsl/mapper/schemas" xmlns:mc="http://www.bolivariano.com/MensajeCredimatic" xmlns="http://www.bolivariano.com/MensajeCredimatic">
+<codigoError 	xmlns="">0</codigoError>
+<mensajeUsuario 	xmlns="">Transacción exitosa</mensajeUsuario>
+<informacionPagoTarjeta 	xmlns="">
+<Recaudo>
+<codigoAutorizacion>057386</codigoAutorizacion>
+<valorComision>3.27</valorComision>
+</Recaudo>
+</informacionPagoTarjeta>
+</MensajeSalidaPagarConsumo>
+</soap:Body>
+</soap:Envelope>
+
+=============>REQUEST REVERSARCONSUMO<==========
+<men:MensajeEntradaReversarConsumo xmlns:men="http://www.bolivariano.com/MensajeCredimatic">
+    <informacionPagoTarjeta xmlns="">
+<mesPago>5</mesPago>
+<numeroTarjeta>48135100243230023028</numeroTarjeta>
+<Recaudo>
+<codigoComercio>888802</codigoComercio>
+<tipoOperacion>9311</tipoOperacion>
+<cuenta>
+<valorDebito>83.07</valorDebito>
+</cuenta>
+</Recaudo>
+<CoreBB>
+<reversoTransaccion>39936497</reversoTransaccion>
+<sec>39939054</sec>
+<secuencial>39939054</secuencial>
+<transaccionesterminal>87654321</transaccionesterminal>
+</CoreBB>
+</informacionPagoTarjeta>
+</men:MensajeEntradaReversarConsumo>
+
+=============>RESPONSE REVERSARCONSUMO<==========
+<soap:Envelope 	xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+<soap:Header/>
+<soap:Body 	xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
+<MensajeSalidaReversarConsumo 	xmlns:oracle-xsl-mapper="http://www.oracle.com/xsl/mapper/schemas" xmlns:mc="http://www.bolivariano.com/MensajeCredimatic" xmlns="http://www.bolivariano.com/MensajeCredimatic">
+<codigoError 	xmlns="">0</codigoError>
+<mensajeUsuario 	xmlns="">Transacción exitosa</mensajeUsuario>
+</MensajeSalidaReversarConsumo>
+</soap:Body>
+</soap:Envelope>
