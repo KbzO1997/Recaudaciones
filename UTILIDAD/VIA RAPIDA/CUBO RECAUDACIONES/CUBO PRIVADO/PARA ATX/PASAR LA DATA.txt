@@ -1,0 +1,20 @@
+bcp cob_cuentas_his..cc_his_servicio in /respaldo/archivos/cuentas/data/ah_tran_monet_20222410.txt -c  -UoperadorRec  -POpe+1234Rec -b 5000
+
+select *
+from cob_cuentas..cc_tran_servicio
+where ts_tsfecha = '10/25/2022'
+and ts_causa in ('19574')
+and ts_secuencial in (55843453,132260065,132260067,132260070,132260073,132260090,132260095,57204659,132260099,57365759,132260111,57507153,132260141,57610169,132260181,132260184,132260191,132260194,132260196)
+and ts_tipo_transaccion = 62688
+and ts_usuario = 'crodrigm'
+order by ts_hora
+
+
+select *
+from cob_cuentas..cc_tran_servicio
+where ts_tsfecha = '10/25/2022'
+and ts_causa in ('19575')
+and ts_tipo_transaccion = 62686
+and ts_secuencial in(132260076,132260079,132260092,57702956,132260144,132260155,57781663,132260162,57870273,132260187,132260217,132260219,132260222,132260230,132260233)
+and ts_usuario = 'crodrigm'
+order by ts_hora

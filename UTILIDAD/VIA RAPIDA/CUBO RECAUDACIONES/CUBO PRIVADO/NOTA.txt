@@ -1,0 +1,20 @@
+SE DEBE POBLAR DE DATA LA HIS SERVICIO
+
+execute cob_pagos..pa_pag_brecau_privadas
+        @e_fecha_desde      = '10/25/2022',
+        @e_fecha_hasta      = '10/25/2022',
+	@e_reintento = 'S',
+	@t_debug = 'N'
+
+
+
+select * from cob_cuentas_his..cc_his_servicio hs
+	where (hs_tsfecha  >= '10/25/2022' and hs_tsfecha < = '10/25/2022')
+	and hs_tipo_transaccion in (select convert(int,c.codigo) 
+							from cobis..cl_tabla t inner join cobis..cl_catalogo c on t.codigo = c.tabla
+							where t.tabla = 'cl_trx_emp_pri' 
+							and c.estado = 'V')
+	and hs_causa in (select c.codigo
+						from cobis..cl_tabla t inner join cobis..cl_catalogo c on t.codigo = c.tabla
+						where t.tabla = 'cl_emp_pri' 
+						and c.estado = 'V')
