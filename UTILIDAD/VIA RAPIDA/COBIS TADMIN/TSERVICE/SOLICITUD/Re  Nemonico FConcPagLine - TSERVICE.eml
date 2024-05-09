@@ -1,0 +1,476 @@
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (104.47.70.102)
+ by mailweb.bolivariano.com (172.17.3.231) with Microsoft SMTP Server (TLS) id
+ 14.3.498.0; Fri, 2 Sep 2022 13:45:30 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=myTq6fC/+hq0Y4kYrWs684VTfvwwtx21geH6SKnjMktJixdjktc9FtXtEAs4j0CJ5zG5KnJpOU9kA6hO249FQYyz+cnF3+HnYlbXDEZ1JnTv6kI9mzhmYd9p1opG2hQt6yGJ5jq0yFuhNmj5b2VsPLrBuvpyUtPkbEIMzL3R7qn0P5CX7B6EbedcpbFyD2kCUUc5IUtI/Jk3w6Besxht2brgXZf7VzuSCekGLo0Yer1DZ9tp66v8mvEdsDuFKwDa9yFCwvNiDpqgREOF71UrRs5oMMoQSHK0e35/35rYUi2gTpJ43+dpuPelxrzE11nGU53IpvQnXZSpuAUQH8vQ7g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=QaZW2fzveMuq+Cx+60fAZ/r9/xmt4uAu0dYqNYWZKmY=;
+ b=HFMTnEB0FT7cdJuxKCD8pQ7pduV6TvRfOdaKpuH8uv8QiAWCTbPnrL535tFfXtLsUu6UiigwjQ04XQpXm/tnBXSfF5DVak/dNZow1EdUrNyXPdwt2YgmoZcOxsatP/PIKj2/r/04OI1hQ3v++yQ+09n96llDXlbdDptF8H5vuZYhYtEZCfpssOH9NiwDLF2dOoBMwkDh6D3M0Y3eoCvPWZQ4BwX8+HxN7hUQ06JKr91o+CDe/Eipo7ICRBfYb4uh6uEQ8kLa89ffQ3sjZz1lP71W71Dcovroc5JOsebsP0SL+Zt8kGNuWN2zCxEY0QnMJUNg/N9ux9TvLnIxzwaNkQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=bolivariano.com; dmarc=pass action=none
+ header.from=bolivariano.com; dkim=pass header.d=bolivariano.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bolivariano.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QaZW2fzveMuq+Cx+60fAZ/r9/xmt4uAu0dYqNYWZKmY=;
+ b=RAonB1H4TMnioEBhWHcuC0t+InvcNKcQvR5epDfeJjvmfUXUuR1oHtgTp3aVPQ6QLcgJ4kvWS8dHYcQTLRJHhlsnAtFswkunRVO5SFm06xnnm5nz7c/Zlkej7XzKFbTRHgpTVWZKibI0u3LUc7uA1ulQS63WgG9UAwd/eJubsZvtlTLaqYy7U7PE4ui8Ariqla9mNmJ4BNbIXTig+BR3o+esLodq182G1vePzr/sH9lfXMOG53tymtmIVvpJjvWKvKDQG91OX3KU79stiMdA5E6G+APs6rXeTf3gIEfgj0GBeDDqyGrFV9o63w8eFrptYpr1bqNB6EQOPBATZKUM3A==
+Received: from DM6PR10MB4122.namprd10.prod.outlook.com (2603:10b6:5:221::19)
+ by DM4PR10MB5965.namprd10.prod.outlook.com (2603:10b6:8:a1::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5588.10; Fri, 2 Sep
+ 2022 18:45:28 +0000
+Received: from DM6PR10MB4122.namprd10.prod.outlook.com
+ ([fe80::2521:d72f:44f9:c75e]) by DM6PR10MB4122.namprd10.prod.outlook.com
+ ([fe80::2521:d72f:44f9:c75e%5]) with mapi id 15.20.5546.022; Fri, 2 Sep 2022
+ 18:45:28 +0000
+From: =?iso-8859-1?Q?Daniel_Pereira_V=E1squez?= <dpereira@bolivariano.com>
+To: "Kevin Bastidas Zavala (Externo)" <kbastidz@bolivariano.com>
+CC: "Jonathan  Guerrero Jijon" <jguerrej@bolivariano.com>, Cuentas
+	<Cuentas@bolivariano.com>
+Subject: RE: Nemonico FConcPagLine - TSERVICE
+Thread-Topic: Nemonico FConcPagLine - TSERVICE
+Thread-Index: AQHYvtjnV0huGQHrkEeQ+G5o59wvxK3MefKw
+Date: Fri, 2 Sep 2022 18:45:28 +0000
+Message-ID: <DM6PR10MB4122C54988CFF718B0700ACACD7A9@DM6PR10MB4122.namprd10.prod.outlook.com>
+References: <631213F6.4040901@bolivariano.com>
+In-Reply-To: <631213F6.4040901@bolivariano.com>
+Accept-Language: es-EC, en-US
+Content-Language: es-ES
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=bolivariano.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 98de684e-ae41-4a3d-1729-08da8d134e43
+x-ms-traffictypediagnostic: DM4PR10MB5965:EE_
+x-ld-processed: 381bee0c-a9ea-4342-81c0-318a50b0845f,ExtAddr
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: T4G2rPSEFIGSAOZ6gMrcdgTeiK0XQtFXrZvIS2XfSm0sVzuRh1++/fco8/dHcxRhDLn20I4kHAgZKzgYO41h8QLsnjkmQQlA9bDYSMgUhOl624pSYXYd9n1sYkzkMuDny4ko9a5IcBlwFR2Dp/y3j2gQycOARgC6OprO1JOIK6/zEfRtOz1Qnb94q/EcplQYh9VXjurSHP79FTppkl6v1WOJ9qIln8ZCcOGGx0ZR32Q6gfY0KBzE16+NNI7ATQ4Ggt9KMjTyQAARi4XlsQiqGoPHfQTzO2yA6yXEFCWsyaAyGalVl1Xz0zK4riG9XqgZ8pYvGFTjLQhNLnUp87y+ajhPrEaDW3EsxCJMrkPcCEBmuaqAjXqMMjV1rHCaTc/D7oSE3Hlh22YasbS3EfbgMnwAH9VicFdcptPRz/MbbDOow4rJ+9iZiKGiZiTyKfv9dVA13OFz4AsVsHbjXaM9aMoMTbMjbMplvydIyoKyEALRM+HFIkwuVgwzkggN8XzC+jLcSAyUoubxjKMyKA+xTH4p2sSWWxQmX+VKvVPWkMM68y12n0TM6PrTLR9XIjU+Cn2iGcrE2bLqUoZRxZdTS7J5qhKOgPReU++xIXZRNqQLllELNTK1AZiAC7Rha3l+b8rmmWRgyzZmfFnWLjJ5gP3h1+mYja/VP5WKtO4mKbI=
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:es;SCL:-1;SRV:;IPV:NLI;SFV:SKI;H:DM6PR10MB4122.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:;DIR:INB;
+Content-Type: multipart/related;
+	boundary="_004_DM6PR10MB4122C54988CFF718B0700ACACD7A9DM6PR10MB4122namp_";
+	type="multipart/alternative"
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR10MB4122.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 98de684e-ae41-4a3d-1729-08da8d134e43
+X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Sep 2022 18:45:28.2792
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 381bee0c-a9ea-4342-81c0-318a50b0845f
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: CfDeURFxNL+onJTxcLPRSbQLgGMwdZIm5jUz4GvNDKF1qG2iDDAHegJIY06zBSl9bDyTF+pjmnkBDM/Hb86uJAcnPbx8cJyH8NP7nNYlMKQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR10MB5965
+X-OrganizationHeadersPreserved: DM4PR10MB5965.namprd10.prod.outlook.com
+Return-Path: dpereira@bolivariano.com
+X-OriginatorOrg: bolivariano.com
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-MS-Exchange-Organization-AuthSource: DM6PR10MB4122.namprd10.prod.outlook.com
+X-MS-Exchange-Organization-SCL: -1
+X-CrossPremisesHeadersPromoted: EX2K10SRV.bolivariano.fin.ec
+X-CrossPremisesHeadersFiltered: EX2K10SRV.bolivariano.fin.ec
+MIME-Version: 1.0
+
+--_004_DM6PR10MB4122C54988CFF718B0700ACACD7A9DM6PR10MB4122namp_
+Content-Type: multipart/alternative;
+	boundary="_000_DM6PR10MB4122C54988CFF718B0700ACACD7A9DM6PR10MB4122namp_"
+
+--_000_DM6PR10MB4122C54988CFF718B0700ACACD7A9DM6PR10MB4122namp_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Buen d=EDa,
+Ejecutable piloto generado, validar que se encuentren los cambios.
+
+Exe --> TSERVI_Piloto.EXE
+Ruta -->  \\desa2srv\cobis\generar\Ejecutable<file://desa2srv/cobis/generar=
+/Ejecutable>
+
+
+Al ser un piloto A&C no es necesario el Changeset de la forma, cuando se ce=
+rtifique el exe en producci=F3n y est=E9 listo para enviarlo a nivel nacion=
+al se subir=E1 la forma al TFS con su respectivo Changeset.
+
+
+Saludos,
+
+Daniel Pereira V.
+Desarrollo - Tecnolog=EDa
+Jun=EDn 200 y Panam=E1. Guayaquil=AD - Ecuador | ( (593) 4 230 5000 - Ext. =
+2202
+[cid:image005.png@01D81F30.9D1D3D20]
+
+De: Kevin Bastidas Zavala (Externo) <kbastidz@bolivariano.com>
+Enviado el: Friday, September 2, 2022 9:32 AM
+Para: Daniel Pereira V=E1squez <dpereira@bolivariano.com>
+CC: Jonathan Guerrero Jijon <jguerrej@bolivariano.com>
+Asunto: Nemonico FConcPagLine - TSERVICE
+
+Estimado,
+Buenos d=EDas
+
+Favor su ayuda generando un ejecutable piloto y el changeset de las siguien=
+te modificacion
+
+Detallo las forma que fue modificada
+
+FConcPagLine Conciliaci=F3n de Pagos en linea  --> RECESABREC-124
+
+Adjunto archivo que fue modificado
+
+
+
+
+Saludos ,
+KB
+
+--_000_DM6PR10MB4122C54988CFF718B0700ACACD7A9DM6PR10MB4122namp_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<!--[if !mso]><style>v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style><![endif]--><style><!--
+/* Font Definitions */
+@font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif;
+	color:black;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:#0563C1;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:#954F72;
+	text-decoration:underline;}
+p.msonormal0, li.msonormal0, div.msonormal0
+	{mso-style-name:msonormal;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif;
+	color:black;}
+span.EstiloCorreo18
+	{mso-style-type:personal-reply;
+	font-family:"Calibri",sans-serif;
+	color:#1F497D;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:70.85pt 85.05pt 70.85pt 85.05pt;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body bgcolor=3D"white" lang=3D"ES-EC" link=3D"#0563C1" vlink=3D"#954F72">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US">Buen d=EDa=
+,<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US">Ejecutable=
+ piloto generado, validar que se encuentren los cambios.<o:p></o:p></span><=
+/p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US"><o:p>&nbsp=
+;</o:p></span></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:11.0pt;font-family:&quot=
+;Calibri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US">Exe</sp=
+an></b><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sans=
+-serif;color:#1F497D;mso-fareast-language:EN-US">
+</span><span style=3D"font-size:11.0pt;font-family:Wingdings;color:#1F497D;=
+mso-fareast-language:EN-US">=E0</span>
+<span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;=
+color:#1F497D;mso-fareast-language:EN-US">
+TSERVI_Piloto.EXE<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:11.0pt;font-family:&quot=
+;Calibri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US">Ruta</s=
+pan></b><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,san=
+s-serif;color:#1F497D;mso-fareast-language:EN-US">
+</span><span style=3D"font-size:11.0pt;font-family:Wingdings;color:#1F497D;=
+mso-fareast-language:EN-US">=E0</span><span style=3D"font-size:11.0pt;font-=
+family:&quot;Calibri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN=
+-US"> &nbsp;<a href=3D"file://desa2srv/cobis/generar/Ejecutable">\\desa2srv=
+\cobis\generar\Ejecutable</a><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US"><o:p>&nbsp=
+;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US"><o:p>&nbsp=
+;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US">Al ser un =
+piloto A&amp;C no es necesario el Changeset de la forma, cuando se certifiq=
+ue el exe en producci=F3n y est=E9 listo para enviarlo
+ a nivel nacional se subir=E1 la forma al TFS con su respectivo Changeset.<=
+o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US"><o:p>&nbsp=
+;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US"><o:p>&nbsp=
+;</o:p></span></p>
+<div>
+<p class=3D"MsoNormal"><span lang=3D"ES-MX" style=3D"font-size:11.0pt;font-=
+family:&quot;Calibri&quot;,sans-serif;color:#1F497D">Saludos,<o:p></o:p></s=
+pan></p>
+<p class=3D"MsoNormal"><span lang=3D"ES-MX" style=3D"font-size:11.0pt;font-=
+family:&quot;Calibri&quot;,sans-serif;color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<p class=3D"MsoNormal"><b><span lang=3D"ES" style=3D"font-family:&quot;Aria=
+l&quot;,sans-serif;color:#0099A8;mso-fareast-language:ES">Daniel Pereira V.=
+<o:p></o:p></span></b></p>
+<p class=3D"MsoNormal"><span lang=3D"ES" style=3D"font-size:10.0pt;font-fam=
+ily:&quot;Arial&quot;,sans-serif;color:#0099A8;mso-fareast-language:ES">Des=
+arrollo - Tecnolog=EDa<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Ar=
+ial&quot;,sans-serif;color:#A6A6A6;mso-fareast-language:ES">Jun=EDn 200 y P=
+anam=E1. Guayaquil=AD &#8211; Ecuador | ( (593) 4 230 5000 - Ext. 2202
+</span><span lang=3D"ES" style=3D"font-size:10.0pt;font-family:&quot;Arial&=
+quot;,sans-serif;color:#1F497D;mso-fareast-language:ES"><o:p></o:p></span><=
+/p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D"><img border=3D"0" width=3D"387" heigh=
+t=3D"62" style=3D"width:4.0312in;height:.6458in" id=3D"Imagen_x0020_1" src=
+=3D"cid:image001.png@01D8BED2.418D52A0" alt=3D"cid:image005.png@01D81F30.9D=
+1D3D20"></span><span lang=3D"ES" style=3D"font-size:11.0pt;font-family:&quo=
+t;Calibri&quot;,sans-serif;color:#1F497D;mso-fareast-language:ES"><o:p></o:=
+p></span></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D;mso-fareast-language:EN-US"><o:p>&nbsp=
+;</o:p></span></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span lang=3D"ES" style=3D"font-size:11.0pt;font-=
+family:&quot;Calibri&quot;,sans-serif;color:windowtext">De:</span></b><span=
+ lang=3D"ES" style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sans=
+-serif;color:windowtext"> Kevin Bastidas Zavala (Externo) &lt;kbastidz@boli=
+variano.com&gt;
+<br>
+<b>Enviado el:</b> Friday, September 2, 2022 9:32 AM<br>
+<b>Para:</b> Daniel Pereira V=E1squez &lt;dpereira@bolivariano.com&gt;<br>
+<b>CC:</b> Jonathan Guerrero Jijon &lt;jguerrej@bolivariano.com&gt;<br>
+<b>Asunto:</b> Nemonico FConcPagLine - TSERVICE<o:p></o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D">Estimado,</span><span style=3D"font-s=
+ize:11.0pt"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D">Buenos d=EDas</span><span style=3D"fo=
+nt-size:11.0pt"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D">&nbsp;</span><span style=3D"font-size=
+:11.0pt"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D">Favor su ayuda generando un ejecutabl=
+e piloto</span><span style=3D"font-size:10.0pt;font-family:&quot;Calibri&qu=
+ot;,sans-serif;color:#1F497D"> y
+</span><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sans=
+-serif;color:#1F497D">el
+</span><span style=3D"font-size:10.0pt;font-family:&quot;Calibri&quot;,sans=
+-serif;color:#1F497D">c</span><span style=3D"font-size:11.0pt;font-family:&=
+quot;Calibri&quot;,sans-serif;color:#1F497D">hangeset</span><span style=3D"=
+font-size:10.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:#1F497D">
+ de las siguiente modificacion</span><span style=3D"font-size:11.0pt"><o:p>=
+</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D">&nbsp;</span><span style=3D"font-size=
+:11.0pt"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:11.0pt;font-family:&quot=
+;Calibri&quot;,sans-serif;color:#1F497D">Detallo las forma que fue modifica=
+da</span></b><span style=3D"font-size:11.0pt"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D">&nbsp;</span><span style=3D"font-size=
+:11.0pt"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D">FConcPagLine Conciliaci=F3n de Pagos =
+en linea&nbsp;
+</span><span style=3D"font-size:11.0pt;font-family:Wingdings;color:#1F497D"=
+>=E0</span><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,=
+sans-serif;color:#1F497D"> RECESABREC-124</span><span style=3D"font-size:11=
+.0pt"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;color:#1F497D"><br>
+Adjunto </span><span style=3D"font-size:10.0pt;font-family:&quot;Calibri&qu=
+ot;,sans-serif;color:#1F497D">archivo que fue modificado<br>
+<br>
+<br>
+<br>
+<br>
+Saludos ,<br>
+KB</span><span style=3D"font-size:11.0pt"><o:p></o:p></span></p>
+</div>
+</div>
+</body>
+</html>
+
+--_000_DM6PR10MB4122C54988CFF718B0700ACACD7A9DM6PR10MB4122namp_--
+
+--_004_DM6PR10MB4122C54988CFF718B0700ACACD7A9DM6PR10MB4122namp_
+Content-Type: image/png; name="image001.png"
+Content-Description: image001.png
+Content-Disposition: inline; filename="image001.png"; size=5994;
+	creation-date="Fri, 02 Sep 2022 18:45:27 GMT";
+	modification-date="Fri, 02 Sep 2022 18:45:27 GMT"
+Content-ID: <image001.png@01D8BED2.418D52A0>
+Content-Transfer-Encoding: base64
+
+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
+AElFTkSuQmCC
+
+--_004_DM6PR10MB4122C54988CFF718B0700ACACD7A9DM6PR10MB4122namp_--

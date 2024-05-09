@@ -1,0 +1,19 @@
+--************************************************************************************
+-- PRO: HP-ACT
+-- DEV: DESA02
+--************************************************************************************
+begin
+	------------------------------------------------------------
+	-- obj: sp_nc_rec_automatica
+	-- CLASIFICA LAS TRANSACCIONES BANCO - EMPRESA
+	------------------------------------------------------------
+	set nocount on
+	exec cob_pagos..pa_pag_a_concilia_broadnet_p
+		@e_fecha              = '09/05/2022'
+		
+	if @@error <> 0
+	begin
+		print 'ERROR EN SP'
+	end	
+end
+go

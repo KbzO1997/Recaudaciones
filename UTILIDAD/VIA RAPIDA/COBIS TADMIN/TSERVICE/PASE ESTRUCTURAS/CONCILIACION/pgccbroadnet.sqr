@@ -1,0 +1,299 @@
+!************************************************************************!
+!*      Archivo:                pgccbroadnet.sqr                        *!
+!*      Base de datos:          cob_pagos                               *!
+!*      Producto:               Cuentas Corrientes                      *!
+!*      Disenado por:           Danny Olaya Soriano                     *!
+!*      Fecha de escritura:     05/06/2019                              *!
+!************************************************************************!
+!*                              IMPORTANTE                              *!
+!*      Este programa es parte de los paquetes bancarios propiedad de   *!
+!*      "BANCO BOLIVARIANO"                                             *!
+!*      Su uso no autorizado queda expresamente prohibido asi como      *!
+!*      cualquier alteracion o agregado hecho por alguno de sus         *!
+!*      usuarios sin el debido consentimiento por escrito de la         *!
+!*      Presidencia Ejecutiva de BANCO BOLIVARIANO.                     *!
+!************************************************************************!
+!*                              PROPOSITO                               *!
+!*      Este programa carga  el archivo de BROADNET y concilia los      *!
+!*      pagos realizados en Banco Bolivariano                           *!
+!************************************************************************!
+!*                              MODIFICACIONES                          *!
+!*      FECHA           AUTOR             RAZON                         *!
+!* 1  06/Mayo/2019     Danny Olaya S.    (Agile) RRCYT - Emision Inicial *!
+!* 2  04/Junio/2019    Danny Olaya S.    RECA-CE-SGC00036170 - AJUSTE PARA LEER ARCHIVO CORRECTAMENTE *!
+!* 3  18/Junio/2019    Danny Olaya S.    (Agile) RECM-3 - Reprocesar los viernes cuando sea lunes *!
+!* 4  24/Junio/2019    Danny Olaya S.    RECA-CE-SGC00036170 - INFORMACION NO SE VISUALIZA CORRECTAMENTE EN TSERVI *!
+!* 5  25/Junio/2019    Danny Olaya S.    RECA-CE-SGC00036170 - AJUSTE ERROR CON LA FECHA DE PROCESO*!
+!* 6  16/Agosto/2019   Danny Olaya S.    RECA-CE-SGC00036342 - AJUSTE ERROR - FECHA PROCESO EN LA CONCILIACION *!
+!* 7  26/Agosto/2019   Danny Olaya S.    (Agile) RECM-19 - AJUSTE ERROR CON LAS FECHAS POST FERIADO Y FIN DE SEMANA *!
+!* 8  13/Febrero/2020  Luis A. Gusñay C. (Agile) RECM-87 - MEJORA PARA EVITAR EL USO DE DOBLE CATALOGO *!
+!* 9  18/Febrero/2020  Luis A. Gusñay C. (Agile) RECM-92 Error en proceso conciliación broadnet *!
+!* 10 25/08/2022  Kevin Bastidas	RECESABREC-124 TSERVI MOVISTAR CANALES DIGITALES *!
+!************************************************************************!
+
+#include "definic.inc"
+
+Begin-Setup
+use cob_pagos
+End-Setup
+
+#include "log.inc"
+#include "ctacte.inc"
+
+Begin-Program
+  do Inicializar_Programa
+  do ParamS(1,$e_fecha_proceso,'','','')
+
+  let $dia = substr($e_fecha_proceso,4,2)
+  let $mes = substr($e_fecha_proceso,1,2)
+  let $anio = substr($e_fecha_proceso,7,4)
+
+begin-select
+ltrim(rtrim(pa_char)) &valor
+	let  $valor = &valor
+from cobis..cl_parametro
+where pa_nemonico = 'ARCBTA'
+and pa_producto = 'CTE'
+end-select
+
+  let $ruta_archivo = '/respaldo/archivos/atm_host/data/'
+  let $name_file = $valor || $anio || $mes || $dia || '.txt'
+  let $i_archivo_origen = $ruta_archivo  || $name_file
+
+  do Main
+  do Finalizar_Programa
+End-Program
+
+
+Begin-Procedure Main
+  do Procesa_Cargar
+  do Crear_Temp
+  do Conciliar
+End-Procedure
+
+
+Begin-Procedure Limpia_tabla
+!Elimina lo cargado según la fecha de proceso
+Begin-Sql
+  delete pag_t_concilia_broadnet
+  where co_fec_cble   = $w_fecha_proceso !REF007
+End-Sql
+End-Procedure
+
+Begin-Procedure Procesa_Cargar
+
+let $flag = 'N'
+let $w_fecha_proceso = $e_fecha_proceso
+
+!REF009 INI
+  do Obtener_Ult_Dia_Laborable
+
+Begin-Select 
+convert(varchar(10),convert(datetime,$w_fecha_ult_laborable),110) &w_fecha_ult_laborable
+	let $w_fecha_ult_laborable = &w_fecha_ult_laborable
+datediff(dd,$w_fecha_ult_laborable,$w_fecha_proceso) &dias_diferencia 
+	let #diff_day = &dias_diferencia 
+End-Select
+
+if #diff_day > 1 
+Begin-Select
+count(1)		&count_concilia
+  let #valor_count_concilia = &count_concilia
+from cob_pagos..pag_t_concilia_broadnet
+where co_fec_cble = $w_fecha_ult_laborable
+and co_resultado = 'OK'
+End-Select
+
+if #valor_count_concilia = 0 
+	let $w_fecha_proceso = $w_fecha_ult_laborable
+end-if
+end-if
+
+do Cargar_Data
+
+End-Procedure
+Begin-Procedure Obtener_Ult_Dia_Laborable
+   execute -XC on-error=Error cob_cuentas..sp_ult_dia_habil_ant
+   @i_fecha = $w_fecha_proceso
+   @i_fch_habil  =  $w_fecha_ult_laborable out
+End-Procedure
+!REF009 FIN
+
+Begin-Procedure Cargar_Data
+!REF007 INI
+show 'FECHA PROCESO DE CARGA: ' $w_fecha_proceso
+
+do Limpia_tabla
+
+!REF007 FIN
+let $dia1 = substr($w_fecha_proceso,4,2)
+let $mes1 = substr($w_fecha_proceso,1,2)
+let $anio1 = substr($w_fecha_proceso,7,4)
+let $name_file1 = $valor || $anio1 || $mes1 ||$dia1|| '.txt'
+let $i_archivo_origen = $ruta_archivo  || $name_file1	
+
+show 'ARCHIVO ORIGEN: ' $i_archivo_origen !REF007
+
+open $i_archivo_origen as 1 for-reading record=87 status=#openfileori
+
+if #openfileori <> 0
+    show ' '
+    show ' ERROR:: Apertura del Archivo: ' $i_archivo_origen
+    do Abortar
+else
+    show ' '
+    show ' CARGANDO DETALLE DEL ARCHIVO PARA CONCILIACION BROADNET........' $i_archivo_origen
+    let #contador = 0
+    let #cont_cab = 0
+    let #flag = 0
+    let #cant_trx = 0
+	let $empresa = ''
+
+    while #flag = 0
+        read 1  into $cadena:87
+        let $tipo_registro = substr($cadena,1,1)
+
+        if $tipo_registro = '1' !LEE CABECERA
+
+            if #cont_cab > 0
+                break
+            end-if
+
+			!*Fecha Archivo
+            let $fech_arch = substr ($cadena,2,8)
+			
+			!*Total de Transacciones
+            let $cant_trx = substr ($cadena,10,10)
+			let #cant_trx = $cant_trx
+		   
+			let #cont_cab = #cont_cab + 1
+
+        else  !LEE DETALLE			
+		
+           !*Fecha Contable
+		   let $fecha_contbl = $w_fecha_proceso !fecha que ejecutan el proceso !ref003
+		   
+		   !*Fecha Transaccion
+           let $fecha_trx = substr ($cadena,2,8)
+		   
+		   !*Hora Transaccion
+           let $hora_trx = substr ($cadena,10,6)
+           
+		   !*Numero referencia
+           let $num_ref = substr ($cadena,16,6)
+		   
+		   !*Número BIN
+           let $num_bin = substr ($cadena,24,6)
+		   let #num_bin = to_number($num_bin)
+		   
+		   !*Numero Autorizacion
+		   
+		   let $num_autoriz = substr($cadena,43,6)
+
+           !* Monto Transaccion
+           let $monto_trx = substr ($cadena,50,12)
+		   let $monto_trx = substr ($monto_trx,1,10) || '.' || substr($monto_trx,11,2)
+		   let #monto_trx = $monto_trx
+
+        end-if
+
+      if #end-file
+         let #flag = 1
+
+         if #contador <> #cant_trx
+            show 'Archivo descuadrado Cant. de Reg en Cabecera ' #cant_trx ' diferente Cant. Reg. detalle ' #contador
+            do Abortar
+         end-if
+
+          break
+      else
+
+      if $tipo_registro =  '2'  !INSERTA TABLA
+	  
+      
+
+			if #num_bin = 827623 !MOVISTAR
+				let $empresa = '103'
+			else 
+				if #num_bin = 827624 !CNT
+					let $empresa = '8456'
+				else
+					
+          if #num_bin = 827688 !TUENTI
+						let $empresa = '8457'
+            else
+            !KBastida Via Rapida 
+            if #num_bin = 827859 !TUENTI  PAQUETE
+                  let $empresa = '19575'
+                else 
+                  if #num_bin = 827828 !MOVISTAR PAQUETE
+                    let $empresa = '19574'
+                  else
+                    let $empresa = '0'
+                  end-if
+
+            end-if
+            !KBastida Via Rapida
+
+              
+					end-if
+
+				end-if
+			
+      end-if			
+	  
+             begin-sql
+             insert into pag_t_concilia_broadnet
+             (co_num_ref   		,co_num_bin, 	co_valor     	,co_fec_cble    ,co_fecha_trx,
+              co_hora_trn     	,co_hora_trn_local, co_canal      	,co_nombre      ,co_celular  ,
+              co_nro_cuenta		,co_tipo_cuenta ,co_fecha_archivo, co_empresa,co_num_autoriz)
+             values
+             ($num_ref       	,#num_bin, 		#monto_trx     	,$fecha_contbl 	,$fecha_trx ,
+              $hora_trx         ,$hora_trx      ,null           ,null          	,null,
+              null           	,null        ,$fech_arch,	$empresa, $num_autoriz)
+             end-sql
+
+         !Contador de Registros
+         let #contador = #contador + 1
+        end-if
+      end-if
+
+   end-while
+
+   show ''
+   let $contador = edit (to_char(#contador),'99999')
+   show 'Se cargaron: ' $contador ' registros de detalle.'
+   show 'CARGA DE ARCHIVO CONCILIA DE BROADNET OK ...'
+
+end-if
+close 1
+End-Procedure
+
+Begin-Procedure Crear_Temp
+!---------------------------------------------*
+!---CREA TABLA CON DATOS DE LA TRAN_SERVICIO--*
+!---------------------------------------------*
+show 'CREANDO TABLA TEMPORAL BROADNET CON MOVIMIENTOS DE TRAN_SERVICIO.....'
+show 'FECHA PROCESO: ' $w_fecha_proceso
+execute -xc on-error=Error pa_pag_i_concilia_broadnet_b
+	@e_fecha = $w_fecha_proceso, !ref003
+	@e_fecha1 = $w_fecha_proceso !ref003
+	if #w_return <> 0
+		do Abortar
+	end-if
+show 'TABLA TEMPORAL CREADA'
+End-Procedure
+
+Begin-Procedure Conciliar
+show 'REALIZANDO CONCILIACION DE BROADNET........'
+execute -xc on-error=Error pa_pag_a_concilia_broadnet_p
+	@e_opcion = 'P',
+	@e_fecha  = $w_fecha_proceso !ref003
+
+show 'CONCILIACION REALIZADA OK'
+End-Procedure
+
+Begin-Procedure Error
+	show $sql-error
+	do Abortar
+End-Procedure
