@@ -1,0 +1,132 @@
+xserver:
+  port: 9091
+  ssl: 
+    enabled: true
+    key-alias: ocpmsbbdevqa
+    key-store: identity.jks
+    key-store-password: desarrollo 
+    key-store-type: JKS
+    enabled-protocols: TLSv1.2
+  security:
+    enable-ssl: true
+    trustStore: otpmsKeyStore.jks
+    trustStorePassword: otpms
+    encrypUsername: frameworkdes.bbframework.com
+    encrypPassword: otpms
+    type: JKS
+  undertow:
+    worker-threads: 10  
+client:
+  ssl:
+    trustStore: otpmsKeyStore.jks
+    type: JKS
+    trustStorePassword: otpms
+  ws:
+    pool-max-total: 30
+    pool-max-idle: 5
+    pool-min-idle: 1
+    pool-min-idle-time: 5000
+    pool-remove-abandoned-timeout: 30
+    address:
+      framework:
+        url: https://frameworkdes.bbframework.com/WSFrameWork/ServicioSeguridadSCL.asmx?wsdl
+        conntimeout: 2000
+        readtimeout: 20000
+        appId: 453
+        appUser: apl_csp
+        prefix: CNB
+        tipo: MS
+      utilitarioms:
+        url: https://utilitarioms-bb-dev-bmovil.apps.ocpmsbbdevqa.bolivariano.fin.ec/BancaMovil/soap/UtilitarioMSNS?wsdl
+        conntimeout: 2000
+        readtimeout: 20000
+      latinia:
+        url: https://avisos24gatewayms-bb-dev-canales.apps.ocpmsbbdevqa.bolivariano.fin.ec/services/Notificaciones/Avisos24GatewayMSNS?wsdl
+        conntimeout: 2000
+        readtimeout: 20000
+      entrustUtil:
+        url: https://entrust-bb-dev-utilitarios.apps.ocpmsbbdevqa.bolivariano.fin.ec/services/EntrustUtil/proxy/EntrustUtilProxyMS?wsdl
+        conntimeout: 2000
+        readtimeout: 20000      
+      bayted:
+        url: https://quickdepdesasrv:3030/ServiceOTP.svc?singlewsdl
+        conntimeout: 2000
+        readtimeout: 20000              
+spring:
+  banner:
+    location: classpath:/banner.txt       
+  sybase:
+    datasource:
+      username:  
+      password: 
+      jdbcUrl: jdbc:sybase:Tds:172.16.23.22:2050             
+      driver-class-name: com.sybase.jdbc4.jdbc.SybDriver
+      connectionProperties: SERVER_INITIATED_TRANSACTIONS=false
+      max-wait: 7000
+      max-active: 30
+      max-idle: 5
+      #min-idle: 1
+      connectionTimeout: 7000
+      maximumPoolSize: 5
+      minimumIdle: 0
+      #initial-size: 1
+      test-on-borrow: true
+      #test-while-idle: true
+      validation-query: "SELECT 1"
+      validation-interval: 30000
+      remove-abandoned: true
+      remove-abandoned-timeout: 50
+      time-between-eviction-runs-millis: 30000
+      min-evictable-idle-time-millis: 50000
+    schemas:
+      cobis: cobis
+      pagos: cob_pagos
+context:
+  initializer:
+    classes: com.bolivariano.CustomContextInitializer
+limites:
+  limitebd: 2000
+  limitews: 3000 
+notificacion:
+  prefix: CNB
+  compania: BOLIVARIANO
+  servicio: OTPIN
+  datoscomunes:
+    canal: CNB
+    asunto: OTP
+  medio:
+    celular: S
+    mail:    S
+  otp:
+    clave:  matricula 
+  cliente:
+    clave:  cliente 
+  bayted:
+    key_proveedor: PAGOPRV
+    key_tercero: PAGTERCER
+mensaje:
+  otpservice:
+    generar:
+      mis_null: Identificación incorrecta
+      medios_null: No tienes %s registrado, Acércate a cualquiera de las oficinas del Banco Bolivariano y actualiza tus datos.
+      otp_null: Fallo en comunicación,intenta más tarde. 
+      notificacion_null: Fallo en comunicación,intenta más tarde.
+      medios_bad: El parametro de envio debe ser A Todos, C Celular, M Correo.
+      ok: Tu código fue enviado al %s registrado.
+    validar:
+      error: Información incorrecta, intenta nuevamente.
+      ok: Transacción exitosa.
+management:
+  server:
+    port: 9091
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: "/"    
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      enabled: true     
+      show-details: always

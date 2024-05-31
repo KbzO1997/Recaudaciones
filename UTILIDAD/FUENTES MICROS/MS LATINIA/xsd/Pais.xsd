@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.bolivariano.com/Pais" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pais="http://www.bolivariano.com/Pais">
+  <xs:element name="pais" type="pais:Pais"/>
+  
+  <xs:complexType name="Estado">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Codigo del estado</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="nombre" type="xs:string" minOccurs="0" maxOccurs="1" default="">
+        <xs:annotation>
+          <xs:documentation>Nombre del estado</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="nemonico" type="xs:string" minOccurs="0" maxOccurs="1" default="">
+        <xs:annotation>
+          <xs:documentation>Nemonico del estado</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="Pais">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Codigo del pais</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="nombre" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Nombre del pais</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="nemonico" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Nemonico del pais</xs:documentation>
+        </xs:annotation>
+      </xs:element>      
+      <xs:element name="estados" minOccurs="0" maxOccurs="1" nillable="false">
+        <xs:annotation>
+          <xs:documentation>Listado de estados</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="estado" type="pais:Estado" minOccurs="0" maxOccurs="unbounded" nillable="false"/>
+            </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

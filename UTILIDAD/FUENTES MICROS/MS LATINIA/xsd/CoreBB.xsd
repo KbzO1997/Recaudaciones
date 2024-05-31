@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.bolivariano.com/CoreBB" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cbb="http://www.bolivariano.com/CoreBB">
+ <xs:element name="CoreBB" type="cbb:CoreBB"/>
+ <xs:complexType name="CoreBB">
+  <xs:sequence>
+   <xs:element name="bandeReEntry" type="xs:string" minOccurs="0" maxOccurs="1">
+    <xs:annotation>
+     <xs:documentation>=t_rty</xs:documentation>
+    </xs:annotation>
+   </xs:element>
+   <xs:element name="codigoTRX" type="xs:int" minOccurs="0" maxOccurs="1">
+    <xs:annotation>
+     <xs:documentation>=t_trn</xs:documentation>
+    </xs:annotation>
+   </xs:element>
+   <xs:element name="estadoBPM" type="xs:string" minOccurs="0" maxOccurs="1"/>
+   <xs:element name="existe" type="xs:string" minOccurs="0" maxOccurs="1"/>
+   <xs:element name="fechaProcesoKernel" type="xs:dateTime" minOccurs="0" maxOccurs="1">
+    <xs:annotation>
+     <xs:documentation>fechaProcesoKernel=sDate=o_fecha_efe</xs:documentation>
+    </xs:annotation>
+   </xs:element>
+   <xs:element name="idBPM" type="xs:int" minOccurs="0" maxOccurs="1"/>
+   <xs:element name="login" type="xs:string" minOccurs="0" maxOccurs="1"/>
+   <xs:element name="modoCorreccion" type="xs:string" minOccurs="0" maxOccurs="1">
+    <xs:annotation>
+     <xs:documentation>=t_corr</xs:documentation>
+    </xs:annotation>
+   </xs:element>
+   <xs:element name="nombFisicoProg" type="xs:string" minOccurs="0" maxOccurs="1"/>
+   <xs:element name="nombreArchivo" type="xs:string" minOccurs="0" maxOccurs="1">
+    <xs:annotation>
+     <xs:documentation>Nombre del archivo a ser generado =t_file</xs:documentation>
+    </xs:annotation>
+   </xs:element>
+   <xs:element name="nomLogicoProg" type="xs:string" minOccurs="0" maxOccurs="1">
+    <xs:annotation>
+     <xs:documentation>=t_from</xs:documentation>
+    </xs:annotation>
+   </xs:element>
+   <xs:element name="numeroSolicitudBPM" type="xs:int" minOccurs="0" maxOccurs="1"/>
+   <xs:element name="oficinaConectada" type="xs:int" minOccurs="0" maxOccurs="1"/>
+   <xs:element name="operacion" type="xs:string" minOccurs="0" maxOccurs="1"/>
+   <xs:element name="origenError" type="xs:string" minOccurs="0" maxOccurs="1">
+    <xs:annotation>
+     <xs:documentation>origenError=s_org_err</xs:documentation>
+    </xs:annotation>
+   </xs:element>
+   <xs:element name="origenTransaccion" type="xs:string" minOccurs="0" maxOccurs="1">
+    <xs:annotation>
+     <xs:documentation>Origen de transaccion local, resubmit, submit =s_org</xs:documentation>
+    </xs:annotation>
+   </xs:element>
+   <xs:element name="reversoTransaccion" type="xs:int" minOccurs="0" maxOccurs="1">
+    <xs:annotation>
+     <xs:documentation>Reverso de transaccion =t_ssn_corr</xs:documentation>
+    </xs:annotation>
+   </xs:element>
+   <xs:element name="rolBPM" type="xs:string" minOccurs="0" maxOccurs="1">
+    <xs:annotation>
+     <xs:documentation>Rol de BPM</xs:documentation>
+    </xs:annotation>
+   </xs:element>
+   <xs:element name="sec" type="xs:string" minOccurs="0" maxOccurs="1"/>
+   <xs:element name="secuencial" type="xs:int" minOccurs="0" maxOccurs="1">
+    <xs:annotation>
+     <xs:documentation>ssn secuencial = i_tsn(IESS) secuencial= o_ssn(IESS)</xs:documentation>
+    </xs:annotation>
+   </xs:element>
+   <xs:element name="secuencialBPM" type="xs:int" minOccurs="0" maxOccurs="1"/>
+   <xs:element name="secuencialRemoto" type="xs:int" minOccurs="0" maxOccurs="1">
+    <xs:annotation>
+     <xs:documentation>Secuencial remoto original corregido =p_rssn_corr</xs:documentation>
+    </xs:annotation>
+   </xs:element>
+   <xs:element name="servidor" type="xs:string" minOccurs="0" maxOccurs="1"/>
+   <xs:element name="servidorLocal" type="xs:string" minOccurs="0" maxOccurs="1"/>
+   <xs:element name="sesion" type="xs:int" minOccurs="0" maxOccurs="1"/>
+   <xs:element name="severidadError" type="xs:int" minOccurs="0" maxOccurs="1">
+    <xs:annotation>
+     <xs:documentation>=s_sev(IESS)</xs:documentation>
+    </xs:annotation>
+   </xs:element>
+   <xs:element name="siguiente" type="xs:int" minOccurs="0" maxOccurs="1"/>
+   <xs:element name="solicitudBPM" type="xs:int" minOccurs="0" maxOccurs="1"/>
+   <xs:element name="transaccionesServRemoto" type="xs:int" minOccurs="0" maxOccurs="1">
+    <xs:annotation>
+     <xs:documentation>Numeo de transacciones server remoto</xs:documentation>
+    </xs:annotation>
+   </xs:element>
+   <xs:element name="transaccionesterminal" type="xs:string" minOccurs="0" maxOccurs="1"/>
+   <xs:element name="transaccionServLocal" type="xs:int" minOccurs="0" maxOccurs="1">
+    <xs:annotation>
+     <xs:documentation>Transaccion Servidor Local = p_lssn</xs:documentation>
+    </xs:annotation>
+   </xs:element>
+  </xs:sequence>
+ </xs:complexType>
+</xs:schema>

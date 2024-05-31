@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.bolivariano.com/Paginacion" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.bolivariano.com/Paginacion">
+	<annotation>
+		<documentation>Entidades de paginacion de consultas</documentation>
+	</annotation>
+	
+	<complexType name="Paginacion">
+		<sequence>
+			<element name="registrosPorPagina" type="int" nillable="false" maxOccurs="1" minOccurs="0" default="10"/>
+			<element name="indiceInicial" type="int" nillable="false" maxOccurs="1" minOccurs="1" default="0"/>
+			<element name="registrosMaximosADevolver" type="int" nillable="false" maxOccurs="1" minOccurs="0" default="3000"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="RespuestaPaginacion">
+		<sequence>
+			<element name="existenMasRegistros" type="boolean" nillable="false" maxOccurs="1" minOccurs="1"/>
+			<element name="siguienteIndice" type="int" nillable="false" maxOccurs="1" minOccurs="1"/>
+			<element name="cantidadTotalRegistros" type="int" nillable="false" maxOccurs="1" minOccurs="1"/>
+		</sequence>
+	</complexType>
+	
+	 <complexType name="RespuestaPaginacion2">
+		<sequence>			
+			<element name="cantidadTotalRegistros" type="int" nillable="false" maxOccurs="1" minOccurs="1"/>
+		</sequence>
+	</complexType>
+</schema>

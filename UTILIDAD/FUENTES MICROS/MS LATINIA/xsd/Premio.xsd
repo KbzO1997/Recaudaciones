@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.bolivariano.com/Premio" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.bolivariano.com/Premio" xmlns:enum="http://www.bolivariano.com/Enumerados">
+ <annotation>
+  <documentation>Definicion de esquema para entidad Premio</documentation>
+ </annotation>
+  <import schemaLocation="Enumerados.xsd" namespace="http://www.bolivariano.com/Enumerados"/>
+ 
+ <complexType name="Premio">
+  <sequence>
+  <element name="idPremio" type="integer" minOccurs="1" maxOccurs="1" nillable="false">
+    <annotation>
+     <documentation>Identificacion de del premio</documentation>
+    </annotation>
+   </element>
+   <element name="descripcion" type="string" minOccurs="0" maxOccurs="1" nillable="false">
+    <annotation>
+     <documentation>Descripcion del premio</documentation>
+    </annotation>
+   </element>
+   <element name="categoria" type="enum:CategoriaPremio" minOccurs="0" maxOccurs="1" nillable="false">
+    <annotation>
+     <documentation>Categoria del premio BEBIDAS_ALCOHOLICAS, TECNOLOGIA, ORDEN_COMPRA</documentation>
+    </annotation>
+   </element>
+   <element name="valorPuntos" type="int" minOccurs="0" maxOccurs="1" nillable="false">
+    <annotation>
+     <documentation>valor de puntos necesarios para canje</documentation>
+    </annotation>
+   </element>
+   <element name="cantidad" type="integer" minOccurs="0" maxOccurs="1" nillable="false">
+    <annotation>
+     <documentation>cantidad de premios</documentation>
+    </annotation>
+   </element>    
+  </sequence>
+ </complexType>
+</schema>

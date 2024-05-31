@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.bolivariano.com/KeyServer" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.bolivariano.com/KeyServer" xmlns:mbl="http://www.bolivariano.com/MensajeBolivariano">
+   <xs:import namespace="http://www.bolivariano.com/MensajeBolivariano" schemaLocation="MensajeBolivariano.xsd"/>
+   <xs:element name="MensajeEntradaEnviarTrama" type="EntradaEnviarTrama"/>
+   <xs:complexType name="EntradaEnviarTrama">
+      <xs:annotation>
+         <xs:documentation>Modelo de Negocio para procesamiento de tramas
+                           keyserver</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="command" type="xs:string" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+               <xs:documentation>tipo de comando a ejecutar</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="panType" type="xs:string" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+               <xs:documentation>tipo de parametro pan</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="format" type="xs:string" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+               <xs:documentation>formato de la trama</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ePin" type="xs:string" minOccurs="0" maxOccurs="1"/>
+         <xs:element name="terminal" type="xs:string" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+               <xs:documentation>codigo del terminal desde donde se envia la transaccion</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="type" type="xs:string" minOccurs="0" maxOccurs="1"/>
+         <xs:element name="offset" type="xs:string" minOccurs="0" maxOccurs="1"/>
+         <xs:element name="pan" type="xs:string" minOccurs="0" maxOccurs="1"/>
+         <xs:element name="padChar" type="xs:string" minOccurs="0" maxOccurs="1"/>
+         <xs:element name="pinLength" type="xs:string" minOccurs="0" maxOccurs="1"/>
+         <xs:element name="masterKey" type="xs:string" minOccurs="0" maxOccurs="1"/>
+         <xs:element name="oldEPin" type="xs:string" minOccurs="0" maxOccurs="1"/>
+         <xs:element name="kekWk" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+   
+   
+   <xs:element name="MensajeSalidaEnviarTrama" type="SalidaEnviarTrama"/>
+   <xs:complexType name="SalidaEnviarTrama">      
+      <xs:sequence>
+         <xs:element name="mensajeSalida" type="mbl:MensajeSalida" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+               <xs:documentation>Mensaje de respuesta</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+        </xs:sequence>
+        </xs:complexType>
+
+    <xs:element name="TramaTCPKeyServerIn" type="xs:string"/>
+
+    <xs:element name="TramaTCPKeyServerOut" type="xs:string"/>
+</xs:schema>

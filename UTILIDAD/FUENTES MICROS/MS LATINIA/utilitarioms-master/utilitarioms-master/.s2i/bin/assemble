@@ -1,0 +1,20 @@
+#!/bin/bash -e
+
+echo "PRE ---------------------------"
+
+
+/usr/local/s2i/assemble
+
+
+echo "POST --------------------------"
+
+if [ "$(ls -A /tmp/src/xml)" ]; then
+   echo "COPYING XML FILES..."
+   cp -r /tmp/src/xml /deployments
+fi
+
+if [ "$(ls -A /tmp/src/html)" ]; then
+   echo "COPYING HTML FILES..."
+   cp -r /tmp/src/html /deployments
+fi
+

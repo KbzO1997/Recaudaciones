@@ -1,0 +1,84 @@
+<soap-env:messages xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+	<message key="async.request">
+		<soap-env:Body>
+			<SOAP-ENV:Envelope
+				xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope"
+				xmlns:e="http://www.technisys.net/cmm/services/errors/v1.0"
+				xmlns:md="http://www.technisys.net/cmm/services/metadata/v2.0"
+				xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+				xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+				<SOAP-ENV:Header>
+					<md:metadata>
+						<serviceId>processFixedTerms</serviceId>
+						<executingOperatorId>${executingOperatorId}</executingOperatorId>
+						<cmmDispatchDate>${fechaEjecucion}</cmmDispatchDate>
+						<customProperties>
+							<isPersonalBank type="java.lang.Boolean">${canalLogo}</isPersonalBank>
+						</customProperties>
+					</md:metadata>
+				</SOAP-ENV:Header>
+				<SOAP-ENV:Body>
+					<srv:processFixedTermsRequest
+						xmlns:srv="http://www.technisys.net/cmm/services/processFixedTerms/rq/v0.0">
+						<electronicsContact name="electronicsContact">
+							<subject>${descripcionTipoOperacion}</subject>
+						</electronicsContact>
+						<transferType name="transferType">
+							<mnemonic>${tipoOperacion}</mnemonic>
+							<shortDesc>${tipoOperacion}</shortDesc>
+						</transferType>
+						<account name="account">
+							<customerOperationPermission>
+								<customerOperation>
+									<type>
+										<mnemonic>${tipoCuentaOrigen}</mnemonic>
+									</type>
+									<operationId>${numeroCuentaOrigen}</operationId>
+								</customerOperation>
+							</customerOperationPermission>
+						</account>
+						<customer name="customer">
+							<identificationType>
+								<mnemonic>${tipoIdentificacion}</mnemonic>
+								<shortDesc>${descripcionTipoIdentificacion}</shortDesc>
+							</identificationType>
+							<identificationNumber>${identificacion}</identificationNumber>
+						</customer>
+						<loan name="loan">
+							<subproduct/>
+							<periodicityPayment>
+								<mnemonic>${periodicidadPlazo}</mnemonic>
+							</periodicityPayment>
+							<fixedTermsType>
+								<mnemonic>${tipoDeposito}</mnemonic>
+							</fixedTermsType>
+							<paymentFrequency/>
+							<automaticRenewal>
+								<mnemonic>${renovacionAutomatica}</mnemonic>
+							</automaticRenewal>
+							<totalTermDays>${plazo}</totalTermDays>
+							<totalOperationAmount>${monto}</totalOperationAmount>
+						</loan>
+						<generic>
+							<numeroCuentaMasked type="java.lang.String">${cuentaEnmascaradaOrigen}</numeroCuentaMasked>
+							<nombreCliente type="java.lang.String">${nombreBeneficiario}</nombreCliente>
+			        <periodicidadDePagoDescripcion type="java.lang.String">${descripcionPeriocidad}</periodicidadDePagoDescripcion>
+							<renovacionAutomaticaDescripcion type="java.lang.String">${descripcionRenovacionAutomatica}</renovacionAutomaticaDescripcion>
+							<formaDePagoMnemonic type="java.lang.String">${formaPago}</formaDePagoMnemonic>
+							<formaDePagoDescripcion type="java.lang.String">${descripcionFormaPago}</formaDePagoDescripcion>
+							<tipoDepositoAPlazoDescripcion type="java.lang.String">${descripcionTipoDeposito}</tipoDepositoAPlazoDescripcion>
+						</generic>
+					</srv:processFixedTermsRequest>
+				</SOAP-ENV:Body>
+			</SOAP-ENV:Envelope>
+		</soap-env:Body>
+	</message>
+	<message key="async.response">
+		<soap-env:Body>
+			<Envelope>
+				<Header/>
+				<Body/>
+			</Envelope>
+		</soap-env:Body>
+	</message>
+</soap-env:messages>

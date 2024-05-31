@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.bolivariano.com/FormaPago" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:forma="http://www.bolivariano.com/FormaPago" xmlns:enum="http://www.bolivariano.com/Enumerados">  
+        
+    <xs:import namespace="http://www.bolivariano.com/Enumerados" schemaLocation="Enumerados.xsd"/>
+  
+  <xs:complexType name="FormaPago">
+    <xs:sequence>
+        <xs:element name="valorPagoTotal" type="xs:double" minOccurs="1" maxOccurs="1" nillable="false"/>
+        <xs:element name="valorComisionTotal" type="xs:double" minOccurs="1" maxOccurs="1" nillable="false"/>
+        <xs:element name="debitoCuenta" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="tipoCuenta" type="enum:TipoCuenta" minOccurs="1" maxOccurs="1" nillable="false"/>                    
+                    <xs:element name="cuenta" type="xs:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xs:element name="subProducto" type="enum:Subproducto" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xs:element name="valor" type="xs:double" minOccurs="1" maxOccurs="1" default="0.00" nillable="false"/>
+                    <xs:element name="valorComision" type="xs:double" minOccurs="1" maxOccurs="1" default="0.00" nillable="false"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+        <xs:element name="efectivo" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="valor" type="xs:double" minOccurs="1" maxOccurs="1" default="0.00" nillable="false"/>
+                    <xs:element name="valorComision" type="xs:double" minOccurs="1" maxOccurs="1" default="0.00" nillable="false"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+        <xs:element name="cheque" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="cantidadCheques" type="xs:integer" minOccurs="1" maxOccurs="1" nillable="false"/>                    
+                    <xs:element name="valor" type="xs:double" minOccurs="1" maxOccurs="1" default="0.00" nillable="false"/>
+                    <xs:element name="valorComision" type="xs:double" minOccurs="1" maxOccurs="1" default="0.00" nillable="false"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+		<xs:element name="tarjeta" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="tipoTarjeta" type="enum:TipoCuenta" minOccurs="1" maxOccurs="1" nillable="false"/>                    
+                    <xs:element name="tarjeta" type="xs:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xs:element name="cvv" type="xs:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+					<xs:element name="fechaExpiracion" type="xs:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xs:element name="valor" type="xs:double" minOccurs="1" maxOccurs="1" default="0.00" nillable="false"/>
+                    <xs:element name="valorComision" type="xs:double" minOccurs="1" maxOccurs="1" default="0.00" nillable="false"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+    </xs:sequence>
+ </xs:complexType>
+</xs:schema>

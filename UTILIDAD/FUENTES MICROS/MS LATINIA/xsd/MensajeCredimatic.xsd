@@ -1,0 +1,679 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.bolivariano.com/MensajeCredimatic" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pref="http://www.bolivariano.com/Paginacion" xmlns:fp="http://www.bolivariano.com/FormaPago" xmlns:cbb="http://www.bolivariano.com/CoreBB" xmlns:mcr="http://www.bolivariano.com/MensajeCredimatic" xmlns:s1="http://www.bolivariano.com/Credimatic" xmlns:mbl="http://www.bolivariano.com/MensajeBolivariano" xmlns:trjc="http://www.bolivariano.com/TarjetaCredito" xmlns:pre="http://www.bolivariano.com/Premio" xmlns:bnc="http://www.bolivariano.com/Banco" xmlns:en="http://www.bolivariano.com/Enumerados">
+	 <xs:import schemaLocation="Banco.xsd" namespace="http://www.bolivariano.com/Banco"/>
+	<xs:import schemaLocation="MensajeBolivariano.xsd" namespace="http://www.bolivariano.com/MensajeBolivariano"/>
+	<xs:import schemaLocation="Credimatic.xsd" namespace="http://www.bolivariano.com/Credimatic"/>
+	<xs:import schemaLocation="TarjetaCredito.xsd" namespace="http://www.bolivariano.com/TarjetaCredito"/>
+	<xs:import schemaLocation="Premio.xsd" namespace="http://www.bolivariano.com/Premio"/>
+	<xs:import schemaLocation="Enumerados.xsd" namespace="http://www.bolivariano.com/Enumerados"/>
+<xs:import schemaLocation="CoreBB.xsd" namespace="http://www.bolivariano.com/CoreBB"/>
+	<xs:import schemaLocation="Paginacion.xsd" namespace="http://www.bolivariano.com/Paginacion"/>
+ <xs:import schemaLocation="FormaPago.xsd" namespace="http://www.bolivariano.com/FormaPago"/>
+
+	<xs:element name="MensajeSalidaReversarTarjetaCredito" type="mcr:MensajeSalidaReversarTarjetaCredito"/>
+
+	<xs:complexType name="MensajeSalidaReversarTarjetaCredito">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeSalida">
+				<xs:sequence>
+					<xs:element name="informacionPagoTarjeta" type="s1:PagoTarjeta" minOccurs="0" maxOccurs="1" nillable="true"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="MensajeSalidaPagarTarjetaCredito" type="mcr:MensajeSalidaPagarTarjetaCredito"/>
+	<xs:complexType name="MensajeSalidaPagarTarjetaCredito">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeSalida">
+				<xs:sequence>
+					<xs:element name="informacionPagoTarjeta" type="s1:PagoTarjeta" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:element name="MensajeSalidaReversarConsumo" type="mcr:MensajeSalidaReversarConsumo"/>
+
+	<xs:complexType name="MensajeSalidaReversarConsumo">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeSalida">
+				<xs:sequence>
+					<xs:element name="informacionPagoTarjeta" type="s1:PagoTarjeta" minOccurs="0" maxOccurs="1" nillable="true"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="MensajeSalidaPagarConsumo" type="mcr:MensajeSalidaPagarConsumo"/>
+	<xs:complexType name="MensajeSalidaPagarConsumo">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeSalida">
+				<xs:sequence>
+					<xs:element name="informacionPagoTarjeta" type="s1:PagoTarjeta" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	
+	<xs:element name="MensajeEntradaPagarTarjetaCredito" type="mcr:MensajeEntradaPagarTarjetaCredito"/>
+	<xs:complexType name="MensajeEntradaPagarTarjetaCredito">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeEntrada">
+				<xs:sequence>
+					<xs:element name="informacionTarjeta" type="s1:PagoTarjeta" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:element name="MensajeEntradaPagarConsumo" type="mcr:MensajeEntradaPagarConsumo"/>
+	<xs:complexType name="MensajeEntradaPagarConsumo">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeEntrada">
+				<xs:sequence>
+					<xs:element name="informacionTarjeta" type="s1:PagoTarjeta" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:element name="MensajeSalidaReversarAvanceEfectivo" type="mcr:MensajeSalidaReversarAvanceEfectivo"/>
+	<xs:complexType name="MensajeSalidaReversarAvanceEfectivo">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeSalida">
+				<xs:sequence>
+					<xs:element name="informacionAvanceEfectivo" type="s1:AvanceEfectivo" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="MensajeEntradaReversarAvanceEfectivo" type="mcr:MensajeEntradaReversarAvanceEfectivo"/>
+	<xs:complexType name="MensajeEntradaReversarAvanceEfectivo">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeEntrada">
+				<xs:sequence>
+					<!--  <xs:element name="informacionPagoTarjeta" type="s1:AvanceEfectivo" minOccurs="0" maxOccurs="1"/>-->
+					<xs:element name="informacionAvanceEfectivo" type="s1:AvanceEfectivo" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="informacionKeyserver" type="s1:KeyServer" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="MensajeSalidaConsultarTarjetaCredito" type="mcr:MensajeSalidaConsultarTarjetaCredito"/>
+	<xs:complexType name="MensajeSalidaConsultarTarjetaCredito">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeSalida">
+				<xs:sequence>
+					<xs:element name="informacionPagoTarjeta" type="s1:PagoTarjeta" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="MensajeEntradaConsultarTarjetaCredito" type="mcr:MensajeEntradaConsultarTarjetaCredito"/>
+	<xs:complexType name="MensajeEntradaConsultarTarjetaCredito">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeEntrada">
+				<xs:sequence>
+					<xs:element name="informacionTarjeta" type="s1:PagoTarjeta" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="MensajeSalidaConsultarMovimientos" type="mcr:MensajeSalidaConsultarMovimientos"/>
+	<xs:complexType name="MensajeSalidaConsultarMovimientos">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeSalida">
+				<xs:sequence>
+					<xs:element name="informacionPagoTarjeta" type="s1:PagoTarjeta" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="detalleMovimientos" type="s1:DetalleMovimientos" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="MensajeEntradaConsultarMovimientos" type="mcr:MensajeEntradaConsultarMovimientos"/>
+	<xs:complexType name="MensajeEntradaConsultarMovimientos">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeEntrada">
+				<xs:sequence>
+					<xs:element name="informacionTarjeta" type="s1:PagoTarjeta" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="tipoOrdenamiento" type="en:TipoOrdenamiento" minOccurs="0" maxOccurs="1" default="DESC">
+						<xs:annotation>
+							<xs:documentation>Tipo Ordenamiento de Movimientos (DESC:Descendente , ASC:Ascendente)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="MensajeSalidaPagarAvanceEfectivo" type="mcr:MensajeSalidaPagarAvanceEfectivo"/>
+	<xs:complexType name="MensajeSalidaPagarAvanceEfectivo">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeSalida">
+				<xs:sequence>
+					<xs:element name="informacionAvanceEfectivo" type="s1:AvanceEfectivo" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="MensajeEntradaReversarTarjetaCredito" type="mcr:MensajeEntradaReversarTarjetaCredito"/>
+	<xs:complexType name="MensajeEntradaReversarTarjetaCredito">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeEntrada">
+				<xs:sequence>
+					<xs:element name="informacionPagoTarjeta" type="s1:PagoTarjeta" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:element name="MensajeEntradaReversarConsumo" type="mcr:MensajeEntradaReversarConsumo"/>
+	<xs:complexType name="MensajeEntradaReversarConsumo">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeEntrada">
+				<xs:sequence>
+					<xs:element name="informacionPagoTarjeta" type="s1:PagoTarjeta" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:element name="MensajeEntradaPagarAvanceEfectivo" type="mcr:MensajeEntradaPagarAvanceEfectivo"/>
+	<xs:complexType name="MensajeEntradaPagarAvanceEfectivo">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeEntrada">
+				<xs:sequence>
+					<!--  <xs:element name="informacionPagoTarjeta" type="s1:AvanceEfectivo" minOccurs="0" maxOccurs="1"/>-->
+					<xs:element name="informacionAvanceEfectivo" type="s1:AvanceEfectivo" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="informacionKeyserver" type="s1:KeyServer" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="MensajeEntradaValidarPin" type="mcr:MensajeEntradaValidarPin"/>
+	<xs:complexType name="MensajeEntradaValidarPin">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeEntrada">
+				<xs:sequence>
+					<xs:element name="informacionTarjeta" type="s1:Credimatic" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="informacionKeyServer" type="s1:KeyServer" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="MensajeSalidaValidarPin" type="mcr:MensajeSalidaValidarPin"/>
+	<xs:complexType name="MensajeSalidaValidarPin">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeSalida">
+				<xs:sequence>
+					<xs:element name="informacionTarjeta" type="s1:Credimatic" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="MensajeEntradaMatricularTarjetaCredito" type="mcr:MensajeEntradaMatricularTarjetaCredito"/>
+	<xs:complexType name="MensajeEntradaMatricularTarjetaCredito">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeEntrada">
+				<xs:sequence>
+					<xs:element name="informacionTarjeta" type="s1:Credimatic" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="MensajeSalidaMatricularTarjetaCredito" type="mcr:MensajeSalidaMatricularTarjetaCredito"/>
+	<xs:complexType name="MensajeSalidaMatricularTarjetaCredito">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeSalida">
+				<xs:sequence>
+					<xs:element name="informacionTarjeta" type="s1:Credimatic" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="MensajeEntradaReceptarNotificacionTarjetaCredito" type="mcr:MensajeEntradaReceptarNotificacionTarjetaCredito"/>
+	<xs:complexType name="MensajeEntradaReceptarNotificacionTarjetaCredito">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeEntrada">
+				<xs:sequence>
+					<xs:element name="informacionTarjeta" type="s1:Credimatic" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="MensajeSalidaReceptarNotificacionTarjetaCredito" type="mcr:MensajeSalidaReceptarNotificacionTarjetaCredito"/>
+	<xs:complexType name="MensajeSalidaReceptarNotificacionTarjetaCredito">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeSalida">
+				<xs:sequence>
+					<xs:element name="informacionTarjeta" type="s1:Credimatic" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+ <!--    validartarjetainteernacional -->
+ <xs:element name="MensajeSalidaValidarTarjetaInternacional" type="mcr:MensajeSalidaValidarTarjetaInternacional"/>
+ <xs:element name="MensajeEntradaValidarTarjetaInternacional" type="mcr:MensajeEntradaValidarTarjetaInternacional"/>
+ 
+	<!-- ejecutarcanjepuntos -->
+	<xs:element name="MensajeSalidaEjecutarCanjePuntos" type="mcr:MensajeSalidaEjecutarCanjePuntos"/>
+	<xs:element name="MensajeEntradaEjecutarCanjePuntos" type="mcr:MensajeEntradaEjecutarCanjePuntos"/>
+
+ <!--    ejecutarpagotarjetacreditointernacional -->
+ <xs:element name="MensajeSalidaEjecutarPagoTarjetaCreditoInternacional" type="mcr:MensajeSalidaEjecutarPagoTarjetaCreditoInternacional"/>
+ <xs:element name="MensajeEntradaEjecutarPagoTarjetaCreditoInternacional" type="mcr:MensajeEntradaEjecutarPagoTarjetaCreditoInternacional"/>
+ 
+ <!--    ejecutarAvanceEfectivo -->
+ <xs:element name="MensajeSalidaEjecutarAvanceEfectivo" type="mcr:MensajeSalidaEjecutarAvanceEfectivo"/>
+ <xs:element name="MensajeEntradaEjecutarAvanceEfectivo" type="mcr:MensajeEntradaEjecutarAvanceEfectivo"/>
+
+ <!-- Rescate SALDOS PROGRAMADOS - Ini -->
+ <xs:element name="MensajeEntradaRescatarSaldoProgramado" type="mcr:MensajeEntradaRescatarSaldoProgramado"/>
+ <xs:element name="MensajeSalidaRescatarSaldoProgramado" type="mcr:MensajeSalidaRescatarSaldoProgramado"/>
+
+ <xs:complexType name="MensajeEntradaRescatarSaldoProgramado">
+  <xs:complexContent>
+   <xs:extension base="mbl:MensajeEntrada">
+    <xs:sequence>
+     <xs:element name="claveUnica" type="xs:string" minOccurs="1" maxOccurs="1"/>
+     <xs:element name="codigoSaldoProgramado" type="xs:string" minOccurs="1" maxOccurs="1"/>
+     <xs:element name="moneda" type="xs:int" minOccurs="1" maxOccurs="1"/>
+     <xs:element name="ubicacion" type="xs:int" minOccurs="1" maxOccurs="1"/>
+     <xs:element name="nombreCuenta" type="xs:string" minOccurs="0" maxOccurs="1"/>
+     <xs:element name="identificacion" type="xs:string" minOccurs="1" maxOccurs="1"/>
+     <xs:element name="formaPago" type="fp:FormaPago" minOccurs="1" maxOccurs="1"/>
+     <xs:element name="CoreBB" type="cbb:CoreBB" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+   </xs:extension>
+  </xs:complexContent>
+ </xs:complexType>
+ 
+ <xs:complexType name="MensajeSalidaRescatarSaldoProgramado">
+  <xs:complexContent>
+   <xs:extension base="mbl:MensajeSalida">
+    <xs:sequence>    
+     <xs:element name="secuencial" type="xs:string" minOccurs="0" maxOccurs="1"/>
+     <xs:element name="hora" type="xs:string" minOccurs="0" maxOccurs="1"/>
+     <xs:element name="ciudad" type="xs:string" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+   </xs:extension>
+  </xs:complexContent>
+ </xs:complexType>
+
+ <xs:element name="MensajeEntradaReversarRescateSaldoProgramado" type="mcr:MensajeEntradaReversarRescateSaldoProgramado"/>
+ <xs:element name="MensajeSalidaReversarRescateSaldoProgramado" type="mcr:MensajeSalidaReversarRescateSaldoProgramado"/>
+ <xs:complexType name="MensajeEntradaReversarRescateSaldoProgramado">
+  <xs:complexContent>
+   <xs:extension base="mbl:MensajeEntrada">
+    <xs:sequence>
+     <xs:element name="claveUnica" type="xs:string" minOccurs="1" maxOccurs="1"/>
+     <xs:element name="codigoSaldoProgramado" type="xs:string" minOccurs="1" maxOccurs="1"/>
+     <xs:element name="moneda" type="xs:int" minOccurs="1" maxOccurs="1"/>
+     <xs:element name="ubicacion" type="xs:int" minOccurs="1" maxOccurs="1"/>
+     <xs:element name="nombreCuenta" type="xs:string" minOccurs="0" maxOccurs="1"/>
+     <xs:element name="identificacion" type="xs:string" minOccurs="1" maxOccurs="1"/>
+     <xs:element name="formaPago" type="fp:FormaPago" minOccurs="1" maxOccurs="1"/>
+     <xs:element name="CoreBB" type="cbb:CoreBB" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+   </xs:extension>
+  </xs:complexContent>
+ </xs:complexType>
+ 
+ <xs:complexType name="MensajeSalidaReversarRescateSaldoProgramado">
+  <xs:complexContent>
+   <xs:extension base="mbl:MensajeSalida">
+    <xs:sequence>    
+     <xs:element name="secuencial" type="xs:string" minOccurs="0" maxOccurs="1"/>
+     <xs:element name="hora" type="xs:string" minOccurs="0" maxOccurs="1"/>
+     <xs:element name="ciudad" type="xs:string" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+   </xs:extension>
+  </xs:complexContent>
+ </xs:complexType>
+<!-- Rescate SALDOS PROGRAMADOS - Fin -->
+<!-- SALDOS PROGRAMADOS -->
+  <xs:element name="MensajeEntradaConsultarSaldosProgramados" type="mcr:MensajeEntradaConsultarSaldosProgramados"/>
+     <xs:element name="MensajeSalidaConsultarSaldosProgramados" type="mcr:MensajeSalidaConsultarSaldosProgramados"/>
+  <xs:element name="MensajeEntradaMovimientosSaldosProgramados" type="mcr:MensajeEntradaMovimientosSaldosProgramados"/>
+     <xs:element name="MensajeSalidaMovimientosSaldosProgramados" type="mcr:MensajeSalidaMovimientosSaldosProgramados"/>
+ 
+   
+  <!-- SALDOS PROGRAMADOS -->
+    <xs:complexType name="MensajeEntradaConsultarSaldosProgramados">
+  <xs:complexContent>
+   <xs:extension base="mbl:MensajeEntrada">
+    <xs:sequence>
+     <xs:element name="informacionTarjeta" type="s1:PagoTarjeta" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+   </xs:extension>
+  </xs:complexContent>
+ </xs:complexType>
+ 
+  <xs:complexType name="MensajeSalidaConsultarSaldosProgramados">
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeSalida">
+            <xs:sequence>
+               <xs:element name="informacionTarjeta" type="s1:PagoTarjeta" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="DetalleSaldosProgramados" type="s1:DetalleSaldosProgramados" minOccurs="0" maxOccurs="unbounded"/>
+               
+
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+ <xs:complexType name="MensajeSalidaMovimientosSaldosProgramados">
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeSalida">
+            <xs:sequence>
+               <xs:element name="informacionTarjeta" type="s1:PagoTarjeta" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="DetalleSaldosProgramados" type="s1:DetalleSaldosProgramados" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+     
+   
+   <xs:complexType name="MensajeEntradaMovimientosSaldosProgramados">
+      <xs:complexContent>
+         <xs:extension base="mbl:MensajeEntrada">
+            <xs:sequence>
+   				<xs:element name="codigoUnicoTarjeta" type="xs:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+               <xs:element name="codigoSaldoProgramado" type="xs:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+               <xs:element name="cuentaTarjeta" type="xs:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+               <xs:element name="paginacion" type="pref:Paginacion" minOccurs="0" maxOccurs="1" nillable="true"/>
+               <xs:element name="secuencialCore" type="xs:int" minOccurs="0" maxOccurs="1" nillable="true"/>
+               <xs:element name="terminal" type="xs:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+               <xs:element name="codigoEmpresa" type="xs:int" minOccurs="0" maxOccurs="1" nillable="true"/>
+               
+          </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+ 
+ 
+
+	<!-- EJECUTAR CANJE PUNTOS -->
+	<xs:complexType name="MensajeEntradaEjecutarCanjePuntos">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeEntrada">
+				<xs:sequence>
+					<xs:element name="informacionTarjeta" type="trjc:TarjetaCredito" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Datos referentes a la tarjeta de credito
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="puntosAcumulados" type="xs:integer" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>cantidad de puntos acumulados en la tarjeta de
+								credito</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="puntosRedimir" type="xs:integer" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>cantidad de de puntos a redimir
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="premios" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>tasa de diferidos</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="premio" minOccurs="0" maxOccurs="unbounded" type="pre:Premio"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="MensajeSalidaEjecutarCanjePuntos">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeSalida">
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="MensajeEntradaProcesarAvanceEfectivo" type="mcr:MensajeEntradaProcesarAvanceEfectivo"/>
+	<xs:complexType name="MensajeEntradaProcesarAvanceEfectivo">
+		<xs:sequence>
+			<xs:element name="canal" type="xs:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+			<xs:element name="codigoTarjeta" type="xs:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+			<xs:element name="tipoCuentaDebito" type="en:TipoCuenta" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="subproducto" type="en:Subproducto" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="cuentaDebito" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="monto" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="modoPago" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="plazo" type="xs:int" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="valorCuota" type="xs:float" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="tasaInteres" type="xs:float" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="MensajeSalidaProcesarAvanceEfectivo" type="mcr:MensajeSalidaProcesarAvanceEfectivo"/>
+	<xs:complexType name="MensajeSalidaProcesarAvanceEfectivo">
+		<xs:sequence>
+			<xs:element name="codigoError" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="codigoErrorRemoto" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="estado" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="mensajeSistema" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="mensajeUsuario" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="fechaProceso" type="xs:date" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="fechaTransaccion" type="xs:dateTime" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="secuencia" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+<!-- VALIDAR TARJETA INTERNACIONAL -->
+ <xs:complexType name="MensajeEntradaValidarTarjetaInternacional">
+  <xs:complexContent>
+   <xs:extension base="mbl:MensajeEntrada">
+    <xs:sequence>
+     <xs:element name="informacionTarjeta" type="trjc:TarjetaCredito" minOccurs="1" maxOccurs="1"/>
+     <xs:element name="banco" type="bnc:Banco" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+   </xs:extension>
+  </xs:complexContent>
+ </xs:complexType>
+ 
+	<!-- EJECUTAR PAGO TARJETA CREDITO INTERNACIONAL -->
+	<xs:complexType name="MensajeEntradaEjecutarPagoTarjetaCreditoInternacional">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeEntrada">
+				<xs:sequence>
+					<xs:element name="tipoIdentificacionCliente" type="en:TipoIdentificacionPersona" minOccurs="1" maxOccurs="1" nillable="false">
+						<xs:annotation>
+							<xs:documentation>tipo de identificacion del cliente
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="identificacionCliente" type="xs:string" minOccurs="1" maxOccurs="1" nillable="false">
+						<xs:annotation>
+							<xs:documentation>identificacion del cliente</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="tipoCuentaDebito" type="en:TipoCuenta" minOccurs="1" maxOccurs="1" nillable="false">
+						<xs:annotation>
+							<xs:documentation>tipo de cuenta de debito</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="cuentaDebito" type="xs:string" minOccurs="1" maxOccurs="1" nillable="false">
+						<xs:annotation>
+							<xs:documentation>numero de cuenta para debito</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="subproducto" type="en:Subproducto" minOccurs="0" maxOccurs="1" nillable="false">
+						<xs:annotation>
+							<xs:documentation>codigo de subproducto</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="codigoBancoBeneficiario" type="xs:string" minOccurs="1" maxOccurs="1" nillable="false">
+						<xs:annotation>
+							<xs:documentation>codigo del banco beneficiario
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="nombreBeneficiario" type="xs:string" minOccurs="0" maxOccurs="1" nillable="false">
+						<xs:annotation>
+							<xs:documentation>nombre del beneficiario</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="valorPago" type="xs:double" minOccurs="1" maxOccurs="1" nillable="false">
+						<xs:annotation>
+							<xs:documentation>valor a pagar</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="codigoTarjeta" type="xs:string" minOccurs="1" maxOccurs="1" nillable="false">
+						<xs:annotation>
+							<xs:documentation>codigo unico de la tarjeta de credito
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="tipoTarjeta" type="xs:string" minOccurs="1" maxOccurs="1" nillable="false">
+						<xs:annotation>
+							<xs:documentation>tipo de tarjeta de credito</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="direccionBeneficiario" type="xs:string" minOccurs="0" maxOccurs="1" nillable="false">
+						<xs:annotation>
+							<xs:documentation>direccion del beneficiario</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="telefonoBeneficiario" type="xs:string" minOccurs="0" maxOccurs="1" nillable="false">
+						<xs:annotation>
+							<xs:documentation>telefono del beneficiario</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	 <xs:complexType name="MensajeSalidaValidarTarjetaInternacional">
+  <xs:complexContent>
+   <xs:extension base="mbl:MensajeSalida">
+    <xs:sequence>
+     <xs:element name="nombreTitular" type="xs:string" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+   </xs:extension>
+  </xs:complexContent>
+ </xs:complexType>
+ 
+	<xs:complexType name="MensajeSalidaEjecutarPagoTarjetaCreditoInternacional">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeSalida"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MensajeSalidaEjecutarPagoTarjetaOtrosBancos">
+		<xs:complexContent>
+			<xs:extension base="mbl:MensajeSalida">
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!--    EJECUTAR AVANCE EFECTIVO    -->
+ <xs:complexType name="MensajeEntradaEjecutarAvanceEfectivo">
+  <xs:complexContent>
+   <xs:extension base="mbl:MensajeEntrada">
+    <xs:sequence>
+     <xs:element name="codigoUnicoTarjeta" type="xs:string" minOccurs="1" maxOccurs="1" nillable="false">
+      <xs:annotation>
+       <xs:documentation>codigo unico de la tarjeta de credito</xs:documentation>
+      </xs:annotation>
+     </xs:element>
+     <xs:element name="codigoSeguridad" type="xs:string" minOccurs="1" maxOccurs="1" nillable="false">
+      <xs:annotation>
+       <xs:documentation>codigo de seguridad encriptado</xs:documentation>
+      </xs:annotation>
+     </xs:element>
+     <xs:element name="fechaCaducidad" type="xs:integer" minOccurs="1" maxOccurs="1" nillable="false">
+      <xs:annotation>
+       <xs:documentation>fecha de caducidad de la tarjeta de credito</xs:documentation>
+      </xs:annotation>
+     </xs:element>
+     <xs:element name="tipoCuentaDebito" minOccurs="1" maxOccurs="1" type="en:TipoCuenta" nillable="false">
+      <xs:annotation>
+       <xs:documentation>tipo de cuenta de debito</xs:documentation>
+      </xs:annotation>
+     </xs:element>
+     <xs:element name="cuentaDebito" minOccurs="1" maxOccurs="1" type="xs:string" nillable="false">
+      <xs:annotation>
+       <xs:documentation>cuenta de debito</xs:documentation>
+      </xs:annotation>
+     </xs:element>
+     <xs:element name="subproducto" minOccurs="0" maxOccurs="1" type="en:Subproducto" nillable="false">
+      <xs:annotation>
+       <xs:documentation>nemonico de subproducto</xs:documentation>
+      </xs:annotation>
+     </xs:element>
+     <xs:element name="monto" minOccurs="1" maxOccurs="1" type="xs:double" nillable="false">
+      <xs:annotation>
+       <xs:documentation>monto del avance</xs:documentation>
+      </xs:annotation>
+     </xs:element>
+     <xs:element name="modoPago" minOccurs="1" maxOccurs="1" type="en:TipoConsumoTarjetaCredito" nillable="false">
+      <xs:annotation>
+       <xs:documentation>modo de pago (DIFERIDO - CORRIENTE)</xs:documentation>
+      </xs:annotation>
+     </xs:element>
+     <xs:element name="plazo" minOccurs="0" maxOccurs="1" type="xs:integer" nillable="false" default="0">
+      <xs:annotation>
+       <xs:documentation>plazo en meses del avance, solo aplica para avances en diferido</xs:documentation>
+      </xs:annotation>
+     </xs:element>
+     <xs:element name="valorCuota" minOccurs="0" maxOccurs="1" type="xs:double" nillable="false" default="0.00">
+      <xs:annotation>
+       <xs:documentation>valor de la cuota, solo aplica para avances en diferido</xs:documentation>
+      </xs:annotation>
+     </xs:element>
+     <xs:element name="tasaInteres" minOccurs="0" maxOccurs="1" type="xs:double" nillable="false" default="0.00">
+      <xs:annotation>
+       <xs:documentation>tasa de interes del avance, solo aplica para avances en diferido</xs:documentation>
+      </xs:annotation>
+     </xs:element>
+    </xs:sequence>
+   </xs:extension>
+  </xs:complexContent>
+ </xs:complexType>
+ <xs:complexType name="MensajeSalidaEjecutarAvanceEfectivo">
+  <xs:complexContent>
+   <xs:extension base="mbl:MensajeSalida"/>
+  </xs:complexContent>
+ </xs:complexType>
+ 
+ <!--vmirandt inicio-->
+ <xs:element name="MensajeEntradaBloquearTarjetaCredito" type="mcr:MensajeEntradaBloquearTarjetaCredito"/>
+   <xs:complexType name="MensajeEntradaBloquearTarjetaCredito">
+      <xs:complexContent>
+          <xs:extension base="mbl:MensajeEntrada">
+                 <xs:sequence>               
+                <xs:element name="informacionTarjeta" type="s1:PagoTarjeta" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="motivoBloqueo" maxOccurs="1" minOccurs="0" type="xs:string"/>
+            </xs:sequence>
+           </xs:extension>  
+     </xs:complexContent>      
+   </xs:complexType>
+   <xs:element name="MensajeSalidaBloquearTarjetaCredito" type="mcr:MensajeSalidaBloquearTarjetaCredito"/>
+   <xs:complexType name="MensajeSalidaBloquearTarjetaCredito">
+   <xs:complexContent>
+    <xs:extension base="mbl:MensajeSalida">
+     <xs:sequence>               
+                <xs:element name="informacionTarjeta" type="s1:PagoTarjeta" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+      </xs:extension>
+   </xs:complexContent>   
+   </xs:complexType> 
+<!--vmirandt fin-->   
+
+	<xs:element name="BankardFault" type="mcr:BankardFault"/>
+	<xs:complexType name="BankardFault">
+		<xs:sequence>
+			<xs:element name="codigo" type="xs:string"/>
+			<xs:element name="nombre" type="xs:string"/>
+			<xs:element name="descripcion" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

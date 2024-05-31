@@ -1,0 +1,91 @@
+<soap-env:messages xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+	<message key="async.request">
+		<soap-env:Body>
+			<SOAP-ENV:Envelope
+				xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope"
+				xmlns:e="http://www.technisys.net/cmm/services/errors/v1.0"
+				xmlns:md="http://www.technisys.net/cmm/services/metadata/v2.0"
+				xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+				xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+				<SOAP-ENV:Header>
+					<md:metadata>
+						<serviceId>processCashAdvance</serviceId>
+						<serviceVersion>0.0</serviceVersion>
+						<executingOperatorId>${executingOperatorId}</executingOperatorId>
+						<cmmDispatchDate>${fechaEjecucion}</cmmDispatchDate>
+						<customProperties>
+							<isPersonalBank type="java.lang.Boolean">${canalLogo}</isPersonalBank>
+						</customProperties>
+					</md:metadata>
+				</SOAP-ENV:Header>
+				<SOAP-ENV:Body>
+					<srv:processCashAdvanceRequest
+						xmlns:srv="http://www.technisys.net/cmm/services/processCashAdvance/rq/v0.0">
+						<creditCard name="creditCard">
+							<creditCardAccount>
+								<account>
+									<customerOperationPermission>
+										<customerOperation>
+											<type>
+												<mnemonic>${descripcionTipoCuenta}</mnemonic>
+											</type>
+											<subproductAccount>
+												<accountType>
+													<mnemonic>${descripcionTipoCuenta}</mnemonic>
+												</accountType>
+											</subproductAccount>
+											<operationId>${numeroCuenta}</operationId>
+										</customerOperation>
+									</customerOperationPermission>
+								</account>
+							</creditCardAccount>
+							<cashAdvance>
+								<interest/>
+								<paymentType>
+									<mnemonic>${tipoAvance}</mnemonic>
+								</paymentType>
+								<monthQuota>
+									<mnemonic>${mesesDiferido}</mnemonic>
+								</monthQuota>
+								<amount>${monto}</amount>
+								<feeValue>${comision}</feeValue>
+							</cashAdvance>
+							<dateTo>${fechaEjecucion}</dateTo>
+						</creditCard>
+						<transferType name="transferType">
+							<mnemonic>AVANCE_EFECTIVO</mnemonic>
+							<longDesc>null:AVANCE_EFECTIVO</longDesc>
+							<shortDesc>AVANCE_EFECTIVO</shortDesc>
+						</transferType>
+						<generic>
+							<numeroCuentaMasked type="java.lang.String">${cuentaEnmascarada}</numeroCuentaMasked>
+							<moneda type="java.lang.String">${moneda}</moneda>
+							<tipoTarjeta type="java.lang.String">${categoriaTarjeta}</tipoTarjeta>
+							<costoTransaccion type="java.lang.Double">${comision}</costoTransaccion>
+							<cardNumber type="java.lang.String">${tarjetaEnmascarada}</cardNumber>
+						</generic>
+					</srv:processCashAdvanceRequest>
+				</SOAP-ENV:Body>
+			</SOAP-ENV:Envelope>
+		</soap-env:Body>
+	</message>
+	<message key="async.response">
+		<soap-env:Body>
+			<Envelope>
+				<Header/>
+				<Body>
+					<processCashAdvanceResponse>
+						<generic>
+							<amountValue type="java.lang.Double">${montoCuota}</amountValue>
+							<feeValue type="java.lang.Double">${montoInteres}</feeValue>
+							<amount type="java.lang.Double">${montoTotal}</amount>
+						</generic>
+						<transaction name="transaction">
+							<sequentialTransaction>${referencia}</sequentialTransaction>
+						</transaction>
+					</processCashAdvanceResponse>
+				</Body>
+			</Envelope>
+		</soap-env:Body>
+	</message>
+</soap-env:messages>

@@ -1,0 +1,51 @@
+<soap-env:messages
+    xmlns:xsd1="http://www.technisys.net/cmm/ora/commons/JMSServicesProcessTypes"
+    xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+    <message key="async.request">
+        <soap-env:Body>
+            <SOAP-ENV:Envelope
+                xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope"
+                xmlns:e="http://www.technisys.net/cmm/services/errors/v1.0"
+                xmlns:md="http://www.technisys.net/cmm/services/metadata/v2.0"
+                xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+                xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+                <SOAP-ENV:Header>
+                    <md:metadata>
+                        <serviceId>processTicketOnboarding</serviceId>
+                        <executingOperatorId>${executingOperatorId}</executingOperatorId>
+                        <cmmDispatchDate>${fechaEjecucion}</cmmDispatchDate>
+                        <customProperties>
+                            <isPersonalBank type="java.lang.Boolean">${canalLogo}</isPersonalBank>
+                        </customProperties>
+                    </md:metadata>
+                </SOAP-ENV:Header>
+                <SOAP-ENV:Body>
+                    <srv:processTicketOnboardingRequest
+                        xmlns:srv="http://www.technisys.net/cmm/services/processTicketOnboarding/rq/v0.0">
+                        <transferType name="transferType">
+                            <mnemonic>${tipoOperacion}</mnemonic>
+                            <shortDesc>${descripcionTipoOperacion}</shortDesc>
+                        </transferType>
+                        <generic>
+                            <numeroCertificado type="java.lang.String">${numeroCertificado}</numeroCertificado>
+                            <cargoServicioFinanciero type="java.math.BigDecimal">${cargoServicioFinanciero}</cargoServicioFinanciero>
+                            <tipoCertificado type="java.lang.String">${tipoCertificado}</tipoCertificado>
+                            <formaPago type="java.lang.String">${formaPago}</formaPago>
+                            <fechaHora type="java.lang.String">${fechaHora}</fechaHora>
+                            <esTarjeta type="java.lang.String">${esTarjeta}</esTarjeta>
+                            <referencia type="java.lang.String">${referencia}</referencia>
+                         </generic>
+                    </srv:processTicketOnboardingRequest>
+                </SOAP-ENV:Body>
+            </SOAP-ENV:Envelope>
+        </soap-env:Body>
+    </message>
+    <message key="async.response">
+        <soap-env:Body>
+            <Envelope>
+                <Header/>
+                <Body/>
+            </Envelope>
+        </soap-env:Body>
+    </message>
+</soap-env:messages>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes id="routes-a286165c-6264-490a-84cf-3d68767067f3" xmlns="http://camel.apache.org/schema/spring">
+    <route id="_route1">
+        <from id="_from1" uri="cxf:bean:endpointSOAP"/>
+        <to id="_to1" uri="direct:logic"/>
+    </route>
+    <route id="_route2">
+        <from id="_from2" uri="cxf:bean:endpointSOAPSecure"/>
+        <to id="_to2" uri="direct:logic"/>
+    </route>
+    <route id="_route3">
+        <from id="_from3" uri="direct:logic"/>
+        <to id="_to3" uri="log:input"/>
+        <setHeader headerName="soapOperation" id="_setHeader1">
+            <simple>${in.headers.CamelCxfMessage[javax.xml.ws.wsdl.operation].localPart}</simple>
+        </setHeader>
+        <unmarshal id="_unmarshal1">
+            <jaxb
+                contextPath="com.bolivariano.bancamovil.mensajesutilitarioms.v1"
+                encoding="utf-8" prettyPrint="true"/>
+        </unmarshal>
+        <choice id="_choice1">
+            <when id="_when1">
+                <simple>${in.headers.soapOperation} == 'validarCupo'</simple>
+                <choice id="_choice2">
+                    <when id="_when2">
+                        <simple>${body.migrado}</simple>
+                        <choice id="_choice2">
+                            <when id="_when2">
+                                <simple>${body.tipoOperacion} == 'VALIDAR'</simple>
+                                <to id="_to4" uri="bean:cupoCyberBank?method=validar"/>
+                            </when>
+                            <otherwise id="_otherwise2">
+                                <to id="_to5" uri="bean:cupoCyberBank?method=actualizar"/>
+                            </otherwise>
+                        </choice>
+                    </when>
+                    <otherwise id="_otherwise1">
+                        <choice id="_choice2">
+                            <when id="_when2">
+                                <simple>${body.tipoCupo} == 'NORMAL'</simple>
+                                <choice id="_choice2">
+                                    <when id="_when2">
+                                    <simple>${body.tipoOperacion} == 'VALIDAR'</simple>
+                                    <to id="_to4" uri="bean:cupoNormal?method=validar"/>
+                                    </when>
+                                    <otherwise id="_otherwise2">
+                                    <to id="_to5" uri="bean:cupoNormal?method=actualizar"/>
+                                    </otherwise>
+                                </choice>
+                            </when>
+                            <otherwise id="_otherwise3">
+                                <choice id="_choice2">
+                                    <when id="_when2">
+                                    <simple>${body.tipoOperacion} == 'VALIDAR'</simple>
+                                    <to id="_to6" uri="bean:cupoPersonalizado?method=validar"/>
+                                    </when>
+                                    <otherwise id="_otherwise4">
+                                    <to id="_to7" uri="bean:cupoPersonalizado?method=actualizar"/>
+                                    </otherwise>
+                                </choice>
+                            </otherwise>
+                        </choice>
+                    </otherwise>
+                </choice>
+            </when>
+            <when id="_when2">
+                <simple>${in.headers.soapOperation} == 'registrarComprobante'</simple>
+                <choice id="_choice1">
+                    <when id="_when3">
+                        <simple>${body.migrado}</simple>
+                        <to id="_to4" uri="bean:comprobanteCyberBank?method=registrar"/>
+                    </when>
+                    <otherwise id="_otherwise1">
+                        <to id="_to5" uri="bean:comprobante24Online?method=registrar"/>
+                    </otherwise>
+                </choice>
+            </when>
+            <when id="_when3">
+                <simple>${in.headers.soapOperation} == 'enviarNotificacion'</simple>
+                <to id="_to6" uri="bean:conectorLatinia?method=enviarNotificacion"/>
+            </when>
+            <when id="_when4">
+		<simple>${in.headers.soapOperation} == 'consultarParametroCore'</simple>
+		<to id="_to8" uri="bean:consultarParametroCoreService?method=consultarParametroCore"/>
+            </when>
+        </choice>
+        <to id="_to31" uri="bean:homologarMensaje"/>
+        <marshal id="_marshal1">
+            <jaxb
+                contextPath="com.bolivariano.bancamovil.mensajesutilitarioms.v1" encoding="utf-8"/>
+        </marshal>
+        <to id="_to3" uri="log:output"/>
+        <convertBodyTo id="_convertBodyTo1" type="javax.xml.transform.Source"/>
+        <removeHeaders id="_removeHeaders1" pattern="*"/>
+    </route>
+</routes>

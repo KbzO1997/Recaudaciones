@@ -1,0 +1,26 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:e="http://www.technisys.net/cmm/services/errors/v1.0" xmlns:md="http://www.technisys.net/cmm/services/metadata/v2.0" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+  <SOAP-ENV:Header>
+    <md:metadata>
+      <serviceId>massiveSelectInstitution</serviceId>
+      <serviceVersion>0.0</serviceVersion>
+      <executingChannel>
+        <mnemonic>BO</mnemonic>
+      </executingChannel>
+      <executingOperatorId>uriTech=OPERADOR_BANCO@1008</executingOperatorId>
+      <featureId>ROL@16</featureId>
+      <locale>en</locale>
+      <customProperties/>
+    </md:metadata>
+  </SOAP-ENV:Header>
+  <SOAP-ENV:Body>
+    <srv:massiveSelectInstitutionRequest xmlns:srv="http://www.technisys.net/cmm/services/massiveSelectInstitution/rq/v0.0">
+      <institution name="institution">
+        <customer>
+          <firstName1/>
+          <identificationNumber>${identificationNumber}</identificationNumber>
+        </customer>
+        <institutionCode/>
+      </institution>
+     </srv:massiveSelectInstitutionRequest>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

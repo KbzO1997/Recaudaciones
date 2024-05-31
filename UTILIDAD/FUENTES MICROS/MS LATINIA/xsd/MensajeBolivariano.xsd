@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.bolivariano.com/MensajeBolivariano" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mbl="http://www.bolivariano.com/MensajeBolivariano">
+	<xs:element name="MensajeSalida" type="mbl:MensajeSalida"/>
+	<xs:complexType name="MensajeSalida">
+		<xs:annotation>
+			<xs:documentation>mensaje de salida generico, contiene atributos comunes para todo
+				mensajes.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="codigoError" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="codigoErrorRemoto" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="estado" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="mensajeSistema" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="mensajeUsuario" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>o_msjerror</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="operacion" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="secuencialBPM" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>o_secbpm</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="MensajeEntrada" type="mbl:MensajeEntrada"/>
+	<xs:complexType name="MensajeEntrada">
+		<xs:annotation>
+			<xs:documentation>mensaje de entrada generico, contiene atributos comunes para todo
+				mensajes.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="archivo" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="canal" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="depuracion" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="fecha" type="xs:dateTime" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="oficina" type="xs:int" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="proceso" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="terminal" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="transaccion" type="xs:int" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="usuario" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+       <xs:element name="MensajeFault" type="mbl:MensajeFault"/>
+           <xs:complexType name="MensajeFault">
+               <xs:sequence>
+                   <xs:element name="codigo" type="xs:string"/>
+                   <xs:element name="nombre" type="xs:string"/>
+                   <xs:element name="descripcion" type="xs:string"/>
+               </xs:sequence>
+           </xs:complexType>
+</xs:schema>

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="Credimatic" targetNamespace="http://www.bolivariano.com/ws/Credimatic" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:mc="http://www.bolivariano.com/MensajeCredimatic" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.bolivariano.com/ws/Credimatic" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <plnk:partnerLinkType name="Credimatic">
+    <plnk:role name="Credimatic" portType="tns:Credimatic"/>
+  </plnk:partnerLinkType>
+  <wsdl:types>
+    <xs:schema>
+      <xs:import namespace="http://www.bolivariano.com/MensajeCredimatic" schemaLocation="xsd/MensajeCredimatic.xsd"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="MensajeEntradaReversarTarjetaCredito">
+    <wsdl:part name="parametros" element="mc:MensajeEntradaReversarTarjetaCredito"/>
+  </wsdl:message>
+  <wsdl:message name="MensajeEntradaReversarConsumo">
+    <wsdl:part name="parametros" element="mc:MensajeEntradaReversarConsumo"/>
+  </wsdl:message>
+  <wsdl:message name="MensajeEntradaConsultarTarjetaCredito">
+    <wsdl:part name="parametros" element="mc:MensajeEntradaConsultarTarjetaCredito"/>
+  </wsdl:message>
+  <wsdl:message name="MensajeEntradaConsultarSaldosProgramados">
+    <wsdl:part name="parametros" element="mc:MensajeEntradaConsultarSaldosProgramados"/>
+  </wsdl:message>
+  <wsdl:message name="MensajeEntradaMovimientosSaldosProgramados">
+    <wsdl:part name="parametros" element="mc:MensajeEntradaMovimientosSaldosProgramados"/>
+  </wsdl:message>
+  <wsdl:message name="MensajeSalidaMovimientosSaldosProgramados">
+    <wsdl:part name="parametros" element="mc:MensajeSalidaMovimientosSaldosProgramados"/>
+  </wsdl:message>
+  <wsdl:message name="MensajeSalidaConsultarSaldosProgramados">
+    <wsdl:part name="parametros" element="mc:MensajeSalidaConsultarSaldosProgramados"/>
+  </wsdl:message>
+  <wsdl:message name="MensajeEntradaConsultarMovimientos">
+    <wsdl:part name="parametros" element="mc:MensajeEntradaConsultarMovimientos"/>
+  </wsdl:message>
+  <wsdl:message name="MensajeEntradaPagarTarjetaCredito">
+    <wsdl:part name="parametros" element="mc:MensajeEntradaPagarTarjetaCredito"/>
+  </wsdl:message>
+  <wsdl:message name="MensajeEntradaPagarConsumo">
+    <wsdl:part name="parametros" element="mc:MensajeEntradaPagarConsumo"/>
+  </wsdl:message>
+  <wsdl:message name="MensajeSalidaReversarTarjetaCredito">
+    <wsdl:part name="parametros" element="mc:MensajeSalidaReversarTarjetaCredito"/>
+  </wsdl:message>
+  <wsdl:message name="MensajeSalidaReversarConsumo">
+    <wsdl:part name="parametros" element="mc:MensajeSalidaReversarConsumo"/>
+  </wsdl:message>
+  <wsdl:message name="MensajeSalidaConsultarTarjetaCredito">
+    <wsdl:part name="parametros" element="mc:MensajeSalidaConsultarTarjetaCredito"/>
+  </wsdl:message>
+  <wsdl:message name="MensajeSalidaConsultarMovimientos">
+    <wsdl:part name="parametros" element="mc:MensajeSalidaConsultarMovimientos"/>
+  </wsdl:message>
+  <wsdl:message name="MensajeSalidaPagarTarjetaCredito">
+    <wsdl:part name="parametros" element="mc:MensajeSalidaPagarTarjetaCredito"/>
+  </wsdl:message>
+  <wsdl:message name="MensajeSalidaPagarConsumo">
+    <wsdl:part name="parametros" element="mc:MensajeSalidaPagarConsumo"/>
+  </wsdl:message>
+  <wsdl:message name="BankardFault">
+    <wsdl:part name="BankardFault" element="mc:BankardFault"/>
+  </wsdl:message>
+  <wsdl:message name="MensajeEntradaValidarPin">
+    <wsdl:part name="paramteros" element="mc:MensajeEntradaValidarPin"/>
+  </wsdl:message>
+  <wsdl:message name="MensajeSalidaValidarPin">
+    <wsdl:part name="parametros" element="mc:MensajeSalidaValidarPin"/>
+  </wsdl:message>
+  <wsdl:message name="MensajeEntradaMatricularTarjetaCredito">
+    <wsdl:part name="parametros" element="mc:MensajeEntradaMatricularTarjetaCredito"/>
+  </wsdl:message>
+  <wsdl:message name="MensajeSalidaMatricularTarjetaCredito">
+    <wsdl:part name="parametros" element="mc:MensajeSalidaMatricularTarjetaCredito"/>
+  </wsdl:message>
+  <wsdl:portType name="Credimatic">
+    <wsdl:operation name="consultarMovimientos">
+      <wsdl:input name="MensajeEntradaConsultarMovimientos" message="tns:MensajeEntradaConsultarMovimientos"/>
+      <wsdl:output name="MensajeSalidaConsultarMovimientos" message="tns:MensajeSalidaConsultarMovimientos"/>
+      <wsdl:fault name="ConsultarMovimientosFault" message="tns:BankardFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="consultarTarjetaCredito">
+      <wsdl:input name="MensajeEntradaConsultarTarjetaCredito" message="tns:MensajeEntradaConsultarTarjetaCredito"/>
+      <wsdl:output name="MensajeSalidaConsultarTarjetaCredito" message="tns:MensajeSalidaConsultarTarjetaCredito"/>
+      <wsdl:fault name="ConsultarFault" message="tns:BankardFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="consultarSaldosProgramados">
+      <wsdl:input name="MensajeEntradaConsultarSaldosProgramados" message="tns:MensajeEntradaConsultarSaldosProgramados"/>
+      <wsdl:output name="MensajeSalidaConsultarSaldosProgramados" message="tns:MensajeSalidaConsultarSaldosProgramados"/>
+      <wsdl:fault name="ConsultarFault" message="tns:BankardFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="consultarMovimientosSaldosProgramados">
+      <wsdl:input name="MensajeEntradaMovimientosSaldosProgramados" message="tns:MensajeEntradaMovimientosSaldosProgramados"/>
+      <wsdl:output name="MensajeSalidaMovimientosSaldosProgramados" message="tns:MensajeSalidaMovimientosSaldosProgramados"/>
+      <wsdl:fault name="ConsultarMovimientosFault" message="tns:BankardFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="pagarTarjetaCredito">
+      <wsdl:input name="mensajeEntradaPagarTarjetaCredito" message="tns:MensajeEntradaPagarTarjetaCredito"/>
+      <wsdl:output name="mensajeSalidaPagarTarjetaCredito" message="tns:MensajeSalidaPagarTarjetaCredito"/>
+      <wsdl:fault name="PagarFault" message="tns:BankardFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="reversarTarjetaCredito">
+      <wsdl:input name="mensajeEntradaReversarTarjetaCredito" message="tns:MensajeEntradaReversarTarjetaCredito"/>
+      <wsdl:output name="mensajeSalidaReversarTarjetaCredito" message="tns:MensajeSalidaReversarTarjetaCredito"/>
+      <wsdl:fault name="ReversarFault" message="tns:BankardFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="validarPin">
+      <wsdl:input message="tns:MensajeEntradaValidarPin"/>
+      <wsdl:output message="tns:MensajeSalidaValidarPin"/>
+      <wsdl:fault name="ValidarPinFault" message="tns:BankardFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="matricularTarjetaCredito">
+      <wsdl:input message="tns:MensajeEntradaMatricularTarjetaCredito"/>
+      <wsdl:output message="tns:MensajeSalidaMatricularTarjetaCredito"/>
+      <wsdl:fault name="MatricularFault" message="tns:BankardFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="pagarConsumo">
+      <wsdl:input name="mensajeEntradaPagarConsumo" message="tns:MensajeEntradaPagarConsumo"/>
+      <wsdl:output name="mensajeSalidaPagarConsumo" message="tns:MensajeSalidaPagarConsumo"/>
+      <wsdl:fault name="PagarFault" message="tns:BankardFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="reversarConsumo">
+      <wsdl:input name="mensajeEntradaReversarConsumo" message="tns:MensajeEntradaReversarConsumo"/>
+      <wsdl:output name="mensajeSalidaReversarConsumo" message="tns:MensajeSalidaReversarConsumo"/>
+      <wsdl:fault name="ReversarFault" message="tns:BankardFault"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CredimaticSOAP12Binding" type="tns:Credimatic">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="consultarMovimientos">
+      <soap12:operation style="document" soapAction="http://www.bolivariano.com/ws/Credimatic/consultarMovimientos"/>
+      <wsdl:input>
+        <soap12:body use="literal" parts="parametros"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" parts="parametros"/>
+      </wsdl:output>
+      <wsdl:fault name="ConsultarMovimientosFault">
+        <soap12:fault name="ConsultarMovimientosFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="consultarTarjetaCredito">
+      <soap12:operation style="document" soapAction="http://www.bolivariano.com/ws/Credimatic/consultarTarjetaCredito"/>
+      <wsdl:input>
+        <soap12:body use="literal" parts="parametros"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" parts="parametros"/>
+      </wsdl:output>
+      <wsdl:fault name="ConsultarFault">
+        <soap12:fault name="ConsultarFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="consultarSaldosProgramados">
+      <soap12:operation style="document" soapAction="http://www.bolivariano.com/ws/Credimatic/consultarSaldosProgramados"/>
+      <wsdl:input>
+        <soap12:body use="literal" parts="parametros"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" parts="parametros"/>
+      </wsdl:output>
+      <wsdl:fault name="ConsultarFault">
+        <soap12:fault name="ConsultarFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="consultarMovimientosSaldosProgramados">
+      <soap12:operation style="document" soapAction="http://www.bolivariano.com/ws/Credimatic/consultarMovimientosSaldosProgramados"/>
+      <wsdl:input>
+        <soap12:body use="literal" parts="parametros"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" parts="parametros"/>
+      </wsdl:output>
+      <wsdl:fault name="ConsultarMovimientosFault">
+        <soap12:fault name="ConsultarMovimientosFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="pagarTarjetaCredito">
+      <soap12:operation style="document" soapAction="http://www.bolivariano.com/ws/Credimatic/pagarTarjetaCredito"/>
+      <wsdl:input>
+        <soap12:body use="literal" parts="parametros"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" parts="parametros"/>
+      </wsdl:output>
+      <wsdl:fault name="PagarFault">
+        <soap12:fault name="PagarFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="reversarTarjetaCredito">
+      <soap12:operation style="document" soapAction="http://www.bolivariano.com/ws/Credimatic/reversarTarjetaCredito"/>
+      <wsdl:input>
+        <soap12:body use="literal" parts="parametros"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" parts="parametros"/>
+      </wsdl:output>
+      <wsdl:fault name="ReversarFault">
+        <soap12:fault name="ReversarFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="validarPin">
+      <soap12:operation style="document" soapAction="http://www.bolivariano.com/ws/Credimatic/validarPin"/>
+      <wsdl:input>
+        <soap12:body use="literal" parts="paramteros"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" parts="parametros"/>
+      </wsdl:output>
+      <wsdl:fault name="ValidarPinFault">
+        <soap12:fault name="ValidarPinFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="matricularTarjetaCredito">
+      <soap12:operation style="document" soapAction="http://www.bolivariano.com/ws/Credimatic/matricularTarjetaCredito"/>
+      <wsdl:input>
+        <soap12:body use="literal" parts="parametros"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" parts="parametros"/>
+      </wsdl:output>
+      <wsdl:fault name="MatricularFault">
+        <soap12:fault name="MatricularFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="pagarConsumo">
+      <soap12:operation style="document" soapAction="http://www.bolivariano.com/ws/Credimatic/pagarConsumo"/>
+      <wsdl:input>
+        <soap12:body use="literal" parts="parametros"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" parts="parametros"/>
+      </wsdl:output>
+      <wsdl:fault name="PagarFault">
+        <soap12:fault name="PagarFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="reversarConsumo">
+      <soap12:operation style="document" soapAction="http://www.bolivariano.com/ws/Credimatic/reversarConsumo"/>
+      <wsdl:input>
+        <soap12:body use="literal" parts="parametros"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" parts="parametros"/>
+      </wsdl:output>
+      <wsdl:fault name="ReversarFault">
+        <soap12:fault name="ReversarFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CredimaticSOAP12BindingQSService">
+    <wsdl:documentation>OSB Service</wsdl:documentation>
+    <wsdl:port name="CredimaticSOAP12BindingQSPort" binding="tns:CredimaticSOAP12Binding">
+      <soap12:address location="https://osbvhd1:8252/Recaudaciones/proxy/TarjetaCredito"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

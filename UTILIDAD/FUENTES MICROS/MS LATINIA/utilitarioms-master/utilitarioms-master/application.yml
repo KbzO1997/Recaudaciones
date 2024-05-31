@@ -1,0 +1,151 @@
+server:
+  undertow:
+    worker-threads: 4
+  port: 8002
+  ssl:
+    key-alias: msawsd1
+    key-store: ../PrivateKeyStore.jks
+    key-store-password: desarrollo
+    key-store-type: JKS
+  security:
+    encrypUsername: secureservice
+camel:
+  springboot:
+    xml-rests: false
+    xml-routes: false
+orchestrator:
+  context-root: /BancaMovil
+  camel:
+    tracing: true
+    route: "classpath:routes.xml"
+    policy: oswm-wss11-policy.xml
+  endpoint:
+    wsdl: "classpath:wsdl/UtilitarioMS.wsdl"
+    name: "{http://www.bolivariano.com/BancaMovil/ws/UtilitarioMS/v1.0}UtilitarioPort"
+    service: "{http://www.bolivariano.com/BancaMovil/ws/UtilitarioMS/v1.0}UtilitarioMS"
+    address: /UtilitarioMS
+    address-no-secure: /UtilitarioMSNS
+
+spring:
+  storebb:
+    datasource:
+      username:
+      password:
+      url: jdbc:sqlserver://172.16.30.6:2668
+      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+      max-wait: 7000
+      max-active: 50
+      max-idle: 5
+      min-idle: 1
+      initial-size: 1
+      test-on-borrow: true
+      test-while-idle: true
+      validation-query: "SELECT 1"
+      validation-interval: 30000
+      remove-abandoned: true
+      remove-abandoned-timeout: 50
+      time-between-eviction-runs-millis: 30000
+      min-evictable-idle-time-millis: 50000
+  sybase:
+    datasource:
+      username: operadorBmo
+      password: Passw0rd*123
+      url: jdbc:sybase:Tds:172.16.23.22:2050
+      driver-class-name: com.sybase.jdbc4.jdbc.SybDriver
+      connectionProperties: SERVER_INITIATED_TRANSACTIONS=false
+      max-wait: 7000
+      max-active: 10
+      max-idle: 5
+      min-idle: 1
+      initial-size: 1
+      test-on-borrow: true
+      test-while-idle: true
+      validation-query: "SELECT 1"
+      validation-interval: 30000
+      remove-abandoned: true
+      remove-abandoned-timeout: 50
+      time-between-eviction-runs-millis: 30000
+      min-evictable-idle-time-millis: 50000
+client:
+  ssl:
+    trustStore: ../PrivateKeyStore.jks
+    trustStorePassword: desarrollo
+  service:
+    latinia:
+        username: apl_avisos24
+        password: P@ssw0rd
+        encrypUsername: notificacionessecureservice
+        encrypPassword: P@ssw0rd
+  ws:
+    rest-max-total: 10 #Maximo total de conexiones abiertas
+    rest-default-max-per-route: 2 #Maximo total de conexiones abiertas por ruta si no se especifica
+    pool-max-total: 20
+    pool-max-idle: 5
+    pool-min-idle: 1
+    pool-min-idle-time: 5000
+    pool-remove-abandoned-timeout: 10
+    address:
+      cmm:
+        url: http://172.16.30.79:2001//cmm-interfaces/entrypoint-http
+        conntimeout: 200
+        readtimeout: 10000
+        requestconntimeout: 1000
+        maxopenconnections: 10
+      conectorLatinia:
+        url: https://avisos24gatewayms-bb-dev-canales.apps.ocpmsbbdevqa.bolivariano.fin.ec/services/Notificaciones/Avisos24GatewayMS?wsdl
+        conntimeout: 200
+        readtimeout: 10000
+      homologarMensaje:
+        url: https://soavides.bolivariano.fin.ec:5554/Genericos/proxy/HomologarMensaje?wsdl
+        conntimeout: 200
+        readtimeout: 10000
+        sistema: wap_homologa_errores
+      framework:
+        url: https://soavides.bolivariano.fin.ec:5554/FrameworkSeguridad/proxy/FrameworkSeguridad?wsdl
+        conntimeout: 200
+        readtimeout: 10000
+        appId: 188
+        appUser: apl_wap
+        prefix: WAP
+        tipo: MS
+
+xml:
+  path: xml\
+  insertTicket: xml\insertTicket.xml
+  insertTicketReceipts: xml\insertTicketReceipts.xml
+  processSystemUserLoginSimplify: xml\processSystemUserLoginSimplify.xml
+  processEntryToEvaluate: xml\processEntryToEvaluate.xml
+  processAccumulatedData: xml\processAccumulatedData.xml
+  massiveSelectInstitution: xml\massiveSelectInstitution.xml
+  insertTicketAdditionalData: xml\insertTicketAdditionalData.xml
+  processPaymentServiceEnrolled: xml\processPaymentServiceEnrolled.xml
+  receiptTableBase64: xml\receiptTableBase64.xml
+
+html:
+  reciboHTML: html\recibo.html
+  widthReceiptImage: 900 #650 
+  heightReceiptImage: 100 #100
+  
+cmm-nemonic: CTL
+
+24Online:
+  comprobante:
+    servicio: 4 #canal WAP
+    estado: R
+    operacion: I
+
+logging.config: logback.xml
+
+context:
+  initializer:
+    classes: com.bolivariano.utilitario.env.FrameworkContextInitializer
+
+latinia:
+  titulo-notificacion-asunto: Notificación veinti4móvil
+  referencia-compania: BOLIVARIANO
+
+serviciosCorreoPersonalizado:
+  sinMis:
+    - "TREGA"
+  servicios:
+    - "TREGA"

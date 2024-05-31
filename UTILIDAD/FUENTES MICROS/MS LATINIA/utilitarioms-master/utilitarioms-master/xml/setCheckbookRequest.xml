@@ -1,0 +1,71 @@
+<soap-env:messages xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+	<message key="async.request">
+		<soap-env:Body>
+			<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:e="http://www.technisys.net/cmm/services/errors/v1.0" xmlns:md="http://www.technisys.net/cmm/services/metadata/v2.0" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+				<SOAP-ENV:Header>
+					<md:metadata>
+						<internals/>
+						<serviceId>setCheckbookRequest</serviceId>
+						<executingOperatorId>${executingOperatorId}</executingOperatorId>						
+						<cmmDispatchDate>${fechaEjecucion}</cmmDispatchDate>
+						<customProperties>
+							<isPersonalBank type="java.lang.Boolean">${canalLogo}</isPersonalBank>
+						</customProperties>
+					</md:metadata>
+				</SOAP-ENV:Header>
+				<SOAP-ENV:Body>
+					<srv:setCheckbookRequestRequest xmlns:srv="http://www.technisys.net/cmm/services/setCheckbookRequest/rq/v0.0">
+						<checkbook name="checkbook">
+							<checkbookType>
+								<mnemonic>${tipoChequera}</mnemonic>
+							</checkbookType>
+							<firstCheckNumber>${numeroChequeInicial}</firstCheckNumber>							
+							<emissionCost>${costoEmision}</emissionCost>
+							<totalEmissionCost>${totalCostoEmision}</totalEmissionCost>
+						</checkbook>
+						<transferType name="transferType">
+							<mnemonic>SOLICITUD_CHEQUERAS</mnemonic>
+						</transferType>
+						<account name="account">
+							<currency>
+								<shortDesc>${nemonicoMoneda}</shortDesc>
+							</currency>
+							<customerOperationPermission>
+								<customerOperation>
+									<subproduct>
+										<product>
+											<productType>
+												<mnemonic>${tipoCuenta}</mnemonic>
+											</productType>
+										</product>
+									</subproduct>
+									<operationIdMasked>${cuentaEnmascarada}</operationIdMasked>
+								</customerOperation>
+							</customerOperationPermission>
+						</account>
+						<customer name="customer">
+							<identificationType>
+								<mnemonic>${tipoIdentificacion}</mnemonic>
+							</identificationType>
+							<identificationNumber>${identificacion}</identificationNumber>
+						</customer>
+						<generic>
+							<sucursal type="java.lang.String">${oficinaEntrega}</sucursal>
+							<costoEmisionChequera type="java.lang.Double">${costoEmision}</costoEmisionChequera>
+							<comisionACobrar type="java.lang.Double">${comisionServicio}</comisionACobrar>							
+							<totalCostoEmisionChequera type="java.lang.Double">${totalCostoEmision}</totalCostoEmisionChequera>							
+						</generic>
+					</srv:setCheckbookRequestRequest>
+				</SOAP-ENV:Body>
+			</SOAP-ENV:Envelope>
+		</soap-env:Body>
+	</message>
+	<message key="async.response">
+		<soap-env:Body>
+			<Envelope>
+				<Header/>
+				<Body/>
+			</Envelope>
+		</soap-env:Body>
+	</message>
+</soap-env:messages>

@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.bolivariano.com/Cuenta" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://www.bolivariano.com/Cuenta" xmlns:cln="http://www.bolivariano.com/Cliente">
+	<xs:import namespace="http://www.bolivariano.com/Cliente" schemaLocation="Cliente.xsd"/>
+	<xs:element name="Cuenta" type="s1:Cuenta"/>
+	<xs:complexType name="Cuenta">
+		<xs:annotation>
+			<xs:documentation>Cuenta</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="agenciaRetiro" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Agencia retiro i_agencia_ret</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="anio" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Anio o_anio</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="banco" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Banco</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cadena1" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>cadena 1</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cadena2" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>cadena 2</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cadena3" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>cadena 3</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cantidadCheque" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Cantidad de cheques por chequera i_nchqs</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cantidadRubros" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Indica cantidad de rubros en la trama</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cartola" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>i_cartola_new</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="casillero" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>casillero i_casillero</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="categoria" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>categoria i_categoria</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cauDebito" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>i_cau_deb</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="chequePropio" type="xs:float" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Cheque propio</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="chequera" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>chequera i_chequera</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ciclo" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>i_ciclo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cobroConOrden" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Indica si el cobro es con o sin orden previa carga i_consin_informacion</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cobroParcial" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Indicador si es cobro parcial</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="codigoComercio" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>codigo comercio</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="codigoDepRet" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>codigo para depositos y retiros de cuentas</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="control" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>p_control</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="correoElectronicoCliente" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Direccion de correo electronico cliente</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creaOrden" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Indica si al cobrr crea una orden o la procesa</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cuenta" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>cuenta i_cta</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cuentaDebito" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>cuenta debito i_cta_debito</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cupoATM" type="xs:float" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>cupo atm i_cupo_atm</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cupoOffline" type="xs:float" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>cupo offline i_cupo_offline</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cupoOnline" type="xs:float" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>cupo online i_cupo_online</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cupoTransferencia" type="xs:float" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Cupo transferencia i_cupo_transf</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="debitar" type="xs:boolean" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Identificador si se debita el valor de la tarjeta al cliente (S o N) i_debitar</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="depositoInicial" type="xs:float" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Monto compromiso deposito inicial i_depini</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="detalle" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>respuesta de validacion de detalle pago</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="detSecuencial" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>detSecuencial</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="disponible" type="xs:float" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Monto disponible</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="emisor" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Emisor i_emisor</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="estado" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Estado</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="estadoCuenta" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Estado cuenta o_estado_cta</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="estadoValida" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Estado valida i_est_valida</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="existe" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Existe o_existe</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="express" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>express i_express</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fechaApertura" type="xs:dateTime" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Fecha apertura i_fecha_apr_sol</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fechaEfectiva" type="xs:dateTime" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>fechaEfectiva</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fechaEmision" type="xs:dateTime" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Fecha de emision de la planilla de consumo electrico representado como YYYYMMDD</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fechaIngreso" type="xs:dateTime" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Fecha ingreso i_fecha_ing_sol</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fechaNucBenef" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Fecha Nuc Beneficiario YANBAL</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="idCliente" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Codigo cliente</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="idEmpresa" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Codigo de empresa i_empresa</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="idEmpresaTarjeta" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Codigo de empresa debita tarjeta i_emp_tarj</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="idFondo" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Indentificador de Fondo Administrado o_ind_fondo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="idProducto" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="idProductoBancario" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Codigo producto bancario de la cuenta</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="idPropietario" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Propietario</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="idReferidor" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Referidor</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="idSolicitud" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Solicitud o_solicitud</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="idSolicitudReferencia" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Solicitud referencia o_solicitud_ref</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="impresora" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>i_impresora</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="indCosto" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Indicador Costo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="indCuentaFondo" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Cuenta Fondo i_ind_cta_fondo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="indDb" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>i_inddb</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="indicadorValMin" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Indica si es valor min (1) - entre min y saldo (2) valor no minimo (3)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="intCap" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>p_int_cap</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="internacional" type="xs:boolean" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Identificador si tarjeta es internacional o nacional (S o N) i_internacional</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kDate" type="xs:dateTime" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>s_k_date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lineas" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>p_lineas</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="listaNegra" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="loc" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>i_loc</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="manejaCartilla" type="xs:boolean" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Identificador si cta maneja cartilla (S o N) i_con_cartilla</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="matriculaAvisos24" type="xs:boolean" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Identificador si se matricula para avisos24 (S o N)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="matriculaVeinti4movil" type="xs:boolean" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Identificador si se matricula para veinti4movil(S o N)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mDate" type="xs:dateTime" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>s_m_date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="medioCelular" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Identificador del medio celular (C) i_des_medio2</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="medioCorreo" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Identificador del medio mail (M) i_des_medio1</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="modeloTarjeta" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="moEstIndCheque" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>YANBAL</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="moneda" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Moneda de la cuenta i_mon</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nombreChequera" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="nombreCuenta" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Nombre del propietario de la cuenta nombreCuenta=i_nombcta(IESS)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nombreTarjeta" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Nombre tarjeta i_nombre_tarj</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="novedad" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>novedad</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="numeroChequeInicial" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Numero de cheque inicial i_cini</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="numeroChequera" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Numero chequera i_nchequera</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="numeroCuenta" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Numero Cuenta o_num_cta</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="oficinaEntregaChequera" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Codigo de oficina que entrega chequera i_ofientr_chq</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="oficinaOrigen" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Oficina origen i_oficina_org</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="oficinaRetiroTarjeta" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Oficina retiro tarjeta i_ofic_retiro_tarj</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ordenBanco" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>ordenBanco</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="origen" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Origen i_origen</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="plastico" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Codigo de plastico i_plastico</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="provisional" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Provisional i_provisional</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="saldoPromedio" type="xs:float" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Saldo promedio SALDO_PROMEDIO</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="secuencialRequerimiento" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>secuencial requerimiento</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sp" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>i_sp</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tarjeta" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tarjeta i_tarjeta</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tCheque" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Cheque i_tchq</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tchq" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="tipoConsultaCuenta" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>tipo consulta Cuenta</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tipoContable" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo contable i_tipo_contable</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tipoCuenta" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo Cuenta i_tipocta</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tipoCuentaDebito" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo Cuenta Debito i_tipo_cta_deb</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tipoDireccion" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo direccion del cliente (Estado Cta) i_tipodir</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tipoMedioCelular" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Identificador del medio celular (C) i_tip_medio2</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tipoPeriodicidad" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de periodicidad (ctas MAS) i_tipo_peri</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tipoTarjeta" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo Tarjeta i_tipo_tarjeta</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="titular" type="xs:boolean" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Identificador si la tarjeta es para titular de la cuenta(S o N)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="usa" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>p_usa</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="usuarioIngreso" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>usuario ingreso i_usu_ingreso</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="valorDebito" type="xs:float" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>valor debito</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="identificaciones" type="cln:Identificacion" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="consComision" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>cons_comision</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="envio" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>envio</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="factura" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Fcatura</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fechaTope" type="xs:dateTime" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Fecha Tope</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="libreta" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Libreta</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="minimoPago" type="xs:float" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Valor Minimo de Pago</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nControl" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>i_nctrl</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="opcion" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Opcion a procesar</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="perteneceEmp" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Indicador si cliente pertenece a la empresa</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pideLibreta" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>i_pide_libreta</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="plazo" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>plaz</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="referenciaSec" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>concatenada fecha y secuencial</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="respuesta" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>p_rpta</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rubroPerson" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>rubro_person</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rutaTransito" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>rutaTransito</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="saldoCont" type="xs:float" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Saldo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="servicio" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Servicio</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serviPerson" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>servi_person</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subtotal" type="xs:float" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Subtotal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="supAutor" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>supAutor</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sus" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>i_sus</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="susFlag" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>i_sus_flag</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tabla" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>tabla</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tipoSaldo" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>tip_saldo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="valorDesc" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>valor_desc</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="valorMon" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>val_mon</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="valorReten" type="xs:float" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Valor a Retener (i_reten)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="valorTotal" type="xs:float" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Valor Total</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
