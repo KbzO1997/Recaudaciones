@@ -1,0 +1,97 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:otc="http://www.bolivariano.com/ws/OTCService" xmlns:men="http://www.bolivariano.com/mensaje/MensajeOTC">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <otc:entradaConsultarEmpresa>
+         <men:canal>IBK</men:canal>
+         <men:depuracion>N</men:depuracion>
+         <men:fecha>2021-09-20T20:49:45</men:fecha>
+         <men:nombreEmpresa></men:nombreEmpresa>
+         <men:oficina>0</men:oficina>
+         <men:secuencial>12:36:27 PM</men:secuencial>
+         <men:tipoBanca>BP</men:tipoBanca>
+         <men:tipoMatriculacion></men:tipoMatriculacion>
+         <men:tipoServicio>PAGO_ADUANA</men:tipoServicio>
+         <men:transaccion>2056</men:transaccion>
+         <men:usuario>srolese</men:usuario>
+      </otc:entradaConsultarEmpresa>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <ns3:salidaConsultarEmpresa xmlns:ns2="http://www.bolivariano.com/mensaje/MensajeOTC" xmlns:ns3="http://www.bolivariano.com/ws/OTCService">
+         <ns2:codigoError>0</ns2:codigoError>
+         <ns2:empresas>
+            <ns2:empresa>
+               <codigoEmpresa>940</codigoEmpresa>
+               <etiquetaEmpresa>Impuestos y Servicios Aduaneros (SENAE)</etiquetaEmpresa>
+               <convenioVisible>false</convenioVisible>
+               <convenios>
+                  <convenio>
+                     <codigo>08</codigo>
+                     <etiquetaCodigo>Impuesto Aduaneros</etiquetaCodigo>
+                     <tipoIdentificadores>
+                        <tipoIdentificador>
+                           <codigo>01</codigo>
+                           <etiquetaCodigo>No. Liquidación</etiquetaCodigo>
+                           <mascara>00000000</mascara>
+                           <matriculable>false</matriculable>
+                           <programable>false</programable>
+                           <regexp>^([0-9]){8}$</regexp>
+                           <textoAyuda>Ingresar los 8 caracteres de la liquidación.</textoAyuda>
+                        </tipoIdentificador>
+                     </tipoIdentificadores>
+                     <visible>true</visible>
+                  </convenio>
+               </convenios>
+               <matriculable>false</matriculable>
+               <matriculacionMultiple>false</matriculacionMultiple>
+               <validable>false</validable>
+            </ns2:empresa>
+            <ns2:empresa>
+               <codigoEmpresa>1929</codigoEmpresa>
+               <etiquetaEmpresa>Servicios logísticos</etiquetaEmpresa>
+               <convenioVisible>true</convenioVisible>
+               <convenios>
+                  <convenio>
+                     <codigo>20717</codigo>
+                     <etiquetaCodigo>CMA CGM Ecuador</etiquetaCodigo>
+                     <tipoIdentificadores>
+                        <tipoIdentificador>
+                           <codigo>2</codigo>
+                           <etiquetaCodigo>Identificación</etiquetaCodigo>
+                           <mascara>0000000000000</mascara>
+                           <matriculable>false</matriculable>
+                           <programable>true</programable>
+                           <regexp>^([0-9]){10,13}$</regexp>
+                           <textoAyuda>Ingrese Identificación</textoAyuda>
+                        </tipoIdentificador>
+                     </tipoIdentificadores>
+                     <visible>true</visible>
+                  </convenio>
+                  <convenio>
+                     <codigo>8459</codigo>
+                     <etiquetaCodigo>TERCON - Terminal de Contenedores</etiquetaCodigo>
+                     <tipoIdentificadores>
+                        <tipoIdentificador>
+                           <codigo>2</codigo>
+                           <etiquetaCodigo>N° Reserva</etiquetaCodigo>
+                           <matriculable>false</matriculable>
+                           <programable>true</programable>
+                           <regexp>^([A-Z-0-9]){1,20}$</regexp>
+                           <textoAyuda>Ingresar 7 caracteres alfanumericos N° de reserva</textoAyuda>
+                        </tipoIdentificador>
+                     </tipoIdentificadores>
+                     <visible>true</visible>
+                  </convenio>
+               </convenios>
+               <matriculable>false</matriculable>
+               <matriculacionMultiple>false</matriculacionMultiple>
+               <validable>false</validable>
+            </ns2:empresa>
+         </ns2:empresas>
+         <ns2:mensajeUsuario>Transaccion Exitosa</ns2:mensajeUsuario>
+      </ns3:salidaConsultarEmpresa>
+   </soap:Body>
+</soap:Envelope>

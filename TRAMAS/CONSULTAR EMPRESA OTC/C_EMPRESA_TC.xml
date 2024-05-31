@@ -1,0 +1,826 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:otc="http://www.bolivariano.com/ws/OTCService" xmlns:men="http://www.bolivariano.com/mensaje/MensajeOTC">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <otc:entradaConsultarEmpresa>
+         <men:canal>IBK</men:canal>
+         <men:depuracion>N</men:depuracion>
+         <men:fecha>2021-09-20T20:49:45</men:fecha>
+         <men:nombreEmpresa></men:nombreEmpresa>
+         <men:oficina>0</men:oficina>
+         <men:secuencial>12:36:27 PM</men:secuencial>
+         <men:tipoBanca>BP</men:tipoBanca>
+         <men:tipoMatriculacion></men:tipoMatriculacion>
+         <men:tipoServicio>AUTOMOTORES_PEATONES</men:tipoServicio>
+         <men:transaccion>2056</men:transaccion>
+         <men:usuario>srolese</men:usuario>
+      </otc:entradaConsultarEmpresa>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <ns3:salidaConsultarEmpresa xmlns:ns2="http://www.bolivariano.com/mensaje/MensajeOTC" xmlns:ns3="http://www.bolivariano.com/ws/OTCService">
+         <ns2:codigoError>0</ns2:codigoError>
+         <ns2:empresas>
+            <ns2:empresa>
+               <codigoEmpresa>18786</codigoEmpresa>
+               <etiquetaEmpresa>ANT - Agencia Nacional de Tránsito</etiquetaEmpresa>
+               <convenioVisible>true</convenioVisible>
+               <convenios>
+                  <convenio>
+                     <codigo>CIT</codigo>
+                     <etiquetaCodigo>Citaciones</etiquetaCodigo>
+                     <tipoIdentificadores>
+                        <tipoIdentificador>
+                           <codigo>CRE</codigo>
+                           <etiquetaCodigo>Carnet de Refugiado</etiquetaCodigo>
+                           <matriculable>true</matriculable>
+                           <programable>false</programable>
+                           <regexp>^([A-Z0-9]){1,20}$</regexp>
+                           <textoAyuda>Ingrese el número de carnet de refugiado</textoAyuda>
+                        </tipoIdentificador>
+                        <tipoIdentificador>
+                           <codigo>CED</codigo>
+                           <etiquetaCodigo>Cédula</etiquetaCodigo>
+                           <datosAdicionales>
+                              <datoAdicional>
+                                 <codigo>FPA_TC</codigo>
+                                 <etiqueta>Forma de Pago</etiqueta>
+                                 <editable>false</editable>
+                                 <listasSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>3</codigo>
+                                       <etiqueta>Diferido con intereses - 3 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>4</codigo>
+                                       <etiqueta>Diferido con intereses - 4 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>5</codigo>
+                                       <etiqueta>Diferido con intereses - 5 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>6</codigo>
+                                       <etiqueta>Diferido con intereses - 6 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>9</codigo>
+                                       <etiqueta>Diferido con intereses - 9 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>12</codigo>
+                                       <etiqueta>Diferido con intereses - 12 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>15</codigo>
+                                       <etiqueta>Diferido con intereses - 15 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>18</codigo>
+                                       <etiqueta>Diferido con intereses - 18 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>24</codigo>
+                                       <etiqueta>Diferido con intereses - 24 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>36</codigo>
+                                       <etiqueta>Diferido con intereses - 36 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                 </listasSeleccion>
+                                 <visible>false</visible>
+                              </datoAdicional>
+                              <datoAdicional>
+                                 <codigo>MPA_TC</codigo>
+                                 <etiqueta>Medio de Pago</etiqueta>
+                                 <editable>false</editable>
+                                 <listasSeleccion/>
+                                 <visible>false</visible>
+                              </datoAdicional>
+                           </datosAdicionales>
+                           <mascara>0000000000</mascara>
+                           <matriculable>true</matriculable>
+                           <programable>false</programable>
+                           <regexp>^([0-9]){10}$</regexp>
+                           <textoAyuda>Ingrese el número de cédula</textoAyuda>
+                        </tipoIdentificador>
+                        <tipoIdentificador>
+                           <codigo>PAS</codigo>
+                           <etiquetaCodigo>Pasaporte</etiquetaCodigo>
+                           <datosAdicionales>
+                              <datoAdicional>
+                                 <codigo>FPA_TC</codigo>
+                                 <etiqueta>Forma de Pago</etiqueta>
+                                 <editable>false</editable>
+                                 <listasSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>3</codigo>
+                                       <etiqueta>Diferido con intereses - 3 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>4</codigo>
+                                       <etiqueta>Diferido con intereses - 4 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>5</codigo>
+                                       <etiqueta>Diferido con intereses - 5 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>6</codigo>
+                                       <etiqueta>Diferido con intereses - 6 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>9</codigo>
+                                       <etiqueta>Diferido con intereses - 9 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>12</codigo>
+                                       <etiqueta>Diferido con intereses - 12 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>15</codigo>
+                                       <etiqueta>Diferido con intereses - 15 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>18</codigo>
+                                       <etiqueta>Diferido con intereses - 18 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>24</codigo>
+                                       <etiqueta>Diferido con intereses - 24 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>36</codigo>
+                                       <etiqueta>Diferido con intereses - 36 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                 </listasSeleccion>
+                                 <visible>false</visible>
+                              </datoAdicional>
+                              <datoAdicional>
+                                 <codigo>MPA_TC</codigo>
+                                 <etiqueta>Medio de Pago</etiqueta>
+                                 <editable>false</editable>
+                                 <listasSeleccion/>
+                                 <visible>false</visible>
+                              </datoAdicional>
+                           </datosAdicionales>
+                           <matriculable>true</matriculable>
+                           <programable>false</programable>
+                           <regexp>^([A-Z0-9]){1,20}$</regexp>
+                           <textoAyuda>Ingrese el número de pasaporte</textoAyuda>
+                        </tipoIdentificador>
+                        <tipoIdentificador>
+                           <codigo>PLA</codigo>
+                           <etiquetaCodigo>Placa</etiquetaCodigo>
+                           <datosAdicionales>
+                              <datoAdicional>
+                                 <codigo>FPA_TC</codigo>
+                                 <etiqueta>Forma de Pago</etiqueta>
+                                 <editable>false</editable>
+                                 <listasSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>3</codigo>
+                                       <etiqueta>Diferido con intereses - 3 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>4</codigo>
+                                       <etiqueta>Diferido con intereses - 4 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>5</codigo>
+                                       <etiqueta>Diferido con intereses - 5 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>6</codigo>
+                                       <etiqueta>Diferido con intereses - 6 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>9</codigo>
+                                       <etiqueta>Diferido con intereses - 9 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>12</codigo>
+                                       <etiqueta>Diferido con intereses - 12 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>15</codigo>
+                                       <etiqueta>Diferido con intereses - 15 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>18</codigo>
+                                       <etiqueta>Diferido con intereses - 18 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>24</codigo>
+                                       <etiqueta>Diferido con intereses - 24 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>36</codigo>
+                                       <etiqueta>Diferido con intereses - 36 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                 </listasSeleccion>
+                                 <visible>false</visible>
+                              </datoAdicional>
+                              <datoAdicional>
+                                 <codigo>MPA_TC</codigo>
+                                 <etiqueta>Medio de Pago</etiqueta>
+                                 <editable>false</editable>
+                                 <listasSeleccion/>
+                                 <visible>false</visible>
+                              </datoAdicional>
+                           </datosAdicionales>
+                           <matriculable>true</matriculable>
+                           <programable>false</programable>
+                           <regexp>^([A-Z0-9]){1,7}$</regexp>
+                           <textoAyuda>Ingrese el número de placa</textoAyuda>
+                        </tipoIdentificador>
+                        <tipoIdentificador>
+                           <codigo>RUC</codigo>
+                           <etiquetaCodigo>RUC</etiquetaCodigo>
+                           <datosAdicionales>
+                              <datoAdicional>
+                                 <codigo>FPA_TC</codigo>
+                                 <etiqueta>Forma de Pago</etiqueta>
+                                 <editable>false</editable>
+                                 <listasSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>3</codigo>
+                                       <etiqueta>Diferido con intereses - 3 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>4</codigo>
+                                       <etiqueta>Diferido con intereses - 4 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>5</codigo>
+                                       <etiqueta>Diferido con intereses - 5 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>6</codigo>
+                                       <etiqueta>Diferido con intereses - 6 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>9</codigo>
+                                       <etiqueta>Diferido con intereses - 9 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>12</codigo>
+                                       <etiqueta>Diferido con intereses - 12 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>15</codigo>
+                                       <etiqueta>Diferido con intereses - 15 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>18</codigo>
+                                       <etiqueta>Diferido con intereses - 18 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>24</codigo>
+                                       <etiqueta>Diferido con intereses - 24 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>36</codigo>
+                                       <etiqueta>Diferido con intereses - 36 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                 </listasSeleccion>
+                                 <visible>false</visible>
+                              </datoAdicional>
+                              <datoAdicional>
+                                 <codigo>MPA_TC</codigo>
+                                 <etiqueta>Medio de Pago</etiqueta>
+                                 <editable>false</editable>
+                                 <listasSeleccion/>
+                                 <visible>false</visible>
+                              </datoAdicional>
+                           </datosAdicionales>
+                           <mascara>0000000000000</mascara>
+                           <matriculable>true</matriculable>
+                           <programable>false</programable>
+                           <regexp>^([0-9]){13}$</regexp>
+                           <textoAyuda>Ingrese el número de RUC</textoAyuda>
+                        </tipoIdentificador>
+                     </tipoIdentificadores>
+                     <visible>true</visible>
+                  </convenio>
+                  <convenio>
+                     <codigo>CDP</codigo>
+                     <etiquetaCodigo>Convenios de Pago</etiquetaCodigo>
+                     <tipoIdentificadores>
+                        <tipoIdentificador>
+                           <codigo>CED</codigo>
+                           <etiquetaCodigo>Cédula</etiquetaCodigo>
+                           <datosAdicionales>
+                              <datoAdicional>
+                                 <codigo>FPA_TC</codigo>
+                                 <etiqueta>Forma de Pago</etiqueta>
+                                 <editable>false</editable>
+                                 <listasSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>3</codigo>
+                                       <etiqueta>Diferido con intereses - 3 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>4</codigo>
+                                       <etiqueta>Diferido con intereses - 4 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>5</codigo>
+                                       <etiqueta>Diferido con intereses - 5 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>6</codigo>
+                                       <etiqueta>Diferido con intereses - 6 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>9</codigo>
+                                       <etiqueta>Diferido con intereses - 9 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>12</codigo>
+                                       <etiqueta>Diferido con intereses - 12 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>15</codigo>
+                                       <etiqueta>Diferido con intereses - 15 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>18</codigo>
+                                       <etiqueta>Diferido con intereses - 18 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>24</codigo>
+                                       <etiqueta>Diferido con intereses - 24 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>36</codigo>
+                                       <etiqueta>Diferido con intereses - 36 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                 </listasSeleccion>
+                                 <visible>false</visible>
+                              </datoAdicional>
+                              <datoAdicional>
+                                 <codigo>MPA_TC</codigo>
+                                 <etiqueta>Medio de Pago</etiqueta>
+                                 <editable>false</editable>
+                                 <listasSeleccion/>
+                                 <visible>false</visible>
+                              </datoAdicional>
+                           </datosAdicionales>
+                           <mascara>0000000000</mascara>
+                           <matriculable>true</matriculable>
+                           <programable>false</programable>
+                           <regexp>^([0-9]){10}$</regexp>
+                           <textoAyuda>Ingrese el número de cédula</textoAyuda>
+                        </tipoIdentificador>
+                        <tipoIdentificador>
+                           <codigo>PAS</codigo>
+                           <etiquetaCodigo>Pasaporte</etiquetaCodigo>
+                           <datosAdicionales>
+                              <datoAdicional>
+                                 <codigo>FPA_TC</codigo>
+                                 <etiqueta>Forma de Pago</etiqueta>
+                                 <editable>false</editable>
+                                 <listasSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>3</codigo>
+                                       <etiqueta>Diferido con intereses - 3 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>4</codigo>
+                                       <etiqueta>Diferido con intereses - 4 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>5</codigo>
+                                       <etiqueta>Diferido con intereses - 5 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>6</codigo>
+                                       <etiqueta>Diferido con intereses - 6 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>9</codigo>
+                                       <etiqueta>Diferido con intereses - 9 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>12</codigo>
+                                       <etiqueta>Diferido con intereses - 12 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>15</codigo>
+                                       <etiqueta>Diferido con intereses - 15 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>18</codigo>
+                                       <etiqueta>Diferido con intereses - 18 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>24</codigo>
+                                       <etiqueta>Diferido con intereses - 24 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>36</codigo>
+                                       <etiqueta>Diferido con intereses - 36 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                 </listasSeleccion>
+                                 <visible>false</visible>
+                              </datoAdicional>
+                              <datoAdicional>
+                                 <codigo>MPA_TC</codigo>
+                                 <etiqueta>Medio de Pago</etiqueta>
+                                 <editable>false</editable>
+                                 <listasSeleccion/>
+                                 <visible>false</visible>
+                              </datoAdicional>
+                           </datosAdicionales>
+                           <matriculable>true</matriculable>
+                           <programable>false</programable>
+                           <regexp>^([A-Z0-9]){1,20}$</regexp>
+                           <textoAyuda>Ingrese el número de pasaporte</textoAyuda>
+                        </tipoIdentificador>
+                        <tipoIdentificador>
+                           <codigo>RUC</codigo>
+                           <etiquetaCodigo>RUC</etiquetaCodigo>
+                           <datosAdicionales>
+                              <datoAdicional>
+                                 <codigo>FPA_TC</codigo>
+                                 <etiqueta>Forma de Pago</etiqueta>
+                                 <editable>false</editable>
+                                 <listasSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>3</codigo>
+                                       <etiqueta>Diferido con intereses - 3 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>4</codigo>
+                                       <etiqueta>Diferido con intereses - 4 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>5</codigo>
+                                       <etiqueta>Diferido con intereses - 5 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>6</codigo>
+                                       <etiqueta>Diferido con intereses - 6 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>9</codigo>
+                                       <etiqueta>Diferido con intereses - 9 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>12</codigo>
+                                       <etiqueta>Diferido con intereses - 12 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>15</codigo>
+                                       <etiqueta>Diferido con intereses - 15 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>18</codigo>
+                                       <etiqueta>Diferido con intereses - 18 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>24</codigo>
+                                       <etiqueta>Diferido con intereses - 24 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>36</codigo>
+                                       <etiqueta>Diferido con intereses - 36 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                 </listasSeleccion>
+                                 <visible>false</visible>
+                              </datoAdicional>
+                              <datoAdicional>
+                                 <codigo>MPA_TC</codigo>
+                                 <etiqueta>Medio de Pago</etiqueta>
+                                 <editable>false</editable>
+                                 <listasSeleccion/>
+                                 <visible>false</visible>
+                              </datoAdicional>
+                           </datosAdicionales>
+                           <mascara>0000000000000</mascara>
+                           <matriculable>true</matriculable>
+                           <programable>false</programable>
+                           <regexp>^([0-9]){13}$</regexp>
+                           <textoAyuda>Ingrese el número de RUC</textoAyuda>
+                        </tipoIdentificador>
+                     </tipoIdentificadores>
+                     <visible>true</visible>
+                  </convenio>
+                  <convenio>
+                     <codigo>SOL</codigo>
+                     <etiquetaCodigo>Solicitudes</etiquetaCodigo>
+                     <tipoIdentificadores>
+                        <tipoIdentificador>
+                           <codigo>SOL</codigo>
+                           <etiquetaCodigo>Orden de Pago</etiquetaCodigo>
+                           <datosAdicionales>
+                              <datoAdicional>
+                                 <codigo>FPA_TC</codigo>
+                                 <etiqueta>Forma de Pago</etiqueta>
+                                 <editable>false</editable>
+                                 <listasSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>3</codigo>
+                                       <etiqueta>Diferido con intereses - 3 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>4</codigo>
+                                       <etiqueta>Diferido con intereses - 4 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>5</codigo>
+                                       <etiqueta>Diferido con intereses - 5 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>6</codigo>
+                                       <etiqueta>Diferido con intereses - 6 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>9</codigo>
+                                       <etiqueta>Diferido con intereses - 9 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>12</codigo>
+                                       <etiqueta>Diferido con intereses - 12 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>15</codigo>
+                                       <etiqueta>Diferido con intereses - 15 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>18</codigo>
+                                       <etiqueta>Diferido con intereses - 18 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>24</codigo>
+                                       <etiqueta>Diferido con intereses - 24 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>36</codigo>
+                                       <etiqueta>Diferido con intereses - 36 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                 </listasSeleccion>
+                                 <visible>false</visible>
+                              </datoAdicional>
+                              <datoAdicional>
+                                 <codigo>MPA_TC</codigo>
+                                 <etiqueta>Medio de Pago</etiqueta>
+                                 <editable>false</editable>
+                                 <listasSeleccion/>
+                                 <visible>false</visible>
+                              </datoAdicional>
+                           </datosAdicionales>
+                           <mascara>00000000</mascara>
+                           <matriculable>false</matriculable>
+                           <programable>true</programable>
+                           <regexp>^([0-9]){5,8}$</regexp>
+                           <textoAyuda>Ingrese número de orden de pago</textoAyuda>
+                        </tipoIdentificador>
+                     </tipoIdentificadores>
+                     <visible>true</visible>
+                  </convenio>
+               </convenios>
+               <matriculable>true</matriculable>
+               <matriculacionMultiple>false</matriculacionMultiple>
+               <validable>false</validable>
+            </ns2:empresa>
+            <ns2:empresa>
+               <codigoEmpresa>6388</codigoEmpresa>
+               <etiquetaEmpresa>ATM - Autoridad de Transito Municipal</etiquetaEmpresa>
+               <convenioVisible>true</convenioVisible>
+               <convenios>
+                  <convenio>
+                     <codigo>CIT</codigo>
+                     <etiquetaCodigo>Citaciones</etiquetaCodigo>
+                     <tipoIdentificadores>
+                        <tipoIdentificador>
+                           <codigo>CED</codigo>
+                           <etiquetaCodigo>Cédula</etiquetaCodigo>
+                           <mascara>0000000000</mascara>
+                           <matriculable>true</matriculable>
+                           <programable>false</programable>
+                           <regexp>^([0-9]){10}$</regexp>
+                           <textoAyuda>Ingrese el número de cédula</textoAyuda>
+                        </tipoIdentificador>
+                        <tipoIdentificador>
+                           <codigo>PASAPORTE</codigo>
+                           <etiquetaCodigo>Pasaporte</etiquetaCodigo>
+                           <matriculable>true</matriculable>
+                           <programable>false</programable>
+                           <regexp>^([A-Z0-9]){1,20}$</regexp>
+                           <textoAyuda>Ingrese el número de pasaporte</textoAyuda>
+                        </tipoIdentificador>
+                        <tipoIdentificador>
+                           <codigo>PLACA</codigo>
+                           <etiquetaCodigo>Placa</etiquetaCodigo>
+                           <matriculable>true</matriculable>
+                           <programable>false</programable>
+                           <regexp>^([A-Z0-9]){1,7}$</regexp>
+                           <textoAyuda>Ingrese el número de placa</textoAyuda>
+                        </tipoIdentificador>
+                        <tipoIdentificador>
+                           <codigo>RUC</codigo>
+                           <etiquetaCodigo>RUC</etiquetaCodigo>
+                           <mascara>0000000000000</mascara>
+                           <matriculable>true</matriculable>
+                           <programable>false</programable>
+                           <regexp>^([0-9]){13}$</regexp>
+                           <textoAyuda>Ingrese el número de RUC</textoAyuda>
+                        </tipoIdentificador>
+                     </tipoIdentificadores>
+                     <visible>true</visible>
+                  </convenio>
+                  <convenio>
+                     <codigo>REN</codigo>
+                     <etiquetaCodigo>Renovación</etiquetaCodigo>
+                     <tipoIdentificadores>
+                        <tipoIdentificador>
+                           <codigo>PLACA</codigo>
+                           <etiquetaCodigo>Placa</etiquetaCodigo>
+                           <matriculable>true</matriculable>
+                           <programable>false</programable>
+                           <regexp>^([A-Z0-9]){1,7}$</regexp>
+                           <textoAyuda>Ingrese el número de placa</textoAyuda>
+                        </tipoIdentificador>
+                     </tipoIdentificadores>
+                     <visible>true</visible>
+                  </convenio>
+                  <convenio>
+                     <codigo>SOL</codigo>
+                     <etiquetaCodigo>Trámites</etiquetaCodigo>
+                     <tipoIdentificadores>
+                        <tipoIdentificador>
+                           <codigo>SOL</codigo>
+                           <etiquetaCodigo>No. solicitud</etiquetaCodigo>
+                           <mascara>000000000000000000000000000000</mascara>
+                           <matriculable>false</matriculable>
+                           <programable>true</programable>
+                           <regexp>^([0-9]){1,30}$</regexp>
+                           <textoAyuda>Ingrese el número solicitud del trámite</textoAyuda>
+                        </tipoIdentificador>
+                     </tipoIdentificadores>
+                     <visible>true</visible>
+                  </convenio>
+               </convenios>
+               <matriculable>true</matriculable>
+               <matriculacionMultiple>false</matriculacionMultiple>
+               <validable>false</validable>
+            </ns2:empresa>
+            <ns2:empresa>
+               <codigoEmpresa>2572</codigoEmpresa>
+               <etiquetaEmpresa>CTE - Comisión de Tránsito del Ecuador</etiquetaEmpresa>
+               <convenioVisible>true</convenioVisible>
+               <convenios>
+                  <convenio>
+                     <codigo>CIT</codigo>
+                     <etiquetaCodigo>Citaciones</etiquetaCodigo>
+                     <tipoIdentificadores>
+                        <tipoIdentificador>
+                           <codigo>CITACION</codigo>
+                           <etiquetaCodigo>Código de servicio</etiquetaCodigo>
+                           <matriculable>true</matriculable>
+                           <programable>false</programable>
+                           <regexp>^([A-Z-0-9]){1,20}$</regexp>
+                           <textoAyuda>Código de servicio</textoAyuda>
+                        </tipoIdentificador>
+                     </tipoIdentificadores>
+                     <visible>true</visible>
+                  </convenio>
+                  <convenio>
+                     <codigo>TRA</codigo>
+                     <etiquetaCodigo>Trámites</etiquetaCodigo>
+                     <tipoIdentificadores>
+                        <tipoIdentificador>
+                           <codigo>TRAMITE</codigo>
+                           <etiquetaCodigo>Código CEP*CTG</etiquetaCodigo>
+                           <mascara>000000000000</mascara>
+                           <matriculable>false</matriculable>
+                           <programable>false</programable>
+                           <regexp>^([0-9]){12}$</regexp>
+                           <textoAyuda>Ingrese el codigo CEP o CTG</textoAyuda>
+                        </tipoIdentificador>
+                     </tipoIdentificadores>
+                     <visible>true</visible>
+                  </convenio>
+               </convenios>
+               <matriculable>true</matriculable>
+               <matriculacionMultiple>false</matriculacionMultiple>
+               <validable>false</validable>
+            </ns2:empresa>
+            <ns2:empresa>
+               <codigoEmpresa>5993</codigoEmpresa>
+               <etiquetaEmpresa>SRI - Matriculación Vehicular</etiquetaEmpresa>
+               <convenioVisible>true</convenioVisible>
+               <convenios>
+                  <convenio>
+                     <codigo>IVM</codigo>
+                     <etiquetaCodigo>Ajuste</etiquetaCodigo>
+                     <tipoIdentificadores>
+                        <tipoIdentificador>
+                           <codigo>AJUSTES</codigo>
+                           <etiquetaCodigo>Placa/CAMV/CPN</etiquetaCodigo>
+                           <matriculable>true</matriculable>
+                           <programable>false</programable>
+                           <regexp>^([A-Z-0-9]){1,20}$</regexp>
+                           <textoAyuda>Ingrese Placa/CAMV/CPN</textoAyuda>
+                        </tipoIdentificador>
+                     </tipoIdentificadores>
+                     <visible>true</visible>
+                  </convenio>
+                  <convenio>
+                     <codigo>MATV</codigo>
+                     <etiquetaCodigo>Matricula</etiquetaCodigo>
+                     <tipoIdentificadores>
+                        <tipoIdentificador>
+                           <codigo>MATRICULA</codigo>
+                           <etiquetaCodigo>Placa/CAMV/CPN</etiquetaCodigo>
+                           <datosAdicionales>
+                              <datoAdicional>
+                                 <codigo>FPA_TC</codigo>
+                                 <etiqueta>Forma de Pago</etiqueta>
+                                 <editable>false</editable>
+                                 <listasSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>3</codigo>
+                                       <etiqueta>Diferido con intereses - 3 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>4</codigo>
+                                       <etiqueta>Diferido con intereses - 4 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>5</codigo>
+                                       <etiqueta>Diferido con intereses - 5 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>6</codigo>
+                                       <etiqueta>Diferido con intereses - 6 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>9</codigo>
+                                       <etiqueta>Diferido con intereses - 9 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>10</codigo>
+                                       <etiqueta>Diferido con intereses - 10 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                    <listaSeleccion>
+                                       <codigo>12</codigo>
+                                       <etiqueta>Diferido con intereses - 12 cuotas de #vc# USD</etiqueta>
+                                    </listaSeleccion>
+                                 </listasSeleccion>
+                                 <visible>false</visible>
+                              </datoAdicional>
+                              <datoAdicional>
+                                 <codigo>MPA_TC</codigo>
+                                 <etiqueta>Medio de Pago</etiqueta>
+                                 <editable>false</editable>
+                                 <listasSeleccion/>
+                                 <visible>false</visible>
+                              </datoAdicional>
+                           </datosAdicionales>
+                           <matriculable>true</matriculable>
+                           <programable>false</programable>
+                           <regexp>^([A-Z-0-9]){1,20}$</regexp>
+                           <textoAyuda>Ingrese Placa/CAMV/CPN</textoAyuda>
+                        </tipoIdentificador>
+                     </tipoIdentificadores>
+                     <visible>true</visible>
+                  </convenio>
+               </convenios>
+               <matriculable>true</matriculable>
+               <matriculacionMultiple>false</matriculacionMultiple>
+               <validable>false</validable>
+            </ns2:empresa>
+            <ns2:empresa>
+               <codigoEmpresa>8461</codigoEmpresa>
+               <etiquetaEmpresa>TeleTag</etiquetaEmpresa>
+               <convenioVisible>false</convenioVisible>
+               <convenios>
+                  <convenio>
+                     <codigo>8461</codigo>
+                     <etiquetaCodigo>TeleTag</etiquetaCodigo>
+                     <tipoIdentificadores>
+                        <tipoIdentificador>
+                           <codigo>1</codigo>
+                           <etiquetaCodigo>Contrato</etiquetaCodigo>
+                           <matriculable>true</matriculable>
+                           <programable>true</programable>
+                           <regexp>^([0-9]){1,13}$</regexp>
+                           <textoAyuda>Más información en www.telepeajeplus.com.ec</textoAyuda>
+                        </tipoIdentificador>
+                     </tipoIdentificadores>
+                     <visible>true</visible>
+                  </convenio>
+               </convenios>
+               <matriculable>true</matriculable>
+               <matriculacionMultiple>false</matriculacionMultiple>
+               <validable>false</validable>
+            </ns2:empresa>
+         </ns2:empresas>
+         <ns2:mensajeUsuario>Transaccion Exitosa</ns2:mensajeUsuario>
+      </ns3:salidaConsultarEmpresa>
+   </soap:Body>
+</soap:Envelope>
