@@ -1,0 +1,160 @@
+<mensajeEntradaEnviarNotificacion xmlns:oraxsl="http://www.oracle.com/XSL/Transform/java" xmlns:oracle-xsl-mapper="http://www.oracle.com/xsl/mapper/schemas" xmlns:sch="http://notification_gateway.microservice.bolivariano.com/estructura" xmlns="http://notification_gateway.microservice.bolivariano.com/estructura">
+    <sch:notificacion>
+        <sch:refServicio>PAGSB</sch:refServicio>
+    </sch:notificacion>
+    <sch:datosComunNotificacion>
+        <sch:canal>IBK</sch:canal>
+    </sch:datosComunNotificacion>
+    <sch:adicionalesNotificacion>
+        <sch:parametrosNotificacion>
+            <sch:clave>desccanal</sch:clave>
+            <sch:valor>24Online</sch:valor>
+        </sch:parametrosNotificacion>
+        <sch:parametrosNotificacion>
+            <sch:clave>deservicio</sch:clave>
+            <sch:valor>POSTPAGO</sch:valor>
+        </sch:parametrosNotificacion>
+        <sch:parametrosNotificacion>
+            <sch:clave>empresa</sch:clave>
+            <sch:valor>CLARO</sch:valor>
+        </sch:parametrosNotificacion>
+        <sch:parametrosNotificacion>
+            <sch:clave>planilla</sch:clave>
+            <sch:valor>0967707312</sch:valor>
+        </sch:parametrosNotificacion>
+        <sch:parametrosNotificacion>
+            <sch:clave>nombre</sch:clave>
+            <sch:valor>NOMBRE: 1396206</sch:valor>
+        </sch:parametrosNotificacion>
+        <sch:parametrosNotificacion>
+            <sch:clave>prodeb</sch:clave>
+            <sch:valor>CTE</sch:valor>
+        </sch:parametrosNotificacion>
+        <sch:parametrosNotificacion>
+            <sch:clave>ctadeb</sch:clave>
+            <sch:valor>292</sch:valor>
+        </sch:parametrosNotificacion>
+        <sch:parametrosNotificacion>
+            <sch:clave>valor</sch:clave>
+            <sch:valor>1.00</sch:valor>
+        </sch:parametrosNotificacion>
+        <sch:parametrosNotificacion>
+            <sch:clave>fecha_tope</sch:clave>
+            <sch:valor>07/22/2022</sch:valor>
+        </sch:parametrosNotificacion>
+        <sch:parametrosNotificacion>
+            <sch:clave>fecha1</sch:clave>
+            <sch:valor>13:41:57</sch:valor>
+        </sch:parametrosNotificacion>
+        <sch:parametrosNotificacion>
+            <sch:clave>valor2</sch:clave>
+            <sch:valor>0.22</sch:valor>
+        </sch:parametrosNotificacion>
+        <sch:parametrosNotificacion>
+            <sch:clave>valortope</sch:clave>
+            <sch:valor>1.22</sch:valor>
+        </sch:parametrosNotificacion>
+    </sch:adicionalesNotificacion>
+    <sch:mediosEnvio>
+        <sch:medioEnvio>
+            <sch:tipo>M</sch:tipo>
+            <sch:valor>crodriguez@bolivariano.com</sch:valor>
+        </sch:medioEnvio>
+        <sch:medioEnvio>
+            <sch:tipo>C</sch:tipo>
+            <sch:valor>0991863698</sch:valor>
+        </sch:medioEnvio>
+    </sch:mediosEnvio>
+</mensajeEntradaEnviarNotificacion>
+
+<inPagoCore>
+    <part xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="InputParameters">
+        <InputParameters xmlns:oracle-xsl-mapper="http://www.oracle.com/xsl/mapper/schemas" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/sp_tr_pago_servicio_rc" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/sp/sp_tr_pago_servicio_rc">
+            <db:s_ssn>49313409</db:s_ssn>
+            <db:s_user>ope998</db:s_user>
+            <db:s_term>term24</db:s_term>
+            <db:s_date>2022-07-22T00:00:00.000-05:00</db:s_date>
+            <db:s_srv>BOLIVSRV</db:s_srv>
+            <db:s_lsrv>BOLIVSRV</db:s_lsrv>
+            <db:s_ofi>0</db:s_ofi>
+            <db:s_rol>5</db:s_rol>
+            <db:s_sev>0</db:s_sev>
+            <db:s_org />
+            <db:t_debug>N</db:t_debug>
+            <db:t_trn>62531</db:t_trn>
+            <db:t_corr>N</db:t_corr>
+            <db:i_mon>1</db:i_mon>
+            <db:i_empresa>118</db:i_empresa>
+            <db:i_codigo>0967707312</db:i_codigo>
+            <db:i_efe>0</db:i_efe>
+            <db:i_val>1.00</db:i_val>
+            <db:i_valch>0</db:i_valch>
+            <db:i_debito>1.00</db:i_debito>
+            <db:i_reten>0</db:i_reten>
+            <db:i_tipocta>CTE</db:i_tipocta>
+            <db:i_cuenta>5005070292</db:i_cuenta>
+            <db:i_opcion>P</db:i_opcion>
+            <db:i_autoriza>0</db:i_autoriza>
+            <db:i_aplcobis>N</db:i_aplcobis>
+            <db:i_costo>0.22</db:i_costo>
+            <db:i_canal>IBK</db:i_canal>
+            <db:i_comision>0.22</db:i_comision>
+            <db:i_deb_com>0.22</db:i_deb_com>
+            <db:i_campo_adic1>13994846</db:i_campo_adic1>
+            <db:i_campo_adic2>PABLO RAFAEL CAICEDO MONTAÃO</db:i_campo_adic2>
+        </InputParameters>
+    </part>
+</inPagoCore><outPagoCore>
+    <part xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="OutputParameters">
+        <OutputParameters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/sp/sp_tr_pago_servicio_rc">
+            <RowSet>
+                <Row>
+                    <Column name="" sqltype="varchar">results_submit_rpc</Column>
+                    <Column name="r_sec_porta" sqltype="varchar">13994846</Column>
+                    <Column name="r_fecha_efectiva" sqltype="datetime">2022-07-22T00:00:00.000-05:00</Column>
+                </Row>
+            </RowSet>
+            <RETURN_VALUE>0</RETURN_VALUE>
+            <o_nombre xsi:nil="true" />
+            <o_saldo xsi:nil="true" />
+            <o_minimo xsi:nil="true" />
+            <o_costo xsi:nil="true" />
+            <o_fecha_tope xsi:nil="true" />
+            <o_fecha_efe>2022-07-22T00:00:00.000-05:00</o_fecha_efe>
+            <o_fecha_fac xsi:nil="true" />
+            <o_inddb xsi:nil="true" />
+            <o_referencia xsi:nil="true" />
+            <o_ssn>49313409</o_ssn>
+            <o_consulta>0</o_consulta>
+            <o_horario>N</o_horario>
+            <o_comisionven xsi:nil="true" />
+            <o_autorisri xsi:nil="true" />
+            <o_fecvensri xsi:nil="true" />
+            <o_nota_venta xsi:nil="true" />
+            <o_campo_adic1 xsi:nil="true" />
+            <o_campo_adic2 xsi:nil="true" />
+            <o_campo_adic3 xsi:nil="true" />
+            <o_campo_adic4 xsi:nil="true" />
+            <o_msg xsi:nil="true" />
+            <o_tasa>0.1200000000000000000</o_tasa>
+            <o_base_imp>0.2</o_base_imp>
+            <o_impuesto>0.02</o_impuesto>
+            <o_comis_trb xsi:nil="true" />
+            <o_servicio_not>PAGSB</o_servicio_not>
+            <o_nomb_ente>NOMBRE: 1396206</o_nomb_ente>
+            <o_cod_ente>1396206</o_cod_ente>
+            <o_desccanal>24Online</o_desccanal>
+            <o_celular>0991863698</o_celular>
+            <o_correo>crodriguez@bolivariano.com</o_correo>
+            <o_desc_empresa>CLARO</o_desc_empresa>
+            <o_prod_deb>CTE</o_prod_deb>
+            <o_valor>1.00</o_valor>
+            <o_fecha_deb>07/22/2022</o_fecha_deb>
+            <o_hora_deb>13:41:57</o_hora_deb>
+            <o_valor_comi>0.22</o_valor_comi>
+            <o_valor_tot>1.22</o_valor_tot>
+            <o_cta_lat>292</o_cta_lat>
+            <o_tipo_serv>POSTPAGO</o_tipo_serv>
+        </OutputParameters>
+    </part>
+</outPagoCore>

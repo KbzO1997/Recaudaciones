@@ -1,0 +1,400 @@
+<inputVariable>
+    <part xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="parametros">
+        <wbcm:MensajeEntradaPagarMovistar xmlns:wbcm="http://www.bolivariano.com/MensajeMovistar">
+            <canal>IBK</canal>
+            <fecha>2022-07-22T00:00:00.000-05:00</fecha>
+            <oficina>0</oficina>
+            <terminal>term24</terminal>
+            <transaccion>62195</transaccion>
+            <usuario>ope998</usuario>
+            <informacionMovistar>
+                <aplicativoCobis>N</aplicativoCobis>
+                <autorizacion>S</autorizacion>
+                <cantidadCheque>0</cantidadCheque>
+                <canalCobranza>08</canalCobranza>
+                <debito>2.0</debito>
+                <debitoComision>0.0</debitoComision>
+                <efectivo>0</efectivo>
+                <empresa>103</empresa>
+                <fechaContable>2022-07-22</fechaContable>
+                <fechaEfectiva>2022-07-22T06:38:34.000Z</fechaEfectiva>
+                <fechaEmision>2022-07-22T06:38:34.000Z</fechaEmision>
+                <nombre>CONSUMIDOR FINAL</nombre>
+                <opcion>P</opcion>
+                <tipoMoneda>1</tipoMoneda>
+                <ubicacion>0</ubicacion>
+                <valorCheque>0</valorCheque>
+                <valorTotalCancelar>2.0</valorTotalCancelar>
+                <cuenta>
+                    <cuenta>5005070292</cuenta>
+                    <tipoCuenta>CTE</tipoCuenta>
+                    <identificaciones>
+                        <identificacion>0009999999999</identificacion>
+                        <tipoIdentificacion>C</tipoIdentificacion>
+                    </identificaciones>
+                </cuenta>
+                <codigoEmpresa>01</codigoEmpresa>
+                <codigoProceso>00</codigoProceso>
+                <codigoProducto>02</codigoProducto>
+                <codigoServicio>827623</codigoServicio>
+                <horaLocal>102434</horaLocal>
+                <numeroTelefono>0912345678</numeroTelefono>
+            </informacionMovistar>
+            <informacionCore>
+                <login>20824</login>
+                <modoCorreccion>N</modoCorreccion>
+                <rolBPM>5</rolBPM>
+                <secuencial>49151453</secuencial>
+                <secuencialRemoto>8359380</secuencialRemoto>
+                <servidor>BOLIVSRV</servidor>
+                <sesion>143</sesion>
+            </informacionCore>
+            <tipoPago>M</tipoPago>
+        </wbcm:MensajeEntradaPagarMovistar>
+    </part>
+</inputVariable> <!--Part II-->
+<messages>
+    <inCobis>
+        <part xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="InputParameters">
+            <InputParameters xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/sp/CanalesNoCobis">
+                <i_canal>IBK</i_canal>
+            </InputParameters>
+        </part>
+    </inCobis>
+    <outCobis>
+        <part xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="OutputParameters">
+            <OutputParameters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/sp/CanalesNoCobis">
+                <RETURN_VALUE>0</RETURN_VALUE>
+                <s_ssn>49154109</s_ssn>
+                <s_user>ope998</s_user>
+                <s_sesn>0</s_sesn>
+                <s_term>term24</s_term>
+                <s_date>2022-07-22T00:00:00.000-05:00</s_date>
+                <s_srv>BOLIVSRV</s_srv>
+                <s_lsrv>BOLIVSRV</s_lsrv>
+                <s_ofi>0</s_ofi>
+                <s_rol>5</s_rol>
+                <s_org_err xsi:nil="true" />
+                <s_error xsi:nil="true" />
+                <s_sev>0</s_sev>
+                <s_msg></s_msg>
+                <s_org>U</s_org>
+                <t_debug xsi:nil="true" />
+                <t_file xsi:nil="true" />
+                <t_from xsi:nil="true" />
+                <t_trn xsi:nil="true" />
+                <o_msj_error xsi:nil="true" />
+            </OutputParameters>
+        </part>
+    </outCobis>
+</messages> <!--Part III-->
+<messages>
+    <inputIAuxRecarga>
+        <part xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="InputParameters">
+            <InputParameters xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:ns2="http://schemas.oracle.com/bpel/extension" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:ns1="http://www.bolivariano.com/Producto" xmlns:ns4="http://www.bolivariano.com/respuestaMQ" xmlns:ns3="http://www.bolivariano.com/consultaMQ" xmlns:ns6="http://www.bolivariano.com/Movistar" xmlns:ns5="http://www.bolivariano.com/CoreBB" xmlns:ns8="http://www.bolivariano.com/Recaudo" xmlns:ns7="http://www.bolivariano.com/MensajeBolivariano" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns9="http://www.bolivariano.com/Cuenta" xmlns:ns11="http://xmlns.oracle.com/pcbpel/adapter/db/MovistarRecarga_SCA_Desarrollo/MovistarRecarga/pa_pg_iauxrecarga" xmlns:ns10="http://www.bolivariano.com/Cliente" xmlns:client="http://xmlns.oracle.com/MovistarRecarga/MovistarRecarga/pagar" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/sp/pa_pg_iauxrecarga" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/sp/pa_pg_iauxrecarga">
+                <tns:e_celular>0912345678</tns:e_celular>
+                <tns:e_operadora>103</tns:e_operadora>
+                <tns:e_secuencial>49151453</tns:e_secuencial>
+                <tns:e_efectivo>0</tns:e_efectivo>
+                <tns:e_debito>2.0</tns:e_debito>
+                <tns:s_date>2022-07-22T00:00:00.000-05:00</tns:s_date>
+                <tns:e_canal>IBK</tns:e_canal>
+                <tns:s_user>ope998</tns:s_user>
+                <tns:e_oficina>0</tns:e_oficina>
+                <tns:e_ubicacion>0</tns:e_ubicacion>
+                <tns:e_nombre>CONSUMIDOR FINAL</tns:e_nombre>
+                <tns:e_tipo_cta>CTE</tns:e_tipo_cta>
+                <tns:e_cuenta>5005070292</tns:e_cuenta>
+            </InputParameters>
+        </part>
+    </inputIAuxRecarga>
+    <outputAuxRecarga>
+        <part xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="OutputParameters">
+            <OutputParameters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/sp/pa_pg_iauxrecarga">
+                <RETURN_VALUE>0</RETURN_VALUE>
+            </OutputParameters>
+        </part>
+    </outputAuxRecarga>
+</messages> <!--Part IV-->
+<messages>
+    <inValidacionesPrevias>
+        <part xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="InputParameters">
+            <InputParameters xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/sp_val_servicios_varios" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/sp/sp_val_servicios_varios">
+                <db:s_ssn>49151453</db:s_ssn>
+                <db:s_lsrv>BOLIVSRV</db:s_lsrv>
+                <db:s_srv>BOLIVSRV</db:s_srv>
+                <db:s_user>ope998</db:s_user>
+                <db:s_sesn>143</db:s_sesn>
+                <db:s_term>term24</db:s_term>
+                <db:s_date>2022-07-22T00:00:00.000-05:00</db:s_date>
+                <db:s_ofi>0</db:s_ofi>
+                <db:s_rol>5</db:s_rol>
+                <db:s_sev>0</db:s_sev>
+                <db:s_org>U</db:s_org>
+                <db:t_corr>N</db:t_corr>
+                <db:t_debug>N</db:t_debug>
+                <db:t_trn>62195</db:t_trn>
+                <db:i_mon>1</db:i_mon>
+                <db:i_empresa>103</db:i_empresa>
+                <db:i_codigo>0912345678</db:i_codigo>
+                <db:i_aplcobis>N</db:i_aplcobis>
+                <db:i_efectivo>0</db:i_efectivo>
+                <db:i_cheque>0</db:i_cheque>
+                <db:i_debito>2.0</db:i_debito>
+                <db:i_subtotal>0</db:i_subtotal>
+                <db:i_comision_efe>0.00</db:i_comision_efe>
+                <db:i_comision_chq>0.00</db:i_comision_chq>
+                <db:i_total>2.0</db:i_total>
+                <db:i_cant_cheques>0</db:i_cant_cheques>
+                <db:i_tipo_cta>CTE</db:i_tipo_cta>
+                <db:i_cuenta>5005070292</db:i_cuenta>
+                <db:i_autoriza>S</db:i_autoriza>
+                <db:i_canal>IBK</db:i_canal>
+                <db:i_tsn>8359380</db:i_tsn>
+                <db:i_ubi>0</db:i_ubi>
+                <db:i_cons_comision>0</db:i_cons_comision>
+                <db:i_opcion>V</db:i_opcion>
+                <db:i_comision_db>0.0</db:i_comision_db>
+            </InputParameters>
+        </part>
+    </inValidacionesPrevias>
+    <outValidacionesPrevias>
+        <part xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="OutputParameters">
+            <OutputParameters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/sp/sp_val_servicios_varios">
+                <RETURN_VALUE>0</RETURN_VALUE>
+                <o_fecha_contable>07/22/2022</o_fecha_contable>
+                <o_ssn>49151453</o_ssn>
+                <o_comision xsi:nil="true" />
+                <o_tasa xsi:nil="true" />
+                <o_base_imp xsi:nil="true" />
+                <o_impuesto xsi:nil="true" />
+                <o_empresa xsi:nil="true" />
+            </OutputParameters>
+        </part>
+    </outValidacionesPrevias>
+</messages> <!--Part V-->
+<messages>
+    <inISOXML>
+        <part xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="parameters">
+            <convertISO8583ToXML xmlns:ns0="http://service.iso8583xml.bolivariano.com/" xmlns="http://service.iso8583xml.bolivariano.com/">
+                <message xmlns="">
+    0210F03A058006C0000000000000000148001982762300009078578580282000000000001100116362090827080408040012002600353733313537303041544D303030303130313630313042424F4C30303030310024303130323039313233343536373820202020202020202020012052454341524741202020202020202020202020203A202020202020202020202020202020392E363549564120202020202020202020202020202020203A202020202020202020202020202020312E333549434520202020202020202020202020202020203A202020202020202020202020202020302E303001442020202020202020202020202042524F41444E455420532E412E202020202020202020202020202041562E2039204445204F435455425245203130302059204D414C45434F4E20532E20424F4C495641303939323337313138383030313030312D3032342D3030303335343431313135393032393538202031332F31312F313520202020202020202020202020202020
+    </message>
+                <packager xmlns="">
+                    <header>0210</header>
+                    <preheader />
+                    <field_002>
+                        <enabled>true</enabled>
+                        <type>IFA_FFCHAR</type>
+                        <length>20</length>
+                    </field_002>
+                    <field_003>
+                        <enabled>true</enabled>
+                        <type>IF_CHAR</type>
+                        <length>6</length>
+                    </field_003>
+                    <field_004>
+                        <enabled>true</enabled>
+                        <type>IFA_NUMERIC</type>
+                        <format>#.##</format>
+                        <length>12</length>
+                        <function>
+                            <className>com.bolivariano.iso8583xml.function.FunctionNumeric</className>
+                        </function>
+                    </field_004>
+                    <field_011>
+                        <enabled>true</enabled>
+                        <type>IF_CHAR</type>
+                        <length>6</length>
+                    </field_011>
+                    <field_012>
+                        <enabled>true</enabled>
+                        <type>IFA_NUMERIC</type>
+                        <length>6</length>
+                    </field_012>
+                    <field_013>
+                        <enabled>true</enabled>
+                        <type>IFA_NUMERIC</type>
+                        <length>4</length>
+                    </field_013>
+                    <field_015>
+                        <enabled>true</enabled>
+                        <type>IFA_NUMERIC</type>
+                        <length>4</length>
+                    </field_015>
+                    <field_022>
+                        <enabled>true</enabled>
+                        <type>IFA_NUMERIC</type>
+                        <length>4</length>
+                    </field_022>
+                    <field_024>
+                        <enabled>true</enabled>
+                        <type>IFA_NUMERIC</type>
+                        <length>4</length>
+                    </field_024>
+                    <field_025>
+                        <enabled>true</enabled>
+                        <type>IFA_NUMERIC</type>
+                        <length>2</length>
+                    </field_025>
+                    <field_038>
+                        <enabled>true</enabled>
+                        <type>IFA_BINARY</type>
+                        <length>6</length>
+                    </field_038>
+                    <field_039>
+                        <enabled>true</enabled>
+                        <type>IFA_BINARY</type>
+                        <length>2</length>
+                    </field_039>
+                    <field_042>
+                        <enabled>true</enabled>
+                        <type>IFA_BINARY</type>
+                        <length>15</length>
+                    </field_042>
+                    <field_041>
+                        <enabled>true</enabled>
+                        <type>IFA_BINARY</type>
+                        <length>8</length>
+                    </field_041>
+                    <field_105>
+                        <enabled>true</enabled>
+                        <type>IFA_LLLABINARY</type>
+                        <length>256</length>
+                    </field_105>
+                    <field_112>
+                        <enabled>true</enabled>
+                        <type>IFA_LLLABINARY</type>
+                        <length>999</length>
+                    </field_112>
+                    <field_114>
+                        <enabled>true</enabled>
+                        <type>IFA_LLLABINARY</type>
+                        <length>512</length>
+                    </field_114>
+                    <field_116>
+                        <enabled>true</enabled>
+                        <type>IFA_LLLABINARY</type>
+                        <length>256</length>
+                    </field_116>
+                    <field_117>
+                        <enabled>true</enabled>
+                        <type>IFA_LLLABINARY</type>
+                        <length>256</length>
+                    </field_117>
+                </packager>
+            </convertISO8583ToXML>
+        </part>
+    </inISOXML>
+    <outISOXML>
+        <part xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="parameters">
+            <ns2:convertISO8583ToXMLResponse xmlns:ns2="http://service.iso8583xml.bolivariano.com/">
+                <return>
+                    <header>
+                        <code>0</code>
+                        <status>CORRECTA</status>
+                        <systemMessage>Transaccion Correcta</systemMessage>
+                        <userMessage>Transaccion Correcta</userMessage>
+                    </header>
+                    <message>
+                        <field_002>
+                            <value>8276230000907857858</value>
+                        </field_002>
+                        <field_003>
+                            <value>282000</value>
+                        </field_003>
+                        <field_004>
+                            <value>11.00</value>
+                        </field_004>
+                        <field_011>
+                            <value>116362</value>
+                        </field_011>
+                        <field_012>
+                            <value>90827</value>
+                        </field_012>
+                        <field_013>
+                            <value>804</value>
+                        </field_013>
+                        <field_015>
+                            <value>804</value>
+                        </field_015>
+                        <field_022>
+                            <value>12</value>
+                        </field_022>
+                        <field_024>
+                            <value>26</value>
+                        </field_024>
+                        <field_025>
+                            <value>0</value>
+                        </field_025>
+                        <field_038>
+                            <value>573157</value>
+                        </field_038>
+                        <field_039>
+                            <value>00</value>
+                        </field_039>
+                        <field_041>
+                            <value>ATM00001</value>
+                        </field_041>
+                        <field_042>
+                            <value>016010BBOL00001</value>
+                        </field_042>
+                        <field_112>
+                            <value>01020912345678</value>
+                        </field_112>
+                        <field_114>
+                            <value>RECARGA             :               9.65IVA                 :               1.35ICE                 :               0.00</value>
+                        </field_114>
+                        <field_117>
+                            <value>
+    BROADNET S.A.              AV. 9 DE OCTUBRE 100 Y MALECON S. BOLIVA0992371188001001-024-00035441115902958  13/11/15
+    </value>
+                        </field_117>
+                    </message>
+                </return>
+            </ns2:convertISO8583ToXMLResponse>
+        </part>
+    </outISOXML>
+</messages><!-- Part VI -->
+<outputVariable>
+    <part xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="parametros">
+        <MensajeSalidaPagarMovistar xmlns:ns1="http://www.bolivariano.com/MensajeMovistar" xmlns="http://www.bolivariano.com/MensajeMovistar">
+            <codigoError xmlns="">00</codigoError>
+            <codigoErrorRemoto xmlns="" />
+            <informacionMovistar xmlns="">
+                <autorizacionSRI>1115902958</autorizacionSRI>
+                <codigoComercio>016010BBOL00001</codigoComercio>
+                <fechaContable>2022-07-22</fechaContable>
+                <fechaEmision>2022-07-22T06:38:34.000Z</fechaEmision>
+                <identificacion>8276230000907857858</identificacion>
+                <nombre>BROADNET S.A</nombre>
+                <valorTotalCancelar>11.00</valorTotalCancelar>
+                <codigoAutorizacionProv>573157</codigoAutorizacionProv>
+                <codigoCondicion>0</codigoCondicion>
+                <codigoProceso>282000</codigoProceso>
+                <codigoRed>26</codigoRed>
+                <codigoTerminal>ATM00001</codigoTerminal>
+                <data1>01020912345678</data1>
+                <data2>RECARGA             :               9.65IVA                 :               1.35ICE                 :               0.00</data2>
+                <data3>00010001</data3>
+                <data4>
+    BROADNET S.A.              AV. 9 DE OCTUBRE 100 Y MALECON S. BOLIVA0992371188001001-024-00035441115902958  13/11/15
+    </data4>
+                <direccion>AV. 9 DE OCTUBRE 100 Y MALECON S. BOLIVA</direccion>
+                <fechaDesde>22/11/2013</fechaDesde>
+                <fecVenSRI>13/11/15</fecVenSRI>
+                <iva>1.3500000000000000000</iva>
+                <horaLocal>90827</horaLocal>
+                <neto>9.6500000000000000000</neto>
+                <modoIngreso>12</modoIngreso>
+                <notaVenta>001-024-0003544</notaVenta>
+                <numeroTelefono>0912345678</numeroTelefono>
+                <resolucion>1305 DEL 07/10/2008</resolucion>
+                <rucEmpresa>0992371188001</rucEmpresa>
+            </informacionMovistar>
+            <informacionCore xmlns="">
+                <secuencial>49151453</secuencial>
+            </informacionCore>
+        </MensajeSalidaPagarMovistar>
+    </part>
+</outputVariable>
