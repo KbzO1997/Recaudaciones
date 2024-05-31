@@ -1,0 +1,248 @@
+{
+	"info": {
+		"_postman_id": "9dbaacf8-1731-4a24-a1ff-1ceadda96e5c",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5424816"
+	},
+	"item": [
+		{
+			"name": "Ganga",
+			"item": [
+				{
+					"name": "https://oauth.almaceneslaganga.com/connect/token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "ibexpp",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "cibexusr",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "5BC8ADF8-9A04-4866-84D6-73ED7C0C7C20",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://oauth.almaceneslaganga.com/connect/token",
+							"protocol": "https",
+							"host": [
+								"oauth",
+								"almaceneslaganga",
+								"com"
+							],
+							"path": [
+								"connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://api.almaceneslaganga.com/Cobranza/1.0/OrdenTransferencia?Identificacion=9999999999&Codigo=1EC0121575",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjlDRjc1ODU1MDcyMUQ5OTg5MjVDRkY5NjQ5MkM5RDY3MzZBRTYzNDdSUzI1NiIsInR5cCI6ImF0K2p3dCIsIng1dCI6Im5QZFlWUWNoMlppU1hQLVdTU3lkWnphdVkwYyJ9.eyJuYmYiOjE3MDU5NTY3MTksImV4cCI6MTcwNTk2MDMxOSwiaXNzIjoiaHR0cHM6Ly9vYXV0aC5hbG1hY2VuZXNsYWdhbmdhLmNvbSIsImF1ZCI6Imh0dHBzOi8vb2F1dGguYWxtYWNlbmVzbGFnYW5nYS5jb20vcmVzb3VyY2VzIiwiY2xpZW50X2lkIjoiY2liZXh1c3IiLCJjbGllbnRfY29tcGFueSI6IjAwMSIsImp0aSI6IjgyNDE4NEY3RjRDN0QyRkUzMDZDODI0ODIwNTAzNEREIiwiaWF0IjoxNzA1OTU2NzE5LCJzY29wZSI6WyJpYmV4cHAiXX0.dxV27Iixz_gHmi4t1QEJGDvohagGpRGQWalHP2oJyTRJrGnY36_m10mlF3o5Hwtt9DPj7o25vbHh3xe22_44V8G4n5Q6SjcEy7FRIPJoaoL9Bhp7O-jiQmMwm65zJL3C48qY2xUlzDDxlJ-uLCIJDnEtN0uWgzOygZloKpURcAvoFuUyX5jFK87ZDUPrj8R9hlvOLtLkQKjlHmxPzujCESAdr7b6BqAclMQQVAC6ONu5MhxHKPIOfh36bV7k-n5D9UqBEqsHNNrC-2RpEjAPXwTWxGYi70Rfo4NAshJZsduCGa8yFaWH7zKTRrf1F_BK_G_7rQ7r_iWLG0bMJGQA9A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.almaceneslaganga.com/Cobranza/1.0/OrdenTransferencia?Identificacion=9999999999&Codigo=1EC0121575",
+							"protocol": "https",
+							"host": [
+								"api",
+								"almaceneslaganga",
+								"com"
+							],
+							"path": [
+								"Cobranza",
+								"1.0",
+								"OrdenTransferencia"
+							],
+							"query": [
+								{
+									"key": "Identificacion",
+									"value": "9999999999"
+								},
+								{
+									"key": "Codigo",
+									"value": "1EC0121575"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://api.almaceneslaganga.com/Cobranza/api/v1/cobranza/OrdenTransferencia/Pago?Codigo=123456&Identificacion=99999999&Valor=122.00&SecuenciaPago=C1-A5484664M&FechaPago=26/09/2023&HoraPago=16:54",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjlDRjc1ODU1MDcyMUQ5OTg5MjVDRkY5NjQ5MkM5RDY3MzZBRTYzNDdSUzI1NiIsInR5cCI6ImF0K2p3dCIsIng1dCI6Im5QZFlWUWNoMlppU1hQLVdTU3lkWnphdVkwYyJ9.eyJuYmYiOjE3MDU5NTY3MTksImV4cCI6MTcwNTk2MDMxOSwiaXNzIjoiaHR0cHM6Ly9vYXV0aC5hbG1hY2VuZXNsYWdhbmdhLmNvbSIsImF1ZCI6Imh0dHBzOi8vb2F1dGguYWxtYWNlbmVzbGFnYW5nYS5jb20vcmVzb3VyY2VzIiwiY2xpZW50X2lkIjoiY2liZXh1c3IiLCJjbGllbnRfY29tcGFueSI6IjAwMSIsImp0aSI6IjgyNDE4NEY3RjRDN0QyRkUzMDZDODI0ODIwNTAzNEREIiwiaWF0IjoxNzA1OTU2NzE5LCJzY29wZSI6WyJpYmV4cHAiXX0.dxV27Iixz_gHmi4t1QEJGDvohagGpRGQWalHP2oJyTRJrGnY36_m10mlF3o5Hwtt9DPj7o25vbHh3xe22_44V8G4n5Q6SjcEy7FRIPJoaoL9Bhp7O-jiQmMwm65zJL3C48qY2xUlzDDxlJ-uLCIJDnEtN0uWgzOygZloKpURcAvoFuUyX5jFK87ZDUPrj8R9hlvOLtLkQKjlHmxPzujCESAdr7b6BqAclMQQVAC6ONu5MhxHKPIOfh36bV7k-n5D9UqBEqsHNNrC-2RpEjAPXwTWxGYi70Rfo4NAshJZsduCGa8yFaWH7zKTRrf1F_BK_G_7rQ7r_iWLG0bMJGQA9A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://api.almaceneslaganga.com/Cobranza/api/v1/cobranza/OrdenTransferencia/Pago?Codigo=123456&Identificacion=99999999&Valor=122.00&SecuenciaPago=C1-A5484664M&FechaPago=26/09/2023&HoraPago=16:54",
+							"protocol": "https",
+							"host": [
+								"api",
+								"almaceneslaganga",
+								"com"
+							],
+							"path": [
+								"Cobranza",
+								"api",
+								"v1",
+								"cobranza",
+								"OrdenTransferencia",
+								"Pago"
+							],
+							"query": [
+								{
+									"key": "Codigo",
+									"value": "123456"
+								},
+								{
+									"key": "Identificacion",
+									"value": "99999999"
+								},
+								{
+									"key": "Valor",
+									"value": "122.00"
+								},
+								{
+									"key": "SecuenciaPago",
+									"value": "C1-A5484664M"
+								},
+								{
+									"key": "FechaPago",
+									"value": "26/09/2023"
+								},
+								{
+									"key": "HoraPago",
+									"value": "16:54"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://api.almaceneslaganga.com/Cobranza/api/v1/cobranza/OrdenTransferencia/Reverso?Codigo=1011&Identificacion=99999999&Valor=300&SecuenciaPago=5484664598&FechaPago=26/09/2023&HoraPago=16:54&MotivoReverso=Error de la cajera",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjlDRjc1ODU1MDcyMUQ5OTg5MjVDRkY5NjQ5MkM5RDY3MzZBRTYzNDdSUzI1NiIsInR5cCI6ImF0K2p3dCIsIng1dCI6Im5QZFlWUWNoMlppU1hQLVdTU3lkWnphdVkwYyJ9.eyJuYmYiOjE3MDU5NTY3MTksImV4cCI6MTcwNTk2MDMxOSwiaXNzIjoiaHR0cHM6Ly9vYXV0aC5hbG1hY2VuZXNsYWdhbmdhLmNvbSIsImF1ZCI6Imh0dHBzOi8vb2F1dGguYWxtYWNlbmVzbGFnYW5nYS5jb20vcmVzb3VyY2VzIiwiY2xpZW50X2lkIjoiY2liZXh1c3IiLCJjbGllbnRfY29tcGFueSI6IjAwMSIsImp0aSI6IjgyNDE4NEY3RjRDN0QyRkUzMDZDODI0ODIwNTAzNEREIiwiaWF0IjoxNzA1OTU2NzE5LCJzY29wZSI6WyJpYmV4cHAiXX0.dxV27Iixz_gHmi4t1QEJGDvohagGpRGQWalHP2oJyTRJrGnY36_m10mlF3o5Hwtt9DPj7o25vbHh3xe22_44V8G4n5Q6SjcEy7FRIPJoaoL9Bhp7O-jiQmMwm65zJL3C48qY2xUlzDDxlJ-uLCIJDnEtN0uWgzOygZloKpURcAvoFuUyX5jFK87ZDUPrj8R9hlvOLtLkQKjlHmxPzujCESAdr7b6BqAclMQQVAC6ONu5MhxHKPIOfh36bV7k-n5D9UqBEqsHNNrC-2RpEjAPXwTWxGYi70Rfo4NAshJZsduCGa8yFaWH7zKTRrf1F_BK_G_7rQ7r_iWLG0bMJGQA9A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://api.almaceneslaganga.com/Cobranza/api/v1/cobranza/OrdenTransferencia/Reverso?Codigo=1011&Identificacion=99999999&Valor=300&SecuenciaPago=5484664598&FechaPago=26/09/2023&HoraPago=16:54&MotivoReverso=Error de la cajera",
+							"protocol": "https",
+							"host": [
+								"api",
+								"almaceneslaganga",
+								"com"
+							],
+							"path": [
+								"Cobranza",
+								"api",
+								"v1",
+								"cobranza",
+								"OrdenTransferencia",
+								"Reverso"
+							],
+							"query": [
+								{
+									"key": "Codigo",
+									"value": "1011"
+								},
+								{
+									"key": "Identificacion",
+									"value": "99999999"
+								},
+								{
+									"key": "Valor",
+									"value": "300"
+								},
+								{
+									"key": "SecuenciaPago",
+									"value": "5484664598"
+								},
+								{
+									"key": "FechaPago",
+									"value": "26/09/2023"
+								},
+								{
+									"key": "HoraPago",
+									"value": "16:54"
+								},
+								{
+									"key": "MotivoReverso",
+									"value": "Error de la cajera"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
