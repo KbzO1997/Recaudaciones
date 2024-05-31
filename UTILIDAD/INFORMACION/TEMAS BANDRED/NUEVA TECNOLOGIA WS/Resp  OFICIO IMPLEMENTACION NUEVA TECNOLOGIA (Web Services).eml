@@ -1,0 +1,1479 @@
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com (104.47.56.169)
+ by mailweb.bolivariano.com (172.17.3.231) with Microsoft SMTP Server (TLS) id
+ 14.3.498.0; Wed, 18 May 2022 10:21:56 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=NvVAXmYm7aIwZArLta4qEbS44s29G+TjnuuBuHXzV47YyU3kwWpmbpW5/BWUC7HLkTlynfV9tPE9u3oNO+L3P0AV04d4uk/CwDxuFWrRC0S+7mZbO3/xrjvaPE4oRz/1IDw+fl0tnlvnnHN8zXMWqEl+4yOBzBG+LSZRN8oA7rcHu/P78lqEW8JYtm5+Fd4Gso7/X8h9D4NhjWcRqbytj/SBqPW8kxIvm3T7h01f4rOgAjp+h4r7cHW1R/mslhB84dZVE8it30G+DpbQDiL8yiVuaSvfKHdE9lohTUJy1Zyy5+9CedKPeBsGjOKAgDV0e1/O8U7HKqMKbYX4OCQGFg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=A4RFDCHEBmqjtBDA/tbOUD7YAjQxnVywLBOeQdjDbM4=;
+ b=mZeKwoiksrUtCFM7YrgqFLJBibtApLBxqgII/kt9KDLq7zuXr2gT7o8mRVwo5xQG4SqvIFg9wDnlyqLSnxIRim84kj6QAvg+gq8WXdDRNhFLyEJ7AD6Q4uQSIdm3OiRyLa8WKP2LIC11GAWzEYCGI8lc7cEo5Ay+DOviNxVa1ZpzCl079acob61h4vt+vd7HHxgmm/d5hsqVP/aW7oBwQZ6CV259GxJ8VHv9uSyKczoLnq97d4tW0L1i+1rBn2DBzHFxQ0keDNd2E3FJNsAs4/w2Hl9iaoWHI4zcSwrGCZjmJGOCLR39xJrI+LAf0+dAfOQJNSIMYqPBOWvtN3eOBw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=bolivariano.com; dmarc=pass action=none
+ header.from=bolivariano.com; dkim=pass header.d=bolivariano.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bolivariano.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=A4RFDCHEBmqjtBDA/tbOUD7YAjQxnVywLBOeQdjDbM4=;
+ b=X4OX854WzsMNVRlMoMgqdphMQpy6O1Al0GADuotMvIpeFSMl4gk3jj/ZDtzYyf+khkS8AASXsOQry69/nHGQ6flPL8+MxNBL/g6y/wQBym2PnDXYi/wIqd3O6f/NW+MmhHCJS3y8SgN3fNPuNXgV6n/4WfhybRx8I7lGEbth5xI7aT/FAXThDe7o8ICh+3XLjKJ5WSOrwj+5nz6Ts+x+VM6RDBz1btR8m3fMk1Pfk+BDCBE38UoO2Tg7CLfxaFl29P2rdu7pW+u+TBgiyzQ1TmypObU1EDrGxG9HvHgLLSfid8Q1x4iXxj1dxKbaPmlfdN4yr2Fz72wZRfdFM3GMsA==
+Received: from PH0PR10MB4472.namprd10.prod.outlook.com (2603:10b6:510:30::13)
+ by BYAPR10MB2710.namprd10.prod.outlook.com (2603:10b6:a02:b5::27) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5250.15; Wed, 18 May
+ 2022 15:21:50 +0000
+Received: from PH0PR10MB4472.namprd10.prod.outlook.com
+ ([fe80::5859:2a15:bad1:7658]) by PH0PR10MB4472.namprd10.prod.outlook.com
+ ([fe80::5859:2a15:bad1:7658%6]) with mapi id 15.20.5273.014; Wed, 18 May 2022
+ 15:21:50 +0000
+From: Diana Soriano Freire <dsoriano@bolivariano.com>
+To: "Ma. Isabel Carrillo Ortega" <mcarrillo@bolivariano.com>,
+	=?Windows-1252?Q?Wendy_Cede=F1o_Ley?= <wcedeno@bolivariano.com>
+CC: Rosario Cunto Icaza <rcunto@bolivariano.com>,
+	=?Windows-1252?Q?Walter__Ram=EDrez_Bocca?= <wramirez@bolivariano.com>, Darwin
+ Briones Barzola <dbriones@bolivariano.com>, Recaudos
+	<Recaudos@bolivariano365.onmicrosoft.com>,
+	=?Windows-1252?Q?Betty_Mu=F1oz_Villacres?= <bmunozv@bolivariano.com>,
+	=?Windows-1252?Q?Ma=2E_Fernanda_Hungr=EDa_Jaramillo?=
+	<mhungria@bolivariano.com>, Recaudaciones <Recaudaciones@bolivariano.com>,
+	Dennise Zepeda Franco <dzepeda@bolivariano.com>,
+	=?Windows-1252?Q?Jaime_Ram=EDrez_Cevallos_=28Quito=29?=
+	<jramirez@bolivariano.com>, =?Windows-1252?Q?Dario_Barco_Le=F3n?=
+	<dbarcol@bolivariano.com>
+Subject: RE: OFICIO IMPLEMENTACION NUEVA TECNOLOGIA (Web Services)
+Thread-Topic: OFICIO IMPLEMENTACION NUEVA TECNOLOGIA (Web Services)
+Thread-Index: hkd6yuZGSWYrRo8MkeTklzvvQdCRhaGlxhCwgAAMVXCAAARJgIADrbbAgAkBfgCAJhV5QIAEHXrggAMq1UyAAAVvQIAADAgk
+Date: Wed, 18 May 2022 15:21:50 +0000
+Message-ID: <PH0PR10MB44724D597EFFF7219382C201D2D19@PH0PR10MB4472.namprd10.prod.outlook.com>
+References: <1144198755.267.1648591666428.JavaMail.stacuri@RGTES-STACURI4>
+ <230780317.277.1648592022270.JavaMail.stacuri@RGTES-STACURI4>
+ <BN0PR10MB49838EC5E79C43C29AFA2506D2EA9@BN0PR10MB4983.namprd10.prod.outlook.com>
+ <PH0PR10MB4472E905DAC47966FBD8BFABD2EA9@PH0PR10MB4472.namprd10.prod.outlook.com>
+ <PH0PR10MB447215D34F9CB0473227C280D2EA9@PH0PR10MB4472.namprd10.prod.outlook.com>
+ <PH0PR10MB4472B464EC6B24E7B2BAE2DCD2EF9@PH0PR10MB4472.namprd10.prod.outlook.com>
+ <BLAPR10MB520180B1795F1562F5AA850AA0F29@BLAPR10MB5201.namprd10.prod.outlook.com>
+ <PH0PR10MB4472196C7EF3CB015E25D7B6D2CA9@PH0PR10MB4472.namprd10.prod.outlook.com>
+ <BLAPR10MB520168AC9750AF4EEC22E382A0CF9@BLAPR10MB5201.namprd10.prod.outlook.com>
+ <PH0PR10MB44720AA39D5D12EFB7753857D2D19@PH0PR10MB4472.namprd10.prod.outlook.com>
+ <PH7PR10MB5816981E3D326AF60D24E953B8D19@PH7PR10MB5816.namprd10.prod.outlook.com>
+In-Reply-To: <PH7PR10MB5816981E3D326AF60D24E953B8D19@PH7PR10MB5816.namprd10.prod.outlook.com>
+Accept-Language: es-EC, en-US
+Content-Language: es-EC
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator:
+msip_labels:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=bolivariano.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 10b27692-5dfb-4e25-04ef-08da38e221b7
+x-ms-traffictypediagnostic: BYAPR10MB2710:EE_
+x-ld-processed: 381bee0c-a9ea-4342-81c0-318a50b0845f,ExtAddr
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 6XOB04LGGhGyMYrT7DPHrAL2KuuRDJoT+PEU89i5+tES+fwihtgyRUjnVBeTCnV1+5VV3lAjR8Cvvo+wNv8g9nvqCvuqxZvUgVKdqcsyHKfRR0p3RuZNxqVIMiHyYJmAtvQehiCdvGY5EHausxcpBY13FQVWcXKw/xfp1We3AhKpjdWBcM8JtjA9M9m8K24CnDkyF+CQ6TyoK59BJBPUXqJUiqJLuPrqeFGcZOMfL4sR7F6GxMINUfQr9ikjYBbRNDKu1Y8Ixlhlt+2THSQOkT/l9gXHXot1K7R+vWgchHsgc2XGAzNqqZZgRBpzqjENIPo1f3V9XlKoJObmnOEdLU7qv2qOb3ot5jOZFfqPAY3UFY5eV+Dqsg9C9SLd/Nb6JQl4Q35fUVutbXE0uSOrYUKS3XKk6c4SQ7HnXSYT0Sk2njc5od4gMwv9JyYQaK280EGk6McyjNfYQHLB4myS7v5FvFJzCW4xMJukiwPYHlAtQjKD0ocGxn6Z7tcvYCELnqJw6cdNNWfhLj9+phtZASKdHbk/8GC7lUacUR1+LBlclXalx1bhvoVMq+TLitexMRlIcERKTvVJ/TLqGXleAHH2jrGLtA3AtTs/ouG0lKE=
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:es;SCL:-1;SRV:;IPV:NLI;SFV:SKI;H:PH0PR10MB4472.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:;DIR:INB;
+Content-Type: multipart/related;
+	boundary="_006_PH0PR10MB44724D597EFFF7219382C201D2D19PH0PR10MB4472namp_";
+	type="multipart/alternative"
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PH0PR10MB4472.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 10b27692-5dfb-4e25-04ef-08da38e221b7
+X-MS-Exchange-CrossTenant-originalarrivaltime: 18 May 2022 15:21:50.5597
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 381bee0c-a9ea-4342-81c0-318a50b0845f
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: aVVIg/ieeKJiQnYkaWSvMha0P/h/jNfUYtESbFvXe8I/r51pinQVzIK/+7KtIB2CdEWxif/M9tIvtVk5Pp3VYhiSkTSrwl1MYnXnfSori2o=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR10MB2710
+X-OrganizationHeadersPreserved: BYAPR10MB2710.namprd10.prod.outlook.com
+Return-Path: dsoriano@bolivariano.com
+X-OriginatorOrg: bolivariano.com
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-MS-Exchange-Organization-AuthSource: PH0PR10MB4472.namprd10.prod.outlook.com
+X-MS-Exchange-Organization-SCL: -1
+X-CrossPremisesHeadersPromoted: EX2K10SRV.bolivariano.fin.ec
+X-CrossPremisesHeadersFiltered: EX2K10SRV.bolivariano.fin.ec
+MIME-Version: 1.0
+
+--_006_PH0PR10MB44724D597EFFF7219382C201D2D19PH0PR10MB4472namp_
+Content-Type: multipart/alternative;
+	boundary="_000_PH0PR10MB44724D597EFFF7219382C201D2D19PH0PR10MB4472namp_"
+
+--_000_PH0PR10MB44724D597EFFF7219382C201D2D19PH0PR10MB4472namp_
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+Estimada Ma. Isabel:
+
+Los saldos en las cuentas que mantienen las empresas p=FAblicas por normati=
+va no se mantienen en el Bco. son enviados al BCE dentro 24 horas.
+En el caso de negocio se realiz=F3 la proyecci=F3n para el a=F1o 2023 de un=
+a participaci=F3n del 0.10% del total de transacciones que tienen 1.880.000=
+ y incluyeron las transacciones por estos nuevos rubros. (Siendo conservado=
+res, esperamos que sean m=E1s las transacciones que logremos recaudar)
+
+Saludos cordiales,
+Diana Soriano Freire
+
+
+
+Saludos cordiales,
+Diana Soriano Freire
+________________________________
+De: Ma. Isabel Carrillo Ortega <mcarrillo@bolivariano.com>
+Enviado: mi=E9rcoles, 18 de mayo de 2022 8:59
+Para: Diana Soriano Freire <dsoriano@bolivariano.com>; Wendy Cede=F1o Ley <=
+wcedeno@bolivariano.com>
+Cc: Rosario Cunto Icaza <rcunto@bolivariano.com>; Walter Ram=EDrez Bocca <w=
+ramirez@bolivariano.com>; Darwin Briones Barzola <dbriones@bolivariano.com>=
+; Recaudos <Recaudos@bolivariano365.onmicrosoft.com>; Betty Mu=F1oz Villacr=
+es <bmunozv@bolivariano.com>; Ma. Fernanda Hungr=EDa Jaramillo <mhungria@bo=
+livariano.com>; Recaudaciones <Recaudaciones@bolivariano.com>; Dennise Zepe=
+da Franco <dzepeda@bolivariano.com>; Jaime Ram=EDrez Cevallos (Quito) <jram=
+irez@bolivariano.com>; Dario Barco Le=F3n <dbarcol@bolivariano.com>
+Asunto: RE: OFICIO IMPLEMENTACION NUEVA TECNOLOGIA (Web Services)
+
+
+Y se puede agregar el monto que se va a recaudar porque eso es monetario o =
+el monetario  no entra al Banco?
+
+
+
+De: Diana Soriano Freire <dsoriano@bolivariano.com>
+Enviado el: mi=E9rcoles, 18 de mayo de 2022 8:51
+Para: Wendy Cede=F1o Ley <wcedeno@bolivariano.com>
+CC: Rosario Cunto Icaza <rcunto@bolivariano.com>; Walter Ram=EDrez Bocca <w=
+ramirez@bolivariano.com>; Darwin Briones Barzola <dbriones@bolivariano.com>=
+; Recaudos <Recaudos@bolivariano365.onmicrosoft.com>; Ma. Isabel Carrillo O=
+rtega <mcarrillo@bolivariano.com>; Betty Mu=F1oz Villacres <bmunozv@bolivar=
+iano.com>; Ma. Fernanda Hungr=EDa Jaramillo <mhungria@bolivariano.com>; Rec=
+audaciones <Recaudaciones@bolivariano.com>; Dennise Zepeda Franco <dzepeda@=
+bolivariano.com>; Jaime Ram=EDrez Cevallos (Quito) <jramirez@bolivariano.co=
+m>; Dario Barco Le=F3n <dbarcol@bolivariano.com>
+Asunto: RE: OFICIO IMPLEMENTACION NUEVA TECNOLOGIA (Web Services)
+
+
+
+Buen d=EDa:
+
+
+
+Estimada Wendy, adjunto caso de negocio solicitado, adicionalmente confirmo=
+ que se encuentra ingresado el requerimiento en la herramienta. Cabe mencio=
+nar que con el nuevo web service permitir=E1 recaudar otros rubros que tien=
+e el Municipio de Cuenca que nosotros actualmente no recaudamos. Por favor =
+nos confirmas el tiempo de atenci=F3n para poder elaborar la comunicaci=F3n=
+ al Municipio de Cuenca solicitando pr=F3rroga para ver la posibilidad que =
+nos acepten para no quedarnos fuera con esta recaudaci=F3n.
+
+
+
+Saludos cordiales,
+
+Diana Soriano Freire
+
+
+
+
+
+
+
+
+
+
+
+
+
+________________________________
+
+De: Wendy Cede=F1o Ley <wcedeno@bolivariano.com<mailto:wcedeno@bolivariano.=
+com>>
+Enviado: lunes, 16 de mayo de 2022 8:17
+Para: Diana Soriano Freire <dsoriano@bolivariano.com<mailto:dsoriano@boliva=
+riano.com>>
+Cc: Rosario Cunto Icaza <rcunto@bolivariano.com<mailto:rcunto@bolivariano.c=
+om>>; Walter Ram=EDrez Bocca <wramirez@bolivariano.com<mailto:wramirez@boli=
+variano.com>>; Darwin Briones Barzola <dbriones@bolivariano.com<mailto:dbri=
+ones@bolivariano.com>>; Recaudos <Recaudos@bolivariano365.onmicrosoft.com<m=
+ailto:Recaudos@bolivariano365.onmicrosoft.com>>; Ma. Isabel Carrillo Ortega=
+ <mcarrillo@bolivariano.com<mailto:mcarrillo@bolivariano.com>>; Betty Mu=F1=
+oz Villacres <bmunozv@bolivariano.com<mailto:bmunozv@bolivariano.com>>; Ma.=
+ Fernanda Hungr=EDa Jaramillo <mhungria@bolivariano.com<mailto:mhungria@bol=
+ivariano.com>>; Recaudaciones <Recaudaciones@bolivariano.com<mailto:Recauda=
+ciones@bolivariano.com>>; Dennise Zepeda Franco <dzepeda@bolivariano.com<ma=
+ilto:dzepeda@bolivariano.com>>; Jaime Ram=EDrez Cevallos (Quito) <jramirez@=
+bolivariano.com<mailto:jramirez@bolivariano.com>>; Dario Barco Le=F3n <dbar=
+col@bolivariano.com<mailto:dbarcol@bolivariano.com>>
+Asunto: RE: OFICIO IMPLEMENTACION NUEVA TECNOLOGIA (Web Services)
+
+
+
+Estimada Diana buenos d=EDas, dado que hay que construir desde cero esta re=
+caudaci=F3n, por favor registrar la iniciativa en el link adjunto, indicand=
+o el alcance que requieren:
+
+
+
+http://shrpointsrv:1409/SitePages/Iniciativa%20online/info.aspx
+
+
+
+Por favor adjuntar en caso de negocio, y la priorizaci=F3n ser=E1 revisada =
+en la siguiente reuni=F3n.
+
+
+
+
+
+Wendy Cede=F1o Ley
+
+Productos Empresas - Innovaci=F3n y Mercadeo
+
+Jun=EDn 200 y Panam=E1 -  Telf.: (593 4 ) 2305000 Ext. 3564
+
+[Firma BB]
+
+De: Diana Soriano Freire <dsoriano@bolivariano.com<mailto:dsoriano@bolivari=
+ano.com>>
+Enviado el: viernes, mayo 13, 2022 17:27
+Para: Wendy Cede=F1o Ley <wcedeno@bolivariano.com<mailto:wcedeno@bolivarian=
+o.com>>; Darwin Briones Barzola <dbriones@bolivariano.com<mailto:dbriones@b=
+olivariano.com>>; Dario Barco Le=F3n <dbarcol@bolivariano.com<mailto:dbarco=
+l@bolivariano.com>>
+CC: Rosario Cunto Icaza <rcunto@bolivariano.com<mailto:rcunto@bolivariano.c=
+om>>; Walter Ram=EDrez Bocca <wramirez@bolivariano.com<mailto:wramirez@boli=
+variano.com>>; Recaudos <Recaudos@bolivariano365.onmicrosoft.com<mailto:Rec=
+audos@bolivariano365.onmicrosoft.com>>; Ma. Isabel Carrillo Ortega <mcarril=
+lo@bolivariano.com<mailto:mcarrillo@bolivariano.com>>; Betty Mu=F1oz Villac=
+res <bmunozv@bolivariano.com<mailto:bmunozv@bolivariano.com>>; Ma. Fernanda=
+ Hungr=EDa Jaramillo <mhungria@bolivariano.com<mailto:mhungria@bolivariano.=
+com>>; Recaudaciones <Recaudaciones@bolivariano.com<mailto:Recaudaciones@bo=
+livariano.com>>; Dennise Zepeda Franco <dzepeda@bolivariano.com<mailto:dzep=
+eda@bolivariano.com>>; Jaime Ram=EDrez Cevallos (Quito) <jramirez@bolivaria=
+no.com<mailto:jramirez@bolivariano.com>>
+Asunto: RE: OFICIO IMPLEMENTACION NUEVA TECNOLOGIA (Web Services)
+
+
+
+Estimados Wendy/Dario:
+
+
+
+Hemos gestionado con el Municipio Cuenca a trav=E9s Banred para que nos den=
+ pr=F3rroga para la salida a producci=F3n con la nueva tecnolog=EDa (web Se=
+rvice) sin embargo nos indica que enviemos una comunicaci=F3n solicitando l=
+a nueva fecha para la salida con el nuevo est=E1ndar t=E9cnico, con los jus=
+tificativos del caso por el cual no podr=EDamos salir en el mes de junio pa=
+ra que ellos eval=FAen nuestra petici=F3n;  por lo que solicito nos confirm=
+en la fecha en que podr=EDa ser atendido este requerimiento para no quedarn=
+os sin esta recaudaci=F3n.
+
+
+
+Agradecemos la atenci=F3n brindada.
+
+
+
+Saludos cordiales,
+
+
+
+Diana Soriano Freire
+
+Pagos y Recaudaciones =96 Operaciones Centrales
+
+Jun=EDn 200 y Panam=E1 =96 Telf: (593 4) 2305000 Ext. 2190
+
+[Firma BB]
+
+
+
+De: Wendy Cede=F1o Ley <wcedeno@bolivariano.com<mailto:wcedeno@bolivariano.=
+com>>
+Enviado el: Tuesday, April 19, 2022 11:52 AM
+Para: Diana Soriano Freire <dsoriano@bolivariano.com<mailto:dsoriano@boliva=
+riano.com>>; Jaime Ram=EDrez Cevallos (Quito) <jramirez@bolivariano.com<mai=
+lto:jramirez@bolivariano.com>>
+CC: Rosario Cunto Icaza <rcunto@bolivariano.com<mailto:rcunto@bolivariano.c=
+om>>; Walter Ram=EDrez Bocca <wramirez@bolivariano.com<mailto:wramirez@boli=
+variano.com>>; Recaudos <Recaudos@bolivariano365.onmicrosoft.com<mailto:Rec=
+audos@bolivariano365.onmicrosoft.com>>; Ma. Isabel Carrillo Ortega <mcarril=
+lo@bolivariano.com<mailto:mcarrillo@bolivariano.com>>; Darwin Briones Barzo=
+la <dbriones@bolivariano.com<mailto:dbriones@bolivariano.com>>; Betty Mu=F1=
+oz Villacres <bmunozv@bolivariano.com<mailto:bmunozv@bolivariano.com>>; Dar=
+io Barco Le=F3n <dbarcol@bolivariano.com<mailto:dbarcol@bolivariano.com>>; =
+Ma. Fernanda Hungr=EDa Jaramillo <mhungria@bolivariano.com<mailto:mhungria@=
+bolivariano.com>>; Recaudaciones <Recaudaciones@bolivariano.com<mailto:Reca=
+udaciones@bolivariano.com>>; Dennise Zepeda Franco <dzepeda@bolivariano.com=
+<mailto:dzepeda@bolivariano.com>>
+Asunto: RE: OFICIO IMPLEMENTACION NUEVA TECNOLOGIA (Web Services)
+
+
+
+Estimados Jaime/Diana buenas tardes, se ha revisado el requerimiento para M=
+unicipio de Cuenca con el equipo t=E9cnico de Recaudaciones, el servicio no=
+ existe en el bus, por tal motivo debe ser creado ya en nuestro nuevo esque=
+ma de Microservicios.
+
+
+
+El requerimiento debe ser ingresado para su posterior priorizaci=F3n en la =
+cartera de Recaudaciones, en el siguiente link:
+
+
+
+http://shrpointsrv:1409/SitePages/Iniciativa%20online/info.aspx
+
+
+
+De requerir atenci=F3n inmediata, se debe dejar de atender una de las inici=
+ativas en curso, pero la salida a producci=F3n depender=E1 de la implementa=
+ci=F3n de los microservicios.
+
+
+
+Cualquier consulta a las =F3rdenes.
+
+
+
+Wendy Cede=F1o Ley
+
+Productos Empresas - Innovaci=F3n y Mercadeo
+
+Jun=EDn 200 y Panam=E1 -  Telf.: (593 4 ) 2305000 Ext. 3564
+
+[Firma BB]
+
+
+
+
+
+
+
+De: Diana Soriano Freire <dsoriano@bolivariano.com<mailto:dsoriano@bolivari=
+ano.com>>
+Enviado el: jueves, abril 14, 2022 8:27
+Para: Dario Barco Le=F3n <dbarcol@bolivariano.com<mailto:dbarcol@bolivarian=
+o.com>>; Betty Mu=F1oz Villacres <bmunozv@bolivariano.com<mailto:bmunozv@bo=
+livariano.com>>; Darwin Briones Barzola <dbriones@bolivariano.com<mailto:db=
+riones@bolivariano.com>>; Wendy Cede=F1o Ley <wcedeno@bolivariano.com<mailt=
+o:wcedeno@bolivariano.com>>; Ma. Isabel Carrillo Ortega <mcarrillo@bolivari=
+ano.com<mailto:mcarrillo@bolivariano.com>>; Recaudos <Recaudos@bolivariano3=
+65.onmicrosoft.com<mailto:Recaudos@bolivariano365.onmicrosoft.com>>
+CC: Rosario Cunto Icaza <rcunto@bolivariano.com<mailto:rcunto@bolivariano.c=
+om>>; Walter Ram=EDrez Bocca <wramirez@bolivariano.com<mailto:wramirez@boli=
+variano.com>>; Jaime Ram=EDrez Cevallos (Quito) <jramirez@bolivariano.com<m=
+ailto:jramirez@bolivariano.com>>; Ma. Fernanda Hungr=EDa Jaramillo <mhungri=
+a@bolivariano.com<mailto:mhungria@bolivariano.com>>; Recaudaciones <Recauda=
+ciones@bolivariano.com<mailto:Recaudaciones@bolivariano.com>>
+Asunto: RE: OFICIO IMPLEMENTACION NUEVA TECNOLOGIA (Web Services)
+Importancia: Alta
+
+
+
+Estimados Dario/Betty:
+
+
+
+Adjunto est=E1ndar t=E9cnico proporcionado por Banred para la Migraci=F3n d=
+el Servicio de Recaudaci=F3n de Municipio de Cuenca a la Plataforma de Cobr=
+os y Pagos de BANRED, lo cual, permitir=E1 dar cumplimiento a lo solicitado=
+ por Municipio de Cuenca;  por favor para revisarlo
+
+
+
+El plazo indicado por el Municipio de Cuenca es hasta el 30 de junio del 20=
+22.
+
+
+
+Saludos cordiales,
+
+Diana Soriano Freire
+
+Pagos y Recaudaciones =96 Operaciones Centrales
+
+Jun=EDn 200 y Panam=E1 =96 Telf: (593 4) 2305000 Ext. 2190
+
+[Firma BB]
+
+
+
+
+
+
+
+De: Diana Soriano Freire
+Enviado el: Monday, April 11, 2022 10:10 AM
+Para: Rosario Cunto Icaza <rcunto@bolivariano.com<mailto:rcunto@bolivariano=
+.com>>; Walter Ram=EDrez Bocca <wramirez@bolivariano.com<mailto:wramirez@bo=
+livariano.com>>; Dario Barco Le=F3n <dbarcol@bolivariano.com<mailto:dbarcol=
+@bolivariano.com>>; Wendy Cede=F1o Ley <wcedeno@bolivariano.com<mailto:wced=
+eno@bolivariano.com>>; Betty Mu=F1oz Villacres <bmunozv@bolivariano.com<mai=
+lto:bmunozv@bolivariano.com>>; Ma. Isabel Carrillo Ortega <mcarrillo@boliva=
+riano.com<mailto:mcarrillo@bolivariano.com>>; Recaudos <Recaudos@bolivarian=
+o365.onmicrosoft.com<mailto:Recaudos@bolivariano365.onmicrosoft.com>>; Darw=
+in Briones Barzola <dbriones@bolivariano.com<mailto:dbriones@bolivariano.co=
+m>>
+CC: Recaudaciones <Recaudaciones@bolivariano.com<mailto:Recaudaciones@boliv=
+ariano.com>>; Jaime Ram=EDrez Cevallos (Quito) <jramirez@bolivariano.com<ma=
+ilto:jramirez@bolivariano.com>>; Ma. Fernanda Hungr=EDa Jaramillo <mhungria=
+@bolivariano.com<mailto:mhungria@bolivariano.com>>
+Asunto: OFICIO IMPLEMENTACION NUEVA TECNOLOGIA (Web Services)
+
+
+
+Estimados:
+
+
+
+Adjunto oficio del Municipio de Cuenca en referencia a la Implementaci=F3n =
+de Nueva Tecnolog=EDa (Web Services), en el que se extendi=F3 hasta el 30 d=
+e junio del 2022.
+
+
+
+Hoy Banred nos facilitar=E1 el Est=E1ndar t=E9cnico actualizado para el des=
+arrollo que corresponder=EDa realizar de nuestro lado para alinearnos a lo =
+solicitado por el Municipio de Cuenca (Implementaci=F3n de nueva tecnolog=
+=EDa Web Services), en el que se extendi=F3 hasta el 30 de junio del 2022; =
+tan pronto se reciba lo env=EDo.
+
+
+
+Saludos cordiales,
+
+Diana Soriano Freire
+
+Pagos y Recaudaciones =96 Operaciones Centrales
+
+Jun=EDn 200 y Panam=E1 =96 Telf: (593 4) 2305000 Ext. 2190
+
+[Firma BB]
+
+
+
+
+
+--_000_PH0PR10MB44724D597EFFF7219382C201D2D19PH0PR10MB4472namp_
+Content-Type: text/html; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+<html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=
+252">
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+Estimada Ma. Isabel:</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+L<span style=3D"color: rgb(0, 0, 0);">os saldos en las cuentas que mantiene=
+n las empresas p=FAblicas por normativa no se mantienen en el Bco. son envi=
+ados al BCE dentro 24 horas.&nbsp;</span></div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<span style=3D"color: rgb(0, 0, 0);">En el caso de negocio se realiz=F3 la&=
+nbsp;</span><span style=3D"color: rgb(0, 0, 0); font-family: Calibri, sans-=
+serif; font-size: 14.6667px; background-color: rgb(255, 255, 255); display:=
+ inline !important;">proyecci=F3n para el a=F1o
+ 2023</span><span style=3D"color:rgb(31, 73, 125);font-family:Calibri, sans=
+-serif;font-size:14.6667px;background-color:rgb(255, 255, 255);display:inli=
+ne !important"><span style=3D"color: rgb(0, 0, 0);">&nbsp;</span></span><sp=
+an data-markjs=3D"true" class=3D"markyc7mp1g45" data-ogacdata-ogabdata-ogsb=
+=3D"" style=3D"margin: 0px; font-size: 14.6667px; font-family: Calibri, san=
+s-serif; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">de</sp=
+an><span style=3D"color:rgb(31, 73, 125);font-family:Calibri, sans-serif;fo=
+nt-size:14.6667px;background-color:rgb(255, 255, 255);display:inline !impor=
+tant"><span style=3D"color: rgb(0, 0, 0);">&nbsp;</span></span><span style=
+=3D"color: rgb(0, 0, 0); font-family: Calibri, sans-serif; font-size: 14.66=
+67px; background-color: rgb(255, 255, 255); display: inline !important;">un=
+a
+ participaci=F3n</span><span style=3D"color:rgb(31, 73, 125);font-family:Ca=
+libri, sans-serif;font-size:14.6667px;background-color:rgb(255, 255, 255);d=
+isplay:inline !important"><span style=3D"color: rgb(0, 0, 0);">&nbsp;</span=
+></span><span data-markjs=3D"true" class=3D"markyc7mp1g45" data-ogacdata-og=
+abdata-ogsb=3D"" style=3D"margin: 0px; font-size: 14.6667px; font-family: C=
+alibri, sans-serif; color: rgb(0, 0, 0); background-color: rgb(255, 255, 25=
+5);">de</span><span style=3D"color: rgb(0, 0, 0); font-family: Calibri, san=
+s-serif; font-size: 14.6667px; background-color: rgb(255, 255, 255); displa=
+y: inline !important;">l
+ 0.10%</span><span style=3D"color:rgb(31, 73, 125);font-family:Calibri, san=
+s-serif;font-size:14.6667px;background-color:rgb(255, 255, 255);display:inl=
+ine !important"><span style=3D"color: rgb(0, 0, 0);">&nbsp;</span></span><s=
+pan data-markjs=3D"true" class=3D"markyc7mp1g45" data-ogacdata-ogabdata-ogs=
+b=3D"" style=3D"margin: 0px; font-size: 14.6667px; font-family: Calibri, sa=
+ns-serif; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">de</s=
+pan><span style=3D"color: rgb(0, 0, 0); font-family: Calibri, sans-serif; f=
+ont-size: 14.6667px; background-color: rgb(255, 255, 255); display: inline =
+!important;">l
+ total</span><span style=3D"color:rgb(31, 73, 125);font-family:Calibri, san=
+s-serif;font-size:14.6667px;background-color:rgb(255, 255, 255);display:inl=
+ine !important"><span style=3D"color: rgb(0, 0, 0);">&nbsp;</span></span><s=
+pan data-markjs=3D"true" class=3D"markyc7mp1g45" data-ogacdata-ogabdata-ogs=
+b=3D"" style=3D"margin: 0px; font-size: 14.6667px; font-family: Calibri, sa=
+ns-serif; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">de</s=
+pan><span style=3D"color:rgb(31, 73, 125);font-family:Calibri, sans-serif;f=
+ont-size:14.6667px;background-color:rgb(255, 255, 255);display:inline !impo=
+rtant"><span style=3D"color: rgb(0, 0, 0);">&nbsp;</span></span><span style=
+=3D"color: rgb(0, 0, 0); font-family: Calibri, sans-serif; font-size: 14.66=
+67px; background-color: rgb(255, 255, 255); display: inline !important;">tr=
+ansacciones
+ que tienen 1.880.000 </span><span style=3D"background-color: rgb(255, 255,=
+ 255); display: inline !important; color: rgb(0, 0, 0);">y incluyeron las t=
+ransacciones por estos nuevos rubros. (Siendo conservadores, esperamos que =
+sean m=E1s las transacciones que logremos
+ recaudar)</span></div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+Saludos cordiales,</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+Diana Soriano Freire</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+Saludos cordiales,</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+Diana Soriano Freire</div>
+<div id=3D"appendonsend"></div>
+<hr style=3D"display:inline-block;width:98%" tabindex=3D"-1">
+<div id=3D"divRplyFwdMsg" dir=3D"ltr"><font face=3D"Calibri, sans-serif" st=
+yle=3D"font-size:11pt" color=3D"#000000"><b>De:</b> Ma. Isabel Carrillo Ort=
+ega &lt;mcarrillo@bolivariano.com&gt;<br>
+<b>Enviado:</b> mi=E9rcoles, 18 de mayo de 2022 8:59<br>
+<b>Para:</b> Diana Soriano Freire &lt;dsoriano@bolivariano.com&gt;; Wendy C=
+ede=F1o Ley &lt;wcedeno@bolivariano.com&gt;<br>
+<b>Cc:</b> Rosario Cunto Icaza &lt;rcunto@bolivariano.com&gt;; Walter Ram=
+=EDrez Bocca &lt;wramirez@bolivariano.com&gt;; Darwin Briones Barzola &lt;d=
+briones@bolivariano.com&gt;; Recaudos &lt;Recaudos@bolivariano365.onmicroso=
+ft.com&gt;; Betty Mu=F1oz Villacres &lt;bmunozv@bolivariano.com&gt;;
+ Ma. Fernanda Hungr=EDa Jaramillo &lt;mhungria@bolivariano.com&gt;; Recauda=
+ciones &lt;Recaudaciones@bolivariano.com&gt;; Dennise Zepeda Franco &lt;dze=
+peda@bolivariano.com&gt;; Jaime Ram=EDrez Cevallos (Quito) &lt;jramirez@bol=
+ivariano.com&gt;; Dario Barco Le=F3n &lt;dbarcol@bolivariano.com&gt;<br>
+<b>Asunto:</b> RE: OFICIO IMPLEMENTACION NUEVA TECNOLOGIA (Web Services)</f=
+ont>
+<div>&nbsp;</div>
+</div>
+<style>
+<!--
+@font-face
+	{font-family:"Cambria Math"}
+@font-face
+	{font-family:Calibri}
+p.x_MsoNormal, li.x_MsoNormal, div.x_MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif}
+a:link, span.x_MsoHyperlink
+	{color:#0563C1;
+	text-decoration:underline}
+a:visited, span.x_MsoHyperlinkFollowed
+	{color:#954F72;
+	text-decoration:underline}
+p
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif}
+p.x_msonormal0, li.x_msonormal0, div.x_msonormal0
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif}
+p.x_xmsonormal, li.x_xmsonormal, div.x_xmsonormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif}
+p.x_xmsoplaintext, li.x_xmsoplaintext, div.x_xmsoplaintext
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif}
+p.x_xmsonormal0, li.x_xmsonormal0, div.x_xmsonormal0
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif}
+p.x_xmsochpdefault, li.x_xmsochpdefault, div.x_xmsochpdefault
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Times New Roman",serif}
+span.x_xmsohyperlink
+	{color:#0563C1;
+	text-decoration:underline}
+span.x_xmsohyperlinkfollowed
+	{color:#954F72;
+	text-decoration:underline}
+span.x_xtextosinformatocar
+	{font-family:"Calibri",sans-serif}
+span.x_xestilocorreo20
+	{font-family:"Calibri",sans-serif;
+	color:windowtext}
+span.x_xestilocorreo21
+	{font-family:"Calibri",sans-serif;
+	color:#1F497D}
+span.x_EstiloCorreo28
+	{font-family:"Calibri",sans-serif;
+	color:#1F497D}
+.x_MsoChpDefault
+	{font-size:10.0pt}
+@page WordSection1
+	{margin:70.85pt 3.0cm 70.85pt 3.0cm}
+div.x_WordSection1
+	{}
+-->
+</style>
+<div lang=3D"ES-EC" link=3D"#0563C1" vlink=3D"#954F72">
+<div class=3D"x_WordSection1">
+<p class=3D"x_MsoNormal"><span style=3D"font-size:11.0pt; font-family:&quot=
+;Calibri&quot;,sans-serif; color:#1F497D">Y se puede agregar el monto que s=
+e va a recaudar porque eso es monetario o el monetario&nbsp; no entra al Ba=
+nco?</span></p>
+<p class=3D"x_MsoNormal"><span style=3D"font-size:11.0pt; font-family:&quot=
+;Calibri&quot;,sans-serif; color:#1F497D">&nbsp;</span></p>
+<div>
+<div style=3D"border:none; border-top:solid #E1E1E1 1.0pt; padding:3.0pt 0c=
+m 0cm 0cm">
+<p class=3D"x_MsoNormal"><b><span lang=3D"ES" style=3D"font-size:11.0pt; fo=
+nt-family:&quot;Calibri&quot;,sans-serif">De:</span></b><span lang=3D"ES" s=
+tyle=3D"font-size:11.0pt; font-family:&quot;Calibri&quot;,sans-serif"> Dian=
+a Soriano Freire &lt;dsoriano@bolivariano.com&gt;
+<br>
+<b>Enviado el:</b> mi=E9rcoles, 18 de mayo de 2022 8:51<br>
+<b>Para:</b> Wendy Cede=F1o Ley &lt;wcedeno@bolivariano.com&gt;<br>
+<b>CC:</b> Rosario Cunto Icaza &lt;rcunto@bolivariano.com&gt;; Walter Ram=
+=EDrez Bocca &lt;wramirez@bolivariano.com&gt;; Darwin Briones Barzola &lt;d=
+briones@bolivariano.com&gt;; Recaudos &lt;Recaudos@bolivariano365.onmicroso=
+ft.com&gt;; Ma. Isabel Carrillo Ortega &lt;mcarrillo@bolivariano.com&gt;;
+ Betty Mu=F1oz Villacres &lt;bmunozv@bolivariano.com&gt;; Ma. Fernanda Hung=
+r=EDa Jaramillo &lt;mhungria@bolivariano.com&gt;; Recaudaciones &lt;Recauda=
+ciones@bolivariano.com&gt;; Dennise Zepeda Franco &lt;dzepeda@bolivariano.c=
+om&gt;; Jaime Ram=EDrez Cevallos (Quito) &lt;jramirez@bolivariano.com&gt;;
+ Dario Barco Le=F3n &lt;dbarcol@bolivariano.com&gt;<br>
+<b>Asunto:</b> RE: OFICIO IMPLEMENTACION NUEVA TECNOLOGIA (Web Services)</s=
+pan></p>
+</div>
+</div>
+<p class=3D"x_MsoNormal">&nbsp;</p>
+<div>
+<p class=3D"x_MsoNormal"><span style=3D"font-family:&quot;Calibri&quot;,san=
+s-serif; color:black">Buen d=EDa:</span></p>
+</div>
+<div>
+<p class=3D"x_MsoNormal"><span style=3D"font-family:&quot;Calibri&quot;,san=
+s-serif; color:black">&nbsp;</span></p>
+</div>
+<div>
+<p class=3D"x_MsoNormal"><span style=3D"font-family:&quot;Calibri&quot;,san=
+s-serif; color:black">Estimada Wendy, adjunto caso de negocio solicitado, a=
+dicionalmente confirmo que se encuentra ingresado el requerimiento en la he=
+rramienta. Cabe mencionar que con el nuevo web
+ service permitir=E1 recaudar otros rubros que tiene el Municipio de Cuenca=
+ que nosotros actualmente no recaudamos. Por favor nos confirmas el tiempo =
+de atenci=F3n para poder elaborar la comunicaci=F3n al Municipio de Cuenca =
+solicitando pr=F3rroga para ver la posibilidad
+ que nos acepten para no quedarnos fuera con esta recaudaci=F3n.</span></p>
+</div>
+<div>
+<p class=3D"x_MsoNormal"><span style=3D"font-family:&quot;Calibri&quot;,san=
+s-serif; color:black">&nbsp;</span></p>
+</div>
+<div>
+<p class=3D"x_MsoNormal"><span style=3D"font-family:&quot;Calibri&quot;,san=
+s-serif; color:black">Saludos cordiales,</span></p>
+</div>
+<div>
+<p class=3D"x_MsoNormal"><span style=3D"font-family:&quot;Calibri&quot;,san=
+s-serif; color:black">Diana Soriano Freire</span></p>
+</div>
+<div>
+<p class=3D"x_MsoNormal"><span style=3D"font-family:&quot;Calibri&quot;,san=
+s-serif; color:black">&nbsp;</span></p>
+</div>
+<div>
+<p class=3D"x_MsoNormal"><span style=3D"font-family:&quot;Calibri&quot;,san=
+s-serif; color:black">&nbsp;</span></p>
+</div>
+<div>
+<p style=3D"background:white"><span style=3D"font-size:11.0pt; font-family:=
+&quot;Calibri&quot;,sans-serif; color:#201F1E">&nbsp;</span></p>
+<p style=3D"background:white"><span style=3D"font-size:11.0pt; font-family:=
+&quot;Calibri&quot;,sans-serif; color:#201F1E">&nbsp;</span></p>
+<div>
+<p style=3D"background:white"><span style=3D"font-size:11.0pt; font-family:=
+&quot;Calibri&quot;,sans-serif; color:#201F1E">&nbsp;</span></p>
+</div>
+<p class=3D"x_MsoNormal"><span style=3D"font-family:&quot;Calibri&quot;,san=
+s-serif; color:black">&nbsp;</span></p>
+</div>
+<div class=3D"x_MsoNormal" align=3D"center" style=3D"text-align:center">
+<hr size=3D"2" width=3D"98%" align=3D"center">
+</div>
+<div id=3D"x_divRplyFwdMsg">
+<p class=3D"x_MsoNormal"><b><span style=3D"font-size:11.0pt; font-family:&q=
+uot;Calibri&quot;,sans-serif; color:black">De:</span></b><span style=3D"fon=
+t-size:11.0pt; font-family:&quot;Calibri&quot;,sans-serif; color:black"> We=
+ndy Cede=F1o Ley &lt;<a href=3D"mailto:wcedeno@bolivariano.com">wcedeno@bol=
+ivariano.com</a>&gt;<br>
+<b>Enviado:</b> lunes, 16 de mayo de 2022 8:17<br>
+<b>Para:</b> Diana Soriano Freire &lt;<a href=3D"mailto:dsoriano@bolivarian=
+o.com">dsoriano@bolivariano.com</a>&gt;<br>
+<b>Cc:</b> Rosario Cunto Icaza &lt;<a href=3D"mailto:rcunto@bolivariano.com=
+">rcunto@bolivariano.com</a>&gt;; Walter Ram=EDrez Bocca &lt;<a href=3D"mai=
+lto:wramirez@bolivariano.com">wramirez@bolivariano.com</a>&gt;; Darwin Brio=
+nes Barzola &lt;<a href=3D"mailto:dbriones@bolivariano.com">dbriones@boliva=
+riano.com</a>&gt;;
+ Recaudos &lt;<a href=3D"mailto:Recaudos@bolivariano365.onmicrosoft.com">Re=
+caudos@bolivariano365.onmicrosoft.com</a>&gt;; Ma. Isabel Carrillo Ortega &=
+lt;<a href=3D"mailto:mcarrillo@bolivariano.com">mcarrillo@bolivariano.com</=
+a>&gt;; Betty Mu=F1oz Villacres &lt;<a href=3D"mailto:bmunozv@bolivariano.c=
+om">bmunozv@bolivariano.com</a>&gt;;
+ Ma. Fernanda Hungr=EDa Jaramillo &lt;<a href=3D"mailto:mhungria@bolivarian=
+o.com">mhungria@bolivariano.com</a>&gt;; Recaudaciones &lt;<a href=3D"mailt=
+o:Recaudaciones@bolivariano.com">Recaudaciones@bolivariano.com</a>&gt;; Den=
+nise Zepeda Franco &lt;<a href=3D"mailto:dzepeda@bolivariano.com">dzepeda@b=
+olivariano.com</a>&gt;;
+ Jaime Ram=EDrez Cevallos (Quito) &lt;<a href=3D"mailto:jramirez@bolivarian=
+o.com">jramirez@bolivariano.com</a>&gt;; Dario Barco Le=F3n &lt;<a href=3D"=
+mailto:dbarcol@bolivariano.com">dbarcol@bolivariano.com</a>&gt;<br>
+<b>Asunto:</b> RE: OFICIO IMPLEMENTACION NUEVA TECNOLOGIA (Web Services)</s=
+pan> </p>
+<div>
+<p class=3D"x_MsoNormal">&nbsp;</p>
+</div>
+</div>
+<div>
+<div>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">Estimada Diana buen=
+os d=EDas, dado que hay que construir desde cero esta recaudaci=F3n, por fa=
+vor registrar la iniciativa en el link adjunto, indicando el alcance que re=
+quieren:</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">&nbsp;</span></p>
+<p class=3D"x_xmsonormal" style=3D"margin-left:35.4pt"><a href=3D"http://sh=
+rpointsrv:1409/SitePages/Iniciativa%20online/info.aspx">http://shrpointsrv:=
+1409/SitePages/Iniciativa%20online/info.aspx</a> &nbsp;</p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">&nbsp;</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">Por favor adjuntar =
+en caso de negocio, y la priorizaci=F3n ser=E1 revisada en la siguiente reu=
+ni=F3n.</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">&nbsp;</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">&nbsp;</span></p>
+<p class=3D"x_xmsonormal"><b><span lang=3D"ES" style=3D"color:#009999">Wend=
+y Cede=F1o Ley</span></b></p>
+<p class=3D"x_xmsonormal"><span lang=3D"ES" style=3D"color:#009999">Product=
+os Empresas - Innovaci=F3n y Mercadeo</span></p>
+<p class=3D"x_xmsonormal"><span lang=3D"ES" style=3D"color:gray">Jun=EDn 20=
+0 y Panam=E1<b> -
+</b>&nbsp;Telf.: (593 4 ) 2305000&nbsp;Ext. 3564</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D"><img border=3D"0" w=
+idth=3D"388" height=3D"63" id=3D"x_x__x005f_x0000_i1029" alt=3D"Firma BB" s=
+tyle=3D"width:4.0416in; height:.6562in" data-outlook-trace=3D"F:1|T:1" src=
+=3D"cid:image001.png@01D86A95.8A2A9EF0"></span></p>
+<div>
+<div style=3D"border:none; border-top:solid #E1E1E1 1.0pt; padding:3.0pt 0c=
+m 0cm 0cm">
+<p class=3D"x_xmsonormal"><b><span lang=3D"ES">De:</span></b><span lang=3D"=
+ES"> Diana Soriano Freire &lt;<a href=3D"mailto:dsoriano@bolivariano.com">d=
+soriano@bolivariano.com</a>&gt;
+<br>
+<b>Enviado el:</b> viernes, mayo 13, 2022 17:27<br>
+<b>Para:</b> Wendy Cede=F1o Ley &lt;<a href=3D"mailto:wcedeno@bolivariano.c=
+om">wcedeno@bolivariano.com</a>&gt;; Darwin Briones Barzola &lt;<a href=3D"=
+mailto:dbriones@bolivariano.com">dbriones@bolivariano.com</a>&gt;; Dario Ba=
+rco Le=F3n &lt;<a href=3D"mailto:dbarcol@bolivariano.com">dbarcol@bolivaria=
+no.com</a>&gt;<br>
+<b>CC:</b> Rosario Cunto Icaza &lt;<a href=3D"mailto:rcunto@bolivariano.com=
+">rcunto@bolivariano.com</a>&gt;; Walter Ram=EDrez Bocca &lt;<a href=3D"mai=
+lto:wramirez@bolivariano.com">wramirez@bolivariano.com</a>&gt;; Recaudos &l=
+t;<a href=3D"mailto:Recaudos@bolivariano365.onmicrosoft.com">Recaudos@boliv=
+ariano365.onmicrosoft.com</a>&gt;;
+ Ma. Isabel Carrillo Ortega &lt;<a href=3D"mailto:mcarrillo@bolivariano.com=
+">mcarrillo@bolivariano.com</a>&gt;; Betty Mu=F1oz Villacres &lt;<a href=3D=
+"mailto:bmunozv@bolivariano.com">bmunozv@bolivariano.com</a>&gt;; Ma. Ferna=
+nda Hungr=EDa Jaramillo &lt;<a href=3D"mailto:mhungria@bolivariano.com">mhu=
+ngria@bolivariano.com</a>&gt;;
+ Recaudaciones &lt;<a href=3D"mailto:Recaudaciones@bolivariano.com">Recauda=
+ciones@bolivariano.com</a>&gt;; Dennise Zepeda Franco &lt;<a href=3D"mailto=
+:dzepeda@bolivariano.com">dzepeda@bolivariano.com</a>&gt;; Jaime Ram=EDrez =
+Cevallos (Quito) &lt;<a href=3D"mailto:jramirez@bolivariano.com">jramirez@b=
+olivariano.com</a>&gt;<br>
+<b>Asunto:</b> RE: OFICIO IMPLEMENTACION NUEVA TECNOLOGIA (Web Services)</s=
+pan></p>
+</div>
+</div>
+<p class=3D"x_xmsonormal">&nbsp;</p>
+<p class=3D"x_xmsonormal">Estimados Wendy/Dario:</p>
+<p class=3D"x_xmsonormal">&nbsp;</p>
+<p class=3D"x_xmsonormal">Hemos gestionado con el Municipio Cuenca a trav=
+=E9s Banred para que nos den pr=F3rroga para la salida a producci=F3n con l=
+a nueva tecnolog=EDa (web Service) sin embargo nos indica que enviemos una =
+comunicaci=F3n solicitando la nueva fecha para
+ la salida con el nuevo est=E1ndar t=E9cnico, con los justificativos del ca=
+so por el cual no podr=EDamos salir en el mes de junio para que ellos eval=
+=FAen nuestra petici=F3n;&nbsp; por lo que solicito nos confirmen la fecha =
+en que podr=EDa ser atendido este requerimiento para
+ no quedarnos sin esta recaudaci=F3n.</p>
+<p class=3D"x_xmsonormal">&nbsp;</p>
+<div>
+<p class=3D"x_xmsonormal">Agradecemos la atenci=F3n brindada.</p>
+<p class=3D"x_xmsonormal">&nbsp;</p>
+<p class=3D"x_xmsonormal">Saludos cordiales,</p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">&nbsp;</span></p>
+<p class=3D"x_xmsonormal"><b><span style=3D"font-size:13.0pt; color:#0099A8=
+">Diana Soriano Freire</span></b></p>
+<p class=3D"x_xmsonormal"><span style=3D"font-size:10.0pt; color:#0099A8">P=
+agos y Recaudaciones =96 Operaciones Centrales</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"font-size:10.0pt; color:#A5A5A5">J=
+un=EDn 200 y Panam=E1 =96 Telf: (593 4) 2305000 Ext. 2190</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"font-size:10.0pt; color:#1F497D"><=
+img border=3D"0" width=3D"388" height=3D"63" id=3D"x_x_Imagen_x0020_4" alt=
+=3D"Firma BB" style=3D"width:4.0416in; height:.6562in" data-outlook-trace=
+=3D"F:1|T:1" src=3D"cid:image002.png@01D86A95.8A2A9EF0"></span></p>
+</div>
+<p class=3D"x_xmsonormal">&nbsp;</p>
+<div>
+<div style=3D"border:none; border-top:solid #E1E1E1 1.0pt; padding:3.0pt 0c=
+m 0cm 0cm">
+<p class=3D"x_xmsonormal"><b><span lang=3D"ES">De:</span></b><span lang=3D"=
+ES"> Wendy Cede=F1o Ley &lt;<a href=3D"mailto:wcedeno@bolivariano.com">wced=
+eno@bolivariano.com</a>&gt;
+<br>
+<b>Enviado el:</b> Tuesday, April 19, 2022 11:52 AM<br>
+<b>Para:</b> Diana Soriano Freire &lt;<a href=3D"mailto:dsoriano@bolivarian=
+o.com">dsoriano@bolivariano.com</a>&gt;; Jaime Ram=EDrez Cevallos (Quito) &=
+lt;<a href=3D"mailto:jramirez@bolivariano.com">jramirez@bolivariano.com</a>=
+&gt;<br>
+<b>CC:</b> Rosario Cunto Icaza &lt;<a href=3D"mailto:rcunto@bolivariano.com=
+">rcunto@bolivariano.com</a>&gt;; Walter Ram=EDrez Bocca &lt;<a href=3D"mai=
+lto:wramirez@bolivariano.com">wramirez@bolivariano.com</a>&gt;; Recaudos &l=
+t;<a href=3D"mailto:Recaudos@bolivariano365.onmicrosoft.com">Recaudos@boliv=
+ariano365.onmicrosoft.com</a>&gt;;
+ Ma. Isabel Carrillo Ortega &lt;<a href=3D"mailto:mcarrillo@bolivariano.com=
+">mcarrillo@bolivariano.com</a>&gt;; Darwin Briones Barzola &lt;<a href=3D"=
+mailto:dbriones@bolivariano.com">dbriones@bolivariano.com</a>&gt;; Betty Mu=
+=F1oz Villacres &lt;<a href=3D"mailto:bmunozv@bolivariano.com">bmunozv@boli=
+variano.com</a>&gt;;
+ Dario Barco Le=F3n &lt;<a href=3D"mailto:dbarcol@bolivariano.com">dbarcol@=
+bolivariano.com</a>&gt;; Ma. Fernanda Hungr=EDa Jaramillo &lt;<a href=3D"ma=
+ilto:mhungria@bolivariano.com">mhungria@bolivariano.com</a>&gt;; Recaudacio=
+nes &lt;<a href=3D"mailto:Recaudaciones@bolivariano.com">Recaudaciones@boli=
+variano.com</a>&gt;;
+ Dennise Zepeda Franco &lt;<a href=3D"mailto:dzepeda@bolivariano.com">dzepe=
+da@bolivariano.com</a>&gt;<br>
+<b>Asunto:</b> RE: OFICIO IMPLEMENTACION NUEVA TECNOLOGIA (Web Services)</s=
+pan></p>
+</div>
+</div>
+<p class=3D"x_xmsonormal">&nbsp;</p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">Estimados Jaime/Dia=
+na buenas tardes, se ha revisado el requerimiento para Municipio de Cuenca =
+con el equipo t=E9cnico de Recaudaciones, el servicio no existe en el bus, =
+por tal motivo debe ser creado ya en nuestro
+ nuevo esquema de <b>Microservicios</b>. </span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">&nbsp;</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">El requerimiento de=
+be ser ingresado para su posterior priorizaci=F3n en la cartera de Recaudac=
+iones, en el siguiente link:</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">&nbsp;</span></p>
+<p class=3D"x_xmsonormal" style=3D"margin-left:35.4pt"><a href=3D"http://sh=
+rpointsrv:1409/SitePages/Iniciativa%20online/info.aspx">http://shrpointsrv:=
+1409/SitePages/Iniciativa%20online/info.aspx</a> &nbsp;</p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">&nbsp;</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">De requerir atenci=
+=F3n inmediata, se debe dejar de atender una de las iniciativas en curso, p=
+ero la salida a producci=F3n depender=E1 de la implementaci=F3n de los micr=
+oservicios.
+</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">&nbsp;</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">Cualquier consulta =
+a las =F3rdenes.</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">&nbsp;</span></p>
+<p class=3D"x_xmsonormal"><b><span lang=3D"ES" style=3D"color:#009999">Wend=
+y Cede=F1o Ley</span></b></p>
+<p class=3D"x_xmsonormal"><span lang=3D"ES" style=3D"color:#009999">Product=
+os Empresas - Innovaci=F3n y Mercadeo</span></p>
+<p class=3D"x_xmsonormal"><span lang=3D"ES" style=3D"color:gray">Jun=EDn 20=
+0 y Panam=E1<b> -
+</b>&nbsp;Telf.: (593 4 ) 2305000&nbsp;Ext. 3564</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D"><img border=3D"0" w=
+idth=3D"388" height=3D"63" id=3D"x_x__x005f_x0000_i1026" alt=3D"Firma BB" s=
+tyle=3D"width:4.0416in; height:.6562in" data-outlook-trace=3D"F:1|T:1" src=
+=3D"cid:image001.png@01D86A95.8A2A9EF0"></span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">&nbsp;</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">&nbsp;</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">&nbsp;</span></p>
+<div>
+<div style=3D"border:none; border-top:solid #E1E1E1 1.0pt; padding:3.0pt 0c=
+m 0cm 0cm">
+<p class=3D"x_xmsonormal"><b><span lang=3D"ES">De:</span></b><span lang=3D"=
+ES"> Diana Soriano Freire &lt;<a href=3D"mailto:dsoriano@bolivariano.com">d=
+soriano@bolivariano.com</a>&gt;
+<br>
+<b>Enviado el:</b> jueves, abril 14, 2022 8:27<br>
+<b>Para:</b> Dario Barco Le=F3n &lt;<a href=3D"mailto:dbarcol@bolivariano.c=
+om">dbarcol@bolivariano.com</a>&gt;; Betty Mu=F1oz Villacres &lt;<a href=3D=
+"mailto:bmunozv@bolivariano.com">bmunozv@bolivariano.com</a>&gt;; Darwin Br=
+iones Barzola &lt;<a href=3D"mailto:dbriones@bolivariano.com">dbriones@boli=
+variano.com</a>&gt;;
+ Wendy Cede=F1o Ley &lt;<a href=3D"mailto:wcedeno@bolivariano.com">wcedeno@=
+bolivariano.com</a>&gt;; Ma. Isabel Carrillo Ortega &lt;<a href=3D"mailto:m=
+carrillo@bolivariano.com">mcarrillo@bolivariano.com</a>&gt;; Recaudos &lt;<=
+a href=3D"mailto:Recaudos@bolivariano365.onmicrosoft.com">Recaudos@bolivari=
+ano365.onmicrosoft.com</a>&gt;<br>
+<b>CC:</b> Rosario Cunto Icaza &lt;<a href=3D"mailto:rcunto@bolivariano.com=
+">rcunto@bolivariano.com</a>&gt;; Walter Ram=EDrez Bocca &lt;<a href=3D"mai=
+lto:wramirez@bolivariano.com">wramirez@bolivariano.com</a>&gt;; Jaime Ram=
+=EDrez Cevallos (Quito) &lt;<a href=3D"mailto:jramirez@bolivariano.com">jra=
+mirez@bolivariano.com</a>&gt;;
+ Ma. Fernanda Hungr=EDa Jaramillo &lt;<a href=3D"mailto:mhungria@bolivarian=
+o.com">mhungria@bolivariano.com</a>&gt;; Recaudaciones &lt;<a href=3D"mailt=
+o:Recaudaciones@bolivariano.com">Recaudaciones@bolivariano.com</a>&gt;<br>
+<b>Asunto:</b> RE: OFICIO IMPLEMENTACION NUEVA TECNOLOGIA (Web Services)<br=
+>
+<b>Importancia:</b> Alta</span></p>
+</div>
+</div>
+<p class=3D"x_xmsonormal">&nbsp;</p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">Estimados Dario/Bet=
+ty:</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">&nbsp;</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">Adjunto est=E1ndar =
+t=E9cnico proporcionado por Banred para la Migraci=F3n del Servicio de Reca=
+udaci=F3n de Municipio de Cuenca a la Plataforma de Cobros y Pagos de BANRE=
+D, lo cual, permitir=E1 dar cumplimiento a lo
+ solicitado por Municipio de Cuenca;&nbsp; por favor para revisarlo</span><=
+/p>
+<p class=3D"x_xmsonormal"><span style=3D"color:black">&nbsp;</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">El plazo indicado p=
+or el Municipio de Cuenca es hasta el
+<b>30 de junio del 2022.</b></span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">&nbsp;</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">Saludos cordiales,<=
+/span></p>
+<div>
+<p class=3D"x_xmsonormal"><b><span style=3D"font-size:13.0pt; color:#0099A8=
+">Diana Soriano Freire</span></b></p>
+<p class=3D"x_xmsonormal"><span style=3D"font-size:10.0pt; color:#0099A8">P=
+agos y Recaudaciones =96 Operaciones Centrales</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"font-size:10.0pt; color:#A5A5A5">J=
+un=EDn 200 y Panam=E1 =96 Telf: (593 4) 2305000 Ext. 2190</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"font-size:10.0pt; color:#1F497D"><=
+img border=3D"0" width=3D"388" height=3D"63" id=3D"x_x_Imagen_x0020_2" alt=
+=3D"Firma BB" style=3D"width:4.0416in; height:.6562in" data-outlook-trace=
+=3D"F:1|T:1" src=3D"cid:image003.png@01D86A95.8A2A9EF0"></span></p>
+<p class=3D"x_xmsonormal"><span style=3D"font-size:10.0pt; color:#1F497D">&=
+nbsp;</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"font-size:10.0pt; color:#1F497D">&=
+nbsp;</span></p>
+</div>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">&nbsp;</span></p>
+<div>
+<div style=3D"border:none; border-top:solid #E1E1E1 1.0pt; padding:3.0pt 0c=
+m 0cm 0cm">
+<p class=3D"x_xmsonormal"><b><span lang=3D"ES">De:</span></b><span lang=3D"=
+ES"> Diana Soriano Freire
+<br>
+<b>Enviado el:</b> Monday, April 11, 2022 10:10 AM<br>
+<b>Para:</b> Rosario Cunto Icaza &lt;<a href=3D"mailto:rcunto@bolivariano.c=
+om">rcunto@bolivariano.com</a>&gt;; Walter Ram=EDrez Bocca &lt;<a href=3D"m=
+ailto:wramirez@bolivariano.com">wramirez@bolivariano.com</a>&gt;; Dario Bar=
+co Le=F3n &lt;<a href=3D"mailto:dbarcol@bolivariano.com">dbarcol@bolivarian=
+o.com</a>&gt;;
+ Wendy Cede=F1o Ley &lt;<a href=3D"mailto:wcedeno@bolivariano.com">wcedeno@=
+bolivariano.com</a>&gt;; Betty Mu=F1oz Villacres &lt;<a href=3D"mailto:bmun=
+ozv@bolivariano.com">bmunozv@bolivariano.com</a>&gt;; Ma. Isabel Carrillo O=
+rtega &lt;<a href=3D"mailto:mcarrillo@bolivariano.com">mcarrillo@bolivarian=
+o.com</a>&gt;;
+ Recaudos &lt;<a href=3D"mailto:Recaudos@bolivariano365.onmicrosoft.com">Re=
+caudos@bolivariano365.onmicrosoft.com</a>&gt;; Darwin Briones Barzola &lt;<=
+a href=3D"mailto:dbriones@bolivariano.com">dbriones@bolivariano.com</a>&gt;=
+<br>
+<b>CC:</b> Recaudaciones &lt;<a href=3D"mailto:Recaudaciones@bolivariano.co=
+m">Recaudaciones@bolivariano.com</a>&gt;; Jaime Ram=EDrez Cevallos (Quito) =
+&lt;<a href=3D"mailto:jramirez@bolivariano.com">jramirez@bolivariano.com</a=
+>&gt;; Ma. Fernanda Hungr=EDa Jaramillo &lt;<a href=3D"mailto:mhungria@boli=
+variano.com">mhungria@bolivariano.com</a>&gt;<br>
+<b>Asunto:</b> OFICIO IMPLEMENTACION NUEVA TECNOLOGIA (Web Services)</span>=
+</p>
+</div>
+</div>
+<p class=3D"x_xmsonormal">&nbsp;</p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">Estimados:</span></=
+p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">&nbsp;</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">Adjunto oficio del =
+Municipio de Cuenca en referencia a la Implementaci=F3n de Nueva Tecnolog=
+=EDa (Web Services), en el que se extendi=F3 hasta el 30 de junio del 2022.=
+</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">&nbsp;</span></p>
+<p class=3D"x_xmsoplaintext"><span style=3D"color:#1F497D">Hoy Banred nos f=
+acilitar=E1 el Est=E1ndar t=E9cnico actualizado para el desarrollo que corr=
+esponder=EDa realizar de nuestro lado para alinearnos a lo solicitado por e=
+l Municipio de Cuenca (Implementaci=F3n de nueva
+ tecnolog=EDa Web Services), en el que se extendi=F3 hasta el 30 de junio d=
+el 2022; tan pronto se reciba lo env=EDo.</span></p>
+<p class=3D"x_xmsonormal">&nbsp;</p>
+<p class=3D"x_xmsonormal"><span style=3D"color:#1F497D">Saludos cordiales,<=
+/span></p>
+<div>
+<p class=3D"x_xmsonormal"><b><span style=3D"font-size:13.0pt; color:#0099A8=
+">Diana Soriano Freire</span></b></p>
+<p class=3D"x_xmsonormal"><span style=3D"font-size:10.0pt; color:#0099A8">P=
+agos y Recaudaciones =96 Operaciones Centrales</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"font-size:10.0pt; color:#A5A5A5">J=
+un=EDn 200 y Panam=E1 =96 Telf: (593 4) 2305000 Ext. 2190</span></p>
+<p class=3D"x_xmsonormal"><span style=3D"font-size:10.0pt; color:#1F497D"><=
+img border=3D"0" width=3D"388" height=3D"63" id=3D"x_x_Imagen_x0020_1" alt=
+=3D"Firma BB" style=3D"width:4.0416in; height:.6562in" data-outlook-trace=
+=3D"F:1|T:1" src=3D"cid:image002.png@01D86A95.8A2A9EF0"></span></p>
+<p class=3D"x_xmsonormal"><span style=3D"font-size:10.0pt; color:#1F497D">&=
+nbsp;</span></p>
+<p class=3D"x_xmsonormal">&nbsp;</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
+
+--_000_PH0PR10MB44724D597EFFF7219382C201D2D19PH0PR10MB4472namp_--
+
+--_006_PH0PR10MB44724D597EFFF7219382C201D2D19PH0PR10MB4472namp_
+Content-Type: image/png; name="image001.png"
+Content-Description: image001.png
+Content-Disposition: inline; filename="image001.png"; size=7232;
+	creation-date="Wed, 18 May 2022 13:59:12 GMT";
+	modification-date="Wed, 18 May 2022 14:42:14 GMT"
+Content-ID: <image001.png@01D86A95.8A2A9EF0>
+Content-Transfer-Encoding: base64
+
+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
+
+--_006_PH0PR10MB44724D597EFFF7219382C201D2D19PH0PR10MB4472namp_
+Content-Type: image/png; name="image002.png"
+Content-Description: image002.png
+Content-Disposition: inline; filename="image002.png"; size=7163;
+	creation-date="Wed, 18 May 2022 13:59:12 GMT";
+	modification-date="Wed, 18 May 2022 14:42:14 GMT"
+Content-ID: <image002.png@01D86A95.8A2A9EF0>
+Content-Transfer-Encoding: base64
+
+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
+
+--_006_PH0PR10MB44724D597EFFF7219382C201D2D19PH0PR10MB4472namp_
+Content-Type: image/png; name="image003.png"
+Content-Description: image003.png
+Content-Disposition: inline; filename="image003.png"; size=7158;
+	creation-date="Wed, 18 May 2022 13:59:13 GMT";
+	modification-date="Wed, 18 May 2022 14:42:14 GMT"
+Content-ID: <image003.png@01D86A95.8A2A9EF0>
+Content-Transfer-Encoding: base64
+
+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
+
+--_006_PH0PR10MB44724D597EFFF7219382C201D2D19PH0PR10MB4472namp_--
