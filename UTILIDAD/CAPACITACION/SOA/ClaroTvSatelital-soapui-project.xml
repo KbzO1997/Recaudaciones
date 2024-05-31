@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="f537c46a-3819-4b0f-a4fb-9364be3f4fba" activeEnvironment="Default" name="ClaroTvSatelital_Proveedor" resourceRoot="" soapui-version="5.6.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="998669b6-10ce-4f71-a6b0-4580fd895581" wsaVersion="NONE" name="WS_CobrosLineaPortBinding" type="wsdl" bindingName="{http://cobros.porta/}WS_CobrosLineaPortBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/JDeveloper/mywork/ClaroTVSatelital_Migracion_SCA_Desarrollo/ClaroTVSatelital/SOA/wsdl/ClaroTvSatelital.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\JDeveloper\mywork\ClaroTVSatelital_Migracion_SCA_Desarrollo\ClaroTVSatelital\SOA\wsdl\ClaroTvSatelital.wsdl"><con:part><con:url>file:\C:\JDeveloper\mywork\ClaroTVSatelital_Migracion_SCA_Desarrollo\ClaroTVSatelital\SOA\wsdl\ClaroTvSatelital.wsdl</con:url><con:content><![CDATA[<WL5G3N0:definitions name="WS_CobrosLineaService" targetNamespace="http://cobros.porta/" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://cobros.porta/" xmlns:WL5G3N2="http://schemas.xmlsoap.org/wsdl/soap/">
+  <WL5G3N0:types>
+    <xsd:schema xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://cobros.porta/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://cobros.porta/" schemaLocation="../xsd/cobros_porta.xsd"/>
+    </xsd:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="consultaDeudasDTH">
+    <WL5G3N0:part element="WL5G3N1:consultaDeudasDTH" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultaDeudasDTHResponse">
+    <WL5G3N0:part element="WL5G3N1:consultaDeudasDTHResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="aplicaPagoDTH">
+    <WL5G3N0:part element="WL5G3N1:aplicaPagoDTH" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="aplicaPagoDTHResponse">
+    <WL5G3N0:part element="WL5G3N1:aplicaPagoDTHResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="aplicaReversoDTH">
+    <WL5G3N0:part element="WL5G3N1:aplicaReversoDTH" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="aplicaReversoDTHResponse">
+    <WL5G3N0:part element="WL5G3N1:aplicaReversoDTHResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultaDeuda">
+    <WL5G3N0:part element="WL5G3N1:consultaDeuda" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultaDeudaResponse">
+    <WL5G3N0:part element="WL5G3N1:consultaDeudaResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="aplicaPago">
+    <WL5G3N0:part element="WL5G3N1:aplicaPago" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="aplicaPagoResponse">
+    <WL5G3N0:part element="WL5G3N1:aplicaPagoResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="aplicaReverso">
+    <WL5G3N0:part element="WL5G3N1:aplicaReverso" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="aplicaReversoResponse">
+    <WL5G3N0:part element="WL5G3N1:aplicaReversoResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultaDeudaAsp">
+    <WL5G3N0:part element="WL5G3N1:consultaDeudaAsp" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultaDeudaAspResponse">
+    <WL5G3N0:part element="WL5G3N1:consultaDeudaAspResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="aplicaPagoAsp">
+    <WL5G3N0:part element="WL5G3N1:aplicaPagoAsp" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="aplicaPagoAspResponse">
+    <WL5G3N0:part element="WL5G3N1:aplicaPagoAspResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultaDeudaDTHAsp">
+    <WL5G3N0:part element="WL5G3N1:consultaDeudaDTHAsp" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultaDeudaDTHAspResponse">
+    <WL5G3N0:part element="WL5G3N1:consultaDeudaDTHAspResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="aplicaPagoDTHAsp">
+    <WL5G3N0:part element="WL5G3N1:aplicaPagoDTHAsp" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="aplicaPagoDTHAspResponse">
+    <WL5G3N0:part element="WL5G3N1:aplicaPagoDTHAspResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="WS_CobrosLinea">
+    <WL5G3N0:operation name="consultaDeudasDTH">
+      <WL5G3N0:input message="WL5G3N1:consultaDeudasDTH"/>
+      <WL5G3N0:output message="WL5G3N1:consultaDeudasDTHResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="aplicaPagoDTH">
+      <WL5G3N0:input message="WL5G3N1:aplicaPagoDTH"/>
+      <WL5G3N0:output message="WL5G3N1:aplicaPagoDTHResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="aplicaReversoDTH">
+      <WL5G3N0:input message="WL5G3N1:aplicaReversoDTH"/>
+      <WL5G3N0:output message="WL5G3N1:aplicaReversoDTHResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultaDeuda">
+      <WL5G3N0:input message="WL5G3N1:consultaDeuda"/>
+      <WL5G3N0:output message="WL5G3N1:consultaDeudaResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="aplicaPago">
+      <WL5G3N0:input message="WL5G3N1:aplicaPago"/>
+      <WL5G3N0:output message="WL5G3N1:aplicaPagoResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="aplicaReverso">
+      <WL5G3N0:input message="WL5G3N1:aplicaReverso"/>
+      <WL5G3N0:output message="WL5G3N1:aplicaReversoResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultaDeudaAsp">
+      <WL5G3N0:input message="WL5G3N1:consultaDeudaAsp"/>
+      <WL5G3N0:output message="WL5G3N1:consultaDeudaAspResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="aplicaPagoAsp">
+      <WL5G3N0:input message="WL5G3N1:aplicaPagoAsp"/>
+      <WL5G3N0:output message="WL5G3N1:aplicaPagoAspResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultaDeudaDTHAsp">
+      <WL5G3N0:input message="WL5G3N1:consultaDeudaDTHAsp"/>
+      <WL5G3N0:output message="WL5G3N1:consultaDeudaDTHAspResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="aplicaPagoDTHAsp">
+      <WL5G3N0:input message="WL5G3N1:aplicaPagoDTHAsp"/>
+      <WL5G3N0:output message="WL5G3N1:aplicaPagoDTHAspResponse"/>
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="WS_CobrosLineaPortBinding" type="WL5G3N1:WS_CobrosLinea">
+    <WL5G3N2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <WL5G3N0:operation name="consultaDeudasDTH">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="aplicaPagoDTH">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="aplicaReversoDTH">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultaDeuda">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="aplicaPago">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="aplicaReverso">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultaDeudaAsp">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="aplicaPagoAsp">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultaDeudaDTHAsp">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="aplicaPagoDTHAsp">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="WS_CobrosLineaService">
+    <WL5G3N0:port binding="WL5G3N1:WS_CobrosLineaPortBinding" name="WS_CobrosLineaPort">
+      <WL5G3N2:address location="http://192.168.10.38:7777/cobroslinea/WS_CobrosLinea"/>
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:\C:\JDeveloper\mywork\ClaroTVSatelital_Migracion_SCA_Desarrollo\ClaroTVSatelital\SOA\xsd\cobros_porta.xsd</con:url><con:content><![CDATA[<xs:schema version="1.0" targetNamespace="http://cobros.porta/" xmlns:tns="http://cobros.porta/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="aplicaPago" type="tns:aplicaPago"/>
+  <xs:element name="aplicaPagoAsp" type="tns:aplicaPagoAsp"/>
+  <xs:element name="aplicaPagoAspResponse" type="tns:aplicaPagoAspResponse"/>
+  <xs:element name="aplicaPagoDTH" type="tns:aplicaPagoDTH"/>
+  <xs:element name="aplicaPagoDTHAsp" type="tns:aplicaPagoDTHAsp"/>
+  <xs:element name="aplicaPagoDTHAspResponse" type="tns:aplicaPagoDTHAspResponse"/>
+  <xs:element name="aplicaPagoDTHResponse" type="tns:aplicaPagoDTHResponse"/>
+  <xs:element name="aplicaPagoResponse" type="tns:aplicaPagoResponse"/>
+  <xs:element name="aplicaReverso" type="tns:aplicaReverso"/>
+  <xs:element name="aplicaReversoDTH" type="tns:aplicaReversoDTH"/>
+  <xs:element name="aplicaReversoDTHResponse" type="tns:aplicaReversoDTHResponse"/>
+  <xs:element name="aplicaReversoResponse" type="tns:aplicaReversoResponse"/>
+  <xs:element name="consultaDeuda" type="tns:consultaDeuda"/>
+  <xs:element name="consultaDeudaAsp" type="tns:consultaDeudaAsp"/>
+  <xs:element name="consultaDeudaAspResponse" type="tns:consultaDeudaAspResponse"/>
+  <xs:element name="consultaDeudaDTHAsp" type="tns:consultaDeudaDTHAsp"/>
+  <xs:element name="consultaDeudaDTHAspResponse" type="tns:consultaDeudaDTHAspResponse"/>
+  <xs:element name="consultaDeudaResponse" type="tns:consultaDeudaResponse"/>
+  <xs:element name="consultaDeudasDTH" type="tns:consultaDeudasDTH"/>
+  <xs:element name="consultaDeudasDTHResponse" type="tns:consultaDeudasDTHResponse"/>
+  <xs:complexType name="aplicaReversoDTH">
+    <xs:sequence>
+      <xs:element name="numero_cedula" type="xs:string" minOccurs="0"/>
+      <xs:element name="valor" type="xs:float"/>
+      <xs:element name="id_institucion" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_canal" type="xs:string" minOccurs="0"/>
+      <xs:element name="fecha_contable" type="xs:string" minOccurs="0"/>
+      <xs:element name="fecha_trx" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_pago_banco" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="aplicaReversoDTHResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaDeudasDTH">
+    <xs:sequence>
+      <xs:element name="numero_cedula" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_institucion" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_canal" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaDeudasDTHResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="aplicaPagoDTHAsp">
+    <xs:sequence>
+      <xs:element name="numero_cedula" type="xs:string" minOccurs="0"/>
+      <xs:element name="valor" type="xs:float"/>
+      <xs:element name="id_institucion" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_canal" type="xs:string" minOccurs="0"/>
+      <xs:element name="fecha_contable" type="xs:string" minOccurs="0"/>
+      <xs:element name="fecha_trx" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_pago_banco" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_terminal" type="xs:string" minOccurs="0"/>
+      <xs:element name="num_trx_atm" type="xs:string" minOccurs="0"/>
+      <xs:element name="valor_recibido" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="aplicaPagoDTHAspResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaDeudaDTHAsp">
+    <xs:sequence>
+      <xs:element name="numero_cedula" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_institucion" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_canal" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_terminal" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaDeudaDTHAspResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaDeuda">
+    <xs:sequence>
+      <xs:element name="numero_telefono" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_institucion" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_canal" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaDeudaResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="aplicaPago">
+    <xs:sequence>
+      <xs:element name="numero_telefono" type="xs:string" minOccurs="0"/>
+      <xs:element name="valor" type="xs:float"/>
+      <xs:element name="id_institucion" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_canal" type="xs:string" minOccurs="0"/>
+      <xs:element name="fecha_contable" type="xs:string" minOccurs="0"/>
+      <xs:element name="fecha_trx" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_pago_banco" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="aplicaPagoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaDeudaAsp">
+    <xs:sequence>
+      <xs:element name="numero_telefono" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_institucion" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_canal" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_terminal" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaDeudaAspResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="aplicaReverso">
+    <xs:sequence>
+      <xs:element name="numero_telefono" type="xs:string" minOccurs="0"/>
+      <xs:element name="valor" type="xs:float"/>
+      <xs:element name="id_institucion" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_canal" type="xs:string" minOccurs="0"/>
+      <xs:element name="fecha_contable" type="xs:string" minOccurs="0"/>
+      <xs:element name="fecha_trx" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_pago_banco" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="aplicaReversoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="aplicaPagoAsp">
+    <xs:sequence>
+      <xs:element name="numero_telefono" type="xs:string" minOccurs="0"/>
+      <xs:element name="valor" type="xs:float"/>
+      <xs:element name="id_institucion" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_canal" type="xs:string" minOccurs="0"/>
+      <xs:element name="fecha_contable" type="xs:string" minOccurs="0"/>
+      <xs:element name="fecha_trx" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_pago_banco" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_terminal" type="xs:string" minOccurs="0"/>
+      <xs:element name="num_trx_atm" type="xs:string" minOccurs="0"/>
+      <xs:element name="valor_recibido" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="aplicaPagoAspResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="aplicaPagoDTH">
+    <xs:sequence>
+      <xs:element name="numero_cedula" type="xs:string" minOccurs="0"/>
+      <xs:element name="valor" type="xs:float"/>
+      <xs:element name="id_institucion" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_canal" type="xs:string" minOccurs="0"/>
+      <xs:element name="fecha_contable" type="xs:string" minOccurs="0"/>
+      <xs:element name="fecha_trx" type="xs:string" minOccurs="0"/>
+      <xs:element name="id_pago_banco" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="aplicaPagoDTHResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://172.16.23.235:7777/cobroslinea/WS_CobrosLinea</con:endpoint><con:endpoint>http://172.16.30.242:10040/cobrosecutel/WS_CobrosLinea_Ecutel</con:endpoint><con:endpoint>http://192.168.10.38:7777/cobroslinea/WS_CobrosLinea</con:endpoint></con:endpoints><con:operation id="b6271801-8fc0-4e78-8576-1ddac8338fcd" isOneWay="false" action="" name="aplicaPago" bindingOperationName="aplicaPago" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="76a62722-1478-4998-ba0e-8c3603b46bfb" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://172.16.30.242:10040/cobrosecutel/WS_CobrosLinea_Ecutel</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cob="http://cobros.ecutel/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <cob:aplicaPago>\r
+         <id_tipo_identificacion>002</id_tipo_identificacion>\r
+         <num_identificacion>0982121124</num_identificacion>\r
+         <valor>40.0</valor>\r
+         <id_forma_pago>001</id_forma_pago>\r
+         <id_institucion>003</id_institucion>\r
+         <id_canal>BVIR</id_canal>\r
+         <fecha_contable>2022-01-03T00:00:00.000-05:00</fecha_contable>\r
+         <fecha_trx>20220103 15:30:06</fecha_trx>\r
+         <id_pago_banco>55806263</id_pago_banco>\r
+      </cob:aplicaPago>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://cobros.porta/WS_CobrosLinea/aplicaPagoRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call id="ec24afd8-f768-4ee2-ac02-e6b66ca89110" name="Copy of Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://172.16.30.242:10040/cobrosecutel/WS_CobrosLinea_Ecutel</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cob="http://cobros.ecutel/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <cob:aplicaPago>\r
+         <id_tipo_identificacion>002</id_tipo_identificacion>\r
+         <num_identificacion>0923967244</num_identificacion>\r
+         <valor>40.00</valor>\r
+         <id_forma_pago>001</id_forma_pago>\r
+         <id_institucion>022</id_institucion>\r
+         <id_canal>VENT</id_canal>\r
+      </cob:aplicaPago>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://cobros.porta/WS_CobrosLinea/aplicaPagoRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="d6ec6003-2323-4e67-887b-f06af849dc3d" isOneWay="false" action="" name="aplicaPagoAsp" bindingOperationName="aplicaPagoAsp" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ed01e600-e342-483c-91e0-c9f76eba06bc" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.10.38:7777/cobroslinea/WS_CobrosLinea</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cob="http://cobros.porta/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <cob:aplicaPagoAsp>\r
+         <!--Optional:-->\r
+         <numero_telefono>?</numero_telefono>\r
+         <valor>?</valor>\r
+         <!--Optional:-->\r
+         <id_institucion>?</id_institucion>\r
+         <!--Optional:-->\r
+         <id_canal>?</id_canal>\r
+         <!--Optional:-->\r
+         <fecha_contable>?</fecha_contable>\r
+         <!--Optional:-->\r
+         <fecha_trx>?</fecha_trx>\r
+         <!--Optional:-->\r
+         <id_pago_banco>?</id_pago_banco>\r
+         <!--Optional:-->\r
+         <id_terminal>?</id_terminal>\r
+         <!--Optional:-->\r
+         <num_trx_atm>?</num_trx_atm>\r
+         <!--Optional:-->\r
+         <valor_recibido>?</valor_recibido>\r
+      </cob:aplicaPagoAsp>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://cobros.porta/WS_CobrosLinea/aplicaPagoAspRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="6db8004d-cc6d-4387-a002-bb8add89d78a" isOneWay="false" action="" name="aplicaPagoDTH" bindingOperationName="aplicaPagoDTH" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c21fa3bf-b213-4a28-a1cd-7b9c8c6196a5" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://172.16.23.235:7777/cobroslinea/WS_CobrosLinea</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cob="http://cobros.porta/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <cob:aplicaPagoDTH>\r
+         <!--Optional:-->\r
+         <numero_cedula>?</numero_cedula>\r
+         <valor>?</valor>\r
+         <!--Optional:-->\r
+         <id_institucion>?</id_institucion>\r
+         <!--Optional:-->\r
+         <id_canal>?</id_canal>\r
+         <!--Optional:-->\r
+         <fecha_contable>?</fecha_contable>\r
+         <!--Optional:-->\r
+         <fecha_trx>?</fecha_trx>\r
+         <!--Optional:-->\r
+         <id_pago_banco>?</id_pago_banco>\r
+      </cob:aplicaPagoDTH>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://cobros.porta/WS_CobrosLinea/aplicaPagoDTHRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="c39d92c0-69dd-4d0d-a7bb-8481285dddae" isOneWay="false" action="" name="aplicaPagoDTHAsp" bindingOperationName="aplicaPagoDTHAsp" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="03d6aea5-43e8-40bd-ace4-cfc57a665b62" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.10.38:7777/cobroslinea/WS_CobrosLinea</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cob="http://cobros.porta/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <cob:aplicaPagoDTHAsp>\r
+         <!--Optional:-->\r
+         <numero_cedula>?</numero_cedula>\r
+         <valor>?</valor>\r
+         <!--Optional:-->\r
+         <id_institucion>?</id_institucion>\r
+         <!--Optional:-->\r
+         <id_canal>?</id_canal>\r
+         <!--Optional:-->\r
+         <fecha_contable>?</fecha_contable>\r
+         <!--Optional:-->\r
+         <fecha_trx>?</fecha_trx>\r
+         <!--Optional:-->\r
+         <id_pago_banco>?</id_pago_banco>\r
+         <!--Optional:-->\r
+         <id_terminal>?</id_terminal>\r
+         <!--Optional:-->\r
+         <num_trx_atm>?</num_trx_atm>\r
+         <!--Optional:-->\r
+         <valor_recibido>?</valor_recibido>\r
+      </cob:aplicaPagoDTHAsp>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://cobros.porta/WS_CobrosLinea/aplicaPagoDTHAspRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="d70c5be9-c9fe-4e74-aa58-6fd9a39c6fbc" isOneWay="false" action="" name="aplicaReverso" bindingOperationName="aplicaReverso" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="68f21f98-acaa-4fe2-974f-d05dffd86b21" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.10.38:7777/cobroslinea/WS_CobrosLinea</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cob="http://cobros.porta/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <cob:aplicaReverso>\r
+         <!--Optional:-->\r
+         <numero_telefono>?</numero_telefono>\r
+         <valor>?</valor>\r
+         <!--Optional:-->\r
+         <id_institucion>?</id_institucion>\r
+         <!--Optional:-->\r
+         <id_canal>?</id_canal>\r
+         <!--Optional:-->\r
+         <fecha_contable>?</fecha_contable>\r
+         <!--Optional:-->\r
+         <fecha_trx>?</fecha_trx>\r
+         <!--Optional:-->\r
+         <id_pago_banco>?</id_pago_banco>\r
+      </cob:aplicaReverso>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://cobros.porta/WS_CobrosLinea/aplicaReversoRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="fa8e99f8-19a7-4d60-a675-153237580f61" isOneWay="false" action="" name="aplicaReversoDTH" bindingOperationName="aplicaReversoDTH" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="672d6777-22c5-4e7e-9eff-25ad4dd75395" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.10.38:7777/cobroslinea/WS_CobrosLinea</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cob="http://cobros.porta/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <cob:aplicaReversoDTH>\r
+         <!--Optional:-->\r
+         <numero_cedula>?</numero_cedula>\r
+         <valor>?</valor>\r
+         <!--Optional:-->\r
+         <id_institucion>?</id_institucion>\r
+         <!--Optional:-->\r
+         <id_canal>?</id_canal>\r
+         <!--Optional:-->\r
+         <fecha_contable>?</fecha_contable>\r
+         <!--Optional:-->\r
+         <fecha_trx>?</fecha_trx>\r
+         <!--Optional:-->\r
+         <id_pago_banco>?</id_pago_banco>\r
+      </cob:aplicaReversoDTH>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://cobros.porta/WS_CobrosLinea/aplicaReversoDTHRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="65d874ff-00ee-4f40-b41b-28b0192194af" isOneWay="false" action="" name="consultaDeuda" bindingOperationName="consultaDeuda" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="e5e3bafe-1581-4d3c-984f-06d8a8195597" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://172.16.30.242:10040/cobrosecutel/WS_CobrosLinea_Ecutel</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cob="http://cobros.ecutel/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <cob:consultaDeuda>\r
+         <id_tipo_identificacion>002</id_tipo_identificacion>\r
+         <num_identificacion>0923967244</num_identificacion>\r
+         <id_institucion>003</id_institucion>\r
+         <id_canal>BVIR</id_canal>\r
+         <id_terminal></id_terminal>\r
+      </cob:consultaDeuda>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://cobros.porta/WS_CobrosLinea/consultaDeudaRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="4bef3f4e-00ef-45fc-a145-2f1a0fa4782e" isOneWay="false" action="" name="consultaDeudaAsp" bindingOperationName="consultaDeudaAsp" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1cfb5901-b187-4eeb-95a2-caef0fc08b18" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.10.38:7777/cobroslinea/WS_CobrosLinea</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cob="http://cobros.porta/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <cob:consultaDeudaAsp>\r
+         <!--Optional:-->\r
+         <numero_telefono>?</numero_telefono>\r
+         <!--Optional:-->\r
+         <id_institucion>?</id_institucion>\r
+         <!--Optional:-->\r
+         <id_canal>?</id_canal>\r
+         <!--Optional:-->\r
+         <id_terminal>?</id_terminal>\r
+      </cob:consultaDeudaAsp>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://cobros.porta/WS_CobrosLinea/consultaDeudaAspRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="5ed41c17-77eb-45a2-80ea-ba8bc9149ac7" isOneWay="false" action="" name="consultaDeudaDTHAsp" bindingOperationName="consultaDeudaDTHAsp" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="fd3b638b-848c-4595-90a4-ccd365e63716" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://172.16.30.242:10040/cobrosecutel/WS_CobrosLinea_Ecutel</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cob="http://cobros.porta/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <cob:consultaDeudaDTHAsp>\r
+         <!--Optional:-->\r
+         <tipo_identificacion>002</tipo_identificacion>
+         <numero_cedula>0923961255</numero_cedula>\r
+         <!--Optional:-->\r
+         <id_institucion>003</id_institucion>\r
+         <!--Optional:-->\r
+         <id_canal>BVIR</id_canal>\r
+         <!--Optional:-->\r
+         <id_terminal>ASDWD</id_terminal>\r
+      </cob:consultaDeudaDTHAsp>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://cobros.porta/WS_CobrosLinea/consultaDeudaDTHAspRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="5260acd4-0c63-4cba-bd14-31a6f2721c58" isOneWay="false" action="" name="consultaDeudasDTH" bindingOperationName="consultaDeudasDTH" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="337f4bbf-2bdb-44a5-9ba4-12e165543b9a" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://172.16.23.235:7777/cobroslinea/WS_CobrosLinea</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cob="http://cobros.porta/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <cob:consultaDeudasDTH>\r
+         <!--Optional:-->\r
+         <numero_cedula>?</numero_cedula>\r
+         <!--Optional:-->\r
+         <id_institucion>?</id_institucion>\r
+         <!--Optional:-->\r
+         <id_canal>?</id_canal>\r
+      </cob:consultaDeudasDTH>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://cobros.porta/WS_CobrosLinea/consultaDeudasDTHRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:mockService id="00df262c-50ee-4cb8-bde6-07ba2c916e3d" port="7777" path="/cobroslinea/WS_CobrosLinea" host="DES023235" name="DTH" bindToHostOnly="false" docroot=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:properties/><con:mockOperation name="consultaDeudasDTH" id="6f94c137-1cd5-4e7d-9947-4eb9ed5a4184" interface="WS_CobrosLineaPortBinding" operation="consultaDeudasDTH"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="70eb6175-7788-4f26-8a24-8a62402f08ad" httpResponseStatus="200" encoding="UTF-8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockResponse@response-delay">500</con:setting></con:settings><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tns:consultaDeudasDTHResponse xmlns:tns="http://cobros.porta/">
+         <return>&lt;elements&gt;  &lt;element&gt;    &lt;nombre_cliente&gt;ZAMBRANO CASTILLO FRANCISCO GERMAN&lt;/nombre_cliente&gt;    &lt;valor&gt;24.45&lt;/valor&gt;    &lt;fecha_maxima_pago&gt;20201008&lt;/fecha_maxima_pago&gt;    &lt;id_respuesta&gt;CL_001&lt;/id_respuesta&gt;    &lt;mensaje_respuesta&gt;Éxito&lt;/mensaje_respuesta&gt;  &lt;/element&gt;&lt;/elements&gt;</return>
+      </tns:consultaDeudasDTHResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://cobros.porta/WS_CobrosLinea/consultaDeudasDTHResponse"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="aplicaPagoDTH" id="a22e23a9-3c82-41f1-9077-915f9a43dce0" interface="WS_CobrosLineaPortBinding" operation="aplicaPagoDTH"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="314cbc43-9e33-4292-8732-0c08a9e07ece" httpResponseStatus="200" encoding="UTF-8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockResponse@response-delay">500</con:setting></con:settings><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tns:aplicaPagoDTHResponse xmlns:tns="http://cobros.porta/">
+         <return>&lt;elements&gt;  &lt;element&gt;    &lt;id_pago_porta&gt;93316114&lt;/id_pago_porta&gt;    &lt;id_respuesta&gt;CL_005&lt;/id_respuesta&gt;    &lt;mensaje_respuesta&gt;Pago Recibido correctamente&lt;/mensaje_respuesta&gt;  &lt;/element&gt;&lt;/elements&gt;</return>
+      </tns:aplicaPagoDTHResponse>
+   </soapenv:Body>
+</soapenv:Envelope>
+]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://cobros.porta/WS_CobrosLinea/aplicaPagoDTHResponse"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="aplicaReversoDTH" id="f84f99e7-b7b1-4392-9b48-f4d6b8949fee" interface="WS_CobrosLineaPortBinding" operation="aplicaReversoDTH"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="c9ebc162-adc7-4671-be3b-89c6f26d27e4" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tns:aplicaReversoDTHResponse xmlns:tns="http://cobros.porta/">
+         <return>&lt;elements&gt;  &lt;element&gt;    &lt;id_pago_porta&gt;93316114&lt;/id_pago_porta&gt;    &lt;id_respuesta&gt;CL_001&lt;/id_respuesta&gt;    &lt;mensaje_respuesta&gt;Pago Recibido correctamente&lt;/mensaje_respuesta&gt;  &lt;/element&gt;&lt;/elements&gt;</return>
+      </tns:aplicaReversoDTHResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://cobros.porta/WS_CobrosLinea/aplicaReversoDTHResponse"/></con:response><con:dispatchConfig/></con:mockOperation></con:mockService><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
