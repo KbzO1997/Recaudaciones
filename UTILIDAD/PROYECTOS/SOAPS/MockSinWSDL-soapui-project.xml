@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="34f893ea-64bd-4e4e-b2d5-eed1ef0f0be0" activeEnvironment="Default" name="MockSinWSDL" resourceRoot="" soapui-version="5.6.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:restMockService id="6d935ae8-5ef5-4e02-9c6d-0d9f7b8077de" port="8080" path="/" host="DES023235" name="REST MockService 1"><con:settings/><con:properties/><con:restMockAction name="/KeyServer" method="POST" resourcePath="/KeyServer" id="1f07a107-57b8-4780-9689-af42f67986bd"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:dispatchPath>/*&#13;
+// Script dispatcher is used to select a response based on the incoming request.&#13;
+// Here are few examples showing how to match based on path, query param, header and body&#13;
+&#13;
+// Match based on path&#13;
+def requestPath = mockRequest.getPath()&#13;
+log.info "Path: "+ requestPath&#13;
+&#13;
+if( requestPath.contains("json") )&#13;
+{&#13;
+    // return the name of the response you want to dispatch&#13;
+    return "JSON Response"&#13;
+}&#13;
+&#13;
+&#13;
+// Match based on query parameter&#13;
+def queryString = mockRequest.getRequest().getQueryString()&#13;
+log.info "QueryString: " + queryString&#13;
+&#13;
+if( queryString.contains("stockholm") )&#13;
+{&#13;
+    // return the name of the response you want to dispatch&#13;
+    return "Response Stockholm"&#13;
+}&#13;
+else if( queryString.contains("london") )&#13;
+{&#13;
+    // return the name of the response you want to dispatch&#13;
+    return "Response London"&#13;
+}&#13;
+&#13;
+&#13;
+// Match based on header&#13;
+def acceptEncodingHeaderList = mockRequest.getRequestHeaders().get("Accept-Encoding")&#13;
+log.info "AcceptEncoding Header List: " + acceptEncodingHeaderList&#13;
+&#13;
+if( acceptEncodingHeaderList.contains("gzip,deflate") )&#13;
+{&#13;
+    // return the name of the response you want to dispatch&#13;
+    return "GZiped Response"&#13;
+}&#13;
+&#13;
+&#13;
+// Match based on body&#13;
+def requestBody = mockRequest.getRequestContent()&#13;
+log.info "Request body: " + requestBody&#13;
+&#13;
+if( requestBody.contains("some data") )&#13;
+{&#13;
+    // return the name of the response you want to dispatch&#13;
+    return "Response N"&#13;
+}&#13;
+*/&#13;
+</con:dispatchPath><con:response name="Response 1" id="dad50e2e-d247-43c2-800a-0e4a018fe4c5" httpResponseStatus="200" mediaType="text/xml"><con:settings/><con:responseContent><![CDATA[<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing">
+   <env:Header>
+      <wsa:Action>http://www.bolivariano.com/KeyServer/EnviarTrama</wsa:Action>
+      <wsa:MessageID>urn:dee28b2c-6da6-11ec-b3e4-525400bf9687</wsa:MessageID>
+      <wsa:ReplyTo>
+         <wsa:Address>http://www.w3.org/2005/08/addressing/anonymous</wsa:Address>
+         <wsa:ReferenceParameters>
+            <instra:tracking.ecid xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">005pCXuMiy72vHG6yzzW6G0000Rp00009K</instra:tracking.ecid>
+            <instra:tracking.FlowEventId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">17067474</instra:tracking.FlowEventId>
+            <instra:tracking.FlowId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">2004037</instra:tracking.FlowId>
+            <instra:tracking.CorrelationFlowId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">0000Nsb2Cip0fpG6yzicMG1XksoW0009my</instra:tracking.CorrelationFlowId>
+            <instra:tracking.quiescing.SCAEntityId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">124219</instra:tracking.quiescing.SCAEntityId>
+         </wsa:ReferenceParameters>
+      </wsa:ReplyTo>
+      <wsa:FaultTo>
+         <wsa:Address>http://www.w3.org/2005/08/addressing/anonymous</wsa:Address>
+      </wsa:FaultTo>
+   </env:Header>
+   <env:Body>
+      <ns1:MensajeSalidaEnviarTrama xmlns:oracle-xsl-mapper="http://www.oracle.com/xsl/mapper/schemas" xmlns:ns1="http://www.bolivariano.com/KeyServer">
+         <ns1:mensajeSalida>
+            <codigoError>0000</codigoError>
+            <mensajeSistema/>
+            <mensajeUsuario>MENSAJE PROCESADO CON EXITO</mensajeUsuario>
+         </ns1:mensajeSalida>
+         <ns1:offset/>
+      </ns1:MensajeSalidaEnviarTarama>
+   </env:Body>
+</env:Envelope>]]></con:responseContent></con:response></con:restMockAction></con:restMockService><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

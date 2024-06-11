@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="f64342af-bc6e-472d-907c-504a0dcaeacb" activeEnvironment="Default" name="KeyServerHttpMock" resourceRoot="" soapui-version="5.6.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="0a0cb0af-03cd-4f0e-9fbd-196354ed9b11" wsaVersion="NONE" name="keyServerBinding" type="wsdl" bindingName="{http://www.bolivariano.com/KeyServer}keyServerBinding" soapVersion="1_1" anonymous="optional" definition="https://soavides.bolivariano.fin.ec:5554/Genericos/proxy/KeyServerHttp?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://soavides.bolivariano.fin.ec:5554/Genericos/proxy/KeyServerHttp?wsdl"><con:part><con:url>https://soavides.bolivariano.fin.ec:5554/Genericos/proxy/KeyServerHttp?wsdl</con:url><con:content><![CDATA[<WL5G3N0:definitions name="KeyServer" targetNamespace="http://www.bolivariano.com/KeyServer" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://www.bolivariano.com/KeyServer" xmlns:WL5G3N2="http://schemas.xmlsoap.org/wsdl/soap/">
+  <WL5G3N0:types>
+    <xsd:schema elementFormDefault="qualified" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.bolivariano.com/KeyServer" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsd1="http://www.bolivariano.com/MensajeBolivariano">
+      <xsd:import namespace="http://www.bolivariano.com/KeyServer" schemaLocation="https://soavides.bolivariano.fin.ec:5554/Genericos/proxy/KeyServerHttp?SCHEMA%2FGenericos%2Fresource%2FKeyServer"></xsd:import>
+    </xsd:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="EnviarTramaRequest">
+    <WL5G3N0:part element="WL5G3N1:MensajeEntradaEnviarTrama" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="EnviarTramaResponse">
+    <WL5G3N0:part element="WL5G3N1:MensajeSalidaEnviarTrama" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="KeyServerPort">
+    <WL5G3N0:operation name="EnviarTrama">
+      <WL5G3N0:input message="WL5G3N1:EnviarTramaRequest"/>
+      <WL5G3N0:output message="WL5G3N1:EnviarTramaResponse"/>
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="keyServerBinding" type="WL5G3N1:KeyServerPort">
+    <WL5G3N2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <WL5G3N0:operation name="EnviarTrama">
+      <WL5G3N2:operation soapAction="http://www.bolivariano.com/KeyServer/EnviarTrama"/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="KeyServer">
+    <WL5G3N0:documentation>OSB Service</WL5G3N0:documentation>
+    <WL5G3N0:port binding="WL5G3N1:keyServerBinding" name="KeyServerSOAP">
+      <WL5G3N2:address location="https://soavides.bolivariano.fin.ec:5554/Genericos/proxy/KeyServerHttp"/>
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>https://soavides.bolivariano.fin.ec:5554/Genericos/proxy/KeyServerHttp?SCHEMA%2FGenericos%2Fresource%2FKeyServer</con:url><con:content><![CDATA[<xs:schema targetNamespace="http://www.bolivariano.com/KeyServer" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.bolivariano.com/KeyServer" xmlns:mbl="http://www.bolivariano.com/MensajeBolivariano">
+  <xs:import namespace="http://www.bolivariano.com/MensajeBolivariano" schemaLocation="https://soavides.bolivariano.fin.ec:5554/Genericos/proxy/KeyServerHttp?SCHEMA%2FModeloNegocio%2FModeloNegocio%2FMensajeBolivariano"/>
+  <xs:element name="MensajeEntradaEnviarTrama" type="EntradaEnviarTrama"/>
+  <xs:complexType name="EntradaEnviarTrama">
+    <xs:annotation>
+      <xs:documentation>Modelo de Negocio para procesamiento de tramas
+                           keyserver</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="command" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>tipo de comando a ejecutar</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="panType" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>tipo de parametro pan</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="format" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>formato de la trama</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ePin" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="terminal" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>codigo del terminal desde donde se envia la transaccion</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="type" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="offset" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="pan" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="padChar" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="pinLength" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="masterKey" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="oldEPin" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="kekWk" type="xs:string" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MensajeSalidaEnviarTrama" type="SalidaEnviarTrama"/>
+  <xs:complexType name="SalidaEnviarTrama">
+    <xs:sequence>
+      <xs:element name="mensajeSalida" type="mbl:MensajeSalida" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Mensaje de respuesta</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TramaTCPKeyServerIn" type="xs:string"/>
+  <xs:element name="TramaTCPKeyServerOut" type="xs:string"/>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>https://soavides.bolivariano.fin.ec:5554/Genericos/proxy/KeyServerHttp?SCHEMA%2FModeloNegocio%2FModeloNegocio%2FMensajeBolivariano</con:url><con:content><![CDATA[<xs:schema targetNamespace="http://www.bolivariano.com/MensajeBolivariano" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mbl="http://www.bolivariano.com/MensajeBolivariano">
+  <xs:element name="MensajeSalida" type="mbl:MensajeSalida"/>
+  <xs:complexType name="MensajeSalida">
+    <xs:annotation>
+      <xs:documentation>mensaje de salida generico, contiene atributos comunes para todo
+				mensajes.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="codigoError" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="codigoErrorRemoto" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="estado" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="mensajeSistema" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="mensajeUsuario" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>o_msjerror</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="operacion" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="secuencialBPM" type="xs:int" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>o_secbpm</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MensajeEntrada" type="mbl:MensajeEntrada"/>
+  <xs:complexType name="MensajeEntrada">
+    <xs:annotation>
+      <xs:documentation>mensaje de entrada generico, contiene atributos comunes para todo
+				mensajes.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="archivo" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="canal" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="depuracion" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="fecha" type="xs:dateTime" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="oficina" type="xs:int" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="proceso" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="terminal" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="transaccion" type="xs:int" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="usuario" type="xs:string" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MensajeFault" type="mbl:MensajeFault"/>
+  <xs:complexType name="MensajeFault">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:string"/>
+      <xs:element name="nombre" type="xs:string"/>
+      <xs:element name="descripcion" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://172.16.23.235:8080/KeyServer</con:endpoint><con:endpoint>http://172.16.23.235:8900/Genericos/proxy/KeyServerHttp</con:endpoint><con:endpoint>https://soavides.bolivariano.fin.ec:5554/Genericos/proxy/KeyServerHttp</con:endpoint></con:endpoints><con:operation id="df55a132-9e13-4ef2-9079-29998197ab32" isOneWay="false" action="http://www.bolivariano.com/KeyServer/EnviarTrama" name="EnviarTrama" bindingOperationName="EnviarTrama" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1b7e7c77-9989-4173-85c5-38511a9380fc" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://soavides.bolivariano.fin.ec:5554/Genericos/proxy/KeyServerHttp</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:key="http://www.bolivariano.com/KeyServer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <MensajeEntradaEnviarTrama xmlns:oracle-xsl-mapper="http://www.oracle.com/xsl/mapper/schemas" xmlns:ns9="http://www.bolivariano.com/KeyServer" xmlns="http://www.bolivariano.com/KeyServer">
+         <ns9:command>VCP</ns9:command>
+         <ns9:panType>1</ns9:panType>
+         <ns9:format>0</ns9:format>
+         <ns9:ePin>0000000000000000</ns9:ePin>
+         <ns9:terminal>00000</ns9:terminal>
+         <ns9:type>X</ns9:type>
+         <ns9:offset>0000</ns9:offset>
+         <ns9:pan>095345752560011787322</ns9:pan>
+         <ns9:padChar>F</ns9:padChar>
+         <ns9:pinLength>04</ns9:pinLength>
+         <ns9:masterKey>08</ns9:masterKey>
+         <ns9:oldEPin>0001</ns9:oldEPin>
+         <ns9:kekWk>0001600000000000</ns9:kekWk>
+      </MensajeEntradaEnviarTrama>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.bolivariano.com/KeyServer/EnviarTrama"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:mockService id="b5b41452-ad6c-482f-b6e7-8376bfb1dc0d" port="8900" path="/Genericos/proxy/KeyServerHttp" host="DES023235" name="MockKeyServer" bindToHostOnly="false" docroot=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:properties/><con:mockOperation name="EnviarTrama" id="d7b9015b-41eb-4eaf-8e4d-d10cbf49b799" interface="keyServerBinding" operation="EnviarTrama"><con:settings/><con:defaultResponse>Response 2</con:defaultResponse><con:dispatchStyle>QUERY_MATCH</con:dispatchStyle><con:response name="Response 1" id="8dd9acd1-e93a-4365-9bba-efdf06fce455" httpResponseStatus="200" encoding="UTF-8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockResponse@encode_attachments">false</con:setting><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockResponse@response-delay">10000</con:setting></con:settings><con:responseContent><![CDATA[<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing">
+   <env:Header>
+      <wsa:Action>http://www.bolivariano.com/KeyServer/EnviarTrama</wsa:Action>
+      <wsa:MessageID>urn:dee28b2c-6da6-11ec-b3e4-525400bf9687</wsa:MessageID>
+      <wsa:ReplyTo>
+         <wsa:Address>http://www.w3.org/2005/08/addressing/anonymous</wsa:Address>
+         <wsa:ReferenceParameters>
+            <instra:tracking.ecid xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">005pCXuMiy72vHG6yzzW6G0000Rp00009K</instra:tracking.ecid>
+            <instra:tracking.FlowEventId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">17067474</instra:tracking.FlowEventId>
+            <instra:tracking.FlowId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">2004037</instra:tracking.FlowId>
+            <instra:tracking.CorrelationFlowId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">0000Nsb2Cip0fpG6yzicMG1XksoW0009my</instra:tracking.CorrelationFlowId>
+            <instra:tracking.quiescing.SCAEntityId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">124219</instra:tracking.quiescing.SCAEntityId>
+         </wsa:ReferenceParameters>
+      </wsa:ReplyTo>
+      <wsa:FaultTo>
+         <wsa:Address>http://www.w3.org/2005/08/addressing/anonymous</wsa:Address>
+      </wsa:FaultTo>
+   </env:Header>
+   <env:Body>
+      <ns1:MensajeSalidaEnviarTrama xmlns:oracle-xsl-mapper="http://www.oracle.com/xsl/mapper/schemas" xmlns:ns1="http://www.bolivariano.com/KeyServer">
+         <ns1:mensajeSalida>
+            <codigoError>0000</codigoError>
+            <mensajeSistema/>
+            <mensajeUsuario>MENSAJE PROCESADO CON EXITO</mensajeUsuario>
+         </ns1:mensajeSalida>
+         <ns1:offset/>
+      </ns1:MensajeSalidaEnviarTarama>
+   </env:Body>
+</env:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.bolivariano.com/KeyServer/EnviarTrama"/></con:response><con:response name="Response 2" id="8dd9acd1-e93a-4365-9bba-efdf06fce455" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing">
+   <env:Header>
+      <wsa:Action>http://www.bolivariano.com/KeyServer/EnviarTrama</wsa:Action>
+      <wsa:MessageID>urn:dee28b2c-6da6-11ec-b3e4-525400bf9687</wsa:MessageID>
+      <wsa:ReplyTo>
+         <wsa:Address>http://www.w3.org/2005/08/addressing/anonymous</wsa:Address>
+         <wsa:ReferenceParameters>
+            <instra:tracking.ecid xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">005pCXuMiy72vHG6yzzW6G0000Rp00009K</instra:tracking.ecid>
+            <instra:tracking.FlowEventId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">17067474</instra:tracking.FlowEventId>
+            <instra:tracking.FlowId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">2004037</instra:tracking.FlowId>
+            <instra:tracking.CorrelationFlowId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">0000Nsb2Cip0fpG6yzicMG1XksoW0009my</instra:tracking.CorrelationFlowId>
+            <instra:tracking.quiescing.SCAEntityId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">124219</instra:tracking.quiescing.SCAEntityId>
+         </wsa:ReferenceParameters>
+      </wsa:ReplyTo>
+      <wsa:FaultTo>
+         <wsa:Address>http://www.w3.org/2005/08/addressing/anonymous</wsa:Address>
+      </wsa:FaultTo>
+   </env:Header>
+   <env:Body>
+      <ns1:MensajeSalidaEnviarTrama xmlns:oracle-xsl-mapper="http://www.oracle.com/xsl/mapper/schemas" xmlns:ns1="http://www.bolivariano.com/KeyServer">
+         <ns1:mensajeSalida>
+            <codigoError>70010</codigoError>
+            <mensajeSistema/>
+            <mensajeUsuario>ERROR AL CONSUMIR SERVICIO</mensajeUsuario>
+         </ns1:mensajeSalida>
+         <ns1:offset/>
+      </ns1:MensajeSalidaEnviarTarama>
+   </env:Body>
+</env:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.bolivariano.com/KeyServer/EnviarTrama"/></con:response><con:dispatchConfig xsi:type="con:MockOperationQueryMatchDispatch" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:query><con:name>match</con:name><con:query>//*[local-name()='pan']</con:query><con:match>095345752560011787322</con:match><con:response>Response 1</con:response></con:query></con:dispatchConfig></con:mockOperation></con:mockService><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
