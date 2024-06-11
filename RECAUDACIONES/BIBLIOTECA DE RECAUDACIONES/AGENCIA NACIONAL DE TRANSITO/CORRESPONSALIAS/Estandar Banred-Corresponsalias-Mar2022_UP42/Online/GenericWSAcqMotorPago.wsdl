@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">WS ISS UP</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="BillInquiryRq">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BillInquiryRequest" type="tns:BillInquiryRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BillInquiryRequest">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Channel" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryAcctNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TxCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AcquirerAuditNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AcquirerInstitutionID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Track2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TerminalID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CurrencyCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BillReference" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BillServiceCode" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BillCompanyCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Medio" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BranchId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AditionalData" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="BillInquiryRs">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BillInquiryResponse" type="tns:BillInquiryResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BillInquiryResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SwitchAuditNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResultCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Amount" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResponseData" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CommissionsClient" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CommissionsComerce" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BillerCutoverDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PartialPayment" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="BillPaymentRq">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BillPaymentRequest" type="tns:BillPaymentRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BillPaymentRequest">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Channel" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryAcctNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TxCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AcquirerAuditNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AcquirerInstitutionID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Track2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TerminalID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CurrencyCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BillReference" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BillServiceCode" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BillCompanyCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Medio" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BranchId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountId1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Amount" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FormaPago" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IndicatorReversal" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Trazabilidad" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Unicidad" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AditionalData" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="BillPaymentRs">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BillPaymentResponse" type="tns:BillPaymentResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BillPaymentResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SwitchAuditNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResultCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResponseData" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BillerCutoverDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SequenceAcquire" type="s:string" />
+		  <s:element minOccurs="0" maxOccurs="1" name="StandIN" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="BillPaymentReversalRq">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BillPaymentReversalRequest" type="tns:BillPaymentReversalRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BillPaymentReversalRequest">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Channel" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryAcctNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TxCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AcquirerAuditNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AcquirerInstitutionID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Track2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TerminalID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CurrencyCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BillReference" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BillServiceCode" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BillCompanyCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SwitchAuditNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SequenceAcquire" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BillerCutoverDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Medio" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BranchId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountId1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Amount" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FormaPago" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IndicatorReversal" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Trazabilidad" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Unicidad" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AditionalData" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="BillPaymentReversalRs">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BillPaymentReversalResponse" type="tns:BillPaymentReversalResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BillPaymentReversalResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SwitchAuditNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResultCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResponseData" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BillerCutoverDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SequenceAcquire" type="s:string" />
+		  <s:element minOccurs="0" maxOccurs="1" name="StandIN" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="BillInquirySoapIn">
+    <wsdl:part name="parameters" element="tns:BillInquiryRq" />
+  </wsdl:message>
+  <wsdl:message name="BillInquirySoapOut">
+    <wsdl:part name="parameters" element="tns:BillInquiryRs" />
+  </wsdl:message>
+  <wsdl:message name="BillPaymentSoapIn">
+    <wsdl:part name="parameters" element="tns:BillPaymentRq" />
+  </wsdl:message>
+  <wsdl:message name="BillPaymentSoapOut">
+    <wsdl:part name="parameters" element="tns:BillPaymentRs" />
+  </wsdl:message>
+  <wsdl:message name="BillPaymentReversalSoapIn">
+    <wsdl:part name="parameters" element="tns:BillPaymentReversalRq" />
+  </wsdl:message>
+  <wsdl:message name="BillPaymentReversalSoapOut">
+    <wsdl:part name="parameters" element="tns:BillPaymentReversalRs" />
+  </wsdl:message>
+  <wsdl:portType name="GenericWSAcqBanredSoap">
+    <wsdl:operation name="BillInquiry">
+      <wsdl:input message="tns:BillInquirySoapIn" />
+      <wsdl:output message="tns:BillInquirySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BillPayment">
+      <wsdl:input message="tns:BillPaymentSoapIn" />
+      <wsdl:output message="tns:BillPaymentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BillPaymentReversal">
+      <wsdl:input message="tns:BillPaymentReversalSoapIn" />
+      <wsdl:output message="tns:BillPaymentReversalSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GenericWSAcqBanredSoap" type="tns:GenericWSAcqBanredSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="BillInquiry">
+      <soap:operation soapAction="http://tempuri.org/BillInquiry" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BillPayment">
+      <soap:operation soapAction="http://tempuri.org/BillPayment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BillPaymentReversal">
+      <soap:operation soapAction="http://tempuri.org/BillPaymentReversal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GenericWSAcqBanredSoap12" type="tns:GenericWSAcqBanredSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="BillInquiry">
+      <soap12:operation soapAction="http://tempuri.org/BillInquiry" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BillPayment">
+      <soap12:operation soapAction="http://tempuri.org/BillPayment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BillPaymentReversal">
+      <soap12:operation soapAction="http://tempuri.org/BillPaymentReversal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GenericWSAcqBanred">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">WS ISS UP</wsdl:documentation>
+    <wsdl:port name="GenericWSAcqBanredSoap" binding="tns:GenericWSAcqBanredSoap">
+      <soap:address location="http://172.20.32.210:27505/Service1.asmx" />
+    </wsdl:port>
+    <wsdl:port name="GenericWSAcqBanredSoap12" binding="tns:GenericWSAcqBanredSoap12">
+      <soap12:address location="http://172.20.32.210:27505/Service1.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
