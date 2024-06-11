@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EntidadesDBStoreContainer" CdmEntityContainer="SATDB">
+    <FunctionImportMapping FunctionImportName="sp_con_nombrempresa" FunctionName="EntidadesDB.Store.sp_con_nombrempresa" />
+    <FunctionImportMapping FunctionImportName="sp_con_nombrempresas_producto" FunctionName="EntidadesDB.Store.sp_con_nombrempresas_producto">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EntidadesDB.sp_con_nombrempresas_producto_Result">
+          <ScalarProperty Name="em_nom_empresa" ColumnName="em_nom_empresa" />
+          <ScalarProperty Name="em_cod_empresa" ColumnName="em_cod_empresa" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_con_nemonico_empresa" FunctionName="EntidadesDB.Store.sp_con_nemonico_empresa" />
+    <FunctionImportMapping FunctionImportName="sp_con_usuario" FunctionName="EntidadesDB.Store.sp_con_usuario">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EntidadesDB.sp_con_usuario_Result">
+          <ScalarProperty Name="us_cod_empresa" ColumnName="us_cod_empresa" />
+          <ScalarProperty Name="us_cod_usuario" ColumnName="us_cod_usuario" />
+          <ScalarProperty Name="us_contrasenia" ColumnName="us_contrasenia" />
+          <ScalarProperty Name="us_reingreso_contrasenia" ColumnName="us_reingreso_contrasenia" />
+          <ScalarProperty Name="us_nom_usuario" ColumnName="us_nom_usuario" />
+          <ScalarProperty Name="us_ofiage_usuario" ColumnName="us_ofiage_usuario" />
+          <ScalarProperty Name="us_fch_expira_clave" ColumnName="us_fch_expira_clave" />
+          <ScalarProperty Name="us_est_usuario" ColumnName="us_est_usuario" />
+          <ScalarProperty Name="us_ctp_usuario" ColumnName="us_ctp_usuario" />
+          <ScalarProperty Name="us_cedula" ColumnName="us_cedula" />
+          <ScalarProperty Name="us_dir_email" ColumnName="us_dir_email" />
+          <ScalarProperty Name="us_nem_empresa" ColumnName="us_nem_empresa" />
+          <ScalarProperty Name="us_cod_caja_cobis" ColumnName="us_cod_caja_cobis" />
+          <ScalarProperty Name="us_cod_usuario_cobis" ColumnName="us_cod_usuario_cobis" />
+          <ScalarProperty Name="us_cargo" ColumnName="us_cargo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

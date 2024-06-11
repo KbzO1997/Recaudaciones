@@ -1,0 +1,221 @@
+﻿@{
+    // Vista de Nueva Matriculacion
+    ViewBag.Title = "Matriculaci&oacute;n de Empresas de Servicio";
+
+    // Modo empotrado
+
+    ViewBag.ModoEmpotrado = true;
+
+    if (ViewBag.ModoEmpotrado)
+    {
+        Layout = "~/Views/Shared/_LayoutGenerico.cshtml";
+    }
+}
+@model OTCSAT.Models.ConfirmacionMatriculacionModel
+
+@if (ViewBag.ModoEmpotrado)
+{
+    <style>
+        body {
+            background-color: white !important;
+        }
+    </style>
+}
+
+@using (Html.BeginForm("ModificarMatriculacion", "Home", FormMethod.Post))
+{
+    <table cellspacing="1" cellpadding="0" style="width:100%;border:none;">
+        <tr>
+            <td>
+                <table cellspacing="0" cellpadding="0" id="contenedorForma" style="width:100%;border:none;">
+                    @if (ViewBag.EsModificacionConfirmada)
+                    {
+                        <tr>
+                            @if(Model.Respuesta.ExitoOperacion)
+                            {
+                                <td colspan="10" align="center" class="mensaje" style="text-align: center; font-size: 11px;">
+                                    @Html.DisplayTextFor(m => m.Respuesta.MensajeError)
+                                </td>
+                            }
+                            else
+                            {
+                                <td colspan="10" align="center" class="mensaje" style="text-align: center; font-size: 11px;background-color:#efdcf2 !important;color:#ff0000 !important;">
+                                    @Html.DisplayTextFor(m => m.Respuesta.MensajeError)
+                                </td>
+                            }
+                        </tr>
+                    }
+                    <tr>
+                        <td colspan="6" class="Vigente">@Html.Raw(@ViewBag.Title)</td>
+                    </tr>
+                    @if (!ViewBag.EsModificacionConfirmada)
+                    {
+                        <tr>
+                            <td class="titCampo">Empresa :</td>
+                            <td class="campo" colspan="3">
+                                @Html.HiddenFor(m => m.Secuencia)
+                                @Html.TextBoxFor(m => m.Ordenante, new { @maxLength = 15, @size = 15, @class = "datos deshabilitado", @onkeypress = "return ValidacionesUI.validarNumero(event)", @readonly = "true" })
+                                <input id="comandoSelector" class="button buttonPicker" type="button" value="!" disabled>
+                                @Html.TextBoxFor(m => m.NombreOrdenante, new { @maxLength = 50, @size = 50, @class = "datos deshabilitado", @style = "text-transform:UPPERCASE;width:354px;", @readonly = "true" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Usuario :</td>
+                            <td class="campo" colspan="3">
+                                @Html.TextBoxFor(m => m.Nemonico, new { @maxLength = 15, @size = 15, @class = "datos deshabilitado", @readonly = "true" })
+                                <input type="text" class="datos deshabilitado" value="@Model.Usuario.Substring(5)" style="text-transform:uppercase" readonly="readonly" size="15">
+                                @Html.HiddenFor(m => m.Usuario)
+                                @Html.TextBoxFor(m => m.NombreUsuario, new { @maxLength = 50, @size = 50, @class = "datos deshabilitado", @readonly = "true" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Tipo Servicio :</td>
+                            <td class="campo">
+                                <select name="NombreTipoRecaudacion" class="datos deshabilitado" style="width:200px;pointer-events:none;">
+                                    <option value="@Html.DisplayTextFor(m=>m.TipoRecaudacion)" selected>@Html.DisplayTextFor(m => m.TipoRecaudacion)</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Emp. Recaudaci&oacute;n :</td>
+                            <td class="campo">
+                                <select name="NombreEmpresaRecaudacion" class="datos deshabilitado" style="width:200px;pointer-events:none;">
+                                    <option value="@Html.DisplayTextFor(m => m.NombreEmpresaRecaudacion)" selected>@Html.DisplayTextFor(m => m.NombreEmpresaRecaudacion)</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Convenio :</td>
+                            <td class="campo">
+                                <select name="NombreConvenio" class="datos deshabilitado" style="width:200px;pointer-events:none;">
+                                    <option value="@Html.DisplayTextFor(m => m.NombreConvenio)" selected>@Html.DisplayTextFor(m => m.NombreConvenio)</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Tipo Identificador :</td>
+                            <td class="campo">
+                                <select name="EtiquetaIdentificador" class="datos deshabilitado" style="width:200px;pointer-events:none;">
+                                    <option value="@Html.DisplayTextFor(m => m.EtiquetaIdentificador)" selected>@Html.DisplayTextFor(m => m.EtiquetaIdentificador)</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">@Html.DisplayTextFor(m => m.EtiquetaIdentificador) :</td>
+                            <td class="campo">
+                                @Html.TextBoxFor(m => m.Suministro, new { @class = "datos deshabilitado", @readonly = "true", @style = "width:200px;" })
+                            </td>
+                        </tr>
+                        <tfoot>
+                            <tr>
+                                <td class="titCampo">Estado :</td>
+                                <td class="campo">
+                                    <label>Activo</label>
+                                    <input type="radio" name="Estado" value="A" @(Model.Estado.Equals("A") ? "checked" : "") />
+                                    <label>Inactivo</label>
+                                    <input type="radio" name="Estado" value="I" @(Model.Estado.Equals("I") ? "checked" : "") />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="titCampo">Alias :</td>
+                                <td class="campo">
+                                    @Html.TextBoxFor(m => m.Alias, new { @class = "datos deshabilitado", @maxLength = "20", @size = 60, @autocomplete = "off", minlength = "1", @style = "text-transform:uppercase", @pattern = "[a-zA-Z0-9 ]+", @data_inputmask_regex = "[a-zA-Z0-9 ]+", @readonly = "true" })
+                                    @Html.HiddenFor(m => m.UsuarioModificacion)
+                                </td>
+                            </tr>
+                        </tfoot>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td class="titCampo">Usuario Autorizado:</td>
+                            <td class="campo" colspan="3">
+                                @Html.DisplayTextFor(m => m.Usuario)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Tipo Servicio :</td>
+                            <td class="campo">
+                                @Html.DisplayTextFor(m => m.TipoRecaudacion)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Emp. Recaudaci&oacute;n :</td>
+                            <td class="campo">
+                                @Html.DisplayTextFor(m => m.EmpresaRecaudacion)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Sub. Empresa :</td>
+                            <td class="campo">
+                                @Html.DisplayTextFor(m => m.Convenio)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">@Html.DisplayTextFor(m => m.EtiquetaIdentificador) :</td>
+                            <td class="campo">
+                                @Html.DisplayTextFor(m => m.Suministro)
+                            </td>
+                        </tr>
+                        <tfoot>
+                            <tr>
+                                <td class="titCampo">Estado Inicial:</td>
+                                <td class="campo">
+                                    @Html.DisplayTextFor(m => m.Estado)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="titCampo">Alias :</td>
+                                <td class="campo">
+                                    @Html.DisplayTextFor(m => m.Alias)
+                                    @Html.HiddenFor(m => m.UsuarioModificacion)
+                                </td>
+                            </tr>
+                        </tfoot>
+                    }
+
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <div class="separadorSeccion"></div>
+    <div class="botonera">
+        @if (ViewBag.EsModificacionConfirmada)
+        {
+            <input class="button" type="button" value="Continuar" id="comandoContinuar" onclick="document.location='@Url.Action("Index",new {UsuarioLogoneado = Model.UsuarioModificacion})'">
+        }
+        else
+        {
+            <input class="button" type="button" value="Regresar" id="comandoVolver" onclick="window.history.back();">
+            <input class="button botonAcentuado" type="submit" value="Guardar" id="comandoGuardar" onclick="return validarModificacion()">
+        }
+
+    </div>
+}
+
+<script language="javascript">
+    function validarModificacion() {
+        var esValido = true;
+
+        // Validacion de campos fijos
+        esValido = esValido && ($("#Alias").val().trim() != "");
+        
+        if (!esValido) {
+            alert("Debe ingresar todos los campos para continuar");
+        } else {
+            if ($("#Alias").val().trim().length < 1) {
+                esValido = false;
+                alert("El alias debe tener al menos 1 caractere");
+            }
+        }
+
+        return esValido;
+    }
+
+    // EntryPoint
+    $(document).ready(function () {
+        $("#Alias").inputmask();
+    });
+
+</script>

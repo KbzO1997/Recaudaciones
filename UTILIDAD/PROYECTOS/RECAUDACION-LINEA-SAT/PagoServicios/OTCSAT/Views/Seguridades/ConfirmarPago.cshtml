@@ -1,0 +1,184 @@
+﻿@{
+
+    // Pre-Confirmacion de pago y validacion de seguridad
+    ViewBag.Title = "Comprobante de pago de servicio";
+
+    // Modo empotrado
+
+    ViewBag.ModoEmpotrado = true;
+
+    if (ViewBag.ModoEmpotrado)
+    {
+        Layout = "~/Views/Shared/_LayoutGenerico.cshtml";
+    }
+}
+@model OTCSAT.Models.SeguridadesModel
+
+@if (ViewBag.ModoEmpotrado)
+{
+    <style>
+        body {
+            background-color: white !important;
+        }
+    </style>
+}
+
+    <div style="width:800px;">
+        <table cellspacing="1" cellpadding="0" style="width:100%;border:none;">
+            <tr>
+                <td>
+                    <table cellspacing="0" cellpadding="0" id="contenedorForma" style="width:100%;border:none;">
+                        <tr>
+                            <td colspan="6" align="center" class="mensaje" style="text-align: center; font-size: 11px;">
+                                @Html.Raw(Model.MensajeError)
+                            </td>
+                        </tr>
+
+                        @if (Model.EsTokenValido && Model.EsPagoExitoso)
+                        {
+                            <!--
+        <tr>
+            <td colspan="6">
+                <div class="separadorSeccion"></div>
+                <div style="text-align: right; padding-top: 10px;width:98%">
+                    <img src="~/Imagenes/logoBB.png">
+                    <img src="~/imagenes/logoSAT.png">
+                </div>
+                <div class="separadorSeccion"></div>
+            </td>
+        </tr>
+        -->
+                            <tr>
+                                <td colspan="6" class="Vigente">@Html.Raw(ViewBag.Title)</td>
+                            </tr>
+                            <tr>
+                                <td class="titCampo">Tipo de Servicio:</td>
+                                <td class="campo" colspan="3">
+                                    @(Model.Grupo.Replace("_", " "))
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="titCampo">Empresa/Servicio:</td>
+                                <td class="campo">
+                                    @Model.NombreEmpresaRecaudacion
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="titCampo">Convenio:</td>
+                                <td class="campo">
+                                    @(Model.NombreConvenio.ToUpper())
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="titCampo">Tipo de Identificaci&oacute;n:</td>
+                                <td class="campo">
+                                    @(Model.EtiquetaIdentificador.ToUpper())
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="titCampo">Suministro:</td>
+                                <td class="campo">
+                                    @Model.Suministro
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="titCampo">Alias:</td>
+                                <td class="campo">
+                                    @(Model.Alias.ToUpper())
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="titCampo">Nombre Abonado:</td>
+                                <td class="campo">
+                                    @Model.Cliente
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="titCampo">Fecha Vencimiento:</td>
+                                <td class="campo">
+                                    @Model.FechaVencimiento
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="titCampo">Cuenta D&eacute;bito:</td>
+                                <td class="campo">
+                                    @((Model.TipoCuenta == 3) ? "CTE" : "AHO") - @(Model.Cuenta.Substring(0, 3) + String.Empty.PadRight(4, 'X') + Model.Cuenta.Substring(7))
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="titCampo">Fecha y Hora:</td>
+                                <td class="campo">
+                                    @(DateTime.Now)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="titCampo">Monto a Pagar:</td>
+                                <td class="campo">
+                                    @Html.DisplayFor(m => m.Monto) USD
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="titCampo">Descripci&oacute;n:</td>
+                                <td class="campo">
+                                    @((!string.IsNullOrEmpty(Model.Referencia))?Model.Referencia.ToUpper():"")
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="titCampo">Cargo por Servicio Financiero:</td>
+                                <td class="campo">
+                                    @Html.DisplayFor(m => m.Comision) USD
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        @Html.HiddenFor(m => m.Ordenante)
+        @Html.HiddenFor(m => m.TipoCuenta)
+        @Html.HiddenFor(m => m.Grupo)
+        @Html.HiddenFor(m => m.EmpresaRecaudacion)
+        @Html.HiddenFor(m => m.Convenio)
+        @Html.HiddenFor(m => m.NombreConvenio)
+        @Html.HiddenFor(m => m.Usuario)
+        @Html.HiddenFor(m => m.TipoIdentificador)
+        @Html.HiddenFor(m => m.Cuenta)
+        @Html.HiddenFor(m => m.Monto)
+        @Html.HiddenFor(m => m.Referencia)
+        @Html.HiddenFor(m => m.Comision)
+        @Html.HiddenFor(m => m.FechaVencimiento)
+        @Html.HiddenFor(m => m.Alias)
+        @Html.HiddenFor(m => m.Cliente)
+        @Html.HiddenFor(m => m.Suministro)
+        @Html.HiddenFor(m => m.NombreEmpresaRecaudacion)
+
+        @Html.HiddenFor(m => m.Deuda)
+        @Html.HiddenFor(m => m.Configuracion)
+
+        @if (Model.EsTokenValido && Model.EsPagoExitoso)
+        {
+
+            <div class="separadorSeccion"></div>
+            <div style="padding-top:10px;font-size:16px;font-family:'Roboto',sans-serif;font-weight:bold;">TOTAL @(String.Format("{0:n}", Model.Monto + @Model.Comision)) USD</div>
+            <!--<div class="separadorSeccion"></div>
+            <div class="Vigente">
+                <p class="Vigente" style="text-align:justify">Ha ingresado al servicio <b>SAT</b> y este aviso legal se origina porque usted posee una clave personal que lo autoriza a realizar transacciones bancarias a trav&eacute;s de medios electr&oacute;nicos, y es necesario que exprese su conocimiento para reconocerle a dicha clave la calidad de firma electr&oacute;nica. Su aceptaci&oacute;n es la manifestaci&oacute;n de su voluntad, que tendr&aacute; igual validez e id&eacute;nticos efectos jur&iacute;dicos que una signatura hol&oacute;grafa. Mientras el Banco Bolivariano no reciba de su parte una comunicaci&oacute;n escrita para revocar el servicio SAT, &eacute;ste estar&aacute; vigente, con todas las consecuencias que de ello se deriven.</p>
+                <p class="Vigente" style="text-align:justify">Se aclara que la aceptaci&oacute;n que usted manifieste en este aviso ser&aacute; tratado como un mensaje de datos, y, como se&ntilde;ala el art&iacute;culo 2 de la ley de Comercio Electr&oacute;nico, tendr&aacute; igual valor jur&iacute;dico que un documento escrito.</p>
+            </div>
+            -->
+            <div class="separadorSeccion"></div>
+            <div class="botonera">
+                <input type="button" class="button" value="Imprimir" onclick="window.open('@Url.Content("~/Pago/Consultar")?ordenante=@(Model.Ordenante)&usuario=@(Model.Usuario)&ordenBanco=@(Model.OrdenBanco)','_blank','width=660,height=520,top=50,left=50,resizable=yes,scrollbars=yes,status=0');" />
+                <input type="button" class="button" value="Volver" onclick="document.location = '@Url.Content("~/Pago/")Index?ordenante=@(Model.Ordenante)&usuario=@(Model.Usuario)';" />
+            </div>
+
+        }
+        else
+        {
+            <div class="separadorSeccion"></div>
+            <div class="botonera">
+                <input type="button" class="button" value="Regresar" onclick="window.history.back();" />
+            </div>
+        }
+    </div>

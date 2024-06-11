@@ -1,0 +1,80 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutGenerico.cshtml";
+    ViewBag.Title = "Busqueda de Empresas";
+
+    ViewBag.MensajeBusqueda = "Consulta devuelve los primeros 30 registros encontrados seg&uacute;n el nombre ingresado";
+}
+@model OTCSAT.Models.BusquedaEmpresaModel
+<style>
+    body {
+        background-color: white !important;
+    }
+</style>
+
+<div class="cabeceraBusqueda">
+    <h1>Consulta de Empresas</h1>
+</div>
+
+<div class="separadorSeccion"></div>
+
+@using (Html.BeginForm("BusquedaEmpresa", "Home", FormMethod.Post))
+{
+    <table border="0" cellpadding="1" cellspacing="1">
+        <tr>
+            <td>
+                <div class="Vigente">@Html.Raw(ViewBag.MensajeBusqueda)</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBoxFor(m=>m.Nombre, new {@maxLength = 200,@size = 200, @class = "datos", @pattern = "^[a-zA-Z ]+$", @onkeypress = "return ValidacionesUI.validarLetras(event)",@autocomplete="off",@style= "width:300px;margin-bottom:0px;text-transform:uppercase;" })
+                <input type="submit" class="button" value="Consultar" />
+            </td>
+        </tr>
+    </table>
+    
+}
+
+@if (Model.Empresas != null)
+{
+    <table border="0" cellpadding="0" cellspacing="0" style="width:600px;">
+        <tbody>
+            @foreach(var empresa in Model.Empresas)
+            {
+            <tr>
+                <td class="list">
+                    <a href="#" onclick="seleccionarItem('@empresa.Codigo','@empresa.Descripcion');">@empresa.Codigo</a>
+                </td>
+                <td class="list">@empresa.Descripcion</td>
+            </tr>
+            }
+            
+        </tbody>
+    </table>
+}
+
+    <div class="separadorSeccion"></div>
+
+    <div class="botonera" style="text-align:center">
+        <input type="button" class="button" value="Cerrar" onclick="window.close();"/>
+    </div>
+
+<script language="javascript">
+    $("#Nombre").on("keydown", function (e) {
+        var tecla = e.which;
+        if (tecla == 13 || tecla == 9) {
+            document.forms[0].submit();
+        }
+    });
+
+    function seleccionarItem(codigo,descripcion) {
+        window.opener.document.getElementById("Empresa").value = codigo.trim();
+        window.opener.document.getElementById("NombreEmpresa").value = descripcion.trim();
+        window.opener.document.onSeleccionBusquedaEmpresa();
+        window.close();
+    }
+
+    $(document).ready(function () {
+        $("#Nombre").focus();
+    });
+</script>

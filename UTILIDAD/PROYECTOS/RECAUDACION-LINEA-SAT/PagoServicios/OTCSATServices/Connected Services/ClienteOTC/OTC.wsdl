@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.bolivariano.com/ws/OTCService" name="OTC" targetNamespace="http://www.bolivariano.com/ws/OTCService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema xmlns:ns1="http://www.bolivariano.com/dominio/DatoAdicional" targetNamespace="http://www.bolivariano.com/dominio/Servicio" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://www.bolivariano.com/dominio/DatoAdicional" />
+      <xs:complexType name="servicio">
+        <xs:sequence>
+          <xs:element name="codTipoServicio" type="xs:string" />
+          <xs:element name="codigoConvenio" type="xs:string" />
+          <xs:element name="codigoEmpresa" type="xs:string" />
+          <xs:element name="codigoTipoBanca" type="xs:string" />
+          <xs:element minOccurs="0" name="codigoTipoIdentificador" type="xs:string" />
+          <xs:element minOccurs="0" name="datosAdicionales">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="datoAdicional" nillable="true" type="ns1:datoAdicional" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="identificador" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:ns2="http://www.bolivariano.com/dominio/FormaPago" xmlns:ns1="http://www.bolivariano.com/dominio/DatoAdicional" targetNamespace="http://www.bolivariano.com/dominio/Recibo" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://www.bolivariano.com/dominio/DatoAdicional" />
+      <xs:import namespace="http://www.bolivariano.com/dominio/FormaPago" />
+      <xs:complexType name="recibo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="comprobante" type="xs:string" />
+          <xs:element minOccurs="0" name="concepto" type="xs:string" />
+          <xs:element minOccurs="0" name="cuota" type="xs:string" />
+          <xs:element minOccurs="0" name="datosAdicionales">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="datoAdicional" nillable="true" type="ns1:datoAdicional" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="dato1" type="xs:string" />
+          <xs:element minOccurs="0" name="dato2" type="xs:string" />
+          <xs:element minOccurs="0" name="dividendo" type="xs:string" />
+          <xs:element minOccurs="0" name="fecha" type="xs:string" />
+          <xs:element minOccurs="0" name="formaPago" type="ns2:formaPago" />
+          <xs:element minOccurs="0" name="identificador" type="xs:string" />
+          <xs:element minOccurs="0" name="impuesto" type="xs:string" />
+          <xs:element minOccurs="0" name="interes" type="xs:double" />
+          <xs:element minOccurs="0" name="interesesPagados" type="xs:double" />
+          <xs:element minOccurs="0" name="interesesPendientes" type="xs:double" />
+          <xs:element minOccurs="0" name="numeroPredial" type="xs:string" />
+          <xs:element minOccurs="0" name="pago" type="xs:double" />
+          <xs:element minOccurs="0" name="referencia" type="xs:string" />
+          <xs:element minOccurs="0" name="secuencia" type="xs:string" />
+          <xs:element minOccurs="0" name="tipoProceso" type="xs:string" />
+          <xs:element minOccurs="0" name="totalAPagar" type="xs:double" />
+          <xs:element minOccurs="0" name="valor" type="xs:double" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://www.bolivariano.com/dominio/FormaPago" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:simpleType name="formaPago">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="ABONO" />
+          <xs:enumeration value="COMBO" />
+          <xs:enumeration value="TOTAL" />
+          <xs:enumeration value="200%" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://www.bolivariano.com/dominio/TipoMatriculacion" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:simpleType name="tipoMatriculacion">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="MATRICULABLE" />
+          <xs:enumeration value="NO_MATRICULABLE" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+    <xs:schema xmlns:ns1="http://www.bolivariano.com/dominio/DatoAdicional" xmlns:ns3="http://www.bolivariano.com/dominio/RegionalArea" targetNamespace="http://www.bolivariano.com/dominio/TipoIdentificador" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://www.bolivariano.com/dominio/DatoAdicional" />
+      <xs:import namespace="http://www.bolivariano.com/dominio/RegionalArea" />
+      <xs:complexType name="tipoIdentificador">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="codigo" type="xs:string" />
+          <xs:element minOccurs="0" name="etiquetaCodigo" type="xs:string" />
+          <xs:element minOccurs="0" name="concatenadorRegionalArea" type="xs:string" />
+          <xs:element minOccurs="0" name="datosAdicionales">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="datoAdicional" nillable="true" type="ns1:datoAdicional" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="flujoAyuda" type="xs:string" />
+          <xs:element minOccurs="0" name="mascara" type="xs:string" />
+          <xs:element minOccurs="0" name="matriculable" type="xs:boolean" />
+          <xs:element minOccurs="0" name="programable" type="xs:boolean" />
+          <xs:element minOccurs="0" name="regexp" type="xs:string" />
+          <xs:element minOccurs="0" name="regionalAreas">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="regionalArea" nillable="true" type="ns3:regionalArea" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="textoAyuda" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="tipoServicio">
+        <xs:restriction base="xs:string" />
+      </xs:simpleType>
+      <xs:simpleType name="tipoMoneda">
+        <xs:restriction base="xs:string" />
+      </xs:simpleType>
+      <xs:simpleType name="tipoCuenta">
+        <xs:restriction base="xs:string" />
+      </xs:simpleType>
+    </xs:schema>
+    <xs:schema xmlns:ns2="http://www.bolivariano.com/dominio/Convenio" xmlns:ns1="http://www.bolivariano.com/dominio/TipoIdentificador" targetNamespace="http://www.bolivariano.com/dominio/Empresa" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://www.bolivariano.com/dominio/TipoIdentificador" />
+      <xs:import namespace="http://www.bolivariano.com/dominio/Convenio" />
+      <xs:complexType name="empresa">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="codigoEmpresa" type="xs:string" />
+          <xs:element minOccurs="0" name="etiquetaEmpresa" type="xs:string" />
+          <xs:element minOccurs="0" name="convenioVisible" type="xs:boolean" />
+          <xs:element minOccurs="0" name="convenios">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="convenio" nillable="true" type="ns2:convenio" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="matriculable" type="xs:boolean" />
+          <xs:element minOccurs="0" name="matriculacionMultiple" type="xs:boolean" />
+          <xs:element minOccurs="0" name="validable" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://www.bolivariano.com/dominio/RegionalArea" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="regionalArea">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="codigo" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://www.bolivariano.com/dominio/ListaSeleccion" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="listaSeleccion">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="codigo" type="xs:string" />
+          <xs:element minOccurs="0" name="etiqueta" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:ns1="http://www.bolivariano.com/dominio/ListaSeleccion" targetNamespace="http://www.bolivariano.com/dominio/DatoAdicional" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://www.bolivariano.com/dominio/ListaSeleccion" />
+      <xs:complexType name="datoAdicional">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="codigo" type="xs:string" />
+          <xs:element minOccurs="0" name="etiqueta" type="xs:string" />
+          <xs:element minOccurs="0" name="editable" type="xs:boolean" />
+          <xs:element minOccurs="0" name="formato" type="xs:string" />
+          <xs:element minOccurs="0" name="listasSeleccion">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="listaSeleccion" nillable="true" type="ns1:listaSeleccion" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="longitud" type="xs:string" />
+          <xs:element minOccurs="0" name="mascara" type="xs:string" />
+          <xs:element minOccurs="0" name="regexp" type="xs:string" />
+          <xs:element minOccurs="0" name="tipo" type="xs:string" />
+          <xs:element minOccurs="0" name="valor" type="xs:string" />
+          <xs:element minOccurs="0" name="visible" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:ns2="http://www.bolivariano.com/dominio/TipoIdentificador" xmlns:ns1="http://www.bolivariano.com/dominio/DatoAdicional" targetNamespace="http://www.bolivariano.com/dominio/Convenio" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://www.bolivariano.com/dominio/DatoAdicional" />
+      <xs:import namespace="http://www.bolivariano.com/dominio/TipoIdentificador" />
+      <xs:complexType name="convenio">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="codigo" type="xs:string" />
+          <xs:element minOccurs="0" name="etiquetaCodigo" type="xs:string" />
+          <xs:element minOccurs="0" name="tipoIdentificadores">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="tipoIdentificador" nillable="true" type="ns2:tipoIdentificador" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="visible" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:ns6="http://www.bolivariano.com/dominio/FormaPago" xmlns:ns1="http://www.bolivariano.com/dominio/TipoIdentificador" xmlns:tns="http://www.bolivariano.com/mensaje/MensajeOTC" xmlns:ns5="http://www.bolivariano.com/dominio/Servicio" xmlns:ns7="http://www.bolivariano.com/dominio/Recibo" xmlns:ns4="http://www.bolivariano.com/dominio/DatoAdicional" xmlns:ns8="http://www.bolivariano.com/dominio/TipoMatriculacion" xmlns:ns2="http://www.bolivariano.com/dominio/Convenio" xmlns:ns3="http://www.bolivariano.com/dominio/Empresa" elementFormDefault="qualified" targetNamespace="http://www.bolivariano.com/mensaje/MensajeOTC" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://www.bolivariano.com/dominio/TipoMatriculacion" />
+      <xs:import namespace="http://www.bolivariano.com/dominio/TipoIdentificador" />
+      <xs:import namespace="http://www.bolivariano.com/dominio/Convenio" />
+      <xs:import namespace="http://www.bolivariano.com/dominio/Empresa" />
+      <xs:import namespace="http://www.bolivariano.com/dominio/DatoAdicional" />
+      <xs:import namespace="http://www.bolivariano.com/dominio/Servicio" />
+      <xs:import namespace="http://www.bolivariano.com/dominio/FormaPago" />
+      <xs:import namespace="http://www.bolivariano.com/dominio/Recibo" />
+      <xs:element name="MensajeEntradaConsultarDeuda" type="tns:mensajeEntradaConsultarDeuda" />
+      <xs:element name="MensajeEntradaConsultarEmpresa" type="tns:mensajeEntradaConsultarEmpresa" />
+      <xs:element name="MensajeEntradaEjecutarPago" type="tns:mensajeEntradaEjecutarPago" />
+      <xs:element name="MensajeSalidaConsultarDeuda" type="tns:mensajeSalidaConsultarDeuda" />
+      <xs:element name="MensajeSalidaConsultarEmpresa" type="tns:mensajeSalidaConsultarEmpresa" />
+      <xs:element name="MensajeSalidaEjecutarPago" type="tns:mensajeSalidaEjecutarPago" />
+      <xs:complexType name="mensajeEntradaConsultarEmpresa">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="canal" type="xs:string" />
+          <xs:element minOccurs="0" name="depuracion" type="xs:string" />
+          <xs:element minOccurs="0" name="fecha" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="nombreEmpresa" type="xs:string" />
+          <xs:element minOccurs="0" name="oficina" type="xs:string" />
+          <xs:element minOccurs="0" name="secuencial" type="xs:string" />
+          <xs:element minOccurs="0" name="tipoBanca" type="xs:string" />
+          <xs:element minOccurs="0" name="tipoMatriculacion" type="ns8:tipoMatriculacion" />
+          <xs:element minOccurs="0" name="tipoServicio" type="ns1:tipoServicio" />
+          <xs:element minOccurs="0" name="transaccion" type="xs:string" />
+          <xs:element minOccurs="0" name="usuario" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mensajeSalidaConsultarEmpresa">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="codigoError" type="xs:string" />
+          <xs:element minOccurs="0" name="empresas">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="empresa" nillable="true" type="ns3:empresa" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="mensajeUsuario" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mensajeEntradaConsultarDeuda">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="canal" type="xs:string" />
+          <xs:element minOccurs="0" name="depuracion" type="xs:string" />
+          <xs:element minOccurs="0" name="fecha" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="oficina" type="xs:string" />
+          <xs:element minOccurs="0" name="secuencial" type="xs:string" />
+          <xs:element minOccurs="0" name="servicio" type="ns5:servicio" />
+          <xs:element minOccurs="0" name="transaccion" type="xs:string" />
+          <xs:element minOccurs="0" name="usuario" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mensajeSalidaConsultarDeuda">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="codigoError" type="xs:string" />
+          <xs:element minOccurs="0" name="datosAdicionales">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="datoAdicional" nillable="true" type="ns4:datoAdicional" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="fechaVencimiento" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="formaPago" type="ns6:formaPago" />
+          <xs:element minOccurs="0" name="formaPagoRecibos" type="xs:string" />
+          <xs:element minOccurs="0" name="identificadorDeuda" type="xs:string" />
+          <xs:element minOccurs="0" name="limiteMontoMaximo" type="xs:double" />
+          <xs:element minOccurs="0" name="limiteMontoMinimo" type="xs:double" />
+          <xs:element minOccurs="0" name="mensajeUsuario" type="xs:string" />
+          <xs:element minOccurs="0" name="montoMinimo" type="xs:double" />
+          <xs:element minOccurs="0" name="montoTotal" type="xs:double" />
+          <xs:element minOccurs="0" name="nombreCliente" type="xs:string" />
+          <xs:element minOccurs="0" name="recibos">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="recibo" nillable="true" type="ns7:recibo" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="textoAyuda" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mensajeEntradaEjecutarPago">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="canal" type="xs:string" />
+          <xs:element minOccurs="0" name="cuenta" type="xs:string" />
+          <xs:element minOccurs="0" name="datosAdicionales">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="datoAdicional" nillable="true" type="ns4:datoAdicional" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="depuracion" type="xs:string" />
+          <xs:element minOccurs="0" name="esquemaFirma" type="xs:string" />
+          <xs:element minOccurs="0" name="fecha" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="fechaPago" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="moneda" type="ns1:tipoMoneda" />
+          <xs:element minOccurs="0" name="nombreCliente" type="xs:string" />
+          <xs:element minOccurs="0" name="oficina" type="xs:string" />
+          <xs:element minOccurs="0" name="recibos">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="recibo" nillable="true" type="ns7:recibo" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="secuencial" type="xs:string" />
+          <xs:element minOccurs="0" name="servicio" type="ns5:servicio" />
+          <xs:element minOccurs="0" name="tipoCuenta" type="ns1:tipoCuenta" />
+          <xs:element minOccurs="0" name="transaccion" type="xs:string" />
+          <xs:element minOccurs="0" name="usuario" type="xs:string" />
+          <xs:element minOccurs="0" name="valorComision" type="xs:double" />
+          <xs:element minOccurs="0" name="valorPago" type="xs:double" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mensajeSalidaEjecutarPago">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="banderaOffline" type="xs:boolean" />
+          <xs:element minOccurs="0" name="codigoError" type="xs:string" />
+          <xs:element minOccurs="0" name="datosAdicionales">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="datoAdicional" nillable="true" type="ns4:datoAdicional" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="fechaDebito" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="fechaPago" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="mensajeUsuario" type="xs:string" />
+          <xs:element minOccurs="0" name="montoTotal" type="xs:double" />
+          <xs:element minOccurs="0" name="referencia" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="mensajeEntradaEjecutarReverso">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="canal" type="xs:string" />
+          <xs:element minOccurs="0" name="cuenta" type="xs:string" />
+          <xs:element minOccurs="0" name="datosAdicionales">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="datoAdicional" nillable="true" type="ns4:datoAdicional" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="depuracion" type="xs:string" />
+          <xs:element minOccurs="0" name="esquemaFirma" type="xs:string" />
+          <xs:element minOccurs="0" name="fechaPago" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="moneda" type="ns1:tipoMoneda" />
+          <xs:element minOccurs="0" name="nombreCliente" type="xs:string" />
+          <xs:element minOccurs="0" name="oficina" type="xs:string" />
+          <xs:element minOccurs="0" name="recibos">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="recibo" nillable="true" type="ns7:recibo" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="secuencial" type="xs:string" />
+          <xs:element minOccurs="0" name="servicio" type="ns5:servicio" />
+          <xs:element minOccurs="0" name="tipoCuenta" type="ns1:tipoCuenta" />
+          <xs:element minOccurs="0" name="transaccion" type="xs:string" />
+          <xs:element minOccurs="0" name="usuario" type="xs:string" />
+          <xs:element minOccurs="0" name="valorComision" type="xs:double" />
+          <xs:element minOccurs="0" name="valorPago" type="xs:double" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:ns6="http://www.bolivariano.com/dominio/Recibo" xmlns:ns1="http://www.bolivariano.com/dominio/TipoIdentificador" xmlns:ns5="http://www.bolivariano.com/dominio/DatoAdicional" xmlns:ns7="http://www.bolivariano.com/dominio/RegionalArea" xmlns:ns4="http://www.bolivariano.com/dominio/Servicio" xmlns:ns8="http://www.bolivariano.com/dominio/ListaSeleccion" xmlns:ns2="http://www.bolivariano.com/mensaje/MensajeOTC" xmlns:ns3="http://www.bolivariano.com/dominio/Empresa" elementFormDefault="qualified" targetNamespace="http://www.bolivariano.com/ws/OTCService" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://www.bolivariano.com/dominio/TipoIdentificador" />
+      <xs:import namespace="http://www.bolivariano.com/dominio/Empresa" />
+      <xs:import namespace="http://www.bolivariano.com/dominio/Servicio" />
+      <xs:import namespace="http://www.bolivariano.com/dominio/DatoAdicional" />
+      <xs:import namespace="http://www.bolivariano.com/dominio/Recibo" />
+      <xs:import namespace="http://www.bolivariano.com/dominio/ListaSeleccion" />
+      <xs:import namespace="http://www.bolivariano.com/dominio/RegionalArea" />
+      <xs:import namespace="http://www.bolivariano.com/mensaje/MensajeOTC" />
+      <xs:element name="entradaConsultarDeuda" type="ns2:mensajeEntradaConsultarDeuda" />
+      <xs:element name="salidaConsultarDeuda" type="ns2:mensajeSalidaConsultarDeuda" />
+      <xs:element name="entradaConsultarEmpresa" type="ns2:mensajeEntradaConsultarEmpresa" />
+      <xs:element name="salidaConsultarEmpresa" type="ns2:mensajeSalidaConsultarEmpresa" />
+      <xs:element name="entradaEjecutarPago" type="ns2:mensajeEntradaEjecutarPago" />
+      <xs:element name="salidaEjecutarPago" type="ns2:mensajeSalidaEjecutarPago" />
+      <xs:element name="entradaEjecutarReverso" type="ns2:mensajeEntradaEjecutarReverso" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="mensajeEntradaConsultarEmpresa">
+    <wsdl:part name="peticion" element="tns:entradaConsultarEmpresa" />
+  </wsdl:message>
+  <wsdl:message name="mensajeSalidaConsultarDeuda">
+    <wsdl:part name="respuesta" element="tns:salidaConsultarDeuda" />
+  </wsdl:message>
+  <wsdl:message name="mensajeSalidaConsultarEmpresa">
+    <wsdl:part name="respuesta" element="tns:salidaConsultarEmpresa" />
+  </wsdl:message>
+  <wsdl:message name="mensajeEntradaEjecutarReverso">
+    <wsdl:part name="peticion" element="tns:entradaEjecutarReverso" />
+  </wsdl:message>
+  <wsdl:message name="mensajeEntradaConsultarDeuda">
+    <wsdl:part name="peticion" element="tns:entradaConsultarDeuda" />
+  </wsdl:message>
+  <wsdl:message name="mensajeEntradaEjecutarPago">
+    <wsdl:part name="peticion" element="tns:entradaEjecutarPago" />
+  </wsdl:message>
+  <wsdl:message name="mensajeSalidaEjecutarPago">
+    <wsdl:part name="respuesta" element="tns:salidaEjecutarPago" />
+  </wsdl:message>
+  <wsdl:portType name="OTCEndpoint">
+    <wsdl:operation name="consultarEmpresa">
+      <wsdl:input message="tns:mensajeEntradaConsultarEmpresa" />
+      <wsdl:output message="tns:mensajeSalidaConsultarEmpresa" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarDeuda">
+      <wsdl:input message="tns:mensajeEntradaConsultarDeuda" />
+      <wsdl:output message="tns:mensajeSalidaConsultarDeuda" />
+    </wsdl:operation>
+    <wsdl:operation name="ejecutarPago">
+      <wsdl:input message="tns:mensajeEntradaEjecutarPago" />
+      <wsdl:output message="tns:mensajeSalidaEjecutarPago" />
+    </wsdl:operation>
+    <wsdl:operation name="ejecutarReverso">
+      <wsdl:input message="tns:mensajeEntradaEjecutarReverso" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OTCBinding" type="tns:OTCEndpoint">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="consultarDeuda">
+      <soap:operation soapAction="http://www.bolivariano.com/consultarDeuda" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarEmpresa">
+      <soap:operation soapAction="http://www.bolivariano.com/consultarEmpresa" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ejecutarPago">
+      <soap:operation soapAction="http://www.bolivariano.com/ejecutarPago" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ejecutarReverso">
+      <soap:operation soapAction="http://www.bolivariano.com/ejecutarReverso" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OTCEndpointService">
+    <wsdl:port name="OTCService" binding="tns:OTCBinding">
+      <soap:address location="http://172.16.30.194:8082/ws/OTCEndpoint" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:tns="http://www.bolivariano.com/Sucursal" xmlns:pos="http://www.bolivariano.com/PosicionGeografica" targetNamespace="http://www.bolivariano.com/Sucursal" xmlns="http://www.w3.org/2001/XMLSchema">
+  <import schemaLocation="TarifarioCash_1_2_3_4_5_6_7.xsd" namespace="http://www.bolivariano.com/PosicionGeografica" />
+  <annotation>
+    <documentation>Definicion de esquema para entidad Sucursal</documentation>
+  </annotation>
+  <complexType name="Sucursal">
+    <sequence>
+      <element minOccurs="0" maxOccurs="1" name="idSucursal" type="integer">
+        <annotation>
+          <documentation>Identificacion numerica de la sucursal</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" maxOccurs="1" name="nombre" type="string">
+        <annotation>
+          <documentation>nombre de la sucursal</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" maxOccurs="1" name="direccion" nillable="true" type="string">
+        <annotation>
+          <documentation>Direccion de la sucursal</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" maxOccurs="1" name="telefono" nillable="true" type="string">
+        <annotation>
+          <documentation>Numero telefonico de la sucursal</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" maxOccurs="1" name="posicion" nillable="true" type="pos:PosicionGeografica">
+        <annotation>
+          <documentation>Posicion geografica de la sucursal</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+</schema>

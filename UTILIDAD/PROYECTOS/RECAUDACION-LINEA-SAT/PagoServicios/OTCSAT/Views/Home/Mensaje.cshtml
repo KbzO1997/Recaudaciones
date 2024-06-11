@@ -1,0 +1,33 @@
+﻿@{
+    // Vista de Notificaciones-Alertas
+    ViewBag.Title = "Notificacion";
+
+    // Modo empotrado
+
+    ViewBag.ModoEmpotrado = true;
+
+    if (ViewBag.ModoEmpotrado)
+    {
+        Layout = "~/Views/Shared/_LayoutGenerico.cshtml";
+    }
+}
+
+@if (ViewBag.ModoEmpotrado)
+{
+    <style>
+        body {
+            background-color: white !important;
+        }
+    </style>
+}
+
+<div class='ventana_modal_contenedor'>
+    <div class='ventana_modal'>
+        <div class='ventana_modal_icono'><img src='../imagenes/icono_rechazada.png' /></div>
+        <div class='ventana_modal_titulo'>@ViewBag.Titulo</div>
+        <div class='ventana_modal_mensaje'>@ViewBag.Mensaje</div>
+        <div class='ventana_modal_boton'>
+            <input class='button' type='button' value='Regresar' onclick='window.history.back();'>
+        </div>
+    </div>
+</div>

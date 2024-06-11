@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EntidadesDB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <Function Name="sp_con_nemonico_empresa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="i_empresa" Type="varchar" Mode="In" />
+    <Parameter Name="o_nemonico" Type="char" Mode="InOut" />
+  </Function>
+  <Function Name="sp_con_nombrempresa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="i_empresa" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_con_nombrempresas_producto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="i_producto" Type="smallint" Mode="In" />
+  </Function>
+  <Function Name="sp_con_usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="us_cod_empresa" Type="varchar" Mode="In" />
+    <Parameter Name="us_nem_empresa" Type="char" Mode="In" />
+    <Parameter Name="us_cod_usuario" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="EntidadesDBStoreContainer" />
+</Schema>

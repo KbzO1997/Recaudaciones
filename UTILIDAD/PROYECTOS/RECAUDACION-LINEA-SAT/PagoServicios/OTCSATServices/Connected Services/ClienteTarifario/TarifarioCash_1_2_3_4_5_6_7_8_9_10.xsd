@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:tns="http://www.bolivariano.com/Funcionario" xmlns:pref1="http://www.bolivariano.com/Persona" targetNamespace="http://www.bolivariano.com/Funcionario" xmlns="http://www.w3.org/2001/XMLSchema">
+  <import schemaLocation="TarifarioCash_1_2_3_4_5_6_7_8.xsd" namespace="http://www.bolivariano.com/Persona" />
+  <annotation>
+    <documentation>Funcionario</documentation>
+  </annotation>
+  <complexType name="Funcionario">
+    <complexContent mixed="false">
+      <extension base="pref1:Persona">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="codigoFuncionario" type="integer" />
+          <element minOccurs="1" maxOccurs="1" name="correoFuncionario" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="cargo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="departamento" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="area" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="extension" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="oficina" type="string" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+</schema>

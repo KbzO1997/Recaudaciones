@@ -1,0 +1,480 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CAAF8ED1-A954-411D-9BDC-1971AE46F0D1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OTCSATServices</RootNamespace>
+    <AssemblyName>OTCSATServices</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.JScript" />
+    <Reference Include="Sybase.AdoNet4.AseClient">
+      <HintPath>..\..\..\..\..\..\..\..\..\2.Librerias\Sybase.AdoNet4.AseClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Connected Services\ClienteEntrust\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ClienteFramework\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ClienteOTC\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ClienteTarifario\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Data\pa_con_cempresa_esp_Result.cs">
+      <DependentUpon>SATDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\pa_sat_ccabmatriculacion_Result.cs">
+      <DependentUpon>SATDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\pa_sat_ccuentas_xlogin_Result.cs">
+      <DependentUpon>SATDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\pa_sat_cdetmatriculacion_Result.cs">
+      <DependentUpon>SATDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\pa_sat_cgruposxusuario_Result.cs">
+      <DependentUpon>SATDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\pa_sat_cmatriculacion_Result.cs">
+      <DependentUpon>SATDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PersistenceContext.cs" />
+    <Compile Include="Data\SATDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SATDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SATDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SATDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SATDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SATDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\sp_con_empresa_Result.cs">
+      <DependentUpon>SATDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\sp_con_nombrempresas_producto_Result.cs">
+      <DependentUpon>SATDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\sp_con_usuario_dispositivo_Result.cs">
+      <DependentUpon>SATDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\sp_con_usuario_Result.cs">
+      <DependentUpon>SATDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\sp_cuenta_empresa_Result.cs">
+      <DependentUpon>SATDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Comprobante.cs" />
+    <Compile Include="Entities\Convenio.cs" />
+    <Compile Include="Entities\Credenciales.cs" />
+    <Compile Include="Entities\Cuenta.cs" />
+    <Compile Include="Entities\DatoAdicional.cs" />
+    <Compile Include="Entities\DefinicionEmpresa.cs" />
+    <Compile Include="Entities\DetalleComprobante.cs" />
+    <Compile Include="Entities\Empresa.cs" />
+    <Compile Include="Entities\EmpresaSAT.cs" />
+    <Compile Include="Entities\Estado.cs" />
+    <Compile Include="Entities\Identificador.cs" />
+    <Compile Include="Entities\ItemSeleccion.cs" />
+    <Compile Include="Entities\Matriculacion.cs" />
+    <Compile Include="Entities\Pago.cs" />
+    <Compile Include="Entities\Recibo.cs" />
+    <Compile Include="Entities\Respuesta.cs" />
+    <Compile Include="Entities\RespuestaConsultaCuenta.cs" />
+    <Compile Include="Entities\RespuestaConsultaCupos.cs" />
+    <Compile Include="Entities\RespuestaConsultaDeuda.cs" />
+    <Compile Include="Entities\RespuestaConsultaMatriculacion.cs" />
+    <Compile Include="Entities\RespuestaConsultaTarifa.cs" />
+    <Compile Include="Entities\RespuestaConsultaTipoDispositivo.cs" />
+    <Compile Include="Entities\RespuestaGeneracionComprobante.cs" />
+    <Compile Include="Entities\RespuestaPago.cs" />
+    <Compile Include="Entities\RespuestaValidacionDispositivo.cs" />
+    <Compile Include="Entities\TipoDispositivo.cs" />
+    <Compile Include="Entities\TipoServicio.cs" />
+    <Compile Include="Entities\Usuario.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecurityProvider\FrameworkSecurityProvider.cs" />
+    <Compile Include="SecurityProvider\HardcodedSecurityProvider.cs" />
+    <Compile Include="SecurityProvider\Interfaces\ISecurityProvider.cs" />
+    <Compile Include="Services\CatalogosService.cs" />
+    <Compile Include="Services\Interfaces\ICatalogosService.cs" />
+    <Compile Include="Services\Interfaces\IMatriculacionesService.cs" />
+    <Compile Include="Services\Interfaces\INotificacionesService.cs" />
+    <Compile Include="Services\Interfaces\IRecaudacionesService.cs" />
+    <Compile Include="Services\Interfaces\ISeguridadesService.cs" />
+    <Compile Include="Services\MatriculacionesService.cs" />
+    <Compile Include="Services\NotificacionesService.cs" />
+    <Compile Include="Services\RecaudacionesService.cs" />
+    <Compile Include="Services\SeguridadesService.cs" />
+    <Compile Include="Utils\CacheFramework.cs" />
+    <Compile Include="Utils\CifradorRCA.cs" />
+    <Compile Include="Utils\Configuraciones.cs" />
+    <Compile Include="Utils\Interfaces\ICifrador.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ClienteEntrust\EntrustService.wsdl" />
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.authenticateTokenResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.blacklistGetResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.blacklistSetResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.deviceAssignResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.deviceUnassignResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.equipoInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.getOTPResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.getSecurityImagesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.machineGetResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.machineSetByPrefixResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.machineSetResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.pingResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.respuestaGeneral.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.respuestaGetSecurityImages.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.respuestaGetSecurityQuestions.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.respuestaOTP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.respuestaRegMaquina.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.respuestaUserGet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.respuestaUserTokenActivate.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.respuestaUserTokenActivateComplete.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.respuestaUserTokenCreate.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.respuestaUserTokenGet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.respuestaUserTokenInfoList.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.saveImageByIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.saveImageResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.saveQuestionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.tokenGetResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.unAssignedTokenGetResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userAliasMachineListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userAssignedTokenGetResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userCardCreateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userCardDeleteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userCardSetResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userCardUnassignResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userCreateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userDeleteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userDevicesGetResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userGetResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userLockoutGetResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userMachineListByPrefixResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userMachineListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userSecurityQuestionsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userSetResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userTokenActivateCompleteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userTokenActivateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userTokenAssignResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userTokenCreateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userTokenDeleteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userTokenGetResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userTokenListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userTokenSetResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.userTokenUnassignResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.validateDeleteByPrefixResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.validateDeleteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\OTCSATServices.ClienteEntrust.validateOTPResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteFramework\ServicioSeguridadSCL.wsdl" />
+    <None Include="Connected Services\ClienteOTC\OTCSATServices.ClienteOTC.consultarDeudaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteOTC\OTCSATServices.ClienteOTC.consultarEmpresaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteOTC\OTCSATServices.ClienteOTC.ejecutarPagoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteOTC\OTCSATServices.ClienteOTC.mensajeSalidaConsultarDeuda.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteOTC\OTCSATServices.ClienteOTC.mensajeSalidaConsultarEmpresa.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteOTC\OTCSATServices.ClienteOTC.mensajeSalidaEjecutarPago.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteOTC\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ClienteOTC\configuration.svcinfo" />
+    <None Include="Connected Services\ClienteOTC\configuration91.svcinfo" />
+    <EntityDeploy Include="Data\SATDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SATDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Connected Services\ClienteTarifario\OTCSATServices.ClienteTarifario.consultarTarifaLoteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteTarifario\OTCSATServices.ClienteTarifario.procesarTarifaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ClienteTarifario\Tarifario.wsdl" />
+    <None Include="Connected Services\ClienteTarifario\TarifarioCash.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ClienteTarifario\TarifarioCash_1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ClienteTarifario\TarifarioCash_1_2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ClienteTarifario\TarifarioCash_1_2_3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ClienteTarifario\TarifarioCash_1_2_3_4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ClienteTarifario\TarifarioCash_1_2_3_4_5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ClienteTarifario\TarifarioCash_1_2_3_4_5_6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ClienteTarifario\TarifarioCash_1_2_3_4_5_6_7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ClienteTarifario\TarifarioCash_1_2_3_4_5_6_7_8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ClienteTarifario\TarifarioCash_1_2_3_4_5_6_7_8_9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ClienteTarifario\TarifarioCash_1_2_3_4_5_6_7_8_9_10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Data\SATDB.edmx.diagram">
+      <DependentUpon>SATDB.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Connected Services\ClienteOTC\OTC.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ClienteEntrust\" />
+    <WCFMetadataStorage Include="Connected Services\ClienteFramework\" />
+    <WCFMetadataStorage Include="Connected Services\ClienteOTC\" />
+    <WCFMetadataStorage Include="Connected Services\ClienteTarifario\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ClienteTarifario\configuration91.svcinfo" />
+    <None Include="Connected Services\ClienteTarifario\configuration.svcinfo" />
+    <None Include="Connected Services\ClienteTarifario\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ClienteEntrust\configuration91.svcinfo" />
+    <None Include="Connected Services\ClienteEntrust\configuration.svcinfo" />
+    <None Include="Connected Services\ClienteEntrust\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ClienteFramework\ServicioSeguridadSCL.disco" />
+    <None Include="Connected Services\ClienteFramework\configuration91.svcinfo" />
+    <None Include="Connected Services\ClienteFramework\configuration.svcinfo" />
+    <None Include="Connected Services\ClienteFramework\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Data\SATDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SATDB.Context.cs</LastGenOutput>
+      <DependentUpon>SATDB.edmx</DependentUpon>
+    </Content>
+    <Content Include="Data\SATDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SATDB.edmx</DependentUpon>
+      <LastGenOutput>SATDB.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="extranet">
+      <Guid>{A86C0E15-6CA9-44A2-A93E-FDCADC76BD2C}</Guid>
+      <VersionMajor>15</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,248 @@
+﻿@{
+
+    // Pre-Confirmacion de pago y validacion de seguridad
+    ViewBag.Title = "Confirmaci&oacute;n de Pago de Servicio";
+
+    // Modo empotrado
+
+    ViewBag.ModoEmpotrado = true;
+
+    if (ViewBag.ModoEmpotrado)
+    {
+        Layout = "~/Views/Shared/_LayoutGenerico.cshtml";
+    }
+}
+@model OTCSAT.Models.SeguridadesModel
+
+@if (ViewBag.ModoEmpotrado)
+{
+    <style>
+        body {
+            background-color: white !important;
+        }
+    </style>
+}
+
+@using (Html.BeginForm("ConfirmarPago", "Seguridades", FormMethod.Post, new { @autocomplete = "off", @id = "frm", @name= "frm" }))
+{
+
+    <div style="width:800px;">
+
+        <table cellspacing="1" cellpadding="0" style="width:100%;border:none;">
+            <tr>
+                <td>
+                    <table cellspacing="0" cellpadding="0" id="contenedorForma" style="width:100%;border:none;">
+                        <tr>
+                            <td colspan="6" class="Vigente">@Html.Raw(ViewBag.Title)</td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Tipo de Servicio:</td>
+                            <td class="campo" colspan="3">
+                                @(Model.Grupo.Replace("_", " "))
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Empresa/Servicio:</td>
+                            <td class="campo">
+                                @Model.NombreEmpresaRecaudacion
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Convenio:</td>
+                            <td class="campo">
+                                @(Model.NombreConvenio.ToUpper())
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Tipo de Identificaci&oacute;n:</td>
+                            <td class="campo">
+                                @(Model.EtiquetaIdentificador.ToUpper())
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Suministro:</td>
+                            <td class="campo">
+                                @Model.Suministro
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Alias:</td>
+                            <td class="campo">
+                                @(Model.Alias.ToUpper())
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Nombre Abonado:</td>
+                            <td class="campo">
+                                @(Model.Cliente.ToUpper())
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Fecha Vencimiento:</td>
+                            <td class="campo">
+                                @Model.FechaVencimiento
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Cuenta D&eacute;bito:</td>
+                            <td class="campo">
+                                @((Model.TipoCuenta == 3) ? "CTE" : "AHO") - @(Model.Cuenta.Substring(0, 3) + String.Empty.PadRight(4, 'X') + Model.Cuenta.Substring(7))
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Monto a Pagar:</td>
+                            <td class="campo">
+                                @Html.DisplayFor(m => m.Monto) USD
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Descripci&oacute;n:</td>
+                            <td class="campo">
+                                @((Model.Referencia != null) ? Model.Referencia.ToUpper() : "")
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Cargo por Servicio Financiero:</td>
+                            <td class="campo">
+                                @Html.DisplayFor(m => m.Comision) USD
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        @Html.HiddenFor(m => m.Ordenante)
+        @Html.HiddenFor(m => m.TipoIdentificador)
+        @Html.HiddenFor(m => m.Grupo)
+        @Html.HiddenFor(m => m.EmpresaRecaudacion)
+        @Html.HiddenFor(m => m.Convenio)
+        @Html.HiddenFor(m => m.NombreConvenio)
+        @Html.HiddenFor(m => m.EtiquetaIdentificador)
+        @Html.HiddenFor(m => m.Usuario)
+        @Html.HiddenFor(m => m.TipoCuenta)
+        @Html.HiddenFor(m => m.Cuenta)
+        @Html.HiddenFor(m => m.Monto)
+        @Html.HiddenFor(m => m.Referencia)
+        @Html.HiddenFor(m => m.Comision)
+        @Html.HiddenFor(m => m.FechaVencimiento)
+        @Html.HiddenFor(m => m.Alias)
+        @Html.HiddenFor(m => m.Cliente)
+        @Html.HiddenFor(m => m.Suministro)
+        @Html.HiddenFor(m => m.NombreEmpresaRecaudacion)
+
+        @Html.HiddenFor(m => m.Deuda)
+        @Html.HiddenFor(m => m.Configuracion)
+
+        @Html.HiddenFor(m => m.DatosAdicionalesJSON)
+        @Html.HiddenFor(m => m.RecibosJSON)
+        @Html.HiddenFor(m => m.EntradasAdicionalesJSON)
+
+        <div id="contenedorAdicional"></div>
+
+        <div class="separadorSeccion"></div>
+        <div class="Vigente" style="text-align:left;">Validaci&oacute;n de Clave Digital</div>
+        <div class="separadorSeccion"></div>
+
+        <table cellpadding="1" cellspacing="1" border="0">
+            <tr>
+                <td>
+                    @if (Model.TipoDispositivo == OTCSATServices.Entities.TipoDispositivo.SOFTTOKEN)
+                    {
+                        <img src="@Url.Content("~/Imagenes/IMG_ENTRUST_2.png")" border="0" />
+                    }
+                    else
+                    {
+                        <img src="@Url.Content("~/Imagenes/IMG_ENTRUST_1.png")" border="0" />
+                    }
+                </td>
+                <td>
+                    <div class="campo">1. Presione el <b>boton de su dispositivo de seguridad</b>, en pocos segundos visualizar&aacute; un n&uacute;mero &uacute;nico que sera su clave digital</div>
+                    <div class="campo">2. Ingrese su <b>clave digital</b> en pantalla y presione el bot&oacute;n aceptar</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div style="text-align:center;">
+                        @Html.TextBoxFor(m => m.Token, new { @maxLength = 8, @size = 8, @class = "datos", @pattern = "^[0-9]*$", @style = "width:300px", @onkeypress = "return ValidacionesUI.validarNumero(event)", @autocomplete = "off", @required = "required" })
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <div class="separadorSeccion"></div>
+        <div class="botonera">
+            <input type="submit" class="button botonAcentuado" id="btnConfirmar" name="btnConfirmar" value="Confirmar" onclick="return validarDatosConfirmacion()" />
+            <input type="button" class="button" value="Regresar" onclick="window.history.back();" />
+        </div>
+    </div>
+}
+<script language="javascript">
+
+    function validarDatosConfirmacion() {
+        var esValida = false;
+
+        if ($("#Token").val().trim() != "") {
+            esValida = true;
+            $("#btnConfirmar").prop("disabled", true);
+            $("#frm").submit();
+        } else {
+            alert("Debe ingresar un valor de token para continuar");
+        }
+
+        return esValida;
+    }
+
+    $(document).ready(function () {
+
+        $("#btnConfirmar").prop("disabled", false);
+		
+        // Cambio de tamanio de frame
+        UtilidadesUI.registrarCambioElemento(document.body, UtilidadesUI.handlerRegistroCambioElemento);
+
+        if ($("input[name=Deuda]") != null) {
+            var deuda = JSON.parse($("input[name=Deuda]").val());
+
+            if (deuda.DatosAdicionales != null && deuda.DatosAdicionales.length > 0) {
+
+                for (var i = 0; i < deuda.DatosAdicionales.length; i++) {
+                    if (deuda.DatosAdicionales[i].Tipo == "COMBO") {
+                        // Es un combo de multiple seleccion
+
+                        var elementosComboRenderizado = "";
+
+                        for (var j = 0; j < deuda.DatosAdicionales[i].Valores.length; j++) {
+                            elementosComboRenderizado += "<option value='" + deuda.DatosAdicionales[i].Valores[j].Codigo + "'>" + deuda.DatosAdicionales[i].Valores[j].Descripcion+"</option>";
+                        }
+                        
+                        $("#contenedorForma").append("<tr><td class='titCampo'>" + deuda.DatosAdicionales[i].Etiqueta + "</td><td class='campo'><select class='datos' name='Adicional_" + deuda.DatosAdicionales[i].Id + "'>" + elementosComboRenderizado+"</select></td></tr>");
+                    }
+                }
+
+            }
+
+            if (deuda.Recibos != null && deuda.Recibos.length > 0) {
+                var tablaRecibos = "<div class='separadorSeccion'></div><table style='width:100%' cellspacing='0' cellpadding='0' border='0'>";
+                tablaRecibos += "<tr><td class='tittabla'>Pagar</td><td class='tittabla'>Fecha</td><td class='tittabla'>Secuencia</td><td class='tittabla'>Referencia</td><td class='tittabla'>Impuesto</td><td class='tittabla'>Concepto</td><td class='tittabla'>Total a Pagar</td><td class='tittabla'>Cuota</td></tr>";
+
+                for (var i = 0; i < deuda.Recibos.length; i++) {
+
+                    var marcaComponente = "";
+
+                    // Validacion especial de recibos para municipios, seleccionar el primer elemento de la lista
+                    if (deuda.FormaPagoRecibos != null && deuda.FormaPagoRecibos == "UNICO_CRONOLOGICO") {
+                        marcaComponente = (i == 0) ? "checked" : "disabled";
+                    } else {
+                        marcaComponente = "";
+                    }
+
+                    tablaRecibos += "<tr><td class='list'><input type='radio' name='Recibo' value='" + ((deuda.Recibos[i].Concepto != null) ? deuda.Recibos[i].Concepto : "") + "|" + ((deuda.Recibos[i].Fecha != null) ? deuda.Recibos[i].Fecha : "") + "|" + ((deuda.Recibos[i].Impuesto != null) ? deuda.Recibos[i].Impuesto : "") + "|" + ((deuda.Recibos[i].Referencia != null) ? deuda.Recibos[i].Referencia : "") + "|" + ((deuda.Recibos[i].Secuencia != null) ? deuda.Recibos[i].Secuencia : "") + "|" + ((deuda.Recibos[i].TotalAPagar != null) ? deuda.Recibos[i].TotalAPagar : "") + "|" + ((deuda.Recibos[i].Cuota != null) ? deuda.Recibos[i].Cuota : "") + "|" + ((deuda.Recibos[i].DatoAdicional != null) ? JSON.stringify(deuda.Recibos[i].DatoAdicional) : "") + "' " + marcaComponente + "></td><td class='list'>" + ((deuda.Recibos[i].Fecha != null) ? deuda.Recibos[i].Fecha : "") + "</td><td class='list'>" + ((deuda.Recibos[i].Secuencia != null) ? deuda.Recibos[i].Secuencia : "") + "</td><td class='list'>" + ((deuda.Recibos[i].Referencia != null) ? deuda.Recibos[i].Referencia : "") + "</td><td class='list'>" + ((deuda.Recibos[i].Impuesto != null) ? deuda.Recibos[i].Impuesto : "") + "</td><td class='list'>" + ((deuda.Recibos[i].Concepto != null) ? deuda.Recibos[i].Concepto : "") + "</td><td class='list'>" + ((deuda.Recibos[i].TotalAPagar != null) ? deuda.Recibos[i].TotalAPagar : "") + "</td><td class='list'>" + ((deuda.Recibos[i].Cuota != null) ? deuda.Recibos[i].Cuota : "") + "</td></tr>";
+                }
+
+                tablaRecibos += "</table>";
+
+                $("#contenedorAdicional").append(tablaRecibos);
+            }
+        }
+    });
+</script>

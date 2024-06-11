@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:tns="http://www.bolivariano.com/CashManagement/MensajesTarifario" xmlns:s1="http://www.bolivariano.com/Cuenta" xmlns:mbl="http://www.bolivariano.com/MensajeBolivariano" xmlns:cln="http://www.bolivariano.com/Cliente" targetNamespace="http://www.bolivariano.com/CashManagement/MensajesTarifario" xmlns="http://www.w3.org/2001/XMLSchema">
+  <import schemaLocation="TarifarioCash_1.xsd" namespace="http://www.bolivariano.com/MensajeBolivariano" />
+  <import schemaLocation="TarifarioCash_1_2_3.xsd" namespace="http://www.bolivariano.com/Cliente" />
+  <import schemaLocation="TarifarioCash_1_2_3_4_5_6_7_8_9.xsd" namespace="http://www.bolivariano.com/Cuenta" />
+  <element name="mensajeEntradaProcesarTarifa" type="tns:MensajeEntradaProcesarTarifa" />
+  <element name="mensajeSalidaProcesarTarifa" type="tns:MensajeSalidaProcesarTarifa" />
+  <element name="mensajeEntradaConsultarTarifaLote" type="tns:MensajeEntradaConsultarTarifaLote" />
+  <element name="mensajeSalidaConsultarTarifaLote" type="tns:MensajeSalidaConsultarTarifaLote" />
+  <complexType name="MensajeEntradaProcesarTarifa">
+    <complexContent mixed="false">
+      <extension base="mbl:MensajeEntrada">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="cliente" type="cln:Identificacion">
+            <annotation>
+              <documentation>Identificacion del cliente</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="1" maxOccurs="1" name="tipoBanca">
+            <annotation>
+              <documentation>Si la transaccion se origina en la banca de personas o empresas</documentation>
+            </annotation>
+            <simpleType>
+              <restriction base="string">
+                <enumeration value="BANCA_EMPRESA" />
+                <enumeration value="BANCA_PERSONA" />
+              </restriction>
+            </simpleType>
+          </element>
+          <element minOccurs="1" maxOccurs="1" name="cuenta" type="s1:Cuenta">
+            <annotation>
+              <documentation>Identificacion de la cuenta y el segmento al cual pertenece</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="idFuncionalidad" type="string">
+            <annotation>
+              <documentation>ID de la funcionalidad en Cyberbank</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="empresaProveedor" type="string">
+            <annotation>
+              <documentation>Codigo de la empresa de recaudacion (claro, movistar, etc)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="1" maxOccurs="1" default="false" name="seDebita" type="boolean">
+            <annotation>
+              <documentation>Marca que indica si lo que se desea es solo consultar la tarifa o tambien cobrarla al cliente definido</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="servicio" type="string">
+            <annotation>
+              <documentation>Servicio en el que esta operando el cliente, aplica para banca empresa</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="formaPago" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="monto" type="double">
+            <annotation>
+              <documentation>Monto de la transacci????n</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="paisDestino" type="string">
+            <annotation>
+              <documentation>Pais destino de la transaccion, aplica solo para servicio de transferencias internacionales</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="cargo">
+            <simpleType>
+              <annotation>
+                <documentation>Determina el tipo de cargo a aplicar para transferencias internacionales</documentation>
+              </annotation>
+              <restriction base="string">
+                <enumeration value="SHA" />
+                <enumeration value="OUR" />
+              </restriction>
+            </simpleType>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="codigoEmpresa" type="integer">
+            <annotation>
+              <documentation>El codigo de la empresa SAT en Cyberbank, solo aplica cuando tipoBanca es BANCA_EMPRESA</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="accionRevocatoriaCheque">
+            <simpleType>
+              <annotation>
+                <documentation>El codigo o motivo de bloqueo de cheques propios, solo aplica en tipoBanca BANCA_PERSONA y para el caso de bloqueo de cheques
+                       propios</documentation>
+              </annotation>
+              <restriction base="string">
+                <enumeration value="RVOC" />
+                <enumeration value="ANCH" />
+                <enumeration value="CSCH" />
+                <enumeration value="DSEC" />
+              </restriction>
+            </simpleType>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="tipoImpuestoFiscal" type="string">
+            <annotation>
+              <documentation>Tipo de impuesto fiscal, aplica para la funcionalidad de pago de impuestos fiscales con tipoBanca BANCA_PERSONA</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="codigoBancoDestino" type="string">
+            <annotation>
+              <documentation>El codigo SWIFT o ABA del banco destino de la transaccion, solo aplica cuando se trate de una transferencia internacional</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="MensajeSalidaProcesarTarifa">
+    <complexContent mixed="false">
+      <extension base="mbl:MensajeSalida">
+        <sequence>
+          <element minOccurs="0" maxOccurs="1" name="comisionEmpresa" type="double">
+            <annotation>
+              <documentation>Comision que aplica a la empresa u ordenante (aplica para BE)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="comisionCliente" type="double">
+            <annotation>
+              <documentation>Comision que aplica al cliente o beneficiario (aplica para BE o BP)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="costoPorEnvio" type="double">
+            <annotation>
+              <documentation>Costo por envio, aplica solo para transferencias internacionales</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="MensajeEntradaConsultarTarifaLote">
+    <complexContent mixed="false">
+      <extension base="mbl:MensajeEntrada">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="cliente" type="cln:Identificacion">
+            <annotation>
+              <documentation>Identificacion del cliente</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="1" maxOccurs="1" name="tipoBanca">
+            <annotation>
+              <documentation>Si la transaccion se origina en la banca de personas o empresas</documentation>
+            </annotation>
+            <simpleType>
+              <restriction base="string">
+                <enumeration value="BANCA_EMPRESA" />
+                <enumeration value="BANCA_PERSONA" />
+              </restriction>
+            </simpleType>
+          </element>
+          <element minOccurs="1" maxOccurs="1" name="cuenta" type="s1:Cuenta">
+            <annotation>
+              <documentation>Identificacion de la cuenta y el segmento al cual pertenece</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="idFuncionalidad" type="string">
+            <annotation>
+              <documentation>ID de la funcionalidad en Cyberbank</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="servicio" type="string">
+            <annotation>
+              <documentation>Servicio en el que esta operando el cliente, aplica para banca empresa</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="formasPago">
+            <annotation>
+              <documentation>Forma de pago del servicio en el que se esta operando, aplica para BE</documentation>
+            </annotation>
+            <complexType>
+              <sequence>
+                <element minOccurs="1" maxOccurs="unbounded" name="formaPago" type="string" />
+              </sequence>
+            </complexType>
+          </element>
+          <element minOccurs="1" maxOccurs="1" name="monto" type="double">
+            <annotation>
+              <documentation>Monto de la transacci????n</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="paisDestino" type="string">
+            <annotation>
+              <documentation>Pais destino de la transaccion, aplica solo para servicio de transferencias internacionales</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="cargo">
+            <simpleType>
+              <annotation>
+                <documentation>Determina el tipo de cargo a aplicar para transferencias internacionales</documentation>
+              </annotation>
+              <restriction base="string">
+                <enumeration value="SHA" />
+                <enumeration value="OUR" />
+              </restriction>
+            </simpleType>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="codigoEmpresa" type="integer">
+            <annotation>
+              <documentation>El codigo de la empresa SAT en Cyberbank, solo aplica cuando tipoBanca es BANCA_EMPRESA</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="codigoBancoDestino" type="string">
+            <annotation>
+              <documentation>El codigo SWIFT o ABA del banco destino de la transaccion, solo aplica cuando se trate de una transferencia internacional</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="MensajeSalidaConsultarTarifaLote">
+    <complexContent mixed="false">
+      <extension base="mbl:MensajeSalida">
+        <sequence>
+          <element minOccurs="0" maxOccurs="1" name="comisiones">
+            <complexType>
+              <sequence>
+                <element minOccurs="1" maxOccurs="unbounded" name="comision">
+                  <complexType>
+                    <sequence>
+                      <element minOccurs="1" maxOccurs="unbounded" name="formaPago" type="string" />
+                      <element minOccurs="0" maxOccurs="1" name="comisionEmpresa" type="double">
+                        <annotation>
+                          <documentation>Comision que aplica a la empresa u ordenante (aplica para BE)</documentation>
+                        </annotation>
+                      </element>
+                      <element minOccurs="0" maxOccurs="1" name="comisionCliente" type="double">
+                        <annotation>
+                          <documentation>Comision que aplica al cliente o beneficiario (aplica para BE o BP)</documentation>
+                        </annotation>
+                      </element>
+                    </sequence>
+                  </complexType>
+                </element>
+              </sequence>
+            </complexType>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="costoPorEnvio" type="double">
+            <annotation>
+              <documentation>Costo por envio, aplica solo para transferencias internacionales</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="TarifarioFault" type="tns:TarifarioFault" />
+  <complexType name="TarifarioFault">
+    <sequence>
+      <element name="codigo" type="string" />
+      <element name="nombre" type="string" />
+      <element name="descripcion" type="string" />
+    </sequence>
+  </complexType>
+</schema>

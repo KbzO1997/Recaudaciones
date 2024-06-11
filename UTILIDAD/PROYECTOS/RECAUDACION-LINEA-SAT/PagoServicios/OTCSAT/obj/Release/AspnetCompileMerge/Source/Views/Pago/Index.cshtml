@@ -1,0 +1,158 @@
+﻿@{
+    ViewBag.Title = "Pago de Servicios";
+
+    // Modo empotrado
+
+    ViewBag.ModoEmpotrado = true;
+
+    if (ViewBag.ModoEmpotrado)
+    {
+        Layout = "~/Views/Shared/_LayoutGenerico.cshtml";
+    }
+}
+@model OTCSAT.Models.PagoModel
+
+@if (ViewBag.ModoEmpotrado)
+{
+    <style>
+        body {
+            background-color: white !important;
+        }
+    </style>
+}
+
+<style>
+    body {
+        font-family: "Roboto",sans-serif;
+    }
+
+    .accordion {
+        background-color: #fff;
+        color: #444;
+        cursor: pointer;
+        margin: 5px 0px;
+        padding: 12px;
+        width: 100%;
+        text-align: left;
+        border: solid 1px #ccc;
+        border-radius: 3px;
+        outline: none;
+        transition: 0.4s;
+        font-family: "Roboto",sans-serif;
+        font-size: 12px;
+    }
+
+    .active, .accordion:hover {
+        background-color: #ccc;
+    }
+
+    .accordion:after {
+        content: "\02795";
+        font-size: 5px;
+        color: #777;
+        float: right;
+        margin-left: 5px;
+    }
+
+    .active:after {
+        content: "\2796";
+    }
+
+    .panel {
+        padding: 0 5px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+    }
+
+    .datosPequenoReforzado {
+        height: 24px !important;
+        width: 80px;
+    }
+
+    .totalRecaudacion {
+        font-family: "Roboto",sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        background-color: #4eadb2;
+        color: white;
+        text-align: right;
+        vertical-align: middle;
+        width: 97%;
+        height: 24px;
+        padding: 10px;
+        padding-right: 15px;
+        border-radius: 5px;
+        margin-top: 15px;
+    }
+
+    .contenedorPago {
+        width: 800px;
+        padding: 5px;
+        padding-right: 30px;
+    }
+
+    .mensajeErroneo {
+        font-size: 11px;
+        background-color: #efdcf2 !important;
+        color: #ff0000 !important;
+    }
+
+    .botonDialogoInterno{
+        font-family:"Roboto",sans-serif !important;
+        font-size:11px !important;
+        color:#ffffff !important;
+        background-color:#4eadb2 !important;
+        border:none !important;
+        border-radius: 5px !important;
+        height: 32px !important;
+        min-width:100px !important;
+        display: inline !important;
+    }
+
+    .alineacionBotoneraInterna{
+        text-align:center !important;
+    }
+
+    .ZebraDialog_Buttons {
+        text-align: center !important;
+        padding: 10px 5px 10px 10px;
+    }
+</style>
+
+@if (ViewBag.ExistenMatriculaciones)
+{
+    <div id="mensajeServicio" class="mensaje">Seleccione el servicio a pagar</div>
+}
+else
+{
+    <div id="mensajeServicio" class="mensaje mensajeErroneo">
+        @ViewBag.MensajeError
+    </div>
+}
+<div id="contenedorPago" class="contenedorPago"></div>
+<div class="totalRecaudacion" id="totalAPagarGlobal">Total a Pagar: 0.00 USD</div>
+
+<div class="botonera">
+    <input type="button" class="button" value="Pagar Otros Servicios" onclick="document.location = '@Url.Content("~/Pago/")NoMatriculado?Ordenante=@Model.Ordenante&Usuario=@Model.Usuario';"/>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        // Cambio de tamanio de frame
+        UtilidadesUI.registrarCambioElemento(document.body, UtilidadesUI.handlerRegistroCambioElemento);
+    });
+
+    //FIXME Esto deberia asignarse con un singleton
+    document.panelOTC = new PanelPagos({
+        ordenante: @Model.Ordenante,
+        usuario: "@Model.Usuario",
+        contenedor: "contenedorPago",
+        seccionMensajes: "mensajeServicio",
+        urlBase: "@Url.Content("~/Pago/")",
+        contenedorTotales: "totalAPagarGlobal"
+    });
+    
+</script>

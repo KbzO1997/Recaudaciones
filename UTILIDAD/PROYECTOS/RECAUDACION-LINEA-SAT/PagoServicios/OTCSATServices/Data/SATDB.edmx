@@ -1,0 +1,769 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Data.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="pa_con_cempresa_esp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="e_nom_empresa" Type="varchar" Mode="In" />
+          <Parameter Name="e_rowcount" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_sat_acupo_cliente_serv" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="e_empresa" Type="int" Mode="In" />
+          <Parameter Name="e_cod_usuario" Type="varchar" Mode="In" />
+          <Parameter Name="e_tipo_cuenta" Type="tinyint" Mode="In" />
+          <Parameter Name="e_id_principal" Type="varchar" Mode="In" />
+          <Parameter Name="e_servicio" Type="varchar" Mode="In" />
+          <Parameter Name="e_valor" Type="money" Mode="In" />
+          <Parameter Name="e_comision" Type="money" Mode="In" />
+          <Parameter Name="s_cod_error" Type="int" Mode="InOut" />
+          <Parameter Name="s_mensaje_error" Type="varchar" Mode="InOut" />
+          <Parameter Name="e_band_consulta" Type="char" Mode="In" />
+        </Function>
+        <Function Name="pa_sat_ccabmatriculacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="e_ordenante" Type="int" Mode="In" />
+          <Parameter Name="e_usuario" Type="varchar" Mode="In" />
+          <Parameter Name="e_grupo" Type="varchar" Mode="In" />
+          <Parameter Name="e_empresa_recaudacion" Type="int" Mode="In" />
+          <Parameter Name="e_convenio" Type="varchar" Mode="In" />
+          <Parameter Name="e_estado" Type="char" Mode="In" />
+          <Parameter Name="e_indice_inicial" Type="int" Mode="In" />
+          <Parameter Name="e_registros_x_pagina" Type="int" Mode="In" />
+          <Parameter Name="s_codigo_respuesta" Type="int" Mode="InOut" />
+          <Parameter Name="s_mensaje_error" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="pa_sat_ccuentas_xlogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="e_empresa" Type="int" Mode="In" />
+          <Parameter Name="e_login" Type="varchar" Mode="In" />
+          <Parameter Name="e_t_producto_usuario" Type="tinyint" Mode="In" />
+        </Function>
+        <Function Name="pa_sat_ccupo_cliente_serv" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="e_empresa" Type="int" Mode="In" />
+          <Parameter Name="e_cod_usuario" Type="varchar" Mode="In" />
+          <Parameter Name="e_tipo_cuenta" Type="tinyint" Mode="In" />
+          <Parameter Name="e_id_principal" Type="varchar" Mode="In" />
+          <Parameter Name="e_servicio" Type="varchar" Mode="In" />
+          <Parameter Name="s_disponible" Type="money" Mode="InOut" />
+          <Parameter Name="s_utilizado" Type="money" Mode="InOut" />
+          <Parameter Name="s_asignado" Type="money" Mode="InOut" />
+          <Parameter Name="s_grupo" Type="char" Mode="InOut" />
+          <Parameter Name="s_cod_error" Type="int" Mode="InOut" />
+          <Parameter Name="s_mensaje_error" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="pa_sat_cdetmatriculacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="e_ordenante" Type="int" Mode="In" />
+          <Parameter Name="e_usuario" Type="varchar" Mode="In" />
+          <Parameter Name="e_grupo" Type="varchar" Mode="In" />
+          <Parameter Name="e_empresa_recaudacion" Type="int" Mode="In" />
+          <Parameter Name="e_convenio" Type="varchar" Mode="In" />
+          <Parameter Name="e_suministro" Type="varchar" Mode="In" />
+          <Parameter Name="s_codigo_respuesta" Type="int" Mode="InOut" />
+          <Parameter Name="s_mensaje_error" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="pa_sat_cgruposxusuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="e_ordenante" Type="int" Mode="In" />
+          <Parameter Name="e_usuario" Type="varchar" Mode="In" />
+          <Parameter Name="s_codigo_respuesta" Type="int" Mode="InOut" />
+          <Parameter Name="s_mensaje_error" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="pa_sat_cmatriculacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="e_secuencia" Type="int" Mode="In" />
+          <Parameter Name="s_codigo_respuesta" Type="int" Mode="InOut" />
+          <Parameter Name="s_mensaje_error" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="pa_sat_icabmatriculacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="e_ordenante" Type="int" Mode="In" />
+          <Parameter Name="e_usuario" Type="varchar" Mode="In" />
+          <Parameter Name="e_grupo" Type="varchar" Mode="In" />
+          <Parameter Name="e_empresa_recaudacion" Type="int" Mode="In" />
+          <Parameter Name="e_convenio" Type="varchar" Mode="In" />
+          <Parameter Name="e_identificador" Type="varchar" Mode="In" />
+          <Parameter Name="e_etiqueta_convenio" Type="varchar" Mode="In" />
+          <Parameter Name="e_etiqueta_identificador" Type="varchar" Mode="In" />
+          <Parameter Name="e_es_editable" Type="char" Mode="In" />
+          <Parameter Name="e_regexp" Type="varchar" Mode="In" />
+          <Parameter Name="e_texto_ayuda" Type="varchar" Mode="In" />
+          <Parameter Name="e_mascara" Type="varchar" Mode="In" />
+          <Parameter Name="e_alias" Type="varchar" Mode="In" />
+          <Parameter Name="e_suministro" Type="varchar" Mode="In" />
+          <Parameter Name="e_regional" Type="varchar" Mode="In" />
+          <Parameter Name="e_usuario_creacion" Type="varchar" Mode="In" />
+          <Parameter Name="e_usuario_modificacion" Type="varchar" Mode="In" />
+          <Parameter Name="e_fecha_modificacion" Type="datetime" Mode="In" />
+          <Parameter Name="e_estado" Type="char" Mode="In" />
+          <Parameter Name="e_nombre_empresa_recaudacion" Type="varchar" Mode="In" />
+          <Parameter Name="s_codigo_respuesta" Type="int" Mode="InOut" />
+          <Parameter Name="s_mensaje_error" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="pa_sat_idetmatriculacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="e_ordenante" Type="int" Mode="In" />
+          <Parameter Name="e_usuario" Type="varchar" Mode="In" />
+          <Parameter Name="e_grupo" Type="varchar" Mode="In" />
+          <Parameter Name="e_empresa_recaudacion" Type="int" Mode="In" />
+          <Parameter Name="e_convenio" Type="varchar" Mode="In" />
+          <Parameter Name="e_identificador" Type="varchar" Mode="In" />
+          <Parameter Name="e_suministro" Type="varchar" Mode="In" />
+          <Parameter Name="e_codigo_dato_adicional" Type="varchar" Mode="In" />
+          <Parameter Name="e_etiqueta" Type="varchar" Mode="In" />
+          <Parameter Name="e_es_editable" Type="char" Mode="In" />
+          <Parameter Name="e_tipo" Type="varchar" Mode="In" />
+          <Parameter Name="e_valor" Type="varchar" Mode="In" />
+          <Parameter Name="e_es_visible" Type="char" Mode="In" />
+          <Parameter Name="e_formato" Type="varchar" Mode="In" />
+          <Parameter Name="e_mascara" Type="varchar" Mode="In" />
+          <Parameter Name="e_regexp" Type="varchar" Mode="In" />
+          <Parameter Name="s_codigo_respuesta" Type="int" Mode="InOut" />
+          <Parameter Name="s_mensaje_error" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="pa_sat_inotif_pagserv" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="e_ordenante" Type="int" Mode="In" />
+          <Parameter Name="e_usuario" Type="varchar" Mode="In" />
+          <Parameter Name="e_tipo_cuenta" Type="smallint" Mode="In" />
+          <Parameter Name="e_numero_cuenta" Type="varchar" Mode="In" />
+          <Parameter Name="e_monto" Type="varchar" Mode="In" />
+          <Parameter Name="e_comision" Type="varchar" Mode="In" />
+          <Parameter Name="e_monto_total" Type="varchar" Mode="In" />
+          <Parameter Name="e_grupo" Type="varchar" Mode="In" />
+          <Parameter Name="e_nom_empresa_rec" Type="char" Mode="In" />
+          <Parameter Name="e_nom_convenio" Type="varchar" Mode="In" />
+          <Parameter Name="e_suministro" Type="varchar" Mode="In" />
+          <Parameter Name="e_orden_empresa" Type="varchar" Mode="In" />
+          <Parameter Name="e_fecha_pago" Type="varchar" Mode="In" />
+          <Parameter Name="e_tipo_ident" Type="varchar" Mode="In" />
+          <Parameter Name="e_alias" Type="varchar" Mode="In" />
+          <Parameter Name="e_nombre_abonado" Type="varchar" Mode="In" />
+          <Parameter Name="s_codigo_respuesta" Type="int" Mode="InOut" />
+          <Parameter Name="s_mensaje_error" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="pa_sat_mcabmatriculacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="e_secuencia" Type="int" Mode="In" />
+          <Parameter Name="e_alias" Type="varchar" Mode="In" />
+          <Parameter Name="e_estado" Type="char" Mode="In" />
+          <Parameter Name="e_usuario_modificacion" Type="varchar" Mode="In" />
+          <Parameter Name="s_codigo_respuesta" Type="int" Mode="InOut" />
+          <Parameter Name="s_mensaje_error" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="sp_con_empresa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="em_cod_empresa" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_con_nemonico_empresa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_empresa" Type="varchar" Mode="In" />
+          <Parameter Name="o_nemonico" Type="char" Mode="InOut" />
+        </Function>
+        <Function Name="sp_con_nombrempresa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_empresa" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_con_nombrempresas_producto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_producto" Type="smallint" Mode="In" />
+        </Function>
+        <Function Name="sp_con_usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="us_cod_empresa" Type="varchar" Mode="In" />
+          <Parameter Name="us_nem_empresa" Type="char" Mode="In" />
+          <Parameter Name="us_cod_usuario" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_con_usuario_dispositivo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_empresa" Type="varchar" Mode="In" />
+          <Parameter Name="i_usuario" Type="varchar" Mode="In" />
+          <Parameter Name="i_transaccion" Type="int" Mode="In" />
+          <Parameter Name="i_producto" Type="int" Mode="In" />
+          <Parameter Name="i_servicio" Type="varchar" Mode="In" />
+          <Parameter Name="i_accion" Type="char" Mode="In" />
+        </Function>
+        <Function Name="sp_cuenta_empresa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_empresa" Type="int" Mode="In" />
+          <Parameter Name="i_servicio" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_grb_reg_auditoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_au_cod_empresa" Type="char" Mode="In" />
+          <Parameter Name="i_au_cod_usuario" Type="varchar" Mode="In" />
+          <Parameter Name="i_au_cod_producto" Type="int" Mode="In" />
+          <Parameter Name="i_au_cod_servicio" Type="varchar" Mode="In" />
+          <Parameter Name="i_au_cod_modulo" Type="int" Mode="In" />
+          <Parameter Name="i_au_cod_transaccion" Type="int" Mode="In" />
+          <Parameter Name="i_au_opcion" Type="char" Mode="In" />
+          <Parameter Name="i_au_accion" Type="char" Mode="In" />
+          <Parameter Name="i_au_des_accion" Type="varchar" Mode="In" />
+          <Parameter Name="i_sesion" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="DataStoreContainer" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Data" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SATDB" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="sp_con_nemonico_empresa">
+            <Parameter Name="i_empresa" Mode="In" Type="String" />
+            <Parameter Name="o_nemonico" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_con_nombrempresa" ReturnType="Collection(String)">
+          <Parameter Name="i_empresa" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_con_nombrempresas_producto" ReturnType="Collection(Data.sp_con_nombrempresas_producto_Result)">
+          <Parameter Name="i_producto" Mode="In" Type="Int16" />
+          </FunctionImport>
+          <FunctionImport Name="sp_con_usuario" ReturnType="Collection(Data.sp_con_usuario_Result)">
+            <Parameter Name="us_cod_empresa" Mode="In" Type="String" />
+            <Parameter Name="us_nem_empresa" Mode="In" Type="String" />
+            <Parameter Name="us_cod_usuario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_sat_cdetmatriculacion" ReturnType="Collection(Data.pa_sat_cdetmatriculacion_Result)">
+            <Parameter Name="e_ordenante" Mode="In" Type="Int32" />
+            <Parameter Name="e_usuario" Mode="In" Type="String" />
+            <Parameter Name="e_grupo" Mode="In" Type="String" />
+            <Parameter Name="e_empresa_recaudacion" Mode="In" Type="Int32" />
+            <Parameter Name="e_convenio" Mode="In" Type="String" />
+            <Parameter Name="e_suministro" Mode="In" Type="String" />
+            <Parameter Name="s_codigo_respuesta" Mode="InOut" Type="Int32" />
+            <Parameter Name="s_mensaje_error" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_sat_icabmatriculacion">
+            <Parameter Name="e_ordenante" Mode="In" Type="Int32" />
+            <Parameter Name="e_usuario" Mode="In" Type="String" />
+            <Parameter Name="e_grupo" Mode="In" Type="String" />
+            <Parameter Name="e_empresa_recaudacion" Mode="In" Type="Int32" />
+            <Parameter Name="e_convenio" Mode="In" Type="String" />
+            <Parameter Name="e_identificador" Mode="In" Type="String" />
+            <Parameter Name="e_etiqueta_convenio" Mode="In" Type="String" />
+            <Parameter Name="e_etiqueta_identificador" Mode="In" Type="String" />
+            <Parameter Name="e_es_editable" Mode="In" Type="String" />
+            <Parameter Name="e_regexp" Mode="In" Type="String" />
+            <Parameter Name="e_texto_ayuda" Mode="In" Type="String" />
+            <Parameter Name="e_mascara" Mode="In" Type="String" />
+            <Parameter Name="e_alias" Mode="In" Type="String" />
+            <Parameter Name="e_suministro" Mode="In" Type="String" />
+            <Parameter Name="e_regional" Mode="In" Type="String" />
+            <Parameter Name="e_usuario_creacion" Mode="In" Type="String" />
+            <Parameter Name="e_usuario_modificacion" Mode="In" Type="String" />
+            <Parameter Name="e_fecha_modificacion" Mode="In" Type="DateTime" />
+            <Parameter Name="e_estado" Mode="In" Type="String" />
+            <Parameter Name="e_nombre_empresa_recaudacion" Mode="In" Type="String" />
+            <Parameter Name="s_codigo_respuesta" Mode="InOut" Type="Int32" />
+            <Parameter Name="s_mensaje_error" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_sat_idetmatriculacion">
+            <Parameter Name="e_ordenante" Mode="In" Type="Int32" />
+            <Parameter Name="e_usuario" Mode="In" Type="String" />
+            <Parameter Name="e_grupo" Mode="In" Type="String" />
+            <Parameter Name="e_empresa_recaudacion" Mode="In" Type="Int32" />
+            <Parameter Name="e_convenio" Mode="In" Type="String" />
+            <Parameter Name="e_identificador" Mode="In" Type="String" />
+            <Parameter Name="e_suministro" Mode="In" Type="String" />
+            <Parameter Name="e_codigo_dato_adicional" Mode="In" Type="String" />
+            <Parameter Name="e_etiqueta" Mode="In" Type="String" />
+            <Parameter Name="e_es_editable" Mode="In" Type="String" />
+            <Parameter Name="e_tipo" Mode="In" Type="String" />
+            <Parameter Name="e_valor" Mode="In" Type="String" />
+            <Parameter Name="e_es_visible" Mode="In" Type="String" />
+            <Parameter Name="e_formato" Mode="In" Type="String" />
+            <Parameter Name="e_mascara" Mode="In" Type="String" />
+            <Parameter Name="e_regexp" Mode="In" Type="String" />
+            <Parameter Name="s_codigo_respuesta" Mode="InOut" Type="Int32" />
+            <Parameter Name="s_mensaje_error" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_sat_ccabmatriculacion" ReturnType="Collection(Data.pa_sat_ccabmatriculacion_Result)">
+            <Parameter Name="e_ordenante" Mode="In" Type="Int32" />
+            <Parameter Name="e_usuario" Mode="In" Type="String" />
+            <Parameter Name="e_grupo" Mode="In" Type="String" />
+            <Parameter Name="e_empresa_recaudacion" Mode="In" Type="Int32" />
+            <Parameter Name="e_convenio" Mode="In" Type="String" />
+            <Parameter Name="e_estado" Mode="In" Type="String" />
+            <Parameter Name="e_indice_inicial" Mode="In" Type="Int32" />
+            <Parameter Name="e_registros_x_pagina" Mode="In" Type="Int32" />
+            <Parameter Name="s_codigo_respuesta" Mode="InOut" Type="Int32" />
+            <Parameter Name="s_mensaje_error" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_sat_cgruposxusuario" ReturnType="Collection(Data.pa_sat_cgruposxusuario_Result)">
+            <Parameter Name="e_ordenante" Mode="In" Type="Int32" />
+            <Parameter Name="e_usuario" Mode="In" Type="String" />
+            <Parameter Name="s_codigo_respuesta" Mode="InOut" Type="Int32" />
+            <Parameter Name="s_mensaje_error" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_cuenta_empresa" ReturnType="Collection(Data.sp_cuenta_empresa_Result)">
+            <Parameter Name="i_empresa" Mode="In" Type="Int32" />
+            <Parameter Name="i_servicio" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_con_cempresa_esp" ReturnType="Collection(Data.pa_con_cempresa_esp_Result)">
+            <Parameter Name="e_nom_empresa" Mode="In" Type="String" />
+            <Parameter Name="e_rowcount" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_sat_cmatriculacion" ReturnType="Collection(Data.pa_sat_cmatriculacion_Result)">
+            <Parameter Name="e_secuencia" Mode="In" Type="Int32" />
+            <Parameter Name="s_codigo_respuesta" Mode="InOut" Type="Int32" />
+            <Parameter Name="s_mensaje_error" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_con_empresa" ReturnType="Collection(Data.sp_con_empresa_Result)">
+          <Parameter Name="em_cod_empresa" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_sat_acupo_cliente_serv">
+            <Parameter Name="e_empresa" Mode="In" Type="Int32" />
+            <Parameter Name="e_cod_usuario" Mode="In" Type="String" />
+            <Parameter Name="e_tipo_cuenta" Mode="In" Type="Byte" />
+            <Parameter Name="e_id_principal" Mode="In" Type="String" />
+            <Parameter Name="e_servicio" Mode="In" Type="String" />
+            <Parameter Name="e_valor" Mode="In" Type="Decimal" />
+            <Parameter Name="e_comision" Mode="In" Type="Decimal" />
+            <Parameter Name="s_cod_error" Mode="InOut" Type="Int32" />
+            <Parameter Name="s_mensaje_error" Mode="InOut" Type="String" />
+            <Parameter Name="e_band_consulta" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_sat_ccupo_cliente_serv">
+            <Parameter Name="e_empresa" Mode="In" Type="Int32" />
+            <Parameter Name="e_cod_usuario" Mode="In" Type="String" />
+            <Parameter Name="e_tipo_cuenta" Mode="In" Type="Byte" />
+            <Parameter Name="e_id_principal" Mode="In" Type="String" />
+            <Parameter Name="e_servicio" Mode="In" Type="String" />
+            <Parameter Name="s_disponible" Mode="InOut" Type="Decimal" />
+            <Parameter Name="s_utilizado" Mode="InOut" Type="Decimal" />
+            <Parameter Name="s_asignado" Mode="InOut" Type="Decimal" />
+            <Parameter Name="s_grupo" Mode="InOut" Type="String" />
+            <Parameter Name="s_cod_error" Mode="InOut" Type="Int32" />
+            <Parameter Name="s_mensaje_error" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_sat_inotif_pagserv">
+            <Parameter Name="e_ordenante" Mode="In" Type="Int32" />
+            <Parameter Name="e_usuario" Mode="In" Type="String" />
+            <Parameter Name="e_tipo_cuenta" Mode="In" Type="Int16" />
+            <Parameter Name="e_numero_cuenta" Mode="In" Type="String" />
+            <Parameter Name="e_monto" Mode="In" Type="String" />
+            <Parameter Name="e_comision" Mode="In" Type="String" />
+            <Parameter Name="e_monto_total" Mode="In" Type="String" />
+            <Parameter Name="e_grupo" Mode="In" Type="String" />
+            <Parameter Name="e_nom_empresa_rec" Mode="In" Type="String" />
+            <Parameter Name="e_nom_convenio" Mode="In" Type="String" />
+            <Parameter Name="e_suministro" Mode="In" Type="String" />
+            <Parameter Name="e_orden_empresa" Mode="In" Type="String" />
+            <Parameter Name="e_fecha_pago" Mode="In" Type="String" />
+            <Parameter Name="e_tipo_ident" Mode="In" Type="String" />
+            <Parameter Name="e_alias" Mode="In" Type="String" />
+            <Parameter Name="e_nombre_abonado" Mode="In" Type="String" />
+            <Parameter Name="s_codigo_respuesta" Mode="InOut" Type="Int32" />
+            <Parameter Name="s_mensaje_error" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_sat_ccuentas_xlogin" ReturnType="Collection(Data.pa_sat_ccuentas_xlogin_Result)">
+            <Parameter Name="e_empresa" Mode="In" Type="Int32" />
+            <Parameter Name="e_login" Mode="In" Type="String" />
+            <Parameter Name="e_t_producto_usuario" Mode="In" Type="Byte" />
+          </FunctionImport>
+          <FunctionImport Name="pa_sat_mcabmatriculacion">
+            <Parameter Name="e_secuencia" Mode="In" Type="Int32" />
+            <Parameter Name="e_alias" Mode="In" Type="String" />
+            <Parameter Name="e_estado" Mode="In" Type="String" />
+            <Parameter Name="e_usuario_modificacion" Mode="In" Type="String" />
+            <Parameter Name="s_codigo_respuesta" Mode="InOut" Type="Int32" />
+            <Parameter Name="s_mensaje_error" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_grb_reg_auditoria">
+            <Parameter Name="i_au_cod_empresa" Mode="In" Type="String" />
+            <Parameter Name="i_au_cod_usuario" Mode="In" Type="String" />
+            <Parameter Name="i_au_cod_producto" Mode="In" Type="Int32" />
+            <Parameter Name="i_au_cod_servicio" Mode="In" Type="String" />
+            <Parameter Name="i_au_cod_modulo" Mode="In" Type="Int32" />
+            <Parameter Name="i_au_cod_transaccion" Mode="In" Type="Int32" />
+            <Parameter Name="i_au_opcion" Mode="In" Type="String" />
+            <Parameter Name="i_au_accion" Mode="In" Type="String" />
+            <Parameter Name="i_au_des_accion" Mode="In" Type="String" />
+            <Parameter Name="i_sesion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_con_usuario_dispositivo" ReturnType="Collection(Data.sp_con_usuario_dispositivo_Result)">
+            <Parameter Name="i_empresa" Mode="In" Type="String" />
+            <Parameter Name="i_usuario" Mode="In" Type="String" />
+            <Parameter Name="i_transaccion" Mode="In" Type="Int32" />
+            <Parameter Name="i_producto" Mode="In" Type="Int32" />
+            <Parameter Name="i_servicio" Mode="In" Type="String" />
+            <Parameter Name="i_accion" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sp_con_nombrempresas_producto_Result">
+          <Property Type="String" Name="em_nom_empresa" Nullable="true" MaxLength="70" />
+          <Property Type="String" Name="em_cod_empresa" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="sp_con_usuario_Result">
+          <Property Type="String" Name="us_cod_empresa" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="us_cod_usuario" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="us_contrasenia" Nullable="false" MaxLength="6" />
+          <Property Type="String" Name="us_reingreso_contrasenia" Nullable="false" MaxLength="6" />
+          <Property Type="String" Name="us_nom_usuario" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="us_ofiage_usuario" Nullable="true" MaxLength="5" />
+          <Property Type="DateTime" Name="us_fch_expira_clave" Nullable="false" Precision="23" />
+          <Property Type="String" Name="us_est_usuario" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="us_ctp_usuario" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="us_cedula" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="us_dir_email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="us_nem_empresa" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="us_cod_caja_cobis" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="us_cod_usuario_cobis" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="us_cargo" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="pa_sat_cdetmatriculacion_Result">
+          <Property Type="Int32" Name="dm_ordenante" Nullable="false" />
+          <Property Type="String" Name="dm_usuario" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="dm_grupo" Nullable="false" MaxLength="60" />
+          <Property Type="Int32" Name="dm_empresa_recaudacion" Nullable="false" />
+          <Property Type="String" Name="dm_convenio" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="dm_identificador" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="dm_codigo_dato_adicional" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="dm_etiqueta" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="dm_es_editable" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="dm_tipo" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="dm_valor" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="dm_es_visible" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="dm_formato" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="dm_mascara" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="dm_regexp" Nullable="true" MaxLength="300" />
+        </ComplexType>
+        <ComplexType Name="pa_sat_ccabmatriculacion_Result">
+          <Property Type="Int32" Name="cm_ordenante" Nullable="false" />
+          <Property Type="String" Name="cm_usuario" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="cm_grupo" Nullable="false" MaxLength="60" />
+          <Property Type="Int32" Name="cm_empresa_recaudacion" Nullable="false" />
+          <Property Type="String" Name="cm_convenio" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="cm_identificador" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="cm_etiqueta_convenio" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="cm_etiqueta_identificador" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="cm_es_editable" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="cm_regexp" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="cm_texto_ayuda" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="cm_mascara" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="cm_alias" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="cm_suministro" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="cm_regional" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="cm_usuario_creacion" Nullable="false" MaxLength="15" />
+          <Property Type="DateTime" Name="cm_fecha_creacion" Nullable="false" Precision="23" />
+          <Property Type="String" Name="cm_usuario_modificacion" Nullable="true" MaxLength="15" />
+          <Property Type="DateTime" Name="cm_fecha_modificacion" Nullable="true" Precision="23" />
+          <Property Type="String" Name="cm_estado" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="cm_secuencia" Nullable="false" />
+          <Property Type="String" Name="cm_nombre_empresa_recaudacion" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_sat_cgruposxusuario_Result">
+          <Property Type="String" Name="GRUPO" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="DESCRIPCION" Nullable="false" MaxLength="24" />
+        </ComplexType>
+        <ComplexType Name="sp_cuenta_empresa_Result">
+          <Property Type="String" Name="codigo" Nullable="true" MaxLength="113" />
+          <Property Type="String" Name="referencia" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="cod_default" Nullable="true" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="pa_con_cempresa_esp_Result">
+          <Property Type="String" Name="codigo" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="70" />
+        </ComplexType>
+        <ComplexType Name="pa_sat_cmatriculacion_Result">
+          <Property Type="Int32" Name="cm_ordenante" Nullable="false" />
+          <Property Type="String" Name="cm_usuario" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="cm_grupo" Nullable="false" MaxLength="60" />
+          <Property Type="Int32" Name="cm_empresa_recaudacion" Nullable="false" />
+          <Property Type="String" Name="cm_convenio" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="cm_identificador" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="cm_etiqueta_convenio" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="cm_etiqueta_identificador" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="cm_es_editable" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="cm_regexp" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="cm_texto_ayuda" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="cm_mascara" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="cm_alias" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="cm_suministro" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="cm_regional" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="cm_usuario_creacion" Nullable="false" MaxLength="15" />
+          <Property Type="DateTime" Name="cm_fecha_creacion" Nullable="false" Precision="23" />
+          <Property Type="String" Name="cm_usuario_modificacion" Nullable="true" MaxLength="15" />
+          <Property Type="DateTime" Name="cm_fecha_modificacion" Nullable="true" Precision="23" />
+          <Property Type="String" Name="cm_estado" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="cm_secuencia" Nullable="false" />
+          <Property Type="String" Name="cm_nombre_empresa_recaudacion" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="sp_con_empresa_Result">
+          <Property Type="String" Name="em_cod_empresa" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="em_nom_empresa" Nullable="true" MaxLength="70" />
+          <Property Type="String" Name="em_nem_empresa" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="em_dir_empresa" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="em_loc_empresa" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="em_ctp_nuc_empresa" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="em_nuc_empresa" Nullable="true" MaxLength="13" />
+          <Property Type="String" Name="em_email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="em_tel_empresa" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="em_fax_empresa" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="em_representante" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="em_ctp_nuc_representante" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="em_nuc_representante" Nullable="true" MaxLength="13" />
+          <Property Type="String" Name="em_informacion" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="em_loc_sri" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="em_pto_vta_sri" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="em_sec_sri" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="em_cod_aut_sri" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="em_fch_vigencia_sri" Nullable="true" Precision="23" />
+          <Property Type="String" Name="em_tip_cta" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="em_num_cta" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="em_nom_cta" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="em_est_empresa" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="em_msj_bienvenida" Nullable="true" MaxLength="250" />
+          <Property Type="Byte" Name="em_dias_expclv" Nullable="true" />
+          <Property Type="DateTime" Name="em_fch_registro" Nullable="true" Precision="23" />
+          <Property Type="String" Name="em_nom_comercial" Nullable="true" MaxLength="70" />
+          <Property Type="Int16" Name="em_old_codigo" Nullable="true" />
+          <Property Type="String" Name="em_old_frecuencia" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="em_ley_sri" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="em_reg_estacion" Nullable="true" MaxLength="1" />
+          <Property Type="Int32" Name="em_sec_npedido" Nullable="true" />
+          <Property Type="Int16" Name="em_old_oficial" Nullable="true" />
+          <Property Type="String" Name="em_lbl_oficial" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="em_log_empresa" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="em_fir_empresa" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="pa_sat_ccuentas_xlogin_Result">
+          <Property Type="String" Name="mr_tipo_cta" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="mr_cuenta" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="sp_con_usuario_dispositivo_Result">
+          <Property Type="String" Name="tipo" Nullable="false" MaxLength="7" />
+          <Property Type="String" Name="serial" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="tipo_dispo" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="identificacion" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="login_entrust" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="est_entrust" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="est_dispositivo" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="usr_ctp" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="usr_mail" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="usr_entrust" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="usr_est_entrust" Nullable="true" MaxLength="1" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DataStoreContainer" CdmEntityContainer="SATDB" >
+          <FunctionImportMapping FunctionImportName="sp_con_nemonico_empresa" FunctionName="Data.Store.sp_con_nemonico_empresa" />
+          <FunctionImportMapping FunctionImportName="sp_con_nombrempresa" FunctionName="Data.Store.sp_con_nombrempresa" />
+          <FunctionImportMapping FunctionImportName="sp_con_nombrempresas_producto" FunctionName="Data.Store.sp_con_nombrempresas_producto">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Data.sp_con_nombrempresas_producto_Result">
+                <ScalarProperty Name="em_nom_empresa" ColumnName="em_nom_empresa" />
+                <ScalarProperty Name="em_cod_empresa" ColumnName="em_cod_empresa" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_con_usuario" FunctionName="Data.Store.sp_con_usuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Data.sp_con_usuario_Result">
+                <ScalarProperty Name="us_cod_empresa" ColumnName="us_cod_empresa" />
+                <ScalarProperty Name="us_cod_usuario" ColumnName="us_cod_usuario" />
+                <ScalarProperty Name="us_contrasenia" ColumnName="us_contrasenia" />
+                <ScalarProperty Name="us_reingreso_contrasenia" ColumnName="us_reingreso_contrasenia" />
+                <ScalarProperty Name="us_nom_usuario" ColumnName="us_nom_usuario" />
+                <ScalarProperty Name="us_ofiage_usuario" ColumnName="us_ofiage_usuario" />
+                <ScalarProperty Name="us_fch_expira_clave" ColumnName="us_fch_expira_clave" />
+                <ScalarProperty Name="us_est_usuario" ColumnName="us_est_usuario" />
+                <ScalarProperty Name="us_ctp_usuario" ColumnName="us_ctp_usuario" />
+                <ScalarProperty Name="us_cedula" ColumnName="us_cedula" />
+                <ScalarProperty Name="us_dir_email" ColumnName="us_dir_email" />
+                <ScalarProperty Name="us_nem_empresa" ColumnName="us_nem_empresa" />
+                <ScalarProperty Name="us_cod_caja_cobis" ColumnName="us_cod_caja_cobis" />
+                <ScalarProperty Name="us_cod_usuario_cobis" ColumnName="us_cod_usuario_cobis" />
+                <ScalarProperty Name="us_cargo" ColumnName="us_cargo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_sat_cdetmatriculacion" FunctionName="Data.Store.pa_sat_cdetmatriculacion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Data.pa_sat_cdetmatriculacion_Result">
+                <ScalarProperty Name="dm_ordenante" ColumnName="dm_ordenante" />
+                <ScalarProperty Name="dm_usuario" ColumnName="dm_usuario" />
+                <ScalarProperty Name="dm_grupo" ColumnName="dm_grupo" />
+                <ScalarProperty Name="dm_empresa_recaudacion" ColumnName="dm_empresa_recaudacion" />
+                <ScalarProperty Name="dm_convenio" ColumnName="dm_convenio" />
+                <ScalarProperty Name="dm_identificador" ColumnName="dm_identificador" />
+                <ScalarProperty Name="dm_codigo_dato_adicional" ColumnName="dm_codigo_dato_adicional" />
+                <ScalarProperty Name="dm_etiqueta" ColumnName="dm_etiqueta" />
+                <ScalarProperty Name="dm_es_editable" ColumnName="dm_es_editable" />
+                <ScalarProperty Name="dm_tipo" ColumnName="dm_tipo" />
+                <ScalarProperty Name="dm_valor" ColumnName="dm_valor" />
+                <ScalarProperty Name="dm_es_visible" ColumnName="dm_es_visible" />
+                <ScalarProperty Name="dm_formato" ColumnName="dm_formato" />
+                <ScalarProperty Name="dm_mascara" ColumnName="dm_mascara" />
+                <ScalarProperty Name="dm_regexp" ColumnName="dm_regexp" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_sat_icabmatriculacion" FunctionName="Data.Store.pa_sat_icabmatriculacion" />
+          <FunctionImportMapping FunctionImportName="pa_sat_idetmatriculacion" FunctionName="Data.Store.pa_sat_idetmatriculacion" />
+          <FunctionImportMapping FunctionImportName="pa_sat_ccabmatriculacion" FunctionName="Data.Store.pa_sat_ccabmatriculacion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Data.pa_sat_ccabmatriculacion_Result">
+                <ScalarProperty Name="cm_ordenante" ColumnName="cm_ordenante" />
+                <ScalarProperty Name="cm_usuario" ColumnName="cm_usuario" />
+                <ScalarProperty Name="cm_grupo" ColumnName="cm_grupo" />
+                <ScalarProperty Name="cm_empresa_recaudacion" ColumnName="cm_empresa_recaudacion" />
+                <ScalarProperty Name="cm_convenio" ColumnName="cm_convenio" />
+                <ScalarProperty Name="cm_identificador" ColumnName="cm_identificador" />
+                <ScalarProperty Name="cm_etiqueta_convenio" ColumnName="cm_etiqueta_convenio" />
+                <ScalarProperty Name="cm_etiqueta_identificador" ColumnName="cm_etiqueta_identificador" />
+                <ScalarProperty Name="cm_es_editable" ColumnName="cm_es_editable" />
+                <ScalarProperty Name="cm_regexp" ColumnName="cm_regexp" />
+                <ScalarProperty Name="cm_texto_ayuda" ColumnName="cm_texto_ayuda" />
+                <ScalarProperty Name="cm_mascara" ColumnName="cm_mascara" />
+                <ScalarProperty Name="cm_alias" ColumnName="cm_alias" />
+                <ScalarProperty Name="cm_suministro" ColumnName="cm_suministro" />
+                <ScalarProperty Name="cm_regional" ColumnName="cm_regional" />
+                <ScalarProperty Name="cm_usuario_creacion" ColumnName="cm_usuario_creacion" />
+                <ScalarProperty Name="cm_fecha_creacion" ColumnName="cm_fecha_creacion" />
+                <ScalarProperty Name="cm_usuario_modificacion" ColumnName="cm_usuario_modificacion" />
+                <ScalarProperty Name="cm_fecha_modificacion" ColumnName="cm_fecha_modificacion" />
+                <ScalarProperty Name="cm_estado" ColumnName="cm_estado" />
+                <ScalarProperty Name="cm_secuencia" ColumnName="cm_secuencia" />
+                <ScalarProperty Name="cm_nombre_empresa_recaudacion" ColumnName="cm_nombre_empresa_recaudacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_sat_cgruposxusuario" FunctionName="Data.Store.pa_sat_cgruposxusuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Data.pa_sat_cgruposxusuario_Result">
+                <ScalarProperty Name="GRUPO" ColumnName="GRUPO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_cuenta_empresa" FunctionName="Data.Store.sp_cuenta_empresa">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Data.sp_cuenta_empresa_Result">
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="referencia" ColumnName="referencia" />
+                <ScalarProperty Name="cod_default" ColumnName="cod_default" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_con_cempresa_esp" FunctionName="Data.Store.pa_con_cempresa_esp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Data.pa_con_cempresa_esp_Result">
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_sat_cmatriculacion" FunctionName="Data.Store.pa_sat_cmatriculacion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Data.pa_sat_cmatriculacion_Result">
+                <ScalarProperty Name="cm_ordenante" ColumnName="cm_ordenante" />
+                <ScalarProperty Name="cm_usuario" ColumnName="cm_usuario" />
+                <ScalarProperty Name="cm_grupo" ColumnName="cm_grupo" />
+                <ScalarProperty Name="cm_empresa_recaudacion" ColumnName="cm_empresa_recaudacion" />
+                <ScalarProperty Name="cm_convenio" ColumnName="cm_convenio" />
+                <ScalarProperty Name="cm_identificador" ColumnName="cm_identificador" />
+                <ScalarProperty Name="cm_etiqueta_convenio" ColumnName="cm_etiqueta_convenio" />
+                <ScalarProperty Name="cm_etiqueta_identificador" ColumnName="cm_etiqueta_identificador" />
+                <ScalarProperty Name="cm_es_editable" ColumnName="cm_es_editable" />
+                <ScalarProperty Name="cm_regexp" ColumnName="cm_regexp" />
+                <ScalarProperty Name="cm_texto_ayuda" ColumnName="cm_texto_ayuda" />
+                <ScalarProperty Name="cm_mascara" ColumnName="cm_mascara" />
+                <ScalarProperty Name="cm_alias" ColumnName="cm_alias" />
+                <ScalarProperty Name="cm_suministro" ColumnName="cm_suministro" />
+                <ScalarProperty Name="cm_regional" ColumnName="cm_regional" />
+                <ScalarProperty Name="cm_usuario_creacion" ColumnName="cm_usuario_creacion" />
+                <ScalarProperty Name="cm_fecha_creacion" ColumnName="cm_fecha_creacion" />
+                <ScalarProperty Name="cm_usuario_modificacion" ColumnName="cm_usuario_modificacion" />
+                <ScalarProperty Name="cm_fecha_modificacion" ColumnName="cm_fecha_modificacion" />
+                <ScalarProperty Name="cm_estado" ColumnName="cm_estado" />
+                <ScalarProperty Name="cm_secuencia" ColumnName="cm_secuencia" />
+                <ScalarProperty Name="cm_nombre_empresa_recaudacion" ColumnName="cm_nombre_empresa_recaudacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_con_empresa" FunctionName="Data.Store.sp_con_empresa">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Data.sp_con_empresa_Result">
+                <ScalarProperty Name="em_cod_empresa" ColumnName="em_cod_empresa" />
+                <ScalarProperty Name="em_nom_empresa" ColumnName="em_nom_empresa" />
+                <ScalarProperty Name="em_nem_empresa" ColumnName="em_nem_empresa" />
+                <ScalarProperty Name="em_dir_empresa" ColumnName="em_dir_empresa" />
+                <ScalarProperty Name="em_loc_empresa" ColumnName="em_loc_empresa" />
+                <ScalarProperty Name="em_ctp_nuc_empresa" ColumnName="em_ctp_nuc_empresa" />
+                <ScalarProperty Name="em_nuc_empresa" ColumnName="em_nuc_empresa" />
+                <ScalarProperty Name="em_email" ColumnName="em_email" />
+                <ScalarProperty Name="em_tel_empresa" ColumnName="em_tel_empresa" />
+                <ScalarProperty Name="em_fax_empresa" ColumnName="em_fax_empresa" />
+                <ScalarProperty Name="em_representante" ColumnName="em_representante" />
+                <ScalarProperty Name="em_ctp_nuc_representante" ColumnName="em_ctp_nuc_representante" />
+                <ScalarProperty Name="em_nuc_representante" ColumnName="em_nuc_representante" />
+                <ScalarProperty Name="em_informacion" ColumnName="em_informacion" />
+                <ScalarProperty Name="em_loc_sri" ColumnName="em_loc_sri" />
+                <ScalarProperty Name="em_pto_vta_sri" ColumnName="em_pto_vta_sri" />
+                <ScalarProperty Name="em_sec_sri" ColumnName="em_sec_sri" />
+                <ScalarProperty Name="em_cod_aut_sri" ColumnName="em_cod_aut_sri" />
+                <ScalarProperty Name="em_fch_vigencia_sri" ColumnName="em_fch_vigencia_sri" />
+                <ScalarProperty Name="em_tip_cta" ColumnName="em_tip_cta" />
+                <ScalarProperty Name="em_num_cta" ColumnName="em_num_cta" />
+                <ScalarProperty Name="em_nom_cta" ColumnName="em_nom_cta" />
+                <ScalarProperty Name="em_est_empresa" ColumnName="em_est_empresa" />
+                <ScalarProperty Name="em_msj_bienvenida" ColumnName="em_msj_bienvenida" />
+                <ScalarProperty Name="em_dias_expclv" ColumnName="em_dias_expclv" />
+                <ScalarProperty Name="em_fch_registro" ColumnName="em_fch_registro" />
+                <ScalarProperty Name="em_nom_comercial" ColumnName="em_nom_comercial" />
+                <ScalarProperty Name="em_old_codigo" ColumnName="em_old_codigo" />
+                <ScalarProperty Name="em_old_frecuencia" ColumnName="em_old_frecuencia" />
+                <ScalarProperty Name="em_ley_sri" ColumnName="em_ley_sri" />
+                <ScalarProperty Name="em_reg_estacion" ColumnName="em_reg_estacion" />
+                <ScalarProperty Name="em_sec_npedido" ColumnName="em_sec_npedido" />
+                <ScalarProperty Name="em_old_oficial" ColumnName="em_old_oficial" />
+                <ScalarProperty Name="em_lbl_oficial" ColumnName="em_lbl_oficial" />
+                <ScalarProperty Name="em_log_empresa" ColumnName="em_log_empresa" />
+                <ScalarProperty Name="em_fir_empresa" ColumnName="em_fir_empresa" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_sat_acupo_cliente_serv" FunctionName="Data.Store.pa_sat_acupo_cliente_serv" />
+          <FunctionImportMapping FunctionImportName="pa_sat_ccupo_cliente_serv" FunctionName="Data.Store.pa_sat_ccupo_cliente_serv" />
+          <FunctionImportMapping FunctionImportName="pa_sat_inotif_pagserv" FunctionName="Data.Store.pa_sat_inotif_pagserv" />
+          <FunctionImportMapping FunctionImportName="pa_sat_ccuentas_xlogin" FunctionName="Data.Store.pa_sat_ccuentas_xlogin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Data.pa_sat_ccuentas_xlogin_Result">
+                <ScalarProperty Name="mr_tipo_cta" ColumnName="mr_tipo_cta" />
+                <ScalarProperty Name="mr_cuenta" ColumnName="mr_cuenta" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_sat_mcabmatriculacion" FunctionName="Data.Store.pa_sat_mcabmatriculacion" />
+          <FunctionImportMapping FunctionImportName="sp_grb_reg_auditoria" FunctionName="Data.Store.sp_grb_reg_auditoria" />
+          <FunctionImportMapping FunctionImportName="sp_con_usuario_dispositivo" FunctionName="Data.Store.sp_con_usuario_dispositivo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Data.sp_con_usuario_dispositivo_Result">
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="serial" ColumnName="serial" />
+                <ScalarProperty Name="tipo_dispo" ColumnName="tipo_dispo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="identificacion" ColumnName="identificacion" />
+                <ScalarProperty Name="login_entrust" ColumnName="login_entrust" />
+                <ScalarProperty Name="est_entrust" ColumnName="est_entrust" />
+                <ScalarProperty Name="est_dispositivo" ColumnName="est_dispositivo" />
+                <ScalarProperty Name="usr_ctp" ColumnName="usr_ctp" />
+                <ScalarProperty Name="usr_mail" ColumnName="usr_mail" />
+                <ScalarProperty Name="usr_entrust" ColumnName="usr_entrust" />
+                <ScalarProperty Name="usr_est_entrust" ColumnName="usr_est_entrust" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

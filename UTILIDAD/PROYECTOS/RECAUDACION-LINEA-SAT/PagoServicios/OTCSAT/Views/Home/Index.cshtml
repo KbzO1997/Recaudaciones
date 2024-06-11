@@ -1,0 +1,344 @@
+﻿@{
+    // Vista de Consulta de Matriculacion de Servicios
+    ViewBag.Title = "Matriculaci&oacute;n de servicios";
+    ViewBag.MensajeAyuda = "Seleccione los datos de b&uacute;squeda deseados o matricule un nuevo pago con la opci&oacute;n &quot;Nuevo&quot;";
+
+    // Modo empotrado
+
+    ViewBag.ModoEmpotrado = true;
+
+    if (ViewBag.ModoEmpotrado)
+    {
+        Layout = "~/Views/Shared/_LayoutGenerico.cshtml";
+    }
+
+}
+
+@model OTCSAT.Models.IndexModel
+
+@if (ViewBag.ModoEmpotrado)
+{
+    <style>
+        body {
+            background-color: white !important;
+        }
+    </style>
+}
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    <table cellspacing="1" cellpadding="0" style="width:100%;border:none;">
+        <tr>
+            <td>
+                <table cellspacing="0" cellpadding="0" style="width:100%;border:none;">
+                    @if (Model.PermisoAcciones.Contains("M")) { 
+                    <tr>
+                        <td colspan="10" align="center" class="mensaje" style="text-align: center; font-size: 11px;">
+                            @Html.Raw(ViewBag.MensajeAyuda)
+                        </td>
+                    </tr>
+                    }
+                    <tr>
+                        <td colspan="6" class="Vigente">@Html.Raw(@ViewBag.Title)</td>
+                    </tr>
+                    <tr>
+                        <td class="titCampo">Empresa :</td>
+                        <td class="campo" colspan="3">
+                            @Html.TextBoxFor(m => m.Empresa, new { @maxLength = 15, @size = 15, @class = "datos", @pattern = "^[0-9]*$", @onkeypress = "return ValidacionesUI.validarNumero(event)" })
+                            <input class="button buttonPicker" type="button" value="!" onClick="mostrarBusquedaEmpresa()">
+                            @Html.TextBoxFor(m => m.NombreEmpresa, new { @maxLength = 50, @size = 50, @class = "datos deshabilitado", @style = "text-transform:UPPERCASE;width:375px;", @readonly = "true" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="titCampo">Usuario :</td>
+                        <td class="campo" colspan="3">
+                            @Html.TextBoxFor(m => m.Nemonico, new { @maxLength = 15, @size = 15, @class = "datos deshabilitado", @readonly = "true" })
+                            @Html.TextBoxFor(m => m.Usuario, new { @maxLength = 15, @size = 15, @class = "datos", @style = "text-transform:uppercase" })
+                            @Html.TextBoxFor(m => m.NombreUsuario, new { @maxLength = 50, @size = 54, @class = "datos deshabilitado", @readonly = "true" })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="titCampo">Producto :</td>
+                        <td class="campo">
+                            <select class="datos" name="Producto" onchange="" disabled style="width:200px;">
+                                <option value="BE" selected>Banca Electr&oacute;nica</option>
+                            </select>
+                        </td>
+                        <td class="titCampo">Servicio :</td>
+                        <td class="campo">
+                            <select class="datos" name="Servicio" onchange="" disabled style="width:200px;">
+                                <option value="24ONLINE" selected>Pago de Servicios</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="titCampo">Tipo Servicio :</td>
+                        <td class="campo">
+                            @Html.DropDownList("TipoServicio", Model.TiposEmpresas, "(Todos)", new { @class = "datos", @style = "width:200px" })
+                        </td>
+                        <td class="titCampo">Empresa&#47;Servicio:</td>
+                        <td class="campo">
+                            @Html.DropDownList("EmpresaRecaudacion", Model.EmpresasRecaudacion, "(Todos)", new { @class = "datos", @style = "width:200px" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="titCampo">Convenio :</td>
+                        <td class="campo">
+                            @Html.DropDownList("Convenio", Model.Convenios, "(Todos)", new { @class = "datos", @style = "width:200px" })
+                        </td>
+                        <td class="titCampo">Estado :</td>
+                        <td class="campo">
+                            @Html.DropDownList("Estado", Model.Estados, "Seleccionar Estado", new { @class = "datos", @style = "width:200px" })
+                            @Html.HiddenFor(m => m.UsuarioCreacion)
+                            @Html.HiddenFor(m => m.EmpresaCreacion)
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+    <div class="separadorSeccion"></div>
+    <div class="botonera">
+        <input class="button" type="submit" value="Consultar" onclick="try { document.forms[0].EsPrimeraPagina.value = 'true'; document.forms[0].IndiceInicial.value = 0; } catch (ex) { }">
+        @if (Model.PermisoAcciones.Contains("M"))
+        {
+            <input class="button" type="button" value="Nuevo" onclick="location.href='@Url.Action("NuevaMatriculacion", "Home",new {UsuarioLogoneado=Model.UsuarioCreacion, PermisoAcciones = Model.PermisoAcciones})'">
+        }
+        @Html.HiddenFor(m => m.EsPrimeraPagina)
+    </div>
+
+    if (Model.Matriculaciones != null && Model.Matriculaciones.Count() > 0)
+    {
+        <div class="Vigente" style="text-align:left;">Matriculaciones</div>
+        <table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+            <thead>
+                <tr>
+                    <td class="tittabla alineadorColumnasGrid">Usuario</td>
+                    <td class="tittabla alineadorColumnasGrid">Servicio</td>
+                    <td class="tittabla alineadorColumnasGrid">Tipo</td>
+                    <td class="tittabla alineadorColumnasGrid">Convenio</td>
+                    <td class="tittabla alineadorColumnasGrid">N&iacute;mero</td>
+                    <td class="tittabla alineadorColumnasGrid">Alias</td>
+                    <td class="tittabla alineadorColumnasGrid">Estado</td>
+                    @if (Model.PermisoAcciones.Contains("M"))
+                    {
+                        <td class="tittabla alineadorColumnasGrid">Acci&oacute;n</td>
+                    }
+                </tr>
+            </thead>
+            @foreach (var fila in Model.Matriculaciones)
+            {
+                <tr class="list">
+                    <td class="list" title="@fila.Usuario"><div class="columnaReducida">@fila.Usuario</div></td>
+                    <td class="list" title="@(fila.Grupo.Replace("_", " "))"><div class="columnaReducida">@(fila.Grupo.Replace("_", " "))</div></td>
+                    <td class="list" title="@fila.NombreEmpresaRecaudacion"><div class="columnaReducida">@fila.NombreEmpresaRecaudacion</div></td>
+                    <td class="list" title="@(fila.EtiquetaConvenio.ToUpper())"><div class="columnaReducida">@(fila.EtiquetaConvenio.ToUpper())</div></td>
+                    <td class="list">@fila.Suministro</td>
+                    <td class="list">@(fila.Alias.ToUpper())</td>
+                    <td class="list">@((fila.Estado.Equals("A")) ? "ACTIVO" : "INACTIVO")</td>
+                    @if (Model.PermisoAcciones.Contains("M"))
+                    {
+                        <td class="list">
+                            <div onclick="UtilidadesUI.mostrarSubMenuGrid(this,{opciones:[{nombre:'Modificar Matriculaci&oacute;n',url:'@Url.Action("ModificarMatriculacion")?secuencia=@fila.Secuencia&UsuarioLogoneado=@Model.UsuarioCreacion&PermisoAcciones=@Model.PermisoAcciones',handler:null}]})">
+                                <img src="Imagenes/icono_acciones.png" />
+                            </div>
+                        </td>
+                    }
+                </tr>
+            }
+
+        </table>
+
+        <div class="botonera">
+            @if (!Model.EsPrimeraPagina)
+            {
+                <input class="button" type="button" value="Anterior" onclick="window.history.back();">
+            }
+
+            @if (Model.ExistenMasPaginas)
+            {
+                <input class="button" type="submit" value="Siguiente">
+                @Html.HiddenFor(m => m.IndiceInicial)
+            }
+        </div>
+    }
+
+    @Html.HiddenFor(m => m.PermisoAcciones)
+
+}
+<script type="text/javascript">
+
+    // FIXME Enviar como parametro los datos de consulta, separar para no depender de componentes de forma especificos
+
+    function limpiarCampos() {
+        $("#NombreEmpresa").val("");
+        $("#Nemonico").val("");
+        $("#Usuario").val("");
+        $("#NombreUsuario").val("");
+        $("#TipoServicio").val("");
+        $("#EmpresaRecaudacion").empty();
+        $("#Convenio").empty();
+    }
+
+    function obtenerNombreUsuario() {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ObtenerNombreUsuario")',
+            dataType: "json",
+            data: {
+                empresa: $("#Empresa").val(),
+                nemonico: $("#Nemonico").val(),
+                usuario: $("#Usuario").val()
+            },
+            success: function (nombreUsuario) {
+                $("#NombreUsuario").val(nombreUsuario);
+                $("#TipoServicio").focus();
+            },
+            error: function (ex) {
+                $("#Nombreusuario").val("");
+            }
+        });
+    }
+
+    function obtenerNemonicoEmpresa() {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ObtenerNemonicoEmpresa")',
+            dataType: "json",
+            data: {
+                empresa: $("#Empresa").val()
+            },
+            success: function (nemonicoEmpresa) {
+                $("#Nemonico").val(nemonicoEmpresa);
+                $("#Usuario").focus();
+            },
+            error: function (ex) {
+                $("#Nemonico").val("");
+            }
+        });
+    }
+
+    function obtenerEmpresasRecaudacion() {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ObtenerEmpresasRecaudacion")',
+            dataType: "json",
+            data: {
+                tipo: $("#TipoServicio").val()
+            },
+            success: function (empresas) {
+                $.each(empresas, function (i, empresa) {
+                    $("#EmpresaRecaudacion").append('<option value="' + empresa.Value + '">' + empresa.Text + '</option>');
+                })
+
+                obtenerConveniosPorEmpresa();
+            },
+            error: function (ex) {
+                alert("Error al mostrar empresas de recaudacion: " + ex);
+            }
+        });
+    }
+
+    function obtenerConveniosPorEmpresa() {
+        $("#Convenio").empty();
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ObtenerConveniosEmpresaRecaudacion")',
+            dataType: "json",
+            data: {
+                grupo: $("#TipoServicio").val(),
+                empresa: $("#EmpresaRecaudacion").val(),
+                mostrarMatriculables: true
+            },
+            success: function (empresa) {
+
+                $.each(empresa.Convenios, function (i, convenio) {
+                    $("#Convenio").append('<option value="' + convenio.Codigo + '">' + convenio.Etiqueta + '</option>');
+                });
+
+            },
+            error: function (ex) {}
+        });
+    }
+
+    function obtenerNombreEmpresa() {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ObtenerNombreEmpresa")',
+            dataType: "json",
+            data: {
+                empresa: $("#Empresa").val()
+            },
+            success: function (nombreEmpresa) {
+                $("#NombreEmpresa").val(nombreEmpresa);
+
+            },
+            error: function (ex) {
+                $("#NombreEmpresa").val("");
+            }
+        });
+    }
+
+    function prepararEventosControles() {
+        $("#TipoServicio").change(function () {
+            $("#EmpresaRecaudacion").empty();
+            obtenerEmpresasRecaudacion();
+        });
+
+        $("#EmpresaRecaudacion").change(function () {
+            obtenerConveniosPorEmpresa();
+        });
+
+        $("#Empresa").on("keydown", function (e) {
+            var tecla = e.which;
+            if (tecla == 13 || tecla == 9) {
+                $("#NombreEmpresa").val("");
+                $("#Nemonico").val("");
+                obtenerNombreEmpresa();
+                obtenerNemonicoEmpresa();
+            }
+        });
+
+        $("#Empresa").on("change", function (e) {
+            limpiarCampos();
+        });
+
+        $("#Usuario").on("keydown", function (e) {
+            var tecla = e.which;
+            if (tecla == 13 || tecla == 9) {
+                $("#NombreUsuario").val("");
+                obtenerNombreUsuario();
+            }
+        });
+    }
+
+    function mostrarBusquedaEmpresa() {
+        if (document.onSeleccionBusquedaEmpresa == null) {
+            document.onSeleccionBusquedaEmpresa = function () {
+                obtenerNemonicoEmpresa();
+            }
+        }
+
+        window.open("@Url.Action("BusquedaEmpresa")", "BUSQUEDA_EMPRESA", "menubar=no,location=no,resizable=no,scrollbars=yes,status=no,width=600,height=400");
+    }
+
+    // EntryPoint
+
+    $(document).ready(function () {
+
+        // Cambio de tamanio de frame
+        UtilidadesUI.registrarCambioElemento(document.body, UtilidadesUI.handlerRegistroCambioElemento);
+
+        if ($("#Empresa").val() == "0") {
+            $("#Empresa").val("");
+        }
+
+        $("#Empresa").focus();
+        prepararEventosControles();
+    });
+
+</script>

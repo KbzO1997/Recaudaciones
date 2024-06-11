@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:res="http://www.bolivariano.com/Restricciones" xmlns:mbl="http://www.bolivariano.com/MensajeBolivariano" targetNamespace="http://www.bolivariano.com/MensajeBolivariano" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="TarifarioCash_1_2.xsd" namespace="http://www.bolivariano.com/Restricciones" />
+  <xs:element name="MensajeSalida" type="mbl:MensajeSalida" />
+  <xs:complexType name="MensajeSalida">
+    <xs:annotation>
+      <xs:documentation>mensaje de salida generico, contiene atributos comunes para todo
+				mensajes.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="codigoError" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="codigoErrorRemoto" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="estado" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="mensajeSistema" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="mensajeUsuario" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>o_msjerror</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="operacion" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="secuencialBPM" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>o_secbpm</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="fechaProceso" type="xs:date" />
+      <xs:element minOccurs="0" maxOccurs="1" name="fechaTransaccion" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" name="secuenciaTransaccion" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MensajeEntrada" type="mbl:MensajeEntrada" />
+  <xs:complexType name="MensajeEntrada">
+    <xs:annotation>
+      <xs:documentation>mensaje de entrada generico, contiene atributos comunes para todo
+				mensajes.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="archivo" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Core</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="canal" type="res:NonEmptyString">
+        <xs:annotation>
+          <xs:documentation>Enumerado indica el Canal en que se origuina la transaccion</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="depuracion" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>core</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="fecha" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Es la fecha del sistema formato dateTime standar de xml
+Ejemplo:
+2016-02-26T00:00:00.000-05:00
+Documentacion:
+https://www.w3.org/TR/xmlschema-2/#dateTime</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="oficina" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Core</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="proceso" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Core</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="terminal" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="transaccion" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>para procesos Core es unico para cada transaccion</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="usuario" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>usuario sirve para la contabilizacion por los diferentes canales</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MensajeFault" type="mbl:MensajeFault" />
+  <xs:complexType name="MensajeFault">
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:string" />
+      <xs:element name="nombre" type="xs:string" />
+      <xs:element name="descripcion" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

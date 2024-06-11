@@ -1,0 +1,79 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutGenerico.cshtml";
+}
+@model OTCSAT.Models.ConsultaComprobanteModel
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <style>
+            body {
+                background-color: white !important;
+            }
+
+            .cabeceraComprobanteOTC {
+                position: relative;
+                width: 650px;
+                height: 64px;
+                background-color: white;
+                background-image: url("../Imagenes/fondoSatImpresion.gif");
+                background-repeat: no-repeat;
+                background-position: right top;
+            }
+
+            .cabeceraComprobanteOTC > span {
+                position: absolute;
+                text-align: right;
+                vertical-align: middle;
+                right: 15px;
+                top: 15px;
+                font-family: Verdana, Arial, Helvetica, sans-serif;
+                font-size: 16px;
+                font-weight: bold;
+                color: white;
+            }
+
+            .titulosComprobanteOTC {
+                font-family: Verdana, Arial, Helvetica, sans-serif;
+                font-size: 11px;
+                text-align: right;
+            }
+
+            h2 {
+                font-family: Verdana, Arial, Helvetica, sans-serif;
+                font-size: 12px;
+                text-align: left;
+                font-weight: bold;
+                color:black!important;
+            }
+        </style>
+        <title>Consulta de Comprobantes</title>
+    </head>
+    <body>
+        <div class="cabeceraComprobanteOTC">
+            <img src="../Imagenes/logoSat.gif">
+            <span>PAGO DE SERVICIOS</span>
+        </div>
+        <div class="titulosComprobanteOTC">
+            <div style="padding-bottom:5px;"><b>@(DateTime.Now.ToString("dddd, dd MMMM yyyy"))</b></div>
+            <div><b>EMPRESA/USUARIO: </b>@(Model.NombreOrdenante.ToUpper())/@(Model.Usuario.ToUpper())</div>
+        </div>
+        <hr />
+        <h2>Detalle de Comprobante</h2>
+        <hr />
+        <table border="0" cellpadding="2" cellspacing="2">
+            @foreach (var fila in Model.Comprobante)
+            {
+                <tr>
+                    <td class="EtiquetaImpresion" style="width:250px;"><b>@fila.Etiqueta:</b></td>
+                    <td class="ContenidoImpresion">@fila.Valor</td>
+                </tr>
+            }
+        </table>
+        <hr />
+        <div class="botonera">
+            <input type="button" class="button botonAcentuado" value="Imprimir" onclick="window.print();" />
+            <input type="button" class="button" value="Cerrar" onclick="window.self.close();" />
+        </div>
+    </body>
+</html>

@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "Detalles de servicios matriculados";
+    
+    // Modo empotrado
+
+    ViewBag.ModoEmpotrado = true;
+
+    if (ViewBag.ModoEmpotrado)
+    {
+        Layout = "~/Views/Shared/_LayoutGenerico.cshtml";
+    }
+}
+@model OTCSAT.Models.ConfirmacionMatriculacionModel
+
+@if (ViewBag.ModoEmpotrado)
+{
+    <style>
+        body {
+            background-color: white !important;
+        }
+    </style>
+}
+
+<table cellspacing="1" cellpadding="0" style="width:100%;border:none;">
+    <tr>
+        <td>
+            <table cellspacing="0" cellpadding="0" id="contenedorForma" style="width:100%;border:none;">
+                <tr>
+                    @if (Model.Respuesta.ExitoOperacion)
+                    {
+                        <td colspan="10" align="center" class="mensaje" style="text-align: center; font-size: 11px;">
+                            @Html.DisplayTextFor(m => m.Respuesta.MensajeError)
+                        </td>
+                    }
+                    else
+                    {
+                        <td colspan="10" align="center" class="mensaje" style="text-align: center; font-size: 11px;background-color:#efdcf2 !important;color:#ff0000 !important;">
+                            @Html.DisplayTextFor(m => m.Respuesta.MensajeError)
+                        </td>
+                    }
+                </tr>
+                <tr>
+                    <td colspan="6" class="Vigente">@ViewBag.Title</td>
+                </tr>
+                <tr>
+                    <td class="titCampo">Usuario Autorizado:</td>
+                    <td class="campo" colspan="3">
+                        @Html.DisplayTextFor(m => m.Usuario)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="titCampo">Tipo Servicio :</td>
+                    <td class="campo">
+                        @(Model.TipoRecaudacion.Replace("_"," "))
+                    </td>
+                </tr>
+                <tr>
+                    <td class="titCampo">Emp. Recaudaci&oacute;n :</td>
+                    <td class="campo">
+                        @Html.DisplayTextFor(m => m.EmpresaRecaudacion)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="titCampo">Sub. Empresa :</td>
+                    <td class="campo">
+                        @Html.DisplayTextFor(m => m.Convenio)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="titCampo">@Html.DisplayTextFor(m => m.EtiquetaIdentificador) :</td>
+                    <td class="campo">
+                        @Html.DisplayTextFor(m => m.Suministro)
+                    </td>
+                </tr>
+                <tfoot>
+                    <tr>
+                        <td class="titCampo">Estado Inicial:</td>
+                        <td class="campo">
+                            @Html.DisplayTextFor(m => m.Estado)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="titCampo">Alias :</td>
+                        <td class="campo">
+                            @(Model.Alias.ToUpper())
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<div class="separadorSeccion"></div>
+<div class="botonera">
+    <input class="button" type="button" value="Continuar" id="comandoContinuar" onclick="document.location='@Url.Action("NuevaMatriculacion",new {UsuarioLogoneado=Model.UsuarioModificacion})'">
+</div>

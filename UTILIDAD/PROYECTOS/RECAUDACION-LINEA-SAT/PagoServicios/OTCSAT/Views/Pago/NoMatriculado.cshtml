@@ -1,0 +1,812 @@
+﻿@{
+    // Vista de Pago No Matriculado
+    ViewBag.Title = "Pago de Servicios No Matriculados";
+    ViewBag.MensajeAyuda = "Este servicio no requiere matriculaci&oacute;n. Para efectuar el pago debe ingresar la informaci&oacute;n adicional.";
+
+    // Modo empotrado
+
+    ViewBag.ModoEmpotrado = true;
+
+    if (ViewBag.ModoEmpotrado)
+    {
+        Layout = "~/Views/Shared/_LayoutGenerico.cshtml";
+    }
+}
+@model OTCSAT.Models.IndexModel
+
+@if (ViewBag.ModoEmpotrado)
+{
+    <style>
+        body {
+            background-color: white !important;
+        }
+    </style>
+}
+
+@using (Html.BeginForm("Index", "Seguridades", FormMethod.Get))
+{
+    <table cellspacing="1" cellpadding="0" style="width:100%;border:none;">
+        <tr>
+            <td>
+                <table cellspacing="0" cellpadding="0" id="contenedorForma" style="width:100%;border:none;">
+                    <tr>
+                        <td colspan="6" align="center" class="mensaje" style="text-align: center; font-size: 11px;">
+                            @Html.Raw(ViewBag.MensajeAyuda)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="cabeceradiv" style="width:100%;min-width:300px;">
+                                <div class="container" style="display:block;">
+                                    <ul class="progressbar" style="margin: 0px 10%;width:100%;">
+                                        <li class="active">Escoger Servicio</li>
+                                        <li>Consultar</li>
+                                        <li>Pagar</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="Vigente">@Html.Raw(@ViewBag.Title)</td>
+                    </tr>
+                    <tr>
+                        <td class="titCampo">Tipo de Servicio :</td>
+                        <td class="campo">
+                            @Html.DropDownList("TipoServicio", Model.TiposEmpresas, "Seleccionar Tipo", new { @class = "datos", @style = "width:200px" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="titCampo">Empresa/Servicio :</td>
+                        <td class="campo">
+                            @Html.DropDownList("EmpresaRecaudacion", Model.EmpresasRecaudacion, "Seleccionar Empresa", new { @class = "datos", @style = "width:200px" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="titCampo">Tipo de Pago :</td>
+                        <td class="campo">
+                            <select name="Convenio" id="Convenio" class="datos" style="width:200px"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="titCampo">Tipo Identificador :</td>
+                        <td class="campo">
+                            <select name="TipoIdentificador" id="TipoIdentificador" class="datos" style="width:200px"></select>
+                        </td>
+                    </tr>
+                    <tfoot>
+                        <tr>
+                            <td class="titCampo">Cuenta de D&eacute;bito :</td>
+                            <td class="campo">
+                                @Html.DropDownList("CuentaDebito", Model.Cuentas, "Seleccionar Cuenta de Debito", new { @class = "datos", @style = "width:200px" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Monto :</td>
+                            <td class="campo">
+                                <!--<div id="montoDeuda">0.00 USD</div>-->
+                                <input type="text" name="montoDeuda" id="montoDeuda" class="datos" style="width:80px" autocomplete="off" placeholder="0.00" value="0.00" pattern="[0-9.,]+" data-inputmask-regex="[0-9.,]+" onkeypress="return ValidacionesUI.validarMoneda(event,this)" onblur="actualizarMonto(this)" readonly />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Cargo por Servicio Financiero :</td>
+                            <td class="campo">
+                                <div id="cargo">0.00 USD</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Descripci&oacute;n de Pago :</td>
+                            <td class="campo">
+                                @Html.HiddenFor(m => m.Empresa)
+                                @Html.HiddenFor(m => m.NombreEmpresa)
+                                @Html.HiddenFor(m => m.Nemonico)
+                                @Html.HiddenFor(m => m.Usuario)
+                                @Html.HiddenFor(m => m.NombreUsuario)
+                                @Html.HiddenFor(m => m.Estado)
+
+                                @Html.TextBoxFor(m => m.Alias, new { @class = "datos", @maxLength = "20", @size = 60, @autocomplete = "off", minlength = "1", @style = "text-transform:uppercase", @pattern = "[a-zA-Z0-9 ]+", @data_inputmask_regex = "[a-zA-Z0-9 ]+" })
+                                @Html.Hidden("MetadataEmpresa")
+                                @Html.Hidden("MetadataConvenio")
+
+                                @Html.HiddenFor(m => m.EmpresaCreacion)
+                                @Html.HiddenFor(m => m.UsuarioCreacion)
+
+                                @Html.Hidden("udev")
+                                @Html.Hidden("Ordenante")
+                                @Html.Hidden("Referencia")
+                                @Html.Hidden("Comision")
+                                @Html.Hidden("Monto")
+                                @Html.Hidden("FechaVencimiento")
+                                @Html.Hidden("Cliente")
+                                @Html.Hidden("Grupo")
+                                @Html.Hidden("TipoCuenta")
+                                @Html.Hidden("Cuenta")
+                                @Html.Hidden("NombreEmpresaRecaudacion")
+                                @Html.Hidden("NombreConvenio")
+                                @Html.Hidden("EtiquetaIdentificador")
+                                @Html.Hidden("Suministro")
+                                @Html.Hidden("Deuda")
+                                @Html.Hidden("Configuracion", "{}")
+
+                                @Html.Hidden("EntradasAdicionalesJSON")
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <div class="separadorSeccion"></div>
+    <div class="botonera">
+        <input class="button" type="button" value="Cancelar" id="comandoVolver" onclick="window.history.back();">
+        <input class="button" type="button" value="Consultar" id="comandoConsultar" onclick="consultarDeuda()">
+        <input class="button" type="submit" value="Pagar" id="comandoPagar" onclick="return validarPago()" disabled>
+    </div>
+}
+
+<script type="text/javascript">
+
+    function mostrarCargadorModal() {
+        $("body").append("<div class='cargadorOTC'></div>");
+
+        var contenedor = document.body;
+        contenedor.style.pointerEvents = "none";
+    }
+
+    function removerCargadorModal() {
+        var contenedor = document.body;
+        $(".cargadorOTC").remove();
+        contenedor.style.pointerEvents = "auto";
+    }
+
+    function serializarMetadefinicion() {
+        //$("#MetadataEmpresa").val(JSON.stringify(document.empresaActual));
+        //$("#MetadataConvenio").val(JSON.stringify(document.convenioActual));
+
+        // Para los casos especiales en los que se agregen mas datos adicionales via ingreso
+        var componentesAdicionales = $("input[name^=IdentificadorAdic]");
+        var entradasAdicionales = [];
+
+        $.each(componentesAdicionales, function (indice, valor) {
+            entradasAdicionales.push({
+                nombre: valor.name,
+                valor: valor.value
+            });
+        });
+
+        componentesAdicionales = $("select[name^=IdentificadorAdic]");
+
+        $.each(componentesAdicionales, function (indice, valor) {
+            entradasAdicionales.push({
+                nombre: valor.name,
+                valor: valor.value
+            });
+        });
+
+        $("#EntradasAdicionalesJSON").val(JSON.stringify(entradasAdicionales));
+
+    }
+
+    /**
+     * Permite validar los campos de pago previo al envio
+     **/
+    function validarPago() {
+        var esValido = true;
+        var esSuministroValido = false;
+        var mensajeError = "Debe ingresar todos los campos para continuar";
+
+        // Validacion de campos fijos
+
+        esValido = esValido && ($("#TipoServicio").val() != "");
+        esValido = esValido && ($("#EmpresaRecaudacion").val() != "");
+        esValido = esValido && ($("#Convenio").val() != "");
+        esValido = esValido && ($("#TipoIdentificador").val() != "");
+        esValido = esValido && ($("#Estado").val() != "");
+        esValido = esValido && ($("#Alias").val().trim() != "");
+
+        // Validacion de campos dinamicos
+
+        var camposDinamicos = $("input[name^=Identificador]");
+
+        if (camposDinamicos != null) {
+            for (i = 0; i < camposDinamicos.length; i++) {
+                esValido = esValido && (camposDinamicos[i].value != "");
+                esSuministroValido = ($(camposDinamicos[i]).inputmask("isComplete"));
+
+                if (!esSuministroValido) {
+                    mensajeError = "El suministro/identificador debe ser valido";
+                }
+
+                esValido = esValido && esSuministroValido;
+            }
+        }
+
+        var casoEspecial = esCasoDepositoTemporal(
+            $("#TipoServicio").val(),
+            $("#EmpresaRecaudacion").val(),
+            $("#Identificador_" + $("#TipoIdentificador").val()).val()
+        );
+
+        if (esValido && casoEspecial.esDepositoTemporal && casoEspecial.permitePagosParciales) {
+
+            var montoIngresadoHomologado = $("#montoDeuda").val().replace("$", "").replace(",", "") * 1;
+            var montoOriginalHomologado = $("#Monto").val().replace("$", "").replace(",", "") * 1;
+
+            if (montoIngresadoHomologado > montoOriginalHomologado) {
+                esValido = esValido && false;
+                mensajeError = "El abono no puede ser mayor a la deuda";
+            } else {
+                if (montoIngresadoHomologado == 0) {
+                    esValido = esValido && false;
+                    mensajeError = "El abono no puede ser cero";
+                } else {
+                    // Actualizar monto de pago
+                    $("#Monto").val($("#montoDeuda").val().replace("$", "").replace(",", ""));
+                }
+            }
+        }
+        // jrocafuf 23/02/2021
+        var casoEspecialPagoParcial = esPagoParcial(
+            $("#TipoServicio").val(),
+            $("#EmpresaRecaudacion").val(),
+            $("#Identificador_" + $("#TipoIdentificador").val()).val()
+        );
+        var empresaRecaudacion = $("#EmpresaRecaudacion").val();
+        
+        if (esValido && casoEspecialPagoParcial.esPagoParcial && casoEspecialPagoParcial.permitePagosParciales) {
+            var montoIngresadoHomologado = $("#montoDeuda").val().replace("$", "").replace(",", "") * 1;
+            var montoOriginalHomologado = $("#Monto").val().replace("$", "").replace(",", "") * 1;
+            
+            
+            if ((montoIngresadoHomologado > montoOriginalHomologado) && empresaRecaudacion != "8461") {
+                esValido = esValido && false;
+                mensajeError = "El abono no puede ser mayor a la deuda";
+            } else {
+                if (montoIngresadoHomologado == 0) {
+                    esValido = esValido && false;
+                    mensajeError = "El abono no puede ser cero";
+                } else {
+                    // Actualizar monto de pago
+                    
+                    
+                    
+                    $("#Monto").val($("#montoDeuda").val().replace("$", "").replace(",", ""));
+                }
+            }
+        }
+        
+        //  jrocafuf 23/02/2021
+
+        if (!esValido) {
+            alert(mensajeError);
+        } else {
+
+            if ($("#Alias").val().trim().length < 1) {
+                esValido = false;
+                alert("Debe ingresar la descripcion del pago");
+            } else {
+
+                // Agregar campos simulados para pasarela de pago
+                var cuentaReal = $("#CuentaDebito").val();
+
+                $("#TipoCuenta").val((cuentaReal.split("@@")[0]=="CTE")?"3":"4");
+                $("#Cuenta").val(cuentaReal.split("@@")[1]);
+                $("#Grupo").val($("#TipoServicio").val());
+                $("#NombreEmpresaRecaudacion").val(document.empresaActual.NombreEmpresa);
+                $("#NombreConvenio").val($("#Convenio option:selected").text());
+                $("#EtiquetaIdentificador").val($("#TipoIdentificador option:selected").text());
+                $("#Referencia").val($("#Alias").val());
+                $("#Suministro").val($("#Identificador_"+$("#TipoIdentificador").val()).val());
+
+                serializarMetadefinicion();
+
+            }
+
+        }
+
+        return esValido;
+    }
+
+    /**
+     * Renderiza los componentes dinamicos de pago por tipo de identificacion
+     * param identificador
+     */
+    function renderizarComponenteDinamico(identificador) {
+
+        var contenidoRegional = "";
+
+        if (identificador != null && identificador.RegionalesArea != null && identificador.RegionalesArea.length > 0) {
+            contenidoRegional += "<select name='Identificador_Reg_" + identificador.Codigo + "' id='Identificador_Reg_" + identificador.Codigo + "' class='datos'>";
+
+            for (i = 0; i < identificador.RegionalesArea.length; i++) {
+                contenidoRegional += "<option value='" + identificador.RegionalesArea[i] + "' "+((i==0)?"selected":"")+" >" + identificador.RegionalesArea[i] +"</option>";
+            }
+
+            contenidoRegional += "</select>";
+        }
+
+        // En caso de que OTC no provea expresion regular, se asumira que puede ingresar numeros y letras sin espacios
+
+        var contenido = "<tr dinamico><td class='titCampo' style='width:20px !important;overflow: hidden;text-overflow:ellipsis;'>" + identificador.Etiqueta + ": </td>";
+        contenido += "<td class='campo'>" + contenidoRegional + "<input type='text' class='datos' name='Identificador_" + identificador.Codigo + "' id='Identificador_" + identificador.Codigo + "' style='width:200px' pattern='" + ((identificador.RegExp != null && identificador.RegExp != "") ? identificador.RegExp : "^[0-9a-zA-Z]+") + "' data-inputmask-regex=\"" + ((identificador.RegExp != null && identificador.RegExp != "") ? identificador.RegExp : "[0-9a-zA-Z]+") + "\"></td></tr>";
+
+        if (identificador != null && identificador.DatosAdicionales != null && identificador.DatosAdicionales.length > 0) {
+
+            // El convenio tiene datos adicionales editables que mostrar
+            for (i = 0; i < identificador.DatosAdicionales.length; i++) {
+                var componenteAdicionalActual = identificador.DatosAdicionales[i];
+
+                if (componenteAdicionalActual.Tipo == "INPUT") {
+                    //dolaya
+                    var visibleEtq = componenteAdicionalActual.EsVisible;
+
+                    if (visibleEtq == false) {
+                        contenido += "<tr><td style='display:none'>" + componenteAdicionalActual.Etiqueta + ":</td>";
+                        contenido += "<td style='display:none'><input type='hidden' class='datos' name='IdentificadorAdic_" + componenteAdicionalActual.Id + "' id='IdentificadorAdic_" + componenteAdicionalActual.Id + "' value='"+componenteAdicionalActual.ValorSeleccionado+"' /></tr>";
+                    }
+                    else {
+                        contenido += "<tr dinamico><td class='titCampo' style='width:20px !important;overflow: hidden;text-overflow:ellipsis;'>" + componenteAdicionalActual.Etiqueta + ": </td>";
+                        contenido += "<td class='campo'><input type='text' class='datos' name='IdentificadorAdic_" + componenteAdicionalActual.Id + "' id='IdentificadorAdic_" + componenteAdicionalActual.Id + "' style='width:200px' pattern='" + ((componenteAdicionalActual.RegExp != null && componenteAdicionalActual.RegExp != "") ? componenteAdicionalActual.RegExp : "^[0-9a-zA-Z]+") + "' data-inputmask-regex=\"" + ((componenteAdicionalActual.RegExp != null && componenteAdicionalActual.RegExp != "") ? componenteAdicionalActual.RegExp : "[0-9a-zA-Z]+") + "\">" + "</td></tr>";
+                    }
+
+                } else if (componenteAdicionalActual.Tipo == "COMBO") {
+                    contenido += "<tr dinamico><td class='titCampo' style='width:20px !important;overflow: hidden;text-overflow:ellipsis;'>" + componenteAdicionalActual.Etiqueta + ": </td>";
+                    contenido += "<td class='campo'><select class='datos' name='IdentificadorAdic_" + componenteAdicionalActual.Id + "' id='IdentificadorAdic_" + componenteAdicionalActual.Id + "'>";
+
+                    if (componenteAdicionalActual.Valores != null && componenteAdicionalActual.Valores.length > 0) {
+                        for (j = 0; j < componenteAdicionalActual.Valores.length; j++) {
+                            contenido += "<option value=\"" + componenteAdicionalActual.Valores[j].Codigo + "\" " + ((componenteAdicionalActual.Valores[j].Codigo == componenteAdicionalActual.ValorSeleccionado)?"selected":"") + ">" + componenteAdicionalActual.Valores[j].Descripcion + "</option>";
+                        }
+                    }
+
+                    contenido += "</select></td></tr>";
+                }
+            }
+        }
+
+        $("#contenedorForma").append(contenido);
+        $("#Identificador_" + identificador.Codigo).inputmask();
+
+        // Agregar inputmask a componentes dinamicos adicionales de convenio
+        var selectorAdicionalesConvenio = $("input[name^=IdentificadorAdic_]");
+
+        if (selectorAdicionalesConvenio != null) {
+            for (i = 0; i < selectorAdicionalesConvenio.length; i++) {
+                $(selectorAdicionalesConvenio[i]).inputmask();
+            }
+        }
+    }
+
+    function eliminarCamposDinamicos() {
+        var componentesAdicionales = $("[dinamico]");
+
+        $.each(componentesAdicionales, function (indice, valor) {
+
+            // a IE11 no le gusta remove :(
+
+            try {
+                componentesAdicionales[indice].remove();
+            } catch (ex) {
+                componentesAdicionales[indice].parentNode.removeChild(componentesAdicionales[indice]);
+            }
+
+        });
+    }
+
+    function obtenerNombreUsuario() {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ObtenerNombreUsuario")',
+            dataType: "json",
+            data: {
+                empresa: $("#Empresa").val(),
+                nemonico: $("#Nemonico").val(),
+                usuario: $("#Usuario").val()
+            },
+            success: function (nombreUsuario) {
+                $("#NombreUsuario").val(nombreUsuario);
+                $("#comandoNuevo").prop("disabled", false);
+            },
+            error: function (ex) {
+                $("#Nombreusuario").val("");
+                $("#comandoNuevo").prop("disabled",true);
+            }
+        });
+    }
+
+    function obtenerNemonicoEmpresa() {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ObtenerNemonicoEmpresa")',
+            dataType: "json",
+            data: {
+                empresa: $("#Empresa").val()
+            },
+            success: function (nemonicoEmpresa) {
+                $("#Nemonico").val(nemonicoEmpresa);
+                $("#Usuario").focus();
+            },
+            error: function (ex) {
+                $("#Nemonico").val("");
+            }
+        });
+    }
+
+    function obtenerEmpresasRecaudacion() {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("../Home/ObtenerEmpresasRecaudacionNoMatriculables")',
+            dataType: "json",
+            data: {
+                tipo: $("#TipoServicio").val()
+            },
+            success: function (empresas) {
+                $.each(empresas, function (i, empresa) {
+                    $("#EmpresaRecaudacion").append('<option value="' + empresa.Value + '">' + empresa.Text + '</option>');
+
+                });
+
+                obtenerConveniosPorEmpresa();
+
+            },
+            error: function (ex) {
+                alert("Error al mostrar empresas de recaudacion: " + ex);
+            }
+        });
+    }
+
+    function obtenerConveniosPorEmpresa() {
+        $("#Convenio").empty();
+        $("#TipoIdentificador").empty();
+
+        document.convenioActual = null;
+        document.empresaActual = null;
+
+        eliminarCamposDinamicos();
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("../Home/ObtenerConveniosEmpresaRecaudacion")',
+            dataType: "json",
+            data: {
+                grupo: $("#TipoServicio").val(),
+                empresa: $("#EmpresaRecaudacion").val(),
+                mostrarMatriculables: false
+            },
+            success: function (empresa) {
+
+                $.each(empresa.Convenios, function (i, convenio) {
+                    $("#Convenio").append('<option value="' + convenio.Codigo + '">' + convenio.Etiqueta + '</option>');
+                });
+
+                $.each(empresa.Convenios, function (i, convenio) {
+                    if (convenio.Codigo == $("#Convenio").val()) {
+
+                        document.empresaActual = empresa;
+                        document.convenioActual = convenio;
+
+                        $.each(convenio.Identificadores, function (j, identificador) {
+                            $("#TipoIdentificador").append("<option value='" + identificador.Codigo + "'>" + identificador.Etiqueta + "</option>");
+                        });
+
+                        $.each(convenio.Identificadores, function (j, identificador) {
+                            if (identificador.Codigo == $("#TipoIdentificador").val()) {
+                                renderizarComponenteDinamico(identificador);
+                                document.definicionIdentificadorActual = identificador;
+                            }
+
+                        });
+
+                        return;
+                    }
+                });
+            },
+            error: function (ex) {
+                //alert("Error al mostrar convenios de recaudacion: " + ex);
+            }
+        });
+    }
+
+    function obtenerNombreEmpresa() {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ObtenerNombreEmpresa")',
+            dataType: "json",
+            data: {
+                empresa: $("#Empresa").val()
+            },
+            success: function (nombreEmpresa) {
+                $("#NombreEmpresa").val(nombreEmpresa);
+
+            },
+            error: function (ex) {
+                $("#NombreEmpresa").val("");
+                $("#comandoNuevo").prop("disabled",true);
+            }
+        });
+    }
+
+    function mostrarMensajeErroneo(titulo,mensaje) {
+        document.location = "@Url.Action("../Home/Mensaje")?TituloMensaje=" + encodeURIComponent(titulo) + "&MensajeError=" +encodeURIComponent(mensaje);
+    }
+
+    /**
+     * Determina si se trata de un deposito temporal e indica el comportamiento especial a manejar en cuanto al tipo de pago
+     * param grupo El grupo de recaudacion
+     * param empresaRecaudacion La empresa de recaudacion
+     * param suministro El codigo de suministro
+     */
+    function esCasoDepositoTemporal(grupo, empresaRecaudacion, suministro) {
+
+        var respuesta = {
+            esDepositoTemporal: false,
+            permitePagosParciales: false
+        };
+
+        respuesta.esDepositoTemporal = (grupo == "IMPUESTOS_OBLIGACIONES" && empresaRecaudacion == "1113");
+        respuesta.permitePagosParciales = (respuesta.esDepositoTemporal && !isNaN(suministro));
+
+        return respuesta;
+    }
+
+    // jrocafuf 23/02/2021
+    function esPagoParcial(grupo, empresaRecaudacion, suministro) {
+        var respuesta = {
+            esPagoParcial: false,
+            permitePagosParciales: false
+        };
+        respuesta.esPagoParcial = ((grupo == "AUTOMOTORES_PEATONES" && empresaRecaudacion == "8461") || (grupo == "IMPUESTOS_OBLIGACIONES" && empresaRecaudacion == "1113"));
+        respuesta.permitePagosParciales = (respuesta.esPagoParcial && !isNaN(suministro));
+        return respuesta;
+    }
+    // jrocafuf 23/02/2021
+    function actualizarMonto(componenteOrigen) {
+        var monto = componenteOrigen.value.
+            replace("$", "").
+            replace(",", "") * 1;
+
+        componenteOrigen.value = UtilidadesUI.renderizarMoneda(monto, "");
+
+    }
+
+    /**
+     * Permite consultar la deuda del registro indicado
+     **/
+    function consultarDeuda() {
+        var codEmpresa;
+        codEmpresa = $("#EmpresaRecaudacion").val();
+
+        mostrarCargadorModal();
+
+        var parametrosConsulta = {
+            ordenante: $("#Empresa").val(),
+            usuario: $("#Usuario").val(),
+            grupo: $("#TipoServicio").val(),
+            empresaRecaudacion: $("#EmpresaRecaudacion").val(),
+            convenio: $("#Convenio").val(),
+            tipoIdentificador: $("#TipoIdentificador").val(),
+            suministro: $("#Identificador_" + $("#TipoIdentificador").val()).val()
+        };
+
+        // Datos adicionales de la metadata de convenio e ingresados por usuario como secundarios
+
+        var selectorAdicionalesConvenio = $("[name^=IdentificadorAdic_]");
+
+        if (selectorAdicionalesConvenio != null) {
+
+            parametrosConsulta.datosAdicionales = [];
+
+            for (i = 0; i < selectorAdicionalesConvenio.length; i++) {
+
+                parametrosConsulta.datosAdicionales.push({
+                    Id: ($(selectorAdicionalesConvenio[i]).attr("name")).split("IdentificadorAdic_")[1],
+                    ValorSeleccionado: $(selectorAdicionalesConvenio[i]).val()
+                });
+
+            }
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "ConsultarDeudaActual",
+            dataType: "json",
+            timeout: 120000,
+            data: parametrosConsulta,
+            success: function (deuda) {
+
+                if (deuda.Respuesta.ExitoOperacion) {
+                    // Carga exitosa
+
+                    // El tema de formaPagoRecibos es por el caso especial de RISE, no envian montos de deuda
+                    if ((deuda.MontoTotal * 1 > 0) || (deuda.FormaPagoRecibos != null && deuda.FormaPagoRecibos == "TOTAL") || codEmpresa == "8461" ) { // jrocafuf 23/02/2021
+
+                        // Caso especial RISE
+                        if (deuda.FormaPagoRecibos != null && deuda.FormaPagoRecibos == "TOTAL") {
+                            deuda.MontoTotal = deuda.Recibos[0].TotalAPagar*1;
+                        }
+
+                        // MUS-24ONLINE-RECAUDACION IMPUESTOS ADUANEROS – DEPOSITOS TEMPORALES
+                        // Caso especial de deposito temporal, si los codigos son alfanumericos el pago es total
+                        // si son numericos se permiten pagos parciales
+
+                        var comportamientoDepositoTemporal = esCasoDepositoTemporal(
+                            parametrosConsulta.grupo,
+                            parametrosConsulta.empresaRecaudacion,
+                            parametrosConsulta.suministro);
+
+                        $("#montoDeuda").attr("readonly",!(comportamientoDepositoTemporal.esDepositoTemporal && comportamientoDepositoTemporal.permitePagosParciales));
+                        // jrocafuf 23/02/2021
+                        var comportamientoPagoParcial = esPagoParcial(
+                            parametrosConsulta.grupo,
+                            parametrosConsulta.empresaRecaudacion,
+                            parametrosConsulta.suministro);
+                        $("#montoDeuda").attr("readonly", !(comportamientoPagoParcial.esPagoParcial && comportamientoPagoParcial.permitePagosParciales));
+                        // jrocafuf 23/02/2021
+
+                        $("#Monto").val(deuda.MontoTotal);
+                        $("#FechaVencimiento").val(UtilidadesUI.renderizarFecha(deuda.FechaVencimiento));
+                        $("#Cliente").val(deuda.NombreCliente);
+                        //$("#montoDeuda").text(UtilidadesUI.renderizarMoneda(deuda.MontoTotal, "$ "));
+                        $("#montoDeuda").val(UtilidadesUI.renderizarMoneda(deuda.MontoTotal,""));
+
+                        $("#Deuda").val(JSON.stringify(deuda));
+
+                        var cuentaSeleccionada = $("#CuentaDebito").val();
+
+                        $.ajax({
+                            type: "POST",
+                            url: "ObtenerTarifa",
+                            dataType: "json",
+                            timeout: 60000,
+                            data: {
+                                ordenante: $("#Empresa").val(),
+                                grupo: $("#TipoServicio").val(),
+                                empresaRecaudacion: $("#EmpresaRecaudacion").val(),
+                                convenio: $("#Convenio").val(),
+                                monto: 1,
+                                tipoCuenta: cuentaSeleccionada.split("@@")[0],
+                                cuenta: cuentaSeleccionada.split("@@")[1]
+                            },
+                            success: function (tarifa) {
+                                removerCargadorModal();
+
+                                var comisionAplicable = 0;
+
+                                if (tarifa.Respuesta.ExitoOperacion) {
+
+                                    comisionAplicable = tarifa.Comision * 1;
+                                    $("#cargo").text(UtilidadesUI.renderizarMoneda(comisionAplicable, "$ "));
+                                    $("#Comision").val(comisionAplicable);
+                                } else {
+                                    $("#cargo").text(UtilidadesUI.renderizarMoneda(0, "$ "));
+                                    $("#Comision").val(0);
+                                }
+
+                                // Mostrar segundo paso de progreso
+                                $($("ul[class='progressbar']>li")[1]).attr("class", "active");
+                                $("#comandoConsultar").prop("disabled", true);
+                                $("#comandoPagar").prop("disabled", false);
+
+                            },
+                            error: function (ex) {
+                                removerCargadorModal();
+
+                                mostrarMensajeErroneo("Por favor revise el siguiente mensaje:","[Tarifario] Tiempo de espera excedido, por favor rentente en unos minutos");
+                            }
+                        });
+
+
+                    } else {
+                        removerCargadorModal();
+
+                        mostrarMensajeErroneo("Por favor revise el siguiente mensaje:", "CLIENTE SIN DEUDA");
+                    }
+
+                } else {
+                    removerCargadorModal();
+
+                    mostrarMensajeErroneo("Por favor revise el siguiente mensaje:", deuda.Respuesta.MensajeError);
+                }
+
+            },
+            error: function (ex) {
+                removerCargadorModal();
+
+                mostrarMensajeErroneo("Por favor revise el siguiente mensaje:", "[OTC] Tiempo de espera excedido, por favor reintente en unos minutos");
+            }
+        });
+    };
+
+    // EntryPoint
+    $(document).ready(function () {
+
+        // Cambio de tamanio de frame
+        UtilidadesUI.registrarCambioElemento(document.body, UtilidadesUI.handlerRegistroCambioElemento);
+
+        $("#Alias").inputmask();
+
+        $("#Convenio").change(function () {
+
+            $.each(document.empresaActual.Convenios, function (i, convenio) {
+                if (convenio.Codigo == $("#Convenio").val()) {
+                    document.convenioActual = convenio;
+
+                    $("#TipoIdentificador").empty();
+
+                    // Cambiar campos dinamicos de tipo de identificador
+
+                    $.each(convenio.Identificadores, function (j, identificador) {
+                        $("#TipoIdentificador").append("<option value='" + identificador.Codigo + "'>" + identificador.Etiqueta + "</option>");
+                    });
+
+                    eliminarCamposDinamicos();
+
+                    $.each(convenio.Identificadores, function (j, identificador) {
+                        if (identificador.Codigo == $("#TipoIdentificador").val()) {
+
+                            renderizarComponenteDinamico(identificador);
+                            document.definicionIdentificadorActual = identificador;
+
+                        }
+
+                    });
+
+                    return;
+                }
+            });
+
+        });
+
+        $("#TipoServicio").change(function () {
+            $("#EmpresaRecaudacion").empty();
+            obtenerEmpresasRecaudacion();
+        });
+
+        $("#EmpresaRecaudacion").change(function () {
+            obtenerConveniosPorEmpresa();
+        });
+
+        $("#Empresa").on("keydown", function (e) {
+            var tecla = e.which;
+            if (tecla == 13 || tecla == 9) {
+                $("#NombreEmpresa").val("");
+                $("#Nemonico").val("");
+                obtenerNombreEmpresa();
+                obtenerNemonicoEmpresa();
+            }
+        });
+
+        $("#Usuario").on("keydown", function (e) {
+            var tecla = e.which;
+            if (tecla == 13 || tecla == 9) {
+                $("#NombreUsuario").val("");
+                obtenerNombreUsuario();
+            }
+        });
+
+        $("#Usuario").on("focusout", function (e) {
+            $("#NombreUsuario").val("");
+            obtenerNombreUsuario();
+        });
+
+        $("#TipoIdentificador").change(function (e) {
+
+            eliminarCamposDinamicos();
+
+            $.each(document.convenioActual.Identificadores, function (j, identificador) {
+                if (identificador.Codigo == $("#TipoIdentificador").val()) {
+                    renderizarComponenteDinamico(identificador);
+                }
+
+            });
+
+        });
+
+        $("#CuentaDebito").val("");
+        $("#TipoServicio").val("");
+        $("#TipoServicio").trigger("change");
+
+    });
+
+</script>

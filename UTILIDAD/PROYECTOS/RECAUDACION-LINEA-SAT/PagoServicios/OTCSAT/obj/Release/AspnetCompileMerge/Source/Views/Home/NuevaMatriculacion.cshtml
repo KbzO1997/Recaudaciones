@@ -1,0 +1,523 @@
+﻿@{
+    // Vista de Nueva Matriculacion
+    ViewBag.Title = "Matriculaci&oacute;n de Empresas de Servicio";
+
+    // Modo empotrado
+
+    ViewBag.ModoEmpotrado = true;
+
+    if (ViewBag.ModoEmpotrado)
+    {
+        Layout = "~/Views/Shared/_LayoutGenerico.cshtml";
+    }
+}
+@model OTCSAT.Models.IndexModel
+
+@if (ViewBag.ModoEmpotrado)
+{
+    <style>
+        body {
+            background-color: white !important;
+        }
+    </style>
+}
+
+@using (Html.BeginForm("GuardarMatriculacion", "Home", FormMethod.Post))
+{
+    <table cellspacing="1" cellpadding="0" style="width:100%;border:none;">
+        <tr>
+            <td>
+                <table cellspacing="0" cellpadding="0" id="contenedorForma" style="width:100%;border:none;">
+                    <tr>
+                        <td colspan="6" class="Vigente">@Html.Raw(@ViewBag.Title)</td>
+                    </tr>
+                    <tr>
+                        <td class="titCampo">Empresa :</td>
+                        <td class="campo" colspan="3">
+                            @Html.TextBoxFor(m => m.Empresa, new { @maxLength = 15, @size = 15, @class = "datos", @onkeypress = "return ValidacionesUI.validarNumero(event)" })
+                            <input id="comandoSelector" class="button buttonPicker" type="button" value="!" onClick="mostrarBusquedaEmpresa()">
+                            @Html.TextBoxFor(m => m.NombreEmpresa, new { @maxLength = 50, @size = 50, @class = "datos deshabilitado", @style = "text-transform:UPPERCASE;width:354px;", @readonly = "true" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="titCampo">Usuario :</td>
+                        <td class="campo" colspan="3">
+                            @Html.TextBoxFor(m => m.Nemonico, new { @maxLength = 15, @size = 15, @class = "datos deshabilitado", @readonly = "true" })
+                            @Html.TextBox("Usuario", "", new { @maxLength = 15, @size = 15, @class = "datos", @style = "text-transform:uppercase" })
+                            @Html.TextBoxFor(m => m.NombreUsuario, new { @maxLength = 50, @size = 50, @class = "datos deshabilitado", @readonly = "true" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="titCampo">Tipo Servicio :</td>
+                        <td class="campo">
+                            @Html.DropDownList("TipoServicio", Model.TiposEmpresas, "Seleccionar Tipo", new { @class = "datos", @style = "width:200px" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="titCampo">Emp. Recaudaci&oacute;n :</td>
+                        <td class="campo">
+                            @Html.DropDownList("EmpresaRecaudacion", Model.EmpresasRecaudacion, "Seleccionar Empresa", new { @class = "datos", @style = "width:200px"})
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="titCampo">Convenio :</td>
+                        <td class="campo">
+                            <select name="Convenio" id="Convenio" class="datos" style="width:200px"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="titCampo">Tipo Identificador :</td>
+                        <td class="campo">
+                            <select name="TipoIdentificador" id="TipoIdentificador" class="datos" style="width:200px"></select>
+                        </td>
+                    </tr>
+                    <tfoot>
+                        <tr>
+                            <td class="titCampo">Estado :</td>
+                            <td class="campo">
+                                <label>Activo</label>
+                                <input type="radio" name="Estado" value="A" checked />
+                                <label>Inactivo</label>
+                                <input type="radio" name="Estado" value="I" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="titCampo">Alias :</td>
+                            <td class="campo">
+                                @Html.TextBoxFor(m => m.Alias, new { @class = "datos", @maxLength = "20", @size = 60, @autocomplete = "off", minlength = "1", @style = "text-transform:uppercase", @pattern = "[a-zA-Z0-9 ]+", @data_inputmask_regex = "[a-zA-Z0-9 ]+", @data_inputmask_placeholder=""})
+                                @Html.Hidden("MetadataEmpresa")
+                                @Html.Hidden("MetadataConvenio")
+
+                                @Html.HiddenFor(m => m.EmpresaCreacion)
+                                @Html.HiddenFor(m => m.UsuarioCreacion)
+
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <div class="separadorSeccion"></div>
+    <div class="botonera">
+        <input class="button" type="button" value="Regresar" id="comandoVolver" onclick="document.location='@Url.Action("Index",new {UsuarioLogoneado=Model.UsuarioCreacion})';">
+        <input class="button botonAcentuado" type="submit" value="Guardar" id="comandoGuardar" onclick="return validarGuardado()">
+    </div>
+}
+
+<script type="text/javascript">
+
+    function serializarMetadefinicion() {
+
+        $("#MetadataEmpresa").val(JSON.stringify(document.empresaActual));
+        $("#MetadataConvenio").val(JSON.stringify(document.convenioActual));
+    }
+
+    function validarGuardado() {
+        var esValido = true;
+        var esSuministroValido = false;
+        var mensajeError = "Debe ingresar todos los campos para continuar";
+
+        // Validacion de campos fijos
+
+        esValido = esValido && ($("#Empresa").val() != "" && $("#Empresa").val() != "0");
+        esValido = esValido && ($("#NombreEmpresa").val() != "");
+        esValido = esValido && ($("#Nemonico").val() != "");
+        esValido = esValido && ($("#Usuario").val() != "");
+        esValido = esValido && ($("#NombreUsuario").val() != "");
+        esValido = esValido && ($("#TipoServicio").val() != "");
+        esValido = esValido && ($("#EmpresaRecaudacion").val() != "");
+        esValido = esValido && ($("#Convenio").val() != "");
+        esValido = esValido && ($("#TipoIdentificador").val() != "");
+        esValido = esValido && ($("#Estado").val() != "");
+        esValido = esValido && ($("#Alias").val().trim() != "");
+
+        // Validacion de campos dinamicos
+
+        var camposDinamicos = $("input[name^=Identificador]");
+
+        if (camposDinamicos != null) {
+            for (i = 0; i < camposDinamicos.length; i++) {
+                esValido = esValido && (camposDinamicos[i].value != "");
+                esSuministroValido = ($(camposDinamicos[i]).inputmask("isComplete"));
+
+                if (!esSuministroValido) {
+                    mensajeError = "El suministro/identificador debe ser valido";
+                }
+
+                esValido = esValido && esSuministroValido;
+            }
+        }
+
+        if (!esValido) {
+            alert(mensajeError);
+        } else {
+
+            if ($("#Alias").val().trim().length < 1) {
+                esValido = false;
+                alert("Debe ingresar el alias de la matriculacion");
+            } else {
+                serializarMetadefinicion();
+            }
+            
+        }
+        
+        return esValido;
+    }
+
+    function renderizarComponenteDinamico(identificador) {
+
+        var contenidoRegional = "";
+
+        if (identificador != null && identificador.RegionalesArea != null && identificador.RegionalesArea.length > 0) {
+            contenidoRegional += "<select name='Identificador_Reg_" + identificador.Codigo + "' id='Identificador_Reg_" + identificador.Codigo + "' class='datos'>";
+
+            for (i = 0; i < identificador.RegionalesArea.length; i++) {
+                contenidoRegional += "<option value='" + identificador.RegionalesArea[i] + "' "+((i==0)?"selected":"")+" >" + identificador.RegionalesArea[i] +"</option>";
+            }
+
+            contenidoRegional += "</select>";
+        }
+
+        // En caso de que OTC no provea expresion regular, se asumira que puede ingresar numeros y letras sin espacios
+
+        var contenido = "<tr dinamico><td class='titCampo' style='width:20px !important;overflow: hidden;text-overflow:ellipsis;'>" + identificador.Etiqueta + ": </td>";
+        contenido += "<td class='campo'>" + contenidoRegional + "<input type='text' class='datos' name='Identificador_" + identificador.Codigo + "' id='Identificador_" + identificador.Codigo + "' style='width:200px' pattern='" + ((identificador.RegExp != null && identificador.RegExp != "") ? identificador.RegExp : "^[0-9a-zA-Z]+") + "' data-inputmask-regex=\"" + ((identificador.RegExp != null && identificador.RegExp != "") ? identificador.RegExp : "[0-9a-zA-Z]+") + "\"></td></tr>";
+
+        $("#contenedorForma").append(contenido);
+        $("#Identificador_" + identificador.Codigo).inputmask();
+
+    }
+
+    function eliminarCamposDinamicos() {
+        var componentesAdicionales = $("[dinamico]");
+
+        $.each(componentesAdicionales, function (indice, valor) {
+
+            // a IE11 no le gusta remove :(
+
+            try {
+                componentesAdicionales[indice].remove();
+            } catch (ex) {
+                componentesAdicionales[indice].parentNode.removeChild(componentesAdicionales[indice]);
+            }
+
+        });
+    }
+
+    function obtenerNombreUsuario() {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ObtenerNombreUsuario")',
+            dataType: "json",
+            data: {
+                empresa: $("#Empresa").val(),
+                nemonico: $("#Nemonico").val(),
+                usuario: $("#Usuario").val()
+            },
+            success: function (nombreUsuario) {
+                $("#NombreUsuario").val(nombreUsuario);
+                $("#comandoNuevo").prop("disabled", false);
+            },
+            error: function (ex) {
+                $("#Nombreusuario").val("");
+                $("#comandoNuevo").prop("disabled",true);
+            }
+        });
+    }
+
+    function obtenerNemonicoEmpresa() {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ObtenerNemonicoEmpresa")',
+            dataType: "json",
+            data: {
+                empresa: $("#Empresa").val()
+            },
+            success: function (nemonicoEmpresa) {
+                $("#Nemonico").val(nemonicoEmpresa);
+                $("#Usuario").focus();
+            },
+            error: function (ex) {
+                $("#Nemonico").val("");
+            }
+        });
+    }
+
+    function obtenerEmpresasRecaudacion() {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ObtenerEmpresasRecaudacion")',
+            dataType: "json",
+            data: {
+                tipo: $("#TipoServicio").val()
+            },
+            success: function (empresas) {
+                $.each(empresas, function (i, empresa) {
+                    $("#EmpresaRecaudacion").append('<option value="' + empresa.Value + '">' + empresa.Text + '</option>');
+
+                });
+
+                obtenerConveniosPorEmpresa();
+
+            },
+            error: function (ex) {
+                alert("Error al mostrar empresas de recaudacion: " + ex);
+            }
+        });
+    }
+
+    function obtenerConveniosPorEmpresa() {
+        $("#Convenio").empty();
+        $("#TipoIdentificador").empty();
+
+        document.convenioActual = null;
+        document.empresaActual = null;
+
+        eliminarCamposDinamicos();
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ObtenerConveniosEmpresaRecaudacion")',
+            dataType: "json",
+            data: {
+                grupo: $("#TipoServicio").val(),
+                empresa: $("#EmpresaRecaudacion").val(),
+                mostrarMatriculables: true
+            },
+            success: function (empresa) {
+
+                $.each(empresa.Convenios, function (i, convenio) {
+                    $("#Convenio").append('<option value="' + convenio.Codigo + '">' + convenio.Etiqueta + '</option>');
+                });
+
+                $.each(empresa.Convenios, function (i, convenio) {
+                    if (convenio.Codigo == $("#Convenio").val()) {
+
+                        document.empresaActual = empresa;
+                        document.convenioActual = convenio;
+
+                        $.each(convenio.Identificadores, function (j, identificador) {
+                            $("#TipoIdentificador").append("<option value='" + identificador.Codigo + "'>" + identificador.Etiqueta + "</option>");
+                        });
+
+                        $.each(convenio.Identificadores, function (j, identificador) {
+                            if (identificador.Codigo == $("#TipoIdentificador").val()) {
+                                renderizarComponenteDinamico(identificador);
+                                document.definicionIdentificadorActual = identificador;
+                            }
+
+                        });
+
+                        return;
+                    }
+                });
+            },
+            error: function (ex) {
+                //alert("Error al mostrar convenios de recaudacion: " + ex);
+            }
+        });
+    }
+
+    function obtenerNombreEmpresa() {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ObtenerNombreEmpresa")',
+            dataType: "json",
+            data: {
+                empresa: $("#Empresa").val()
+            },
+            success: function (nombreEmpresa) {
+                $("#NombreEmpresa").val(nombreEmpresa);
+
+            },
+            error: function (ex) {
+                $("#NombreEmpresa").val("");
+                $("#comandoNuevo").prop("disabled",true);
+            }
+        });
+    }
+
+    // EntryPoint
+    $(document).ready(function () {
+
+        if ($("#Empresa").val() == "0") {
+            $("#Empresa").val("");
+        }
+
+        // Cambio de tamanio de frame
+        UtilidadesUI.registrarCambioElemento(document.body, UtilidadesUI.handlerRegistroCambioElemento);
+        
+        $("#Alias").inputmask();
+
+        $("#Convenio").change(function () {
+            
+            $.each(document.empresaActual.Convenios, function (i, convenio) {
+                if (convenio.Codigo == $("#Convenio").val()) {
+                    document.convenioActual = convenio;
+
+                    $("#TipoIdentificador").empty();
+
+                    // Cambiar campos dinamicos de tipo de identificador
+
+                    $.each(convenio.Identificadores, function (j, identificador) {
+                        $("#TipoIdentificador").append("<option value='" + identificador.Codigo + "'>" + identificador.Etiqueta + "</option>");
+                    });
+
+                    eliminarCamposDinamicos();
+
+                    $.each(convenio.Identificadores, function (j, identificador) {
+                        if (identificador.Codigo == $("#TipoIdentificador").val()) {
+
+                            renderizarComponenteDinamico(identificador);
+                            document.definicionIdentificadorActual = identificador;
+                            
+                        }
+
+                    });
+
+                    return;
+                }
+            });
+
+        });
+
+        $("#TipoServicio").change(function () {
+            $("#EmpresaRecaudacion").empty();
+            obtenerEmpresasRecaudacion();
+        });
+
+        $("#EmpresaRecaudacion").change(function () {
+            obtenerConveniosPorEmpresa();
+        });
+
+        $("#Empresa").on("keydown", function (e) {
+            var tecla = e.which;
+            if (tecla == 13 || tecla == 9) {
+                $("#NombreEmpresa").val("");
+                $("#Nemonico").val("");
+                obtenerNombreEmpresa();
+                obtenerNemonicoEmpresa();
+            }
+        });
+
+        $("#Usuario").on("keydown", function (e) {
+            var tecla = e.which;
+            if (tecla == 13 || tecla == 9) {
+                $("#NombreUsuario").val("");
+                obtenerNombreUsuario();
+            }
+        });
+
+        $("#Usuario").on("focusout", function (e) {
+            $("#NombreUsuario").val("");
+            obtenerNombreUsuario();
+        });
+
+        $("#TipoIdentificador").change(function (e) {
+
+            eliminarCamposDinamicos();
+
+            $.each(document.convenioActual.Identificadores, function (j, identificador) {
+                if (identificador.Codigo == $("#TipoIdentificador").val()) {
+                    renderizarComponenteDinamico(identificador);
+                }
+
+            });
+
+        });
+
+        @if(ViewBag.Secuencia!=null && ViewBag.Secuencia > 0)
+        {
+            // Es modificacion de matriculacion existente, cargar datos
+            @Html.Raw("setTimeout(function(){cargarDatosMatriculacion(" + @ViewBag.Secuencia + ");},500);")
+        }
+
+    });
+
+    function cargarDatosMatriculacion(secuencia) {
+
+        $("#comandoGuardar").attr("disabled", "disabled");
+        $("#comandoSelector").attr("disabled", "disabled");
+        $("#Empresa").attr("readonly", "readonly");
+        $("#Usuario").attr("readonly", "readonly");
+        $("#Convenio").css("pointer-events", "none");
+        $("#TipoIdentificador").css("pointer-events", "none");
+        $("#TipoServicio").css("pointer-events", "none");
+        $("#EmpresaRecaudacion").css("pointer-events","none");
+
+        $("#Empresa").addClass("deshabilitado");
+        $("#Usuario").addClass("deshabilitado");
+        $("#Convenio").addClass("deshabilitado");
+        $("#TipoIdentificador").addClass("deshabilitado");
+        $("#TipoServicio").addClass("deshabilitado");
+        $("#EmpresaRecaudacion").addClass("deshabilitado");
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ObtenerDatosMatriculacion")',
+            dataType: "json",
+            data: {
+                secuencia: secuencia
+            },
+            success: function (matriculacion) {
+                if (matriculacion.respuesta.ExitoOperacion) {
+
+                    var eventoTab = jQuery.Event("keydown");
+                    eventoTab.which = 9;
+                    $("#TipoServicio").val(matriculacion.cabecera.Grupo);
+                    $("#TipoServicio").trigger("change");
+
+                    $("#Empresa").val(matriculacion.cabecera.Ordenante);
+                    $("#Empresa").trigger(eventoTab);
+
+                    setTimeout(function () {
+
+                        $("#Usuario").val(matriculacion.cabecera.Usuario.substring(5, 20));
+                        $("#NombreUsuario").focus();
+                        $("#Convenio").trigger("change");
+
+                        $("#EmpresaRecaudacion").val(matriculacion.cabecera.EmpresaRecaudacion);
+                        $("#EmpresaRecaudacion").trigger("change");
+
+                        setTimeout(function () {
+                            $("#Convenio").val(matriculacion.cabecera.Convenio);
+                            $("#TipoIdentificador").val(matriculacion.cabecera.Identificador);
+                            $("#TipoIdentificador").trigger("change");
+                            $("#Identificador_" + $("#TipoIdentificador").val()).val(matriculacion.cabecera.Suministro);
+                            $("#Identificador_" + $("#TipoIdentificador").val()).attr("readonly", "readonly");
+                            $("#Identificador_" + $("#TipoIdentificador").val()).addClass("deshabilitado");
+                            $("#Estado").val(matriculacion.cabecera.Estado);
+                            $("#Alias").val(matriculacion.cabecera.Alias);
+                        }, 500);
+
+                        $("#Identificador_" + $("#TipoIdentificador").val()).attr("readonly", "readonly");
+                        $("#Identificador_" + $("#TipoIdentificador").val()).addClass("deshabilitado");
+
+                        $("input[name=Estado][value='" + matriculacion.cabecera.Estado + "']").prop("checked", true);
+
+                        $("#comandoGuardar").removeAttr("disabled");
+
+                    }, 750);
+                } else {
+                    alert("Error: "+matriculacion.respuesta.MensajeError);
+                }
+            },
+            error: function (ex) {
+                alert("Imposible Cargar Datos de Matriculacion");
+                $("#comandoNuevo").prop("disabled",true);
+            }
+        });
+    }
+
+    function mostrarBusquedaEmpresa() {
+        if (document.onSeleccionBusquedaEmpresa == null) {
+            document.onSeleccionBusquedaEmpresa = function () {
+                obtenerNemonicoEmpresa();
+            }
+        }
+
+        window.open("@Url.Action("BusquedaEmpresa")", "BUSQUEDA_EMPRESA", "menubar=no,location=no,resizable=no,scrollbars=yes,status=no,width=600,height=400");
+    }
+</script>

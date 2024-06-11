@@ -1,0 +1,1670 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WL5G3N0:definitions xmlns:WL5G3N2="http://service.wsentrust.ec.fin.bolivariano/" xmlns:WL5G3N1="http://fluxit.com.ar/service" xmlns:WL5G3N3="http://schemas.xmlsoap.org/wsdl/soap12/" name="EntrustService" targetNamespace="http://service.wsentrust.ec.fin.bolivariano/" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/">
+  <WL5G3N0:types>
+    <xs:schema xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://service.wsentrust.ec.fin.bolivariano/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://fluxit.com.ar/service" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://service.wsentrust.ec.fin.bolivariano/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xsd:element name="authenticateToken" type="tns:authenticateToken" />
+      <xsd:element name="authenticateTokenResponse" type="tns:authenticateTokenResponse" />
+      <xsd:element name="blacklistGet" type="tns:blacklistGet" />
+      <xsd:element name="blacklistGetResponse" type="tns:blacklistGetResponse" />
+      <xsd:element name="blacklistSet" type="tns:blacklistSet" />
+      <xsd:element name="blacklistSetResponse" type="tns:blacklistSetResponse" />
+      <xsd:element name="deviceAssign" type="tns:deviceAssign" />
+      <xsd:element name="deviceAssignResponse" type="tns:deviceAssignResponse" />
+      <xsd:element name="deviceUnassign" type="tns:deviceUnassign" />
+      <xsd:element name="deviceUnassignResponse" type="tns:deviceUnassignResponse" />
+      <xsd:element name="getOTP" type="tns:getOTP" />
+      <xsd:element name="getOTPResponse" type="tns:getOTPResponse" />
+      <xsd:element name="getSecurityImages" type="tns:getSecurityImages" />
+      <xsd:element name="getSecurityImagesResponse" type="tns:getSecurityImagesResponse" />
+      <xsd:element name="machineGet" type="tns:machineGet" />
+      <xsd:element name="machineGetResponse" type="tns:machineGetResponse" />
+      <xsd:element name="machineSet" type="tns:machineSet" />
+      <xsd:element name="machineSetByPrefix" type="tns:machineSetByPrefix" />
+      <xsd:element name="ping" type="tns:ping" />
+      <xsd:element name="pingResponse" type="tns:pingResponse" />
+      <xsd:element name="respuestaUserGet" type="tns:respuestaUserGet" />
+      <xsd:element name="saveImage" type="tns:saveImage" />
+      <xsd:element name="saveImageById" type="tns:saveImageById" />
+      <xsd:element name="saveImageByIdResponse" type="tns:saveImageByIdResponse" />
+      <xsd:element name="saveImageResponse" type="tns:saveImageResponse" />
+      <xsd:element name="saveQuestion" type="tns:saveQuestion" />
+      <xsd:element name="saveQuestionResponse" type="tns:saveQuestionResponse" />
+      <xsd:element name="tokenGet" type="tns:tokenGet" />
+      <xsd:element name="tokenGetResponse" type="tns:tokenGetResponse" />
+      <xsd:element name="unAssignedTokenGet" type="tns:unAssignedTokenGet" />
+      <xsd:element name="unAssignedTokenGetResponse" type="tns:unAssignedTokenGetResponse" />
+      <xsd:element name="userAliasMachineList" type="tns:userAliasMachineList" />
+      <xsd:element name="userAssignedTokenGet" type="tns:userAssignedTokenGet" />
+      <xsd:element name="userAssignedTokenGetResponse" type="tns:userAssignedTokenGetResponse" />
+      <xsd:element name="userCardCreate" type="tns:userCardCreate" />
+      <xsd:element name="userCardCreateResponse" type="tns:userCardCreateResponse" />
+      <xsd:element name="userCardDelete" type="tns:userCardDelete" />
+      <xsd:element name="userCardDeleteResponse" type="tns:userCardDeleteResponse" />
+      <xsd:element name="userCardSet" type="tns:userCardSet" />
+      <xsd:element name="userCardSetResponse" type="tns:userCardSetResponse" />
+      <xsd:element name="userCardUnassign" type="tns:userCardUnassign" />
+      <xsd:element name="userCardUnassignResponse" type="tns:userCardUnassignResponse" />
+      <xsd:element name="userCreate" type="tns:userCreate" />
+      <xsd:element name="userCreateResponse" type="tns:userCreateResponse" />
+      <xsd:element name="userDelete" type="tns:userDelete" />
+      <xsd:element name="userDeleteResponse" type="tns:userDeleteResponse" />
+      <xsd:element name="userDevicesGet" type="tns:userDevicesGet" />
+      <xsd:element name="userDevicesGetResponse" type="tns:userDevicesGetResponse" />
+      <xsd:element name="userGet" type="tns:userGet" />
+      <xsd:element name="userGetResponse" type="tns:userGetResponse" />
+      <xsd:element name="userLockoutGet" type="tns:userLockoutGet" />
+      <xsd:element name="userLockoutGetResponse" type="tns:userLockoutGetResponse" />
+      <xsd:element name="userMachineList" type="tns:userMachineList" />
+      <xsd:element name="userMachineListByPrefix" type="tns:userMachineListByPrefix" />
+      <xsd:element name="userMachineListByPrefixResponse" type="tns:userMachineListByPrefixResponse" />
+      <xsd:element name="userSecurityQuestions" type="tns:userSecurityQuestions" />
+      <xsd:element name="userSecurityQuestionsResponse" type="tns:userSecurityQuestionsResponse" />
+      <xsd:element name="userSet" type="tns:userSet" />
+      <xsd:element name="userSetResponse" type="tns:userSetResponse" />
+      <xsd:element name="userTokenActivate" type="tns:userTokenActivate" />
+      <xsd:element name="userTokenActivateComplete" type="tns:userTokenActivateComplete" />
+      <xsd:element name="userTokenActivateCompleteResponse" type="tns:userTokenActivateCompleteResponse" />
+      <xsd:element name="userTokenActivateResponse" type="tns:userTokenActivateResponse" />
+      <xsd:element name="userTokenAssign" type="tns:userTokenAssign" />
+      <xsd:element name="userTokenAssignResponse" type="tns:userTokenAssignResponse" />
+      <xsd:element name="userTokenCreate" type="tns:userTokenCreate" />
+      <xsd:element name="userTokenCreateResponse" type="tns:userTokenCreateResponse" />
+      <xsd:element name="userTokenDelete" type="tns:userTokenDelete" />
+      <xsd:element name="userTokenDeleteResponse" type="tns:userTokenDeleteResponse" />
+      <xsd:element name="userTokenGet" type="tns:userTokenGet" />
+      <xsd:element name="userTokenGetResponse" type="tns:userTokenGetResponse" />
+      <xsd:element name="userTokenList" type="tns:userTokenList" />
+      <xsd:element name="userTokenListResponse" type="tns:userTokenListResponse" />
+      <xsd:element name="userTokenSet" type="tns:userTokenSet" />
+      <xsd:element name="userTokenSetResponse" type="tns:userTokenSetResponse" />
+      <xsd:element name="userTokenUnassign" type="tns:userTokenUnassign" />
+      <xsd:element name="userTokenUnassignResponse" type="tns:userTokenUnassignResponse" />
+      <xsd:element name="validateDelete" type="tns:validateDelete" />
+      <xsd:element name="validateDeleteByPrefix" type="tns:validateDeleteByPrefix" />
+      <xsd:element name="validateOTP" type="tns:validateOTP" />
+      <xsd:element name="validateOTPResponse" type="tns:validateOTPResponse" />
+      <xsd:complexType name="userDelete">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userid" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userDeleteResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaGeneral" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="respuestaGeneral">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="codigoErrorInterno" type="xsd:string" />
+          <xsd:element name="codigoRespuesta" type="xsd:int" />
+          <xsd:element minOccurs="0" name="mensajeSistema" type="xsd:string" />
+          <xsd:element minOccurs="0" name="mensajeUsuario" type="xsd:string" />
+          <xsd:element minOccurs="0" name="secuencial" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="validateOTP">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="otp" type="xsd:string" />
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="validateOTPResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaOTP" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="respuestaOTP">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:respuestaGeneral">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="fecha_caducidad" type="xsd:anySimpleType" />
+              <xsd:element minOccurs="0" name="otp" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="userTokenUnassign">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userid" type="xsd:string" />
+          <xsd:element minOccurs="0" name="resettoken" type="xsd:string" />
+          <xsd:element minOccurs="0" name="serialnumber" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userTokenUnassignResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaGeneral" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userTokenGet">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userTokenGetResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaUserTokenGet" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="respuestaUserTokenGet">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:respuestaGeneral">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="tokenAsignado" type="tns:tokenInfo" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="tokenInfo">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:deviceInfo">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="currentActivationType" type="xsd:string" />
+              <xsd:element minOccurs="0" name="group" type="xsd:string" />
+              <xsd:element minOccurs="0" name="tokenType" type="xsd:string" />
+              <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+              <xsd:element minOccurs="0" name="vendorId" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="deviceInfo">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="comment" type="xsd:string" />
+          <xsd:element minOccurs="0" name="deviceType" type="xsd:string" />
+          <xsd:element minOccurs="0" name="serialNumber" type="xsd:string" />
+          <xsd:element minOccurs="0" name="state" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userSecurityQuestions">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userid" type="xsd:string" />
+          <xsd:element name="challengeSize" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userSecurityQuestionsResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaGetSecurityQuestions" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="respuestaGetSecurityQuestions">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:respuestaGeneral">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="questions" type="tns:question" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="question">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="question" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="authenticateToken">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+          <xsd:element minOccurs="0" name="token" type="xsd:string" />
+          <xsd:element minOccurs="0" name="device" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="authenticateTokenResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaGeneral" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="blacklistSet">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+          <xsd:element minOccurs="0" name="ip" type="xsd:string" />
+          <xsd:element minOccurs="0" name="accion" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="blacklistSetResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ping">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="name" type="xsd:string" />
+          <xsd:element minOccurs="0" name="value" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="pingResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaGeneral" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="machineSet">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+          <xsd:element minOccurs="0" name="accion" type="xsd:string" />
+          <xsd:element minOccurs="0" name="grupo" type="xsd:string" />
+          <xsd:element minOccurs="0" name="alias" type="xsd:string" />
+          <xsd:element minOccurs="0" name="identificador" type="xsd:string" />
+          <xsd:element minOccurs="0" name="secuencia" type="xsd:string" />
+          <xsd:element minOccurs="0" name="appData" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="equipoInfo">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="alias" type="xsd:string" />
+          <xsd:element minOccurs="0" name="appData" type="xsd:string" />
+          <xsd:element minOccurs="0" name="codigoResultado" type="xsd:string" />
+          <xsd:element minOccurs="0" name="eliminado" type="xsd:string" />
+          <xsd:element minOccurs="0" name="errorSistema" type="xsd:string" />
+          <xsd:element minOccurs="0" name="fecha" type="xsd:string" />
+          <xsd:element minOccurs="0" name="identificacion" type="xsd:string" />
+          <xsd:element minOccurs="0" name="mensaje" type="xsd:string" />
+          <xsd:element minOccurs="0" name="secuencial" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userMachineListByPrefix">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+          <xsd:element minOccurs="0" name="prefix" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userMachineListByPrefixResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaRegMaquina" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="respuestaRegMaquina">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:respuestaGeneral">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="listaMaquinas" nillable="true" type="tns:equipoInfo" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="userCardDelete">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userid" type="xsd:string" />
+          <xsd:element minOccurs="0" name="serialnumber" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userCardDeleteResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaGeneral" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tokenGet">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="serialnumber" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tokenGetResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaUserTokenGet" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="deviceUnassign">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userid" type="xsd:string" />
+          <xsd:element minOccurs="0" name="serialnumber" type="xsd:string" />
+          <xsd:element name="resettoken" type="xsd:boolean" />
+          <xsd:element minOccurs="0" name="devicetype" type="xsd:string" />
+          <xsd:element name="deleteuser" type="xsd:boolean" />
+          <xsd:element name="createuser" type="xsd:boolean" />
+          <xsd:element minOccurs="0" name="alias" type="xsd:string" />
+          <xsd:element minOccurs="0" name="groupname" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="deviceUnassignResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaGeneral" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userGet">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userGetResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaUserGet" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="respuestaUserGet">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:respuestaGeneral">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="userInfo" type="tns:userInfoSummary" />
+              <xsd:element name="deviceBlocked" type="xsd:boolean" />
+              <xsd:element name="userBlocked" type="xsd:boolean" />
+              <xsd:element minOccurs="0" name="lockoutMethod" type="xsd:string" />
+              <xsd:element minOccurs="0" name="authenticacionMethods" type="tns:authenticationMethods" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="userInfoSummary">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+          <xsd:element minOccurs="0" name="userNumber" type="xsd:string" />
+          <xsd:element minOccurs="0" name="repository" type="xsd:string" />
+          <xsd:element minOccurs="0" name="userName" type="xsd:string" />
+          <xsd:element minOccurs="0" name="group" type="xsd:string" />
+          <xsd:element minOccurs="0" name="comments" type="xsd:string" />
+          <xsd:element name="failureCount" type="xsd:int" />
+          <xsd:element minOccurs="0" name="fullName" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="devices" nillable="true" type="tns:deviceInfo" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="authenticationMethods">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="method" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userTokenCreate">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+          <xsd:element minOccurs="0" name="stateCurrent" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userTokenCreateResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaUserTokenCreate" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="respuestaUserTokenCreate">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:respuestaGeneral">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="serialNumber" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="userTokenActivate">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+          <xsd:element minOccurs="0" name="serialNumber" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userTokenActivateResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaUserTokenActivate" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="respuestaUserTokenActivate">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:respuestaGeneral">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="userTokenActivateResult" type="tns:userTokenActivateResult" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="userTokenActivateResult">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="activationCode" type="xsd:string" />
+          <xsd:element minOccurs="0" name="activationId" type="xsd:string" />
+          <xsd:element minOccurs="0" name="checkCode" type="xsd:string" />
+          <xsd:element minOccurs="0" name="token" type="tns:userTokenInfo" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userTokenInfo">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="activationState" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="availableActivationTypes" nillable="true" type="tns:tokenActivationType" />
+          <xsd:element name="challengeSupported" type="xsd:boolean" />
+          <xsd:element minOccurs="0" name="comment" type="xsd:string" />
+          <xsd:element name="createdForUser" type="xsd:boolean" />
+          <xsd:element minOccurs="0" name="currentActivationType" type="tns:tokenActivationType" />
+          <xsd:element name="deliveryAndSignatureSupported" type="xsd:boolean" />
+          <xsd:element minOccurs="0" name="group" type="xsd:string" />
+          <xsd:element minOccurs="0" name="lastUsedDate" type="xsd:dateTime" />
+          <xsd:element minOccurs="0" name="loadDate" type="xsd:dateTime" />
+          <xsd:element minOccurs="0" name="mobilePlatform" type="xsd:string" />
+          <xsd:element minOccurs="0" name="mobileVersion" type="xsd:string" />
+          <xsd:element name="responseSupported" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="rolesGrantingAccess" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="serialNumber" type="xsd:string" />
+          <xsd:element name="signatureSupported" type="xsd:boolean" />
+          <xsd:element minOccurs="0" name="state" type="tns:state" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="tokenParameters" nillable="true" type="tns:nameValue" />
+          <xsd:element minOccurs="0" name="tokenSet" type="xsd:string" />
+          <xsd:element minOccurs="0" name="tokenType" type="xsd:string" />
+          <xsd:element name="unlockSupported" type="xsd:boolean" />
+          <xsd:element minOccurs="0" name="userName" type="xsd:string" />
+          <xsd:element minOccurs="0" name="userid" type="xsd:string" />
+          <xsd:element name="usesLicense" type="xsd:boolean" />
+          <xsd:element minOccurs="0" name="vendorId" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tokenActivationType">
+        <xsd:sequence />
+      </xsd:complexType>
+      <xsd:complexType name="state">
+        <xsd:sequence />
+      </xsd:complexType>
+      <xsd:complexType name="nameValue">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="name" type="xsd:string" />
+          <xsd:element minOccurs="0" name="value" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="getOTP">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="getOTPResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaOTP" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="saveImageById">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userid" type="xsd:string" />
+          <xsd:element minOccurs="0" name="name" type="xsd:string" />
+          <xsd:element minOccurs="0" name="value" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="saveImageByIdResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaGeneral" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="validateDelete">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+          <xsd:element minOccurs="0" name="alias" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="saveQuestion">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userid" type="xsd:string" />
+          <xsd:element minOccurs="0" name="questions" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="saveQuestionResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaGeneral" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userCardSet">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userid" type="xsd:string" />
+          <xsd:element minOccurs="0" name="serialnumber" type="xsd:string" />
+          <xsd:element minOccurs="0" name="state" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userCardSetResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaGeneral" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="blacklistGet">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+          <xsd:element minOccurs="0" name="ip" type="xsd:string" />
+          <xsd:element minOccurs="0" name="accion" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="blacklistGetResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="return" type="xsd:anyType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userAliasMachineList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+          <xsd:element minOccurs="0" name="alias" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userDevicesGet">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userDevicesGetResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaUserGet" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userAssignedTokenGet">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userAssignedTokenGetResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaUserTokenGet" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userTokenAssign">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userid" type="xsd:string" />
+          <xsd:element minOccurs="0" name="resettoken" type="xsd:string" />
+          <xsd:element minOccurs="0" name="serialnumber" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userTokenAssignResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaGeneral" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="validateDeleteByPrefix">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+          <xsd:element minOccurs="0" name="alias" type="xsd:string" />
+          <xsd:element minOccurs="0" name="prefix" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userTokenDelete">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+          <xsd:element minOccurs="0" name="token" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userTokenDeleteResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaGeneral" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="saveImage">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userid" type="xsd:string" />
+          <xsd:element minOccurs="0" name="name" type="xsd:string" />
+          <xsd:element minOccurs="0" name="value" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="saveImageResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaGeneral" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="getSecurityImages">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+          <xsd:element name="imagesCount" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="getSecurityImagesResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaGetSecurityImages" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="respuestaGetSecurityImages">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:respuestaGeneral">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="images" nillable="true" type="tns:imagen" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="imagen">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="data" type="xsd:string" />
+          <xsd:element name="id" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="machineGet">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+          <xsd:element minOccurs="0" name="accion" type="xsd:string" />
+          <xsd:element minOccurs="0" name="alias" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="machineGetResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaRegMaquina" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userCardUnassign">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userid" type="xsd:string" />
+          <xsd:element minOccurs="0" name="serialnumber" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userCardUnassignResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaGeneral" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userTokenSet">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userid" type="xsd:string" />
+          <xsd:element minOccurs="0" name="state" type="xsd:string" />
+          <xsd:element minOccurs="0" name="serialnumber" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userTokenSetResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaGeneral" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="machineSetByPrefix">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+          <xsd:element minOccurs="0" name="accion" type="xsd:string" />
+          <xsd:element minOccurs="0" name="grupo" type="xsd:string" />
+          <xsd:element minOccurs="0" name="alias" type="xsd:string" />
+          <xsd:element minOccurs="0" name="identificador" type="xsd:string" />
+          <xsd:element minOccurs="0" name="secuencia" type="xsd:string" />
+          <xsd:element minOccurs="0" name="appData" type="xsd:string" />
+          <xsd:element minOccurs="0" name="prefix" type="xsd:string" />
+          <xsd:element name="limit" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userTokenActivateComplete">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+          <xsd:element minOccurs="0" name="activationCode" type="xsd:string" />
+          <xsd:element minOccurs="0" name="activationId" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userTokenActivateCompleteResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaUserTokenActivateComplete" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="respuestaUserTokenActivateComplete">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:respuestaGeneral">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="userTokenActivateCompleteResult" type="tns:userTokenActivateCompleteResult" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="userTokenActivateCompleteResult">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="outputParameters" nillable="true" type="tns:nameValue" />
+          <xsd:element minOccurs="0" name="token" type="tns:userTokenInfo" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userCreate">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userid" type="xsd:string" />
+          <xsd:element minOccurs="0" name="userstate" type="xsd:string" />
+          <xsd:element minOccurs="0" name="fullname" type="xsd:string" />
+          <xsd:element minOccurs="0" name="groupname" type="xsd:string" />
+          <xsd:element minOccurs="0" name="comment" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userCreateResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaGeneral" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userCardCreate">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userid" type="xsd:string" />
+          <xsd:element minOccurs="0" name="serialnumber" type="xsd:string" />
+          <xsd:element minOccurs="0" name="state" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userCardCreateResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaGeneral" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userTokenList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userTokenListResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaUserTokenInfoList" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="respuestaUserTokenInfoList">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:respuestaGeneral">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="tokensAsignado" nillable="true" type="tns:deviceInfo" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="unAssignedTokenGet">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="serialnumber" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="unAssignedTokenGetResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaUserTokenGet" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="deviceAssign">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userid" type="xsd:string" />
+          <xsd:element minOccurs="0" name="userstate" type="xsd:string" />
+          <xsd:element minOccurs="0" name="alias" type="xsd:string" />
+          <xsd:element minOccurs="0" name="fullname" type="xsd:string" />
+          <xsd:element minOccurs="0" name="groupname" type="xsd:string" />
+          <xsd:element minOccurs="0" name="option" type="xsd:string" />
+          <xsd:element minOccurs="0" name="serialnumber" type="xsd:string" />
+          <xsd:element minOccurs="0" name="state" type="xsd:string" />
+          <xsd:element name="resettoken" type="xsd:boolean" />
+          <xsd:element minOccurs="0" name="indperson" type="xsd:string" />
+          <xsd:element minOccurs="0" name="devicetype" type="xsd:string" />
+          <xsd:element name="createuser" type="xsd:boolean" />
+          <xsd:element name="isreverse" type="xsd:boolean" />
+          <xsd:element name="deleteuser" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="deviceAssignResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaGeneral" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userLockoutGet">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userid" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userLockoutGetResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaGeneral" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userSet">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="option" type="xsd:string" />
+          <xsd:element minOccurs="0" name="userid" type="xsd:string" />
+          <xsd:element minOccurs="0" name="alias" type="xsd:string" />
+          <xsd:element minOccurs="0" name="groupname" type="xsd:string" />
+          <xsd:element name="clearlock" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userSetResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="tns:respuestaGeneral" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userMachineList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="userId" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Exception" type="tns:Exception" />
+      <xsd:complexType name="Exception">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="message" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xs:schema>
+    <xs:schema xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://fluxit.com.ar/service" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://service.wsentrust.ec.fin.bolivariano/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://fluxit.com.ar/service" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://service.wsentrust.ec.fin.bolivariano/" />
+      <xsd:element name="machineSet" type="tns:machineSet" />
+      <xsd:element name="machineSetByPrefix" type="tns:machineSetByPrefix" />
+      <xsd:element name="userAliasMachineList" type="tns:userAliasMachineList" />
+      <xsd:element name="userMachineList" type="tns:userMachineList" />
+      <xsd:element name="validateDelete" type="tns:validateDelete" />
+      <xsd:element name="validateDeleteByPrefix" type="tns:validateDeleteByPrefix" />
+      <xsd:complexType name="machineSet">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="maquina" type="ns1:equipoInfo" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="validateDelete">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="maquina" type="ns1:equipoInfo" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userAliasMachineList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="maquina" type="ns1:equipoInfo" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="validateDeleteByPrefix">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="return" type="ns1:respuestaRegMaquina" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="machineSetByPrefix">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="maquina" type="ns1:respuestaRegMaquina" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="userMachineList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="maquina" type="ns1:equipoInfo" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xs:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="validateDeleteResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N1:validateDelete" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userLockoutGet">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userLockoutGet" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userTokenCreateResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userTokenCreateResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="authenticateTokenResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:authenticateTokenResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userTokenActivateResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userTokenActivateResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="validateDelete">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:validateDelete" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userTokenSet">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userTokenSet" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="validateDeleteByPrefix">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:validateDeleteByPrefix" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userAssignedTokenGet">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userAssignedTokenGet" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="pingResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:pingResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="saveQuestion">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:saveQuestion" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="machineSetByPrefix">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:machineSetByPrefix" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userSet">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userSet" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="deviceAssignResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:deviceAssignResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userTokenListResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userTokenListResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userAliasMachineList">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userAliasMachineList" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userDelete">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userDelete" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userSetResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userSetResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="machineSetByPrefixResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N1:machineSetByPrefix" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="blacklistGetResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:blacklistGetResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="deviceUnassign">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:deviceUnassign" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userGet">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userGet" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userTokenUnassignResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userTokenUnassignResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userTokenDelete">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userTokenDelete" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userAliasMachineListResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N1:userAliasMachineList" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="machineGet">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:machineGet" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userLockoutGetResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userLockoutGetResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="deviceAssign">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:deviceAssign" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userCardCreateResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userCardCreateResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="Exception">
+    <WL5G3N0:part name="Exception" element="WL5G3N2:Exception" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userCardUnassignResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userCardUnassignResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userMachineListResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N1:userMachineList" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getSecurityImagesResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:getSecurityImagesResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="validateOTP">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:validateOTP" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userTokenList">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userTokenList" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userTokenActivateCompleteResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userTokenActivateCompleteResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="machineGetResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:machineGetResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userTokenSetResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userTokenSetResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userTokenUnassign">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userTokenUnassign" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userMachineListByPrefix">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userMachineListByPrefix" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="unAssignedTokenGet">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:unAssignedTokenGet" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="saveImage">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:saveImage" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userCardCreate">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userCardCreate" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="validateOTPResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:validateOTPResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="validateDeleteByPrefixResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N1:validateDeleteByPrefix" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="tokenGet">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:tokenGet" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userMachineListByPrefixResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userMachineListByPrefixResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userCreateResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userCreateResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userSecurityQuestions">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userSecurityQuestions" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userTokenCreate">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userTokenCreate" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userTokenActivateComplete">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userTokenActivateComplete" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userTokenGet">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userTokenGet" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userAssignedTokenGetResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userAssignedTokenGetResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="machineSetResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N1:machineSet" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="saveImageById">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:saveImageById" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userTokenDeleteResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userTokenDeleteResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userTokenActivate">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userTokenActivate" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="saveImageByIdResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:saveImageByIdResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="saveQuestionResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:saveQuestionResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userCardSetResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userCardSetResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="authenticateToken">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:authenticateToken" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="deviceUnassignResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:deviceUnassignResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userTokenAssign">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userTokenAssign" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="blacklistSet">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:blacklistSet" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userCardSet">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userCardSet" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userDevicesGet">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userDevicesGet" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getSecurityImages">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:getSecurityImages" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userTokenGetResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userTokenGetResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userTokenAssignResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userTokenAssignResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getOTP">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:getOTP" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="blacklistGet">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:blacklistGet" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userCreate">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userCreate" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="saveImageResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:saveImageResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getOTPResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:getOTPResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="unAssignedTokenGetResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:unAssignedTokenGetResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userGetResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userGetResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="tokenGetResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:tokenGetResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userCardDeleteResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userCardDeleteResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userMachineList">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userMachineList" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userDevicesGetResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userDevicesGetResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userCardDelete">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userCardDelete" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userSecurityQuestionsResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userSecurityQuestionsResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ping">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:ping" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userDeleteResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userDeleteResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="machineSet">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:machineSet" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="blacklistSetResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:blacklistSetResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="userCardUnassign">
+    <WL5G3N0:part name="parameters" element="WL5G3N2:userCardUnassign" />
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="EntrustServicePortType">
+    <WL5G3N0:operation name="userDelete">
+      <WL5G3N0:input name="userDelete" message="WL5G3N2:userDelete" />
+      <WL5G3N0:output name="userDeleteResponse" message="WL5G3N2:userDeleteResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="validateOTP">
+      <WL5G3N0:input name="validateOTP" message="WL5G3N2:validateOTP" />
+      <WL5G3N0:output name="validateOTPResponse" message="WL5G3N2:validateOTPResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userTokenUnassign">
+      <WL5G3N0:input name="userTokenUnassign" message="WL5G3N2:userTokenUnassign" />
+      <WL5G3N0:output name="userTokenUnassignResponse" message="WL5G3N2:userTokenUnassignResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userTokenGet">
+      <WL5G3N0:input name="userTokenGet" message="WL5G3N2:userTokenGet" />
+      <WL5G3N0:output name="userTokenGetResponse" message="WL5G3N2:userTokenGetResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userSecurityQuestions">
+      <WL5G3N0:input name="userSecurityQuestions" message="WL5G3N2:userSecurityQuestions" />
+      <WL5G3N0:output name="userSecurityQuestionsResponse" message="WL5G3N2:userSecurityQuestionsResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="authenticateToken">
+      <WL5G3N0:input name="authenticateToken" message="WL5G3N2:authenticateToken" />
+      <WL5G3N0:output name="authenticateTokenResponse" message="WL5G3N2:authenticateTokenResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="blacklistSet">
+      <WL5G3N0:input name="blacklistSet" message="WL5G3N2:blacklistSet" />
+      <WL5G3N0:output name="blacklistSetResponse" message="WL5G3N2:blacklistSetResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ping">
+      <WL5G3N0:input name="ping" message="WL5G3N2:ping" />
+      <WL5G3N0:output name="pingResponse" message="WL5G3N2:pingResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="machineSet">
+      <WL5G3N0:input name="machineSet" message="WL5G3N2:machineSet" />
+      <WL5G3N0:output name="machineSetResponse" message="WL5G3N2:machineSetResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userMachineListByPrefix">
+      <WL5G3N0:input name="userMachineListByPrefix" message="WL5G3N2:userMachineListByPrefix" />
+      <WL5G3N0:output name="userMachineListByPrefixResponse" message="WL5G3N2:userMachineListByPrefixResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userCardDelete">
+      <WL5G3N0:input name="userCardDelete" message="WL5G3N2:userCardDelete" />
+      <WL5G3N0:output name="userCardDeleteResponse" message="WL5G3N2:userCardDeleteResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="tokenGet">
+      <WL5G3N0:input name="tokenGet" message="WL5G3N2:tokenGet" />
+      <WL5G3N0:output name="tokenGetResponse" message="WL5G3N2:tokenGetResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="deviceUnassign">
+      <WL5G3N0:input name="deviceUnassign" message="WL5G3N2:deviceUnassign" />
+      <WL5G3N0:output name="deviceUnassignResponse" message="WL5G3N2:deviceUnassignResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userGet">
+      <WL5G3N0:input name="userGet" message="WL5G3N2:userGet" />
+      <WL5G3N0:output name="userGetResponse" message="WL5G3N2:userGetResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userTokenCreate">
+      <WL5G3N0:input name="userTokenCreate" message="WL5G3N2:userTokenCreate" />
+      <WL5G3N0:output name="userTokenCreateResponse" message="WL5G3N2:userTokenCreateResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userTokenActivate">
+      <WL5G3N0:input name="userTokenActivate" message="WL5G3N2:userTokenActivate" />
+      <WL5G3N0:output name="userTokenActivateResponse" message="WL5G3N2:userTokenActivateResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getOTP">
+      <WL5G3N0:input name="getOTP" message="WL5G3N2:getOTP" />
+      <WL5G3N0:output name="getOTPResponse" message="WL5G3N2:getOTPResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="saveImageById">
+      <WL5G3N0:input name="saveImageById" message="WL5G3N2:saveImageById" />
+      <WL5G3N0:output name="saveImageByIdResponse" message="WL5G3N2:saveImageByIdResponse" />
+      <WL5G3N0:fault name="Exception" message="WL5G3N2:Exception" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="validateDelete">
+      <WL5G3N0:input name="validateDelete" message="WL5G3N2:validateDelete" />
+      <WL5G3N0:output name="validateDeleteResponse" message="WL5G3N2:validateDeleteResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="saveQuestion">
+      <WL5G3N0:input name="saveQuestion" message="WL5G3N2:saveQuestion" />
+      <WL5G3N0:output name="saveQuestionResponse" message="WL5G3N2:saveQuestionResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userCardSet">
+      <WL5G3N0:input name="userCardSet" message="WL5G3N2:userCardSet" />
+      <WL5G3N0:output name="userCardSetResponse" message="WL5G3N2:userCardSetResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="blacklistGet">
+      <WL5G3N0:input name="blacklistGet" message="WL5G3N2:blacklistGet" />
+      <WL5G3N0:output name="blacklistGetResponse" message="WL5G3N2:blacklistGetResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userAliasMachineList">
+      <WL5G3N0:input name="userAliasMachineList" message="WL5G3N2:userAliasMachineList" />
+      <WL5G3N0:output name="userAliasMachineListResponse" message="WL5G3N2:userAliasMachineListResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userDevicesGet">
+      <WL5G3N0:input name="userDevicesGet" message="WL5G3N2:userDevicesGet" />
+      <WL5G3N0:output name="userDevicesGetResponse" message="WL5G3N2:userDevicesGetResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userAssignedTokenGet">
+      <WL5G3N0:input name="userAssignedTokenGet" message="WL5G3N2:userAssignedTokenGet" />
+      <WL5G3N0:output name="userAssignedTokenGetResponse" message="WL5G3N2:userAssignedTokenGetResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userTokenAssign">
+      <WL5G3N0:input name="userTokenAssign" message="WL5G3N2:userTokenAssign" />
+      <WL5G3N0:output name="userTokenAssignResponse" message="WL5G3N2:userTokenAssignResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="validateDeleteByPrefix">
+      <WL5G3N0:input name="validateDeleteByPrefix" message="WL5G3N2:validateDeleteByPrefix" />
+      <WL5G3N0:output name="validateDeleteByPrefixResponse" message="WL5G3N2:validateDeleteByPrefixResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userTokenDelete">
+      <WL5G3N0:input name="userTokenDelete" message="WL5G3N2:userTokenDelete" />
+      <WL5G3N0:output name="userTokenDeleteResponse" message="WL5G3N2:userTokenDeleteResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="saveImage">
+      <WL5G3N0:input name="saveImage" message="WL5G3N2:saveImage" />
+      <WL5G3N0:output name="saveImageResponse" message="WL5G3N2:saveImageResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getSecurityImages">
+      <WL5G3N0:input name="getSecurityImages" message="WL5G3N2:getSecurityImages" />
+      <WL5G3N0:output name="getSecurityImagesResponse" message="WL5G3N2:getSecurityImagesResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="machineGet">
+      <WL5G3N0:input name="machineGet" message="WL5G3N2:machineGet" />
+      <WL5G3N0:output name="machineGetResponse" message="WL5G3N2:machineGetResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userCardUnassign">
+      <WL5G3N0:input name="userCardUnassign" message="WL5G3N2:userCardUnassign" />
+      <WL5G3N0:output name="userCardUnassignResponse" message="WL5G3N2:userCardUnassignResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userTokenSet">
+      <WL5G3N0:input name="userTokenSet" message="WL5G3N2:userTokenSet" />
+      <WL5G3N0:output name="userTokenSetResponse" message="WL5G3N2:userTokenSetResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="machineSetByPrefix">
+      <WL5G3N0:input name="machineSetByPrefix" message="WL5G3N2:machineSetByPrefix" />
+      <WL5G3N0:output name="machineSetByPrefixResponse" message="WL5G3N2:machineSetByPrefixResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userTokenActivateComplete">
+      <WL5G3N0:input name="userTokenActivateComplete" message="WL5G3N2:userTokenActivateComplete" />
+      <WL5G3N0:output name="userTokenActivateCompleteResponse" message="WL5G3N2:userTokenActivateCompleteResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userCreate">
+      <WL5G3N0:input name="userCreate" message="WL5G3N2:userCreate" />
+      <WL5G3N0:output name="userCreateResponse" message="WL5G3N2:userCreateResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userCardCreate">
+      <WL5G3N0:input name="userCardCreate" message="WL5G3N2:userCardCreate" />
+      <WL5G3N0:output name="userCardCreateResponse" message="WL5G3N2:userCardCreateResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userTokenList">
+      <WL5G3N0:input name="userTokenList" message="WL5G3N2:userTokenList" />
+      <WL5G3N0:output name="userTokenListResponse" message="WL5G3N2:userTokenListResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="unAssignedTokenGet">
+      <WL5G3N0:input name="unAssignedTokenGet" message="WL5G3N2:unAssignedTokenGet" />
+      <WL5G3N0:output name="unAssignedTokenGetResponse" message="WL5G3N2:unAssignedTokenGetResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="deviceAssign">
+      <WL5G3N0:input name="deviceAssign" message="WL5G3N2:deviceAssign" />
+      <WL5G3N0:output name="deviceAssignResponse" message="WL5G3N2:deviceAssignResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userLockoutGet">
+      <WL5G3N0:input name="userLockoutGet" message="WL5G3N2:userLockoutGet" />
+      <WL5G3N0:output name="userLockoutGetResponse" message="WL5G3N2:userLockoutGetResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userSet">
+      <WL5G3N0:input name="userSet" message="WL5G3N2:userSet" />
+      <WL5G3N0:output name="userSetResponse" message="WL5G3N2:userSetResponse" />
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userMachineList">
+      <WL5G3N0:input name="userMachineList" message="WL5G3N2:userMachineList" />
+      <WL5G3N0:output name="userMachineListResponse" message="WL5G3N2:userMachineListResponse" />
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="EntrustServiceSoapBinding" type="WL5G3N2:EntrustServicePortType">
+    <WL5G3N3:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <WL5G3N0:operation name="userDelete">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userDelete">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userDeleteResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="validateOTP">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="validateOTP">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="validateOTPResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userTokenUnassign">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userTokenUnassign">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userTokenUnassignResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userTokenGet">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userTokenGet">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userTokenGetResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userSecurityQuestions">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userSecurityQuestions">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userSecurityQuestionsResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="authenticateToken">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="authenticateToken">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="authenticateTokenResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="blacklistSet">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="blacklistSet">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="blacklistSetResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ping">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="ping">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="pingResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="machineSet">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="machineSet">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="machineSetResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userCardDelete">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userCardDelete">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userCardDeleteResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userMachineListByPrefix">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userMachineListByPrefix">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userMachineListByPrefixResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="tokenGet">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="tokenGet">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="tokenGetResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="deviceUnassign">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="deviceUnassign">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="deviceUnassignResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userGet">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userGet">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userGetResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getOTP">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="getOTP">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="getOTPResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userTokenActivate">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userTokenActivate">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userTokenActivateResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userTokenCreate">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userTokenCreate">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userTokenCreateResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="saveImageById">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="saveImageById">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="saveImageByIdResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="Exception">
+        <WL5G3N3:fault use="literal" name="Exception" namespace="" />
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="validateDelete">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="validateDelete">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="validateDeleteResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="saveQuestion">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="saveQuestion">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="saveQuestionResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userCardSet">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userCardSet">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userCardSetResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="blacklistGet">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="blacklistGet">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="blacklistGetResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userAliasMachineList">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userAliasMachineList">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userAliasMachineListResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userDevicesGet">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userDevicesGet">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userDevicesGetResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userAssignedTokenGet">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userAssignedTokenGet">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userAssignedTokenGetResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userTokenAssign">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userTokenAssign">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userTokenAssignResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="validateDeleteByPrefix">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="validateDeleteByPrefix">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="validateDeleteByPrefixResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="saveImage">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="saveImage">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="saveImageResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userTokenDelete">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userTokenDelete">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userTokenDeleteResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getSecurityImages">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="getSecurityImages">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="getSecurityImagesResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="machineGet">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="machineGet">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="machineGetResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userCardUnassign">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userCardUnassign">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userCardUnassignResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userTokenSet">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userTokenSet">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userTokenSetResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="machineSetByPrefix">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="machineSetByPrefix">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="machineSetByPrefixResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userTokenActivateComplete">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userTokenActivateComplete">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userTokenActivateCompleteResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userCardCreate">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userCardCreate">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userCardCreateResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userCreate">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userCreate">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userCreateResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="deviceAssign">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="deviceAssign">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="deviceAssignResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="unAssignedTokenGet">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="unAssignedTokenGet">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="unAssignedTokenGetResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userTokenList">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userTokenList">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userTokenListResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userLockoutGet">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userLockoutGet">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userLockoutGetResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userSet">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userSet">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userSetResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="userMachineList">
+      <WL5G3N3:operation soapAction="" style="document" />
+      <WL5G3N0:input name="userMachineList">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output name="userMachineListResponse">
+        <WL5G3N3:body use="literal" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="EntrustService">
+    <WL5G3N0:port name="EntrustServicePort" binding="WL5G3N2:EntrustServiceSoapBinding">
+      <WL5G3N3:address location="https://soavides.bolivariano.fin.ec:5554/EntrustUtil/proxy/EntrustUtilProxyMS" />
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>

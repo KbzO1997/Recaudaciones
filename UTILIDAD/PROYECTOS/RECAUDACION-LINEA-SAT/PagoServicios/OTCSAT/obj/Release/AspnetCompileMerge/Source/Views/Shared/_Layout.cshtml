@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Pago de Servicios Banca Empresas</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryinputmask")
+    @Scripts.Render("~/bundles/satcommons")
+</head>
+<body>
+
+    <!-- Navegacion general superior -->
+    <br>
+    <div align="left">
+        <table width="720" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <span class="txttitulo">24Online | Matriculaci&oacute;n de servicios</span>
+                <br>
+                <span class="opcionActual">Matriculaci&oacute;n de servicios</span>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <!-- Fin de navegacion general superior -->
+
+    <table align="center" id="tb_principal">
+        <tr>
+            <td>
+                <table id="tb_cuerpo" valign="top" align="center" border="0" cellPadding="0" cellSpacing="0">
+                    <tr valign="top">
+                        <td valign="top">
+                            <table width="100%" align="center" border="0" cellPadding="0" cellspacing="1">
+                                <tr>
+                                    <td align="center" valign="top">
+                                        <div>
+                                            <!-- Contenido de seccion -->
+                                            <div class="tituloContenedor">
+                                                <label>Matriculaci&oacute;n de servicios</label>
+                                            </div>
+                                            <div class="contenedorIndividual">
+                                                @RenderBody()
+                                            </div>
+                                            <!-- Fin de contenido de seccion -->
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

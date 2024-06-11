@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EntidadesDB" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="SATDB" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="sp_con_nombrempresa" ReturnType="Collection(String)">
+      <Parameter Name="i_empresa" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_con_nombrempresas_producto" ReturnType="Collection(EntidadesDB.sp_con_nombrempresas_producto_Result)">
+      <Parameter Name="i_producto" Mode="In" Type="Int16" />
+    </FunctionImport>
+    <FunctionImport Name="sp_con_nemonico_empresa">
+      <Parameter Name="i_empresa" Mode="In" Type="String" />
+      <Parameter Name="o_nemonico" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_con_usuario" ReturnType="Collection(EntidadesDB.sp_con_usuario_Result)">
+      <Parameter Name="us_cod_empresa" Mode="In" Type="String" />
+      <Parameter Name="us_nem_empresa" Mode="In" Type="String" />
+      <Parameter Name="us_cod_usuario" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="sp_con_nombrempresas_producto_Result">
+    <Property Type="String" Name="em_nom_empresa" Nullable="true" MaxLength="70" />
+    <Property Type="String" Name="em_cod_empresa" Nullable="false" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="sp_con_usuario_Result">
+    <Property Type="String" Name="us_cod_empresa" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="us_cod_usuario" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="us_contrasenia" Nullable="false" MaxLength="6" />
+    <Property Type="String" Name="us_reingreso_contrasenia" Nullable="false" MaxLength="6" />
+    <Property Type="String" Name="us_nom_usuario" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="us_ofiage_usuario" Nullable="true" MaxLength="5" />
+    <Property Type="DateTime" Name="us_fch_expira_clave" Nullable="false" Precision="23" />
+    <Property Type="String" Name="us_est_usuario" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="us_ctp_usuario" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="us_cedula" Nullable="false" MaxLength="13" />
+    <Property Type="String" Name="us_dir_email" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="us_nem_empresa" Nullable="true" MaxLength="5" />
+    <Property Type="String" Name="us_cod_caja_cobis" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="us_cod_usuario_cobis" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="us_cargo" Nullable="true" MaxLength="10" />
+  </ComplexType>
+</Schema>

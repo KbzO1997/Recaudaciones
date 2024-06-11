@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:men="http://www.bolivariano.com/CashManagement/MensajesTarifario" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.bolivariano.com/CashManagement/Tarifario/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Tarifario" targetNamespace="http://www.bolivariano.com/CashManagement/Tarifario/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import schemaLocation="TarifarioCash.xsd" namespace="http://www.bolivariano.com/CashManagement/MensajesTarifario" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="procesarTarifaRequest">
+    <wsdl:part name="part" element="men:mensajeEntradaProcesarTarifa" />
+  </wsdl:message>
+  <wsdl:message name="procesarTarifaResponse">
+    <wsdl:part name="part" element="men:mensajeSalidaProcesarTarifa" />
+  </wsdl:message>
+  <wsdl:message name="consultarTarifaLoteRequest">
+    <wsdl:part name="part" element="men:mensajeEntradaConsultarTarifaLote" />
+  </wsdl:message>
+  <wsdl:message name="consultarTarifaLoteResponse">
+    <wsdl:part name="part" element="men:mensajeSalidaConsultarTarifaLote" />
+  </wsdl:message>
+  <wsdl:portType name="TarifarioPT">
+    <wsdl:operation name="procesarTarifa">
+      <wsdl:input message="tns:procesarTarifaRequest" />
+      <wsdl:output message="tns:procesarTarifaResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarTarifaLote">
+      <wsdl:input message="tns:consultarTarifaLoteRequest" />
+      <wsdl:output message="tns:consultarTarifaLoteResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TarifarioSOAP11Binding" type="tns:TarifarioPT">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="procesarTarifa">
+      <soap:operation soapAction="http://www.bolivariano.com/CashManagement/Tarifario/procesarTarifa" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarTarifaLote">
+      <soap:operation soapAction="http://www.bolivariano.com/CashManagement/Tarifario/consultarTarifaLote" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TarifarioSOAP11BindingQSService">
+    <wsdl:port name="TarifarioSOAP11BindingQSPort" binding="tns:TarifarioSOAP11Binding">
+      <soap:address location="https://soavides.bolivariano.fin.ec:5554/Tarifario/proxy/TarifarioCash" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
