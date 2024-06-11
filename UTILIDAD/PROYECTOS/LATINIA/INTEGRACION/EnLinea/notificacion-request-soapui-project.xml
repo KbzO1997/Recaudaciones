@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="MsNotificationGateway" soapui-version="5.4.0" id="f23e5ea3-9ec6-44f8-9b47-429803f76eeb" abortOnError="false" runType="SEQUENTIAL" resourceRoot="" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="notificacionesSOAP11Binding" type="wsdl" bindingName="{http://notification_gateway.microservice.bolivariano.com/microservicio/NotificationGateway}notificacionesSOAP11Binding" soapVersion="1_1" anonymous="optional" definition="https://172.16.31.128:8094/microservicio/NotificationGateway/soap/enviarNotificacion?wsdl" id="72806617-85d7-4ecd-b562-d5f2eaccf5f4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://172.16.31.128:8094/microservicio/NotificationGateway/soap/enviarNotificacion?wsdl"><con:part><con:url>https://172.16.31.128:8094/microservicio/NotificationGateway/soap/enviarNotificacion?wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://notification_gateway.microservice.bolivariano.com/microservicio/NotificationGateway" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://notification_gateway.microservice.bolivariano.com/microservicio/NotificationGateway" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:sch="http://notification_gateway.microservice.bolivariano.com/estructura">
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import namespace="http://notification_gateway.microservice.bolivariano.com/estructura" schemaLocation="https://172.16.31.128:8094/microservicio/NotificationGateway/soap/enviarNotificacion?xsd=../schema/notificaciones.xsd"></xsd:import>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="enviarNotificacionResponse">
+    <wsdl:part element="sch:mensajeSalidaEnvioNotificacion" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="enviarNotificacionRequest">
+    <wsdl:part element="sch:mensajeEntradaEnvioNotificacion" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="notificacionesPortType">
+    <wsdl:operation name="enviarNotificacion">
+      <wsdl:input message="tns:enviarNotificacionRequest"></wsdl:input>
+      <wsdl:output message="tns:enviarNotificacionResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="notificacionesSOAP11Binding" type="tns:notificacionesPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="enviarNotificacion">
+      <soap:operation soapAction="http://notification_gateway.microservice.bolivariano.com/microservicio/NotificationGateway/enviarNotificacion"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NotificacionesSOAPService">
+    <wsdl:port binding="tns:notificacionesSOAP11Binding" name="notificacionesSOAP11BindingQSPort">
+      <soap:address location="https://172.16.31.128:8094/microservicio/NotificationGateway/soap/enviarNotificacion"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>https://172.16.31.128:8094/microservicio/NotificationGateway/soap/enviarNotificacion?xsd=../schema/notificaciones.xsd</con:url><con:content><![CDATA[<xs:schema elementFormDefault="qualified" targetNamespace="http://notification_gateway.microservice.bolivariano.com/estructura" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://notification_gateway.microservice.bolivariano.com/estructura">
+  <xs:complexType name="notificacion">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="0" name="idRequerimiento" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="refServicio" nillable="true" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="refCompania" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="codEnte" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="etiquetaMensaje" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="claveValorNotificacion">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="clave" nillable="true" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="valor" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="datoAdjunto">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="valor" nillable="true" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="tipo" nillable="true" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="nombre" nillable="true" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="codificacion" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="medioEnvio">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="tipo" nillable="true" type="tns:tipoMedio"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="valor" nillable="true" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="tipoMail" type="tns:tipoMedioMail"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="tipoMedio">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="M"/>
+      <xs:enumeration value="C"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="tipoMedioMail">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="to"/>
+      <xs:enumeration value="cc"/>
+      <xs:enumeration value="bcc"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="datosComunNotificacion">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="canal" nillable="true" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="fechaIngreso" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="horaIngreso" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="asunto" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="datosAdicionalesNotificacion">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="1" name="parametrosNotificacion" nillable="true" type="tns:claveValorNotificacion"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="mediosEnvio">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="1" name="medioEnvio" nillable="true" type="tns:medioEnvio"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="datosAdjunto">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="1" name="datoAdjunto" nillable="true" type="tns:datoAdjunto"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="mensajeEntradaEnvioNotificacion">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="notificacion" nillable="true" type="tns:notificacion"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="datosComunNotificacion" nillable="true" type="tns:datosComunNotificacion"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="adicionalesNotificacion" type="tns:datosAdicionalesNotificacion"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="mediosEnvio" type="tns:mediosEnvio"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="datosAdjunto" type="tns:datosAdjunto"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="mensajeSalidaEnvioNotificacion">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="codigoError" nillable="true" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="mensajeSistema" nillable="true" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="mensajeUsuario" nillable="true" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="horaIngreso" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="mensajeEntradaEnvioNotificacion" nillable="true" type="tns:mensajeEntradaEnvioNotificacion"/>
+  <xs:element name="mensajeSalidaEnvioNotificacion" nillable="true" type="tns:mensajeSalidaEnvioNotificacion"/>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://172.16.31.128:8094/microservicio/NotificationGateway/soap/enviarNotificacion</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://notification_gateway.microservice.bolivariano.com/microservicio/NotificationGateway/enviarNotificacion" name="enviarNotificacion" bindingOperationName="enviarNotificacion" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional" id="896c7864-5816-4ae1-aee1-ae4c89ce44f9"><con:settings/><con:call name="Request 1" id="0cdfa534-4b6c-4d75-bd54-006f2493e6ea"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://172.16.31.128:8094/services/NotificationGateway/soap/enviarNotificacion</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:est="http://notification_gateway.microservice.bolivariano.com/estructura">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <est:mensajeEntradaEnviarNotificacion>
+         <est:notificacion>
+            <!--Optional:-->
+            <est:idRequerimiento>?</est:idRequerimiento>
+            <est:refServicio>?</est:refServicio>
+            <!--Optional:-->
+            <est:refCompania>?</est:refCompania>
+            <!--Optional:-->
+            <est:codEnte>?</est:codEnte>
+            <!--Optional:-->
+            <est:etiquetaMensaje>?</est:etiquetaMensaje>
+         </est:notificacion>
+         <est:datosComunNotificacion>
+            <est:canal>?</est:canal>
+            <!--Optional:-->
+            <est:fechaIngreso>?</est:fechaIngreso>
+            <!--Optional:-->
+            <est:horaIngreso>?</est:horaIngreso>
+            <!--Optional:-->
+            <est:asunto>?</est:asunto>
+         </est:datosComunNotificacion>
+         <!--Optional:-->
+         <est:adicionalesNotificacion>
+            <!--1 or more repetitions:-->
+            <est:parametrosNotificacion>
+               <est:clave>?</est:clave>
+               <est:valor>?</est:valor>
+            </est:parametrosNotificacion>
+         </est:adicionalesNotificacion>
+         <!--Optional:-->
+         <est:mediosEnvio>
+            <!--1 or more repetitions:-->
+            <est:medioEnvio>
+               <est:tipo>?</est:tipo>
+               <est:valor>?</est:valor>
+               <!--Optional:-->
+               <est:tipoMail>?</est:tipoMail>
+            </est:medioEnvio>
+         </est:mediosEnvio>
+         <!--Optional:-->
+         <est:datosAdjunto>
+            <!--1 or more repetitions:-->
+            <est:datoAdjunto>
+               <est:valor>?</est:valor>
+               <est:tipo>?</est:tipo>
+               <est:nombre>?</est:nombre>
+               <est:codificacion>?</est:codificacion>
+            </est:datoAdjunto>
+         </est:datosAdjunto>
+      </est:mensajeEntradaEnviarNotificacion>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://notification_gateway.microservice.bolivariano.com/microservicio/NotificationGateway/enviarNotificacion"/><con:wsrmConfig version="1.2"/></con:call><con:call name="RequestEjemplo" id="783bb808-eea3-47bd-a660-ad9cf14de51b"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://172.16.31.128:8050/services/Notificaciones/Avisos24GatewayMSNS</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:est="http://notification_gateway.microservice.bolivariano.com/estructura">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <est:mensajeEntradaEnviarNotificacion>
+	<est:notificacion>
+		<est:idRequerimiento>IVR202009122110060</est:idRequerimiento>
+		<est:refServicio>REATM</est:refServicio>
+		<est:refCompania>BOLIVARIANO</est:refCompania>
+		<est:codEnte>137349</est:codEnte>
+		<est:etiquetaMensaje>Avisos24</est:etiquetaMensaje>
+	</est:notificacion>
+	<est:datosComunNotificacion>
+		<est:canal>IVR</est:canal>
+		<est:fechaIngreso>2020/09/12</est:fechaIngreso>
+		<est:horaIngreso>15:39:40</est:horaIngreso>
+	</est:datosComunNotificacion>
+	<est:adicionalesNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>transaccion</est:clave>
+			<est:valor>compra</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>tipotrj</est:clave>
+			<est:valor>VISA</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>valor2</est:clave>
+			<est:valor>12.00</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>comercio</est:clave>
+			<est:valor>MUNDO BEBÉ</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>tarjeta</est:clave>
+			<est:valor>XXXXX115</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>TITULAR</est:clave>
+			<est:valor>MARIN</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>fecha</est:clave>
+			<est:valor>11/09/2020</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>hora</est:clave>
+			<est:valor>15:38:32</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>ciudad</est:clave>
+			<est:valor>Guayaquil</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>estado</est:clave>
+			<est:valor>Guayas</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>pais</est:clave>
+			<est:valor>Ecuador</est:valor>
+		</est:parametrosNotificacion>
+	</est:adicionalesNotificacion>
+	<est:mediosEnvio>
+		<est:medioEnvio>
+			<est:tipo>M</est:tipo>
+			<est:valor>cmarin@bolivariano.com</est:valor>
+		</est:medioEnvio>
+	</est:mediosEnvio>
+</est:mensajeEntradaEnviarNotificacion>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://notification_gateway.microservice.bolivariano.com/microservicio/NotificationGateway/enviarNotificacion"/><con:wsrmConfig version="1.2"/></con:call><con:call id="efc6f2c0-241d-4517-bff6-31dd392435f9" name="RequestEjemplo"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://172.16.31.128:8050/services/Notificaciones/Avisos24GatewayMSNS</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:est="http://notification_gateway.microservice.bolivariano.com/estructura">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <est:mensajeEntradaEnviarNotificacion>
+	<est:notificacion>
+		<est:idRequerimiento>BNK202009122110046</est:idRequerimiento>
+		<est:refServicio>ACCEX</est:refServicio>
+		<est:refCompania>BOLIVARIANO</est:refCompania>
+		<est:codEnte>604541</est:codEnte>
+		<est:etiquetaMensaje>Avisos24</est:etiquetaMensaje>
+	</est:notificacion>
+	<est:datosComunNotificacion>
+		<est:canal>BNK</est:canal>
+		<est:fechaIngreso>2020/08/31</est:fechaIngreso>
+		<est:horaIngreso>19:13:40</est:horaIngreso>
+	</est:datosComunNotificacion>
+	<est:adicionalesNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>login</est:clave>
+			<est:valor>0917908014</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>cliente_mis</est:clave>
+			<est:valor>4078</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>producto</est:clave>
+			<est:valor>0</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>desccanal</est:clave>
+			<est:valor>24online</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>cliente</est:clave>
+			<est:valor>09******14</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>fecha_tope</est:clave>
+			<est:valor>20/07/2020</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>fecha1</est:clave>
+			<est:valor>12:27:32</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>empresa</est:clave>
+			<est:valor>Direccion IP</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>planilla</est:clave>
+			<est:valor>172.16.30.109</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>nombre</est:clave>
+			<est:valor>CHRISTIAN MARIN</est:valor>
+		</est:parametrosNotificacion>
+	</est:adicionalesNotificacion>
+	<est:mediosEnvio>
+		<est:medioEnvio>
+			<est:tipo>C</est:tipo>
+			<est:valor>0998663011</est:valor>
+		</est:medioEnvio>
+	</est:mediosEnvio>
+</est:mensajeEntradaEnviarNotificacion>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://notification_gateway.microservice.bolivariano.com/microservicio/NotificationGateway/enviarNotificacion"/><con:wsrmConfig version="1.2"/></con:call><con:call id="e5539d8a-ec76-4fb1-bdf6-8639d169c53c" name="1474176"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://172.16.31.128:8050/services/Notificaciones/Avisos24GatewayMSNS</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:est="http://notification_gateway.microservice.bolivariano.com/estructura">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <est:mensajeEntradaEnviarNotificacion>
+	<est:notificacion>
+		<est:idRequerimiento>IVR202009122110024</est:idRequerimiento>
+		<est:refServicio>REATM</est:refServicio>
+		<est:refCompania>BOLIVARIANO</est:refCompania>
+		<est:codEnte>1474176</est:codEnte>
+		<est:etiquetaMensaje>Avisos24</est:etiquetaMensaje>
+	</est:notificacion>
+	<est:datosComunNotificacion>
+		<est:canal>IVR</est:canal>
+		<est:fechaIngreso>2020/09/12</est:fechaIngreso>
+		<est:horaIngreso>15:39:40</est:horaIngreso>
+	</est:datosComunNotificacion>
+	<est:adicionalesNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>transaccion</est:clave>
+			<est:valor>compra</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>tipotrj</est:clave>
+			<est:valor>VISA</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>valor2</est:clave>
+			<est:valor>12.00</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>comercio</est:clave>
+			<est:valor>MUNDO BEBÉ</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>tarjeta</est:clave>
+			<est:valor>XXXXX115</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>TITULAR</est:clave>
+			<est:valor>MARIN</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>fecha</est:clave>
+			<est:valor>11/09/2020</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>hora</est:clave>
+			<est:valor>15:38:32</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>ciudad</est:clave>
+			<est:valor>Guayaquil</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>estado</est:clave>
+			<est:valor>Guayas</est:valor>
+		</est:parametrosNotificacion>
+		<est:parametrosNotificacion>
+			<est:clave>pais</est:clave>
+			<est:valor>Ecuador</est:valor>
+		</est:parametrosNotificacion>
+	</est:adicionalesNotificacion>
+	<est:mediosEnvio>
+		<est:medioEnvio>
+			<est:tipo>M</est:tipo>
+			<est:valor>cmarin@bolivariano.com</est:valor>
+		</est:medioEnvio>
+	</est:mediosEnvio>
+</est:mensajeEntradaEnviarNotificacion>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://notification_gateway.microservice.bolivariano.com/microservicio/NotificationGateway/enviarNotificacion"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
