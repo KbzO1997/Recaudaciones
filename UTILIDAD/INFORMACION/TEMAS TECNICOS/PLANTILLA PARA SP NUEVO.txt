@@ -1,0 +1,64 @@
+/************************************************************************/
+/* Archivo:            pa_onb_iclientesprecal.sp                        */
+/* Motor de Base:      SYBASE                                           */
+/* Base de datos:      cob_cuentas                                      */
+/* Servidor:           HP-ACT                                           */
+/* Aplicacion:         Retanqueo                                        */
+/* Stored procedure:   pa_onb_iclientesprecal                           */
+/* Procesamiento:      OLTP                                             */
+/* Ult.ControlTarea:   R-BVIRM24                                        */
+/* Ult.Referencia:     REF 1                                            */
+/* Disenado por:       Daniela Garaicoa Prado                           */
+/* Fecha de escritura: 15/Jul/2022                                      */
+/************************************************************************/
+/*			                IMPORTANTE		       		                */
+/*	Este programa es parte de los paquetes bancarios propiedad de       */ 
+/*	"BANCO BOLIVARIANO C.A."                                            */
+/*	Su uso no autorizado queda expresamente prohibido asi como          */
+/*	cualquier alteracion o agregado hecho por alguno de sus             */
+/*	usuario sin el debido consentimiento por escrito de la              */ 
+/*	Presidencia Ejecutiva de BANCO BOLIVARIANO o su representante       */
+/************************************************************************/
+/* PROPOSITO:                                                           */
+/*       Procesamiento para descartar clientes que no pasan el seguro	*/	
+/*       para rutas online o express									*/
+/************************************************************************/
+/*  MODIFICACIONES                                                      */
+/************************************************************************/
+/*  REF   FECHA             AUTOR                           TAREA       */
+/*    1   15/Jul/2022       Daniela Garaicoa           		BVIRM24     */
+/*        Emision inicial                                               */
+/************************************************************************/
+use cob_cuentas
+go
+if exists(select 1 from sysobjects where name = 'pa_onb_iclientesprecal' and type = 'P')
+	begin
+		drop procedure dbo.pa_onb_iclientesprecal
+		if exists(select 1 from sysobjects where name = 'pa_onb_iclientesprecal' and type = 'P')
+			PRINT '<<< DROP PROCEDURE pa_onb_iclientesprecal --ERROR-- >>>'
+			else
+			PRINT '== DROP PROCEDURE pa_onb_iclientesprecal *OK* =='
+	end   
+go
+create procedure dbo.pa_onb_iclientesprecal
+@e_sec_carga int
+as
+begin
+	insert into cob_credito..cre_d_base_cli_precalif(
+		bc_id_carga, bc_identificacion)
+		select 
+			sec_carga, p.ap_identificacion
+            from cob_cuentas..onb_o_archivo_precalifica p
+            where ap_secuencia = @e_sec_carga
+	if @@error <> 0
+		begin
+			return 3000075
+		end
+	return 0
+end
+go
+if exists(select 1 from sysobjects where name='pa_onb_iclientesprecal' and type = 'P')
+	PRINT '== CREATE PROCEDURE pa_onb_iclientesprecal *OK* =='
+	else
+	PRINT '<<< CREATE PROCEDURE pa_onb_iclientesprecal -- ERROR -- >>>'
+go
