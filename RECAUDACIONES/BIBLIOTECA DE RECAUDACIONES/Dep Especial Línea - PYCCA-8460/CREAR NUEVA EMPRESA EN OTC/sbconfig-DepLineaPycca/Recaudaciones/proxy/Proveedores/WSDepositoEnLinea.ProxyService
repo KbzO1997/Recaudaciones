@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isAutoPublish="false" isTracingEnabled="false">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config">
+      <con:wsdl ref="ModeloNegocioCash/DepositoEnLinea"/>
+      <con:port>
+        <con:name>DepositoEnLineaPort</con:name>
+        <con:namespace>http://www.bolivariano.com/CashManagement/ws/DepositoEnLinea/</con:namespace>
+      </con:port>
+      <con:selector type="SOAP body"/>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/Recaudaciones/proxy/WSDepositoEnLinea</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>false</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:pipeline type="request" name="ConsultarMEDITERRANEAN_request">
+      <con:stage name="flujoMediterraneaConsulta">
+        <con:context>
+          <con2:userNsDecl namespace="http://tempuri.org/" prefix="tem"/>
+          <con2:varNsDecl namespace="http://www.bolivariano.com/CashManagement/MensajesDepositoenLinea" prefix="men"/>
+        </con:context>
+        <con:actions>
+          <con1:assign varName="inConsultarDeuda">
+            <con2:id>_ActionId-7719261666947815037--669f97e4.16b4c485b38.-7f74</con2:id>
+            <con1:expr>
+              <con2:xsltTransform>
+                <con2:resource ref="Recaudaciones/resources/DepositoEnLinea/MEDITERRANEAN/mediterraneanMsgInConsultaProveedor"/>
+                <con2:input>$body/men:MensajeEntradaConsultar</con2:input>
+              </con2:xsltTransform>
+            </con1:expr>
+          </con1:assign>
+          <con1:wsCallout>
+            <con2:id>_ActionId-7719261666947815037--669f97e4.16b4c485b38.-7f9a</con2:id>
+            <con1:service xsi:type="ref:BusinessServiceRef" ref="Recaudaciones/business/Proveedor/WS_MEDITERRANEAN" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>OpenItem</con1:operation>
+            <con1:request>
+              <con1:body>$inConsultarDeuda</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body>outConsultarDeuda</con1:body>
+            </con1:response>
+            <con1:requestTransform/>
+            <con1:responseTransform/>
+          </con1:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="ConsultarMEDITERRANEAN_response">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con1:replace varName="body" contents-only="true">
+            <con2:id>_ActionId-1871606032731027957-3c127283.16b65cfd7ba.-7fe0</con2:id>
+            <con1:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con2:xsltTransform>
+                <con2:resource ref="Recaudaciones/resources/DepositoEnLinea/MEDITERRANEAN/mediterraneanMsgOutConsultaProveedor"/>
+                <con2:input>$outConsultarDeuda</con2:input>
+              </con2:xsltTransform>
+            </con1:expr>
+          </con1:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="request" name="PagarMEDITERRANEAN_request">
+      <con:stage name="flujoMediterraneanPago">
+        <con:context>
+          <con2:varNsDecl namespace="http://www.bolivariano.com/CashManagement/MensajesDepositoenLinea" prefix="men"/>
+        </con:context>
+        <con:actions>
+          <con1:assign varName="inPagarMediterranean">
+            <con2:id>_ActionId-2830819598799012638--24478da9.16b8adf488c.-7f97</con2:id>
+            <con1:expr>
+              <con2:xsltTransform>
+                <con2:resource ref="Recaudaciones/resources/DepositoEnLinea/MEDITERRANEAN/mediterraneanMsgInPagarProveedor"/>
+                <con2:input>$body/men:MensajeEntradaPagar</con2:input>
+              </con2:xsltTransform>
+            </con1:expr>
+          </con1:assign>
+          <con1:wsCallout>
+            <con2:id>_ActionId-2830819598799012638--24478da9.16b8adf488c.-7fae</con2:id>
+            <con1:service xsi:type="ref:BusinessServiceRef" ref="Recaudaciones/business/Proveedor/WS_MEDITERRANEAN" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>GetPaid</con1:operation>
+            <con1:request>
+              <con1:body>$inPagarMediterranean</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body>outPagarMediterranean</con1:body>
+            </con1:response>
+            <con1:requestTransform/>
+            <con1:responseTransform/>
+          </con1:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PagarMEDITERRANEAN_response">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con1:replace varName="body" contents-only="true">
+            <con2:id>_ActionId-2830819598799012638--24478da9.16b8adf488c.-7f70</con2:id>
+            <con1:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con2:xsltTransform>
+                <con2:resource ref="Recaudaciones/resources/DepositoEnLinea/MEDITERRANEAN/mediterraneanMsgOutPagarProveedor"/>
+                <con2:input>$outPagarMediterranean</con2:input>
+              </con2:xsltTransform>
+            </con1:expr>
+          </con1:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="request" name="ReversarMediterranean_request">
+      <con:stage name="stage1">
+        <con:context>
+          <con2:varNsDecl namespace="http://www.bolivariano.com/CashManagement/MensajesDepositoenLinea" prefix="men"/>
+        </con:context>
+        <con:actions>
+          <con1:assign varName="inReversarMediterranean">
+            <con2:id>_ActionId-1378460466531929732--7baf337a.16bd33ce817.-7f56</con2:id>
+            <con1:expr>
+              <con2:xsltTransform>
+                <con2:resource ref="Recaudaciones/resources/DepositoEnLinea/MEDITERRANEAN/mediterraneanMsgInReversarProveedor"/>
+                <con2:input>$body/men:MensajeEntradaReversar</con2:input>
+              </con2:xsltTransform>
+            </con1:expr>
+          </con1:assign>
+          <con1:wsCallout>
+            <con2:id>_ActionId-1378460466531929732--7baf337a.16bd33ce817.-7f75</con2:id>
+            <con1:service xsi:type="ref:BusinessServiceRef" ref="Recaudaciones/business/Proveedor/WS_MEDITERRANEAN" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>GetPaid</con1:operation>
+            <con1:request>
+              <con1:body>$inReversarMediterranean</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body>outReversarMediterranean</con1:body>
+            </con1:response>
+            <con1:requestTransform/>
+            <con1:responseTransform/>
+          </con1:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="ReversarMediterranean_response">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con1:replace varName="body" contents-only="true">
+            <con2:id>_ActionId-1378460466531929732--7baf337a.16bd33ce817.-7f39</con2:id>
+            <con1:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con2:xsltTransform>
+                <con2:resource ref="Recaudaciones/resources/DepositoEnLinea/MEDITERRANEAN/mediterraneanMsgOutReversarProveedor"/>
+                <con2:input>$outReversarMediterranean</con2:input>
+              </con2:xsltTransform>
+            </con1:expr>
+          </con1:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="request" name="ConsultarMARGLOBAL_request">
+      <con:stage name="flujoMarglobalConsultar">
+        <con:context>
+          <con2:userNsDecl namespace="http://extranet.marglobal.com/Bolivariano/" prefix="bol"/>
+          <con2:varNsDecl namespace="http://www.bolivariano.com/CashManagement/MensajesDepositoenLinea" prefix="men"/>
+        </con:context>
+        <con:actions>
+          <con1:assign varName="inConsultarDeuda">
+            <con2:id>_ActionId-1433415030003431484--5a3049a6.16c3e5dad77.-7fb4</con2:id>
+            <con1:expr>
+              <con2:xsltTransform>
+                <con2:resource ref="Recaudaciones/resources/DepositoEnLinea/MARGLOBAL/marglobalMsgInConsultaProveedor"/>
+                <con2:input>$body/men:MensajeEntradaConsultar</con2:input>
+              </con2:xsltTransform>
+            </con1:expr>
+          </con1:assign>
+          <con1:wsCallout>
+            <con2:id>_ActionId-1433415030003431484--5a3049a6.16c3e5dad77.-7fd7</con2:id>
+            <con1:service xsi:type="ref:BusinessServiceRef" ref="Recaudaciones/business/Proveedor/WS_MARGLOBAL" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>ConsultaValoresxTrx</con1:operation>
+            <con1:request>
+              <con1:body>$inConsultarDeuda</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body>outConsultarDeuda</con1:body>
+            </con1:response>
+            <con1:requestTransform/>
+            <con1:responseTransform/>
+          </con1:wsCallout>
+          <con1:assign varName="xmlRespNaviera">
+            <con2:id>_ActionId-1433415030003431484--5a3049a6.16c3e5dad77.-7f9a</con2:id>
+            <con1:expr>
+              <con2:xqueryText>fn-bea:inlinedXML($outConsultarDeuda/bol:ConsultaValoresxTrxResult)</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="ConsultarMARGLOBAL_response">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con1:replace varName="body" contents-only="true">
+            <con2:id>_ActionId-1433415030003431484--5a3049a6.16c3e5dad77.-7f4a</con2:id>
+            <con1:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con2:xsltTransform>
+                <con2:resource ref="Recaudaciones/resources/DepositoEnLinea/MARGLOBAL/marglobalMsgOutConsultaProveedor"/>
+                <con2:input>$xmlRespNaviera</con2:input>
+              </con2:xsltTransform>
+            </con1:expr>
+          </con1:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="request" name="PagarMARGLOBAL_request">
+      <con:stage name="flujoPagoMarglobal">
+        <con:context>
+          <con2:userNsDecl namespace="http://extranet.marglobal.com/Bolivariano/" prefix="bol"/>
+          <con2:varNsDecl namespace="http://www.bolivariano.com/CashManagement/MensajesDepositoenLinea" prefix="men"/>
+        </con:context>
+        <con:actions>
+          <con1:assign varName="inPagarMarglobal">
+            <con2:id>_ActionId-1433415030003431484--5a3049a6.16c3e5dad77.-7f03</con2:id>
+            <con1:expr>
+              <con2:xsltTransform>
+                <con2:resource ref="Recaudaciones/resources/DepositoEnLinea/MARGLOBAL/marglobalMsgInPagarProveedor"/>
+                <con2:input>$body/men:MensajeEntradaPagar</con2:input>
+              </con2:xsltTransform>
+            </con1:expr>
+          </con1:assign>
+          <con1:wsCallout>
+            <con2:id>_ActionId-1433415030003431484--5a3049a6.16c3e5dad77.-7f34</con2:id>
+            <con1:service xsi:type="ref:BusinessServiceRef" ref="Recaudaciones/business/Proveedor/WS_MARGLOBAL" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>ConfirmacionPago</con1:operation>
+            <con1:request>
+              <con1:body>$inPagarMarglobal</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body>outPagarMarglobal</con1:body>
+            </con1:response>
+            <con1:requestTransform/>
+            <con1:responseTransform/>
+          </con1:wsCallout>
+          <con1:assign varName="XMLPago">
+            <con2:id>_ActionId-1433415030003431484--5a3049a6.16c3e5dad77.-7ee8</con2:id>
+            <con1:expr>
+              <con2:xqueryText>fn-bea:inlinedXML($outPagarMarglobal/bol:ConfirmacionPagoResult)</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PagarMARGLOBAL_response">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con1:replace varName="body" contents-only="true">
+            <con2:id>_ActionId-1433415030003431484--5a3049a6.16c3e5dad77.-7eb8</con2:id>
+            <con1:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con2:xsltTransform>
+                <con2:resource ref="Recaudaciones/resources/DepositoEnLinea/MARGLOBAL/marglobalMsgOutPagarProveedor"/>
+                <con2:input>$XMLPago</con2:input>
+              </con2:xsltTransform>
+            </con1:expr>
+          </con1:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="request" name="ReversarMarglobal_request">
+      <con:stage name="flujoReversoMarglobal">
+        <con:context>
+          <con2:userNsDecl namespace="http://extranet.marglobal.com/Bolivariano/" prefix="bol"/>
+          <con2:varNsDecl namespace="http://www.bolivariano.com/CashManagement/MensajesDepositoenLinea" prefix="men"/>
+        </con:context>
+        <con:actions>
+          <con1:assign varName="inReversarMarglobal">
+            <con2:id>_ActionId-1433415030003431484--5a3049a6.16c3e5dad77.-7e3b</con2:id>
+            <con1:expr>
+              <con2:xsltTransform>
+                <con2:resource ref="Recaudaciones/resources/DepositoEnLinea/MARGLOBAL/marglobalMsgInReversarProveedor"/>
+                <con2:input>$body/men:MensajeEntradaReversar</con2:input>
+              </con2:xsltTransform>
+            </con1:expr>
+          </con1:assign>
+          <con1:wsCallout>
+            <con2:id>_ActionId-1433415030003431484--5a3049a6.16c3e5dad77.-7e5d</con2:id>
+            <con1:service xsi:type="ref:BusinessServiceRef" ref="Recaudaciones/business/Proveedor/WS_MARGLOBAL" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>ReversarConfirmacion</con1:operation>
+            <con1:request>
+              <con1:body>$inReversarMarglobal</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body>outReversarMarglobal</con1:body>
+            </con1:response>
+            <con1:requestTransform/>
+            <con1:responseTransform/>
+          </con1:wsCallout>
+          <con1:assign varName="XMLReverso">
+            <con2:id>_ActionId-1433415030003431484--5a3049a6.16c3e5dad77.-7e20</con2:id>
+            <con1:expr>
+              <con2:xqueryText>fn-bea:inlinedXML($outReversarMarglobal/bol:ReversarConfirmacionResult)</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="ReversarMarglobal_response">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con1:replace varName="body" contents-only="true">
+            <con2:id>_ActionId-1433415030003431484--5a3049a6.16c3e5dad77.-7e0c</con2:id>
+            <con1:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con2:xsltTransform>
+                <con2:resource ref="Recaudaciones/resources/DepositoEnLinea/MARGLOBAL/marglobalMsgOutReversarProveedor"/>
+                <con2:input>$XMLReverso</con2:input>
+              </con2:xsltTransform>
+            </con1:expr>
+          </con1:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="request" name="ConsultarPycca_request">
+      <con:stage name="flujoPyccaConsultar">
+        <con:comment/>
+        <con:context>
+          <con2:userNsDecl namespace="http://extranet.marglobal.com/Bolivariano/" prefix="bol"/>
+          <con2:varNsDecl namespace="http://www.bolivariano.com/CashManagement/MensajesDepositoenLinea" prefix="men"/>
+        </con:context>
+        <con:actions>
+          <con1:assign varName="inConsultarDeuda">
+            <con2:id>_ActionId-2978250403964750055-7b609836.172941cf98f.-7e7e</con2:id>
+            <con1:expr>
+              <con2:xsltTransform>
+                <con2:resource ref="Recaudaciones/resources/DepositoEnLinea/Pycca/pyccaMsgInConsultaProveedor"/>
+                <con2:input>$body/men:MensajeEntradaConsultar</con2:input>
+              </con2:xsltTransform>
+            </con1:expr>
+          </con1:assign>
+          <con1:wsCallout>
+            <con2:id>_ActionId-2978250403964750055-7b609836.172941cf98f.-7e7d</con2:id>
+            <con1:service xsi:type="ref:BusinessServiceRef" ref="Recaudaciones/business/Proveedor/WS_Pycca" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>cargarDatos</con1:operation>
+            <con1:request>
+              <con1:body>$inConsultarDeuda</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body>outConsultarDeuda</con1:body>
+            </con1:response>
+            <con1:requestTransform/>
+            <con1:responseTransform/>
+          </con1:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="ConsultarPycca_response">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con1:replace varName="body" contents-only="true">
+            <con2:id>_ActionId-2978250403964750055-7b609836.172941cf98f.-7e7b</con2:id>
+            <con1:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con2:xsltTransform>
+                <con2:resource ref="Recaudaciones/resources/DepositoEnLinea/Pycca/pyccaMsgOutConsultaProveedor"/>
+                <con2:input>$outConsultarDeuda</con2:input>
+              </con2:xsltTransform>
+            </con1:expr>
+          </con1:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="request" name="PagarPycca_request">
+      <con:stage name="flujoPagoPycca">
+        <con:comment/>
+        <con:context>
+          <con2:userNsDecl namespace="http://extranet.marglobal.com/Bolivariano/" prefix="bol"/>
+          <con2:varNsDecl namespace="http://www.bolivariano.com/CashManagement/MensajesDepositoenLinea" prefix="men"/>
+        </con:context>
+        <con:actions>
+          <con1:assign varName="inPagarPycca">
+            <con2:id>_ActionId-532152656525210005--4633787b.172cd84fe7b.-7eda</con2:id>
+            <con1:expr>
+              <con2:xsltTransform>
+                <con2:resource ref="Recaudaciones/resources/DepositoEnLinea/Pycca/pyccaMsgInPagoProveedor"/>
+                <con2:input>$body/men:MensajeEntradaPagar</con2:input>
+              </con2:xsltTransform>
+            </con1:expr>
+          </con1:assign>
+          <con1:wsCallout>
+            <con2:id>_ActionId-532152656525210005--4633787b.172cd84fe7b.-7ed9</con2:id>
+            <con1:service xsi:type="ref:BusinessServiceRef" ref="Recaudaciones/business/Proveedor/WS_Pycca" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>registrarPagoBanco</con1:operation>
+            <con1:request>
+              <con1:body>$inPagarPycca</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body>outPagarPycca</con1:body>
+            </con1:response>
+            <con1:requestTransform/>
+            <con1:responseTransform/>
+          </con1:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PagarPycca_response">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con1:replace varName="body" contents-only="true">
+            <con2:id>_ActionId-532152656525210005--4633787b.172cd84fe7b.-7ed7</con2:id>
+            <con1:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con2:xsltTransform>
+                <con2:resource ref="Recaudaciones/resources/DepositoEnLinea/Pycca/pyccaMsgOutPagoProveedor"/>
+                <con2:input>$outPagarPycca</con2:input>
+              </con2:xsltTransform>
+            </con1:expr>
+          </con1:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="request" name="ReversarPycca_request">
+      <con:stage name="flujoReversoPycca">
+        <con:comment/>
+        <con:context>
+          <con2:userNsDecl namespace="http://extranet.marglobal.com/Bolivariano/" prefix="bol"/>
+          <con2:varNsDecl namespace="http://www.bolivariano.com/CashManagement/MensajesDepositoenLinea" prefix="men"/>
+        </con:context>
+        <con:actions>
+          <con1:assign varName="inReversarPycca">
+            <con2:id>_ActionId-532152656525210005--4633787b.172cd84fe7b.-7df6</con2:id>
+            <con1:expr>
+              <con2:xsltTransform>
+                <con2:resource ref="Recaudaciones/resources/DepositoEnLinea/Pycca/pyccaMsgInReversarProveedor"/>
+                <con2:input>$body/men:MensajeEntradaReversar</con2:input>
+              </con2:xsltTransform>
+            </con1:expr>
+          </con1:assign>
+          <con1:wsCallout>
+            <con2:id>_ActionId-532152656525210005--4633787b.172cd84fe7b.-7df5</con2:id>
+            <con1:service xsi:type="ref:BusinessServiceRef" ref="Recaudaciones/business/Proveedor/WS_Pycca" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>registrarPagoBanco</con1:operation>
+            <con1:request>
+              <con1:body>$inReversarPycca</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body>outReversarPycca</con1:body>
+            </con1:response>
+            <con1:requestTransform/>
+            <con1:responseTransform/>
+          </con1:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="ReversarPycca_response">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con1:replace varName="body" contents-only="true">
+            <con2:id>_ActionId-532152656525210005--4633787b.172cd84fe7b.-7df3</con2:id>
+            <con1:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con2:xsltTransform>
+                <con2:resource ref="Recaudaciones/resources/DepositoEnLinea/Pycca/pyccaMsgOutReversarProveedor"/>
+                <con2:input>$outReversarPycca</con2:input>
+              </con2:xsltTransform>
+            </con1:expr>
+          </con1:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:branch-node type="operation" name="DepositoENLinea">
+        <con:context/>
+        <con:branch-table>
+          <con:branch name="Consultar">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:branch-node type="condition" name="DepositoEnLinea">
+                <con:context>
+                  <con2:varNsDecl namespace="http://www.bolivariano.com/CashManagement/MensajesDepositoenLinea" prefix="men"/>
+                </con:context>
+                <con:branch-table variable="body">
+                  <con:xpath>
+                    <con2:xpathText>./men:MensajeEntradaConsultar/codigoEmpresa</con2:xpathText>
+                  </con:xpath>
+                  <con:branch name="MEDITERRANEAN">
+                    <con:operator>equals</con:operator>
+                    <con:value>6930</con:value>
+                    <con:flow>
+                      <con:pipeline-node name="ConsultarMEDITERRANEAN">
+                        <con:request>ConsultarMEDITERRANEAN_request</con:request>
+                        <con:response>ConsultarMEDITERRANEAN_response</con:response>
+                      </con:pipeline-node>
+                    </con:flow>
+                  </con:branch>
+                  <con:branch name="MARGLOBAL">
+                    <con:operator>equals</con:operator>
+                    <con:value>451</con:value>
+                    <con:flow>
+                      <con:pipeline-node name="ConsultarMARGLOBAL">
+                        <con:request>ConsultarMARGLOBAL_request</con:request>
+                        <con:response>ConsultarMARGLOBAL_response</con:response>
+                      </con:pipeline-node>
+                    </con:flow>
+                  </con:branch>
+                  <con:branch name="Pycca">
+                    <con:operator>equals</con:operator>
+                    <con:value>8460</con:value>
+                    <con:flow>
+                      <con:pipeline-node name="ConsultarPycca">
+                        <con:request>ConsultarPycca_request</con:request>
+                        <con:response>ConsultarPycca_response</con:response>
+                      </con:pipeline-node>
+                    </con:flow>
+                  </con:branch>
+                  <con:default-branch>
+                    <con:flow/>
+                  </con:default-branch>
+                </con:branch-table>
+              </con:branch-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="Pagar">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:branch-node type="condition" name="DepositoEnLineaPagar">
+                <con:context>
+                  <con2:varNsDecl namespace="http://www.bolivariano.com/CashManagement/MensajesDepositoenLinea" prefix="men"/>
+                </con:context>
+                <con:branch-table variable="body">
+                  <con:xpath>
+                    <con2:xpathText>./men:MensajeEntradaPagar/codigoEmpresa</con2:xpathText>
+                  </con:xpath>
+                  <con:branch name="MEDITERRANEAN">
+                    <con:operator>equals</con:operator>
+                    <con:value>6930</con:value>
+                    <con:flow>
+                      <con:pipeline-node name="PagarMEDITERRANEAN">
+                        <con:request>PagarMEDITERRANEAN_request</con:request>
+                        <con:response>PagarMEDITERRANEAN_response</con:response>
+                      </con:pipeline-node>
+                    </con:flow>
+                  </con:branch>
+                  <con:branch name="MARGLOBAL">
+                    <con:operator>equals</con:operator>
+                    <con:value>451</con:value>
+                    <con:flow>
+                      <con:pipeline-node name="PagarMARGLOBAL">
+                        <con:request>PagarMARGLOBAL_request</con:request>
+                        <con:response>PagarMARGLOBAL_response</con:response>
+                      </con:pipeline-node>
+                    </con:flow>
+                  </con:branch>
+                  <con:branch name="Pycca">
+                    <con:operator>equals</con:operator>
+                    <con:value>8460</con:value>
+                    <con:flow>
+                      <con:pipeline-node name="PagarPycca">
+                        <con:comment/>
+                        <con:request>PagarPycca_request</con:request>
+                        <con:response>PagarPycca_response</con:response>
+                      </con:pipeline-node>
+                    </con:flow>
+                  </con:branch>
+                  <con:default-branch>
+                    <con:flow/>
+                  </con:default-branch>
+                </con:branch-table>
+              </con:branch-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="Reversar">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:branch-node type="condition" name="DepositoEnLineaReversar">
+                <con:context>
+                  <con2:varNsDecl namespace="http://www.bolivariano.com/CashManagement/MensajesDepositoenLinea" prefix="men"/>
+                </con:context>
+                <con:branch-table variable="body">
+                  <con:xpath>
+                    <con2:xpathText>./men:MensajeEntradaReversar/codigoEmpresa</con2:xpathText>
+                  </con:xpath>
+                  <con:branch name="MEDITERRANEAN">
+                    <con:operator>equals</con:operator>
+                    <con:value>6930</con:value>
+                    <con:flow>
+                      <con:pipeline-node name="ReversarMediterranean">
+                        <con:request>ReversarMediterranean_request</con:request>
+                        <con:response>ReversarMediterranean_response</con:response>
+                      </con:pipeline-node>
+                    </con:flow>
+                  </con:branch>
+                  <con:branch name="MARGLOBAL">
+                    <con:operator>equals</con:operator>
+                    <con:value>451</con:value>
+                    <con:flow>
+                      <con:pipeline-node name="ReversarMarglobal">
+                        <con:request>ReversarMarglobal_request</con:request>
+                        <con:response>ReversarMarglobal_response</con:response>
+                      </con:pipeline-node>
+                    </con:flow>
+                  </con:branch>
+                  <con:branch name="Pycca">
+                    <con:operator>equals</con:operator>
+                    <con:value>8460</con:value>
+                    <con:flow>
+                      <con:pipeline-node name="ReversarPycca">
+                        <con:comment/>
+                        <con:request>ReversarPycca_request</con:request>
+                        <con:response>ReversarPycca_response</con:response>
+                      </con:pipeline-node>
+                    </con:flow>
+                  </con:branch>
+                  <con:default-branch>
+                    <con:flow/>
+                  </con:default-branch>
+                </con:branch-table>
+              </con:branch-node>
+            </con:flow>
+          </con:branch>
+          <con:default-branch>
+            <con:flow/>
+          </con:default-branch>
+        </con:branch-table>
+      </con:branch-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

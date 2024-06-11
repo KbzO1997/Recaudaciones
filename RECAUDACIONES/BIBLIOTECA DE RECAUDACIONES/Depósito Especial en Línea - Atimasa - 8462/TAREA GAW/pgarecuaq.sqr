@@ -1,0 +1,168 @@
+!***************************************************************************!
+!*      Archivo:                pgarecuaq.sqr                              *!
+!*      Base de datos:          cob_pagos                                  *!
+!*      Producto:               Cuentas Corrientes                         *!
+!*      Disenado por:           Danny Olaya                                *!
+!*      Fecha de escritura:     05/23/2018                                 *!
+!***************************************************************************!
+!*                              IMPORTANTE                                 *!
+!*      Este programa es parte de los paquetes bancarios propiedad de      *!
+!*      "BANCO BOLIVARIANO"                                                *!
+!*      Su uso no autorizado queda expresamente prohibido asi como         *!
+!*      cualquier alteracion o agregado hecho por alguno de sus            *!
+!*      usuarios sin el debido consentimiento por escrito de la            *!
+!*      Presidencia Ejecutiva de BANCO BOLIVARIANO.                        *!
+!***************************************************************************!
+!*                              PROPOSITO                                  *!
+!*    Este programa genera el reporte de recaudos de ECUAQUIMICA           *!
+!***************************************************************************!
+!*     FECHA           AUTOR           RAZON                               *!
+!*1    07/Jun/2018     Danny Olaya S.  DEPONL-AP-SGC00031612-SGC00032076   *!
+!*2    12/Jul/2019     Daniel Pereira  RECMPS-21 Recaudacion MSC   	   *!
+!***************************************************************************!
+
+#define WPATH	'/respaldo/archivos/cuentas/data/'
+
+#include "definic.inc"
+
+Begin-Setup
+  use cob_pagos
+  printer-init {COD_IMP_COND}
+End-Setup
+
+#include "log.inc"
+#include "ctacte.inc"
+
+Begin-Program
+  do Inicializar_Programa
+  do ParamS(1,$i_fecha_proceso,'','','')
+  
+  let $dia = substr($i_fecha_proceso,4,2)
+  let $mes = substr($i_fecha_proceso,1,2)
+  let $anio = substr($i_fecha_proceso,7,4)
+  
+  do Main
+ 
+  do Finalizar_Programa
+End-Program
+
+
+!*************************!
+Begin-Procedure Main!*****!
+!*************************!
+Begin-Select   !Ref 2 
+ltrim(rtrim(c.codigo))	&cod_emp
+ltrim(rtrim(c.valor))	&nom_arch
+
+  let $i_empresa = &cod_emp
+  let $nom_arch = &nom_arch
+  do Generar_Archivo
+from cobis..cl_catalogo c, cobis..cl_tabla t
+where t.codigo = c.tabla
+and t.tabla = 'sv_archivos_dep_enlinea'
+and c.estado = 'V'
+End-Select
+  
+End-Procedure
+
+!************************************!
+Begin-Procedure Generar_Archivo!*****!
+!************************************!
+do SetParametros
+
+show '....GENERANDO REPORTE DE TRANSACCIONES DE ECUAQUIMICA....'
+
+   execute -XC do = FormarArchivo
+     cob_pagos..pa_pag_g_archivo_resp_ecuaq
+         @e_fecha_proceso    = $i_fecha_proceso,
+         @e_empresa          = $i_empresa    !ref 2
+     into &TIPO_PROCESO  		char(1),
+          &TIPO_IDENTIFICACION  char(1),
+          &IDENTIFICACION    	varchar(13),
+          &REFERENCIA           varchar(20),
+          &REFERENCIA_AUX       varchar(20),
+          &MONEDA_PAGO		    char(5),		
+          &VALOR_PAGO			money,
+          &SECUENCIAL_PAGO	    int,
+          &FECHA_PAGO		    varchar(10),
+          &HORA_PAGO	        varchar(10),
+		  &CANAL_PROCESO	    char(5),
+		  &MODO_PROCESO			char(2),
+		  &FORMA_PAGO		    varchar(10)
+ close #NumEmp  
+ 
+  show 'Se ha generado el archivo ' $i_arch ' para empresa ' $i_empresa
+
+End-Procedure
+
+!**********************************!
+begin-procedure SetParametros!*****!
+!**********************************!
+  let $tab = chr(9)	!* Se crea un espacio de carro (tabulacion)  
+  !let $i_arch = {WPATH}  || 'conciliacion_' ||  $anio  || $mes || $dia||'.txt'
+  let $i_arch = {WPATH}  || $nom_arch ||  $anio  || $mes || $dia||'.txt'    !ref 2
+  let #NumEmp = to_number($i_empresa)
+  open $i_arch as #NumEmp for-writing record =10000
+  do Before_OfArea2(#NumEmp)
+  
+end-procedure
+
+!**********************************!
+begin-procedure FormarArchivo!*****!
+  !**********************************!
+  let $tab = chr(9)
+  move &TIPO_PROCESO to $TIPO_PROCESO
+  	let $linea = $TIPO_PROCESO
+  move &TIPO_IDENTIFICACION to $TIPO_IDENTIFICACION
+  	let $linea = $linea || $tab || $TIPO_IDENTIFICACION
+move &IDENTIFICACION to $IDENTIFICACION
+  	let $linea = $linea ||$tab || $IDENTIFICACION
+  move &REFERENCIA to $REFERENCIA
+  	let $linea = $linea  ||$tab || $REFERENCIA
+  move &REFERENCIA_AUX to $REFERENCIA_AUX
+  	let $linea = $linea || $tab || $REFERENCIA_AUX
+  move &MONEDA_PAGO to $MONEDA_PAGO
+  	let $linea = $linea || $tab || $MONEDA_PAGO
+  move &VALOR_PAGO to $VALOR_PAGO
+  	let $linea = $linea || $tab || $VALOR_PAGO
+  move &SECUENCIAL_PAGO to $SECUENCIAL_PAGO
+  	let $linea = $linea ||$tab || $SECUENCIAL_PAGO
+  move &FECHA_PAGO to $FECHA_PAGO
+  	let $linea = $linea ||$tab || $FECHA_PAGO
+  move &HORA_PAGO to $HORA_PAGO
+  	let $linea = $linea ||$tab || $HORA_PAGO 
+  move &CANAL_PROCESO to $CANAL_PROCESO
+  	let $linea = $linea || $tab || $CANAL_PROCESO 
+  move &MODO_PROCESO to $MODO_PROCESO
+  	let $linea = $linea || $tab || $MODO_PROCESO 		
+  move &FORMA_PAGO to $FORMA_PAGO
+  	let $linea = $linea || $tab || $FORMA_PAGO 	
+  write #NumEmp from $linea
+end-procedure
+
+!----------------------------
+Begin-Procedure Before_OfArea2(#NumEmp)
+!----------------------------
+  let $tab = chr(9)	!* Se crea un espacio de carro (tabulacion)  
+  let $linea = 'TIPO_PROCESO'
+  let $linea = $linea || $tab || 'TIPO_IDENTIFICACION'
+  let $linea = $linea || $tab || 'IDENTIFICACION'
+  let $linea = $linea || $tab || 'REFERENCIA'
+  let $linea = $linea || $tab || 'REFERENCIA_AUX'
+  let $linea = $linea || $tab || 'MONEDA_PAGO'
+  let $linea = $linea || $tab || 'VALOR_PAGO'
+  let $linea = $linea || $tab || 'SECUENCIAL_PAGO'
+  let $linea = $linea || $tab || 'FECHA_PAGO'
+  let $linea = $linea || $tab || 'HORA_PAGO'
+  let $linea = $linea || $tab || 'CANAL_PROCESO'
+  let $linea = $linea || $tab || 'MODO_PROCESO'
+  let $linea = $linea || $tab || 'FORMA_PAGO'
+  write #NumEmp from $linea	
+  next-listing
+End-Procedure
+
+!**************************!
+Begin-Procedure Error!*****!
+!**************************!
+  show $sql-error
+End-Procedure

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:wsdlEntry xmlns:con="http://www.bea.com/wli/sb/resources/config">
+    <con:wsdl><![CDATA[<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://recaudaciones.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://recaudaciones.org/">
+<wsdl:types>
+<s:schema elementFormDefault="qualified" targetNamespace="http://recaudaciones.org/">
+<s:element name="cargarDatos">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="tipoIdentificacion" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="parametroBusqueda" type="s:string"/>
+<s:element minOccurs="1" maxOccurs="1" name="proveedor" nillable="true" type="s:int"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="cargarDatosResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="cargarDatosResult" type="tns:CargarDatosSalida"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="CargarDatosSalida">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="codigoError" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="mensajeError" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="identificacion" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="nombreCliente" type="s:string"/>
+<s:element minOccurs="1" maxOccurs="1" name="deuda" nillable="true" type="s:decimal"/>
+</s:sequence>
+</s:complexType>
+<s:element name="registrarPagoBanco">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="tipoProceso" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="tipoIdentificacion" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="Identificacion" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="Referencia" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="monedaPago" type="s:string"/>
+<s:element minOccurs="1" maxOccurs="1" name="valorPago" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" name="secuencialPago" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="canalProceso" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="codigoBanco" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="formaPago" type="s:string"/>
+<s:element minOccurs="1" maxOccurs="1" name="proveedor" nillable="true" type="s:int"/>
+<s:element minOccurs="1" maxOccurs="1" name="fechaPago" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" name="horaPago" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="registrarPagoBancoResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="registrarPagoBancoResult" type="tns:RegistrarPagoBancoSalida"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="RegistrarPagoBancoSalida">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="codigoError" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="mensajeError" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="secuencialPago" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="tipoIdentificacion" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="Identificación" type="s:string"/>
+<s:element minOccurs="1" maxOccurs="1" name="valorPago" nillable="true" type="s:decimal"/>
+</s:sequence>
+</s:complexType>
+</s:schema>
+</wsdl:types>
+<wsdl:message name="cargarDatosSoapIn">
+<wsdl:part name="parameters" element="tns:cargarDatos"/>
+</wsdl:message>
+<wsdl:message name="cargarDatosSoapOut">
+<wsdl:part name="parameters" element="tns:cargarDatosResponse"/>
+</wsdl:message>
+<wsdl:message name="registrarPagoBancoSoapIn">
+<wsdl:part name="parameters" element="tns:registrarPagoBanco"/>
+</wsdl:message>
+<wsdl:message name="registrarPagoBancoSoapOut">
+<wsdl:part name="parameters" element="tns:registrarPagoBancoResponse"/>
+</wsdl:message>
+<wsdl:portType name="BolivarianoWSSoap">
+<wsdl:operation name="cargarDatos">
+<wsdl:input message="tns:cargarDatosSoapIn"/>
+<wsdl:output message="tns:cargarDatosSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="registrarPagoBanco">
+<wsdl:input message="tns:registrarPagoBancoSoapIn"/>
+<wsdl:output message="tns:registrarPagoBancoSoapOut"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="BolivarianoWSSoap" type="tns:BolivarianoWSSoap">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="cargarDatos">
+<soap:operation soapAction="http://recaudaciones.org/cargarDatos" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="registrarPagoBanco">
+<soap:operation soapAction="http://recaudaciones.org/registrarPagoBanco" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="BolivarianoWSSoap12" type="tns:BolivarianoWSSoap">
+<soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="cargarDatos">
+<soap12:operation soapAction="http://recaudaciones.org/cargarDatos" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="registrarPagoBanco">
+<soap12:operation soapAction="http://recaudaciones.org/registrarPagoBanco" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="BolivarianoWS">
+<wsdl:port name="BolivarianoWSSoap" binding="tns:BolivarianoWSSoap">
+<soap:address location="http://130.1.1.37:8610/BankWS/BolivarianoWS.asmx"/>
+</wsdl:port>
+<wsdl:port name="BolivarianoWSSoap12" binding="tns:BolivarianoWSSoap12">
+<soap12:address location="http://130.1.1.37:8610/BankWS/BolivarianoWS.asmx"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>]]></con:wsdl>
+    <con:targetNamespace>http://recaudaciones.org/</con:targetNamespace>
+</con:wsdlEntry>

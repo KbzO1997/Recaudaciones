@@ -1,0 +1,25 @@
+select *
+  from cobis..cl_tabla a
+ where a.tabla = 'sv_horario_serv'
+select * from cobis..cl_catalogo where tabla = 1039
+
+insert into cobis..cl_catalogo values (1039,'8462','23:59:00','V')   
+
+
+
+
+
+
+select * from 
+cobis..cl_catalogo
+inner join  cobis..cl_tabla  on cobis..cl_tabla.codigo =  cobis..cl_catalogo.tabla
+where lower(cobis..cl_catalogo.codigo) like '%8462%'
+
+tabla  codigo     valor                                                            estado codigo tabla                          descripcion                                                      
+------ ---------- ---------------------------------------------------------------- ------ ------ ------------------------------ ---------------------------------------------------------------- 
+27613  8462       ATIMASA                                                          V      27613  sv_empresas_luz                TABLA DE EMPRESAS PARA COBROS DE LUZ                             
+27682  8462       23:59:00                                                         V      27682  sv_horario_serv                HORARIOS DE SERVICIOS                                            
+27732  8462       779                                                              V      27732  causa_nd_cte_servicios         CAUSAS ND CTE SERVICIOS                                          
+27733  8462       779                                                              V      27733  causa_nd_aho_servicios         CAUSAS ND AHO SERVICIOS                                          
+29776  8462       778                                                              V      29776  causa_nd_comision_servcte      CAUSAS ND CTE COMISION DE SERVICIOS                              
+29777  8462       778                                                              V      29777  causa_nd_comision_servaho      CAUSAS ND AHO COMISION DE SERVICIOS                              
