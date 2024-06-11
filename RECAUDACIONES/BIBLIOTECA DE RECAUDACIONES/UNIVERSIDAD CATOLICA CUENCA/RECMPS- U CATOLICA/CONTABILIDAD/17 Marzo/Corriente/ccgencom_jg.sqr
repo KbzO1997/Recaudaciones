@@ -1,0 +1,225 @@
+!************************************************************************!
+!*      Archivo           :  ccgencom.sqr                               *!
+!*      Base de datos     :  cob_cuentas                                *!
+!*      Producto          :  Cuentas Corrientes                         *!
+!*      Disenado por      :  Rodrigo Garces/Julio Navarrete             *!
+!*      Codigo programa   :  3123                                       *!
+!*      Fecha de escritura:  05/Ene/96                                  *!
+!************************************************************************!
+!*                              IMPORTANTE                              *!
+!*      Este programa es parte de los paquetes bancarios propiedad de   *!
+!*      "BANCO BOLIVARIANO".                                            *!
+!*      Su uso no autorizado queda expresamente prohibido asi como      *!
+!*      cualquier alteracion o agregado hecho por alguno de sus         *!
+!*      usuarios sin el debido consentimiento por escrito de la         *!
+!*      Presidencia Ejecutiva de BANCO BOLIVARIANO o su representante.  *!
+!************************************************************************!
+!*                              PROPOSITO                               *!
+!*      Genera comprobantes contables de los movimientos del dia        *!
+!************************************************************************!
+!*                            MODIFICACIONES                            *!
+!*   FECHA       AUTOR             RAZON                                *!
+!*  05/Ene/96    B Mosquera          Emision Inicial                    *!
+!*  30/Ago/96    Juan F. Cadena      Revision Bco. de Credito           *!
+!*  23/Jun/97    David Sanchez C.    Utilizar Perfiles con parametros   *!
+!*  27/Oct/1997  David Sanchez C.    No sucretizar, utilizar stored     *!
+!*                                   Procedure sp_scomprobante_cc.      *!
+!*  02/Nov/1997  David Sanchez C.    utilizas sp_tsasiento_cc           *!
+!*  16/Ene/1998  David Sanchez C.    Corregir transitorio en dolares    *!
+!*  31/Ago/1999  C.Montesdeoca       Cuadrar comprobantes dolares       *!
+!*  13/Sep/1999  C.Montesdeoca       Que no reporte como eroror los     *!
+!*                                   comprobantes cuadrados             *!
+!*  01/Ago/2000  R. Egas             Cambio de la monead base           *!
+!*  11/Oct/2000  R. Egas             Control de la variable &to_perfil  *!
+!*  18/Dic/2000  R. Egas             Se necesita que genere la oficina  *!
+!*                                   des completa                       *!
+!*  09/Abr/2002  Galo Yanez          Query x empresa = 1                *!
+!*  03/May/2002  Walter Ramirez      Considerar tipo contable           *!
+!*  24/Feb/2003  Rosa Castillo       Procesos de Depuracion   		*!
+!*  05/Jun/2003  Galo Yanez      Direccionar a tablas de cob_cuenta 	*!
+!*   #  14.Oct.2003  Galo Yanez      Cambiar older sqr commands.        *!
+!*  05/Ene/2004  Franklin Moncayo V. Control de Contabilizacion por Trx *!
+!*  19/Dic/2003  Viviana Arias       Considera nuevos campos contable   *!
+!*             			     para transferencias swift.   	*!
+!*  09/Jun/2005  Hugo Yépez          En transferencias recibidas se     *!
+!*                                   requiere identif la oficina a la q *!
+!*                                   pertenece cta ctble correspondal   *!
+!*  09/Ago/2005  William Moreno H.   Nuevo campo en arreglo Totaliza  	*!
+!*             			     dor para moneda extranjera 3870  	*!
+!*             			     3874, 3875       			*!
+!*  24/Ago/2005  Paul Hoyos V.       Nuevo campo to_cotizacion en la ta-*!
+!*             			     re_total, este se agrega al quiebre*!
+!*             			     ademas se suma al sp_tsasiento_cc  *!
+!*             			     el parametro @i_param11            *!
+!*  12/Jul/2006 A.Burbano E. Modificacion para Demandado Y Castigado    *!
+!*  10/Sep/2008 T.Cumbicus agregue la transaccion 3909   		*!
+!*  26/Nov/2008 T.Cumbicus agregue la transaccion 4007   		*!
+!*  24/Jun/2010 Galo Yanez		Considerar contabilidad para	*!
+!*					cuenta 4101.ITCTA.01		*!
+!*					Tarea: CTE-CC-9059		*!
+!*  06/May/2011	Raul Altamirano M.   REF25: Migracion Sybase 15		*! 
+!*  17/Nov/2011 Galo Yanez	Validar que se hayan ejecutado los 	*!
+!*				totalizadores (cctotmon - cctotser)	*!
+!*				Tarea: CTE-CC-10814			*!
+!*  12/Jun/2012 Galo Yanez	Cambio por plan contable		*!
+!*				Tarea: CTE-CC-11534 			*!
+!*29 18/Ene/2016 Miriam Lindao       Tarea: CTE-CC-SGC00023497             *!
+!*                                   Sobregiros cambio estado Créd.Consumos*!
+!* 30 06/Jul/2016 Galo Yanez	Considerar contabilidad para pagos 	*!
+!*				de tarjeta por ServiPagos (SPAG)	*!
+!*				Tarea: TCRE-CC-SGC00025434		*!
+!*  31 28/jul/2017 T. Cervantes Z. CTE-CC-SGC00027933 Incluir los codi- *!
+!*                   gos de transaccion 4317 y 4319 en la contabilidad. *!
+!*  32 29/OCT/2020 PAUL HOYOS V. CTE-CC-SGC00039790_PasoAVencido60Dias  *!
+!************************************************************************!
+!*  08/Dic/2020 R. Alvarez  Sipecom    Tunning - Transformar SQR ==> SP *!
+!*                                     Tarea:   CTE-CC-SGC00040520      *!
+!************************************************************************!
+
+
+#include  "definic.inc"
+
+#define   ANCHO_PAG                100 !Ancho de la pagina a imprimir
+
+
+Begin-Setup
+use cob_cuentas
+End-Setup  
+
+#include "log.inc"
+#include "ctacte.inc"
+
+!-----------------------------
+Begin-Program
+!-----------------------------
+do Inicializar_Programa
+!do ParamN (1,#i_filial,'cobis..cl_filial','fi_filial = ','No existe la filial')
+!do ParamS (2,$i_fecha_proceso,'','','')
+
+let #i_filial = 1
+let $i_fecha_proceso = '03/17/2021'
+!cambiar solo fecha
+
+do Main
+do Finalizar_Programa
+End-Program
+
+!-----------------------------
+Begin-Procedure Main
+!-----------------------------
+do Presentar
+do Procesar
+if ($w_error_comprb = 'S') 
+  do Error_Comprobante 
+end-if
+End-Procedure
+
+!------------------------------
+Begin-Procedure Procesar
+!------------------------------
+  execute -XC on-error=Error @#result=cob_cuentas..pa_cte_bgenera_comprob_contab
+       @e_filial            = #i_filial,
+       @e_fecha             = $i_fecha_proceso,
+       @s_procesadas        = #w_procesadas output,
+       @s_error_comprb      = $w_error_comprb out,
+
+  
+  show 'Retorno del programa ' #result
+  show 'PROCESADAS ' #w_procesadas
+End-Procedure
+
+
+!------------------------------
+Begin-Procedure Presentar
+!------------------------------
+do Nombre_Filial (#i_filial,$nombre_filial)
+do Columnas (6,6,6,6,15,6,6,6,18,18,18,18,18,30,0,0,0,0,0,10)
+End-Procedure
+
+
+Begin-Heading  10       !CVT antes 8 
+!------------
+do Cabecera ($nombre_filial,'ERRORES EN LA GENERACION DE COMPROBANTES (AH)','',
+	'', '',$i_fecha_proceso)
+position (+1)
+do Lin_Horizontal
+do PrintS (1,'MON','',0)
+do PrintS (2,'TRANSAC','',0)
+do PrintS (3,'PERFIL','',0)
+do PrintS (4,'DB/CR','',0)
+do PrintS (5,'CUENTA CTBLE','',0)
+do PrintS (6,'OF.OR','',0)
+do PrintS (7,'OF.DT','',0)
+do PrintS (8,'ASIENTO','',0)
+do PrintS (9,'      TOT DEBITO MN','',0)
+do PrintS (10,'    TOT CREDITO MN','',0)
+do PrintS (11,'     TOT DEBITO ME','',0)
+do PrintS (12,'    TOT CREDITO ME','',0)
+do PrintS (13,'        COTIZACION','',0)
+do PrintS (14,'CONCEPTO','',0)
+do Lin_Horizontal
+End-Heading
+
+Begin-Procedure Error_Comprobante
+execute do=Imprime_Detalle 
+        cob_cuentas..pa_cte_bgencom_rep
+    INTO &Moneda       smallint,
+         &TipoTran     int,
+         &Perfil       varchar(6),
+         &DebCred      char(1),
+         &Cuenta       varchar(30),
+         &OficOrg      smallint,
+         &OficDest     smallint,
+         &Asiento      int,
+         &CreditoMN    money,
+         &DebitoMN     money,
+         &Concepto     varchar(29),
+         &CreditoME    money,
+         &DebitoME     money,
+         &Cotizacion   money
+  do PrintS(5,'TOTAL:','',0)
+  do PrintN(9,#tot_debito,'999,999,999,999.99',0)
+  do PrintN(10,#tot_credito,'999,999,999,999.99',0)
+  do PrintS(14,$mensaje,'',0)
+  new-page
+End-Procedure
+
+Begin-Procedure Imprime_Detalle
+   let #Moneda     = &Moneda
+   let #TipoTran   = &TipoTran
+   let $Perfil     = &Perfil
+   let $DebCred    = &DebCred
+   let $Cuenta     = &Cuenta
+   let #OficOrg    = &OficOrg
+   let #OficDest   = &OficDest
+   let #Asiento    = &Asiento
+   let #CreditoMN  = &CreditoMN
+   let #DebitoMN   = &DebitoMN
+   let $Concepto   = &Concepto
+   let #CreditoME  = &CreditoME
+   let #DebitoME   = &DebitoME
+   let #Cotizacion = &Cotizacion
+   do PrintN (1,#Moneda,'9',0)
+   do PrintN (2,#TipoTran,'999999',0)
+   do PrintS (3,$Perfil,'',0)
+   do PrintS (4,$DebCred,'',0)
+   do PrintS (5,$Cuenta,'',0)
+   do PrintN (6,#OficOrg,'99',0)
+   do PrintN (7,#OficDest,'99',0)
+   do PrintN (8,#Asiento,'999999',0)
+   do PrintN (9,#DebitoMN,'999,999,999,999.99',0)
+   do PrintN (10,#CreditoMN,'999,999,999,999.99',0)
+   do PrintN (11,#DebitoME,'999,999,999,999.99',0)
+   do PrintN (12,#CreditoME,'999,999,999,999.99',0)
+   do PrintN (13,#Cotizacion,'999,999,999,999.99',0)
+   do PrintS (14,$Concepto,'',0)
+   next-listing
+End-Procedure
+
+
+!-----------------------------
+Begin-Procedure Error
+!-----------------------------
+  show $sql-error
+  do Abortar
+End-Procedure

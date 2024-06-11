@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="GAW-2255-CONCILIACION UCATOLICA CUENCA DEPLINEA" mainModule="Main" version="2.0" logLevel="verbose">
+	<variable name="RutaOrigen" value="/respaldo/archivos/cuentas/data/" />
+	<variable name="RutaDestino" value="/sftpdata/camara/apl_sftp_206/UCATOLICA/BOLIVARIANO_CONCILIACION" />
+	<variable name="ListaOrigen" value="" />
+	<variable name="ListaDestino" value="Nombres y peso de archivos existentes en destino:" />
+	<variable name="FilesDest" value="" />
+	<variable name="MensajeError" value="" />
+
+	<module name="Main">
+
+		<createWorkspace version="1.0" />
+
+
+		<setVariable label="Set EliminarNameSize" name="EliminarNameSize" value="Nombres y peso de archivos eliminados en el origen:" version="2.0" />
+
+
+		<setVariable label="Set NameSize" name="NameSize" value="Nombres y peso de archivos transmitidos al destino:" version="2.0" />
+
+
+		<timestamp version="1.0">
+			<format outputVariable="fechafiltro" pattern="yyyyMMdd">
+				<comment>
+					<![CDATA[Fecha para usar en filtro]]>
+				</comment>
+			</format>
+			<format outputVariable="fechaproceso" pattern="dd-MM-yyyy HH:mm:ss">
+				<comment>
+					<![CDATA[Fecha para el cuerpo del mensaje]]>
+				</comment>
+			</format>
+		</timestamp>
+
+
+		<setVariable label="ServidorOrigen" name="ServidorOrigen" value="${UNIXPRODUCCION11}" version="2.0" />
+
+
+		<setVariable label="ServidorDestino" name="ServidorDestino" value="${DESTINOSFTPOUT107}" version="2.0" />
+
+
+		<setVariable label="filtro" name="filtro" value="CONCILIACION_UCATOLICA${fechafiltro}*.txt" version="2.0" />
+                                                         
+
+		<setVariable label="cantDestino" name="cantDestino" value="0" version="2.0" />
+
+
+		<setVariable label="Retransmitir" name="Retransmitir" value="SI" version="2.0" />
+
+
+		<sftp label="SFTP Origen" resourceId="${ServidorOrigen}" version="1.0" onError="call:NotificationErrorSFTP">
+			<get destinationDir="/" destinationFilesVariable="files" numFilesDownloadedVariable="numberfilesdownload" processedSourceFilesVariable="SourceFiles">
+				<fileset dir="${RutaOrigen}">
+					<wildcardFilter>
+						<include pattern="${filtro}" />
+					</wildcardFilter>
+				</fileset>
+			</get>
+		</sftp>
+
+		<forEachLoop label="For-Each Get" itemsVariable="${files}" currentItemVariable="outputfile" logLevel="normal">
+
+			<setVariable label="Set ListaOrigen" name="ListaOrigen" value="${ListaOrigen}${String(outputfile:name)}, Size: ${String(outputfile:size)} bytes${system.lineFeed}" version="2.0" logLevel="silent" />
+
+		</forEachLoop>
+
+		<setVariable label="Set numberfilesdeleted" name="numberfilesdeleted" value="0" version="2.0" />
+
+
+		<setVariable label="Set numberfilesupload" name="numberfilesupload" value="0" version="2.0" />
+
+		<if condition="${numberfilesdownload == 0}">
+
+			<setVariable label="Set MensajeError" name="MensajeError" value="No se encontraron archivos en la ruta ${RutaOrigen} que cumplan el filtro ${filtro}" version="2.0" />
+
+
+			<callModule label="Call Module NotificationError" module="NotificationError" version="1.0" />
+
+		</if>
+		<if condition="${Retransmitir==&apos;SI&apos;}">
+			<forEachLoop label="For-Each Get" itemsVariable="${files}" currentItemVariable="outputfile" currentIterationVariable="iter" logLevel="normal">
+
+				<print version="1.0">
+					<![CDATA[""""""""""""""""""""""""""""""
+SUBIENDO ${outputfile}
+""""""""""""""""""""""""""""""]]>
+				</print>
+
+
+				<sftp label="SFTP Destino" resourceId="${ServidorDestino}" keyLocation="KeyVault" version="1.0" logLevel="normal" disabled="false" onError="call:NotificationErrorSFTP">
+					<put sourceFile="${outputfile}" destinationDir="${RutaDestino}" destinationFilesVariable="upFiles" />
+				</sftp>
+
+
+				<sftp label="SFTP Origen - Eliminar archivos" resourceId="${ServidorOrigen}" version="1.0" disabled="false" onError="call:NotificationErrorSFTP">
+					<delete>
+						<fileset dir="${RutaOrigen}">
+							<wildcardFilter>
+								<include pattern="${String(outputfile:name)}" />
+							</wildcardFilter>
+						</fileset>
+					</delete>
+				</sftp>
+
+
+				<setVariable label="Set Eliminar Name and Size" name="EliminarNameSize" value="${EliminarNameSize}${system.lineFeed}${String(outputfile:name)}, Size: ${String(outputfile:size)} bytes" version="2.0" logLevel="silent" />
+
+
+				<setVariable label="Set numberfilesupload" name="numberfilesupload" value="${numberfilesupload + 1}" version="2.0" />
+
+
+				<setVariable label="Set numberfilesdeleted" name="numberfilesdeleted" value="${numberfilesdeleted + 1}" version="2.0" />
+
+
+				<setVariable label="Set Name and Size" name="NameSize" value="${NameSize}${system.lineFeed}${String(outputfile:name)}, Size: ${String(outputfile:size)} bytes" version="2.0" logLevel="silent" />
+
+			</forEachLoop>
+			<else>
+				<forEachLoop itemsVariable="${files}" currentItemVariable="outputfile" currentIterationVariable="iter" logLevel="normal">
+
+					<sftp label="SFTP Destino" resourceId="${ServidorDestino}" keyLocation="KeyVault" version="1.0" logLevel="normal" disabled="false" onError="call:NotificationErrorSFTP">
+						<list numFilesFoundVariable="cantidad">
+							<fileset dir="${RutaDestino}">
+								<wildcardFilter>
+									<include pattern="${outputfile:name}" />
+								</wildcardFilter>
+							</fileset>
+						</list>
+					</sftp>
+
+					<if condition="${cantidad==1}">
+						<else>
+
+							<print version="1.0">
+								<![CDATA[""""""""""""""""""""""""""""""
+SUBIENDO ${outputfile}
+""""""""""""""""""""""""""""""]]>
+							</print>
+
+
+							<sftp label="SFTP Destino" resourceId="${ServidorDestino}" keyLocation="KeyVault" version="1.0" onError="call:NotificationErrorSFTP">
+								<put sourceFile="${outputfile}" destinationDir="${RutaDestino}" />
+							</sftp>
+
+
+							<sftp label="SFTP Origen - Eliminar archivos" resourceId="${ServidorOrigen}" version="1.0" disabled="false" onError="call:NotificationErrorSFTP">
+								<delete>
+									<fileset dir="${RutaOrigen}">
+										<wildcardFilter>
+											<include pattern="${String(outputfile:name)}" />
+										</wildcardFilter>
+									</fileset>
+								</delete>
+							</sftp>
+
+
+							<setVariable label="Set Eliminar Name and Size" name="EliminarNameSize" value="${EliminarNameSize}${system.lineFeed}${String(outputfile:name)}, Size: ${String(outputfile:size)} bytes" version="2.0" logLevel="silent" />
+
+
+							<setVariable label="Set Name and Size" name="NameSize" value="${NameSize}${system.lineFeed}${String(outputfile:name)}, Size: ${String(outputfile:size)} bytes" version="2.0" logLevel="silent" />
+
+
+							<setVariable label="Set numberfilesdeleted" name="numberfilesdeleted" value="${numberfilesdeleted + 1}" version="2.0" />
+
+
+							<setVariable label="Set numberfilesupload" name="numberfilesupload" value="${numberfilesupload + 1}" version="2.0" />
+
+						</else>
+
+						<setVariable label="Set ListaDestino" name="ListaDestino" value="${ListaDestino}${system.carriageReturn}${system.lineFeed}${outputfile:name}" version="2.0" logLevel="silent" />
+
+
+						<setVariable label="Set cantDestino" name="cantDestino" value="${cantDestino + 1}" version="2.0" />
+
+
+						<print label="DEBUG error archivo existente" version="1.0">
+							<![CDATA[----ERROR POR ARCHIVO EXISTENTE----
+
+Numero de archivos transmitidos origen:
+0
+
+Destino: ${outputfile}
+
+]]>
+						</print>
+
+					</if>
+				</forEachLoop>
+				<if condition="${numberfilesupload == 0}">
+
+					<setVariable label="Set MensajeError" name="MensajeError" value="No se transmitieron archivos nuevos al destino.${system.lineFeed}${system.carriageReturn}Lista de archivos en destino:${system.lineFeed}${ListaDestino}" version="2.0" />
+
+
+					<callModule label="Call Module NotificationError" module="NotificationError" version="1.0" />
+
+				</if>
+			</else>
+		</if>
+
+		<deleteWorkspace version="1.0" />
+
+
+		<sendEmail label="Send Email to Operator" resourceId="SMTP Bolivariano" toList="${GRCDTC0375}" ccList="${GROP01}" keyLocation="KeyVault" version="2.0" disabled="false">
+			<from address="${from}" keyLocation="KeyVault" />
+			<subject>
+				<![CDATA[${system.project.name} - TRANSMISION CORRECTA]]>
+			</subject>
+			<message>
+				<![CDATA[Fecha de proceso:
+${fechaproceso}
+
+Numero de archivos encontrados en origen:
+${numberfilesdownload}
+
+${ListaOrigen}
+
+Numero de archivos encontrados en destino:
+${cantDestino}
+
+${ListaDestino}
+
+Numero de archivos dejados en destino:
+${numberfilesupload}
+
+${NameSize}
+
+Numero de archivos eliminados en origen:
+${numberfilesdeleted}
+
+${EliminarNameSize}
+
+]]>
+			</message>
+		</sendEmail>
+
+	</module>
+
+
+	<module name="NotificationErrorSFTP" disabled="false">
+
+		<setVariable name="MensajeError" value="${system.job.error}" version="2.0" />
+
+		<if condition="${Contains(system.job.error,&apos;The maximum disk space has been reached.&apos;)}">
+
+			<sftp label="SFTP Destino" resourceId="${ServidorDestino}" keyLocation="KeyVault" version="1.0" onError="continue">
+				<delete file="${RutaDestino}/${outputfile:name}" />
+			</sftp>
+
+
+			<setVariable label="archivosNoTransferidos" name="archivosNoTransferidos" value="Archivos No Transferidos:" version="2.0" />
+
+			<forEachLoop itemsVariable="${files}" currentItemVariable="file" beginIndex="${iter}">
+
+				<setVariable label="Actualizo archivosNoTransferidos" name="archivosNoTransferidos" value="${archivosNoTransferidos}${system.carriageReturn}${system.lineFeed}${file:name},  ${file:size}" version="2.0" logLevel="silent" />
+
+			</forEachLoop>
+
+			<sendEmail label="Send Email Error" resourceId="SMTP Bolivariano" toList="${GRCDSEE0275}" ccList="${GROP01}" keyLocation="KeyVault" version="2.0" disabled="false">
+				<from address="${from}" keyLocation="KeyVault" />
+				<subject>
+					<![CDATA[${system.project.name} - ERROR AL TRANSMITIR ]]>
+				</subject>
+				<message>
+					<![CDATA[Mail de  error por falta de espacio
+Fecha de proceso:
+${fechaproceso}
+
+Descripcion/causa de error:  
+${MensajeError}
+       
+Informacion de la Tarea: 
+Servidor Origen: ${ServidorOrigen}
+Servidor Destino: ${ServidorDestino}
+
+${NameSize}
+
+${archivosNoTransferidos}]]>
+				</message>
+				<attachment file="${system.job.log}" />
+			</sendEmail>
+
+			<else>
+
+				<sendEmail label="Send Email Error" resourceId="SMTP Bolivariano" toList="${GRCDSEE0275}" ccList="${GROP01}" keyLocation="KeyVault" version="2.0" disabled="false">
+					<from address="${from}" keyLocation="KeyVault" />
+					<subject>
+						<![CDATA[${system.project.name} - ERROR AL TRANSMITIR ]]>
+					</subject>
+					<message>
+						<![CDATA[Fecha de proceso:
+${fechaproceso}
+
+Descripcion/causa de error:  
+${MensajeError}
+       
+Informacion de la Tarea: 
+Servidor Origen: ${ServidorOrigen}
+Servidor Destino: ${ServidorDestino}]]>
+					</message>
+					<attachment file="${system.job.log}" />
+				</sendEmail>
+
+			</else>
+		</if>
+
+		<deleteWorkspace version="1.0" onError="continue" />
+
+
+		<raiseError version="1.0" disabled="false">
+			<message>${MensajeError}</message>
+		</raiseError>
+
+
+		<exitProject version="1.0" />
+
+	</module>
+
+
+	<module name="NotificationError">
+
+		<deleteWorkspace version="1.0" onError="continue" />
+
+
+		<sendEmail label="Send Email Error" resourceId="SMTP Bolivariano" toList="${GRCDSEE0275}" ccList="${GROP01}" keyLocation="KeyVault" version="2.0" disabled="false">
+			<from address="${from}" keyLocation="KeyVault" />
+			<subject>
+				<![CDATA[${system.project.name} - ERROR AL TRANSMITIR ]]>
+			</subject>
+			<message>
+				<![CDATA[Fecha de proceso:
+${fechaproceso}
+
+Descripcion/causa de error:  
+${MensajeError}
+       
+Informacion de la Tarea: 
+Servidor Origen: ${ServidorOrigen}
+Servidor Destino: ${ServidorDestino}]]>
+			</message>
+			<attachment file="${system.job.log}" />
+		</sendEmail>
+
+
+		<raiseError version="1.0" disabled="false">
+			<message>${MensajeError}</message>
+		</raiseError>
+
+
+		<exitProject version="1.0" />
+
+	</module>
+
+	<description>Formato Original y elimina al transmitir x RED</description>
+</project>

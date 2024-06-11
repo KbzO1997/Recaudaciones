@@ -1,0 +1,98 @@
+!************************************************************************!
+!*      Archivo           :  cctotmon.sqr                               *!
+!*      Base de datos     :  cob_cuentas                                *!
+!*      Producto          :  Cuentas de Corrientes                      *!
+!*      Disenado por      :  Mauricio Bayas/Sandra Ortiz                *!
+!*      Fecha de escritura:  18/Oct/94                                  *!
+!************************************************************************!
+!*                              IMPORTANTE                              *!
+!*      Este programa es parte de los paquetes bancarios propiedad de   *!
+!*      "BANCO BOLIVARIANO".                                            *!
+!*      Su uso no autorizado queda expresamente prohibido asi como      *!
+!*      cualquier alteracion o agregado hecho por alguno de sus         *!
+!*      usuarios sin el debido consentimiento por escrito de la         *!
+!*      Presidencia Ejecutiva de BANCO BOLIVARIANO o su representante.  *!
+!************************************************************************!
+!*                              PROPOSITO                               *!
+!*      Se encarga de calcular los totales de las transacciones moneta- *!
+!* rias del dia a contabilizar.  Estos totales se almacenan en re_total *!
+!************************************************************************!
+!*                            MODIFICACIONES                            *!
+!*      FECHA           AUTOR           RAZON                           *!
+!*      18/Oct/94     R. Garces         Emision Inicial                 *!
+!*	30/Ago/96     Juan F. Cadena	Revision Bco. de Credito:	*!
+!*					Totalizacion por sucursales	*!
+!*	07/Oct/96     Erika L. Sanchez	Correcciones por errores hayados*!
+!*      02/Oct/97     David Sanchez C.  Utilizar nemonicos              *!
+!*      27/Oct/97     D.Sanchez         Validar codigo valor solo sucres*!
+!*      31/Oct/97     D.Sanchez         No considerar Trans. 10402, ya  *!
+!*                                      que se considera como trans.serv*!
+!*      02/Nov/97     D.Sanchez         Utilizar parametro VSI          *!
+!*      01/Ene/98     D.Sanchez         Utilizar parametro CAP          *!
+!*      16/Dic/98     D.Barco           Utilizar parametro VCC          *!
+!*      05/Nov/1999   R. Egas           secuencial de quiebre           *!
+!*      25/Ene/2000   R. Egas           Utilizar parametro CAI, es igual*!
+!*                                      al CAP + el valor del imp IRF   *!
+!*      04/Abr/2000   R. Egas           Verificacion de codval moneda   *!
+!*                                      extranjera, para posi/divi      *!
+!*      13/Abr/2000   C.Montesdeoca     Problema contable en Db/Cr      *!
+!*      14/Abr/2000   C.Montesdeoca     Corregir modificacion anterior  *!
+!*      01/Ago/2000   R. Egas           Cambio a moneda Base            *!
+!*      02/May/2002   W. Ramirez        Considerar Tipo de Cuenta       *!
+!*   #  14.Oct.2003  Galo Yanez  Cambiar older sqr commands.            *!
+!*	03/Ago/2004   Galo Yanez	Reproceso solo monetarios	*!
+!*      20.AGO.2006  Paul Hoyos V.     Se agrega al quiebre el campo co-*!
+!*                                     tización.                        *!
+!*  17/Nov/2011 Galo Yanez	Validar que se hayan ejecutado los 	*!
+!*				totalizadores (cctotmon - cctotser)	*!
+!*				Tarea: CTE-CC-10814			*!
+!* 21  16/DIC/2013   Sandra Merino   CNB-316-CU-1901                    *!
+!* 22  24/Sep/2020   J.Pazminno        Tunning - Transformar SQR ==> SP *!
+!*                                     Tarea:   CTE-CC-SGC00039533      *!
+!************************************************************************!
+
+#include  "definic.inc"
+Begin-Setup
+  use cob_cuentas
+End-Setup  
+
+#include "log.inc"
+#include "ctacte.inc"
+
+Begin-Program
+  do Inicializar_Programa
+  !do ParamN (1,#i_filial,'cobis..cl_filial','fi_filial = ','No existe la filial')
+  !do ParamS (2,$i_fecha_proceso,'','','')
+  
+let #i_filial = 1
+let $i_fecha_proceso = '03/17/2021'
+! cambiar solo fecha
+
+
+  do Main
+  do Finalizar_Programa
+End-Program
+
+!------------------------------
+Begin-Procedure Main
+!------------------------------
+  do Procesar
+End-Procedure
+
+!------------------------------
+Begin-Procedure Procesar
+!------------------------------
+  execute -XC on-error=Error @#result=cob_cuentas..pa_cte_btotalizar_tran_monet_jg
+       @e_filial      = #i_filial,
+       @e_fecha	      = $i_fecha_proceso,
+       @s_procesadas  = #w_procesadas output
+    show 'Retorno del programa ' #result
+    show 'PROCESADAS ' #w_procesadas  
+End-Procedure
+
+!------------------------------
+Begin-Procedure Error
+!------------------------------
+  show $sql-error
+  do Abortar
+End-Procedure

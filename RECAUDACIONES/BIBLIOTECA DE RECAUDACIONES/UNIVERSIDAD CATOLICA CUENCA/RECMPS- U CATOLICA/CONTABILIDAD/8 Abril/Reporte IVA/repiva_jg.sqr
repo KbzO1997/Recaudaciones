@@ -1,0 +1,374 @@
+!**********************************************************************!
+!*    Archivo           : repiva.sqr                                  *!
+!*    Base de datos     : cob_pagos                                   *!
+!*    Producto          : Cuentas Corrientes                          *!
+!*    Disenado por      : Sandra Merino.                              *!
+!*    Fecha de escritura: 09/Ene/2013                                 *!
+!**********************************************************************!
+!*                              IMPORTANTE                            *!
+!*   Este programa es parte de los paquetes bancarios propiedad del   *!
+!*   "BANCO BOLIVARIANO".                                             *!
+!*   Su uso no autorizado queda expresamente prohibido asi como       *!
+!*   cualquier alteracion o agregado hecho por alguno de sus usuarios *!
+!*   sin el debido consentimiento por escrito de la Presidencia       *!
+!*   Ejecutiva del BANCO BOLIVARIANO o su representante               *!
+!**********************************************************************!
+!*                              PROPOSITO                             *!
+!*   Genera reporte de cuentas de IVA                                 *!
+!**********************************************************************!
+!*     FECHA            AUTOR                MODIFICACIONES           *!
+!*   1 09/Ene/2013   Sandra Merino.          CTE-CC-SGC00006701       *!
+!*   2 02/Ago/2016   pholguiv.     CTE-CC-SGC00025809 compensacion Iva*!
+!*   3 13/Feb/2017   María José Silva Cobro de comision VEN RECA-CC-SGC00027715*!
+!**********************************************************************!
+
+#include "definic.inc"
+#define   ANCHO_PAG                420  !Ref003:msilvag 380    ! Ancho de pagina
+#define   NOM_ARCH                 repiva.sqr
+#define  SALIDA  '<37><33><10>(cobis1.jdt) STARTLM<10>'
+
+Begin-Setup
+use cob_pagos
+Begin-Sql on-error=STOP -c1
+    create table ##temptot (causa       varchar(3) null,
+                            trn         int  null,
+                            ofic        int null,
+                            d_ofic      varchar(30) null,
+                            cont        int  null,
+                            efect       float null,
+                            cheque      float null,
+                            nd          float null,
+                            nc          float null,
+                            Efecob      float null,
+                            costo      float null,
+                            total       float null
+                            )! RCA 12/Sep/2001
+End-Sql
+End-Setup
+
+#include "printer_cobis1.inc"   !REF:GYC
+
+#include "log.inc"
+#include "ctacte.inc"
+
+Begin-Program   !REF:GYC
+do Inicializar_Programa
+!do ParamN (1,#i_filial,'cobis..cl_filial','fi_filial = ','No existe la filial')
+!do ParamS (2,$i_fecha_proceso,'','','')
+
+let #i_filial = 1
+let $i_fecha_proceso = '04/08/2021'
+
+!cambiar fecha
+
+let $det = 'N'
+   do Muestra_Tiempo
+   show '*---------------------------*'
+   show '*Hora de inicio ---> ' &hora
+   show '*---------------------------*'
+do Main
+   do Muestra_Tiempo
+   show '*---------------------------*'
+
+   show '*Hora de final  ---> ' &hora
+   show '*---------------------------*'
+do finalizar_Programa
+End-Program   !REF:GYC
+
+Begin-Heading 10
+  let $w_titulo    = 'REPORTE DETALLADO DE INGRESO E IVA '
+
+  !do Encabezado($w_titulo,$i_fecha_proceso)
+  position (+1)
+  do Lin_Horizontal
+  do Centrar ('OFICINA',1)
+  do Centrar ('FECHA_PROCESO',2)
+  do Centrar ('FECHA_REAL',3)
+  do Centrar ('TRX',4)
+  !do Centrar ('DESC_TRX',5)			!Ref02 pholguiv--comentar
+  do Centrar ('CAUSA   DESC_CAUSA',5)		!Ref02 pholguiv--comentar
+  !do Centrar ('DESC_CAUSA',6)			!Ref02 pholguiv--comentar
+  do Centrar ('CTA_CLIENTE',6)
+  do Centrar ('OFIC_CTA',7)
+  do Centrar ('TIPO_CTA',8)
+  do Centrar ('USUARIO',9)
+  do Centrar ('VALOR_COMISION',10)
+  do Centrar ('VALOR_IVA',11)
+  do Centrar ('TOTAL_COBRADO',12)    ! COBRO DE COMISION  EN VEZ COBRO CON BANRED Ref15
+  do Centrar ('DESCTO IVA',13)	     ! COMPENSACION IVA Ref06 pholguiv
+  do Centrar ('CTA_INGRESO',14)
+  do Centrar ('CTA_IVA',15)
+  do Centrar ('CTA_PUENTE',16)
+  do Centrar ('CORR',17)
+  do Centrar ('DEB_CRED',18)
+  do Centrar ('MONEDA',19)
+  do Centrar ('OFI_CTA_ASOCIADO    TIP_CTA_COM    CTA_NDCOM',20)   !Ref003:msilvag   !Ref02 pholguiv--comentar
+  do Lin_Horizontal
+End-Heading
+
+Begin-Procedure Main
+  do Columnas (15,25,25,38,35,15,25,10,25,15,15,15,15,15,15,10,10,10,10,50) !15 Ref003:msilvag     ! AME Ref15
+ !do Nombre_Filial(#i_filial,$w_empresa)
+ do Nombre_Listado
+ do Carga_data  !smerino
+ do Procesar
+End-Procedure
+
+
+Begin-Procedure Procesar
+show 'CREANDO EXCEL DE REPORTE DETALLADO DE INGRESO E IVA'
+begin-select
+convert(varchar(10),getdate(),101) &w_fecha_dia
+end-select
+Begin-Select distinct
+cc_secuencial
+cc_cod_alterno
+cc_oficina                () on-break print=never before=antes_oficina  level=1
+convert(varchar,cc_oficina) + '- ' + cc_des_ofic  &oficina
+convert(varchar,cc_fecha_proceso,101)    &fecha_proceso
+cc_fecha_real      &fecha_real
+convert(varchar,cc_transaccion) + '- ' + cc_desc_trx    &transaccion 	!Ref02 pholguiv unir campos
+!cc_desc_trx        &desc_trx						!Ref02 pholguiv --comentar
+cc_cuasa + ' ' + cc_des_causa	    &causa				!Ref02 pholguiv unir campos
+!cc_des_causa       &des_causa						!Ref02 pholguiv --comentar
+cc_cta_cliente     &cta_cliente
+cc_tip_cta         &tip_cta
+cc_usuario         &usuario
+convert(varchar,cc_val_com)         &val_com
+convert(varchar,cc_val_iva)         &val_iva
+convert(varchar,cc_total)           &total
+cc_cta_ing         &cta_ing   () on-break print=never before=antes_cuenta  level=2
+cc_cta_iva         &cta_iva
+cc_cta_puente      &cta_puente
+cc_signo           &signo
+cc_debcred         &debcred
+convert(varchar(10),cc_oficina_cta)     &oficina2
+convert(varchar,cc_moneda)          &cc_moneda
+convert(varchar,cc_comp_iva)        &comp_iva				!Ref02 pholguiv
+case when isnull(cc_cta_adic,'') <> '' and cc_oficina_adic <> null then convert(varchar,cc_oficina_adic) +'-'+  cc_cta_adic  else convert(varchar,cc_oficina_adic) end	 &ofi_cta_adic	!Ref02 pholguiv
+!Ref003:msilvag Inicio
+!case when exists( select 1 from cob_cuentas..cc_ctacte where cc_cta_banco = a.cc_cta_comision) then 'CTE' when exists( select 1 from cob_ahorros..ah_cuenta where ah_cta_banco = a.cc_cta_comision) then 'AHO' else '   ' end  &cc_tipcta_comision
+cc_tipcta_comision                  &cc_tipcta_comision     
+cc_cta_comision                     &cc_cta_com             
+!Ref003:msilvag Fin
+
+
+          let #val_com = &val_com
+	  let #val_iva =  &val_iva
+	  let #total= &total
+	  let #comp_iva = &comp_iva 					!Ref02 pholguiv
+
+         if &signo = 'S'
+	      let #val_com =(-1) *  #val_com
+	      let #val_iva = (-1) * #val_iva
+              let #total= (-1) *  #total
+         end-if
+
+
+
+      let #val_com_ofic = #val_com_ofic + #val_com
+      let #val_com_ofic_iva = #val_com_ofic_iva + #val_iva
+      let #val_com_ofic_total = #val_com_ofic_total + #total
+      let #val_cta_ing_com = #val_cta_ing_com + #val_com
+      let #val_cta_ing_iva = #val_cta_ing_iva + #val_iva
+      let #val_cta_ing_total = #val_cta_ing_total + #total
+
+
+
+      let #val_total_gen_com = #val_total_gen_com + #val_com
+      let #val_total_gen_iva = #val_total_gen_iva + #val_iva
+      let #val_total_gen_total = #val_total_gen_total + #total
+
+
+    !Ref003:msilvag Inicio   'A011DDD' || $institucion || $anio || $mes || $dia || '.TXT'
+    let $var_concatena = &ofi_cta_adic || '                     ' || &cc_tipcta_comision || '              ' || &cc_cta_com
+    !let $descripcion = '(' || $i_municipio || ' - ' || $valor || ')'
+    !Ref003:msilvag Fin
+
+    do PrintS(1,&oficina,'',0)
+    do PrintS(2,&fecha_proceso,'',0)
+    do PrintS(3,&fecha_real,'',0)
+    do PrintS(4,&transaccion,'',0)
+    !do PrintS(5,&desc_trx,'',0)				!Ref02 pholguiv -- comentar
+    do PrintS(5,&causa,'',0)
+    !do PrintS(6,&des_causa,'',0)				!Ref02 pholguiv -- comentar
+    do PrintS(6,&cta_cliente,'',0)
+    do PrintS(7,&oficina2,'',0)
+    do PrintS(8,&tip_cta,'',0)
+    do PrintS(9,&usuario,'',0)
+    do PrintN(10,#val_com,'{FOR_DIN_S}',0)
+    do PrintN(11,#val_iva,'{FOR_DIN_S}',0)
+    do PrintN(12,#total,'{FOR_DIN_S}',0)
+    do PrintN(13,#comp_iva,'{FOR_DIN_S}',0)			!Ref02 pholguiv--agrega campo
+    do PrintS(14,&cta_ing,'',0)
+    do PrintS(15,&cta_iva,'',0)
+    do PrintS(16,&cta_puente,'',0)
+    do PrintS(17,&signo,'',0)
+    do PrintS(18,&debcred,'',0)
+    do PrintS(19,&cc_moneda,'',0)
+    do PrintS(20,$var_concatena,'',0)            !Ref003:msilvag &ofi_cta_adic   !Ref02 pholguiv--agrega campo
+
+     next-listing
+from db_general..cc_tmp_trx_iva  
+order by cc_oficina,cc_cta_ing
+End-Select
+  !do totales_generales
+
+End-Procedure
+
+
+
+
+!*******************************************************************************
+!****                        Busca nombre de oficina                         ***
+!*******************************************************************************
+Begin-Procedure antes_oficina
+do Before_Pagina
+let #ofic = &cc_oficina
+
+begin-select
+of_nombre  &d_oficina
+from cobis..cl_oficina
+where  of_oficina = &cc_oficina
+end-select
+End-Procedure
+
+!*******************************************************************************
+!****                        Busca nombre de cta                         ***
+!*******************************************************************************
+Begin-Procedure antes_cuenta
+do PrintS(1,&cta_ing,'',0)
+next-listing
+End-Procedure
+
+
+
+!*******************************************************************************
+!****                        imprime totales para oficina                    ***
+!*******************************************************************************
+Begin-Procedure despues_oficina
+!do Inserta_Total
+do After_Pagina
+  next-listing
+  next-listing
+  do PrintS(1,'TOT. OFICINA','',0)
+  do PrintN(12,#val_com_ofic,'{FOR_DIN_S}',0)
+  do PrintN(13,#val_com_ofic_iva,'{FOR_DIN_S}',0)
+  do PrintN(14,#val_com_ofic_total,'{FOR_DIN_S}',0)
+
+
+let #val_com_ofic = 0
+let #val_com_ofic_iva = 0
+let #val_com_ofic_total =0
+
+End-Procedure
+!*******************************************************************************
+!****                        imprime totales para usuarios                   ***
+!*******************************************************************************
+Begin-Procedure despues_cuenta
+
+  do PrintS(1,'TOT. CUENTA INGRESO','',0)
+  do PrintN(12,#val_cta_ing_com,'{FOR_DIN_S}',0)
+  do PrintN(13,#val_cta_ing_iva,'{FOR_DIN_S}',0)
+  do PrintN(14,#val_cta_ing_total,'{FOR_DIN_S}',0)  ! Ref15
+
+
+let #val_cta_ing_com = 0
+let #val_cta_ing_iva = 0
+let #val_cta_ing_total = 0
+
+next-listing
+next-listing
+End-Procedure
+
+
+
+!--------------------------------
+Begin-Procedure Carga_data
+!--------------------------------
+show 'Llamando al SP QUE CARGAS LAS TABLAS TEMPORALES ........'
+show $i_fecha_proceso
+!execute cob_cuentas..sp_reporte_iva_det
+execute cob_cuentas..sp_reporte_iva_det
+@i_fecha_proceso  = $i_fecha_proceso
+if #w_return <> 0
+   do Abortar
+end-if
+show 'CARGA REALAIZADA ....'
+End-Procedure
+
+
+!*******************************************************************************
+!****                        imprime totales Generales                    ***
+!*******************************************************************************
+Begin-Procedure totales_generales
+new-page
+do After_Pagina
+  next-listing
+
+  next-listing
+  do PrintS(1,'TOT. GENERAL','',0)
+  do PrintN(12,#val_total_gen_com,'{FOR_DIN_S}',0)
+  do PrintN(13,#val_total_gen_iva,'{FOR_DIN_S}',0)
+  do PrintN(14,#val_total_gen_total,'{FOR_DIN_S}',0)
+
+
+
+let #val_total_gen_com = 0
+let #val_total_gen_iva = 0
+let #val_total_gen_total =0
+
+
+End-Procedure
+
+
+!*******************************************************************************
+!*****    Procedimientos generales utilizados para el encabezamiento     *******
+!*******************************************************************************
+Begin-Procedure Encabezado($titulo,$fecha_proceso)
+
+let #pos = {ANCHO_PAG} -23
+!date-time () 'MM/DD/YYYY' &fecha_actual
+!date-time () HH:MI &hora
+BEGIN-SELECT
+convert(char(10),getdate(),101) &fecha_actual
+convert(char(8),getdate(),108) &hora
+END-SELECT
+
+print $titulo                              (1) center
+let $fecha_imp = 'Fecha : ' || $fecha_proceso
+print $fecha_imp                           (2) center
+
+End-Procedure
+
+!*******************************************************************************
+!*****    Procedimientos para generar nuevo nombre de archivo            *******
+!*******************************************************************************
+Begin-Procedure Nombre_Listado
+Begin-Select
+convert(char(2),datepart(mm,getdate())) &mm_listado_b
+convert(char(2),datepart(dd,getdate())) &dd_listado_b
+substring(convert(char(4),datepart(yy,getdate())),3,2) &aa_listado_b
+convert(char(2),datepart(hh,getdate())) &hh_listado_b
+convert(char(2),datepart(mi,getdate())) &mn_listado_b
+End-Select
+
+!let $archivo_fuente = 'Reporte_detallado_iva'
+let $archivo_fuente = 'repiva'
+move &mm_listado_b to $mes_listado '00'
+move &dd_listado_b to $dia_listado '00'
+move &hh_listado_b to $hor_listado '00'
+move &mn_listado_b to $min_listado '00'
+let $fecha_definitiva = $mes_listado || $dia_listado || &aa_listado_b || '_'
+let $fecha_definitiva = $fecha_definitiva || $hor_listado || $min_listado
+let $nombre_listado = '../listados/' || $archivo_fuente || '_'
+let $nombre_listado = $nombre_listado || $fecha_definitiva || '.lis'
+new-report $nombre_listado
+!do Encabezado($w_titulo,$i_fecha_proceso)
+End-Procedure
+
+Begin-Procedure Muestra_Tiempo
+Begin-Select
+convert(char(8),getdate(),8)    &hora
+End-Select
+End-Procedure

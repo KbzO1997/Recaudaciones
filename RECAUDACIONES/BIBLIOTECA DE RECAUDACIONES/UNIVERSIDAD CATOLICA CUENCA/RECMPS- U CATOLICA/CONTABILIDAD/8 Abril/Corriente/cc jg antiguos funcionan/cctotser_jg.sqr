@@ -1,0 +1,789 @@
+!************************************************************************!
+!*      Archivo           :  cctotser.sqr                               *!
+!*      Base de datos     :  cob_cuentas                                *!
+!*      Producto          :  Cuentas de Corrientes                      *!
+!*      Disenado por      :  Mauricio Bayas/Sandra Ortiz                *!
+!*      Fecha de escritura:  18/Oct/94                                  *!
+!************************************************************************!
+!*                              IMPORTANTE                              *!
+!*      Este programa es parte de los paquetes bancarios propiedad de   *!
+!*      "BANCO BOLIVARIANO".                                            *!
+!*      Su uso no autorizado queda expresamente prohibido asi como      *!
+!*      cualquier alteracion o agregado hecho por alguno de sus         *!
+!*      usuarios sin el debido consentimiento por escrito de la         *!
+!*      Presidencia Ejecutiva de BANCO BOLIVARIANO o su representante.  *!
+!************************************************************************!
+!*                              PROPOSITO                               *!
+!*      Se encarga de calcular los totales de las transacciones de ser- *!
+!* vicio del dia a contabilizar. Estos totales se almacenan en re_total *!
+!************************************************************************!
+!*                            MODIFICACIONES                            *!
+!*      FECHA           AUTOR           RAZON                           *!
+!*      18/Oct/94     R. Garces         Emision Inicial                 *!
+!*	30/Ago/96     Juan F. Cadena	Revision Bco. de Credito	*!
+!*					Totalizacion por sucursales	*!
+!*      27/Oct/97     D.Sanchez         Validar codigo valor solo sucres*!
+!*      31/Dic/98     Dario Barco       Adicionar nemonico de impuestos *!
+!*  07/Sep/1999  Keytel F. Almeida H.   Adicionar nemonico de aduanas   *!
+!*               (referencia KFAH:07sep1999)                            *!
+!*      05/Nov/1999   R. Egas           secuencial de quiebre           *!
+!*      30/Mar/2000   R. Egas           Verificacion de codval moneda   *!
+!*                                      extranjera, para posi/divi      *!
+!*      04/Abr/2000   R. Egas           Verificacion de codval moneda   *!
+!*                                      extranjera, para posi/divi      *!
+!*      11/Abr/2000   R. Egas           Redondeo de valor en moneda ext *!
+!*                                      debe ser a 2 decimales          *!
+!*      18/Abr/2000   R. Egas           Adicionar trx 3147              *!
+!*      01/Ago/2000   R. Egas           Cambio a moneda Base            *!
+!*      28/Mar/2001   R. Egas           MOdificacion al nmemonico ADU   *!
+!*      12/Abr/2001   R. Egas           Creacion del mnemonico AFB      *!
+!*	09/May/2001   Galo Yanez	Validar si es null los campos	*!
+!*					ts_valor y ts_saldo		*!
+!*      05/Oct/2001   Danilo Romero.    Incluir el Nemonico MTM para que*!
+!*                    reporte las transferencias (Pago Proveedores).    *!
+!*      02/May/2002   Walter Ramirez    Considerar tipo de cuenta       *!
+!*   #  14.Oct.2003  Galo Yanez  Cambiar older sqr commands.   *!
+!*	19/Dic/2003   Viviana Arias	Considera las Transferencias Re-*!
+!*					cibidas desde Swift.		*!
+!*	21/Ene/2004   Viviana Arias	Crea nuevos campos en el arreglo*!
+!*					totalizador para considerar la  *!
+!*					cotizacion preferencial en transf.*!
+!*					Considera el rubro BAN.		*!
+!*      03/Ago/2004   Galo Yanez        Reproceso solo servicios	*!
+!*      18/Nov/2004   Walter Ramirez    Aumentar Nemonico para Servicio *!
+!*      11/MAY/2005   Erika Sanchez     Nuevo campo en arreglo Totaliza-*!
+!*                                      dor para moneda extranjera->3208*!
+!*      09/Ago/2005   William Moreno H. Nuevo campo en arreglo Totaliza *!
+!*					dor para moneda extranjera 3870 *!
+!*					3874				*!
+!*	08/Abr/2006	Galo Yanez	Corregir contabilidad de trx	*!
+!*					3875 (transferencia en euros)	*!
+!*      20.AGO.2006  Paul Hoyos V.     Se agrega al grupo de transaccio-*!
+!*                                     nes la transacción de flujo entre*!
+!*                                     oficinas                         *!
+!*                        Nota.-    se volvio a comentar el cambio de   *!
+!*                                  de cotizacion por que en producción *!
+!*                                  el campo ct_valor no se le da manten*!
+!*  28/Sep/2007 A. Burbano E. Convert numeric ts_ocasional para cotiza  *!
+!*  10/Sep/2008 T.Cumbicus agregue la transaccion 3909 de emision de cheques *!
+!*  12/Sep/2008 Galo Yanez	Aumentar tamano en convert a numeric	*!
+!*  26/Nov/2008 T.Cumbicus agregue la transaccion 4007   *!
+!*  04/Feb/2009 T.Cumbicus modifique la transaccion 3770  para que contabilice en euros *!
+!*  26/Mar/2009 T.Cumbicus modifique la transaccion 3909  para que contabilice en euros *!
+!*  1/Jul/2009 T.Cumbicus modifique la transaccion 3774,3775  para que contabilice en euros *!
+!*33  23/mar/2010 T.Cumbicus CTE-CC-8512 Cambio en cotizacion ISD de euro a euro  *!
+!*  17/Nov/2011 Galo Yanez	Validar que se hayan ejecutado los 	*!
+!*				totalizadores (cctotmon - cctotser)	*!
+!*				Tarea: CTE-CC-10814			*!
+!* 36  16/DIC/2013   Sandra Merino   CNB-316-CU-1901                    *!
+!*  04/Jun/2014 Jonathan Lopez T.	CCONTA-AP-SGC00014097-SGC00015564 Mapear la variable de Cotizacion*!
+!*  38 28/jul/2017 T. Cervantes Z. CTE-CC-SGC00027933 Incluir los codi- *!
+!*                   gos de transaccion 4317 y 4319 en la contabilidad. *!
+!************************************************************************!
+
+#include  "definic.inc"
+
+#define   NRO_TOT                  20000! Numero maximo de totalizadores
+#define   ANCHO_PAG                  80 ! Tamanio de la hoja
+
+Begin-Setup
+use cob_cuentas
+End-Setup
+
+#include "log.inc"
+#include "ctacte.inc"
+
+Begin-Program   !REF:GYC
+do Inicializar_Programa
+!do ParamN (1,#i_filial,'cobis..cl_filial','fi_filial = ','No existe la filial')
+!do ParamS (2,$i_fecha_proceso,'','','')
+
+let #i_filial = 1
+let $i_fecha_proceso = '04/08/2021'
+
+!cambiar fecha y  ts_secuencial in (95196049,95195066,95195760,60983746)
+
+do Inicio_Valida				!-- GYC 2011/Nov/17
+do Main
+do Fin_Valida					!-- GYC 2011/Nov/17
+do Finalizar_Programa
+End-Program   !REF:GYC
+
+!------------------------------
+Begin-Procedure Main
+!------------------------------
+do Crear_Arreglo
+do Inicializaciones
+
+do Transacciones
+End-Procedure
+
+!------------------------------
+Begin-Procedure Inicio_Valida			!-- GYC 2011/Nov/17
+!------------------------------
+Begin-Sql
+delete cob_cuentas..cc_control_contabilidad
+where cc_fecha = $i_fecha_proceso
+  and cc_producto = 3
+  and cc_transaccion = 'S'
+End-Sql
+
+Begin-Sql
+  insert into cob_cuentas..cc_control_contabilidad
+  values ($i_fecha_proceso, 3, 'S', 'E', getdate(), null, null)
+End-Sql
+End-Procedure
+
+!------------------------------
+Begin-Procedure Fin_Valida			!-- GYC 2011/Nov/17
+!------------------------------
+Begin-Sql
+update cob_cuentas..cc_control_contabilidad
+set cc_estado = 'F',
+    cc_hora_fin = getdate()
+where cc_fecha = $i_fecha_proceso
+  and cc_producto = 3
+  and cc_transaccion = 'S'
+End-Sql
+End-Procedure
+
+
+!------------------------------
+Begin-Procedure Crear_Arreglo
+!------------------------------
+!* Crea   el arreglo que contiene la transaccion destino,causa destino *!
+!* y valor destino.                                                    *!
+
+Create-Array name=Totalizador size={NRO_TOT}  field=Transaccion:number
+                                              field=Causa:char
+                                              field=Valor:number
+                                              field=Perfil:char
+                                              field=Codval:number
+                                              field=Tipocuenta:char
+                                              field=NumTran:number
+                                              field=Estado:char
+                                              field=Tiposob:char
+                                              field=Tipocre:char
+                                              field=Plazo:char
+					      field=Contable:char     !VIVI, 19/Dic/03
+					      field=Cotizacion:number !VIVI, 6/Ene/2004
+					      field=Valor_me:number   !ESA 11/MAY/2005
+End-Procedure
+
+!------------------------------
+Begin-Procedure Transacciones
+!------------------------------
+!* Se barre una por una las transacciones a contabilizar *!
+
+let #quiebre = 0
+Begin-Select
+ts_moneda                &ti_moneda () on-break print=never before=Salvar after=Analizar_Quiebre level=1
+isnull(ts_tipo_contable,'0')         &ti_tipo_contable () on-break print=never before=Salvar after=Analizar_Quiebre level=2
+ts_oficina               &ti_ofic_orig () on-break print=never before=Salvar after=Analizar_Quiebre level=3
+isnull(ts_oficina_cta,0) &ti_ofic_dest () on-break print=never before=Salvar after=Analizar_Quiebre level=4
+ts_tipo_transaccion      &ti_tipo_tran () on-break print=never before=Salvar after=Analizar_Quiebre level=5
+ts_causa                 &ti_causa () on-break print=never before=Salvar after=Analizar_Quiebre level=6             !RE 19991105
+ts_estado_sob 	         &ti_estado () on-break print=never before=Salvar after=Analizar_Quiebre level=7
+ts_tipo_sobregiro        &ti_tipo_sob () on-break print=never before=Salvar after=Analizar_Quiebre level=8
+ts_tipo_credito          &ti_tipo_cre () on-break print=never before=Salvar after=Analizar_Quiebre level=9
+ts_plazo                 &ti_plazo () on-break print=never before=Salvar after=Analizar_Quiebre level=10
+!VIVI, 19/Dic/2003
+ts_ccontable             &ti_ccontable () on-break print=never before=Salvar after=Analizar_Quiebre level=10
+ts_indicador
+!ts_valor
+isnull(ts_valor,0)		&ts_valor		!GYC 2001/MAY/09
+ts_correccion
+ts_secuencial
+ts_cod_alterno
+!ts_saldo
+isnull(ts_saldo,0)		&ts_saldo		!GYC 2001/MAY/09
+isnull(ts_monto,0)		&ts_monto		!GYC 2001/MAY/09
+isnull(ts_contratado,0) 	&ts_contratado		!GYC 2001/MAY/09
+!-- convert(numeric(10,4),isnull(ts_ocasional,0))		&ts_ocasional		!GYC 2001/MAY/09 !ANBE 092707
+convert(numeric(20,4),isnull(ts_ocasional,0))		&ts_ocasional		!GYC 2008/Sep/13
+isnull(ts_aporte_iess,0)        &ts_aporte_iess
+isnull(ts_descuento_iess,0)	&ts_descuento_iess	!GYC 2001/MAY/09
+isnull(ts_fonres_iess,0)	&ts_fonres_iess		!GYC 2001/MAY/09
+tc_indice
+tc_causa_dst
+tc_causa_org
+tc_contabiliza
+tc_perfil
+tc_estado
+isnull(convert(varchar,mt_cotiza),'1.0')  &mt_cotiza () on-break print=never before=Salvar after=Analizar_Quiebre level=10
+substring(isnull(ts_tipo_chequera,''),1,3)  &canal 
+
+
+   let #secuencial =  &ts_secuencial
+   let #codigo_val =  to_number(&tc_causa_dst)
+   let $w_causa = &ti_causa
+   let #w_ocasional =  &ts_ocasional
+   let #w_aporte_iess =  &ts_aporte_iess
+   if &ts_correccion = 'S' ! Se trata de una correccion, signo negativo
+      let #signo = -1
+   else
+      let #signo =  1
+   end-if
+   
+   let $canal = &canal 
+   if $canal = 'CNB' and &tc_contabiliza = 'VTR'  and ( &ti_tipo_tran = 3497 or &ti_tipo_tran = 3188 )
+       let $canal = 'VEN'
+   end-if   
+   
+   do CampoContable
+
+   !ESA 11MAY2005	!WMH 09AGO2005
+   let #val_me = 0
+   
+   let #val_cotiza =  &ts_ocasional	!REF 33
+   
+   !let #ti_tipo_tran = &ti_tipo_tran  !PHV 21AGO2006
+   if &ti_tipo_tran = 3208 or  &ti_tipo_tran = 3870  or  &ti_tipo_tran = 4007 or &ti_tipo_tran = 3874 or &ti_tipo_tran = 3875  or &ti_tipo_tran = 3909
+      !--<REF 38
+      or &ti_tipo_tran = 4317 or &ti_tipo_tran = 4319 or &ti_tipo_tran = 43565
+      !--REF 38>
+	let #val_me = &ts_aporte_iess
+	if &mt_cotiza  <> '1.0'		!REF 33
+		let #val_cotiza = &mt_cotiza	!REF 33
+	end-if		
+   end-if
+   
+   if #val > 0   ! AME  CNB
+      !VIVI, Transferencias en otras monedas
+   if (&ti_tipo_tran = 3770 or &ti_tipo_tran = 3775  or &ti_tipo_tran = 3774) and &ti_moneda <> #moneda_base
+      do Graba_Transf (&tc_indice, &ti_tipo_tran, &tc_causa_org, #val, &tc_perfil,#codigo_val,#secuencial,#signo,&ti_tipo_contable,&ti_estado, &ti_tipo_sob, &ti_tipo_cre, &ti_plazo, &ti_ccontable, &ts_ocasional, &ti_moneda, &tc_estado, #w_numdecbase,$i_fecha_proceso,#w_aporte_iess)!VIVI
+   else
+      do Actualizar (&tc_indice, &ti_tipo_tran, &tc_causa_org, #val, &tc_perfil,#codigo_val,#secuencial,#signo,&ti_tipo_contable,&ti_estado, &ti_tipo_sob, &ti_tipo_cre, &ti_plazo, &ti_ccontable, #val_cotiza, &ti_moneda, #val_me )	!REF 33 VIVI
+   end-if
+   end-if
+   
+   do Actualizar_Reg_Proc
+   let #quiebre = 0
+from cob_cuentas..cc_tran_servicio, cob_remesas..re_tran_contable, cob_cuentas..cc_monet_transfer	
+where ts_tipo_transaccion = tc_tipo_tran
+  and tc_causa_org      in (isnull(ts_causa,'0'),'0')
+  and tc_estado         = 'V'
+  and ts_tipo_transaccion  not in (select convert (smallint, codigo)
+                              from cobis..cl_catalogo
+                             where tabla = (select codigo
+                                              from cobis..cl_tabla
+                                             where tabla = 'tr_ser_no_cont')
+                               and estado = 'V')
+  and ts_tsfecha *= mt_fecha 
+  and ts_secuencial *= mt_ssn_monet 
+  and ts_tipo_transaccion  *= mt_tipo_tran 
+  and ts_causa *= mt_causa 
+  and ts_tsfecha = $i_fecha_proceso
+  and ts_secuencial in (98197966,98201975,98202055,98198119,98198749,98198931,98198988,54014946,104542651)
+ order by ts_moneda,ts_tipo_contable, ts_oficina,ts_oficina_cta,ts_tipo_transaccion,ts_causa,isnull(convert(varchar,mt_cotiza),'1.0')
+End-Select
+End-Procedure
+
+
+!------------------------------
+Begin-Procedure CampoContable
+!------------------------------
+let #val = 0
+evaluate &tc_contabiliza
+WHEN = 'SLD'
+   let #val = &ts_saldo
+   break
+WHEN = 'VTR'  
+   if $canal <> 'CNB' 
+      let #val = &ts_valor
+   end-if
+   break
+WHEN = 'VTRCNB'  
+   if  $canal = 'CNB'
+     let #val = &ts_valor
+   end-if
+   break   
+WHEN = 'MNT'
+   let #val = &ts_monto
+   break
+WHEN = 'SCO'
+   let #val = &ts_contratado
+   break
+WHEN = 'SOC'
+   let #val = &ts_ocasional
+   break
+WHEN = 'AIE'
+   let #val = &ts_aporte_iess
+   break
+WHEN = 'DIE'
+   let #val = &ts_descuento_iess
+   break
+WHEN = 'FIE'
+   let #val = &ts_fonres_iess
+   break
+WHEN = 'OIN'
+   let #val = &ts_valor + &ts_saldo
+   break
+WHEN = 'SSI'                           !* DBL981216
+   let #val = &ts_saldo - &ts_valor
+   break
+WHEN = 'MTM'                           !* DRM - 03/Oct/2001
+   let #val = &ts_contratado + &ts_monto
+   break
+WHEN = 'SMM'                           !* DBL981216
+   let #val = &ts_saldo + &ts_monto
+   break
+WHEN = 'ADU'                           !* KFAH:07sep1999
+   let #val = &ts_saldo + &ts_monto + &ts_valor + &ts_contratado
+WHEN = 'SER'
+   let #val = &ts_saldo + &ts_monto + &ts_valor + &ts_contratado - &ts_aporte_iess + &ts_descuento_iess
+WHEN = 'AFB'                           !* KFAH:07sep1999
+   let #val = &ts_saldo + &ts_monto + &ts_valor + &ts_contratado + &ts_ocasional
+WHEN = 'VMM'                           !* KFAH:07sep1999
+   let #val = &ts_valor + &ts_monto
+WHEN = 'SVV'
+   !let #val = &ts_saldo + &ts_monto + &ts_valor + &ts_ocasional - &ts_fonres_iess
+    let #val = &ts_saldo + &ts_monto + &ts_valor + &ts_contratado + &ts_descuento_iess - &ts_aporte_iess - &ts_fonres_iess
+   break
+end-evaluate
+End-Procedure
+
+!------------------------------
+Begin-Procedure Salvar
+!------------------------------
+!* Salva las variables necesarias antes del quiebre  y encera variables *!
+let #oficina_orig = &ti_ofic_orig
+let #oficina_dest = &ti_ofic_dest
+let #moneda = &ti_moneda
+let $estado_cont = &tc_estado
+End-Procedure
+
+!------------------------------
+Begin-Procedure Analizar_Quiebre
+!------------------------------
+!* De producirse un quiebre, acumula todos los valores para la *!
+!* transaccion activa                                          *!
+
+add 1 to #quiebre
+if #quiebre = 1 ! Si es 1 entonces totaliza
+   do Grabar_Total
+end-if
+End-Procedure
+
+!------------------------------
+!VIVI, Aumenta parametro $contable, #cotiza
+Begin-Procedure Actualizar (#indice,#tran,$causa,#valor,$perfil,#codval,#sec,#signo,$tipocontable,$estado,$tiposob,$tipocre,$plazo, $contable, #cotiza, #w_moneda, #valor_me)  !VIVI
+!------------------------------
+!* Actualiza el elemento totalizador del arreglo #indice con #valor *!
+get #valor_anterior from Totalizador (#indice) valor
+get #valor_anterior_me from Totalizador (#indice) valor_me
+let #nuevo_valor = #valor_anterior + #valor * #signo
+let #nuevo_valor_me = #valor_anterior_me + #valor_me * #signo
+get #numtran_ant from Totalizador (#indice) NumTran
+let #numtran_ant = #numtran_ant + 1 * #signo
+ !VIVI Campo $contable, #cotiza
+put #tran $causa #nuevo_valor $perfil #codval $tipocontable #numtran_ant $estado $tiposob $tipocre $plazo $contable  #cotiza  #nuevo_valor_me  into Totalizador (#indice)
+End-Procedure
+
+!------------------------------
+Begin-Procedure Grabar_Total
+!------------------------------
+!* Graba en re_total los totales para la transaccion y causa definidas *!
+!* en el arreglo Totalizador                                           *!
+
+let #ind_max = {NRO_TOT} - 1
+!show 'GRABANDO: '  #ind_max
+let #i = 1
+while #i <= #ind_max ! Analizamos todos los totalizadores
+   get #tran_dest $causa_org #valor_dest $perfil #codval $tipocontable #NumTrn $estado $tiposob $tipocre $plazo $contable #cotiza #valor_dest_me from Totalizador (#i)  !VIVI
+   !show 'ENTRO'
+   if #valor_dest <> 0
+      !show 'SIGUE'
+      if #moneda <> #moneda_base        !- Moneda Base
+           do Moneda_Extranjera            !- determina le valor en usd y verifica pos/div solo monac
+      else
+        if #tran_dest = 3148 !RE 18/ABR/2000
+           do Moneda_Nacional              !- determina le valor en usd y verifica pos/div dif a monac
+        else
+            !tc 01162009
+           let #cotiza = 0
+           let #valor_me = 0
+        end-if
+      end-if
+
+
+      Begin-SQL on-error=Error         ! re_total_cc (to_producto DSC970516
+      insert into
+      cob_remesas..re_total (to_producto, to_moneda, to_tipo_tran,
+	      to_causa, to_ofic_orig, to_ofic_dest, to_valor,
+	      to_perfil, to_codval, to_valor_me, to_numtran, to_estado,
+              to_tipo_contable, to_estado_sob, to_tipo_sobregiro, to_tipo_credito, to_plazo, to_ccontable, to_cotizacion, to_tipo)     !VIVI			!-- GYC 2004/Ago/03
+      values (3,#moneda,#tran_dest,
+	      $causa_org,#oficina_orig,#oficina_dest,#valor_dest,
+	      $perfil, #codval, #valor_me, #NumTrn, $estado_cont,
+              $tipocontable, $estado, $tiposob, $tipocre, $plazo, $contable, #cotiza, 'S')	!VIVI
+      End-SQL
+      put 0 '' 0 '' 0 '' 0 '' '' '' '' '' 0 0 into Totalizador (#i)
+
+   end-if
+   add 1 to #i
+end-while
+End-Procedure
+
+!------------------------------
+Begin-Procedure Moneda_Extranjera
+!------------------------------
+!Begin-Select
+!ct_compra
+!from cob_conta..cb_cotizacion
+!where ct_fecha = $i_fecha_proceso
+!  and ct_moneda = convert(tinyint,#moneda)
+!End-Select
+!{PHV 21AGO2006
+!Se vuelve a comentar ya que en producción solo se da manteniemiento al campo
+!ct_compra y ct_venta y al campo ct_valor no
+!Se quema la transaccion de 3706 ya que esta debe trabajar con el campo ct_valor
+!en lugar del campo ct_compra
+!let #ct_compra = 0
+!if #ti_tipo_tran = 3706.0 or #ti_tipo_tran = 3705.0
+!Begin-Select
+!ct_valor       &ct_valor
+!from cob_conta..cb_cotizacion
+!where ct_fecha = $i_fecha_proceso
+!  and ct_moneda = convert(tinyint,#moneda)
+!End-Select
+!let #ct_compra = &ct_valor
+!else
+Begin-Select
+ct_compra      &ct_compra
+from cob_conta..cb_cotizacion
+where ct_fecha = $i_fecha_proceso
+  and ct_moneda = convert(tinyint,#moneda)
+End-Select
+let #ct_compra = &ct_compra
+!end-if
+!}PHV 21AGO2006
+if isnull(&ct_compra)
+!if #ct_compra = 0
+  let #conversion = 0
+else
+  let #conversion = round((#valor_dest * &ct_compra),#w_numdecbase)
+  let #cotiza= &ct_compra!--jlopez 04/06/2014 mapeo de variable de la cotizacion
+  !let #conversion = round((#valor_dest * #ct_compra),#w_numdecbase)
+end-if
+!VIVI
+!--if &ti_tipo_tran = 3770 or &ti_tipo_tran = 3775 					!-- GYC 2006/Abr/08
+if #tran_dest = 3770  or &ti_tipo_tran = 3775   or &ti_tipo_tran = 3774
+   	let #valor_dest = #val
+   	
+   	let #conversion = round((#valor_dest ),#w_numdecbase)	!-- TC 2009/Feb/04
+   	
+   	if $w_causa = '1' and #w_ocasional <> 0 !-- TC 2009/Feb/04
+		let #conversion = round((#valor_dest * #w_ocasional),#w_numdecbase)
+	end-if
+   	if $w_causa = '3' and #w_ocasional <> 0 !-- TC 2009/Feb/04
+		let #conversion = round((#valor_dest * #w_ocasional),#w_numdecbase)
+	end-if
+	if $w_causa = '2'  !-- TC 2009/Feb/04		
+		let #conversion = round((#valor_dest * #ct_compra),#w_numdecbase)
+	end-if
+end-if
+
+!***  VERIFICA SI CODIGO VALOR ES DE CUENTA QUE SOLO ACEPTA MONEDA NACIONAL
+let #existe   = 0
+let $codval   = to_char(#codval)
+let #cu_moneda = #moneda_base
+Begin-Select
+valor
+  let #existe = 1
+from cobis..cl_catalogo
+where tabla = (select codigo from cobis..cl_tabla
+               where tabla = 're_codval_mn') and codigo = convert(char(10),$codval) and estado = 'V'
+End-Select
+
+
+!***  #existe = 1: CUENTA SOLO ACEPTA MONEDA NACIONAL, POR LO TANTO #valor_me = 0
+!***  #existe = 0: CUENTA ACEPTA VARIAS MONEDAS.
+
+!gveintia Verifica si cuenta es mon. nacional o varias monedas (Transf.Env.)
+!--if &ti_tipo_tran = 3870 or &ti_tipo_tran = 3874 or &ti_tipo_tran = 3875 		!-- GYC 2006/Abr/08
+if #tran_dest = 3870 or #tran_dest = 4007 or #tran_dest = 3874 or #tran_dest = 3875 or #tran_dest = 3909
+   !--<REF 38
+   or #tran_dest = 4317 or #tran_dest = 4319 or #tran_dest = 43565
+   !--REF 38>
+Begin-Select
+dp_cuenta   &dp_cuenta
+from cob_conta..cb_det_perfil
+where dp_codval = #codval and dp_perfil = $perfil
+End-Select
+
+   if &dp_cuenta <> ''
+      let #pos = instr(&dp_cuenta,'.MON',1)
+      if #pos = 0
+         let #existe = 1
+      else
+         let #existe = 0
+      end-if
+   end-if
+   
+Begin-Select
+cu_moneda  &cu_moneda
+from cob_conta..cb_cuenta
+where cu_cuenta = &dp_cuenta
+End-Select
+   
+	if &cu_moneda <> 0   
+	   let #cu_moneda = &cu_moneda
+	end-if   
+
+end-if
+
+
+
+
+if  #existe = 1
+
+    let #valor_me   = 0
+   !--if &ti_tipo_tran = 3208  or  &ti_tipo_tran = 3870  or  &ti_tipo_tran = 4007 or &ti_tipo_tran = 3874 or &ti_tipo_tran = 3875 !WMH 09AGO2005
+   !-- GYC 2006/Abr/08
+   if #tran_dest = 3208  or #tran_dest = 3870  or #tran_dest = 4007 or #tran_dest = 3874 or #tran_dest = 3875 or #tran_dest = 3909
+      !--<REF 38
+      or #tran_dest = 4317 or #tran_dest = 4319 or #tran_dest = 43565
+      !--REF 38>
+    !let #cotiza = round((#valor_dest / #valor_dest_me),#w_numdecbase)
+    let #valor_me   = #valor_dest_me
+    
+    
+    if #moneda_base = #cu_moneda
+    	let #valor_me   = 0
+    end-if        
+    
+   else
+    let #valor_dest = #conversion
+   end-if
+   
+else
+
+   !--if &ti_tipo_tran = 3208  or  &ti_tipo_tran = 3870 or &ti_tipo_tran = 3874 or &ti_tipo_tran = 3875  !WMH 09AGO2005
+   !-- GYC 2006/Abr/08
+   if #tran_dest = 3208  or #tran_dest = 3870  or #tran_dest = 4007  or #tran_dest = 3874 or #tran_dest = 3875 or #tran_dest = 3909
+      !--<REF 38
+      or #tran_dest = 4317 or #tran_dest = 4319 or #tran_dest = 43565
+      !--REF 38>
+
+   !-- INICIO TC 2009/ENE/06
+    if #valor_dest = #valor_dest_me and #moneda <> #moneda_base
+    	!let #cotiza = &ct_compra
+    	!let #valor_dest =  #conversion
+    	let #valor_dest = round((#valor_dest * #cotiza),#w_numdecbase)
+    	let #valor_me   = #valor_dest_me
+    else
+   !-- FIN TC 2009/ENE/06 
+    	!let #cotiza = round((#valor_dest / #valor_dest_me),#w_numdecbase)
+    	let #valor_me = #valor_dest_me
+    end-if
+    
+   else
+    let #valor_me   = #valor_dest
+    let #valor_dest = #conversion
+   end-if
+end-if
+
+
+End-Procedure
+
+!------------------------------
+Begin-Procedure Moneda_Nacional                                         !RE 04/ABR/2000
+!------------------------------
+Begin-Select
+ct_compra       &compra
+from cob_conta..cb_cotizacion
+where ct_fecha = $i_fecha_proceso
+  and ct_moneda = 0
+End-Select
+if isnull(&compra)
+  let #conversion = 0
+else
+  let #conversion = round((#valor_dest / &compra),0)                    !RE 11/ABR/2000
+end-if
+
+!***  VERIFICA SI CODIGO VALOR ES DE CUENTA QUE SOLO ACEPTA MONEDA EXTRANJERA
+let #existe   = 0
+let $codval   = to_char(#codval)
+Begin-Select
+valor           &val
+  let #existe = 1
+from cobis..cl_catalogo
+where tabla = (select codigo from cobis..cl_tabla
+               where tabla = 're_codval_me') and codigo = convert(char(10),$codval)
+End-Select
+
+
+!***  #existe = 1: CUENTA SOLO ACEPTA MONEDA EXTRANJERA, POR LO TANTO #valor_me <> 0
+!***  #existe = 0: CUENTA ACEPTA SUCRES Y DOLARES.        (DSC971027)
+
+!gveintia Verifica si cuenta es mon. nacional o varias monedas (Transf.Env.)
+if &ti_tipo_tran = 3870 or  &ti_tipo_tran = 4007 or &ti_tipo_tran = 3874 or &ti_tipo_tran = 3875 or &ti_tipo_tran = 3909
+   !--<REF 38
+   or &ti_tipo_tran = 4317 or &ti_tipo_tran = 4319 or &ti_tipo_tran = 43565
+   !--REF 38>
+Begin-Select
+dp_cuenta   &dp_cuenta2
+from cob_conta..cb_det_perfil
+where dp_codval = #codval and dp_perfil = $perfil
+End-Select
+   if &dp_cuenta <> ''
+      let #pos = instr(&dp_cuenta2,'.MON',1)
+      if #pos = 0
+         let #existe = 1
+      else
+         let #existe = 0
+      end-if
+   end-if
+end-if
+
+if  #existe = 1
+    
+    let #valor_me   = #conversion
+else
+    
+    let #valor_me   = 0
+end-if
+End-Procedure
+
+!------------------------------
+Begin-Procedure Error
+!------------------------------
+  show $sql-error
+  show 'moneda '    #moneda
+  show 'tran dest ' #tran_dest
+  show 'causa '     $causa_dest
+  show 'ofic orig ' #oficina_orig
+  show 'ofic dest ' #oficina_dest
+  show 'perfil '    $perfil
+  do Abortar
+End-Procedure
+
+!------------------------------
+Begin-Procedure Inicializaciones
+!------------------------------
+Begin-Sql
+delete cob_remesas..re_total                            !-- GYC 2004/Ago/03
+where to_producto = 3
+  and to_tipo = 'S'
+End-Sql
+
+begin-select
+em_moneda_base
+    let #moneda_base = &em_moneda_base
+from    cob_conta..cb_empresa
+where   em_empresa = 1
+end-select
+
+! Numero de decimales para moneda base
+begin-select
+mo_decimales
+        let $w_usadeci = &mo_decimales
+  from cobis..cl_moneda
+ where mo_moneda = convert(tinyint,#moneda_base)
+end-select
+if $w_usadeci = 'S'
+   let #w_numdecbase = 2
+else
+   let #w_numdecbase = 0
+end-if
+
+let #w_numdecnobase = 0
+
+End-Procedure
+
+!GRABA LOS REGISTROS DE TRANSFERENCIAS REALIZADOS EN MONEDAS EXTRANJERA
+Begin-Procedure Graba_Transf (#indice,#tran,$causa,#valor_dest,$perfil,#codval,#sec,#signo,$tipocontable,$estado,$tiposob,$tipocre,$plazo, $contable, #cotiza, #w_moneda, $estado_c, #w_numdecbase,$w_fecha,#w_val_aux)
+
+Begin-Select
+ct_compra      &ct_compra
+from cob_conta..cb_cotizacion
+where ct_fecha = $w_fecha
+  and ct_moneda = convert(tinyint,#w_moneda)
+End-Select
+let #ct_compra = &ct_compra
+
+if #valor_dest <> 0
+  let #moneda = #w_moneda
+  let #valor_me = 0
+  if #w_moneda <> #moneda_base           !- Moneda Base
+  
+     !- determina le valor en usd y verifica pos/div solo monac
+    !VIVI
+    if #tran = 3770 or #tran = 3775  or #tran = 3774
+   	 
+   	 !show 'moneda ' #w_moneda
+   	let #conversion = round((#valor_dest ),#w_numdecbase)	!-- TC 2009/Feb/04
+   	
+   	if $causa = '1'  and #cotiza <> 0 !-- TC 2009/Feb/04
+		let #conversion = round((#valor_dest * #cotiza),#w_numdecbase)
+	end-if
+   	if $causa = '3'  and #cotiza <> 0 !-- TC 2009/Feb/04
+		let #conversion = #valor_dest
+		let #valor_dest = round((#conversion / #cotiza),#w_numdecbase)
+	end-if
+	
+	if ($causa = '2' or $causa = '0') and #cotiza = 0   !-- TC 2009/Feb/04		
+		let #conversion = round((#valor_dest * #ct_compra),#w_numdecbase)
+		let #cotiza = #ct_compra
+        end-if
+   	if $causa = '0'  and #cotiza <> 0 and #w_val_aux =0 !-- TC 2009/Feb/04
+		let #conversion = round((#valor_dest * #cotiza),#w_numdecbase)
+	end-if
+   	if $causa = '0'  and #cotiza <> 0  and #w_val_aux <> 0 !-- TC 2009/Feb/04
+		let #conversion = #valor_dest
+		let #valor_dest = round((#conversion / #cotiza),#w_numdecbase)
+	end-if        
+        
+    end-if
+
+    !***  VERIFICA SI CODIGO VALOR ES DE CUENTA QUE SOLO ACEPTA MONEDA NACIONAL
+    let #existe   = 0
+    let $codval   = to_char(#codval)
+Begin-Select
+valor
+   let #existe = 1
+from cobis..cl_catalogo
+where tabla = (select codigo from cobis..cl_tabla
+               where tabla = 're_codval_mn') and codigo = convert(char(10),$codval) and estado = 'V'
+End-Select
+
+Begin-Select
+dp_cuenta   &dp_cuenta
+from cob_conta..cb_det_perfil
+where dp_codval = #codval and dp_perfil = $perfil
+End-Select
+
+   if &dp_cuenta <> ''
+      let #pos = instr(&dp_cuenta,'.MON',1)
+      if #pos = 0
+         let #existe = 1
+      else
+         let #existe = 0
+      end-if
+   end-if
+
+    !***  #existe = 1: CUENTA SOLO ACEPTA MONEDA NACIONAL, POR LO TANTO #valor_me = 0
+    !***  #existe = 0: CUENTA ACEPTA VARIAS MONEDAS.
+    if  #existe = 1 or $codval = '322'
+        let #valor_me   = 0
+        let #valor_dest = #conversion
+    else
+        let #valor_me   = #valor_dest
+        let #valor_dest = #conversion
+    end-if
+  end-if
+
+Begin-SQL on-error=Error
+insert into
+cob_remesas..re_total (to_producto, to_moneda, to_tipo_tran,
+      to_causa, to_ofic_orig, to_ofic_dest, to_valor,
+      to_perfil, to_codval, to_valor_me, to_numtran, to_estado,
+      to_tipo_contable, to_estado_sob, to_tipo_sobregiro, to_tipo_credito, to_plazo, to_ccontable, to_cotizacion, to_tipo) !VIVI 		!-- GYC 2004/Ago/03
+values (3,#moneda,#tran,
+      $causa,#oficina_orig,#oficina_dest,#valor_dest,
+      $perfil, #codval, #valor_me, 1, $estado_c,
+      $tipocontable, $estado, $tiposob, $tipocre, $plazo, $contable, #cotiza, 'S')
+End-SQL
+end-if
+End-Procedure

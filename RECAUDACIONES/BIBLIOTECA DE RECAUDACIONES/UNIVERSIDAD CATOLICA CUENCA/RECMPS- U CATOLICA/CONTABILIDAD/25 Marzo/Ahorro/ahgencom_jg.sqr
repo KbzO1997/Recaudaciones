@@ -1,0 +1,981 @@
+!************************************************************************!
+!*      Archivo           :  ahgencom.sqr                               *!
+!*      Base de datos     :  cob_ahorros                                *!
+!*      Producto          :  Cuentas de Ahorros                         *!
+!*      Disenado por      :  Rodrigo Garces/Julio Navarrete             *!
+!*      Codigo programa   :  3123                                       *!
+!*      Fecha de escritura:  05/Ene/96                                  *!
+!************************************************************************!
+!*                              IMPORTANTE                              *!
+!*      Este programa es parte de los paquetes bancarios propiedad del  *!
+!*      "BANCO BOLIVARIANO".                                            *!
+!*      Su uso no autorizado queda expresamente prohibido asi como      *!
+!*      cualquier alteracion o agregado hecho por alguno de sus         *!
+!*      usuarios sin el debido consentimiento por escrito de la         *!
+!*      Presidencia Ejecutiva del BANCO BOLIVARIANO o su representante. *!
+!************************************************************************!
+!*                              PROPOSITO                               *!
+!*      Genera comprobantes contables de los movimientos del dia        *!
+!************************************************************************!
+!*                            MODIFICACIONES                            *!
+!*      FECHA           AUTOR           RAZON                           *!
+!*      05/Ene/96     B Mosquera        Emision Inicial                 *! 
+!*	30/Ago/96     Juan F. Cadena	Revision Bco. de Credito	*!
+!*      23/Jun/97     David Sanchez C.  Utilizar Perfiles con parametros*!
+!*      27/Oct/1997   David Sanchez C.  No sucretizar, utilizar stored  *!
+!*                                      Procedure sp_scomprobante_cc.   *!
+!*      02/Nov/1997   David Sanchez C.  utilizas sp_tsasiento_cc        *!
+!*      16/Ene/1998   David Sanchez C.  Corregir transitorio en dolares *!
+!*      06/May/1998   Graciela Morales  Considerar perfiles solo sucres *!
+!*      27/May/1998   David Sanchez C.  Utilizar tabla re_total_ah      *!
+!*      01/Ago/2000   R. Egas           Cambio a moneda Base            *!
+!*      18/Dic/2000   R. Egas           Se necesita que genere la ofici *!
+!*                                      na destino completa             *!
+!*	09/Abr/2002   Galo Yanez	Query x empresa = 1		*!
+!*	03/Jun/2002   Rosa Castillo	Migracion Contable		*!
+!*      24/Feb/2003   Galo Yanez        Indice x oficina                *!
+!*      05/Jun/2003   Galo Yanez        Direccionar a tablas de ahorros *!
+!*   #  14.Oct.2003  Galo Yanez  Cambiar older sqr commands.            *!
+!*  05/Ene/2004  Franklin Moncayo V. Control de Contabilizacion por Trx *! 
+!*      20.AGO.2006  Paul Hoyos V.     Se agrega al quiebre el campo co-*!
+!*                                     tización. Se env. sp_tsasiento_ah*!   
+!*                                     un nuevo campo @i_param11 con el *!    
+!*                                     valor de la cotizacion y en caso *!    
+!*                                     de descuadre se ajusta el cbte.  *!
+!*	04/Abr/2011   Raul Altamirano REF17:AHO-CC-10355 Migracion Sybase 15*! 		
+!*  17/Nov/2011 Galo Yanez	Validar que se hayan ejecutado los 	*!
+!*				totalizadores (ahtotmon - ahtotser)	*!
+!*				Tarea: AHO-CC-10815			*!
+!************************************************************************!
+
+#include  "definic.inc"
+
+#define   ANCHO_PAG                190 !Ancho de la pagina a imprimir
+#define   AREA_ORIG                37  !Area de Cuentas de Ahorro
+#define   AREA_DEST		   80
+!#define   MON_NAC                   0
+#define  SALIDA  '<37><33><10>(dfl.jdt) STARTLM<10>'
+
+Begin-Setup
+!---------
+use cob_remesas
+
+!FMV 05ENE2004 Control Trx
+begin-sql -c1
+create table ##re_trx
+( tr_tran   int )
+end-sql 
+
+End-Setup  
+
+#include "printer_dfl.inc"   !REF:GYC
+
+#include "log.inc"
+#include "ctahorro.inc"
+
+Begin-Program   !REF:GYC
+!-----------
+do Inicializar_Programa
+!do ParamN (1,#i_filial,'cobis..cl_filial','fi_filial = ','No existe la filial')
+!do ParamS (2,$i_fecha_proceso,'','','')
+
+let #i_filial = 1
+let $i_fecha_proceso = '03/25/2021'
+
+let #secuencial = 0
+do Verifica_Procesos					!-- GYC 2011/Nov/17
+do Main
+do Finalizar_Programa
+End-Program   !REF:GYC
+
+Begin-Heading  8 
+!------------
+do Cabecera ($nombre_filial,'ERRORES EN LA GENERACION DE COMPROBANTES (AH)','',
+	'', '',$i_fecha_proceso)
+position (+1)
+do Lin_Horizontal
+do PrintS (1,'MON','',0)
+do PrintS (2,'TRANSAC','',0)
+do PrintS (3,'PERFIL','',0)
+do PrintS (4,'DB/CR','',0)
+do PrintS (5,'CUENTA CTBLE','',0)
+do PrintS (6,'OF.OR','',0)
+do PrintS (7,'OF.DT','',0)
+do PrintS (8,'ASIENTO','',0)
+do PrintS (9,'      TOT DEBITO MN','',0)
+do PrintS (10,'    TOT CREDITO MN','',0)
+do PrintS (11,'     TOT DEBITO ME','',0)
+do PrintS (12,'    TOT CREDITO ME','',0)
+do PrintS (13,'        COTIZACION','',0)
+do PrintS (14,'CONCEPTO','',0)
+do Lin_Horizontal
+End-Heading
+
+Begin-Procedure Trunca_Tabla
+!----------------------------
+begin-sql
+ truncate table cob_remesas..re_asientos_ah
+end-sql
+End-Procedure
+
+Begin-Procedure Before_Tran
+!--------------------------
+let #asiento        = 0
+let #tot_credito    = 0
+let #tot_debito     = 0
+let #tot_credito_me = 0
+let #tot_debito_me  = 0
+let #indice         = 0
+let #of_origen      = &oficina_origen
+let #of_destino     = &oficina_destino
+let #cod_tran       = &to_tipo_tran
+let #producto       = &to_producto
+End-Procedure
+
+
+Begin-Procedure After_Tran
+!-------------------------
+if #quiebre = 1
+   if round(#tot_debito,2) <> round(#tot_credito,2)
+      show '>>>>>>DESCUADRE<<<<<<<<<<' 
+      !show 'TRANSA: ' #w_tran
+      show 'DEBITO: ' #tot_debito ' CREDITO:' #tot_credito
+      !show 'DEBITO: ' #tot_debito_me  ' CREDITO:' #tot_debito_me 
+      
+      !{PHV  03AGO2006 
+      if #w_tran = 3520 or #w_tran = 4239 or #w_tran = 4237
+         do AjustaCbteTranf
+      else
+         do Ajusta_Comprobante
+      end-if
+      !}PHV  03AGO2006
+      do Error_Comprobante('COMPROBANTE CONTBLE AJUSTADO',#w_tran,#w_origen,#w_mon,#tot_debito,#tot_credito)
+
+      !*** DSC971210
+      let #error = {FALSE}
+      do Generar_Cabecera_Temporal
+      if #error = {FALSE}
+         do Insertar_Asientos            !INSERTA EN cb_tasiento
+         do Generar_Cabecera_Definitiva
+      end-if
+      !*** DSC971210
+   else
+      if #tot_debito <> 0 or #tot_credito <> 0
+        !show 'DEBITo: ' #tot_debito ' CREDITo:' #tot_credito
+         let #error = {FALSE}
+         do Generar_Cabecera_Temporal
+         if #error = {FALSE} 
+            do Insertar_Asientos            !INSERTA EN cb_tasiento
+            do Generar_Cabecera_Definitiva
+         end-if
+      end-if
+   end-if
+   do Trunca_Tabla 
+   let #quiebre = 0
+end-if
+End-Procedure
+     
+
+!*** DSC971210
+Begin-Procedure Ajusta_Comprobante
+!-------------------------
+let #debito     = 0
+let #debito_me  = 0
+let #credito    = 0
+let #credito_me = 0
+let #cotizacion = 0
+!*DSC let #of_origen  = 0
+let #of_destino = #of_origen
+let #asiento    = #asiento + 1
+let #moneda     = #moneda_tr
+!*** DSC980116
+!if #moneda = 1
+if #moneda <> #moneda_base
+   do Lee_Cotizacion
+end-if
+!*** DSC980116
+
+if #tot_debito > #tot_credito
+   !pasivos por identificar 
+   if #moneda <> #moneda_base
+      let $cuenta_final = '299090250509'
+   else
+      let $cuenta_final = '299090200501'
+   end-if
+   let #credito     = #tot_debito  - #tot_credito
+   let #tot_credito = #tot_credito + #credito
+   let $debcred = '2'
+else
+   !activos por identificar 
+   if #moneda <> #moneda_base
+      let $cuenta_final = '199090250509'
+   else
+      let $cuenta_final = '199090200501'
+   end-if
+   let #debito     = #tot_credito - #tot_debito
+   let #tot_debito = #tot_debito  + #debito
+   let $debcred = '1'
+end-if
+do Busca_Moneda         !* Busca moneda de la cuenta contable
+
+begin-sql
+insert into cob_remesas..re_asientos_ah
+(ra_perfil,ra_tipo_tran,ra_asiento,ra_cuenta,ra_oficina_orig,ra_oficina_dest,
+ ra_area_dest,ra_credito,ra_debito,ra_concepto,ra_credito_me,ra_debito_me,
+ ra_moneda,ra_cotizacion,ra_tipo_doc,ra_producto,ra_debcred)
+values ($perfil,#trans,#asiento,$cuenta_final,#of_origen,#of_destino,#area,
+#credito,#debito,$dtr_concepto,#credito_me,#debito_me,#moneda,#cotizacion,
+$tipo_doc,#producto,$debcred)
+end-sql
+End-Procedure
+!*** DSC971210
+
+!*** DSC980116
+Begin-Procedure Lee_Cotizacion
+!-------------------------
+Begin-Select
+ct_compra      &cotiza
+from cob_conta..cb_cotizacion
+where ct_fecha  =$i_fecha_proceso
+  and ct_moneda = convert(tinyint,#moneda) 
+End-Select
+let #cotizacion = &cotiza
+End-Procedure
+!*** DSC980116
+
+Begin-Procedure Extraer_Valor (#filial,$parametro,$valor,:$resultado)
+!----------------------------
+Begin-Select
+re_substring    &substring        !OJOOOOO
+from cob_conta..cb_relparam
+where re_empresa = convert(tinyint,#filial) 
+  and re_parametro = convert(varchar(10),$parametro) 
+  and re_clave = convert(varchar(20),$valor) 
+End-Select
+let $resultado = &substring       !OJOOOOO
+End-Procedure
+
+Begin-Procedure Armar_Cuenta
+!---------------------------
+let #ascii = ascii(substr($trama,1,1))
+if #ascii >= 48 and #ascii <= 57 ! Numerico, parte fija
+   let $cuenta_final = $cuenta_final || $trama
+else
+   let $clave =  to_char(&to_moneda)   !OJOOOOOO
+   do Extraer_Valor (#i_filial,$trama,$clave,$resultado)      !OJOOOOOO
+   let $cuenta_final = $cuenta_final || $resultado
+end-if
+End-Procedure  
+
+
+Begin-Procedure Resolver_Cuenta
+!------------------------------
+!* A partir de la cuenta dinamica determina la final con los parametros *!
+
+let #salir = {FALSE}
+let $cuenta_aux = &dp_cuenta
+while #salir = {FALSE}
+   let #pos = instr ($cuenta_aux,'.',1)
+   if #pos = 0 ! No existen mas tramas
+      let $trama = $cuenta_aux
+      do Armar_Cuenta  
+      let #salir = {TRUE}
+   else
+      let #pos_ant = #pos - 1
+      let #pos_sig = #pos + 1
+      let $trama = substr ($cuenta_aux,1,#pos_ant)
+      let $cuenta_aux = substr($cuenta_aux,#pos_sig,length($cuenta_aux)+1-#pos_sig)
+      do Armar_Cuenta
+  end-if
+end-while
+End-Procedure 
+
+!--------------------------------------
+Begin-Procedure Verifica_Procesos					!-- GYC 2011/Nov/17
+!--------------------------------------
+let $w_estado_monet = 'N'
+Begin-Select
+cc_estado	&estado_monet
+   let $w_estado_monet = &estado_monet
+from cob_cuentas..cc_control_contabilidad
+where cc_fecha = $i_fecha_proceso
+  and cc_producto = 4
+  and cc_transaccion = 'M'
+End-Select
+
+let $w_estado_serv = 'N'
+Begin-Select
+cc_estado	&estado_serv
+   let $w_estado_serv = &estado_serv
+from cob_cuentas..cc_control_contabilidad
+where cc_fecha = $i_fecha_proceso
+  and cc_producto = 4
+  and cc_transaccion = 'S'
+End-Select
+
+if $w_estado_monet = 'E'
+   show ' '
+   show 'TODAVIA SE ESTA EJECUTANDO ahtotmon.sqr ........'
+   show ' '
+   do Abortar
+end-if   
+
+if $w_estado_serv = 'E'
+   show ' '
+   show 'TODAVIA SE ESTA EJECUTANDO ahtotser.sqr ........'
+   show ' '
+   do Abortar
+end-if  
+
+if $w_estado_monet = 'N'
+   show ' '
+   show 'NO SE HA EJECUTADO ahtotmon.sqr ........'
+   show ' '
+   do Abortar
+end-if   
+
+if $w_estado_serv = 'N'
+   show ' '
+   show 'NO SE HA EJECUTADO ahtotser.sqr ........'
+   show ' '
+   do Abortar
+end-if 
+End-Procedure
+       
+
+Begin-Procedure Main
+!-------------------
+do Borra_Repositorio            !DSC971013
+do Trunca_Tabla  		!DSC971013
+do Inicializaciones
+do Nombre_Filial (#i_filial,$nombre_filial)
+do Columnas (6,6,6,6,15,6,6,6,18,18,18,18,18,30,0,0,0,0,0,0)
+
+!FMV 05ENE2004 Control Trx
+do Transacciones
+End-Procedure
+
+!FMV 05ENE2004 Control Trx
+Begin-Procedure Transacciones
+
+begin-sql
+insert into ##re_trx 
+select distinct(to_tipo_tran) 
+from cob_remesas..re_total_ah
+end-sql
+
+begin-select
+tr_tran   &s_tran
+
+   let #s_tran = &s_tran
+   !show 'Control Principal : ' #s_tran
+   do ContaTrx
+
+from ##re_trx
+order by tr_tran		!REF17: REAM MIGRACION
+end-select
+
+End-Procedure
+
+Begin-Procedure ContaTrx
+
+!show 'OJO ....' #s_tran
+
+Begin-Select
+to_moneda    () on-break print=never before=Before_Tran after=After_Tran
+to_ofic_orig &oficina_origen () on-break print=never before=Before_Tran after=After_Tran
+to_ofic_dest &oficina_destino ! OFICINA DE LA CUENTA   
+to_tipo_tran () on-break print=never before=Before_Tran after=After_Tran
+to_causa
+to_cotizacion &to_cotizacion () on-break print=never before=Before_Tran after=After_Tran !PHV  28-JUL-2006  
+to_producto
+to_valor 
+to_perfil
+to_codval
+to_valor_me 
+
+  let #of_origen   = &oficina_origen      ! OJOOOOOOOO
+  let #of_destino  = &oficina_destino     ! OJOOOOOOOO
+
+  let #error = 0
+  let #total_debito     = 0
+  let #total_debito_me  = 0
+  let #total_credito    = 0
+  let #total_credito_me = 0
+  
+  !Se asigna en caso de ser nulo la variable el valor de moneda base
+  let #me_cotizacion    = &to_cotizacion   !{PHV  28-JUL-2006
+  let #moneda_dest      = &to_moneda       !{PHV  28-JUL-2006
+  let #quiebre = 1
+
+  do Comprobar_Perfil       !COMPROBAR EXISTENCIA DEL PERFIL
+  if #perfil_existe = 1
+      do Cuentas_Perfil     !PROCESO PRINCIPAL
+  end-if
+  do Actualizar_Reg_Proc
+from re_total_ah                 
+where to_producto = 4     
+  and to_estado = 'V'
+  and to_tipo_tran = #s_tran
+order by to_moneda,to_ofic_orig,to_tipo_tran,to_cotizacion,to_causa
+End-Select
+End-Procedure
+
+Begin-Procedure Comprobar_Perfil
+!-------------------------------
+!*pe_descripcion  &descripcion (DSC971001)
+!let #perfil_existe = 0
+!Begin-Select
+let #perfil_existe = 1 
+!from cob_conta..cb_perfil
+!where pe_perfil = &to_perfil
+!End-Select
+
+!-- DSC971001
+Begin-Select
+tn_descripcion &descripcion
+from cobis..cl_ttransaccion
+where tn_trn_code = &to_tipo_tran 
+End-Select
+!-- DSC971001 
+End-Procedure
+
+
+Begin-Procedure Calcular_Cotizacion
+!----------------------------------
+Begin-Select 
+ct_compra      &cotizacion
+from cob_conta..cb_cotizacion
+where ct_fecha  =$i_fecha_proceso
+  and ct_moneda = &to_moneda
+End-Select 
+let #cotizacion = &cotizacion
+End-Procedure
+
+
+Begin-Procedure Cuentas_Perfil
+!-----------------------------
+!show ' PERFIL:' &to_perfil ' CODVAL:' &to_codval  ' MONEDA:' &to_moneda  ' VALOR:' &to_valor
+Begin-Select
+dp_cuenta
+dp_debcred 
+dp_constante
+dp_codval
+dp_origen_dest
+dp_perfil
+
+   let #of_duenia = 99
+   if &dp_constante <> 'N' and &dp_constante <> ''
+      let #of_duenia = to_number(&dp_constante)  !* OF. DUENIA DE CTA. CTBLE *!
+   end-if                                        !* (DSC970917) *!
+   let $tipo_doc  = 'N'
+
+   let #debcred   = to_number(&dp_debcred)
+   let $cuenta_final = '' 
+   do Resolver_Cuenta		!ARMA LA CUENTA CONTABLE
+   do PrintS (3,'','',0)
+  
+   let #asiento = #asiento  + 1
+
+   let #to_monto_mn = &to_valor
+   let #to_monto_me = &to_valor_me
+
+   ! GENERACION DEL VALOR EN MONEDA NACIONAL 
+   !if &to_moneda <> {MON_NAC}
+   if &to_moneda <> #moneda_base   
+      !***** ESTA CONVERSION YA LA REALIZA EL ahtotmon.sqr y ahtotser.sqr   
+             do Calcular_Cotizacion     ! GMD19980506
+      !***** let #to_monto_mn = #to_monto_mn + &to_valor_me * #cotizacion  
+      !***** (DSC971027)
+   end-if
+
+   if #to_monto_mn <  0 	! Cambiar el debito por el credito y viceversa
+      if #debcred = 2
+         let #debcred = 1
+      else
+         let #debcred = 2
+      end-if
+      let #to_monto_mn = #to_monto_mn * -1
+      let #to_monto_me = #to_monto_me * -1
+   end-if   
+
+   let #debito     = #to_monto_mn  * (2 - #debcred)
+   let #debito_me  = #to_monto_me  * (2 - #debcred)
+
+   let #credito    = #to_monto_mn  * (#debcred - 1)
+   let #credito_me = #to_monto_me  * (#debcred - 1) 
+
+   add #debito     to #tot_debito
+   add #debito_me  to #tot_debito_me
+   add #credito    to #tot_credito
+   add #credito_me to #tot_credito_me
+   let #w_tran  =  &to_tipo_tran       !OJOOOOOOO
+   let #w_origen =  &oficina_origen       !OJOOOOOOO
+   let #w_mon    =  &to_moneda       !OJOOOOOOO
+
+   let #total_todo = #debito + #credito + #debito_me + #credito_me
+  
+   !show 'debito:' #debito ' credito:' #credito 
+
+   !* PARA CUENTAS QUE SE MUEVEN SOLO EN OF. QUE ORIGINA LA TRANS.(DSC970908) *!
+   if &dp_origen_dest = 'O'
+      let #of_destino = &oficina_origen
+      let #of_origen  = &oficina_origen
+   else
+      let #of_destino = &oficina_destino
+      let #of_origen  = &oficina_origen
+   end-if
+
+   !* PARA OFICINAS QUE SON DUENIAS DE LA CTA CTBLE QUE SE MUEVE (DSC970917) *!
+   if #of_duenia <> 99
+      if #of_destino <> #of_duenia
+         let #of_destino = #of_duenia
+      end-if
+   end-if
+
+   if $cuenta_final <> '' and  #total_todo > 0 
+      do Generar_Asientos
+   end-if
+  
+from cob_conta..cb_det_perfil,cob_conta..cb_perfil
+where dp_empresa   = convert(tinyint,#i_filial) 
+  and dp_producto  = 4 !Cuentas de Ahorro
+  and dp_perfil    = &to_perfil
+  and pe_empresa   = convert(tinyint,#i_filial) 
+  and pe_producto  = 4 !Cuentas de Ahorro
+  and pe_perfil    = &to_perfil
+  and dp_codval    = &to_codval                        !DSC970603
+End-Select     
+End-Procedure
+
+
+Begin-Procedure Generar_Asientos 
+!-------------------------------
+if #debito = 0
+   let $debcred = '2'
+else
+   let $debcred = '1'
+end-if
+
+let $dtr_concepto = &descripcion || ' (' || to_char(&to_tipo_tran) || ')'
+
+let #moneda    = &to_moneda
+let #moneda_tr = &to_moneda          !* DSC971210
+let $perfil    = &to_perfil
+let #trans     = &to_tipo_tran
+
+do Busca_Moneda         !* Busca moneda de la cuenta contable
+begin-sql
+insert into cob_remesas..re_asientos_ah
+(ra_perfil,ra_tipo_tran,ra_asiento,ra_cuenta,ra_oficina_orig,
+ ra_oficina_dest,ra_area_dest,ra_credito,ra_debito,ra_concepto,ra_credito_me,
+ ra_debito_me,ra_moneda,ra_cotizacion,ra_tipo_doc,ra_producto,ra_debcred, ra_codval)
+values ($perfil,#trans,#asiento,$cuenta_final,#of_origen,#of_destino,#area,
+ #credito,#debito,$dtr_concepto,#credito_me,#debito_me,#moneda,#cotizacion,
+ $tipo_doc,#producto,$debcred,&to_codval)
+end-sql
+
+End-Procedure
+
+
+Begin-Procedure Busca_Moneda
+!---------------------------
+let #existe = 0
+!if #of_destino > 99           !**DSC           RE 19/DIC/2000
+!   let $ofi = substr(to_char(#of_destino),1,1)||substr(to_char(#of_destino),3,1)
+!   let #of_dest = to_number($ofi)
+!else
+!   let #of_dest = #of_destino
+!end-if                        !**DSC
+let #of_dest = #of_destino
+begin-select
+pg_cuenta
+cu_moneda    &moneda_cuenta
+  let #existe = 1
+from cob_conta..cb_plan_general, cob_conta..cb_cuenta
+where pg_empresa = convert(tinyint,#i_filial) and
+      !pg_oficina = convert(tinyint,#of_dest) and
+      pg_oficina = convert(smallint,#of_dest) and                       !GYC 2003/Feb/24
+      pg_cuenta  = convert(char(20),$cuenta_final) and
+      cu_empresa = convert(tinyint,#i_filial) and
+      cu_cuenta  = pg_cuenta
+end-select
+if #existe = 1
+   let #moneda = &moneda_cuenta
+end-if
+End-Procedure
+
+
+Begin-Procedure Insertar_Asientos
+!--------------------------------
+let #asiento     = 0
+let #contador    = -1
+let #debito      = 0
+let #debito_me   = 0
+let #credito     = 0
+let #credito_me  = 0
+
+Begin-Select
+ra_producto
+ra_moneda 
+ra_tipo_tran
+ra_perfil
+ra_debcred      () on-break print=never after=After_Cuenta level=1
+ra_cuenta       () on-break print=never after=After_Cuenta level=2
+ra_oficina_orig () on-break print=never after=After_Cuenta level=3
+ra_oficina_dest () on-break print=never after=After_Cuenta level=4
+ra_asiento
+ra_area_dest
+ra_credito
+ra_debito
+ra_concepto
+ra_credito_me
+ra_debito_me
+ra_cotizacion
+ra_tipo_doc
+
+   let #asiento      = #asiento  + 1
+   let #contador     = #contador + 1
+   let $cuenta_final = &ra_cuenta
+   let #of_destino   = &ra_oficina_dest
+   let #of_origen    = &ra_oficina_orig
+   let $dtr_concepto = &ra_concepto
+   let #cotizacion   = &ra_cotizacion                !** DSC971102
+   let #debito       = #debito     + &ra_debito
+   let #debito_me    = #debito_me  + &ra_debito_me
+   let #credito      = #credito    + &ra_credito
+   let #credito_me   = #credito_me + &ra_credito_me
+   let #moneda       = &ra_moneda
+   let $tipo_doc     = &ra_tipo_doc
+   let #quiebre      = 1
+   
+from cob_remesas..re_asientos_ah
+order by ra_tipo_tran,ra_debcred,ra_cuenta,ra_oficina_orig,ra_oficina_dest
+End-Select
+
+End-Procedure
+
+
+Begin-Procedure After_Cuenta
+!--------------------------------
+if #quiebre = 1
+   if #contador > 0
+      let #asiento  = #asiento  - #contador
+   end-if
+
+    !show 'ASIENTO:' #asiento ' DEBITO:' #debito ' CREDITO:' #credito ' ORIGEN:' #of_origen ' DESTINO:' #of_destino
+
+  !if #of_destino > 99           !**DSC
+  ! let $ofi = substr(to_char(#of_destino),1,1)||substr(to_char(#of_destino),3,1)
+  ! let #of_destino = to_number($ofi)
+  !end-if                        !**DSC
+   !{PHV  01AGO2006 
+   !Grabo la cotizacion de la transacción si la moneda destino es a moneda base 
+   !de lo contrario envio el valor de cero.
+   if #moneda_dest <> #moneda_base or #me_cotizacion <> 0
+      let #cotizacion2 = #me_cotizacion
+   else
+      let #cotizacion2 = 0
+   end-if  
+   !{PHV  01AGO2006 
+   if #debito > 0  or  #debito_me > 0
+   !--execute on-error=Error cob_remesas..sp_tsasiento_cc             !-- GYC 2003/Jun/05
+   execute on-error=Error cob_ahorros..sp_tsasiento_ah
+      @t_trn            = 6952,
+      @i_tran           = 0,
+      @i_operacion      = 'I', 
+      @i_empresa        = #i_filial,
+      @i_producto       = 4,
+      @i_comprobante    = #comprobante,
+      @i_fecha_tran     = $i_fecha_proceso,
+      @i_asiento        = #asiento,
+      @i_cuenta         = $cuenta_final,
+      @i_oficina_dest   = #of_destino,
+      @i_oficina_orig   = #of_origen,
+      @i_area_dest      = {AREA_DEST}, 
+      @i_debcred        = '1',          !DEBITO
+      @i_concepto       = $dtr_concepto,
+      @i_cotizacion     = #cotizacion,            !* DSC971102
+      @i_valor          = #debito,
+      @i_valor_me       = #debito_me,
+      @i_tipo_tran      = 'N', 
+      @i_moneda         = #moneda,
+      @i_tipo_doc       = $tipo_doc,
+      @i_param11        = #cotizacion2            !PHV  01AGO2006
+    end-if
+   
+   if #credito > 0  or  #credito_me > 0
+   !--execute on-error=Error cob_remesas..sp_tsasiento_cc       !-- GYC 2003/Jun/05
+   execute on-error=Error cob_ahorros..sp_tsasiento_ah
+      @t_trn            = 6952,
+      @i_tran           = 0,
+      @i_operacion      = 'I', 
+      @i_empresa        = #i_filial,
+      @i_producto       = 4,
+      @i_comprobante    = #comprobante,
+      @i_fecha_tran     = $i_fecha_proceso,
+      @i_asiento        = #asiento,
+      @i_cuenta         = $cuenta_final,
+      @i_oficina_dest   = #of_destino,
+      @i_oficina_orig   = #of_origen,
+      @i_area_dest      = {AREA_DEST}, 
+      @i_debcred        = '2',                    !CREDITO
+      @i_concepto       = $dtr_concepto,
+      @i_cotizacion     = #cotizacion,            !* DSC971102
+      @i_valor          = #credito,
+      @i_valor_me       = #credito_me,
+      @i_tipo_tran      = 'N', 
+      @i_moneda         = #moneda,
+      @i_tipo_doc       = $tipo_doc,
+      @i_param11        = #cotizacion2            !PHV  01AGO2006
+    end-if
+
+    let #contador    = -1
+    let #debito      = 0
+    let #debito_me   = 0
+    let #credito     = 0
+    let #credito_me  = 0
+    let #quiebre = 0
+end-if
+End-Procedure
+	
+
+Begin-Procedure After_Cta
+!--------------------------------
+if #quiebre = 1
+   if #contador > 0
+      let #asiento  = #asiento  - #contador
+   end-if
+   let #contador = -1
+   let #quiebre  = 0
+end-if
+End-Procedure
+
+
+Begin-Procedure Generar_Cabecera_Temporal 
+!----------------------------------------
+let #asiento  = 0
+let #contador = -1
+Begin-Select
+ra_debcred      &quiebre3 () on-break print=never after=After_Cta level=1
+ra_cuenta       &quiebre2 () on-break print=never after=After_Cta level=2
+ra_oficina_orig &quiebre1 () on-break print=never after=After_Cta level=3
+ra_oficina_dest &quiebre  () on-break print=never after=After_Cta level=4
+   let #asiento      = #asiento  + 1
+   let #contador     = #contador + 1
+   let #quiebre      = 1
+
+   !show 'CTA:' &quiebre2 ' OF.O:' &quiebre1 ' OF.D:' &quiebre ' ASIENTO:' #asiento ' CONTADOR:' #contador 
+from cob_remesas..re_asientos_ah
+order by ra_tipo_tran,ra_debcred,ra_cuenta,ra_oficina_orig,ra_oficina_dest
+End-Select
+
+let #param = 1
+    !--execute on-error=Error cob_conta..sp_tscomprobante			!-- GYC 2003/Jun/05
+    
+    execute on-error=Error cob_ahorros..sp_ah_comprobante
+      @t_trn            = 6951,
+      @i_operacion      = 'I',
+      @i_empresa        = #i_filial,
+      @i_producto       = 4,               !Cuentas de Ahorros 
+      @i_fecha_tran     = $i_fecha_proceso, 
+      @i_oficina_orig   = #of_origen,
+      @i_area_orig      = {AREA_ORIG},
+      @i_digitador      = $username,
+      @i_descripcion    = $dtr_concepto,
+      @i_perfil         = &to_perfil,
+      @i_detalles       = #asiento, 
+      @i_tot_debito     = #tot_debito,
+      @i_tot_credito    = #tot_credito,
+      @i_tot_debito_me  = #tot_debito_me,
+      @i_tot_credito_me = #tot_credito_me,
+      @i_automatico     = 3123,
+      @i_reversado      = 'N',
+      @o_comprobante    = #num_comprobante output
+
+      let #comprobante  = #num_comprobante
+End-Procedure
+
+  
+Begin-Procedure Generar_Cabecera_Definitiva
+!------------------------------------------
+!show 'COMPROBANTE:' #comprobante ' FECHA:' $i_fecha_proceso
+!show 'ASIENTOS:' #asiento ' DEBITO:' #tot_debito ' CREDITO:' #tot_credito
+let #param = 4
+!*** execute on-error=Error cob_conta..sp_scomprobante    (DSC971027)
+!--execute on-error=Error cob_remesas..sp_scomprobante_cc
+
+execute on-error=Error cob_ahorros..sp_scomprobante_ah			!-- GYC 2003/Jun/05
+   @t_trn            = 6953,
+   @i_tran           = 0,
+   @i_operacion      = 'I',
+   @i_modo           = 0,
+   @i_empresa        = #i_filial,
+   @i_fecha_tran     = $i_fecha_proceso,
+   @i_comprobante    = #comprobante,
+   @i_asiento        = #asiento,
+   @i_perfil         = &to_perfil,
+   @i_producto       = 4,
+   @i_detalles       = #asiento,
+   @i_tot_debito     = #tot_debito,
+   @i_tot_credito    = #tot_credito,
+   @i_tot_debito_me  = #tot_debito_me,
+   @i_tot_credito_me = #tot_credito_me,
+   @i_formato_fecha  = 1
+End-Procedure
+       
+
+Begin-Procedure Error_Comprobante($mensaje,#w_tran,#w_origen,#w_mon,#tot_debito,#tot_credito)
+!-------------------------
+let #_error = {TRUE}
+
+Begin-Select
+ra_producto
+ra_moneda
+ra_tipo_tran
+ra_perfil
+ra_debcred
+ra_cuenta
+ra_oficina_orig
+ra_oficina_dest
+ra_asiento
+ra_credito
+ra_debito
+ra_concepto
+ra_credito_me
+ra_debito_me
+ra_cotizacion
+
+   let $w_concepto = substr(&ra_concepto,1,29)
+   do PrintN(1,&ra_moneda ,'9',0)
+   do PrintN(2,&ra_tipo_tran,'999999',0)
+   do PrintS(3,&ra_perfil,'',0)
+   do PrintS(4,&ra_debcred,'',0)
+   do PrintS(5,&ra_cuenta,'',0)
+   do PrintN(6,&ra_oficina_orig,'99',0)
+   do PrintN(7,&ra_oficina_dest,'99',0)
+   do PrintN(8,&ra_asiento,'999999',0)
+   do PrintN(9,&ra_debito,'999,999,999,999.99',0)
+   do PrintN(10,&ra_credito,'999,999,999,999.99',0)
+   do PrintN(11,&ra_debito_me,'999,999,999,999.99',0)
+   do PrintN(12,&ra_credito_me,'999,999,999,999.99',0)
+   do PrintN(13,&ra_cotizacion,'999,999,999,999.99',0)
+   do PrintS(14,$w_concepto,'',0)
+   next-listing
+
+from cob_remesas..re_asientos_ah
+order by ra_tipo_tran,ra_debcred,ra_cuenta,ra_oficina_orig,ra_oficina_dest
+End-Select
+
+   do PrintS(5,'TOTAL:','',0)
+   do PrintN(9,#tot_debito,'999,999,999,999.99',0)
+   do PrintN(10,#tot_credito,'999,999,999,999.99',0)
+   do PrintS(14,$mensaje,'',0)
+   new-page
+End-Procedure
+
+
+Begin-Procedure Borra_Repositorio
+!--------------------------------
+begin-sql
+!--delete cob_conta..cb_sasiento					!--GYC 2003/Jun/05
+delete cob_ahorros..ah_sasiento
+where sa_fecha_tran = $i_fecha_proceso
+  and sa_empresa    = 1
+  and sa_producto   = 4
+end-sql
+
+begin-sql
+!--delete cob_conta..cb_scomprobante					!--GYC 2003/Jun/05
+delete cob_ahorros..ah_scomprobante
+where sc_fecha_tran = $i_fecha_proceso
+  and sc_empresa    = 1
+  and sc_producto   = 4
+end-sql
+End-Procedure
+
+
+Begin-Procedure Error
+!-------------------------
+  if #perfil_existe = 0
+    let #param = 5
+  else
+    show $sql-error
+    !* Imprime en caso que falle la ejecucion del sp *!
+    let #error = 1
+    !let $error = $sql-error
+  end-if
+  evaluate #param
+    when = 1
+      let $error = 'NO SE GENERO NI LA CABECERA NI LOS DETALLES'
+      break
+    when = 2
+      let $error = 'SE GENERO LA CABECERA Y NO LOS DETALLES'
+      break
+    when = 3
+      let $error = 'SOLO SE GENERO LA CABECERA Y EL PRIMER ASIENTO'
+      break
+    when = 4
+      let $error = 'NO SE PUDO GENERAR EL COMPROBANTE DEFINITIVO'
+      break
+    when = 5
+      let $error = 'NO EXISTE PERFIL'
+      break
+  end-evaluate
+  show $error
+End-Procedure
+
+Begin-Procedure Inicializaciones
+!------------------------------
+begin-select
+em_moneda_base
+    let #moneda_base = &em_moneda_base
+from    cob_conta..cb_empresa
+where   em_empresa = 1
+end-select
+End-Procedure
+
+!*** PHV  03AGO2006
+Begin-Procedure AjustaCbteTranf
+!-------------------------
+let #debito     = 0
+let #debito_me  = 0
+let #credito    = 0
+let #credito_me = 0
+let #cotizacion = 0
+
+if #w_tran = 3520
+   let #codvalor = 339
+else   
+   let #codvalor = 405
+end-if
+
+if #tot_debito > #tot_credito
+let #credito     = #tot_debito - #tot_credito
+let #tot_credito = #tot_credito + #credito
+let $debcred     = '2'
+
+begin-sql
+set rowcount 1
+update cob_remesas..re_asientos_ah
+set ra_credito = ra_credito + #credito
+where ra_codval = convert(smallint,$codvalor)
+set rowcount 0
+end-sql
+
+else
+   let #debito     = #tot_credito - #tot_debito
+   let #tot_debito = #tot_debito  + #debito
+   let $debcred    = '1'
+   
+begin-sql
+set rowcount 1
+update cob_remesas..re_asientos_ah
+set ra_debito = ra_debito + #debito
+where ra_debito > 0
+set rowcount 0
+end-sql
+end-if
+End-Procedure
+!*** PHV  03AGO2006
+

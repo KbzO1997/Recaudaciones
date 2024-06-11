@@ -1,0 +1,563 @@
+!************************************************************************!
+!*      Archivo           : cccrea06.sqr                                *!
+!*      Base de datos     : cob_cuentas                                 *!
+!*      Producto          : Cuentas Corrientes                          *!
+!*      Disenado por      : German Medina Cevallos                      *!
+!*      Fecha de escritura: 07-Diciembre-2009                           *!
+!************************************************************************!
+!*                                IMPORTANTE                            *!
+!*      Este programa es parte de los paquetes bancarios propiedad de   *!
+!*      BANCO BOLIVARIANO S.A.                                          *!
+!*      Su uso no autorizado queda expresamente prohibido asi como      *!
+!*      cualquier alteracion o agregado hecho por alguno de sus         *!
+!*      usuarios sin el debido consentimiento por escrito de la         *!
+!*      Presidencia Ejecutiva de BANCO BOLIVARIANO o su representante.  *!
+!************************************************************************!
+!*                           PROPOSITO                                  *!
+!*      Llama a los Sps del A06                                         *!
+!*                                                                      *!
+!************************************************************************!
+!*                              MODIFICACIONES                          *!
+!*  FECHA          AUTOR              RAZON                             *!
+!*  07/DIC/2009    German Medina C.   Emision Inicial                   *!
+!*2 29/MAY/2010    German Medina C.   Agregar Servicios                 *!
+!*                                    CTE-CC-8888                       *!
+!*3 10/JUN/2010    German Medina C.   Modificaciones A06                *!
+!*                                    CTE-CC-8977                       *!
+!*4 25/JUN/2010    German Medina C.   Modificaciones A06                *!
+!*                                    CTE-CC-9092                       *!
+!*5 25/JUL/2010    German Medina C.   Modificaciones A06                *!
+!*                                    CTE-CC-9200                       *!
+!*6 29/SEP/2010    German Medina C.   Modificaciones A06                *!
+!*                                    CTE-CC-9354                       *!
+!*7	01/JUN/2011		 Raul Altamirano M. MIgracion Sybase 15 *!
+!*8 03/AGO/2011    German Medina C.   Cambio en Fechas CTE-CC-10161     *!
+!*9 04/MAY/2012    German Medina C.   Optimizacion AHO-CC-11398         *!
+!*10 23/MAY/2012   German Medina C.   Optimizacion AHO-CC-11455         *!
+!*11 30/Jul/2015   Jorge Pamzminn M. Cuenta Basica                      *!
+!*                                   Tarea:CB-AP-SGC00018374-SGC00018869*!
+!*12 04/May/2018   Pablo Holguin V.  Agrega campo Cuenta Contable       *!
+!*13 18/Mar/2019   Pablo Holguin V.  Modificacion estructura  		*!
+!				     Tarea CTE-CC-SGC00034569		*!
+!************************************************************************!
+
+#include "definic.inc"
+
+begin-Setup
+use cob_cuentas
+!-- ref: 3
+Begin-Sql on-error=STOP -c1
+create table ##cc_a06_parametros
+                 (
+                    pa_canal                char (1)            null,
+                    pa_cod_servicio         char (10)           null,
+                    pa_tip_producto         char (6)            null,
+                    pa_descripcion          varchar (500)       null,
+                    pa_tip_tarifa           char (2)            null,
+                    pa_tip_cliente          char (1)            null,
+                    pa_tarifa               money               null,
+                    pa_sector               char (2)            null,
+                    pa_tip_servicio         char (10)           null,
+                    pa_error                int                 null,
+                    pa_desc_error           varchar (100)       null
+                 )
+end-sql
+end-Setup
+
+#include "log.inc"
+#include "ctacte.inc"
+
+#define  SALIDA  '<37><33><10>(cobis1.jdt) STARTLM<10>'
+
+begin-Program
+do Inicializar_Programa
+!--do ParamS (1,$i_fecha_ini,'','','')
+do ParamS (1,$i_fecha_fin,'','','')
+do ParamN (2,#i_producto,'','','')
+do ParamS (3,$i_reproceso,'','','')
+
+let $archivo = ''
+let $fecha = ''
+let $i_fecha_ini = ''
+
+do Inicio
+do Main
+show 'Creacion de Archivo del A06'
+do Cear_Archivo
+show 'Enviar Archivo via mail'
+do Enviar_Archivo
+do Actualizar_Fecha	!ref: 4
+do Fin
+do finalizar_Programa
+
+end-Program
+
+!*****************************************************!
+!--                     Inicio                      --!
+!*****************************************************!
+begin-Procedure Inicio
+begin-select
+convert(varchar, getdate(), 108)    &inicio
+  let $inicio = &inicio
+end-select
+  show '||-----------------||'
+  show '||-- HORA INICIO --||'
+  let $hora1 = '||--   ' || $inicio || '  --||'
+  show $hora1
+  show '||-----------------||'
+end-Procedure
+
+!*****************************************************!
+!--                        Fin                      --!
+!*****************************************************!
+begin-Procedure Fin
+begin-select
+convert(varchar, getdate(), 108)    &fin
+  let $fin = &fin
+end-select
+  show '||-----------------||'
+  show '||--   HORA FIN  --||'
+  let $hora2 = '||--   ' || $fin || '  --||'
+  show $hora2
+  show '||-----------------||'
+end-Procedure
+
+
+
+!*****************************************************!
+!--                       Main                      --!
+!*****************************************************!
+begin-Procedure Main
+
+!--ref: 3
+!--Obtener fecha ultimo corte A06
+Begin-Select
+convert(varchar, dateadd(dd, 1, pa_datetime), 101)		&pa_dato
+  let $i_fecha_ini = &pa_dato
+from cobis..cl_parametro
+where pa_nemonico = 'FCA06'
+End-Select
+show $i_fecha_ini
+
+!-- ref: 10
+if #i_producto = 1 or #i_producto = 4
+  do LlenaAhHisMov
+end-if
+
+!-- Ejecuta todos los procesos: Ahorros Automaticos, Corrientes Automaticos, Manuales
+if #i_producto = 1
+  show 'Producto 4 inicia...'
+
+begin-select
+convert(varchar, getdate(), 108)    &inia
+  let $inia = &inia
+end-select
+  show '||--   INI - 4   --||'
+  let $hora_inia = '||--   ' || $inia || '  --||'
+  show $hora_inia
+  do EliminarDetalleA06
+  !-- Primero todo cuentas de ahorros
+  let #i_producto = 4
+  do Obtener_Canal
+
+begin-select
+convert(varchar, getdate(), 108)    &fina
+  let $fina = &fina
+end-select
+  show '||--   FIN - 4   --||'
+  let $hora_fina = '||--   ' || $fina || '  --||'
+  show $hora_fina
+  show 'Producto 4 finaliza con exito.'
+
+
+  show 'Producto 3 inicia...'
+
+begin-select
+convert(varchar, getdate(), 108)    &inib
+  let $inib = &inib
+end-select
+  show '||--   INI - 3   --||'
+  let $hora_inib = '||--   ' || $inib || '  --||'
+  show $hora_inib
+  !-- Segundo todo cuentas de corrientes !-- ref: 3
+  let #i_producto = 3
+  do Obtener_Canal
+
+begin-select
+convert(varchar, getdate(), 108)    &finb
+  let $finb = &finb
+end-select
+  show '||--   FIN - 3   --||'
+  let $hora_finb = '||--   ' || $finb || '  --||'
+  show $hora_finb
+  show 'Producto 3 finaliza con exito.'
+
+  show 'Procesos Manuales incian...'
+begin-select
+convert(varchar, getdate(), 108)    &inic
+  let $inic = &inic
+end-select
+  show '||--   INI - MANUALES   --||'
+  let $hora_inic = '||--   ' || $inic || '  --||'
+  show $hora_inic
+  !-- Tercero procesos manuales
+  do Procesos_Manuales
+begin-select
+convert(varchar, getdate(), 108)    &finc
+  let $finc = &finc
+end-select
+  show '||--   FIN - MANUALES   --||'
+  let $hora_finc = '||--   ' || $finc || '  --||'
+  show $hora_finc
+  show 'Procesos Manules finalizan con exito.'
+else
+  !-- Procesos Manuales - Solo ejecutar esta opción si previamente los procesos --< 3 y 4 >-- han terminado
+  !-- Porque este proceso actualiza varios procesos automaticos.
+  if #i_producto = 2
+    do Procesos_Manuales
+  else
+    do Obtener_Canal
+  end-if
+
+end-if
+
+end-Procedure
+
+!*****************************************************!
+!--                LLena_Estructura                 --!
+!*****************************************************!
+begin-Procedure LLena_Estructura
+
+if #i_producto = 4
+  let $tipo_producto = 'C[A,B]%'        !JPM Ref.11: incluir soporte tipo CB (antes CA%)
+else
+  let $tipo_producto = 'CC%'
+end-if
+
+
+
+begin-select
+pa_cod_servicio   &pa_cod_servicio,
+pa_tip_producto   &pa_tip_producto,
+pa_tip_cliente    &pa_tip_cliente
+
+  do LLama_SP(&canal, &pa_cod_servicio, &pa_tip_producto, &pa_tip_cliente, #i_producto, $i_fecha_ini, $i_fecha_fin)
+
+from ##cc_a06_parametros
+where pa_canal = &canal
+  and pa_tip_producto like $tipo_producto
+  and pa_tip_servicio is null
+  and pa_error is null
+order by pa_cod_servicio, pa_tip_producto
+end-select
+
+
+end-Procedure
+
+!*****************************************************!
+!--                      LLama_SP                   --!
+!*****************************************************!
+begin-Procedure LLama_SP($canal, $servicio, $producto, $cliente, #producto, $fecha_ini, $fecha_fin)
+
+execute cob_super..sp_selecciona_a06
+    @i_fecha_ini      = $fecha_ini,
+    @i_fecha_fin      = $fecha_fin,
+    @i_canal          = $canal,
+    @i_servicio       = $servicio,
+    @i_tipo_producto  = $producto,
+    @i_tipo_cliente   = $cliente,
+    @i_moneda         = 1,
+    @i_producto       = #producto
+
+end-Procedure
+
+!*****************************************************!
+!--                    Obtener_Canal                --!
+!*****************************************************!
+begin-Procedure Obtener_Canal
+!-- ref: 3
+!--if $i_reproceso = 'S'
+begin-Sql
+update cob_super..cc_a06_parametros
+set pa_error = null, pa_desc_error = null
+end-Sql
+
+!-- ref: 9
+begin-Sql -c1
+delete ##cc_a06_parametros
+end-Sql
+begin-Sql -c1
+insert into ##cc_a06_parametros
+select * from cob_super..cc_a06_parametros
+end-Sql
+
+show 'Obtener_Canal'
+begin-Select
+distinct(pa_canal)  &canal
+  do LLena_Estructura
+from ##cc_a06_parametros
+order by pa_canal						!REF7: REAM MIGRACION
+end-Select
+
+end-Procedure
+
+!PHOYOS ini 20160325
+begin-Procedure EliminarDetalleA06
+if $i_reproceso = 'S'
+begin-Sql
+delete cob_super..cc_detalle_a06
+where cd_fecha_corte = $i_fecha_fin
+and cd_producto in (3, 4, 12)
+end-Sql
+end-if
+end-Procedure
+!PHOYOS fin 20160325
+
+!*****************************************************!
+!--                  Procesos_Manuales              --!
+!*****************************************************!
+begin-Procedure Procesos_Manuales
+show 'Inicia Procesos Manuales'
+
+execute cob_super..sp_procesos_manuales_a06
+    @i_fecha_ini      = $i_fecha_ini,
+    @i_fecha_fin      = $i_fecha_fin
+show 'Finaliza Procesos Manuales'
+
+end-Procedure
+
+
+!*****************************************************!
+!--                   Cear_Archivo                  --!
+!*****************************************************!
+Begin-Procedure Cear_Archivo
+
+let $ruta_archivo = '/respaldo/archivos/cuentas/data/'
+
+let $fecha = substr ($i_fecha_fin, 1, 2)
+let $fecha = $fecha || substr ($i_fecha_fin, 4, 2)
+let $fecha = $fecha || substr ($i_fecha_fin, 7, 4)
+
+let $nomb_arc =  'A06_' || $fecha || '.xls'
+let $archivo = $ruta_archivo || $nomb_arc
+
+open $archivo as 1 for-writing record = 5000
+
+let $espacio = chr(39)
+let $tab = chr(9)	!-- Se crea un espacio de carro (tabulacion)
+
+let $linea = 'Tipo-Servicio'
+let $linea = $linea || $tab || 'Canal'   		!-- Ref13 pholguiv
+!let $linea = $linea || $tab || 'Tipo-Producto'
+let $linea = $linea || $tab || 'Propiedad-Canal' 	!-- Ref13 pholguiv
+!let $linea = $linea || $tab || 'Descripcion'
+let $linea = $linea || $tab || 'Provincia'  		!-- Ref13 pholguiv
+let $linea = $linea || $tab || 'Canton '		!-- Ref13 pholguiv
+!let $linea = $linea || $tab || ' '
+!let $linea = $linea || $tab || 'Tipo-Tarifa'
+!let $linea = $linea || $tab || 'Tipo-Cliente'
+let $linea = $linea || $tab || 'Numero-Transacciones'
+let $linea = $linea || $tab || 'Cargo-Dolares'		!---Ref13 pholguiv
+let $linea = $linea || $tab || 'Cargo-Porcentaje'	!---Ref13 pholguiv
+!let $linea = $linea || $tab || 'Tarifa'
+!let $linea = $linea || $tab || 'Total'
+let $linea = $linea || $tab || 'Ingresos Brutos'	!---Ref13 pholguiv
+let $linea = $linea || $tab || 'Ingreso-Neto'		!---Ref13 pholguiv
+let $linea = $linea || $tab || 'Monto-Base'		!---Ref13 pholguiv
+!let $linea = $linea || $tab || 'Tasa-Ponderada'
+let $linea = $linea || $tab || 'Base-Imponible'		!---Ref13 pholguiv
+let $linea = $linea || $tab || 'Iva-Pagado'		!---Ref13 pholguiv
+let $linea = $linea || $tab || 'Cta-Contable'		!--Ref12 pholguiv
+
+write 1 from  $linea
+
+!* Datos del archivo
+Begin-Select
+
+cd_tipo_servicio    &cd_tipo_servicio
+  move &cd_tipo_servicio to $cd_tipo_servicio
+  let $linea =$cd_tipo_servicio
+
+cd_canal            &cd_canal
+  move &cd_canal to $cd_canal
+  let $linea = $linea || $tab ||  $cd_canal
+
+!---Ref13 pholguiv comentar campos por nueva estructura
+
+!cd_tipo_producto    &cd_tipo_producto
+ ! move &cd_tipo_producto to $cd_tipo_producto
+  !let $linea = $linea || $tab || $cd_tipo_producto
+
+!cd_descripcion      &cd_descripcion
+!  move &cd_descripcion to $cd_descripcion
+!  let $linea = $linea || $tab || $cd_descripcion
+
+!cd_tipo_tarjeta     &cd_tipo_tarjeta
+!  move &cd_tipo_tarjeta to $cd_tipo_tarjeta
+!  let $linea = $linea || $tab || $cd_tipo_tarjeta
+
+!cd_clase_tarjeta    &cd_clase_tarjeta
+ ! move &cd_clase_tarjeta to $cd_clase_tarjeta
+ ! let $linea = $linea || $tab || $cd_clase_tarjeta
+
+!cd_tipo_tarifa      &cd_tipo_tarifa
+!  move &cd_tipo_tarifa to $cd_tipo_tarifa
+! let $linea = $linea || $tab || $cd_tipo_tarifa
+
+!(case cd_tipo_cliente when 'T' then '' else cd_tipo_cliente end)     &cd_tipo_cliente
+!  move &cd_tipo_cliente to $cd_tipo_cliente
+!  let $linea = $linea || $tab || $cd_tipo_cliente
+
+!Ref pholguiv campo nuevos segun nueva resolucion 2019/03/18
+cd_prop_canal    &cd_prop_canal
+ move &cd_prop_canal to $cd_prop_canal
+ let $linea = $linea || $tab || $cd_prop_canal
+
+cd_cod_provincia    &cd_cod_provincia
+ move &cd_cod_provincia to $cd_cod_provincia
+ let $linea = $linea || $tab || $cd_cod_provincia
+
+cd_cod_canton    &cd_cod_canton
+ move &cd_cod_canton to $cd_cod_canton
+ let $linea = $linea || $tab || $cd_cod_canton
+
+cd_numero_trans     &cd_numero_trans
+  move &cd_numero_trans to $cd_numero_trans
+  let $linea = $linea || $tab || $cd_numero_trans
+
+cd_tarifa           &cd_tarifa
+  move &cd_tarifa to $cd_tarifa
+  let $linea = $linea || $tab || $cd_tarifa
+
+!Ref13 pholguiv campo nuevos segun nueva resolucion 2019/03/18
+cd_cargo_porcentaje &cd_cargo_porcentaje
+  move &cd_cargo_porcentaje to $cd_cargo_porcentaje
+  let $linea = $linea || $tab || $cd_cargo_porcentaje
+
+cd_ingreso_total    &cd_ingreso_total
+  move &cd_ingreso_total to $cd_ingreso_total
+  let $linea = $linea || $tab || $cd_ingreso_total
+
+!Ref13 pholguiv campo nuevos segun nueva resolucion 2019/03/18
+cd_ingreso_neto     &cd_ingreso_neto
+  move &cd_ingreso_neto to $cd_ingreso_neto
+  let $linea = $linea || $tab || $cd_ingreso_neto
+
+cd_monto_base       &cd_monto_base
+    move &cd_monto_base to $cd_monto_base
+    let $linea = $linea || $tab || $cd_monto_base
+
+cd_base_imponible   &cd_base_imponible
+    move &cd_base_imponible to $cd_base_imponible
+    let $linea = $linea || $tab || $cd_base_imponible
+
+cd_iva_pagado       &cd_iva_pagado
+    move &cd_iva_pagado to $cd_iva_pagado
+    let $linea = $linea || $tab || $cd_iva_pagado
+
+!cd_tasa_ponderada   &cd_tasa_ponderada				!--Ref13 pholguiv 2019/03/18
+ ! move &cd_tasa_ponderada to $cd_tasa_ponderada
+ ! let $linea = $linea || $tab || $cd_tasa_ponderada
+
+cd_cta_contable		&cd_cta_contable
+  move &cd_cta_contable to $cd_cta_contable
+  let $linea = $linea || $tab || $cd_cta_contable
+
+ write 1 from  $linea
+ next-listing
+
+from
+cob_super..cc_detalle_a06
+where cd_fecha_corte = $i_fecha_fin
+and (cd_numero_trans + cd_monto_base ) >0
+order by cd_tipo_servicio, cd_canal, cd_tipo_producto
+
+End-Select
+close 1
+
+End-Procedure
+
+!*****************************************************!
+!--                   Enviar_Archivo                --!
+!*****************************************************!
+Begin-Procedure Enviar_Archivo
+
+!-- ref: 5
+Begin-Select
+count(1)		&count
+  let #valor_count = &count
+from cobis..cl_catalogo a, cobis..cl_tabla b
+where a.tabla = b.codigo
+and b.tabla = 'cc_mails_a06'
+and a.estado = 'V'
+End-Select
+
+show 'Cantidad de Correos a enviar ' #valor_count
+let $mails = ''
+
+Begin-Select
+valor		&va
+  let $mails = ' -t' || &va
+from cobis..cl_catalogo a, cobis..cl_tabla b
+where a.tabla = b.codigo
+and b.tabla = 'cc_mails_a06'
+and a.codigo = '01'
+and a.estado = 'V'
+End-Select
+Begin-Select
+valor		&val
+  let $mails = $mails || ' -c' || &val
+from cobis..cl_catalogo a, cobis..cl_tabla b
+where a.tabla = b.codigo
+and b.tabla = 'cc_mails_a06'
+and a.estado = 'V'
+End-Select
+
+show $mails
+!-- ref: 5
+let $w_cmd = 'mail_files' || $mails || ' -s"ESTRUCTURA A06_' || $fecha || '" -n/' || $archivo || ' -p"/fuentes/cobis/cuentas/ctacte/batch/fuentes/" < /dev/null'
+
+call system using $w_cmd #w_status
+if #w_status != 0
+   show 'ERROR: Error al enviar el mail: Enviar informe via mail al stand by de turno'
+   do Abortar
+end-if
+
+End-Procedure
+
+!-- ref: 4
+!*****************************************************!
+!--                   Actualizar_Fecha              --!
+!*****************************************************!
+Begin-Procedure Actualizar_Fecha
+
+!-- ref: 8
+begin-Sql
+update cobis..cl_parametro
+set pa_datetime = $i_fecha_ini
+where pa_nemonico = 'FCDA06'
+end-Sql
+
+begin-Sql
+update cobis..cl_parametro
+set pa_datetime = $i_fecha_fin
+where pa_nemonico = 'FCA06'
+end-Sql
+End-Procedure
+
+!-- ref: 4
+!*****************************************************!
+!--         Obtiene datos de ah_his_movimiento      --!
+!*****************************************************!
+Begin-Procedure LlenaAhHisMov
+
+execute on-error=Error cob_super..sp_obtener_ah_his_mov
+	@i_fecha_ini	= $i_fecha_ini,
+	@i_fecha_fin	= $i_fecha_fin
+
+End-Procedure
+
+Begin-Procedure Error
+  show $sql-error
+  do Abortar
+End-Procedure

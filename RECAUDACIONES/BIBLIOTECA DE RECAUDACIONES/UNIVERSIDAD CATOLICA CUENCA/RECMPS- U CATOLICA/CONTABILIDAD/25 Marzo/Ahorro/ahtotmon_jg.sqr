@@ -1,0 +1,108 @@
+!************************************************************************!
+!*      Archivo           :  ahtotmon.sqr                               *!
+!*      Base de datos     :  cob_ahorros                                *!
+!*      Producto          :  Cuentas de Ahorros                         *!
+!*      Disenado por      :  Mauricio Bayas/Sandra Ortiz                *!
+!*      Fecha de escritura:  18/Oct/94                                  *!
+!************************************************************************!
+!*                              IMPORTANTE                              *!
+!*      Este programa es parte de los paquetes bancarios propiedad del  *!
+!*      "BANCO BOLIVARIANO".                                            *!
+!*      Su uso no autorizado queda expresamente prohibido asi como      *!
+!*      cualquier alteracion o agregado hecho por alguno de sus         *!
+!*      usuarios sin el debido consentimiento por escrito de la         *!
+!*      Presidencia Ejecutiva del BANCO BOLIVARIANO o su representante. *!
+!************************************************************************!
+!*                              PROPOSITO                               *!
+!*      Se encarga de calcular los totales de las transacciones moneta- *!
+!* rias del dia a contabilizar.  Estos totales se almacenan en re_total *!
+!************************************************************************!
+!*                            MODIFICACIONES                            *!
+!*      FECHA           AUTOR           RAZON                           *!
+!*      18/Oct/94     R. Garces         Emision Inicial                 *! 
+!*	30/Ago/96     Juan F. Cadena	Revision Bco. de Credito:	*!
+!*					Totalizacion por sucursales	*!
+!*	07/Oct/96     Erika L. Sanchez	Correcciones por errores hayados*!
+!*	06/May/1998   Graciela Morales	Validar codigo valor solo sucres*!
+!*      27/May/1998   David Sanchez     Utilizar tabla re_total_ah      *!
+!*      31/Dic/98     Dario Barco       Adicionar nemonico de impuestos *!
+!*      26/Abr/1999   Lourdes Reyes     Cambiar tabla re_codval_mn a:   *!
+!*                                      re_codval_mn_ah                 *!
+!*      05/Nov/1999   R. Egas           secuencial en quiebre           *!
+!*      13/Abr/2000   C.Montesdeoca     Problema contable en Db/Cr      *!
+!*      01/Ago/2000   R. Egas           Cambio a moneda Base            *!
+!*   #  14.Oct.2003  Galo Yanez  Cambiar older sqr commands.   *!
+!*      03/Ago/2004   Galo Yanez        Reproceso solo monetarios       *!
+!*      20.AGO.2006  Paul Hoyos V.     Se agrega al quiebre el campo co-*!
+!*                                     tización.                        *!
+!*      03.MAR.2009  Tania Cumbicus    Se agrega al quiebre un nuevo campo*!
+!*                                     de cotizacion para trx 4253, 4272 *!
+!*                                     causas 32, 940 de creditos en euros *!
+!*      26.MAR.2009  Tania Cumbicus    Se agrega al quiebre un nuevo campo*!
+!*                                     de cotizacion para trx 4272 *!
+!*                                     causas 333, 424 de cheques en euros *!
+!*      25.JUN.2009  Tania Cumbicus    se agrega causa 515 para tomar nueva cotizacion*!
+!* 17   10.MAR.2010  Tania Cumbicus  CTE-CC-8512  Se agrega validacion para causa ISD *!
+!*                                     para que contabilice con cotizacion de transferencia *!
+!*  17/Nov/2011 Galo Yanez	Validar que se hayan ejecutado los 	*!
+!*				totalizadores (ahtotmon - ahtotser)	*!
+!*				Tarea: AHO-CC-10815			*!
+!*  02/Feb/2012	Galo Yanez	Grabar en tabla temporal fisica el 	*!
+!*				cursor principal			*!
+!*				Tarea: AHO-8860				*!
+!* 20  16/DIC/2013   Sandra Merino   CNB-316-CU-1901                    *!
+!*  14/Ago/2014	Galo Yanez	Cambiar base de tabla temporal de 	*!
+!*				trabajo (optimizacion solicitada DBA)	*!
+!*				Tarea: AHO-CC-SGC00016819		*!
+!* 22  07/Oct/2020   SIPECOM           Tunning - Transformar SQR ==> SP *!
+!*                                     Tarea:   CTE-CC-SGC00039533      *!
+!************************************************************************!
+
+#include  "definic.inc"
+
+Begin-Setup
+use cob_ahorros
+End-Setup  
+
+#include "log.inc"
+#include "ctahorro.inc"
+
+!-----------------------------
+Begin-Program
+!-----------------------------
+do Inicializar_Programa
+!do ParamN (1,#i_filial,'cobis..cl_filial','fi_filial = ','No existe la filial')
+!do ParamS (2,$i_fecha_proceso,'','','')
+
+let #i_filial = 1
+let $i_fecha_proceso = '03/25/2021'
+!cambiar fecha proceso
+
+
+do Main
+do Finalizar_Programa
+End-Program
+
+!-----------------------------
+Begin-Procedure Main
+!-----------------------------
+do Procesar
+End-Procedure
+
+!------------------------------
+Begin-Procedure Procesar
+!------------------------------
+  execute -XC on-error=Error @#result=cob_ahorros..pa_aho_btotmon_proc_jg
+       @e_filial			= #i_filial,
+       @e_fecha_proceso		= $i_fecha_proceso,
+       @s_procesadas  = #w_procesadas output
+    show 'Retorno del programa ' #result
+    show 'PROCESADAS ' #w_procesadas  
+End-Procedure
+
+!-----------------------------
+Begin-Procedure Error
+!-----------------------------
+  show $sql-error
+  do Abortar
+End-Procedure

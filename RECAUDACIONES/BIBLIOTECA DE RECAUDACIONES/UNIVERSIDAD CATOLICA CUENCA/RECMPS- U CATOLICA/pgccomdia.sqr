@@ -1,0 +1,193 @@
+!************************************************************************!
+!*      Archivo:                pgccomdia.sqr                           *!
+!*      Base de datos:          cob_pagos                               *!
+!*      Producto:               ECUAQUIMICA                             *!
+!*      Disenado por:           Daniel Pereira  			*!
+!*      Fecha de escritura:     03/Mayo/2018                            *!
+!************************************************************************!
+!*                              IMPORTANTE                              *!
+!*      Este programa es parte de los paquetes bancarios propiedad de   *!
+!*      "BANCO BOLIVARIANO"                                             *!
+!*      Su uso no autorizado queda expresamente prohibido asi como      *!
+!*      cualquier alteracion o agregado hecho por alguno de sus         *!
+!*      usuarios sin el debido consentimiento por escrito de la         *!
+!*      Presidencia Ejecutiva de BANCO BOLIVARIANO.                     *!
+!************************************************************************!
+!*                              PROPOSITO                               *!
+!* Este programa cobra diariamente la comisión a empresas con depósito en línea  *!
+!************************************************************************!
+!*                              MODIFICACIONES                          *!
+!*    FECHA       AUTOR             RAZON                               *!
+!*1  03/May/2018  Daniel Pereira    DEPONL-AP-SGC00031612-SGC00031777   *!		
+!*2  01/Dec/2020  Jonathan Guerreo  RECM-209 HABILITAR COBRO ATIMASA    *!		
+!*3  05/Mar/2021  Jonathan Guerreo  RECMPS-553 COBRO POR CATALOGO       *!	
+!************************************************************************!
+
+!#define ANCHO_PAG 6000
+!#define LARGO_PAG 6000
+
+#include "definic.inc"
+#define  WPATH 			'/respaldo/archivos/cuentas/data/'
+#define CHR_TAB   9
+#define CHR_ENT   13
+
+Begin-Setup
+use cob_pagos
+End-Setup
+
+!#include "printer_cobis1.inc"
+#include "log.inc"
+#include "ctacte.inc"
+
+
+Begin-Program
+do Inicializar_Programa
+do ParamS (1,$i_fecha_proceso,'','','')
+do ParamN (2,#i_empresa,'','','')
+if $i_fecha_proceso = ''
+   let $mensaje_error = 'Error en el ingreso del Parametro Fecha de Proceso'
+   do Abortar
+end-if
+
+!if #i_empresa = 0
+!   let $mensaje_error = 'Error en el ingreso del Parametro Empresa'
+!   do Abortar
+!end-if
+
+do Main
+do Finalizar_Programa	
+  
+End-Program  
+
+!--------------------------------
+Begin-Procedure Main
+!--------------------------------
+  !do Columnas (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+  let $tab = chr(9)	!* Se crea un espacio de carro (tabulacion)
+  let $dia  = substr($i_fecha_proceso,4,2)
+  let $mes  = substr($i_fecha_proceso,1,2)
+  let $anio = substr($i_fecha_proceso,9,2)
+  let $w_chr_tab = chr ({CHR_TAB})
+  let $w_chr_ent = chr ({CHR_ENT})    
+
+Begin-Select  
+ltrim(rtrim(c.codigo))	&cod_emp
+ltrim(rtrim(c.valor))	&nom_arch
+
+  let $i_empresa = &cod_emp
+  let #i_empresa = to_number($i_empresa)
+  let $nom_arch = &nom_arch
+  do CobroComision
+  do Genera_Datos
+from cobis..cl_catalogo c, cobis..cl_tabla t
+where t.codigo = c.tabla
+and t.tabla = 'sv_cobro_comision_diaria'
+and c.estado = 'V'
+End-Select
+  
+End-Procedure
+
+Begin-Procedure CobroComision
+
+show 'REALIZANDO COBRO COMISION EMPRESA........' &nom_arch
+execute -XC @#w_return = cob_pagos..pa_reca_bcobro_comi_diario
+@t_debug        = 'N',
+@t_file           = 'pgccomdia.sqr',
+@s_srv            = 'BOLIVSRV',
+@s_ofi            = 0,
+@s_user           = 'sa',
+@s_term           = 'consola',
+@s_org            = 'L',
+@t_rty            = '',
+@e_moneda         = 1,
+@e_empresa        = #i_empresa
+
+if #w_return <> 0
+   do Abortar
+end-if
+show 'COBRO COMISION REALIZADA ....'
+
+End-Procedure
+
+!--------------------------------
+Begin-Procedure Genera_Datos
+!--------------------------------    
+let $reporte = 'RptComDia_' || $nom_arch  || '_' || substr($i_fecha_proceso,1,2)  || substr($i_fecha_proceso,4,2)  || substr($i_fecha_proceso,7,4) ||  '.txt'
+let $archivo = {WPATH}  ||  $reporte
+let #NumEmp = #i_empresa 
+open $archivo as #NumEmp for-writing record = 5000
+if #filestatus != 0
+  let $msg = 'Error al abrir el Archivo : ' || $archivo
+  show $msg
+  do Abortar
+end-if
+
+do CabeceraReporte
+show 'CREANDO REPORTE COMISION........'
+do Extrae_Datos
+show 'REPORTE COMISION CREADO OK ........'
+show  $archivo
+
+close #NumEmp
+End-Procedure
+
+!--------------------------------
+Begin-Procedure Extrae_Datos
+!--------------------------------
+    let #contador = 0
+    
+execute -XC do = Impresion
+     cob_pagos..pa_reca_ggenera_rep_cod
+     @t_debug = 'N',
+     @t_file = ' ',
+     @e_fecha = $i_fecha_proceso,
+     @e_empresa = #i_empresa
+into &fecha           varchar(10),
+     &referencia      varchar(20),
+     &valor           money,
+     &costo           money,
+     &estado          varchar(13),
+     &fecha_cobro     varchar(10)
+            
+End-Procedure
+
+!--------------------------------
+Begin-Procedure Impresion
+!--------------------------------
+        position (+1)              
+        
+	let $fecha                = &fecha
+	let $referencia           = &referencia
+	let #valor                = &valor 
+	let $valor                = to_char(#valor)
+	let #costo                = &costo 
+	let $costo                = to_char(#costo)
+	let $estado               = &estado
+	let $fecha_cobro          = &fecha_cobro
+	
+	let $linea = $fecha  
+	let $linea = $linea || $tab || $referencia
+	let $linea = $linea || $tab || $valor
+	let $linea = $linea || $tab || $costo
+	let $linea = $linea || $tab || $estado
+	let $linea = $linea || $tab || $fecha_cobro
+
+	write #NumEmp from  $linea
+	next-listing
+	next-listing
+End-Procedure
+
+!--------------------------------
+Begin-Procedure CabeceraReporte
+!--------------------------------
+let $espacio = chr(39)
+let $linea = 'Fecha recaudo'
+let $linea = $linea || $tab || 'Código cliente'
+let $linea = $linea || $tab || 'Monto recaudado'
+let $linea = $linea || $tab || 'Monto comisión por registro'
+let $linea = $linea || $tab || 'Estado'
+let $linea = $linea || $tab || 'Fecha de cobro'
+write #NumEmp from  $linea
+let $espacio = chr(39)
+  
+End-Procedure

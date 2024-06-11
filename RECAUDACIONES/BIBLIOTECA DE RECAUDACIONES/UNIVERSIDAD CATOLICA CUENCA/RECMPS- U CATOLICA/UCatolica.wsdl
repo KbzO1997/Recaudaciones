@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.payments.ucuacue.edu.ec/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="BankWSService" targetNamespace="http://services.payments.ucuacue.edu.ec/">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://services.payments.ucuacue.edu.ec/" elementFormDefault="unqualified" targetNamespace="http://services.payments.ucuacue.edu.ec/" version="1.0">
+			<xs:import namespace="http://services.payments.ucuacue.edu.ec/"/>
+			<xs:element name="RegistroPagoBancoEntrada" type="tns:RegistroPagoBancoEntrada"/>
+			<xs:element name="RegistroPagoBancoEntradaResponse" type="tns:RegistroPagoBancoEntradaResponse"/>
+			<xs:element name="cargarDatosEntrada" type="tns:cargarDatosEntrada"/>
+			<xs:element name="cargarDatosEntradaResponse" type="tns:cargarDatosEntradaResponse"/>
+			<xs:complexType name="RegistroPagoBancoEntrada">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="tipoProceso" type="xs:string"/>
+					<xs:element minOccurs="0" name="tipoIdentificacion" type="xs:string"/>
+					<xs:element minOccurs="0" name="identificacion" type="xs:string"/>
+					<xs:element minOccurs="0" name="referencia" type="xs:string"/>
+					<xs:element minOccurs="0" name="monedaPago" type="xs:string"/>
+					<xs:element minOccurs="0" name="valorPago" type="xs:double"/>
+					<xs:element minOccurs="0" name="secuencialPago" type="xs:string"/>
+					<xs:element minOccurs="0" name="fechaPago" type="xs:string"/>
+					<xs:element minOccurs="0" name="horaPago" type="xs:string"/>
+					<xs:element minOccurs="0" name="canalProceso" type="xs:string"/>
+					<xs:element minOccurs="0" name="codigoBanco" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="RegistroPagoBancoEntradaResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return" type="tns:registraPagoBancoSalida"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="registraPagoBancoSalida">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="codigoError" type="xs:string"/>
+					<xs:element minOccurs="0" name="identificacion" type="xs:string"/>
+					<xs:element minOccurs="0" name="mensajeError" type="xs:string"/>
+					<xs:element minOccurs="0" name="secuencialPago" type="xs:string"/>
+					<xs:element minOccurs="0" name="tipoIdentificacion" type="xs:string"/>
+					<xs:element minOccurs="0" name="valorPago" type="xs:double"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="cargarDatosEntrada">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="tipoIdentificacion" type="xs:string"/>
+					<xs:element minOccurs="0" name="parametroBusqueda" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="cargarDatosEntradaResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="cargarDatosSalida" type="tns:cargarDatosSalida"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="cargarDatosSalida">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="codigoError" type="xs:string"/>
+					<xs:element minOccurs="0" name="deuda" type="xs:string"/>
+					<xs:element minOccurs="0" name="identificacion" type="xs:string"/>
+					<xs:element minOccurs="0" name="mensajeError" type="xs:string"/>
+					<xs:element minOccurs="0" name="nombreCliente" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://services.payments.ucuacue.edu.ec/" targetNamespace="http://services.payments.ucuacue.edu.ec/" version="1.0">
+			<xs:import namespace="http://services.payments.ucuacue.edu.ec/"/>
+			<xs:element name="CargarDatosSalida" type="ns1:cargarDatosSalida"/>
+			<xs:element name="RegistraPagoBancoSalida" type="ns1:registraPagoBancoSalida"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="RegistroPagoBancoEntrada">
+		<wsdl:part element="tns:RegistroPagoBancoEntrada" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="cargarDatosEntrada">
+		<wsdl:part element="tns:cargarDatosEntrada" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="RegistroPagoBancoEntradaResponse">
+		<wsdl:part element="tns:RegistroPagoBancoEntradaResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="cargarDatosEntradaResponse">
+		<wsdl:part element="tns:cargarDatosEntradaResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="BankWS">
+		<wsdl:operation name="RegistroPagoBancoEntrada">
+			<wsdl:input message="tns:RegistroPagoBancoEntrada" name="RegistroPagoBancoEntrada">
+			</wsdl:input>
+			<wsdl:output message="tns:RegistroPagoBancoEntradaResponse" name="RegistroPagoBancoEntradaResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="cargarDatosEntrada">
+			<wsdl:input message="tns:cargarDatosEntrada" name="cargarDatosEntrada">
+			</wsdl:input>
+			<wsdl:output message="tns:cargarDatosEntradaResponse" name="cargarDatosEntradaResponse">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="BankWSServiceSoapBinding" type="tns:BankWS">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="RegistroPagoBancoEntrada">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input name="RegistroPagoBancoEntrada">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="RegistroPagoBancoEntradaResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="cargarDatosEntrada">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input name="cargarDatosEntrada">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="cargarDatosEntradaResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="BankWSService">
+		<wsdl:port binding="tns:BankWSServiceSoapBinding" name="BankWSPort">
+			<soap:address location="http://45.182.119.14:8081/payments/BankWS?wsdl"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

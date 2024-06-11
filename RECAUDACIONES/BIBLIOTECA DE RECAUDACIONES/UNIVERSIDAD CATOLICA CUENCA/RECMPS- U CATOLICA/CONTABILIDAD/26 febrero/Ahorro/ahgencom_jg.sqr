@@ -1,0 +1,205 @@
+!************************************************************************!
+!*      Archivo           :  ahgencom.sqr                               *!
+!*      Base de datos     :  cob_ahorros                                *!
+!*      Producto          :  Cuentas de Ahorros                         *!
+!*      Disenado por      :  Rodrigo Garces/Julio Navarrete             *!
+!*      Codigo programa   :  3123                                       *!
+!*      Fecha de escritura:  05/Ene/96                                  *!
+!************************************************************************!
+!*                              IMPORTANTE                              *!
+!*      Este programa es parte de los paquetes bancarios propiedad del  *!
+!*      "BANCO BOLIVARIANO".                                            *!
+!*      Su uso no autorizado queda expresamente prohibido asi como      *!
+!*      cualquier alteracion o agregado hecho por alguno de sus         *!
+!*      usuarios sin el debido consentimiento por escrito de la         *!
+!*      Presidencia Ejecutiva del BANCO BOLIVARIANO o su representante. *!
+!************************************************************************!
+!*                              PROPOSITO                               *!
+!*      Genera comprobantes contables de los movimientos del dia        *!
+!************************************************************************!
+!*                            MODIFICACIONES                            *!
+!*      FECHA           AUTOR           RAZON                           *!
+!*      05/Ene/96     B Mosquera        Emision Inicial                 *! 
+!*	30/Ago/96     Juan F. Cadena	Revision Bco. de Credito	*!
+!*      23/Jun/97     David Sanchez C.  Utilizar Perfiles con parametros*!
+!*      27/Oct/1997   David Sanchez C.  No sucretizar, utilizar stored  *!
+!*                                      Procedure sp_scomprobante_cc.   *!
+!*      02/Nov/1997   David Sanchez C.  utilizas sp_tsasiento_cc        *!
+!*      16/Ene/1998   David Sanchez C.  Corregir transitorio en dolares *!
+!*      06/May/1998   Graciela Morales  Considerar perfiles solo sucres *!
+!*      27/May/1998   David Sanchez C.  Utilizar tabla re_total_ah      *!
+!*      01/Ago/2000   R. Egas           Cambio a moneda Base            *!
+!*      18/Dic/2000   R. Egas           Se necesita que genere la ofici *!
+!*                                      na destino completa             *!
+!*	09/Abr/2002   Galo Yanez	Query x empresa = 1		*!
+!*	03/Jun/2002   Rosa Castillo	Migracion Contable		*!
+!*      24/Feb/2003   Galo Yanez        Indice x oficina                *!
+!*      05/Jun/2003   Galo Yanez        Direccionar a tablas de ahorros *!
+!*   #  14.Oct.2003  Galo Yanez  Cambiar older sqr commands.            *!
+!*  05/Ene/2004  Franklin Moncayo V. Control de Contabilizacion por Trx *! 
+!*      20.AGO.2006  Paul Hoyos V.     Se agrega al quiebre el campo co-*!
+!*                                     tización. Se env. sp_tsasiento_ah*!   
+!*                                     un nuevo campo @i_param11 con el *!    
+!*                                     valor de la cotizacion y en caso *!    
+!*                                     de descuadre se ajusta el cbte.  *!
+!*	04/Abr/2011   Raul Altamirano REF17:AHO-CC-10355 Migracion Sybase 15*! 		
+!*  17/Nov/2011 Galo Yanez	Validar que se hayan ejecutado los 	*!
+!*				totalizadores (ahtotmon - ahtotser)	*!
+!*				Tarea: AHO-CC-10815			*!
+!* 18  30/Oct/2020   C.Vera Sipecom    Tunning - Transformar SQR ==> SP *!
+!*                                     Tarea:   CTE-CC-SGC00040520      *!
+!************************************************************************!
+
+#include  "definic.inc"
+
+#define   ANCHO_PAG                100 !Ancho de la pagina a imprimir   !CVT
+
+Begin-Setup
+use cob_ahorros
+End-Setup  
+
+#include "log.inc"
+#include "ctahorro.inc"
+
+!-----------------------------
+Begin-Program
+!-----------------------------
+do Inicializar_Programa
+!do ParamN (1,#i_filial,'cobis..cl_filial','fi_filial = ','No existe la filial')
+!do ParamS (2,$i_fecha_proceso,'','','')
+
+let #i_filial = 1
+let $i_fecha_proceso = '02/26/2021'
+
+
+do Main
+do Finalizar_Programa
+End-Program
+
+!-----------------------------
+Begin-Procedure Main
+!-----------------------------
+let $w_error_comp = ''
+do Presentar
+do Procesar
+if ($w_error_comp <> 'N')                                                   !CVT -->
+  do Error_Comprobante !($w_mensaje,#w_tot_debito,#w_tot_credito)
+end-if                                                                  !<-- CVT
+End-Procedure
+
+!------------------------------
+Begin-Procedure Procesar
+!------------------------------
+  execute -XC on-error=Error @#result=cob_ahorros..pa_aho_bgencom_proc
+       @e_filial            = #i_filial,
+       @e_fecha_proceso     = $i_fecha_proceso,
+       @s_procesadas        = #w_procesadas  output,
+       @s_error_comprb      = $w_error_comp  out,
+       @s_mensaje           = $w_mensaje     out,
+       @s_tot_debito        = #w_tot_debito  out,
+       @s_tot_credito       = #w_tot_credito out
+      
+  show 'Retorno del programa ' #result
+  show 'PROCESADAS ' #w_procesadas
+End-Procedure
+
+
+!------------------------------
+Begin-Procedure Presentar
+!------------------------------
+do Nombre_Filial (#i_filial,$nombre_filial)
+do Columnas (6,6,6,6,15,6,6,6,18,18,18,18,18,30,0,0,0,0,0,0)
+End-Procedure
+
+
+Begin-Heading  10       !CVT antes 8 
+!------------
+do Cabecera ($nombre_filial,'ERRORES EN LA GENERACION DE COMPROBANTES (AH)','',
+	'', '',$i_fecha_proceso)
+position (+1)
+do Lin_Horizontal
+do PrintS (1,'MON','',0)
+do PrintS (2,'TRANSAC','',0)
+do PrintS (3,'PERFIL','',0)
+do PrintS (4,'DB/CR','',0)
+do PrintS (5,'CUENTA CTBLE','',0)
+do PrintS (6,'OF.OR','',0)
+do PrintS (7,'OF.DT','',0)
+do PrintS (8,'ASIENTO','',0)
+do PrintS (9,'      TOT DEBITO MN','',0)
+do PrintS (10,'    TOT CREDITO MN','',0)
+do PrintS (11,'     TOT DEBITO ME','',0)
+do PrintS (12,'    TOT CREDITO ME','',0)
+do PrintS (13,'        COTIZACION','',0)
+do PrintS (14,'CONCEPTO','',0)
+do Lin_Horizontal
+End-Heading
+
+
+!Begin-Procedure Error_Comprobante($mensaje,#tot_debito,#tot_credito)
+Begin-Procedure Error_Comprobante
+  !-------------------------
+  !PARAMETROS ORIGINAL: ($mensaje,#w_tran,#w_origen,#w_mon,#tot_debito,#tot_credito)
+execute do=Imprime_Detalle 
+        cob_ahorros..pa_aho_bgencom_rep
+    INTO &Moneda       smallint,
+         &TipoTran     int,
+         &Perfil       varchar(6),
+         &DebCred      char(1),
+         &Cuenta       varchar(30),
+         &OficOrg      smallint,
+         &OficDest     smallint,
+         &Asiento      int,
+         &CreditoMN    money,
+         &DebitoMN     money,
+         &Concepto     varchar(29),
+         &CreditoME    money,
+         &DebitoME     money,
+         &Cotizacion   money
+  do PrintS(5,'TOTAL:','',0)
+  do PrintN(9,#tot_debito,'999,999,999,999.99',0)
+  do PrintN(10,#tot_credito,'999,999,999,999.99',0)
+  do PrintS(14,$mensaje,'',0)
+  new-page
+End-Procedure
+
+Begin-Procedure Imprime_Detalle
+   let #Moneda     = &Moneda
+   let #TipoTran   = &TipoTran
+   let $Perfil     = &Perfil
+   let $DebCred    = &DebCred
+   let $Cuenta     = &Cuenta
+   let #OficOrg    = &OficOrg
+   let #OficDest   = &OficDest
+   let #Asiento    = &Asiento
+   let #CreditoMN  = &CreditoMN
+   let #DebitoMN   = &DebitoMN
+   let $Concepto   = &Concepto
+   let #CreditoME  = &CreditoME
+   let #DebitoME   = &DebitoME
+   let #Cotizacion = &Cotizacion
+   do PrintN (1,#Moneda,'9',0)
+   do PrintN (2,#TipoTran,'999999',0)
+   do PrintS (3,$Perfil,'',0)
+   do PrintS (4,$DebCred,'',0)
+   do PrintS (5,$Cuenta,'',0)
+   do PrintN (6,#OficOrg,'99',0)
+   do PrintN (7,#OficDest,'99',0)
+   do PrintN (8,#Asiento,'999999',0)
+   do PrintN (9,#DebitoMN,'999,999,999,999.99',0)
+   do PrintN (10,#CreditoMN,'999,999,999,999.99',0)
+   do PrintN (11,#DebitoME,'999,999,999,999.99',0)
+   do PrintN (12,#CreditoME,'999,999,999,999.99',0)
+   do PrintN (13,#Cotizacion,'999,999,999,999.99',0)
+   do PrintS (14,$Concepto,'',0)
+   next-listing
+End-Procedure
+
+
+!-----------------------------
+Begin-Procedure Error
+!-----------------------------
+  show $sql-error
+  do Abortar
+End-Procedure
+

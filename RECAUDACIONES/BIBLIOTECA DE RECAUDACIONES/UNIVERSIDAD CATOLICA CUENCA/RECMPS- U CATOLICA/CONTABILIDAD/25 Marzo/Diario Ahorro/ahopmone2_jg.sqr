@@ -1,0 +1,503 @@
+!************************************************************************!
+!*      Archivo           :  ahopmone2.sqr                              *!
+!*      Base de datos     :  cob_ahorros                                *!
+!*      Producto          :  Cuentas de Ahorro                          *!
+!*      Disenado por      :  Galo Yanez                                 *!
+!*      Fecha de escritura:  03/Abril/2002                              *!
+!************************************************************************!
+!*                              IMPORTANTE                              *!
+!*      Este programa es parte de los paquetes bancarios propiedad de   *!
+!*      "MACOSA", representantes exclusivos para el Ecuador de la       *!
+!*      "NCR CORPORATION".                                              *!
+!*      Su uso no autorizado queda expresamente prohibido asi como      *!
+!*      cualquier alteracion o agregado hecho por alguno de sus         *!
+!*      usuarios sin el debido consentimiento por escrito de la         *!
+!*      Presidencia Ejecutiva de MACOSA o su representante.             *!
+!************************************************************************!
+!*                              PROPOSITO                               *!
+!*      Emite el diario de operaciones monetarias por cuenta            *!
+!*      Sacando las transacciones de ah_tran_monet_resp                 *!
+!************************************************************************!
+!*                            MODIFICACIONES                            *!
+!*      FECHA           AUTOR           RAZON                           *!
+!*   #  14.Oct.2003  Galo Yanez  Cambiar older sqr commands.   *!
+!*      Nov 17/2003     Galo Yanez      Utilizar tablas individuales    *!
+!*                                      para generar resumen de totales *!
+!*   2  07/JUN/2018  Paul Hoyos V.   FACOFF-AP-SGC00029747-SGC00030151  *!
+!*   3  07/AGO/2018  Paul Hoyos V.   CTE-CE-SGC00032640                 *!
+!************************************************************************!
+
+#include  "definic.inc"
+                                       ! Antes era 210 
+#define   ANCHO_PAG             180 !Ancho de la pagina a imprimir !RE 19990104; antes 154 REF_03
+#define   LARGO_PAG              60 !Largo de la pagina a imprimir ; antes 58 REF_03
+
+!******** Para compilar aniadir en la linea de comandos -Mvar ********!
+
+Begin-Setup
+use cob_ahorros
+End-Setup  
+
+#include "printer_cod_imp_cond.inc"   !REF:GYC
+
+#include "log.inc"
+#include "ctahorro.inc"
+
+Begin-Program   !REF:GYC
+do Inicializar_Programa
+!do ParamN (1,#i_filial,'cobis..cl_filial','fi_filial = ','No existe la filial')
+
+let #i_filial = 1
+
+
+! cambiar tm_fecha = '03/17/2021' and tm_secuencial 
+
+
+let $i_proceso = 'N'						!GYC 2001/ABR/18
+do Main								!GYC 2001/ABR/18
+let $i_proceso = 'R'						!GYC 2001/ABR/18
+do Main
+do Finalizar_Programa
+End-Program   !REF:GYC
+
+Begin-Heading 6
+!* Define los titulos del reporte *!
+do Cabecera (
+	'DIARIO DE OPERACIONES MONETARIAS','(CUENTAS DE AHORROS)',
+	$nombre_filial, $nombre_oficina, $nombre_moneda,
+	$t11_fecha_proceso)
+do Lin_Horizontal
+!do Centrar ('No.CUENTA',1)
+!do Centrar ('NOMBRE   ',2)
+!do Centrar ('EFECTIVO ',3)
+!do Centrar ('CHEQUES  ',4)
+!do Centrar ('TOTAL DEP',5)
+!do Centrar ('CAUSA    ',6)
+!do Centrar ('EFECTIVO ',7)
+!do Centrar ('OFIC ',8)
+!do Centrar ('HORA   ',9)
+
+do PrintS (1,'No.CUENTA','',0)
+do PrintS (2,'NOMBRE   ','',0)
+do PrintS (3,'          EFECTIVO','',0)
+do PrintS (4,'           CHEQUES','',0)
+do PrintS (5,'     TOTAL CREDITO','',0)
+do PrintS (6,'      IMPUESTO','',0)                      !FER:30Dic98
+!*do PrintS (6,' CAUSA','',0)*!                          !*FER:29Dic98*!
+do PrintS (7,' CAUSA','',0)                              !*FER:29Dic98*!
+!*do PrintS (7,'      TOTAL DEBITO','',0)*!              !*FER:29Dic98*!
+do PrintS (8,'      TOTAL DEBITO','',0)                  !*FER:29Dic98*!
+!*do PrintS (8,' HORA','',0)*!                           !*FER:29Dic98*!
+do PrintS (9,' HORA','',0)                               !*FER:29Dic98*!
+do PrintS (10,' ','',0)                                  !PHOYOSV 20180607 REF_02
+do PrintS (11,'  DETALLE  ','',0)                        !PHOYOSV 20180607 REF_02
+do Lin_Horizontal     
+End-Heading
+
+Begin-Procedure Main
+do Nombre_Filial (#i_filial,$nombre_filial)
+!do Columnas (12,25,18,18,18,6,18,5,3,0,0,0,0,0,0,0,0,0,0,0)   !FER:29Dic98   
+!do Columnas (12,25,18,18,18,18,6,18,5,3,0,0,0,0,0,0,0,0,0,0)  !FER:29Dic98
+!do Columnas (10,17,18,18,18,13,6,18,5,1,0,0,0,0,0,0,0,0,0,0)    !* RE19990104 
+ do Columnas (10,17,18,18,18,13,6,18,5,1,20,0,0,0,0,0,0,0,0,0) !PHOYOSV 20180607 REF_02
+let $w_rrhh = 'rrhh'                                           !* DSC980305
+do Transacciones
+End-Procedure
+
+
+Begin-Procedure Transacciones
+do Trunca_Tabla
+!* Procesa las transacciones monetarias de la oficine activa *!   
+!***  Inclusi¢n de campo 48 horas para diferido  KFAH:22nov1999  ***!
+Begin-Select
+ah_oficina
+ah_moneda
+ah_cta_banco 
+tm_cta_banco
+!tm_usuario () on-break print=never before=Before_Usuario after=After_Usuario level=2         GMD19980506
+tm_usuario () on-break print=never before=Before_Usuario after=After_Usuario level=3
+!tm_tipo_tran () on-break print=never before=Before_Transa after=After_Transa level=3         GMD19980506
+tm_tipo_tran () on-break print=never before=Before_Transa after=After_Transa level=4
+tm_signo
+tm_valor
+tm_chq_propios
+tm_chq_locales
+tm_chq_ot_plazas
+tm_indicador
+tm_secuencial
+tn_trn_code
+tn_descripcion
+tm_correccion
+tm_causa
+tm_efectivo
+tm_valor_impuesto  !FER:29Dic98
+of_nombre
+ah_nombre
+tm_oficina &tm_oficina () on-break print=never before=Before_Oficina after=After_Usuario level=1 
+tm_oficina_cta
+!tm_moneda      GMD19980506
+tm_moneda () on-break print=never before=Before_Moneda after=After_Oficina level=2
+tm_hora
+of_oficina
+ah_saldo_ayer
+ah_disponible+ah_12h+ah_24h+ah_48h+ah_remesas &ah_saldo_contable     !*** KFAH:27nov2000
+convert(char(8),tm_hora,8)      &hora_transa
+isnull(tm_ctadestino,'')            &tm_ctadestino  !PHOYOSV 20180607 REF_05
+   let $tm_ctadestino = &tm_ctadestino              !PHOYOSV 20180607 REF_05
+
+ do Verifica_causa						!GYC 2001/ABR/27 
+ if &tm_correccion = 'N'
+    let #factor = 1
+ else
+    let #factor = -1
+ end-if 
+
+ do Imprime_Registro !*** IMPRIME LINEA DE DETALLE ***!
+  
+ let #quiebre = 0
+ if &tm_usuario <> $w_rrhh         !* DSC980306
+    next-listing
+ end-if
+ do Actualizar_Reg_Proc
+from cob_ahorros..ah_tran_monet, cobis..cl_ttransaccion, cob_ahorros..ah_cuenta, cobis..cl_oficina
+where tm_tipo_tran     *= tn_trn_code
+  and of_filial        = convert(tinyint,#i_filial) 
+  and tm_oficina       = of_oficina 
+  and ah_cta_banco     = tm_cta_banco
+  and tm_tipo_tran     <> 4221         
+  and tm_tipo_tran     <> 4281        
+  and ($i_proceso      = 'N' or						
+      (tm_causa in (select codigo
+                                  from cobis..cl_catalogo
+                                 where tabla = (select codigo
+                                                  from cobis..cl_tabla
+                                                 where tabla = 'ah_causa_rrhh')
+                                                   and estado = 'V') and $i_proceso = 'R'))												   												   
+and tm_fecha = '03/25/2021'
+and tm_secuencial in (1039946990,1803415256,58927629,1297052953)
+
+
+order by tm_oficina, tm_moneda, tm_usuario, tm_tipo_tran, tm_cta_banco, tm_secuencial
+! order by tm_oficina, tm_usuario, tm_tipo_tran, tm_cta_banco, tm_secuencial    GMD19980506
+/*** ah_oficina, ah_moneda, ah_cta_banco, tm_secuencial ***/
+End-Select
+End-Procedure
+
+Begin-Procedure Verifica_causa                                  !GYC 2001/ABR/27
+Begin-Select
+count(*)  &registro
+from cobis..cl_catalogo
+where tabla = (select codigo
+               from cobis..cl_tabla
+               where tabla = 'ah_causa_rrhh')
+  and estado = 'V'
+  and codigo = &tm_causa
+End-Select
+End-Procedure
+
+Begin-Procedure Imprime_Registro
+  let #cheques = &tm_chq_propios+&tm_chq_locales+&tm_chq_ot_plazas
+!  position (-1)
+  let #cuenta = to_number (&tm_cta_banco)
+  add #cuenta to #total_cuenta
+  if &tm_usuario <> $w_rrhh                            		!* DSC980305
+     !do PrintS (1,&tm_cta_banco,'{FOR_CTA}',0)
+     if $i_proceso = 'N' and &registro > 0                      !GYC 2001/ABR/27
+        let $w_cta = '          '                               !GYC 2001/ABR/27
+        let $w_nom = '                    '                     !GYC 2001/ABR/27
+        do PrintS (1,$w_cta,'',0)                               !GYC 2001/ABR/27
+        do PrintS (2,$w_nom,'',0)                               !GYC 2001/ABR/27
+     else
+        do PrintS (1,&tm_cta_banco,'',0)                        !* RE19990104
+        do PrintS (2,&ah_nombre,'',0)
+     end-if
+  end-if
+
+  let $w_causa = '  '|| &tm_causa
+  if &tm_usuario <> $w_rrhh                                     !* DSC980305
+     !do PrintS (6,$w_causa,'',0)                               !FER:29Dic98 
+     do PrintS (7,$w_causa,'',0)                                !FER:29Dic98
+  end-if
+  if &tm_signo = 'C'
+     do PrintN (6,&tm_valor_impuesto,'99999999999.99',0)        !FER:29Dic98
+     if &tm_tipo_tran  = 4229   or &tm_tipo_tran = 4244
+        or &tm_tipo_tran = 4253 or &tm_tipo_tran = 4255
+        or &tm_tipo_tran = 4257 or &tm_tipo_tran = 4293
+        or &tm_tipo_tran = 4294 or &tm_tipo_tran = 4309         !191197 Sofpro 
+        or &tm_tipo_tran = 4312 or &tm_tipo_tran = 4315 
+        or &tm_tipo_tran = 4316                                 !011297 Sofpro
+
+        if &tm_usuario <> $w_rrhh                               !* DSC980305
+           do PrintN (5,&tm_valor,'{FOR_DIN}',0)
+        end-if
+        let #valor  = &tm_valor
+        let #suma_cheq_db = #suma_cheq_db + (#valor * #factor)
+     else
+        let #w_total_dep = &tm_valor + #cheques                 ! (DSC971001)
+        if &tm_usuario <> $w_rrhh                               !* DSC980305
+           do PrintN (3,&tm_valor,'{FOR_DIN}',0)
+           do PrintN (4,#cheques,'{FOR_DIN}',0)
+           do PrintN (5,#w_total_dep,'{FOR_DIN}',0)             ! (DSC971001)
+        end-if
+        let #suma_efec_cr = #suma_efec_cr + (&tm_valor * #factor)
+        let #suma_cheq_cr = #suma_cheq_cr + (#cheques * #factor)
+        let #suma_cheq_db = #suma_cheq_db + (#w_total_dep * #factor)
+        let #valor        = #w_total_dep                        ! (DSC971013)
+     end-if
+  else
+     if &tm_usuario <> $w_rrhh                                  !* DSC980305
+        !do PrintN (7,&tm_valor,'{FOR_DIN}',0)                  !FER:29Dic98
+        do PrintN (8,&tm_valor,'{FOR_DIN}',0)                   !FER:29Dic98
+     end-if
+     let #suma_efec_db = #suma_efec_db + (&tm_valor * #factor)
+     let #valor        = &tm_valor                              ! (DSC971013)
+  end-if
+
+  if &tm_usuario <> $w_rrhh                                     !* DSC980305
+     !do PrintS (8,&hora_transa,'',0)                           !FER:29Dic98
+     do PrintS (9,&hora_transa,'',0)                            !FER:29Dic98
+  end-if
+  if &tm_correccion = 'S'
+     if &tm_usuario <> $w_rrhh                                  !* DSC980305
+        do PrintS (10,'*','',0)                                !FER:29Dic98
+        !do PrintS (11,'*','',0)                                 !FER:29Dic98
+     end-if
+     let #valor = #valor * -1
+     let #reg   = -1
+  else
+     if &tm_usuario <> $w_rrhh                                  !* DSC980305
+        do PrintS (10,' ','',0)                                !FER:29Dic98
+        !do PrintS (11,' ','',0)                                 !FER:29Dic98
+     end-if
+     let #reg   = 1
+  end-if
+  if &tm_tipo_tran = 4272 and &tm_causa = '10'          !PHOYOSV 20180607 INI REF_02
+   do PrintS (11,$tm_ctadestino,'',0)
+  end-if                                                !PHOYOSV 20180607 FIN REF_02
+
+!**************** LEE EN re_transa (DSC971013)
+let #existe = 0
+Begin-Select
+tr_tipo_tran &t
+  let #existe = 1
+from cob_remesas..re_transa_am
+where tr_tipo_tran = &tm_tipo_tran
+  and tr_causa     = &tm_causa
+  and tr_signo     = &tm_signo
+End-Select
+
+if #existe = 1
+   do Actualiza_Tabla
+else
+   do Inserta_Tabla
+end-if
+!**************** (DSC971013)
+End-Procedure
+
+Begin-Procedure Actualiza_Tabla
+!------------------------------
+begin-sql
+  update cob_remesas..re_transa_am
+  set tr_valor = tr_valor + #valor, tr_contador = tr_contador + #reg
+  where tr_tipo_tran = &tm_tipo_tran
+    and tr_causa     = &tm_causa
+    and tr_signo     = &tm_signo
+end-sql
+End-Procedure
+
+Begin-Procedure Inserta_Tabla
+!------------------------------
+Begin-Select
+tn_descripcion &descripcion
+from cobis..cl_ttransaccion
+where tn_trn_code = &tm_tipo_tran
+End-Select
+begin-sql
+   insert into cob_remesas..re_transa_am
+   values(null,&tm_tipo_tran,&tm_signo,&tm_causa,&descripcion,1,#valor)
+end-sql
+End-Procedure
+
+Begin-Procedure Before_Transa
+  let $codigo_transa = '(' || to_char(&tn_trn_code) || ')'
+  position (+1)
+  do PrintS (1,'TRANSACCION:','',0)
+  do PrintS (2,&tn_descripcion,'',0)
+  do PrintS (3,$codigo_transa,'',0)
+  position (+2)
+End-Procedure
+
+Begin-Procedure After_Transa
+  !* Imprime los totales por transaccion *!
+  do PrintS (1,'TOTALES:','',0)
+  do PrintN (3,#suma_efec_cr,'{FOR_DIN}',0)
+  do PrintN (4,#suma_cheq_cr,'{FOR_DIN}',0)
+  do PrintN (5,#suma_cheq_db,'{FOR_DIN}',0)  ! (DSC971001)
+  !do PrintN (7,#suma_efec_db,'{FOR_DIN}',0)  !FER:29Dic98
+  do PrintN (8,#suma_efec_db,'{FOR_DIN}',0)   !FER:29Dic98
+  !* do PrintN (7,#suma_cheq_db,'{FOR_DIN}',0) (DSC971001)
+  let #suma_efec_cr = 0
+  let #suma_cheq_cr = 0
+  let #suma_efec_db = 0
+  let #suma_cheq_db = 0
+  position (+1) 
+End-Procedure
+
+
+Begin-Procedure After_Usuario
+next-listing
+next-listing
+do PrintS (1,'RESUMEN:','',0)
+do PrintS (2,'** POR OPERADOR **','',0)
+do PrintS (3,'TOTAL SUMA DE CTAS','',0)
+do PrintN (4,#total_cuenta,'',0)
+let #total_cuenta = 0
+next-listing
+do PrintS (1,'TRANS.','',0)
+do PrintS (2,'DESCRIPCION','',0)
+do PrintS (3,'NUM.TRAN','',0)
+do PrintS (4,'     T O T A L E S','',0)
+do PrintS (5,'OBSERVACION','',0)
+next-listing
+Begin-Select
+tr_tipo_tran
+tr_causa
+tr_signo
+tr_detalle
+tr_contador
+tr_valor
+   do PrintN (1,&tr_tipo_tran,'999999',0)
+   do PrintS (2,&tr_detalle,'',0)
+   do PrintN (3,&tr_contador,'99999',0)
+   do PrintN (4,&tr_valor,'{FOR_DIN}',0)
+   if &tr_signo = 'D'
+      let $tabla = 'ah_causa_nd' 
+   else
+      let $tabla = 'ah_causa_nc' 
+   end-if
+   do Lee_Causa
+   do PrintS (5,&causa,'',0)
+   let $w_causa = '  '|| &tr_causa
+   !do PrintS (6,$w_causa,'',0)  !FER:29Dic98
+   do PrintS (7,$w_causa,'',0)   !FER:29Dic98 
+   next-listing
+   let #break = 0
+   do Actualizar_Reg_Proc
+from cob_remesas..re_transa_am
+End-Select
+new-page
+do Trunca_Tabla
+End-Procedure
+
+
+Begin-Procedure Trunca_Tabla
+!---------------------------
+begin-sql
+  truncate table cob_remesas..re_transa_am
+end-sql
+End-Procedure
+
+
+Begin-Procedure Lee_Causa
+!------------------------
+Begin-Select
+valor &causa
+from cobis..cl_catalogo 
+where tabla = (select codigo from cobis..cl_tabla where tabla = $tabla) 
+  and codigo = &tr_causa
+End-Select
+End-Procedure
+
+
+Begin-Procedure Before_Usuario
+!* Encera variables de totales *!
+ position (+1)
+ do PrintS (1,'OPERADOR :','',0)
+ do PrintS (2,&tm_usuario,'',0)
+ position (+1)
+ let #suma_efec_cr = 0
+ let #suma_cheq_cr = 0
+ let #suma_efec_db = 0
+ let #suma_cheq_db = 0
+ do Decimales
+End-Procedure
+
+Begin-Procedure After_Oficina
+ new-page
+End-Procedure
+    
+Begin-Procedure Before_Oficina
+!* Encera variables de totales *!
+  if $i_proceso = 'N'                                                  !GYC 2001/ABR/18
+     do Generar_Listado (&tm_oficina)  !* Sofpro 11/01/97 *!
+  else                                                                 !GYC 2001/ABR/18
+     do Nombre_reporte                                                 !GYC 2001/ABR/18
+  end-if                                                               !GYC 2001/ABR/18
+do Nombre_Moneda (&ah_moneda,$nombre_moneda)
+let $nombre_moneda = 'MONEDA: ' || $nombre_moneda
+do Nombre_Oficina (#i_filial,&tm_oficina,$nombre_oficina)
+let $nombre_oficina = 'OFICINA : ' || $nombre_oficina
+let #total_cuenta = 0
+do Decimales         ! GMD19980506
+!do Nombre_Sucursal (#i_filial, &tm_oficina_cta, $nombre_sucursal)
+!let $nombre_sucursal = 'SUCURSAL : ' || $nombre_sucursal
+!do Nombre_Oficina (#i_filial, &tm_oficina_cta, $nombre_oficina)
+!let $nombre_oficina = 'OFICINA : ' || $nombre_oficina
+!do Nombre_Moneda (&tm_moneda, $nombre_moneda)  !* Sofpro 11/01/97  *!
+!let $nombre_moneda = 'MONEDA : ' || $nombre_moneda  !* Sofpro 11/01/97  *!
+!do Decimales
+End-Procedure
+
+Begin-Procedure Before_Moneda                    ! GMD19980506
+!* Encera variables de totales *!
+do Nombre_Moneda (&ah_moneda,$nombre_moneda)
+let $nombre_moneda = 'MONEDA: ' || $nombre_moneda
+do Decimales
+End-Procedure                                    ! GMD19980506
+
+Begin-Procedure Decimales
+!* Encuentra parametro de decimales *!
+let #num_deci = 0
+Begin-Select
+mo_decimales
+  if &mo_decimales = 'S'
+    do Num_Deci
+  end-if
+from cobis..cl_moneda
+where mo_moneda = convert(tinyint,#i_moneda) 
+End-Select
+End-Procedure
+
+Begin-Procedure Num_Deci
+Begin-Select
+pa_tinyint
+from  cobis..cl_parametro
+where pa_nemonico = 'DCI'
+  and pa_producto = 'CTE'
+End-Select
+if isnull(&pa_tinyint)
+  let #num_deci = 0
+else
+  let #num_deci = &pa_tinyint
+end-if
+End-Procedure
+
+Begin-Procedure Nombre_reporte                                          !GYC 2001/ABR/18
+let $w_oficina = to_char(&tm_oficina)
+BEGIN-SELECT 
+convert(char(10),getdate(),101) &w_fechoy
+convert(char(8),getdate(),108) &w_hormin
+END-SELECT
+!date-time () MM/DD/YYYY &w_fechoy
+!date-time () HH:MI      &w_hormin
+let $w_mes = substr(&w_fechoy,1,2)
+let $w_dia = substr(&w_fechoy,4,2)
+let $w_ano = substr(&w_fechoy,7,4)
+let $w_hor = substr(&w_hormin,1,2)
+let $w_min = substr(&w_hormin,4,2)
+let $w_feclis = $w_mes || $w_dia || $w_ano || '_' || $w_hor || $w_min
+let $nombre_reporte = 'ahopmorh'|| '_' || $w_feclis || '_of' || $w_oficina || '.lis'
+let $nombre_reporte = '../listados/' || $nombre_reporte
+new-report $nombre_reporte
+End-Procedure
+
